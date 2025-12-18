@@ -18,22 +18,21 @@ public class AttackManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        Init();
-    }
 
-    private void Init()
+    public void Set_Ready()
     {
         foreach (var attackCont in attackConts)
         {
             attackCont.Init();
         }
+    }
 
+    public void Set_AttackState(bool isStart)
+    {
         // 攻撃開始
         foreach (var attackCont in attackConts)
         {
-            attackCont.Set_AttackTrigger(true);
+            attackCont.Set_AttackTrigger(isStart);
         }
     }
 

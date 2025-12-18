@@ -37,6 +37,12 @@ public class UI_PopUpBase : MonoBehaviour
         seq_open.Restart();
     }
 
+    public virtual void Close()
+    {
+        seq_open.Kill();
+        this.gameObject.SetActive(false);
+    }
+
     private void CreateSeqence()
     {
         posi_ini = CG_target.transform.localPosition;
