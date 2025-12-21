@@ -30,17 +30,21 @@ public class InGameManager : MonoBehaviour
         {
             case GameStateType.InGame_Ready:
                 AttackManager.Inst.Set_Ready();
+                BlockGenerateManager.Inst.InitialGenerate();
                 break;
             case GameStateType.InGame:
                 timer = 0;
                 AttackManager.Inst.Set_AttackState(true);
+                BlockGenerateManager.Inst.Set_GenerateState(true);
                 break;
             case GameStateType.InGame_End:
                 AttackManager.Inst.Set_AttackState(false);
+                BlockGenerateManager.Inst.Set_GenerateState(false);
                 break;
             case GameStateType.Result:
                 break;
             case GameStateType.OutGame:
+                BlockGenerateManager.Inst.ResetAllBlocks();
                 break;
         }
     }
@@ -52,6 +56,7 @@ public class InGameManager : MonoBehaviour
         GameEvent.UI.PublishTimeLimit(timeLimit - timer);
         if (timer >= timeLimit)
         {
+            GameEvent.UI.PublishTimeLimit(0f);
             GameWatcher.Inst.SetGameState(GameStateType.InGame_End);
         }
     }

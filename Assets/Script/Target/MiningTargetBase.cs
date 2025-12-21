@@ -5,6 +5,14 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
 {
 
     protected virtual int hp { get; set; } = 10;
+    protected virtual int hp_max { get; set; } = 10;
+
+
+    public virtual void Init()
+    {
+        gameObject.SetActive(true);
+        hp = hp_max;
+    }
 
     public virtual void Damage(int damage)
     {
@@ -12,13 +20,13 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         DamageAction();
         if (hp <= 0)
         {
-            Destroy();
+            NotActivate();
         }
     }
 
-    public virtual void Destroy()
+    public virtual void NotActivate()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void DamageAction()

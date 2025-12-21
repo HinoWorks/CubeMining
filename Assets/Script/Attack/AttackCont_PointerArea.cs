@@ -31,6 +31,7 @@ public class AttackCont_PointerArea : AttackContBase
     public override void Init()
     {
         base.Init();
+        targets.Clear();
         CreateAttackRoop();
     }
 

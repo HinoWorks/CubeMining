@@ -11,8 +11,8 @@ public class MiningTarget_Cube : MiningTargetBase
         base.Damage(damage);
     }
 
-    public override void Destroy()
+    public override void NotActivate()
     {
-        base.Destroy();
+        base.NotActivate();
     }
 }

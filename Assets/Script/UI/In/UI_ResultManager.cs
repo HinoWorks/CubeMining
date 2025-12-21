@@ -1,7 +1,9 @@
 using UnityEngine;
+using UniRx;
 
 public class UI_ResultManager : UI_PopUpBase
 {
+
 
 
     public override void Open()
@@ -14,9 +16,13 @@ public class UI_ResultManager : UI_PopUpBase
     }
 
 
+
+
+    #region -- on Click --
     public void OnClick_Next()
     {
         Close();
+        GameWatcher.Inst.SetGameState(GameStateType.OutGame);
     }
-
+    #endregion
 }

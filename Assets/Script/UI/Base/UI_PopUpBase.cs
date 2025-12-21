@@ -39,7 +39,7 @@ public class UI_PopUpBase : MonoBehaviour
 
     public virtual void Close()
     {
-        seq_open.Kill();
+        seq_open.Pause();
         this.gameObject.SetActive(false);
     }
 

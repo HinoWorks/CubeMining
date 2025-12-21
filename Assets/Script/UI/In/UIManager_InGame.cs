@@ -10,6 +10,7 @@ public class UIManager_InGame : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI tmp_timer;
     public UI_ResultManager ui_ResultManager;
+    public UI_EventManager ui_EventManager;
 
 
 
@@ -19,6 +20,23 @@ public class UIManager_InGame : MonoBehaviour
         else { Destroy(this); }
 
         GameEvent.UI.TimeLimit.Subscribe(Set_TimeLimit).AddTo(this);
+        GameEvent.GameState.SetGameState.Subscribe(ChangeGateState).AddTo(this);
+    }
+
+    private void ChangeGateState(GameStateType _state)
+    {
+        switch (_state)
+        {
+            case GameStateType.InGame_Ready:
+                ui_EventManager.StateGame();
+                break;
+            case GameStateType.InGame_End:
+                ui_EventManager.EndGame();
+                break;
+            case GameStateType.Result:
+                ui_ResultManager.Open();
+                break;
+        }
     }
 
     private void Set_TimeLimit(float time)

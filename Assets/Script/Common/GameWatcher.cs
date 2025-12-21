@@ -27,8 +27,6 @@ public class GameWatcher : MonoBehaviour
     {
         await UniTask.Delay(3000);
         SetGameState(GameStateType.InGame_Ready);
-        await UniTask.Delay(3000);
-        SetGameState(GameStateType.InGame);
     }
 
 
