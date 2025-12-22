@@ -12,6 +12,7 @@ public class AttackCont_PointerArea : AttackContBase
 
 
     private HashSet<IDamagable> targets = new HashSet<IDamagable>();
+    private readonly List<IDamagable> removeBuffer = new();
 
     // loc
     private int damage = 1;
@@ -51,10 +52,17 @@ public class AttackCont_PointerArea : AttackContBase
             .Where(_ => base.isActive)
             .Subscribe(_ =>
             {
+                removeBuffer.Clear();
+
                 foreach (var t in targets)
                 {
-                    t.Damage(damage);
+                    if (!t.isAlive) continue;
+                    if (t.Damage(damage))
+                    {
+                        removeBuffer.Add(t);
+                    }
                 }
+                foreach (var t in removeBuffer) targets.Remove(t);
             })
             .AddTo(this); // Destroy で自動終了
     }
@@ -76,7 +84,6 @@ public class AttackCont_PointerArea : AttackContBase
 
 
     #region -- target fix --
-
     private void OnEnter(Collider other)
     {
         if (other.TryGetComponent(out IDamagable target))

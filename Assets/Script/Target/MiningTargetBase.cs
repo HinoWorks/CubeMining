@@ -7,6 +7,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     protected virtual int hp { get; set; } = 10;
     protected virtual int hp_max { get; set; } = 10;
     public int value;
+    public bool isAlive => hp > 0;
 
 
     public virtual void Init(BlockData _blockData)
@@ -19,16 +20,24 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         hp = hp_max;
     }
 
-    public virtual void Damage(int damage)
+    public virtual bool Damage(int damage)
     {
         hp -= damage;
         DamageAction();
         if (hp <= 0)
         {
-            NotActivate();
+            BreakFromDamage();
+            return true;
         }
+        return false;
     }
 
+
+
+    public virtual void BreakFromDamage()
+    {
+        gameObject.SetActive(false);
+    }
     public virtual void NotActivate()
     {
         gameObject.SetActive(false);

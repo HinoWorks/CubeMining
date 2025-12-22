@@ -2,8 +2,8 @@ using UnityEngine;
 
 public interface IDamagable
 {
-
-    void Damage(int damage);
+    bool isAlive { get; }
+    bool Damage(int damage);
 
 
 }

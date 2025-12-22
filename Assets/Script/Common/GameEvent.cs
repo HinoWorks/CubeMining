@@ -64,6 +64,13 @@ public static class GameEvent
         {
             timeLimit.OnNext(time);
         }
+
+        private static readonly Subject<System.Numerics.BigInteger> coinMod = new();
+        public static IObservable<System.Numerics.BigInteger> CoinMod => coinMod.AsObservable();
+        public static void PublishCoinMod(System.Numerics.BigInteger mod)
+        {
+            coinMod.OnNext(mod);
+        }
     }
 
 

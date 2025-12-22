@@ -32,6 +32,8 @@ public class InGameManager : MonoBehaviour
             case GameStateType.InGame_Ready:
                 AttackManager.Inst.Set_Ready();
                 BlockGenerateManager.Inst.InitialGenerate();
+                getCoin = 0;
+                GameEvent.UI.PublishCoinMod(getCoin);
                 break;
             case GameStateType.InGame:
                 timer = 0;
@@ -63,6 +65,11 @@ public class InGameManager : MonoBehaviour
         }
     }
 
+    public void AddGetCoin(BigInteger _deltaCoin)
+    {
+        getCoin += _deltaCoin;
+        GameEvent.UI.PublishCoinMod(getCoin);
+    }
 
 
 }

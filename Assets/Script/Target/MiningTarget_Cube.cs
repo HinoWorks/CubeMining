@@ -6,13 +6,16 @@ public class MiningTarget_Cube : MiningTargetBase
 
 
 
-    public override void Damage(int damage)
+    public override bool Damage(int damage)
     {
-        base.Damage(damage);
+        return base.Damage(damage);
     }
 
-    public override void NotActivate()
+    public override void BreakFromDamage()
     {
-        base.NotActivate();
+        InGameManager.Inst.AddGetCoin(base.value);
+        var ui_textCoinGet = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
+        ui_textCoinGet.SetText(StaticManager.Get_BigintegerToString(base.value));
+        base.BreakFromDamage();
     }
 }
