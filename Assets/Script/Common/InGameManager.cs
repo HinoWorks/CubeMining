@@ -1,5 +1,6 @@
 using UnityEngine;
 using UniRx;
+using System.Numerics;
 
 public class InGameManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class InGameManager : MonoBehaviour
 
     private float timer = 0;
     private float timeLimit = 5;
-
+    private BigInteger getCoin;
 
 
     void Awake()

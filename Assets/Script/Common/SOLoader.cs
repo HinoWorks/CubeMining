@@ -18,6 +18,20 @@ public static class SOLoader
     }
 
 
+
+    private static SO_BlockData so_blockData;
+    public static SO_BlockData BlockData
+    {
+        get
+        {
+            if (so_blockData == null)
+            {
+                so_blockData = LoadSO<SO_BlockData>(pathBase + nameof(SO_BlockData));
+            }
+            return so_blockData;
+        }
+    }
+
     private static T LoadSO<T>(string path) where T : ScriptableObject
     {
         return Resources.Load<T>(path);
