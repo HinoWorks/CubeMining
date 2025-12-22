@@ -21,16 +21,18 @@ public class AttackCont_PointerArea : AttackContBase
 
 
 
-    public override void AwakeCall()
+    protected override void AwakeCall()
     {
         GameEvent.Input.PointerAreaIn.Subscribe(isAreaIn => PointerAreaIn(isAreaIn)).AddTo(this);
         GameEvent.Input.PointerMove.Subscribe(pos => PointerMove(pos)).AddTo(this);
         triggerSender.OnEnter += OnEnter;
         triggerSender.OnExit += OnExit;
     }
-    public override void Init()
+    public override void Init(AttackUnitData _unitData)
     {
-        base.Init();
+        base.Init(_unitData);
+        damage = _unitData.damage_base;
+        attackInterval = _unitData.attackDuration;
         targets.Clear();
         CreateAttackRoop();
     }

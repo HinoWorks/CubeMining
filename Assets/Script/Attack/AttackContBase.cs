@@ -3,8 +3,14 @@ using UnityEngine;
 public class AttackContBase : MonoBehaviour
 {
 
-    public virtual void AwakeCall() { } //一度だけ呼ばれる
-    public virtual void Init()
+
+    void Awake()
+    {
+        AwakeCall();
+    }
+    protected virtual void AwakeCall() { } //一度だけ呼ばれる
+
+    public virtual void Init(AttackUnitData _unitData)
     {
         isActive = false;
     }

@@ -33,7 +33,7 @@ public class GameWatcher : MonoBehaviour
     public void SetGameState(GameStateType state)
     {
         currentGameState = state;
-        Debug.Log("<color=yellow>SetGameState: " + currentGameState + "</color>");
+        Debug.Log($"<color=yellow> ========= GameState: {currentGameState} ========= </color>");
         GameEvent.GameState.PublishGameState(currentGameState);
     }
 }

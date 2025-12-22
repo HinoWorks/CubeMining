@@ -42,6 +42,7 @@ public class InGameManager : MonoBehaviour
                 BlockGenerateManager.Inst.Set_GenerateState(false);
                 break;
             case GameStateType.Result:
+                AttackManager.Inst.AttackUnitDelete();
                 break;
             case GameStateType.OutGame:
                 BlockGenerateManager.Inst.ResetAllBlocks();
