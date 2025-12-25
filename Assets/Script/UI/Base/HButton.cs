@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 
 
@@ -15,13 +16,19 @@ public class HButton : Button
     const float scale_push = 0.85f; // ボタンが押されたときのスケール
     const float scale_over = 1.1f; // ボタンにカーソルが乗ったときのスケール
 
-    private HButtonConnect hButtonConnect;
+    //private HButtonConnect hButtonConnect;
+    public UnityAction<bool> onMouseOver;
+    public UnityAction<bool> onSelect;
+    public UnityEvent rightClick;
+    //public UnityAction onRightClick;
+
+
 
 
     protected override void Awake()
     {
         base.Awake();
-        hButtonConnect = this.GetComponent<HButtonConnect>();
+        //hButtonConnect = this.GetComponent<HButtonConnect>();
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -30,9 +37,9 @@ public class HButton : Button
 
         if (base.interactable == false) return;
         Anim_ScaleChange_PointerOn();
-        if (hButtonConnect != null)
+        if (onMouseOver != null)
         {
-            hButtonConnect.Set_MouseOverActive(true);
+            onMouseOver(true);
         }
     }
 
@@ -42,9 +49,9 @@ public class HButton : Button
 
         if (base.interactable == false) return;
         Anim_ScaleChange_ToNormal();
-        if (hButtonConnect != null)
+        if (onMouseOver != null)
         {
-            hButtonConnect.Set_MouseOverActive(false);
+            onMouseOver(false);
         }
     }
 
@@ -69,16 +76,20 @@ public class HButton : Button
         }
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (hButtonConnect == null) return;
-            hButtonConnect.RightClickAction();
+            if (rightClick != null)
+            {
+                rightClick.Invoke();
+            }
         }
     }
 
 
     public void Set_SelectActive(bool _active)
     {
-        if (hButtonConnect == null) return;
-        hButtonConnect.Set_SelectActive(_active);
+        if (onSelect != null)
+        {
+            onSelect(_active);
+        }
     }
 
 

@@ -9,6 +9,13 @@ public class HButtonConnect : MonoBehaviour
     public UnityEvent rightClick;
 
 
+    void Awake()
+    {
+        var button = this.GetComponent<HButton>();
+        button.onMouseOver += Set_MouseOverActive;
+        button.onSelect += Set_SelectActive;
+    }
+
     public void Set_MouseOverActive(bool _active)
     {
         if (obj_mouseOver == null) return;
@@ -22,9 +29,4 @@ public class HButtonConnect : MonoBehaviour
     }
 
 
-    public void RightClickAction()
-    {
-        if (rightClick == null) return;
-        rightClick?.Invoke();
-    }
 }

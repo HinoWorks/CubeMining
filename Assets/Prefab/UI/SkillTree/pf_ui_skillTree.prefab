@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6285860255244087271}
+  - component: {fileID: 371033559620423174}
   m_Layer: 5
   m_Name: pf_ui_skillTree
   m_TagString: Untagged
@@ -38,6 +39,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &371033559620423174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766212243448170487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6118f7f14eeff4006aee8d2077dc0169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeMaanger
+  skillTreeUnits:
+  - {fileID: 5559785607696037125}
+  ui_skillTreeDetail: {fileID: 523471426713319873}
 --- !u!1 &2841180574831032908
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,6 +129,38 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3292231474377375136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 192229793801928275}
+  m_Layer: 5
+  m_Name: area_0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &192229793801928275
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3292231474377375136}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6064242813531101926}
+  m_Father: {fileID: 6683896851426228539}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4478741068212723785
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +266,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3053416855376485218}
-  - {fileID: 6064242813531101926}
+  - {fileID: 192229793801928275}
   - {fileID: 3870937569565801792}
   m_Father: {fileID: 6285860255244087271}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -648,7 +696,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6683896851426228539}
+    m_TransformParent: {fileID: 192229793801928275}
     m_Modifications:
     - target: {fileID: 1570215255416170635, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
       propertyPath: m_Pivot.x
@@ -739,6 +787,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
+--- !u!114 &5559785607696037125 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 921638462854743912, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
+  m_PrefabInstance: {fileID: 4747359985619858029}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781b0a16b3140475f83639a6a77070f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeUnit
 --- !u!224 &6064242813531101926 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1570215255416170635, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
@@ -841,6 +900,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+--- !u!114 &523471426713319873 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6820127740739110281, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+  m_PrefabInstance: {fileID: 6477944788260404296}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1002e1a6172dd4df29a5887b32d48cf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeDetail
 --- !u!224 &7849976625757664857 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3825509163840899601, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
