@@ -19,7 +19,7 @@ public class HButton : Button
     //private HButtonConnect hButtonConnect;
     public UnityAction<bool> onMouseOver;
     public UnityAction<bool> onSelect;
-    public UnityEvent rightClick;
+    public UnityAction rightClick;
     //public UnityAction onRightClick;
 
 

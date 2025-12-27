@@ -17,32 +17,27 @@ public class DataBase : MonoBehaviour
     }
 
     // --- GSS Load Setting --
-    //https://docs.google.com/spreadsheets/d/1cpQ3TFUgHY1-klRyl7RQZLdhuq1m5VVAFKE4_mniBjA/edit?usp=sharing
-    private string SheetID = "1cpQ3TFUgHY1-klRyl7RQZLdhuq1m5VVAFKE4_mniBjA";
+    //https://docs.google.com/spreadsheets/d/18r14I3b0cia4TxMk525C686vuO6sjbfO5Cd16gWzNes/edit?usp=sharing
+    private string SheetID = "18r14I3b0cia4TxMk525C686vuO6sjbfO5Cd16gWzNes";
     string tqx = "tqx=out:csv";
 
 
 
 
-    //[Header("GSS Load data")]
-    //public SO_EnhanceData mSO_EnhanceData;
-
-
-    [Header("Connect")]
-    public SO_SoundData mSO_SoundData;
-
+    [Header("GSS Load data")]
+    public SO_SkillTreeData mSO_SkillTreeData;
 
 
 
     public async UniTask LoadData()
     {
-        await DataLoad_EnahnceData_Base();
+        await DataLoad_SkillTreeData();
 
 #if UNITY_EDITOR
         Debug.Log($"<color=yellow>End Master Data update!</color>");
         await UniTask.Delay(200, true);
 
-        //EditorUtility.SetDirty(mSO_EnhanceData);
+        EditorUtility.SetDirty(mSO_SkillTreeData);
 
         // -- save --
         AssetDatabase.SaveAssets();
@@ -51,13 +46,11 @@ public class DataBase : MonoBehaviour
 
 
 
-    private async UniTask DataLoad_EnahnceData_Base()
+    private async UniTask DataLoad_SkillTreeData()
     {
-        // -- soとclass設定 --
-
-        //var loadData = await DataLoad("EnhanceData_Ball_Base");
-        //var convData = CSVSerializer.Deserialize<EnhanceData_BallBase>(loadData);
-        //mSO_EnhanceData.enhanceData_BallBases = convData;
+        var loadData = await DataLoad("SkillTree");
+        var convData = CSVSerializer.Deserialize<SkillTree>(loadData);
+        mSO_SkillTreeData.skillTreeDatas = convData;
     }
 
 

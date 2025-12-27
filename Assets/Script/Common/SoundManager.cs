@@ -106,7 +106,7 @@ public class SoundManager : MonoBehaviour
     #region -- BGM --
     public void PlayBGM(int _index)
     {
-        var getData = DataBase.Inst.mSO_SoundData.Get_SoundData_BGM(_index);
+        var getData = SOLoader.SoundData.Get_SoundData_BGM(_index);
         if (getData == null) return;
 
         // -- set 
@@ -135,7 +135,7 @@ public class SoundManager : MonoBehaviour
         if (!_isForceON && isSEPlayed) return;
         isSEPlayed = true;
         SO_SoundElement getData;
-        getData = DataBase.Inst.mSO_SoundData.Get_SoundData_SE_Random(0, 4);
+        getData = SOLoader.SoundData.Get_SoundData_SE_Random(0, 4);
 
         PlaySE(getData);
     }
@@ -144,7 +144,7 @@ public class SoundManager : MonoBehaviour
         if (!_isForceON && isSEPlayed) return;
         isSEPlayed = true;
         SO_SoundElement getData;
-        getData = DataBase.Inst.mSO_SoundData.Get_SoundData_SE(11);
+        getData = SOLoader.SoundData.Get_SoundData_SE(11);
 
         PlaySE(getData);
     }
@@ -153,7 +153,7 @@ public class SoundManager : MonoBehaviour
         if (!_isForceON && isSEPlayed) return;
         isSEPlayed = true;
         SO_SoundElement getData;
-        getData = DataBase.Inst.mSO_SoundData.Get_SoundData_SE(12);
+        getData = SOLoader.SoundData.Get_SoundData_SE(12);
 
         PlaySE(getData);
     }

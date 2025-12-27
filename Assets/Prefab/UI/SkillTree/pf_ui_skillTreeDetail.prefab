@@ -1287,6 +1287,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3825509163840899601}
   - component: {fileID: 6820127740739110281}
+  - component: {fileID: 8564135131766946735}
+  - component: {fileID: 5290335148502239846}
   m_Layer: 5
   m_Name: pf_ui_skillTreeDetail
   m_TagString: Untagged
@@ -1326,6 +1328,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1002e1a6172dd4df29a5887b32d48cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeDetail
+  image_icon: {fileID: 0}
+  tmp_name: {fileID: 0}
+  tmp_description: {fileID: 0}
+  tmp_enhanceLevel: {fileID: 0}
+  tmp_enhanceCost: {fileID: 0}
+  tmp_enhanceButton: {fileID: 0}
+--- !u!95 &8564135131766946735
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6790620336251871532}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5290335148502239846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6790620336251871532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3759e2aae0f7b9a47bb98fc64bf3c543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SimpleAnimationComponent::SimpleAnimation
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingMode: 0
+  m_WrapMode: 0
+  m_Clip: {fileID: 7400000, guid: 89894851a828b4a799c4035deff06c68, type: 2}
+  m_States:
+  - clip: {fileID: 7400000, guid: 89894851a828b4a799c4035deff06c68, type: 2}
+    name: Default
+    defaultState: 1
+  - clip: {fileID: 7400000, guid: 89894851a828b4a799c4035deff06c68, type: 2}
+    name: Active
+    defaultState: 0
 --- !u!1 &8749629663473781280
 GameObject:
   m_ObjectHideFlags: 0
