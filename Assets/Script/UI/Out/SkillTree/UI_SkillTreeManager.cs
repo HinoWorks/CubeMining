@@ -1,11 +1,22 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using UnityEditor;
+using UnityEngine.UI;
+using System.Collections.Generic;
+using System;
 
 public class UI_SkillTreeMaanger : MonoBehaviour
 {
-    private UI_SkillTreeUnit[] skillTreeUnits;
+    public UI_SkillTreeUnit[] skillTreeUnits;
     [SerializeField] UI_SkillTreeDetail ui_skillTreeDetail;
+
+    [Space(10)]
+    [Header("Node settings")]
+    [SerializeField] GameObject nodeContPrefab;
+    [SerializeField] List<UI_SkillTreeNodeCont> nodeConts = new List<UI_SkillTreeNodeCont>();
+    [SerializeField] RectTransform nodeRoot;
+    [SerializeField] float nodeLineHeight = 4f;
 
 
     [Space(10)]
@@ -22,10 +33,68 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     private Vector2 lastMousePos;
     private float duration_zoom = 0.05f;
 
+
+
+
+#if UNITY_EDITOR
+    [ContextMenu("SkillTreeData_Update")]
+    public void SkillTreeData_Update()
+    {
+        foreach (var nodeCont in nodeConts)
+        {
+            nodeCont.NotActivate();
+        }
+
+        // -- unit set --
+        skillTreeUnits = transform.GetComponentsInChildren<UI_SkillTreeUnit>();
+        foreach (var skillTreeUnit in skillTreeUnits)
+        {
+            var so = SOLoader.SkillTreeData.GetSkillTreeData(skillTreeUnit.skillIndex);
+            if (so == null)
+            {
+                Debug.LogError($"SkillTreeData not found: {skillTreeUnit.skillIndex}");
+                return;
+            }
+            skillTreeUnit.OnValidateCall(so);
+        }
+
+        // -- node set --
+        foreach (var skillTreeUnit in skillTreeUnits)
+        {
+            NodeCreate(skillTreeUnit);
+        }
+
+        EditorUtility.SetDirty(this);
+    }
+
+    private void NodeCreate(UI_SkillTreeUnit _unit)
+    {
+        if (_unit.skillTree.unlockCheckIndex == -1) return;
+        var targetUnit = Array.Find(skillTreeUnits, x => x.skillIndex == _unit.skillTree.unlockCheckIndex);
+        if (targetUnit == null) return;
+
+        var nodeCont = Get_FreeNodeCont();
+        nodeCont.SetNodeCont(_unit, targetUnit, nodeLineHeight);
+    }
+
+    private UI_SkillTreeNodeCont Get_FreeNodeCont()
+    {
+        var nodeCont = nodeConts.Find(x => x.gameObject.activeSelf == false);
+        if (nodeCont == null)
+        {
+            nodeCont = Instantiate(nodeContPrefab, nodeRoot).GetComponent<UI_SkillTreeNodeCont>();
+            nodeConts.Add(nodeCont);
+        }
+        return nodeCont;
+    }
+#endif
+
+
+
     void Awake()
     {
         // -unit set-
-        skillTreeUnits = transform.GetComponentsInChildren<UI_SkillTreeUnit>();
+        // skillTreeUnits = transform.GetComponentsInChildren<UI_SkillTreeUnit>();
         foreach (var skillTreeUnit in skillTreeUnits)
         {
             skillTreeUnit.AwakeCall(OnMouseOver);
@@ -41,8 +110,22 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         ui_skillTreeDetail.gameObject.SetActive(false);
         if (!isActive) return;
 
-        // == TODO ==
-        // content Init
+        // 実行時に接続線を更新
+        // UpdateAllConnections();
+    }
+
+    /// <summary>
+    /// 全ての接続線を更新する
+    /// </summary>
+    private void UpdateAllConnections()
+    {
+        foreach (var nodeCont in nodeConts)
+        {
+            if (nodeCont.gameObject.activeSelf)
+            {
+                nodeCont.UpdateConnection();
+            }
+        }
     }
 
 

@@ -4,22 +4,9 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-
-
     public static InputManager Inst;
     [SerializeField] private InputActionAsset inputActions;
 
-    /*
-    [Space(5)]
-    [SerializeField] InputActionReference move_Left;
-    [SerializeField] InputActionReference move_Right;
-    [SerializeField] InputActionReference move_Up;
-    [SerializeField] InputActionReference move_Down;
-
-    [Space(5)]
-    [SerializeField] InputActionReference rotate_R;
-    [SerializeField] InputActionReference rotate_L;
-    */
 
     [Space(5)]
     [SerializeField] InputActionReference focus;
@@ -32,15 +19,6 @@ public class InputManager : MonoBehaviour
 
 
 
-/*
-    public InputActionReference Move_Left => move_Left;
-    public InputActionReference Move_Right => move_Right;
-    public InputActionReference Move_Up => move_Up;
-    public InputActionReference Move_Down => move_Down;
-
-    public InputActionReference Rotate_R => rotate_R;
-    public InputActionReference Rotate_L => rotate_L;
-    */
 
     public InputActionReference Focus => focus;
     public InputActionReference Zoom_Action => zoom_Action;

@@ -3,9 +3,14 @@ using UnityEngine.UI;
 using System;
 
 
-
 public class UI_SkillTreeUnit : MonoBehaviour
 {
+    public int skillIndex;
+    public SkillTree skillTree;
+
+
+    [Space(10)]
+    [Header("Connect")]
     [SerializeField] Image image_icon;
     [SerializeField] GameObject obj_lock;
     [SerializeField] GameObject obj_enhanceReady;
@@ -13,18 +18,21 @@ public class UI_SkillTreeUnit : MonoBehaviour
     [SerializeField] HButton button;
 
     public Action<bool, UI_SkillTreeUnit> onMouseOver;
-    /*
-        private SkillTreeUnitData data;
-        public void SetData(SkillTreeUnitData _data)
-        {
-            data = _data;
-            image_icon.sprite = data.icon;
-            obj_lock.SetActive(data.isLock);
-            obj_enhanceReady.SetActive(data.isEnhanceReady);
-            obj_complete.SetActive(data.isComplete);
-        }
 
-    */
+
+
+
+
+#if UNITY_EDITOR
+    public void OnValidateCall(SkillTree _skillTree)
+    {
+        skillTree = _skillTree;
+        image_icon.sprite = skillTree.icon;
+    }
+
+#endif
+
+
 
     public void AwakeCall(Action<bool, UI_SkillTreeUnit> _onMouseOver)
     {

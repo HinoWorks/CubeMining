@@ -535,7 +535,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1570215255416170635}
   - component: {fileID: 454978153020702346}
-  - component: {fileID: 921638462854743912}
   m_Layer: 5
   m_Name: pf_ui_skillUnit
   m_TagString: Untagged
@@ -610,7 +609,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 921638462854743912}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UI_SkillTreeUnit, Assembly-CSharp
         m_MethodName: OnClick_Enhance
         m_Mode: 1
@@ -622,23 +621,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &921638462854743912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081131858959866027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 781b0a16b3140475f83639a6a77070f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeUnit
-  image_icon: {fileID: 52530168297019692}
-  obj_lock: {fileID: 3491229013826804748}
-  obj_enhanceReady: {fileID: 3949865368280285514}
-  obj_complete: {fileID: 6392168944890995019}
-  button: {fileID: 454978153020702346}
 --- !u!1 &6261027018150897534
 GameObject:
   m_ObjectHideFlags: 0

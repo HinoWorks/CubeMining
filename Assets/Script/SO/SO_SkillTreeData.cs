@@ -23,6 +23,7 @@ public class SkillTree
 {
     public int index;
     public string skillName;
+    public Sprite icon;
     public int maxLevel;
     public int unlockCheckIndex;
     public string paramCategory;
