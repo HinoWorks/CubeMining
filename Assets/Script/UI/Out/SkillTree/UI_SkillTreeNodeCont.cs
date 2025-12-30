@@ -110,4 +110,12 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
         lineImage = GetComponent<Image>();
     }
 
+
+
+    public void Set_LineState(bool _isOn)
+    {
+        lineImage.enabled = _isOn;
+
+    }
+
 }

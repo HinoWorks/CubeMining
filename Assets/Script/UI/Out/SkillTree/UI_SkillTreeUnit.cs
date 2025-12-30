@@ -29,7 +29,6 @@ public class UI_SkillTreeUnit : MonoBehaviour
         skillTree = _skillTree;
         image_icon.sprite = skillTree.icon;
     }
-
 #endif
 
 
@@ -38,6 +37,15 @@ public class UI_SkillTreeUnit : MonoBehaviour
     {
         this.onMouseOver = _onMouseOver;
         button.onMouseOver += OnPointerEnter;
+
+
+        Init();
+    }
+
+    private void Init()
+    {
+        // TODO HERE
+        Debug.Log("Set -- SaveData UnlockState");
     }
 
 
