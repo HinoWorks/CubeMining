@@ -7,11 +7,18 @@ using System;
 using System.Linq;
 
 
+public static class InitialCreateData
+{
+    public static int skillTreeIndex_first = 1;
+
+}
+
+
 
 [System.Serializable]
 public class SkillTreeData
 {
-    public string key = ""; //不要だが一旦保持
+    public string key = "";
     public int level = 0;
 }
 
@@ -28,13 +35,6 @@ public class ItemData
 }
 
 
-[System.Serializable]
-public class BallCountData
-{
-    public int count;
-    public int level = 0;
-}
-
 
 public enum state
 {
@@ -49,18 +49,6 @@ public class SaveLoader : MonoBehaviour
     public state currentState { get; private set; } = state.InitialLoad;
 
 
-
-    private const string KEY_GoalCount = "key_GoalCount";
-    private int goalCount;
-    public int GoalCount
-    {
-        get => goalCount;
-        private set
-        {
-            goalCount = value;
-            ES3.Save(KEY_GoalCount, goalCount);
-        }
-    }
 
     private const string KEY_GoalLevel = "key_GoalLevel";
     private int goalLevel;
@@ -100,13 +88,6 @@ public class SaveLoader : MonoBehaviour
     private bool isProcessingQueue = false;
 
 
-    // -- auto save --
-    private float saveDelay_coin = 1f; // 1秒後に保存
-    private float saveTimer_coin = -1f;
-    private bool isSavePending_coin = false;
-    private BigInteger pendingCoin = 0;
-
-
 
     void Awake()
     {
@@ -127,18 +108,19 @@ public class SaveLoader : MonoBehaviour
 
     private async UniTask SaveData_InitialLoad()
     {
-        // --- Load --
-        blockCount = ES3.KeyExists(KEY_BLOCKCOUNT) ? ES3.Load<int>(KEY_BLOCKCOUNT) : 0;
-        coin = ES3.KeyExists(KEY_COIN) ? BigInteger.Parse(ES3.Load<string>(KEY_COIN)) : 0;
-        GoalCount = ES3.KeyExists(KEY_GoalCount) ? ES3.Load<int>(KEY_GoalCount) : 0;
-        GoalLevel = ES3.KeyExists(KEY_GoalLevel) ? ES3.Load<int>(KEY_GoalLevel) : 1;
-
-
-        // -- Initial set --
-        if (blockCount == 0)
+        var createdInitialData = ES3.KeyExists(StaticManager.KEY_CREATE_INITIAL_DATA);
+        if (!createdInitialData)
         {
             InitialData_Create();
+            ES3.Save(StaticManager.KEY_CREATE_INITIAL_DATA, true);
         }
+
+        // Initial Load Data
+        coin = ES3.KeyExists(KEY_COIN) ? BigInteger.Parse(ES3.Load<string>(KEY_COIN)) : 0;
+
+        //blockCount = ES3.KeyExists(KEY_BLOCKCOUNT) ? ES3.Load<int>(KEY_BLOCKCOUNT) : 0;
+        //GoalCount = ES3.KeyExists(KEY_GoalCount) ? ES3.Load<int>(KEY_GoalCount) : 0;
+        //GoalLevel = ES3.KeyExists(KEY_GoalLevel) ? ES3.Load<int>(KEY_GoalLevel) : 1;
 
         currentState = state.Idling;
     }
@@ -231,25 +213,21 @@ public class SaveLoader : MonoBehaviour
 
     #region -- coin data --
     /// <summary>
-    /// コインセーブリクエスト - デルタ
+    /// コインセーブリクエスト - デルタを加算してセーブ
     /// </summary>
-    /// <param name="_delta"></param>
     public void Request_SaveCoin(BigInteger _delta)
     {
-        pendingCoin += _delta;
-        saveTimer_coin = saveDelay_coin;
-        isSavePending_coin = true;
+        EnqueueMethod(() => { SavePendeingCoin(_delta); });
     }
-    private void SavePendeingCoin()
+    private void SavePendeingCoin(BigInteger _delta)
     {
-        coin += pendingCoin;
-        pendingCoin = 0;
-
+        coin += _delta;
         ES3.Save(KEY_COIN, coin.ToString());
-
         GameEvent.UI.PublishCoinMod(coin);
     }
     #endregion
+
+
 
 
 

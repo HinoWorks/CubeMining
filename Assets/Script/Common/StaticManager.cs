@@ -7,6 +7,8 @@ using System.Numerics;
 
 public class StaticManager : MonoBehaviour
 {
+    public static string KEY_CREATE_INITIAL_DATA = "key_createInitialData";
+
 
     private static BigInteger Get_Num(int _count)
     {
@@ -109,12 +111,13 @@ public class StaticManager : MonoBehaviour
     #endregion
 
 
-    /*
-        #region 
-        public static bool CoinCheck(BigInteger _cost)
-        {
-            return _cost <= SaveLoader.Inst.Coin;
-        }
-        #endregion
-    */
+
+
+    #region 
+    public static bool CoinCheck(BigInteger _cost)
+    {
+        return _cost <= SaveLoader.Inst.Coin;
+    }
+    #endregion
+
 }

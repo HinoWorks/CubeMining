@@ -3,9 +3,8 @@ using UnityEngine.UI;
 
 public class UI_SkillTreeNodeCont : MonoBehaviour
 {
-
-    public int index_base => baseUnit == null ? -1 : baseUnit.skillIndex;
-    public int index_target => targetUnit == null ? -1 : targetUnit.skillIndex;
+    [SerializeField] private int baseSkillIndex;
+    public int BaseSkillIndex => baseSkillIndex;
 
     private UI_SkillTreeUnit baseUnit;
     private UI_SkillTreeUnit targetUnit;
@@ -20,6 +19,7 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
     {
         baseUnit = _baseUnit;
         targetUnit = _targetUnit;
+        baseSkillIndex = _baseUnit.skillTree.baseSkillIndex;
 
         if (baseUnit != null && targetUnit != null)
         {
@@ -115,7 +115,8 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
     public void Set_LineState(bool _isOn)
     {
         lineImage.enabled = _isOn;
-
     }
+
+
 
 }

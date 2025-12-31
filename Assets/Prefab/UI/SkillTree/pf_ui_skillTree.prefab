@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
+  baseSkillIndex: 7
 --- !u!1 &678979126989378162
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
+  baseSkillIndex: 3
 --- !u!1 &766212243448170487
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
+  baseSkillIndex: 7
 --- !u!1 &2352517164292058250
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
+  baseSkillIndex: 3
 --- !u!1 &2495170367460170651
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
+  baseSkillIndex: 5
 --- !u!1 &2841180574831032908
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
+  baseSkillIndex: 2
 --- !u!1 &4478741068212723785
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,6 +923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
+  baseSkillIndex: 1
 --- !u!1 &6765812519882517539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
+  baseSkillIndex: 3
 --- !u!1001 &169962226951730725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1173,7 +1181,7 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
       value: pf_ui_skillUnitTotal (3)
@@ -1263,6 +1271,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.cost
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
       value: 5
       objectReference: {fileID: 0}
@@ -1271,8 +1287,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
       value: skill_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.deltaValue
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -1311,7 +1339,7 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
       value: pf_ui_skillUnitTotal
@@ -1401,6 +1429,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.cost
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
       value: 2
       objectReference: {fileID: 0}
@@ -1409,8 +1445,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
       value: skill_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.deltaValue
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -1449,7 +1497,7 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
       value: pf_ui_skillUnitTotal (2)
@@ -1539,6 +1587,14 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.cost
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
       value: 4
       objectReference: {fileID: 0}
@@ -1547,8 +1603,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
       value: skill_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.deltaValue
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -1587,7 +1655,7 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
       value: pf_ui_skillUnitTotal (4)
@@ -1677,6 +1745,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.cost
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
       value: 6
       objectReference: {fileID: 0}
@@ -1685,8 +1761,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
       value: skill_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.deltaValue
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -1725,7 +1813,7 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
       value: pf_ui_skillUnitTotal (6)
@@ -1815,6 +1903,14 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.cost
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
       value: 8
       objectReference: {fileID: 0}
@@ -1823,8 +1919,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
       value: skill_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.deltaValue
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -1863,7 +1971,7 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
       value: pf_ui_skillUnitTotal (1)
@@ -1953,6 +2061,14 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.cost
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
       value: 3
       objectReference: {fileID: 0}
@@ -1961,8 +2077,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
       value: skill_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.deltaValue
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -2001,7 +2129,7 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
       value: pf_ui_skillUnitTotal (7)
@@ -2091,6 +2219,14 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.cost
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
       value: 9
       objectReference: {fileID: 0}
@@ -2099,8 +2235,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
       value: skill_9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.deltaValue
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -2139,7 +2287,7 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
       value: pf_ui_skillUnitTotal
@@ -2225,16 +2373,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.cost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.maxLevel
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseValue
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
       value: skill_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.deltaValue
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -2386,7 +2554,7 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
       value: pf_ui_skillUnitTotal (5)
@@ -2476,6 +2644,14 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.cost
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
       value: 7
       objectReference: {fileID: 0}
@@ -2484,8 +2660,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
       value: skill_7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.deltaValue
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex

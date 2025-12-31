@@ -2,9 +2,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using UnityEditor;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
+using Cysharp.Threading.Tasks;
+
+
+public enum SkillTreeUnlockState
+{
+    Locked,
+    EnhanceReady,
+    EnhanceComplete
+}
 
 public class UI_SkillTreeMaanger : MonoBehaviour
 {
@@ -69,8 +77,8 @@ public class UI_SkillTreeMaanger : MonoBehaviour
 
     private void NodeCreate(UI_SkillTreeUnit _unit)
     {
-        if (_unit.skillTree.unlockCheckIndex == -1) return;
-        var targetUnit = Array.Find(skillTreeUnits, x => x.skillIndex == _unit.skillTree.unlockCheckIndex);
+        if (_unit.skillTree.baseSkillIndex == -1) return;
+        var targetUnit = Array.Find(skillTreeUnits, x => x.skillIndex == _unit.skillTree.baseSkillIndex);
         if (targetUnit == null) return;
 
         var nodeCont = Get_FreeNodeCont();
@@ -93,11 +101,9 @@ public class UI_SkillTreeMaanger : MonoBehaviour
 
     void Awake()
     {
-        // -unit set-
-        // skillTreeUnits = transform.GetComponentsInChildren<UI_SkillTreeUnit>();
         foreach (var skillTreeUnit in skillTreeUnits)
         {
-            skillTreeUnit.AwakeCall(OnMouseOver);
+            skillTreeUnit.AwakeCall(OnMouseOver, OnClick_Enhance, UpdateNodeState);
         }
         ui_skillTreeDetail.gameObject.SetActive(false);
     }
@@ -121,10 +127,8 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     {
         foreach (var nodeCont in nodeConts)
         {
-            if (nodeCont.gameObject.activeSelf)
-            {
-                nodeCont.UpdateConnection();
-            }
+            if (!nodeCont.gameObject.activeSelf) continue;
+            nodeCont.UpdateConnection();
         }
     }
 
@@ -181,16 +185,58 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     }
 
 
+
+
+    /// <summary>
+    /// unit にマウスオーバーした時の処理
+    /// </summary>
     private void OnMouseOver(bool _isEnter, UI_SkillTreeUnit _skillTreeUnit)
     {
         if (_isEnter)
         {
             ui_skillTreeDetail.transform.position = _skillTreeUnit.transform.position;
-            ui_skillTreeDetail.gameObject.SetActive(true);
+            ui_skillTreeDetail.SetData(_skillTreeUnit);
         }
         else
         {
-            ui_skillTreeDetail.gameObject.SetActive(false);
+            ui_skillTreeDetail.SetData(null);
         }
     }
+
+
+    /// <summary>
+    /// unit をクリックした時の処理
+    /// </summary>
+    private async void OnClick_Enhance(UI_SkillTreeUnit _skillTreeUnit)
+    {
+        if (_skillTreeUnit.unlockState != SkillTreeUnlockState.EnhanceReady) return;
+        if (StaticManager.CoinCheck(_skillTreeUnit.skillTree.cost) == false) return;
+        SaveLoader.Inst.Request_SaveSkillTreeData(_skillTreeUnit.skillIndex, _skillTreeUnit.level + 1);
+        SaveLoader.Inst.Request_SaveCoin(-_skillTreeUnit.skillTree.cost);
+
+        await UniTask.DelayFrame(2);
+        _skillTreeUnit.Init();
+
+        // ベーススキルの更新
+        var checkTargetUnit = Array.FindAll(skillTreeUnits, x => x.skillTree.baseSkillIndex == _skillTreeUnit.skillIndex);
+        foreach (var unit in checkTargetUnit)
+        {
+            unit.Init();
+        }
+
+        UpdateNodeState(_skillTreeUnit.skillTree.baseSkillIndex, true);
+    }
+
+    public void UpdateNodeState(int _baseSkillIndex, bool _isOn)
+    {
+        var targetNodes = nodeConts.FindAll(x => x.BaseSkillIndex == _baseSkillIndex);
+        foreach (var node in targetNodes)
+        {
+            node.Set_LineState(_isOn);
+        }
+    }
+
+
+
+
 }

@@ -25,11 +25,11 @@ public class SkillTree
     public string skillName;
     public Sprite icon;
     public int maxLevel;
-    public int unlockCheckIndex;
+    public int baseSkillIndex;
     public string paramCategory;
     public string paramType;
-    public int baseValue;
-    public int deltaValue;
+    public float baseValue;
+    public float deltaValue;
     public int cost;
 }
 
