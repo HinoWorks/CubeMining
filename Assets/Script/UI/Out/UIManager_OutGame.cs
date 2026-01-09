@@ -16,6 +16,7 @@ public class UIManager_OutGame : MonoBehaviour
     [SerializeField] UI_OutGame_HeaderButton[] headerButtons;
     [SerializeField] GameObject main;
     [SerializeField] UI_SkillTreeMaanger ui_skillTreeMaanger;
+    public UI_SkillTreeMaanger UI_SkillTreeManager => ui_skillTreeMaanger;
 
 
 
@@ -30,6 +31,9 @@ public class UIManager_OutGame : MonoBehaviour
 
     void Awake()
     {
+        if (Inst == null) Inst = this;
+        else Destroy(this);
+
         GameEvent.GameState.SetGameState.Subscribe(ChangeGateState).AddTo(this);
 
         // -- header button set --

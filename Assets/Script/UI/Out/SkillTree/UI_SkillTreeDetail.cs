@@ -8,9 +8,11 @@ public class UI_SkillTreeDetail : MonoBehaviour
     [SerializeField] TextMeshProUGUI tmp_skillName;
     //[SerializeField] TextMeshProUGUI tmp_description;
     [SerializeField] TextMeshProUGUI tmp_paramNow;
+    [SerializeField] GameObject obj_vec;
     [SerializeField] TextMeshProUGUI tmp_paramNext;
     [SerializeField] TextMeshProUGUI tmp_level;
     [SerializeField] TextMeshProUGUI tmp_cost;
+    [SerializeField] GameObject obj_complete;
 
 
 
@@ -32,8 +34,15 @@ public class UI_SkillTreeDetail : MonoBehaviour
         tmp_paramNow.SetText(paramNow.ToString("F2"));
         tmp_paramNext.SetText(paramNext.ToString("F2"));
         tmp_cost.SetText(so.cost.ToString());
+        tmp_cost.color = StaticManager.CoinCheck(so.cost) ? Color.white : Color.red;
+
+        tmp_paramNext.gameObject.SetActive(_skillTreeUnit.unlockState == SkillTreeUnlockState.EnhanceReady);
+        obj_vec.SetActive(_skillTreeUnit.unlockState == SkillTreeUnlockState.EnhanceReady);
+        obj_complete.SetActive(_skillTreeUnit.unlockState == SkillTreeUnlockState.EnhanceComplete);
 
         this.gameObject.SetActive(true);
+
+
     }
 
 

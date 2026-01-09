@@ -4,7 +4,9 @@ using UnityEngine.UI;
 public class UI_SkillTreeNodeCont : MonoBehaviour
 {
     [SerializeField] private int baseSkillIndex;
+    [SerializeField] private int targetSkillIndex;
     public int BaseSkillIndex => baseSkillIndex;
+    public int TargetSkillIndex => targetSkillIndex;
 
     private UI_SkillTreeUnit baseUnit;
     private UI_SkillTreeUnit targetUnit;
@@ -19,13 +21,14 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
     {
         baseUnit = _baseUnit;
         targetUnit = _targetUnit;
-        baseSkillIndex = _baseUnit.skillTree.baseSkillIndex;
+        lineHeight = _lineHeight;
+        baseSkillIndex = _baseUnit.skillIndex;
+        targetSkillIndex = _targetUnit.skillIndex;
 
         if (baseUnit != null && targetUnit != null)
         {
             this.gameObject.SetActive(true);
             UpdateConnection();
-            lineHeight = _lineHeight;
         }
         else
         {
@@ -112,9 +115,11 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
 
 
 
-    public void Set_LineState(bool _isOn)
+    public void Set_LineState(SkillTreeUnlockState _unlockState, int _level)
     {
-        lineImage.enabled = _isOn;
+        lineImage.enabled = _unlockState != SkillTreeUnlockState.Hide;
+        if (_unlockState == SkillTreeUnlockState.Hide) return;
+        lineImage.color = _level == 0 ? Color.gray : Color.green;
     }
 
 

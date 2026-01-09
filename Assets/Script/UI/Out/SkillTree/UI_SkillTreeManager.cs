@@ -9,6 +9,7 @@ using Cysharp.Threading.Tasks;
 
 public enum SkillTreeUnlockState
 {
+    Hide,
     Locked,
     EnhanceReady,
     EnhanceComplete
@@ -78,11 +79,11 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     private void NodeCreate(UI_SkillTreeUnit _unit)
     {
         if (_unit.skillTree.baseSkillIndex == -1) return;
-        var targetUnit = Array.Find(skillTreeUnits, x => x.skillIndex == _unit.skillTree.baseSkillIndex);
-        if (targetUnit == null) return;
+        var baseUnit = Array.Find(skillTreeUnits, x => x.skillIndex == _unit.skillTree.baseSkillIndex);
+        if (baseUnit == null) return;
 
         var nodeCont = Get_FreeNodeCont();
-        nodeCont.SetNodeCont(_unit, targetUnit, nodeLineHeight);
+        nodeCont.SetNodeCont(baseUnit, _unit, nodeLineHeight);
     }
 
     private UI_SkillTreeNodeCont Get_FreeNodeCont()
@@ -115,6 +116,11 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         this.gameObject.SetActive(isActive);
         ui_skillTreeDetail.gameObject.SetActive(false);
         if (!isActive) return;
+
+        foreach (var skillTreeUnit in skillTreeUnits)
+        {
+            skillTreeUnit.Init();
+        }
 
         // 実行時に接続線を更新
         // UpdateAllConnections();
@@ -223,19 +229,25 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         {
             unit.Init();
         }
-
-        UpdateNodeState(_skillTreeUnit.skillTree.baseSkillIndex, true);
+        ui_skillTreeDetail.SetData(_skillTreeUnit);
+        UpdateNodeState(_skillTreeUnit.skillTree.baseSkillIndex, _skillTreeUnit.skillIndex, _skillTreeUnit.unlockState, _skillTreeUnit.level);
     }
 
-    public void UpdateNodeState(int _baseSkillIndex, bool _isOn)
+    private void UpdateNodeState(int _baseSkillIndex, int _targetSkillIndex, SkillTreeUnlockState _unlockState, int _level)
     {
-        var targetNodes = nodeConts.FindAll(x => x.BaseSkillIndex == _baseSkillIndex);
+        var targetNodes = nodeConts.FindAll(x => x.BaseSkillIndex == _baseSkillIndex && x.TargetSkillIndex == _targetSkillIndex);
         foreach (var node in targetNodes)
         {
-            node.Set_LineState(_isOn);
+            node.Set_LineState(_unlockState, _level);
         }
     }
 
+    public SkillTreeUnlockState Get_SkillTreeUnlockState(int _skillIndex)
+    {
+        var skillTreeUnit = Array.Find(skillTreeUnits, x => x.skillIndex == _skillIndex);
+        if (skillTreeUnit == null) return SkillTreeUnlockState.Hide;
+        return skillTreeUnit.unlockState;
+    }
 
 
 
