@@ -24,7 +24,7 @@ public class CSVSerializer
         return (T)CreateIdValue(typeof(T), ParseCSV(text), id_col, value_col);
     }
 
-    static public T DeserializeIdValue<T>(List<string[]> rows, int id_col=0, int value_col=1)
+    static public T DeserializeIdValue<T>(List<string[]> rows, int id_col = 0, int value_col = 1)
     {
         return (T)CreateIdValue(typeof(T), rows, id_col, value_col);
     }
@@ -54,7 +54,7 @@ public class CSVSerializer
         for (int i = 1; i < rows.Count; i++)
         {
             object rowdata = Create(rows[i], table, type);
-            array_value.SetValue(rowdata, i-1);
+            array_value.SetValue(rowdata, i - 1);
         }
         return array_value;
     }
@@ -109,6 +109,11 @@ public class CSVSerializer
             Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(value.ToString());
             fieldinfo.SetValue(v, sprite);
         }
+        else if (fieldinfo.FieldType == typeof(GameObject))
+        {
+            GameObject gameObject = AssetDatabase.LoadAssetAtPath<GameObject>(value.ToString());
+            fieldinfo.SetValue(v, gameObject);
+        }
 #endif
         else if (fieldinfo.FieldType == typeof(string))
             fieldinfo.SetValue(v, value);
@@ -116,7 +121,7 @@ public class CSVSerializer
             fieldinfo.SetValue(v, Convert.ChangeType(value, fieldinfo.FieldType));
     }
 
-    static object CreateIdValue(Type type, List<string[]> rows, int id_col=0, int val_col=1)
+    static object CreateIdValue(Type type, List<string[]> rows, int id_col = 0, int val_col = 1)
     {
         object v = Activator.CreateInstance(type);
 

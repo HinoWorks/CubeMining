@@ -31,7 +31,7 @@ public class InGameManager : MonoBehaviour
         {
             case GameStateType.InGame_Ready:
                 AttackManager.Inst.Set_Ready();
-                BlockGenerateManager.Inst.InitialGenerate();
+                BlockGenerateManager.Inst.Init();
                 getCoin = 0;
                 GameEvent.UI.PublishCoinMod(getCoin);
                 break;

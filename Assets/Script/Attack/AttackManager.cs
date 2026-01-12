@@ -20,7 +20,7 @@ public class AttackManager : MonoBehaviour
     public void Set_Ready()
     {
         Debug.Log($"TODO == Attack Unit Activate");
-        attackUnitIndexes = new int[1] { 0 };
+        attackUnitIndexes = new int[1] { 1 };
         foreach (var unitIndex in attackUnitIndexes)
         {
             AttackUnitGenerate(unitIndex);

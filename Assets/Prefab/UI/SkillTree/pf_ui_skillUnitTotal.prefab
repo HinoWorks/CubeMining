@@ -129,6 +129,7 @@ MonoBehaviour:
   skillTree:
     index: 0
     skillName: 
+    description: 
     icon: {fileID: 0}
     maxLevel: 0
     baseSkillIndex: 0
@@ -142,6 +143,7 @@ MonoBehaviour:
   obj_lock: {fileID: 2871724803519547253}
   obj_enhanceReady: {fileID: 2412101548125444659}
   obj_complete: {fileID: 5700633528826067506}
+  obj_level0: {fileID: 6596646189769231104}
   button: {fileID: 1295158779427792371}
   obj_debug: {fileID: 6280283915969263840}
   tmp_debug: {fileID: 2932069515276859599}
@@ -464,5 +466,10 @@ GameObject:
 --- !u!1 &5700633528826067506 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6392168944890995019, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
+  m_PrefabInstance: {fileID: 1704960128120855417}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6596646189769231104 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5486161659434635385, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
   m_PrefabInstance: {fileID: 1704960128120855417}
   m_PrefabAsset: {fileID: 0}

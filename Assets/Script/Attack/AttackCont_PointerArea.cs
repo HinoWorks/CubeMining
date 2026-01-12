@@ -32,8 +32,8 @@ public class AttackCont_PointerArea : AttackContBase
     public override void Init(AttackUnitData _unitData)
     {
         base.Init(_unitData);
-        damage = _unitData.damage_base;
-        attackInterval = _unitData.attackDuration;
+        damage = _unitData.damage;
+        attackInterval = _unitData.attackInterval;
         targets.Clear();
         CreateAttackRoop();
     }

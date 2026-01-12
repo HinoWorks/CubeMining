@@ -229,8 +229,8 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         {
             unit.Init();
         }
-        ui_skillTreeDetail.SetData(_skillTreeUnit);
-        UpdateNodeState(_skillTreeUnit.skillTree.baseSkillIndex, _skillTreeUnit.skillIndex, _skillTreeUnit.unlockState, _skillTreeUnit.level);
+        ui_skillTreeDetail.SetData_Enhanced(_skillTreeUnit.level + 1);
+        UpdateNodeState(_skillTreeUnit.skillTree.baseSkillIndex, _skillTreeUnit.skillIndex, _skillTreeUnit.unlockState, _skillTreeUnit.level + 1);
     }
 
     private void UpdateNodeState(int _baseSkillIndex, int _targetSkillIndex, SkillTreeUnlockState _unlockState, int _level)

@@ -15,241 +15,289 @@ MonoBehaviour:
   skillTreeDatas:
   - index: 1
     skillName: skill_1
+    description: skill description --- 1
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 1
     baseSkillIndex: -1
-    paramCategory: 
-    paramType: 
+    paramCategory: 0
+    targetIndex: -1
+    paramType: 0
     baseValue: 1
     deltaValue: 0.15
     cost: 10
   - index: 10
     skillName: skill_2
+    description: skill description --- 10
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 1
-    paramCategory: 
-    paramType: 
+    paramCategory: 0
+    targetIndex: -1
+    paramType: 0
     baseValue: 1
     deltaValue: 0.15
     cost: 11
   - index: 11
     skillName: skill_3
+    description: skill description --- 11
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 10
-    paramCategory: 
-    paramType: 
+    paramCategory: 1
+    targetIndex: 1
+    paramType: 3
     baseValue: 1
     deltaValue: 0.15
     cost: 12
   - index: 12
     skillName: skill_4
+    description: skill description --- 12
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 11
-    paramCategory: 
-    paramType: 
+    paramCategory: 1
+    targetIndex: 1
+    paramType: 3
     baseValue: 1
     deltaValue: 0.15
     cost: 13
   - index: 13
     skillName: skill_5
+    description: skill description --- 13
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 11
-    paramCategory: 
-    paramType: 
+    paramCategory: 1
+    targetIndex: 2
+    paramType: 3
     baseValue: 1
     deltaValue: 0.15
     cost: 14
   - index: 14
     skillName: skill_6
+    description: skill description --- 14
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 11
-    paramCategory: 
-    paramType: 
+    paramCategory: 1
+    targetIndex: 3
+    paramType: 3
     baseValue: 1
     deltaValue: 0.15
     cost: 15
   - index: 15
     skillName: skill_7
+    description: skill description --- 15
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 13
-    paramCategory: 
-    paramType: 
+    paramCategory: 1
+    targetIndex: 1
+    paramType: 3
     baseValue: 1
     deltaValue: 0.15
     cost: 16
   - index: 16
     skillName: skill_8
+    description: skill description --- 16
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 15
-    paramCategory: 
-    paramType: 
+    paramCategory: 1
+    targetIndex: 2
+    paramType: 3
     baseValue: 1
     deltaValue: 0.15
     cost: 17
   - index: 17
     skillName: skill_9
+    description: skill description --- 17
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 15
-    paramCategory: 
-    paramType: 
+    paramCategory: 1
+    targetIndex: 3
+    paramType: 3
     baseValue: 1
     deltaValue: 0.15
     cost: 18
   - index: 18
     skillName: skill_10
+    description: skill description --- 18
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 111
-    paramCategory: 
-    paramType: 
+    paramCategory: 1
+    targetIndex: 5
+    paramType: 3
     baseValue: 1
     deltaValue: 0.15
     cost: 19
   - index: 19
     skillName: skill_11
+    description: skill description --- 19
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 111
-    paramCategory: 
-    paramType: 
+    paramCategory: 1
+    targetIndex: 1
+    paramType: 3
     baseValue: 1
     deltaValue: 0.15
     cost: 20
   - index: 20
     skillName: skill_20
+    description: skill description --- 20
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 1
-    paramCategory: 
-    paramType: 
+    paramCategory: 2
+    targetIndex: 1
+    paramType: 4
     baseValue: 1
     deltaValue: 0.15
     cost: 21
   - index: 21
     skillName: skill_21
+    description: skill description --- 21
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 20
-    paramCategory: 
-    paramType: 
+    paramCategory: 2
+    targetIndex: 1
+    paramType: 5
     baseValue: 1
     deltaValue: 0.15
     cost: 22
   - index: 22
     skillName: skill_22
+    description: skill description --- 22
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 21
-    paramCategory: 
-    paramType: 
+    paramCategory: 2
+    targetIndex: 2
+    paramType: 5
     baseValue: 1
     deltaValue: 0.15
     cost: 22
   - index: 23
     skillName: skill_23
+    description: skill description --- 23
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 22
-    paramCategory: 
-    paramType: 
+    paramCategory: 2
+    targetIndex: 3
+    paramType: 5
     baseValue: 1
     deltaValue: 0.15
     cost: 22
   - index: 24
     skillName: skill_24
+    description: skill description --- 24
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 20
-    paramCategory: 
-    paramType: 
+    baseSkillIndex: 22
+    paramCategory: 2
+    targetIndex: 5
+    paramType: 5
     baseValue: 1
     deltaValue: 0.15
     cost: 22
   - index: 25
     skillName: skill_25
+    description: skill description --- 25
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 20
-    paramCategory: 
-    paramType: 
+    baseSkillIndex: 24
+    paramCategory: 2
+    targetIndex: 1
+    paramType: 5
     baseValue: 1
     deltaValue: 0.15
     cost: 22
   - index: 26
     skillName: skill_26
+    description: skill description --- 26
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 20
-    paramCategory: 
-    paramType: 
+    baseSkillIndex: 23
+    paramCategory: 2
+    targetIndex: 2
+    paramType: 5
     baseValue: 1
     deltaValue: 0.15
     cost: 22
   - index: 27
     skillName: skill_27
+    description: skill description --- 27
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 20
-    paramCategory: 
-    paramType: 
+    baseSkillIndex: 26
+    paramCategory: 2
+    targetIndex: 3
+    paramType: 5
     baseValue: 1
     deltaValue: 0.15
     cost: 22
   - index: 28
     skillName: skill_28
+    description: skill description --- 28
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 20
-    paramCategory: 
-    paramType: 
+    baseSkillIndex: 25
+    paramCategory: 2
+    targetIndex: 4
+    paramType: 5
     baseValue: 1
     deltaValue: 0.15
     cost: 22
   - index: 29
     skillName: skill_29
+    description: skill description --- 29
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 20
-    paramCategory: 
-    paramType: 
+    baseSkillIndex: 25
+    paramCategory: 2
+    targetIndex: 5
+    paramType: 5
     baseValue: 1
     deltaValue: 0.15
     cost: 22
   - index: 30
     skillName: skill_22
+    description: skill description --- 30
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 20
-    paramCategory: 
-    paramType: 
+    paramCategory: 2
+    targetIndex: 1
+    paramType: 5
     baseValue: 1
     deltaValue: 0.15
     cost: 22
   - index: 31
     skillName: skill_23
+    description: skill description --- 31
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 20
-    paramCategory: 
-    paramType: 
+    paramCategory: 2
+    targetIndex: 3
+    paramType: 5
     baseValue: 1
     deltaValue: 0.15
     cost: 22
   - index: 32
     skillName: skill_24
+    description: skill description --- 32
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 20
-    paramCategory: 
-    paramType: 
+    paramCategory: 2
+    targetIndex: 5
+    paramType: 5
     baseValue: 1
     deltaValue: 0.15
     cost: 22

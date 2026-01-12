@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600604876754034270}
-  m_LocalRotation: {x: 0, y: 0, z: -0.52573115, w: 0.8506508}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 75, y: -350}
-  m_SizeDelta: {x: 335.4102, y: 10}
+  m_AnchoredPosition: {x: 75, y: -500}
+  m_SizeDelta: {x: 150, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4354938961077602388
 CanvasRenderer:
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
-  baseSkillIndex: 20
+  baseSkillIndex: 22
   targetSkillIndex: 24
 --- !u!1 &641133861356149599
 GameObject:
@@ -116,7 +116,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641133861356149599}
-  m_LocalRotation: {x: 0, y: 0, z: -0.61541224, w: 0.78820544}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -125,8 +125,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 75, y: -500}
-  m_SizeDelta: {x: 618.4658, y: 10}
+  m_AnchoredPosition: {x: 150, y: -725}
+  m_SizeDelta: {x: 150, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2116663363631695754
 CanvasRenderer:
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
-  baseSkillIndex: 20
+  baseSkillIndex: 25
   targetSkillIndex: 29
 --- !u!1 &766212243448170487
 GameObject:
@@ -396,7 +396,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2710164781739359686}
-  m_LocalRotation: {x: 0, y: 0, z: -0.81124216, w: 0.5847103}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -405,8 +405,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -75, y: -425}
-  m_SizeDelta: {x: 474.34164, y: 10}
+  m_AnchoredPosition: {x: -150, y: -575}
+  m_SizeDelta: {x: 150, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &389376928023573031
 CanvasRenderer:
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
-  baseSkillIndex: 20
+  baseSkillIndex: 26
   targetSkillIndex: 27
 --- !u!1 &2714350068260930463
 GameObject:
@@ -683,7 +683,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3849702854203220212}
-  m_LocalRotation: {x: 0, y: 0, z: -0.47185794, w: 0.8816746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -692,8 +692,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: -425}
-  m_SizeDelta: {x: 540.8327, y: 10}
+  m_AnchoredPosition: {x: 225, y: -650}
+  m_SizeDelta: {x: 150, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4468613976644760328
 CanvasRenderer:
@@ -745,7 +745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
-  baseSkillIndex: 20
+  baseSkillIndex: 25
   targetSkillIndex: 28
 --- !u!1 &3933676462058146504
 GameObject:
@@ -1119,7 +1119,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5508522663791030616}
-  m_LocalRotation: {x: 0, y: 0, z: -0.58471024, w: 0.8112422}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1128,8 +1128,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 75, y: -425}
-  m_SizeDelta: {x: 474.34164, y: 10}
+  m_AnchoredPosition: {x: 150, y: -575}
+  m_SizeDelta: {x: 150, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4835479329743426270
 CanvasRenderer:
@@ -1181,7 +1181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
-  baseSkillIndex: 20
+  baseSkillIndex: 24
   targetSkillIndex: 25
 --- !u!1 &5781871248295564932
 GameObject:
@@ -1779,7 +1779,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7290560989028494886}
-  m_LocalRotation: {x: 0, y: 0, z: -0.8506508, w: 0.52573115}
+  m_LocalRotation: {x: 0, y: 0, z: 0.92387956, w: 0.38268346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1788,8 +1788,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -75, y: -350}
-  m_SizeDelta: {x: 335.4102, y: 10}
+  m_AnchoredPosition: {x: -75, y: -575}
+  m_SizeDelta: {x: 212.13203, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1776770919730084497
 CanvasRenderer:
@@ -1841,7 +1841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
-  baseSkillIndex: 20
+  baseSkillIndex: 23
   targetSkillIndex: 26
 --- !u!1 &7291021322089718531
 GameObject:
@@ -2375,6 +2375,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
       value: 11
       objectReference: {fileID: 0}
@@ -2535,6 +2539,10 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -2699,6 +2707,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
       value: 11
       objectReference: {fileID: 0}
@@ -2861,8 +2873,12 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
-      value: 20
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -3021,6 +3037,10 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 14
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -3185,8 +3205,12 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
-      value: 20
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -3345,6 +3369,10 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 16
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -3509,8 +3537,12 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
-      value: 20
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -3671,6 +3703,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
       value: 22
       objectReference: {fileID: 0}
@@ -3827,6 +3863,10 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 11
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -3991,6 +4031,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
       value: 1
       objectReference: {fileID: 0}
@@ -4153,8 +4197,12 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
-      value: 20
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -4313,6 +4361,10 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 21
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -4477,6 +4529,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
       value: 15
       objectReference: {fileID: 0}
@@ -4639,6 +4695,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
       value: 21
       objectReference: {fileID: 0}
@@ -4797,6 +4857,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
       value: -1
       objectReference: {fileID: 0}
@@ -4840,6 +4904,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 152722955680469825, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
       propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 152722955680469825, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 152722955680469825, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
@@ -4943,6 +5011,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8523588578071009522, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523588578071009522, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -4956,6 +5028,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8979243565275910143, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
       propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979243565275910143, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8979243565275910143, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
@@ -5120,8 +5196,12 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -5282,8 +5362,12 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -5442,6 +5526,10 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.description
+      value: skill description --- 15
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex

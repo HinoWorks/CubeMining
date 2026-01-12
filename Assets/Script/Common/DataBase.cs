@@ -8,13 +8,14 @@ using UnityEditor;
 
 public class DataBase : MonoBehaviour
 {
-
-    public static DataBase Inst;
-    void Awake()
-    {
-        if (Inst == null) { Inst = this; }
-        else { Destroy(this); }
-    }
+    /*
+        public static DataBase Inst;
+        void Awake()
+        {
+            if (Inst == null) { Inst = this; }
+            else { Destroy(this); }
+        }
+        */
 
     // --- GSS Load Setting --
     //https://docs.google.com/spreadsheets/d/18r14I3b0cia4TxMk525C686vuO6sjbfO5Cd16gWzNes/edit?usp=sharing
@@ -25,20 +26,24 @@ public class DataBase : MonoBehaviour
 
 
     [Header("GSS Load data")]
-    public SO_SkillTreeData mSO_SkillTreeData;
-
+    [SerializeField] SO_SkillTreeData mSO_SkillTreeData;
+    [SerializeField] SO_AttackUnitData mSO_AttackUnitData;
+    [SerializeField] SO_BlockData mSO_BlockData;
 
 
     public async UniTask LoadData()
     {
         await DataLoad_SkillTreeData();
+        await DataLoad_AttackUnitData();
+        await DataLoad_BlockData();
 
 #if UNITY_EDITOR
         Debug.Log($"<color=yellow>End Master Data update!</color>");
         await UniTask.Delay(200, true);
 
         EditorUtility.SetDirty(mSO_SkillTreeData);
-
+        EditorUtility.SetDirty(mSO_AttackUnitData);
+        EditorUtility.SetDirty(mSO_BlockData);
         // -- save --
         AssetDatabase.SaveAssets();
 #endif
@@ -52,6 +57,22 @@ public class DataBase : MonoBehaviour
         var convData = CSVSerializer.Deserialize<SkillTree>(loadData);
         mSO_SkillTreeData.skillTreeDatas = convData;
     }
+
+    private async UniTask DataLoad_AttackUnitData()
+    {
+        var loadData = await DataLoad("AttackUnit");
+        var convData = CSVSerializer.Deserialize<AttackUnitData>(loadData);
+        mSO_AttackUnitData.attackUnitDatas = convData;
+    }
+
+
+    private async UniTask DataLoad_BlockData()
+    {
+        var loadData = await DataLoad("BlockUnit");
+        var convData = CSVSerializer.Deserialize<BlockData>(loadData);
+        mSO_BlockData.blockDatas = convData;
+    }
+
 
 
     private async UniTask<string> DataLoad(string _sheetName)

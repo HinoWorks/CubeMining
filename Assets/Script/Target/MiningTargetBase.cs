@@ -10,12 +10,12 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     public bool isAlive => hp > 0;
 
 
-    public virtual void Init(BlockData _blockData)
+    public virtual void Init(int _hp, int _value, int _index)
     {
         gameObject.SetActive(true);
-        hp_max = _blockData.hp;
-        index = _blockData.blockIndex;
-        value = _blockData.baseValue;
+        hp_max = _hp;
+        index = _index;
+        value = _value;
 
         hp = hp_max;
     }

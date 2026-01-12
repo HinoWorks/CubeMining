@@ -18,6 +18,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
     [SerializeField] GameObject obj_lock;
     [SerializeField] GameObject obj_enhanceReady;
     [SerializeField] GameObject obj_complete;
+    [SerializeField] GameObject obj_level0;
     [SerializeField] HButton button;
 
     [Space(10)]
@@ -91,6 +92,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
         }
         else //データありの場合、レベルを確認
         {
+            obj_level0.SetActive(skillTreeData.level == 0);
             level = skillTreeData.level;
             unlockState = skillTreeData.level >= skillTree.maxLevel ?
                  SkillTreeUnlockState.EnhanceComplete : SkillTreeUnlockState.EnhanceReady;
@@ -98,7 +100,6 @@ public class UI_SkillTreeUnit : MonoBehaviour
         // Debug.Log($"SkillTreeUnit: {skillIndex} ----> unlockState: {unlockState}");
         onUpdateNodeState?.Invoke(skillTree.baseSkillIndex, skillIndex, unlockState, level);
         SetState();
-
     }
 
 
@@ -115,6 +116,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
 
     private void OnPointerEnter(bool _isEnter)
     {
+        if (this.unlockState == SkillTreeUnlockState.Hide || this.unlockState == SkillTreeUnlockState.Locked) return;
         onMouseOver?.Invoke(_isEnter, this);
     }
 

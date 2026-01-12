@@ -13,13 +13,63 @@ MonoBehaviour:
   m_Name: SO_BlockData
   m_EditorClassIdentifier: Assembly-CSharp::SO_BlockData
   blockDatas:
-  - blockIndex: 0
-    pf: {fileID: 8585812083356289928, guid: 86a369e0b7351463690adc2cd170656b, type: 3}
-    hp: 5
-    baseValue: 2
-    generateRate: 0.8
   - blockIndex: 1
+    unitName: Block--1
+    unitDescription: Block - 1 description
+    icon: {fileID: 0}
+    pf: {fileID: 8585812083356289928, guid: 86a369e0b7351463690adc2cd170656b, type: 3}
+    hp: 2
+    baseValue: 2
+    generateInterval: 1
+    count: 1
+    size: 0.5
+  - blockIndex: 2
+    unitName: Block--2
+    unitDescription: Block - 1 description
+    icon: {fileID: 0}
     pf: {fileID: 8585812083356289928, guid: d82904e9b8e434b5f85dc24ef035528e, type: 3}
-    hp: 10
+    hp: 8
     baseValue: 6
-    generateRate: 0.2
+    generateInterval: 2
+    count: 1
+    size: 0.5
+  - blockIndex: 3
+    unitName: Block--3
+    unitDescription: Block - 1 description
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    hp: 16
+    baseValue: 12
+    generateInterval: 3
+    count: 1
+    size: 0.5
+  - blockIndex: 4
+    unitName: Block--4
+    unitDescription: Block - 1 description
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    hp: 22
+    baseValue: 20
+    generateInterval: 4
+    count: 1
+    size: 0.5
+  - blockIndex: 5
+    unitName: Block--5
+    unitDescription: Block - 1 description
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    hp: 25
+    baseValue: 35
+    generateInterval: 5
+    count: 1
+    size: 0.5
+  - blockIndex: 6
+    unitName: Block--6
+    unitDescription: Block - 1 description
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    hp: 30
+    baseValue: 50
+    generateInterval: 6
+    count: 1
+    size: 0.5

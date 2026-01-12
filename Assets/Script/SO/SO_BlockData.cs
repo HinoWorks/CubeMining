@@ -6,10 +6,18 @@ using System;
 public class BlockData
 {
     public int blockIndex;
+    public string unitName;
+    public string unitDescription;
+    public Sprite icon;
+
     public GameObject pf;
+
+
     public int hp;
     public int baseValue;
-    public float generateRate;
+    public float generateInterval;
+    public int count;
+    public float size;
 }
 
 
