@@ -6,8 +6,6 @@ public class AttackManager : MonoBehaviour
     public static AttackManager Inst;
     [SerializeField] List<AttackContBase> attackConts = new List<AttackContBase>();
 
-    private int[] attackUnitIndexes;
-
     void Awake()
     {
         if (Inst == null) { Inst = this; }
@@ -20,23 +18,23 @@ public class AttackManager : MonoBehaviour
     public void Set_Ready()
     {
         Debug.Log($"TODO == Attack Unit Activate");
-        attackUnitIndexes = new int[1] { 1 };
-        foreach (var unitIndex in attackUnitIndexes)
+        foreach (var attackParam in GameParamManager.list_attackParam)
         {
-            AttackUnitGenerate(unitIndex);
+            if (attackParam.attackUnitIndex == 1) { }
+            else if (!attackParam.isActive) continue;
+            AttackUnitGenerate(attackParam);
         }
     }
 
-    private void AttackUnitGenerate(int _unitIndex)
+    private void AttackUnitGenerate(AttackParam _attackParam)
     {
-        var attackUnitData = SOLoader.AttackUnitData.GetAttackUnitData(_unitIndex);
-        var attackUnit = Instantiate(attackUnitData.pf, transform) as GameObject;
+        var attackUnit = Instantiate(_attackParam.so.pf, transform) as GameObject;
         attackUnit.transform.position = transform.position;
         attackUnit.transform.localScale = Vector3.one;
 
         var attackCont = attackUnit.GetComponent<AttackContBase>();
         attackConts.Add(attackCont);
-        attackCont.Init(attackUnitData);
+        attackCont.Init(_attackParam);
     }
 
 

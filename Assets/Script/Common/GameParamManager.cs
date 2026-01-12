@@ -9,8 +9,22 @@ using UnityEngine.Analytics;
 /// </summary>
 public class GameBaseParam
 {
-    public float ingameTime;
-    public float bonusRate;
+    public float ingameTime { get; private set; }
+    public float bonusRate { get; private set; }
+
+    public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
+    {
+        switch (_paramType)
+        {
+            case ParamType.IngameTime:
+                ingameTime += _setParam;
+                break;
+            case ParamType.BonusRate:
+                bonusRate += _setParam;
+                break;
+        }
+
+    }
 }
 
 
@@ -21,14 +35,14 @@ public class GameBaseParam
 public class BlockGenerateParam
 {
     public BlockData so;
-    public bool isActive = false;
+    public bool isActive { get; private set; } = false;
 
-    public int blockIndex;
-    public int hp;
-    public int baseValue;
-    public float generateInterval;
-    public int count;
-    public float size;
+    public int blockIndex { get; private set; }
+    public int hp { get; private set; }
+    public int baseValue { get; private set; }
+    public float generateInterval { get; private set; }
+    public int count { get; private set; }
+    public float size { get; private set; }
 
     public void Init(BlockData _blockData)
     {
@@ -74,18 +88,20 @@ public class BlockGenerateParam
 /// </summary>
 public class AttackParam
 {
-    public bool isActive = false;
-    public int attackUnitIndex;
+    public AttackUnitData so;
+    public bool isActive { get; private set; } = false;
+    public int attackUnitIndex { get; private set; }
 
-    public float damage;
-    public float aliveTime;
-    public float ct;
-    public int count;
-    public float attackInterval;
-    public float size;
+    public float damage { get; private set; }
+    public float aliveTime { get; private set; }
+    public float ct { get; private set; }
+    public int count { get; private set; }
+    public float attackInterval { get; private set; }
+    public float size { get; private set; }
 
     public void Init(AttackUnitData _attackUnitData)
     {
+        so = _attackUnitData;
         attackUnitIndex = _attackUnitData.attackIndex;
         isActive = false;
         damage = _attackUnitData.damage;
@@ -181,8 +197,8 @@ public static class GameParamManager
 
     public static void Init_GameBaseParam()
     {
-        gameBaseParam.ingameTime = 5f;
-        gameBaseParam.bonusRate = 0f;
+        gameBaseParam.Set_SkillTreeParam(ParamType.IngameTime, 5f);
+        gameBaseParam.Set_SkillTreeParam(ParamType.BonusRate, 0f);
 
         // block generate param init
         list_blockGenerateParam.Clear();
@@ -223,17 +239,7 @@ public static class GameParamManager
 
     private static void Set_GamesystemParam(SkillTree _skillTree, float _setParam)
     {
-        switch (_skillTree.paramType)
-        {
-            case ParamType.Unlock:
-                break;
-            case ParamType.IngameTime:
-                gameBaseParam.ingameTime += _setParam;
-                break;
-            case ParamType.BonusRate:
-                gameBaseParam.bonusRate += _setParam;
-                break;
-        }
+        gameBaseParam.Set_SkillTreeParam(_skillTree.paramType, _setParam);
     }
 
     private static void Set_BlockParam(SkillTree _skillTree, float _setParam)
