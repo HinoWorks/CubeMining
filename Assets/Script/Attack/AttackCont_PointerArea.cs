@@ -15,8 +15,8 @@ public class AttackCont_PointerArea : AttackContBase
     private readonly List<IDamagable> removeBuffer = new();
 
     // loc
-    private int damage = 1;
-    private float attackInterval = 0.5f;
+    private int damage => (int)base.attackParam.damage;
+    private float attackInterval => base.attackParam.attackInterval;
     private Vector3 offsetPosition = new Vector3(0, 0.1f, 0);
 
 
@@ -29,11 +29,9 @@ public class AttackCont_PointerArea : AttackContBase
         triggerSender.OnEnter += OnEnter;
         triggerSender.OnExit += OnExit;
     }
-    public override void Init(AttackUnitData _unitData)
+    public override void Init(AttackParam _attackParam)
     {
-        base.Init(_unitData);
-        damage = _unitData.damage;
-        attackInterval = _unitData.attackInterval;
+        base.Init(_attackParam);
         targets.Clear();
         CreateAttackRoop();
     }

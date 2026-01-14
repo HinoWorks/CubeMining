@@ -6,6 +6,10 @@ public class InGameManager : MonoBehaviour
 {
     public static InGameManager Inst;
 
+    [SerializeField] Transform parentPool;
+    public Transform ParentPool => parentPool;
+
+
 
     private float timer = 0;
     private float timeLimit = 5;

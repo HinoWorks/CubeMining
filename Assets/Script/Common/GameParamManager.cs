@@ -95,6 +95,7 @@ public class AttackParam
     public float damage { get; private set; }
     public float aliveTime { get; private set; }
     public float ct { get; private set; }
+    public float speed { get; private set; }
     public int count { get; private set; }
     public float attackInterval { get; private set; }
     public float size { get; private set; }
@@ -107,6 +108,7 @@ public class AttackParam
         damage = _attackUnitData.damage;
         aliveTime = _attackUnitData.aliveTime;
         ct = _attackUnitData.ct;
+        speed = _attackUnitData.speed;
         count = _attackUnitData.count;
         attackInterval = _attackUnitData.attackInterval;
         size = _attackUnitData.size;
@@ -127,6 +129,9 @@ public class AttackParam
                 break;
             case ParamType.CT:
                 ct += _setParam;
+                break;
+            case ParamType.Speed:
+                speed += _setParam;
                 break;
             case ParamType.Count:
                 count += (int)_setParam;

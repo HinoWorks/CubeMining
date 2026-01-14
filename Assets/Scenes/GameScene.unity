@@ -3362,6 +3362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a615c6c916ba4e84b80e8647342dbd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGameManager
+  parentPool: {fileID: 716063530}
 --- !u!114 &892646011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3374,7 +3375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0481c95869d8949c8a39301ff85e64b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlockGenerateManager
-  parentPool: {fileID: 716063530}
   range_x: {x: -5, y: 5}
   range_y: {x: 10, y: 15}
   range_z: {x: -4, y: 4}

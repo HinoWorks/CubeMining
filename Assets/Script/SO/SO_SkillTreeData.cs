@@ -30,7 +30,7 @@ public enum ParamType
     AliveTime,
     CT,
     Count,
-
+    Speed,
     Interval,
     Size,
 

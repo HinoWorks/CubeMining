@@ -10,14 +10,23 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     public bool isAlive => hp > 0;
 
 
+    private Collider col;
+
+    void Awake()
+    {
+        col = GetComponent<Collider>();
+    }
+
+
     public virtual void Init(int _hp, int _value, int _index)
     {
-        gameObject.SetActive(true);
         hp_max = _hp;
         index = _index;
         value = _value;
-
         hp = hp_max;
+
+        col.enabled = true;
+        gameObject.SetActive(true);
     }
 
     public virtual bool Damage(int damage)
@@ -26,6 +35,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         DamageAction();
         if (hp <= 0)
         {
+            col.enabled = false;
             BreakFromDamage();
             return true;
         }

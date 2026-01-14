@@ -31,7 +31,6 @@ public class GenerateBlockData
 public class BlockGenerateManager : MonoBehaviour
 {
     public static BlockGenerateManager Inst;
-    [SerializeField] Transform parentPool;
     [SerializeField] Vector2 range_x;
     [SerializeField] Vector2 range_y;
     [SerializeField] Vector2 range_z;
@@ -115,7 +114,7 @@ public class BlockGenerateManager : MonoBehaviour
             var targetBlock = list_targetBlocks.Find(x => x.isActiveAndEnabled == false && x.index == _blockData.param.blockIndex);
             if (targetBlock == null)
             {
-                var newBlock = Instantiate(_blockData.param.so.pf, parentPool) as GameObject;
+                var newBlock = Instantiate(_blockData.param.so.pf, InGameManager.Inst.ParentPool) as GameObject;
                 targetBlock = newBlock.GetComponent<MiningTargetBase>();
                 list_targetBlocks.Add(targetBlock);
             }

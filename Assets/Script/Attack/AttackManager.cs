@@ -5,6 +5,7 @@ public class AttackManager : MonoBehaviour
 {
     public static AttackManager Inst;
     [SerializeField] List<AttackContBase> attackConts = new List<AttackContBase>();
+    private bool isAttacking = false;
 
     void Awake()
     {
@@ -18,9 +19,11 @@ public class AttackManager : MonoBehaviour
     public void Set_Ready()
     {
         Debug.Log($"TODO == Attack Unit Activate");
+        isAttacking = false;
         foreach (var attackParam in GameParamManager.list_attackParam)
         {
-            if (attackParam.attackUnitIndex == 1) { }
+            if (attackParam.attackUnitIndex == 1
+                || attackParam.attackUnitIndex == 2) { }
             else if (!attackParam.isActive) continue;
             AttackUnitGenerate(attackParam);
         }
@@ -41,11 +44,13 @@ public class AttackManager : MonoBehaviour
     public void Set_AttackState(bool isStart)
     {
         // 攻撃開始
+        isAttacking = isStart;
         foreach (var attackCont in attackConts)
         {
             attackCont.Set_AttackTrigger(isStart);
         }
     }
+
 
     public void AttackUnitDelete()
     {
