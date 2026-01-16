@@ -1,6 +1,9 @@
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
+using System.Numerics;
+using DG.Tweening;
+using TMPro;
 
 public enum OutGame_MenuType
 {
@@ -13,7 +16,13 @@ public class UIManager_OutGame : MonoBehaviour
 {
     public static UIManager_OutGame Inst;
 
+    [Header(" -- Header --")]
     [SerializeField] UI_OutGame_HeaderButton[] headerButtons;
+    [SerializeField] TextMeshProUGUI tmp_coin;
+    private float currentCoinFloat;
+
+    [Space(10)]
+    [Header(" -- Main --")]
     [SerializeField] GameObject main;
     [SerializeField] UI_SkillTreeMaanger ui_skillTreeMaanger;
     public UI_SkillTreeMaanger UI_SkillTreeManager => ui_skillTreeMaanger;
@@ -34,6 +43,7 @@ public class UIManager_OutGame : MonoBehaviour
         if (Inst == null) Inst = this;
         else Destroy(this);
 
+        GameEvent.UI.CoinMod.Subscribe(Set_CoinMod).AddTo(this);
         GameEvent.GameState.SetGameState.Subscribe(ChangeGateState).AddTo(this);
 
         // -- header button set --
@@ -63,6 +73,22 @@ public class UIManager_OutGame : MonoBehaviour
     }
 
 
+
+    private void Set_CoinMod(BigInteger mod)
+    {
+        var modCoin = StaticManager.Get_BigintegerToUnit(mod);
+        DOTween.To(() => currentCoinFloat, x => currentCoinFloat = x, modCoin.num, 0.5f).OnUpdate(() =>
+        {
+            if (modCoin.unit == "")
+            {
+                tmp_coin.text = $"{currentCoinFloat.ToString("F0")} {modCoin.unit}";
+            }
+            else
+            {
+                tmp_coin.text = $"{currentCoinFloat.ToString("F2")} {modCoin.unit}";
+            }
+        });
+    }
 
 
     #region -- on Click --

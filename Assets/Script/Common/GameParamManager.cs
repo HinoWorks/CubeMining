@@ -104,7 +104,7 @@ public class AttackParam
     {
         so = _attackUnitData;
         attackUnitIndex = _attackUnitData.attackIndex;
-        isActive = false;
+        isActive = attackUnitIndex == 1 ? true : false;
         damage = _attackUnitData.damage;
         aliveTime = _attackUnitData.aliveTime;
         ct = _attackUnitData.ct;

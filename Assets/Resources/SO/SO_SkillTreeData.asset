@@ -14,28 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_SkillTreeData
   skillTreeDatas:
   - index: 1
-    skillName: skill_1
-    description: skill description --- 1
+    skillName: Ingame Time up
+    description: Ingame Time up
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 1
     baseSkillIndex: -1
     paramCategory: 0
     targetIndex: -1
-    paramType: 0
+    paramType: 1
     baseValue: 1
     deltaValue: 0.15
     cost: 10
   - index: 10
-    skillName: skill_2
-    description: skill description --- 10
+    skillName: SHOT
+    description: 'New Attack Skill -- Shot '
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 3
+    maxLevel: 1
     baseSkillIndex: 1
-    paramCategory: 0
-    targetIndex: -1
+    paramCategory: 2
+    targetIndex: 2
     paramType: 0
-    baseValue: 1
-    deltaValue: 0.15
+    baseValue: -1
+    deltaValue: -1
     cost: 11
   - index: 11
     skillName: skill_3

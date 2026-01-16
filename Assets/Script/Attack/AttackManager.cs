@@ -22,9 +22,7 @@ public class AttackManager : MonoBehaviour
         isAttacking = false;
         foreach (var attackParam in GameParamManager.list_attackParam)
         {
-            if (attackParam.attackUnitIndex == 1
-                || attackParam.attackUnitIndex == 2) { }
-            else if (!attackParam.isActive) continue;
+            if (!attackParam.isActive) continue;
             AttackUnitGenerate(attackParam);
         }
     }

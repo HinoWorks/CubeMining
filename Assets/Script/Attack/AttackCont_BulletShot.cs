@@ -6,6 +6,7 @@ using System;
 
 public class AttackCont_BulletShot : AttackContBase
 {
+    [SerializeField] float radius = 1f;
     [SerializeField] GameObject bulletPrefab;
     private List<BulletBase> bullets = new List<BulletBase>();
 
@@ -68,11 +69,10 @@ public class AttackCont_BulletShot : AttackContBase
                 freeBullet = newBullet.GetComponent<BulletBase>();
                 bullets.Add(freeBullet);
             }
-            freeBullet.transform.position = transform.position;
-
             var direction = new Vector3(Mathf.Cos((initialAngle + i * deltaAngle) * Mathf.Deg2Rad), 0,
-                                        Mathf.Sin((initialAngle + i * deltaAngle) * Mathf.Deg2Rad)) * speed;
-            freeBullet.Init(damage, aliveTime, direction);
+                                        Mathf.Sin((initialAngle + i * deltaAngle) * Mathf.Deg2Rad));
+            freeBullet.transform.position = transform.position + direction * radius;
+            freeBullet.Init(damage, aliveTime, direction * speed);
         }
     }
 
