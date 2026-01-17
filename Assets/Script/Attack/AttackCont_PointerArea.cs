@@ -15,8 +15,6 @@ public class AttackCont_PointerArea : AttackContBase
     private readonly List<IDamagable> removeBuffer = new();
 
     // loc
-    private int damage => (int)base.attackParam.damage;
-    private float attackInterval => base.attackParam.attackInterval;
     private Vector3 offsetPosition = new Vector3(0, 0.1f, 0);
 
 

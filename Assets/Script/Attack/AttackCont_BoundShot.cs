@@ -4,17 +4,14 @@ using System.Collections.Generic;
 using System;
 
 
-public class AttackCont_BulletShot : AttackContBase
+public class AttackCont_BoundShot : AttackContBase
 {
-    [SerializeField] float radius = 1f;
     [SerializeField] GameObject bulletPrefab;
     private List<BulletBase> bullets = new List<BulletBase>();
 
-
     // loc
-    private float deltaAngle => 360f / count;
     private Vector3 pointerPosition;
-    private Vector3 offsetPosition = new Vector3(0, 0.1f, 0);
+    private Vector3 offsetPosition = new Vector3(0, 0.35f, 0);
 
 
 
@@ -27,7 +24,6 @@ public class AttackCont_BulletShot : AttackContBase
     public override void Init(AttackParam _attackParam)
     {
         base.Init(_attackParam);
-        CreateAttackRoop();
     }
 
     public override void OnDestroy()
@@ -40,21 +36,17 @@ public class AttackCont_BulletShot : AttackContBase
         base.OnDestroy();
     }
 
-    private void CreateAttackRoop()
+    public override void Set_AttackTrigger(bool isTrigger)
     {
-        Observable.Interval(TimeSpan.FromSeconds(attackInterval))
-            .Where(_ => base.isActive)
-            .Subscribe(_ =>
-            {
-                CreateBullet();
-            })
-            .AddTo(this); // Destroy で自動終了
-    }
+        base.Set_AttackTrigger(isTrigger);
 
+        if (!base.isActive) return;
+        CreateBullet();
+    }
 
     private void CreateBullet()
     {
-        var initialAngle = UnityEngine.Random.Range(0f, 360f);
+        var randomAngle = UnityEngine.Random.Range(0f, 360f);
         for (int i = 0; i < count; i++)
         {
             var freeBullet = bullets.Find(x => !x.gameObject.activeSelf);
@@ -64,10 +56,11 @@ public class AttackCont_BulletShot : AttackContBase
                 freeBullet = newBullet.GetComponent<BulletBase>();
                 bullets.Add(freeBullet);
             }
-            var direction = new Vector3(Mathf.Cos((initialAngle + i * deltaAngle) * Mathf.Deg2Rad), 0,
-                                        Mathf.Sin((initialAngle + i * deltaAngle) * Mathf.Deg2Rad));
-            freeBullet.transform.position = transform.position + direction * radius;
+            var direction = new Vector3(Mathf.Cos((randomAngle) * Mathf.Deg2Rad), 0,
+                                        Mathf.Sin((randomAngle) * Mathf.Deg2Rad));
+            freeBullet.transform.position = transform.position;
             freeBullet.Init(damage, aliveTime, direction * speed);
+            freeBullet.SetBulletType(BulletType.Piercing);
         }
     }
 
@@ -79,6 +72,4 @@ public class AttackCont_BulletShot : AttackContBase
         transform.position = pointerPosition;
     }
     #endregion
-
-
 }

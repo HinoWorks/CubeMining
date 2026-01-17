@@ -18,7 +18,6 @@ public class AttackManager : MonoBehaviour
 
     public void Set_Ready()
     {
-        Debug.Log($"TODO == Attack Unit Activate");
         isAttacking = false;
         foreach (var attackParam in GameParamManager.list_attackParam)
         {

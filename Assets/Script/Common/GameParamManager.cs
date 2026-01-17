@@ -49,7 +49,7 @@ public class BlockGenerateParam
         so = _blockData;
 
         blockIndex = _blockData.blockIndex;
-        isActive = false;
+        isActive = so.blockIndex == 1 ? true : false;
         hp = _blockData.hp;
         baseValue = _blockData.baseValue;
         generateInterval = _blockData.generateInterval;
@@ -84,7 +84,7 @@ public class BlockGenerateParam
 }
 
 /// <summary>
-/// ブロックの生成パラメータ
+/// アタックユニットのパラメータ
 /// </summary>
 public class AttackParam
 {

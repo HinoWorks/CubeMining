@@ -14,6 +14,15 @@ public class AttackContBase : MonoBehaviour
     protected AttackParam attackParam;
 
 
+
+    protected int damage => (int)attackParam.damage;
+    protected float attackInterval => attackParam.attackInterval;
+    protected float speed => attackParam.speed;
+    protected float aliveTime => attackParam.aliveTime;
+    protected int count => attackParam.count;
+
+
+    //
     protected AttackUnitState attackUnitState;
     protected float timer_attackInterval;
     protected float timer_aliveTime;

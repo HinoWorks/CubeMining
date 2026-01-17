@@ -19,8 +19,9 @@ public class BulletBase : MonoBehaviour
     protected int damage;
     protected float lifetime;
 
-    private Collider col;
-    private Rigidbody rb;
+    protected Collider col;
+    protected Rigidbody rb;
+
 
 
     protected BulletType bulletType;
@@ -63,7 +64,7 @@ public class BulletBase : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    protected virtual void SetBulletType(BulletType _bulletType)
+    public virtual void SetBulletType(BulletType _bulletType)
     {
         bulletType = _bulletType;
     }

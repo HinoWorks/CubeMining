@@ -45,7 +45,6 @@ public class UI_SkillTreeDetail : MonoBehaviour
         tmp_paramNext.SetText(paramNext.ToString("F2"));
         tmp_cost.SetText(so.cost.ToString());
         tmp_cost.color = StaticManager.CoinCheck(so.cost) ? Color.white : Color.red;
-        Debug.Log($"so.cost: {so.cost}  // coin : {SaveLoader.Inst.Coin}  // check : {StaticManager.CoinCheck(so.cost)}");
 
         tmp_paramNext.gameObject.SetActive(currentUnit.unlockState == SkillTreeUnlockState.EnhanceReady);
         obj_vec.SetActive(currentUnit.unlockState == SkillTreeUnlockState.EnhanceReady);

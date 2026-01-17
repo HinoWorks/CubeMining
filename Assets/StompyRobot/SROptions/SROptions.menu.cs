@@ -70,6 +70,8 @@ public partial class SROptions
     }
 
 
+
+
     [Category("システム周り")]
     [DisplayName("ゴールカウント +10")]
     [Sort(0)]

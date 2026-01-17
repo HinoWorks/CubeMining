@@ -98,9 +98,7 @@ public class BlockGenerateManager : MonoBehaviour
 
         foreach (var blockData in GameParamManager.list_blockGenerateParam)
         {
-            if (blockData.blockIndex == 1 || blockData.blockIndex == 2) { } // DEBUG == block index 1 and 2 is always generate
-            else if (!blockData.isActive) continue;
-
+            if (!blockData.isActive) continue;
             var generateBlockData = new GenerateBlockData();
             generateBlockData.Init(blockData);
             list_generateBlockDatas.Add(generateBlockData);

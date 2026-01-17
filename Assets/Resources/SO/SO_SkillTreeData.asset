@@ -38,16 +38,16 @@ MonoBehaviour:
     deltaValue: -1
     cost: 11
   - index: 11
-    skillName: skill_3
-    description: skill description --- 11
+    skillName: Bound SHOT
+    description: New Attack Skill -- Bound
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 3
+    maxLevel: 1
     baseSkillIndex: 10
-    paramCategory: 1
-    targetIndex: 1
-    paramType: 3
-    baseValue: 1
-    deltaValue: 0.15
+    paramCategory: 2
+    targetIndex: 3
+    paramType: 0
+    baseValue: -1
+    deltaValue: -1
     cost: 12
   - index: 12
     skillName: skill_4

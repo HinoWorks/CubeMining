@@ -15,7 +15,6 @@ public class BulletCont_Normal : BulletBase
 
     protected override void OnTriggerEnter(Collider other)
     {
-        base.OnTriggerEnter(other);
         if (other.TryGetComponent(out IDamagable target))
         {
             target.Damage(damage);
