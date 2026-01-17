@@ -42,8 +42,8 @@ public class BlockGenerateManager : MonoBehaviour
     private int[] unlockBlockIndexes;
 
     private bool isGenerate = false;
-    private float generateInterval = 1f;
     private int initialGenerateCount = 15;
+
 
 
 
@@ -128,5 +128,17 @@ public class BlockGenerateManager : MonoBehaviour
         return new Vector3(Random.Range(range_x.x, range_x.y), Random.Range(range_y.x, range_y.y), Random.Range(range_z.x, range_z.y));
     }
     #endregion
+
+
+
+    /// <summary>
+    /// アクティブなブロックをランダムに取得 存在しない場合はnullを返す
+    /// </summary>
+    public MiningTargetBase Get_RandomTargetBlock()
+    {
+        var activeBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled);
+        if (activeBlocks.Count == 0) return null;
+        return activeBlocks[Random.Range(0, activeBlocks.Count)];
+    }
 
 }

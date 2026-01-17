@@ -7,6 +7,8 @@ public enum EffectType
 {
     None,
     BlockBreak,
+
+    ThunderStrike = 100,
 }
 
 public class EffectManager : MonoBehaviour
@@ -14,7 +16,9 @@ public class EffectManager : MonoBehaviour
     public static EffectManager Inst;
 
     [SerializeField] GameObject pf_eff_blockBreak;
+    [SerializeField] GameObject pf_eff_thunderStrike;
     private List<GameObject> pool_eff_blockBreak = new List<GameObject>();
+    private List<GameObject> pool_eff_thunderStrike = new List<GameObject>();
 
 
     private int createCountInit = 20;
@@ -33,6 +37,12 @@ public class EffectManager : MonoBehaviour
             var newUnit = Instantiate(pf_eff_blockBreak, InGameManager.Inst.ParentPool) as GameObject;
             newUnit.SetActive(false);
             pool_eff_blockBreak.Add(newUnit);
+        }
+        for (int i = 0; i < createCountInit; i++)
+        {
+            var newUnit = Instantiate(pf_eff_thunderStrike, InGameManager.Inst.ParentPool) as GameObject;
+            newUnit.SetActive(false);
+            pool_eff_thunderStrike.Add(newUnit);
         }
     }
 
@@ -55,6 +65,8 @@ public class EffectManager : MonoBehaviour
         {
             case EffectType.BlockBreak:
                 return (pf_eff_blockBreak, pool_eff_blockBreak);
+            case EffectType.ThunderStrike:
+                return (pf_eff_thunderStrike, pool_eff_thunderStrike);
             default:
                 return (null, new List<GameObject>());
         }

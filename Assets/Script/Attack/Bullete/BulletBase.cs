@@ -69,7 +69,7 @@ public class BulletBase : MonoBehaviour
         bulletType = _bulletType;
     }
 
-    private void SetLifetime()
+    protected virtual void SetLifetime()
     {
         Observable.Timer(TimeSpan.FromSeconds(lifetime))
             .Subscribe(_ =>
