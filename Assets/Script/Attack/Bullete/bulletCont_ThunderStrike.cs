@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class bulletCont_ThunderStrike : BulletBase
+public class BulletCont_ThunderStrike : BulletBase
 {
     private Vector3 offsetPosition = new Vector3(0, 5f, 0); // 雷発生位置のオフセット
 
