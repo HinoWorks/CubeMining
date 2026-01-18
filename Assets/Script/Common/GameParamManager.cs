@@ -268,9 +268,26 @@ public static class GameParamManager
             Debug.LogError($"AttackUnitData is not found: {_skillTree.targetIndex} // ==> 初期ロードで読み込み失敗");
         }
         targetAttack.Set_SkillTreeParam(_skillTree.paramType, _setParam);
-
     }
 
 
+
+
+
+
+
+    #region DEBUG
+    public static void DEBUG_AttackParam_Unlock(int _attackIndex)
+    {
+        var targetAttack = list_attackParam.Find(x => x.attackUnitIndex == _attackIndex);
+        if (targetAttack == null)
+        {
+            Debug.LogError($"AttackUnitData is not found: {_attackIndex} // ==> 初期ロードで読み込み失敗");
+            return;
+        }
+        targetAttack.Set_SkillTreeParam(ParamType.Unlock, 1f);
+    }
+
+    #endregion
 
 }

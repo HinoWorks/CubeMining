@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class bulletCont_ThunderStrike : BulletBase
 {
-    private Vector3 offsetPosition = new Vector3(0, 2f, 0); // 雷発生位置のオフセット
+    private Vector3 offsetPosition = new Vector3(0, 5f, 0); // 雷発生位置のオフセット
 
 
     /// <summary>

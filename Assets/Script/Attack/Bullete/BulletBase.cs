@@ -78,7 +78,7 @@ public class BulletBase : MonoBehaviour
                 rb.linearVelocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 this.gameObject.SetActive(false);
-            });
+            }).AddTo(this);
     }
 
 

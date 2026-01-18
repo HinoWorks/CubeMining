@@ -5,6 +5,9 @@ using SRF.Service;
 using SRDebugger.Services;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System;
+
+
 
 
 public partial class SROptions
@@ -53,7 +56,7 @@ public partial class SROptions
 
 
     private int targetIndex;
-    [Category("要素アンロック")]
+    [Category("要素アンロック -- Attack")]
     [DisplayName("index")]
     [Sort(0)]
     public int SetTargetIndex
@@ -61,12 +64,15 @@ public partial class SROptions
         get { return targetIndex; }
         set { targetIndex = value; }
     }
-    [Category("要素アンロック")]
+    [Category("要素アンロック -- Attack")]
     [DisplayName("アンロック")]
     [Sort(1)]
     public void UnlockIndex()
     {
-        // SaveLoader.Inst.Request_SaveUpgradeLevelData(targetIndex, 1);
+        //var targetSkillTreeData = SOLoader.SkillTreeData.GetSkillTreeDatas(ParamCategory.Attack, targetIndex, ParamType.Unlock);
+        //if (targetSkillTreeData == null) return;
+        //SaveLoader.Inst.Request_SaveSkillTreeData(targetSkillTreeData.index, 1);
+        GameParamManager.DEBUG_AttackParam_Unlock(targetIndex);
     }
 
 

@@ -50,16 +50,16 @@ MonoBehaviour:
     deltaValue: -1
     cost: 12
   - index: 12
-    skillName: skill_4
-    description: skill description --- 12
+    skillName: 'Thunder '
+    description: New Attack Skill -- Thunder
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 3
+    maxLevel: 1
     baseSkillIndex: 11
-    paramCategory: 1
-    targetIndex: 1
-    paramType: 3
-    baseValue: 1
-    deltaValue: 0.15
+    paramCategory: 2
+    targetIndex: 4
+    paramType: 0
+    baseValue: -1
+    deltaValue: -1
     cost: 13
   - index: 13
     skillName: skill_5

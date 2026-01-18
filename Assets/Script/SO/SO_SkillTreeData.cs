@@ -85,4 +85,17 @@ public class SO_SkillTreeData : ScriptableObject
         return datas;
     }
 
+    public SkillTree GetSkillTreeDatas(ParamCategory _paramCategory, int _targetIndex, ParamType _paramType)
+    {
+        var targetDatas = GetSkillTreeDatas(_paramCategory, _targetIndex);
+        if (targetDatas == null) return null;
+        var data = Array.Find(targetDatas, data => data.paramType == _paramType);
+        if (data == null)
+        {
+            Debug.LogError($"SkillTreeData not found: {_paramCategory}, {_targetIndex}, {_paramType}");
+            return null;
+        }
+        return data;
+    }
+
 }

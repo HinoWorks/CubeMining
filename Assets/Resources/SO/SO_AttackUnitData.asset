@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_AttackUnitData
   attackUnitDatas:
   - attackIndex: 1
-    unitName: skill_1
+    unitName: Base Attack
     unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 9024363205940861645, guid: b01f45b95c0cf4ee2bce95722cc5a0af, type: 3}
@@ -27,7 +27,7 @@ MonoBehaviour:
     count: 1
     size: 1
   - attackIndex: 2
-    unitName: skill_2
+    unitName: Bullet Shot
     unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 601605801108607667, guid: a04d40441070042f8bd468435cd2208b, type: 3}
@@ -35,33 +35,33 @@ MonoBehaviour:
     damage: 1
     attackInterval: 0.5
     speed: 5
-    aliveTime: 999
+    aliveTime: 5
     ct: 1
     count: 1
     size: 1
   - attackIndex: 3
-    unitName: skill_3
+    unitName: Piar
     unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 601605801108607667, guid: fce8c512f8d4d47f99474347f22678f8, type: 3}
     attackType: 1
     damage: 1
     attackInterval: -1
-    speed: 3
+    speed: 6
     aliveTime: 999
     ct: -1
     count: 1
     size: 1
   - attackIndex: 4
-    unitName: skill_4
+    unitName: Thunder
     unitDescription: 
     icon: {fileID: 0}
-    pf: {fileID: 9024363205940861645, guid: b01f45b95c0cf4ee2bce95722cc5a0af, type: 3}
-    attackType: 0
-    damage: 1
-    attackInterval: 0.5
-    speed: 5
-    aliveTime: 999
+    pf: {fileID: 601605801108607667, guid: cf76259b3ea4e43bda25b30158e2f8f6, type: 3}
+    attackType: 1
+    damage: 10
+    attackInterval: 1
+    speed: 0
+    aliveTime: 1
     ct: 1
     count: 1
     size: 1
