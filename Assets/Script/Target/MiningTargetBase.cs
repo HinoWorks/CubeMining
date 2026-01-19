@@ -6,15 +6,23 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     public int index { get; private set; }
     protected virtual int hp { get; set; } = 10;
     protected virtual int hp_max { get; set; } = 10;
+    protected float hp_rate => (float)hp / hp_max;
     public int value;
     public bool isAlive => hp > 0;
 
+
+    private float animScale_rate;
+    private Vector3 animScale_1 => animScale_rate * new Vector3(1.1f, 0.9f, 1.1f);
+    private Vector3 animScale_2 => animScale_rate * new Vector3(0.9f, 1.1f, 0.9f);
+    private float animDuration = 0.075f;
+    private Sequence seq_anim;
 
     private Collider col;
 
     void Awake()
     {
         col = GetComponent<Collider>();
+        animScale_rate = transform.localScale.x;
     }
 
 
@@ -56,7 +64,15 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
 
     private void DamageAction()
     {
-        transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.1f);
+        if (seq_anim == null)
+        {
+            seq_anim = DOTween.Sequence();
+            seq_anim.Append(transform.DOScale(animScale_1, animDuration).SetEase(Ease.OutBack));
+            seq_anim.Append(transform.DOScale(animScale_2, animDuration).SetEase(Ease.OutBack));
+            seq_anim.Append(transform.DOScale(animScale_rate * Vector3.one, animDuration).SetEase(Ease.OutBack));
+            seq_anim.SetAutoKill(false).SetLink(this.gameObject).Pause();
+        }
+        seq_anim.Restart();
     }
     private void Set_DamageText(int _damage)
     {

@@ -20,6 +20,7 @@ public class AttackContBase : MonoBehaviour
     protected float speed => attackParam.speed;
     protected float aliveTime => attackParam.aliveTime;
     protected int count => attackParam.count;
+    protected float size => attackParam.size;
 
 
     //

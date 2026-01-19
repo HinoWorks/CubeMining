@@ -2,13 +2,22 @@ using UnityEngine;
 
 public class MiningTarget_Cube : MiningTargetBase
 {
+    //  [SerializeField] HitFlash hitFlash;
     private Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
 
 
+    public override void Init(int _hp, int _value, int _index)
+    {
+        base.Init(_hp, _value, _index);
+        //hitFlash.Init_Crack();
+    }
 
     public override bool Damage(int damage)
     {
-        return base.Damage(damage);
+        //hitFlash.Flash();
+        var isBreak = base.Damage(damage);
+        // hitFlash.Set_Crack(hp_rate);
+        return isBreak;
     }
 
     public override void BreakFromDamage()

@@ -2,7 +2,7 @@ using UnityEngine;
 using UniRx;
 using System.Collections.Generic;
 using System;
-
+using DG.Tweening;
 
 public class AttackCont_PointerArea : AttackContBase
 {
@@ -49,6 +49,8 @@ public class AttackCont_PointerArea : AttackContBase
             .Subscribe(_ =>
             {
                 removeBuffer.Clear();
+                obj_pointerArea.transform.DOScale(1.1f * size * Vector3.one, 0.075f).SetEase(Ease.OutBack);
+                obj_pointerArea.transform.DOScale(size * Vector3.one, 0.075f).SetEase(Ease.OutBack).SetDelay(0.075f);
 
                 foreach (var t in targets)
                 {
