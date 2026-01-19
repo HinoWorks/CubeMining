@@ -4,12 +4,23 @@ using UnityEngine;
 public class BulletCont_Bound : BulletBase
 {
 
+    private TrailRenderer trailRenderer;
+
 
     public override void Init(int _damage, float _lifetime, Vector3 _direction)
     {
+        if (trailRenderer == null)
+        {
+            trailRenderer = GetComponent<TrailRenderer>();
+        }
+        trailRenderer.Clear();
         base.Init(_damage, _lifetime, _direction);
     }
 
+    public override void ReturnToPool()
+    {
+        base.ReturnToPool();
+    }
     public override void OnDestroy()
     {
         base.OnDestroy();

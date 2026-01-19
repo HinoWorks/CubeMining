@@ -27,11 +27,10 @@ public class BulletBase : MonoBehaviour
     protected BulletType bulletType;
 
 
-
-    void Awake()
+    private void ConnectComponents()
     {
-        col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
     }
 
 
@@ -41,6 +40,10 @@ public class BulletBase : MonoBehaviour
         lifetime = _lifetime;
 
         gameObject.SetActive(true);
+        if (col == null)
+        {
+            ConnectComponents();
+        }
         col.enabled = true;
         rb.linearVelocity = _direction;
         rb.angularVelocity = Vector3.zero;

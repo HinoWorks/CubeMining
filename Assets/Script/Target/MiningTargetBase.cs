@@ -32,6 +32,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     public virtual bool Damage(int damage)
     {
         hp -= damage;
+        Set_DamageText(damage);
         DamageAction();
         if (hp <= 0)
         {
@@ -57,5 +58,10 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     {
         transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.1f);
     }
-
+    private void Set_DamageText(int _damage)
+    {
+        var ui_damageText = UI_PoolManager.Inst.Get_TextDamage();
+        ui_damageText.SetPosition(transform.position);
+        ui_damageText.SetText(_damage.ToString());
+    }
 }

@@ -19,7 +19,7 @@ public class MiningTarget_Cube : MiningTargetBase
 
         InGameManager.Inst.AddGetCoin(base.value);
         var ui_textCoinGet = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
-        ui_textCoinGet.SetText(StaticManager.Get_BigintegerToString(base.value));
+        ui_textCoinGet.SetText(StaticManager.Get_BigintegerToString(base.value), Color.green);
         base.BreakFromDamage();
     }
 }

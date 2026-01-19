@@ -14,6 +14,7 @@ public class UI_PoolManager : MonoBehaviour
     [Header(" -- pf set --")]
     [SerializeField] GameObject pf_circleGauge;
     [SerializeField] GameObject pf_getCoinText;
+    [SerializeField] GameObject pf_damageText;
     [SerializeField] GameObject pf_moveIcon_Coin;
     [SerializeField] GameObject pf_moveIcon_Gem;
     [SerializeField] GameObject pf_ballCounter;
@@ -29,6 +30,7 @@ public class UI_PoolManager : MonoBehaviour
 
     private List<UI_CircleTimer> pool_gauge_circle = new List<UI_CircleTimer>();
     private List<UI_TextCoinGet> pool_textCoinGet = new List<UI_TextCoinGet>();
+    private List<UI_TextDamage> pool_damageText = new List<UI_TextDamage>();
     private List<UI_GetResourceMove> pool_moveItemCont_coin = new List<UI_GetResourceMove>(15);
     private List<UI_SpeechBubble> pool_speechBubble = new List<UI_SpeechBubble>(10);
 
@@ -62,7 +64,13 @@ public class UI_PoolManager : MonoBehaviour
             pool_textCoinGet.Add(selectUnit);
             selectUnit.gameObject.SetActive(false);
         }
-
+        for (int i = 0; i < 50; i++)
+        {
+            var newUnit = Instantiate(pf_damageText, parent_base) as GameObject;
+            var selectUnit = newUnit.GetComponent<UI_TextDamage>();
+            pool_damageText.Add(selectUnit);
+            selectUnit.gameObject.SetActive(false);
+        }
     }
 
     private void Set_UIScaleChange(float _zoomRate)
@@ -100,6 +108,20 @@ public class UI_PoolManager : MonoBehaviour
         selectUnit.Initialize(_target, _offset);
         return selectUnit;
     }
+
+    public UI_TextDamage Get_TextDamage()
+    {
+        UI_TextDamage selectUnit = null;
+        selectUnit = pool_damageText.Find(d => d.gameObject.activeSelf == false);
+        if (selectUnit == null)
+        {
+            var newUnit = Instantiate(pf_damageText, parent_base) as GameObject;
+            selectUnit = newUnit.GetComponent<UI_TextDamage>();
+            pool_damageText.Add(selectUnit);
+        }
+        return selectUnit;
+    }
+
 
     public UI_SpeechBubble Set_SpeechBubbleGet(Transform _target, Vector3 _offset)
     {
