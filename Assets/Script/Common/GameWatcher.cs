@@ -20,16 +20,8 @@ public class GameWatcher : MonoBehaviour
 
     void Start()
     {
-        Set_InGameStart();
-    }
-
-    private async void Set_InGameStart()
-    {
+        SetGameState(GameStateType.Title);
         GameParamManager.Init();
-
-
-        await UniTask.Delay(3000);
-        SetGameState(GameStateType.InGame_Ready);
     }
 
 

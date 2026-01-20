@@ -39,7 +39,6 @@ public class BlockGenerateManager : MonoBehaviour
     // -- loc
     private List<MiningTargetBase> list_targetBlocks = new List<MiningTargetBase>(); // 生成されたブロックのリスト
     private List<GenerateBlockData> list_generateBlockDatas = new List<GenerateBlockData>(); // 生成されるブロックのデータリスト
-    private int[] unlockBlockIndexes;
 
     private bool isGenerate = false;
     private int initialGenerateCount = 15;
