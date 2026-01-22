@@ -11,7 +11,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     public bool isAlive => hp > 0;
 
 
-    private float animScale_rate;
+    protected float animScale_rate;
     private Vector3 animScale_1 => animScale_rate * new Vector3(1.1f, 0.9f, 1.1f);
     private Vector3 animScale_2 => animScale_rate * new Vector3(0.9f, 1.1f, 0.9f);
     private float animDuration = 0.075f;
@@ -22,7 +22,6 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     void Awake()
     {
         col = GetComponent<Collider>();
-        animScale_rate = transform.localScale.x;
     }
 
 
@@ -34,6 +33,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         hp = hp_max;
 
         col.enabled = true;
+        animScale_rate = transform.localScale.x;
         gameObject.SetActive(true);
     }
 

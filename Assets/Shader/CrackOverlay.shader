@@ -2,12 +2,11 @@ Shader "Universal Render Pipeline/Custom/CrackOverlay_UV1Only_Glow_EmitBase"
 {
     Properties
     {
-        _MainTex ("Base (RGB) A=SM", 2D) = "white" {}
+        [MainTexture] _MainTex ("Base (RGB) A=SM", 2D) = "white" {}
+        [MainColor] _Color ("Tint", Color) = (1,1,1,1)
         _BumpMap ("Base Normal", 2D) = "bump" {}
         _CrackMask ("Crack Mask (R)", 2D) = "gray" {}
         _CrackNormal ("Crack Normal", 2D) = "bump" {}
-
-        _Color ("Tint", Color) = (1,1,1,1)
         _CrackDarken ("Crack Darken", Range(0,1)) = 0.4
         _CrackSmoothMul ("Crack Smoothness Mult", Range(0,1)) = 0.5
 
@@ -152,7 +151,7 @@ Shader "Universal Render Pipeline/Custom/CrackOverlay_UV1Only_Glow_EmitBase"
                 inputData.shadowCoord = TransformWorldToShadowCoord(input.positionWS);
                 inputData.fogCoord = ComputeFogFactor(input.positionCS.z);
                 inputData.vertexLighting = half3(0, 0, 0);
-                inputData.bakedGI = SAMPLE_GI(input.uv, SampleSH(normalWS), normalWS);
+                inputData.bakedGI = SampleSH(normalWS);
                 inputData.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(input.positionCS);
                 inputData.shadowMask = half4(1, 1, 1, 1);
 

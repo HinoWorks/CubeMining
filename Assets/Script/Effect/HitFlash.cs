@@ -92,12 +92,9 @@ public class HitFlash : MonoBehaviour
             targetTightness = tightness_high;
         }
 
-        // 立ち上がり：即白
-        mpb.SetColor(colorId, Color.white);
-        rend.SetPropertyBlock(mpb);
-
         await UniTask.DelayFrame(2);
         mpb_crack.SetFloat(ID_Tightness, targetTightness);
+        mpb_crack.SetColor(colorId, baseColor); // 元の色を保持
         rend.SetPropertyBlock(mpb_crack);
     }
 

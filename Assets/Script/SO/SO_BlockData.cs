@@ -18,6 +18,9 @@ public class BlockData
     public float generateInterval;
     public int count;
     public float size;
+
+    public float bigBlockRate;
+    public int separateBlock;
 }
 
 

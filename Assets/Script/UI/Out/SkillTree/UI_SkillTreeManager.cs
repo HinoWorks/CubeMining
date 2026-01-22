@@ -126,6 +126,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         // UpdateAllConnections();
     }
 
+    /*
     /// <summary>
     /// 全ての接続線を更新する
     /// </summary>
@@ -137,7 +138,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
             nodeCont.UpdateConnection();
         }
     }
-
+*/
 
 
     void Update()

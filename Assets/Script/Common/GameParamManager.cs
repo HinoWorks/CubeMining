@@ -44,6 +44,10 @@ public class BlockGenerateParam
     public int count { get; private set; }
     public float size { get; private set; }
 
+    public float bigBlockRate { get; private set; }
+    public int separateBlockCount { get; private set; }
+
+
     public void Init(BlockData _blockData)
     {
         so = _blockData;
@@ -55,6 +59,8 @@ public class BlockGenerateParam
         generateInterval = _blockData.generateInterval;
         count = _blockData.count;
         size = _blockData.size;
+        bigBlockRate = _blockData.bigBlockRate;
+        separateBlockCount = _blockData.separateBlock;
     }
 
     public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
@@ -76,6 +82,12 @@ public class BlockGenerateParam
                 break;
             case ParamType.Size:
                 size += _setParam;
+                break;
+            case ParamType.BigBlockRate:
+                bigBlockRate += _setParam;
+                break;
+            case ParamType.SeparateBlockCount:
+                separateBlockCount += (int)_setParam;
                 break;
         }
     }
@@ -202,7 +214,7 @@ public static class GameParamManager
 
     public static void Init_GameBaseParam()
     {
-        gameBaseParam.Set_SkillTreeParam(ParamType.IngameTime, 5f);
+        gameBaseParam.Set_SkillTreeParam(ParamType.IngameTime, 10f);
         gameBaseParam.Set_SkillTreeParam(ParamType.BonusRate, 0f);
 
         // block generate param init
@@ -225,7 +237,9 @@ public static class GameParamManager
     }
 
 
-
+    /// <summary>
+    /// パラメータの差分fix
+    /// </summary>
     public static void Set_DeltaParam(SkillTree _skillTree, float _setParam)
     {
         switch (_skillTree.paramCategory)
@@ -255,7 +269,6 @@ public static class GameParamManager
             Debug.LogError($"BlockData is not found: {_skillTree.targetIndex} // ==> 初期ロードで読み込み失敗");
             return;
         }
-
         targetBlock.Set_SkillTreeParam(_skillTree.paramType, _setParam);
     }
 

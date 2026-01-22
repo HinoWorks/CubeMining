@@ -21,6 +21,8 @@ public enum ParamType
 
     // block param
     Value,
+    BigBlockRate,
+    SeparateBlockCount,
 
 
 

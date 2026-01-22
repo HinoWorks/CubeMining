@@ -4,16 +4,17 @@ public class BulletCont_Normal : BulletBase
 {
     private TrailRenderer trailRenderer;
 
+    void Awake()
+    {
+        trailRenderer = GetComponent<TrailRenderer>();
+    }
 
     public override void Init(int _damage, float _lifetime, Vector3 _direction)
     {
-        if (trailRenderer == null)
-        {
-            trailRenderer = GetComponent<TrailRenderer>();
-        }
-        trailRenderer.Clear();
-
         base.Init(_damage, _lifetime, _direction);
+
+
+        if (trailRenderer != null) trailRenderer.Clear();
     }
     public override void ReturnToPool()
     {
