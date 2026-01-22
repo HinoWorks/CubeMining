@@ -8,6 +8,7 @@ using System;
 public class AttackCont_Laser : AttackContBase
 {
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] bool isVertical = false;
     private List<BulletCont_Laser> bullets = new List<BulletCont_Laser>();
 
 
@@ -60,7 +61,8 @@ public class AttackCont_Laser : AttackContBase
             setPosition = targetBlock.transform.position;
         }
         freeBullet.transform.position = new Vector3(setPosition.x, 0f, setPosition.z);
-        freeBullet.Init(damage, aliveTime, count);
+        freeBullet.transform.rotation = isVertical ? Quaternion.Euler(0f, 90f, 0f) : Quaternion.identity;
+        freeBullet.Init(damage, aliveTime, count, isVertical);
     }
 
 

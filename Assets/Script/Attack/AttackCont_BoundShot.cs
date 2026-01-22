@@ -26,22 +26,23 @@ public class AttackCont_BoundShot : AttackContBase
         base.Init(_attackParam);
     }
 
-    public override void OnDestroy()
-    {
-        foreach (var bullet in bullets)
-        {
-            bullet.OnDestroy();
-        }
-        bullets.Clear();
-        base.OnDestroy();
-    }
 
     public override void Set_AttackTrigger(bool isTrigger)
     {
         base.Set_AttackTrigger(isTrigger);
 
-        if (!base.isActive) return;
-        CreateBullet();
+        if (isTrigger)
+        {
+            CreateBullet();
+        }
+        else
+        {
+            foreach (var bullet in bullets)
+            {
+                bullet.OnDestroy();
+            }
+            bullets.Clear();
+        }
     }
 
     private void CreateBullet()

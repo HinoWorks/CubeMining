@@ -27,18 +27,19 @@ public class BulletCont_Laser : MonoBehaviour
         }
         Destroy(this.gameObject);
     }
-    public virtual void Init(int _damage, float _lifetime, int _count)
+    public void Init(int _damage, float _lifetime, int _count, bool _isVertical)
     {
         damage = _damage;
         lifetime = _lifetime;
 
         gameObject.SetActive(true);
         SetLifetime();
-        SetBullet(_count);
+        SetBullet(_count, _isVertical);
     }
 
-    private void SetBullet(int _count)
+    private void SetBullet(int _count, bool _isVertical)
     {
+        var offsetAngle = _isVertical ? 90f : 0f;
         foreach (var rb in rbs)
         {
             rb.gameObject.SetActive(false);
@@ -47,7 +48,7 @@ public class BulletCont_Laser : MonoBehaviour
         for (int i = 0; i < _count; i++)
         {
             rbs[i].gameObject.SetActive(true);
-            var setAngle = i * 360f / _count;
+            var setAngle = i * 360f / _count + offsetAngle;
             var setDirection = new Vector3(Mathf.Cos(setAngle * Mathf.Deg2Rad), 0, Mathf.Sin(setAngle * Mathf.Deg2Rad));
             rbs[i].linearVelocity = setSpped * setDirection;
         }
