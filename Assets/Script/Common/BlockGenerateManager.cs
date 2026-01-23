@@ -18,18 +18,38 @@ public class GenerateBlockData
     private float timer = 0f;
     public BlockSize sizeType => Random.Range(0f, 1f) < param.bigBlockRate ? BlockSize.Big : BlockSize.Normal;
 
-
     public void Init(BlockGenerateParam _param)
     {
         param = _param;
     }
-
     public void UnityUpdate()
     {
         timer += Time.deltaTime;
         if (timer >= param.generateInterval)
         {
-            BlockGenerateManager.Inst.GenerateBlock(this);
+            BlockGenerateManager.Inst.GenerateBlock(this, sizeType);
+            timer = 0f;
+        }
+    }
+
+}
+
+
+[System.Serializable]
+public class GenerateObjectData
+{
+    public ObjectGenerateParam param { get; private set; }
+    private float timer = 0f;
+    public void Init(ObjectGenerateParam _param)
+    {
+        param = _param;
+    }
+    public void UnityUpdate()
+    {
+        timer += Time.deltaTime;
+        if (timer >= param.generateInterval)
+        {
+            BlockGenerateManager.Inst.GenerateObject(this);
             timer = 0f;
         }
     }
@@ -48,20 +68,16 @@ public class BlockGenerateManager : MonoBehaviour
     // -- loc
     private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
     private List<GenerateBlockData> list_generateBlockDatas = new List<GenerateBlockData>(); // 生成されるブロックのデータリスト
+    private GenerateObjectData generateObjectData = new GenerateObjectData();
 
     private bool isGenerate = false;
     private int initialGenerateCount = 15;
 
-
     private float bigBlockSizeRate = 2f;
     private Vector3[] array_position = new Vector3[6]
     {
-        new Vector3(1, 0, -1),
-        new Vector3(-1, 1, 1),
-        new Vector3(1, 0, 1),
-        new Vector3(-1, 1, -1),
-        new Vector3(-1, 0, 1),
-        new Vector3(1, 1, 1),
+        new Vector3(1, 0, -1),new Vector3(-1, 1, 1),new Vector3(1, 0, 1),
+        new Vector3(-1, 1, -1),new Vector3(-1, 0, 1),new Vector3(1, 1, 1),
     };
 
 
@@ -82,16 +98,19 @@ public class BlockGenerateManager : MonoBehaviour
         {
             list_generateBlockDatas[i].UnityUpdate();
         }
+        generateObjectData.UnityUpdate();
     }
 
     public void Init()
     {
         Set_BlockGenerateDatas();
+        generateObjectData.Init(GameParamManager.objectGenerateParam);
 
-
+        // pool init
+        var targetBlockData = list_generateBlockDatas[0];
         for (int i = 0; i < initialGenerateCount; i++)
         {
-            GenerateBlock(list_generateBlockDatas[0]);
+            GenerateBlock(targetBlockData, targetBlockData.sizeType);
         }
 
     }
@@ -124,7 +143,7 @@ public class BlockGenerateManager : MonoBehaviour
         }
     }
 
-    public void GenerateBlock(GenerateBlockData _blockData)
+    public void GenerateBlock(GenerateBlockData _blockData, BlockSize _blockSizeType)
     {
         for (int i = 0; i < _blockData.param.count; i++)
         {
@@ -139,11 +158,9 @@ public class BlockGenerateManager : MonoBehaviour
             targetBlock.transform.position = GetRandomPosition();
             targetBlock.transform.rotation = Quaternion.identity;
 
-            var blockSizeType = _blockData.sizeType;
-            var blockSize = blockSizeType == BlockSize.Big ? _blockData.param.size * bigBlockSizeRate : _blockData.param.size;
-            targetBlock.transform.localScale = blockSize * Vector3.one;
             targetBlock.Init(_blockData.param.hp, _blockData.param.baseValue, _blockData.param.blockIndex);
-            targetBlock.Set_BlockSize(blockSizeType);
+            var blockSizeRate = _blockSizeType == BlockSize.Big ? bigBlockSizeRate : 1f;
+            targetBlock.Set_BlockSize(_blockSizeType, _blockData.param.size * blockSizeRate);
         }
     }
     private Vector3 GetRandomPosition()
@@ -167,9 +184,23 @@ public class BlockGenerateManager : MonoBehaviour
 
             targetBlock.transform.position = _position + 0.3f * array_position[i];
             targetBlock.transform.rotation = Quaternion.identity;
-            targetBlock.transform.localScale = blockData.size * Vector3.one;
             targetBlock.Init(blockData.hp, blockData.baseValue, blockData.blockIndex);
-            targetBlock.Set_BlockSize(BlockSize.Normal);
+            targetBlock.Set_BlockSize(BlockSize.Normal, blockData.size);
+        }
+    }
+
+
+    /// <summary>
+    /// ブロック以外のオブジェクト生成
+    /// </summary>
+    public void GenerateObject(GenerateObjectData _objectData)
+    {
+        /// TODO HERE ====
+
+
+        if (Random.Range(0f, 1f) < _objectData.param.rate_cupcel)
+        {
+            return;
         }
     }
 

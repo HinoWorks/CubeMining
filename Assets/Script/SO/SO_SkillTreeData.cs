@@ -19,6 +19,12 @@ public enum ParamType
 
 
 
+    // object generate param
+    Rate_TimeUp,
+    Rate_Bomb,
+    Rate_Laser,
+
+
     // block param
     Value,
     BigBlockRate,

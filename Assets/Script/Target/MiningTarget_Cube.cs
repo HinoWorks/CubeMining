@@ -13,9 +13,12 @@ public class MiningTarget_Cube : MiningTargetBase
         base.Init(_hp, _value, _index);
         //hitFlash.Init_Crack();
     }
-    public void Set_BlockSize(BlockSize _blockSize)
+    public void Set_BlockSize(BlockSize _blockSize, float _size)
     {
         blockSize = _blockSize;
+
+        transform.localScale = _size * Vector3.one;
+        base.animScale_rate = _size;
     }
 
 

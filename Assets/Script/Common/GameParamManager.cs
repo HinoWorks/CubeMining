@@ -12,6 +12,12 @@ public class GameBaseParam
     public float ingameTime { get; private set; }
     public float bonusRate { get; private set; }
 
+    public void Init()
+    {
+        ingameTime = 10f;
+        bonusRate = 0f;
+    }
+
     public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
@@ -23,10 +29,46 @@ public class GameBaseParam
                 bonusRate += _setParam;
                 break;
         }
-
     }
 }
 
+/// <summary>
+/// ブロック以外のオブジェクト生成パラメータ
+/// </summary>
+public class ObjectGenerateParam
+{
+    public float generateInterval { get; private set; }
+    public float rate_cupcel { get; private set; }
+    public float rate_timeUp { get; private set; }
+    public float rate_bomb { get; private set; }
+    public float rate_laser { get; private set; }
+
+    public void Init()
+    {
+        generateInterval = 1f;
+        rate_cupcel = 0f;
+        rate_timeUp = 0f;
+        rate_bomb = 0f;
+        rate_laser = 0f;
+    }
+    public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
+    {
+        switch (_paramType)
+        {
+            case ParamType.Rate_TimeUp:
+                rate_timeUp += _setParam;
+                break;
+            case ParamType.Rate_Bomb:
+                rate_bomb += _setParam;
+                break;
+            case ParamType.Rate_Laser:
+                rate_laser += _setParam;
+                break;
+        }
+    }
+
+
+}
 
 
 /// <summary>
@@ -167,6 +209,7 @@ public class AttackParam
 public static class GameParamManager
 {
     public readonly static GameBaseParam gameBaseParam = new GameBaseParam();
+    public readonly static ObjectGenerateParam objectGenerateParam = new ObjectGenerateParam();
     public readonly static List<BlockGenerateParam> list_blockGenerateParam = new List<BlockGenerateParam>();
     public readonly static List<AttackParam> list_attackParam = new List<AttackParam>();
 
@@ -214,8 +257,8 @@ public static class GameParamManager
 
     public static void Init_GameBaseParam()
     {
-        gameBaseParam.Set_SkillTreeParam(ParamType.IngameTime, 10f);
-        gameBaseParam.Set_SkillTreeParam(ParamType.BonusRate, 0f);
+        gameBaseParam.Init();
+        objectGenerateParam.Init();
 
         // block generate param init
         list_blockGenerateParam.Clear();

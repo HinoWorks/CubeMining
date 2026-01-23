@@ -33,7 +33,6 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         hp = hp_max;
 
         col.enabled = true;
-        animScale_rate = transform.localScale.x;
         gameObject.SetActive(true);
     }
 
