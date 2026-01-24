@@ -7,7 +7,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     protected virtual int hp { get; set; } = 10;
     protected virtual int hp_max { get; set; } = 10;
     protected float hp_rate => (float)hp / hp_max;
-    public int value;
+    public int value { get; private set; }
     public bool isAlive => hp > 0;
 
 

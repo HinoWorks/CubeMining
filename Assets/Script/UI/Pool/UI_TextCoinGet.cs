@@ -31,8 +31,8 @@ public class UI_TextCoinGet : UI_Gauge
         if (seq == null)
         {
             seq = DOTween.Sequence();
-            seq.Append(tmp_getCoin.transform.DOLocalMoveY(50f, 0.75f).SetEase(Ease.OutSine));
-            seq.Join(DOTween.To(() => tmp_getCoin.alpha, x => tmp_getCoin.alpha = x, 0f, 0.15f).SetDelay(0.6f)
+            seq.Append(tmp_getCoin.transform.DOLocalMoveY(30f, 0.75f).SetEase(Ease.OutSine));
+            seq.Join(DOTween.To(() => tmp_getCoin.alpha, x => tmp_getCoin.alpha = x, 0f, 0.15f).SetDelay(0.7f)
             .OnComplete(() =>
             {
                 Return();

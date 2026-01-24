@@ -39,6 +39,7 @@ public class GenerateBlockData
 public class GenerateObjectData
 {
     public ObjectGenerateParam param { get; private set; }
+    private float checkInterval = 1f;
     private float timer = 0f;
     public void Init(ObjectGenerateParam _param)
     {
@@ -46,8 +47,9 @@ public class GenerateObjectData
     }
     public void UnityUpdate()
     {
+        if (param.generateRate <= 0f) return;
         timer += Time.deltaTime;
-        if (timer >= param.generateInterval)
+        if (timer >= checkInterval)
         {
             BlockGenerateManager.Inst.GenerateObject(this);
             timer = 0f;
@@ -68,8 +70,11 @@ public class BlockGenerateManager : MonoBehaviour
     // -- loc
     private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
     private List<GenerateBlockData> list_generateBlockDatas = new List<GenerateBlockData>(); // 生成されるブロックのデータリスト
-    private GenerateObjectData generateObjectData = new GenerateObjectData();
 
+    private List<MiningTarget_Object> list_targetObjects = new List<MiningTarget_Object>(); // 生成されたオブジェクトのリスト
+    private List<GenerateObjectData> list_objectGenerateDatas = new List<GenerateObjectData>(); // 生成されるオブジェクトのデータリスト
+
+    public BlockGenerateParam blockGenerateParam_max { get; private set; } // 最大ブロックパラメータ
     private bool isGenerate = false;
     private int initialGenerateCount = 15;
 
@@ -98,13 +103,16 @@ public class BlockGenerateManager : MonoBehaviour
         {
             list_generateBlockDatas[i].UnityUpdate();
         }
-        generateObjectData.UnityUpdate();
+        for (int i = 0; i < list_objectGenerateDatas.Count; i++)
+        {
+            list_objectGenerateDatas[i].UnityUpdate();
+        }
     }
 
     public void Init()
     {
         Set_BlockGenerateDatas();
-        generateObjectData.Init(GameParamManager.objectGenerateParam);
+        Set_ObjectGenerateDatas();
 
         // pool init
         var targetBlockData = list_generateBlockDatas[0];
@@ -124,22 +132,26 @@ public class BlockGenerateManager : MonoBehaviour
         {
             targetBlock.NotActivate();
         }
+        foreach (var targetObject in list_targetObjects)
+        {
+            targetObject.NotActivate();
+        }
     }
 
 
 
 
-    #region local method 
+    #region == Block Generate ==
     private void Set_BlockGenerateDatas()
     {
         list_generateBlockDatas.Clear();
-
         foreach (var blockData in GameParamManager.list_blockGenerateParam)
         {
             if (!blockData.isActive) continue;
             var generateBlockData = new GenerateBlockData();
             generateBlockData.Init(blockData);
             list_generateBlockDatas.Add(generateBlockData);
+            blockGenerateParam_max = blockData;
         }
     }
 
@@ -188,30 +200,39 @@ public class BlockGenerateManager : MonoBehaviour
             targetBlock.Set_BlockSize(BlockSize.Normal, blockData.size);
         }
     }
-
-
-    /// <summary>
-    /// ブロック以外のオブジェクト生成
-    /// </summary>
-    public void GenerateObject(GenerateObjectData _objectData)
-    {
-        /// TODO HERE ====
-
-
-        if (Random.Range(0f, 1f) < _objectData.param.rate_cupcel)
-        {
-            return;
-        }
-    }
-
-
     #endregion
 
 
 
-    /// <summary>
-    /// アクティブなブロックをランダムに取得 存在しない場合はnullを返す
-    /// </summary>
+    #region == Object Generate ==
+    private void Set_ObjectGenerateDatas()
+    {
+        list_objectGenerateDatas.Clear();
+        foreach (var objectData in GameParamManager.list_objectGenerateParam)
+        {
+            var generateObjectData = new GenerateObjectData();
+            generateObjectData.Init(objectData);
+            list_objectGenerateDatas.Add(generateObjectData);
+        }
+    }
+    public void GenerateObject(GenerateObjectData _objectData)
+    {
+        var targetObject = list_targetObjects.Find(x => x.isActiveAndEnabled == false
+            && x.index == _objectData.param.so.objectIndex);
+        if (targetObject == null)
+        {
+            var newObject = Instantiate(_objectData.param.so.pf, InGameManager.Inst.ParentPool) as GameObject;
+            targetObject = newObject.GetComponent<MiningTarget_Object>();
+            list_targetObjects.Add(targetObject);
+        }
+        targetObject.transform.position = GetRandomPosition();
+        targetObject.transform.rotation = Quaternion.identity;
+        targetObject.Init(_objectData.param);
+    }
+    #endregion
+
+
+
     public MiningTargetBase Get_RandomTargetBlock()
     {
         var activeBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled);

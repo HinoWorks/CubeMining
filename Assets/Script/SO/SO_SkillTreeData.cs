@@ -7,33 +7,32 @@ public enum ParamCategory
 {
     GameSystem,
     Block,
+    OtherObject,
     Attack
 }
 public enum ParamType
 {
     Unlock,
 
-    // game system param
+    // ==== game system param ====
     IngameTime,
     BonusRate,
 
 
 
-    // object generate param
-    Rate_TimeUp,
-    Rate_Bomb,
-    Rate_Laser,
+    // ==== object generate param ====
+    Rate_Generate,
+    Rate_Value,
 
 
-    // block param
+    // ==== block param ====
     Value,
     BigBlockRate,
     SeparateBlockCount,
 
 
 
-
-    // attack param
+    // ==== attack param ====
     Damage,
     AliveTime,
     CT,

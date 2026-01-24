@@ -19,6 +19,20 @@ public static class SOLoader
         }
     }
 
+
+    private static SO_ObjectUnit so_objectUnit;
+    public static SO_ObjectUnit ObjectUnitData
+    {
+        get
+        {
+            if (so_objectUnit == null)
+            {
+                so_objectUnit = LoadSO<SO_ObjectUnit>(pathBase + nameof(SO_ObjectUnit));
+            }
+            return so_objectUnit;
+        }
+    }
+
     private static SO_BlockData so_blockData;
     public static SO_BlockData BlockData
     {

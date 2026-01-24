@@ -37,32 +37,25 @@ public class GameBaseParam
 /// </summary>
 public class ObjectGenerateParam
 {
-    public float generateInterval { get; private set; }
-    public float rate_cupcel { get; private set; }
-    public float rate_timeUp { get; private set; }
-    public float rate_bomb { get; private set; }
-    public float rate_laser { get; private set; }
+    public ObjectUnitData so;
+    public float generateRate { get; private set; }
+    public float valueRate { get; private set; }
 
-    public void Init()
+    public void Init(ObjectUnitData _objectUnitData)
     {
-        generateInterval = 1f;
-        rate_cupcel = 0f;
-        rate_timeUp = 0f;
-        rate_bomb = 0f;
-        rate_laser = 0f;
+        so = _objectUnitData;
+        generateRate = _objectUnitData.generateRate;
+        valueRate = _objectUnitData.valueRate;
     }
     public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
         {
-            case ParamType.Rate_TimeUp:
-                rate_timeUp += _setParam;
+            case ParamType.Rate_Generate:
+                generateRate += _setParam;
                 break;
-            case ParamType.Rate_Bomb:
-                rate_bomb += _setParam;
-                break;
-            case ParamType.Rate_Laser:
-                rate_laser += _setParam;
+            case ParamType.Rate_Value:
+                valueRate += _setParam;
                 break;
         }
     }
@@ -209,7 +202,7 @@ public class AttackParam
 public static class GameParamManager
 {
     public readonly static GameBaseParam gameBaseParam = new GameBaseParam();
-    public readonly static ObjectGenerateParam objectGenerateParam = new ObjectGenerateParam();
+    public readonly static List<ObjectGenerateParam> list_objectGenerateParam = new List<ObjectGenerateParam>();
     public readonly static List<BlockGenerateParam> list_blockGenerateParam = new List<BlockGenerateParam>();
     public readonly static List<AttackParam> list_attackParam = new List<AttackParam>();
 
@@ -258,7 +251,6 @@ public static class GameParamManager
     public static void Init_GameBaseParam()
     {
         gameBaseParam.Init();
-        objectGenerateParam.Init();
 
         // block generate param init
         list_blockGenerateParam.Clear();
@@ -267,6 +259,15 @@ public static class GameParamManager
             var blockParam = new BlockGenerateParam();
             blockParam.Init(blockData);
             list_blockGenerateParam.Add(blockParam);
+        }
+
+        // object generate param init
+        list_objectGenerateParam.Clear();
+        foreach (var objectData in SOLoader.ObjectUnitData.objectUnitDatas)
+        {
+            var objectParam = new ObjectGenerateParam();
+            objectParam.Init(objectData);
+            list_objectGenerateParam.Add(objectParam);
         }
 
         // attack param init
@@ -291,6 +292,9 @@ public static class GameParamManager
                 Set_GamesystemParam(_skillTree, _setParam);
                 break;
             case ParamCategory.Block:
+                Set_BlockParam(_skillTree, _setParam);
+                break;
+            case ParamCategory.OtherObject:
                 Set_BlockParam(_skillTree, _setParam);
                 break;
             case ParamCategory.Attack:

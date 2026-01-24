@@ -29,6 +29,7 @@ public class DataBase : MonoBehaviour
     [SerializeField] SO_SkillTreeData mSO_SkillTreeData;
     [SerializeField] SO_AttackUnitData mSO_AttackUnitData;
     [SerializeField] SO_BlockData mSO_BlockData;
+    [SerializeField] SO_ObjectUnit mSO_ObjectUnitData;
 
 
     public async UniTask LoadData()
@@ -36,6 +37,7 @@ public class DataBase : MonoBehaviour
         await DataLoad_SkillTreeData();
         await DataLoad_AttackUnitData();
         await DataLoad_BlockData();
+        await DataLoad_ObjectUnitData();
 
 #if UNITY_EDITOR
         Debug.Log($"<color=yellow>End Master Data update!</color>");
@@ -44,6 +46,7 @@ public class DataBase : MonoBehaviour
         EditorUtility.SetDirty(mSO_SkillTreeData);
         EditorUtility.SetDirty(mSO_AttackUnitData);
         EditorUtility.SetDirty(mSO_BlockData);
+        EditorUtility.SetDirty(mSO_ObjectUnitData);
         // -- save --
         AssetDatabase.SaveAssets();
 #endif
@@ -65,12 +68,18 @@ public class DataBase : MonoBehaviour
         mSO_AttackUnitData.attackUnitDatas = convData;
     }
 
-
     private async UniTask DataLoad_BlockData()
     {
         var loadData = await DataLoad("BlockUnit");
         var convData = CSVSerializer.Deserialize<BlockData>(loadData);
         mSO_BlockData.blockDatas = convData;
+    }
+
+    private async UniTask DataLoad_ObjectUnitData()
+    {
+        var loadData = await DataLoad("ObjectUnit");
+        var convData = CSVSerializer.Deserialize<ObjectUnitData>(loadData);
+        mSO_ObjectUnitData.objectUnitDatas = convData;
     }
 
 

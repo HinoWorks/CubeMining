@@ -2,10 +2,8 @@ using UnityEngine;
 
 public class MiningTarget_Cube : MiningTargetBase
 {
-    //[SerializeField] HitFlash hitFlash;
     private Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
     private BlockSize blockSize;
-
 
 
     public override void Init(int _hp, int _value, int _index)
