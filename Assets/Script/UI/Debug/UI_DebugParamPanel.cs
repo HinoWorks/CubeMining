@@ -64,7 +64,8 @@ public class UI_DebugParamPanel : MonoBehaviour
         // GameBaseParamの表示
         stringBuilder_gameBase.AppendLine("=== Game Base Param ===");
         stringBuilder_gameBase.AppendLine($"Ingame Time: {GameParamManager.gameBaseParam.ingameTime:F2}");
-        stringBuilder_gameBase.AppendLine($"Bonus Rate: {GameParamManager.gameBaseParam.bonusRate:F2}");
+        stringBuilder_gameBase.AppendLine($"Coin Bonus Rate: {GameParamManager.gameBaseParam.coinBonusRate:F2}");
+        stringBuilder_gameBase.AppendLine($"Block Generate Time Rate: {GameParamManager.gameBaseParam.blockGenerateTimeRate:F2}");
         stringBuilder_gameBase.AppendLine();
 
         // BlockGenerateParamの表示

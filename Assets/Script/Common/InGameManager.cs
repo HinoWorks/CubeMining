@@ -12,7 +12,8 @@ public class InGameManager : MonoBehaviour
 
 
     private float timer = 0;
-    private float timeLimit => GameParamManager.gameBaseParam.ingameTime;
+    private float timeLimit => GameParamManager.gameBaseParam.ingameTime + exTime;
+    private float exTime = 0f;
     private BigInteger getCoin;
 
 
@@ -37,6 +38,7 @@ public class InGameManager : MonoBehaviour
                 AttackManager.Inst.Set_Ready();
                 BlockGenerateManager.Inst.Init();
                 getCoin = 0;
+                exTime = 0f;
                 GameEvent.UI.PublishCoinMod(getCoin);
                 GameEvent.UI.PublishTimeLimit(timeLimit);
                 break;
@@ -76,7 +78,12 @@ public class InGameManager : MonoBehaviour
         getCoin += _deltaCoin;
         GameEvent.UI.PublishCoinMod(getCoin);
     }
-
+    public void AddGetExTime(float _deltaExTime)
+    {
+        exTime += _deltaExTime;
+        GameEvent.UI.PublishTimeLimit(timeLimit);
+        GameEvent.UI.PublishTimeLimit(timeLimit - timer);
+    }
 
 
     private void Save_IngameResult()

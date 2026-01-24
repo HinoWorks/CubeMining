@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class MiningTarget_Tresure : MiningTarget_Object
+public class MiningTarget_Timer : MiningTarget_Object
 {
-    private int treasureValueRate = 10;
+    private float exTimeBase = 1f;
 
     public override void Init(ObjectGenerateParam _objectGenerateParam)
     {
@@ -15,13 +15,12 @@ public class MiningTarget_Tresure : MiningTarget_Object
         effect.transform.position = transform.position + EffectOffset;
         effect.SetActive(true);
 
-        // ===== treasure value ======
-        var getTresureCoin = (int)(BlockGenerateManager.Inst.blockGenerateParam_max.baseValue
-                                    * treasureValueRate * objectGenerateParam.so.valueRate);
+        // ===========
+        var getExTime = exTimeBase * objectGenerateParam.so.valueRate;
 
-        InGameManager.Inst.AddGetCoin(getTresureCoin);
+        InGameManager.Inst.AddGetExTime(getExTime);
         var ui_textCoinGet = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
-        ui_textCoinGet.SetText_Coin(StaticManager.Get_BigintegerToString(getTresureCoin), Color.green);
+        ui_textCoinGet.SetText($"+{getExTime.ToString("F1")} Sec", Color.blue);
         base.BreakFromDamage();
     }
 

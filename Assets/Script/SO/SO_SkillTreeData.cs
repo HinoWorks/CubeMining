@@ -16,7 +16,7 @@ public enum ParamType
 
     // ==== game system param ====
     IngameTime,
-    BonusRate,
+    CoinBonusRate,
 
 
 

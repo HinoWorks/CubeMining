@@ -12,10 +12,17 @@ public class UI_TextCoinGet : UI_Gauge
     private Sequence seq;
 
 
-    public void SetText(string _setText, Color _setColor)
+    public void SetText_Coin(string _setText, Color _setColor)
     {
         tmp_getCoin.transform.localPosition = new Vector3(Random.Range(-posiRange, posiRange), Random.Range(-posiRange, posiRange), 0f);
         tmp_getCoin.SetText($"<size=75%>$</size>{_setText}");
+        tmp_getCoin.color = _setColor;
+        StartTextAnim();
+    }
+    public void SetText(string _setText, Color _setColor)
+    {
+        tmp_getCoin.transform.localPosition = new Vector3(Random.Range(-posiRange, posiRange), Random.Range(-posiRange, posiRange), 0f);
+        tmp_getCoin.SetText($"{_setText}");
         tmp_getCoin.color = _setColor;
         StartTextAnim();
     }

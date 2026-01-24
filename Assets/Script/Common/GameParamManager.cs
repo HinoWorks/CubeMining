@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using UnityEngine.Analytics;
 
 
 /// <summary>
@@ -9,24 +8,31 @@ using UnityEngine.Analytics;
 /// </summary>
 public class GameBaseParam
 {
-    public float ingameTime { get; private set; }
-    public float bonusRate { get; private set; }
+    // インゲーム時間
+    public float ingameTime => ingameTime_Base + ingameTime_enhanced;
+    private float ingameTime_Base = 10f;
+    private float ingameTime_enhanced = 0f;
 
-    public void Init()
-    {
-        ingameTime = 10f;
-        bonusRate = 0f;
-    }
+    // リザルト時のコインボーナス
+    public float coinBonusRate => 1f + coinBonusRate_enhanced;
+    private float coinBonusRate_enhanced = 0f;
+
+    // ブロック生成時間の短縮率
+    public float blockGenerateTimeRate => 1f - blockGenerateTimeRate_enhanced;
+    private float blockGenerateTimeRate_enhanced = 0f;
+
+
+
 
     public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
         {
             case ParamType.IngameTime:
-                ingameTime += _setParam;
+                ingameTime_enhanced += _setParam;
                 break;
-            case ParamType.BonusRate:
-                bonusRate += _setParam;
+            case ParamType.CoinBonusRate:
+                coinBonusRate_enhanced += _setParam;
                 break;
         }
     }
@@ -59,8 +65,6 @@ public class ObjectGenerateParam
                 break;
         }
     }
-
-
 }
 
 
@@ -229,29 +233,20 @@ public static class GameParamManager
     #endregion
 
 
-
-
     public static async UniTask Init()
     {
         // ゲームの基本的なパラメタを読み込む
         Init_GameBaseParam();
 
-        // skill treeによるデータ更新
-        foreach (var skillData in SOLoader.SkillTreeData.skillTreeDatas)
-        {
-            var saveData = await SaveLoader.Inst.Get_SkillTreeData(skillData.index);
-            if (saveData == null) continue;
-            var setParam = skillData.baseValue + skillData.deltaValue * saveData.level;
-            Set_DeltaParam(skillData, setParam);
-        }
+
+        await Init_SkillTreeParam(); // skill treeによるデータ更新
+        await Init_ArtifactParam(); // artifactによるデータ更新
 
         await UniTask.DelayFrame(1);
     }
 
     public static void Init_GameBaseParam()
     {
-        gameBaseParam.Init();
-
         // block generate param init
         list_blockGenerateParam.Clear();
         foreach (var blockData in SOLoader.BlockData.blockDatas)
@@ -280,54 +275,76 @@ public static class GameParamManager
         }
     }
 
+    private static async UniTask Init_SkillTreeParam()
+    {
+        foreach (var skillData in SOLoader.SkillTreeData.skillTreeDatas)
+        {
+            var saveData = await SaveLoader.Inst.Get_SkillTreeData(skillData.index);
+            if (saveData == null) continue;
+            var setParam = skillData.baseValue + skillData.deltaValue * saveData.level;
+            Set_DeltaParam(skillData.paramCategory, skillData.targetIndex, skillData.paramType, setParam);
+        }
+    }
+
+    private static async UniTask Init_ArtifactParam()
+    {
+        // ==== TODO HERE ====
+        /*
+        foreach (var artifactData in SOLoader.ArtifactData.artifactDatas)
+        {
+            var saveData = await SaveLoader.Inst.Get_SkillTreeData(skillData.index);
+            if (saveData == null) continue;
+            var setParam = skillData.baseValue + skillData.deltaValue * saveData.level;
+            Set_DeltaParam(skillData, setParam);
+        }
+        */
+    }
+
 
     /// <summary>
     /// パラメータの差分fix
     /// </summary>
-    public static void Set_DeltaParam(SkillTree _skillTree, float _setParam)
+    public static void Set_DeltaParam(ParamCategory _paramCategory, int _targetIndex, ParamType _paramType, float _setParam)
     {
-        switch (_skillTree.paramCategory)
+        switch (_paramCategory)
         {
             case ParamCategory.GameSystem:
-                Set_GamesystemParam(_skillTree, _setParam);
+                Set_GamesystemParam(_paramType, _setParam);
                 break;
             case ParamCategory.Block:
-                Set_BlockParam(_skillTree, _setParam);
+                Set_BlockParam(_targetIndex, _paramType, _setParam);
                 break;
             case ParamCategory.OtherObject:
-                Set_BlockParam(_skillTree, _setParam);
+                Set_BlockParam(_targetIndex, _paramType, _setParam);
                 break;
             case ParamCategory.Attack:
-                Set_AttackParam(_skillTree, _setParam);
+                Set_AttackParam(_targetIndex, _paramType, _setParam);
                 break;
         }
     }
 
-    private static void Set_GamesystemParam(SkillTree _skillTree, float _setParam)
+    private static void Set_GamesystemParam(ParamType _paramType, float _setParam)
     {
-        gameBaseParam.Set_SkillTreeParam(_skillTree.paramType, _setParam);
+        gameBaseParam.Set_SkillTreeParam(_paramType, _setParam);
     }
-
-    private static void Set_BlockParam(SkillTree _skillTree, float _setParam)
+    private static void Set_BlockParam(int _blockIndex, ParamType _paramType, float _setParam)
     {
-        var targetBlock = list_blockGenerateParam.Find(x => x.blockIndex == _skillTree.targetIndex);
+        var targetBlock = list_blockGenerateParam.Find(x => x.blockIndex == _blockIndex);
         if (targetBlock == null)
         {
-            Debug.LogError($"BlockData is not found: {_skillTree.targetIndex} // ==> 初期ロードで読み込み失敗");
+            Debug.LogError($"BlockData is not found: {_blockIndex} // ==> 初期ロードで読み込み失敗");
             return;
         }
-        targetBlock.Set_SkillTreeParam(_skillTree.paramType, _setParam);
+        targetBlock.Set_SkillTreeParam(_paramType, _setParam);
     }
-
-
-    private static void Set_AttackParam(SkillTree _skillTree, float _setParam)
+    private static void Set_AttackParam(int _attackIndex, ParamType _paramType, float _setParam)
     {
-        var targetAttack = list_attackParam.Find(x => x.attackUnitIndex == _skillTree.targetIndex);
+        var targetAttack = list_attackParam.Find(x => x.attackUnitIndex == _attackIndex);
         if (targetAttack == null)
         {
-            Debug.LogError($"AttackUnitData is not found: {_skillTree.targetIndex} // ==> 初期ロードで読み込み失敗");
+            Debug.LogError($"AttackUnitData is not found: {_attackIndex} // ==> 初期ロードで読み込み失敗");
         }
-        targetAttack.Set_SkillTreeParam(_skillTree.paramType, _setParam);
+        targetAttack.Set_SkillTreeParam(_paramType, _setParam);
     }
 
 
