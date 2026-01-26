@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1d838fc78cf44ef867bed076d2d33d, type: 3}
+  m_Name: SO_UnlockData
+  m_EditorClassIdentifier: Assembly-CSharp::SO_GameEventData
+  unlockDatas:
+  - eventIndex: 1
+    unlockCheckType: 1
+    checkCount: 2
+    unlockTargetType: 0
+  - eventIndex: 2
+    unlockCheckType: 1
+    checkCount: 3
+    unlockTargetType: 0
+  - eventIndex: 3
+    unlockCheckType: 3
+    checkCount: 10
+    unlockTargetType: 0
+  - eventIndex: 4
+    unlockCheckType: 2
+    checkCount: 3
+    unlockTargetType: 0
+  - eventIndex: 5
+    unlockCheckType: 0
+    checkCount: 0
+    unlockTargetType: 0
+  - eventIndex: 6
+    unlockCheckType: 0
+    checkCount: 0
+    unlockTargetType: 0
+  - eventIndex: 7
+    unlockCheckType: 0
+    checkCount: 0
+    unlockTargetType: 0
+  - eventIndex: 8
+    unlockCheckType: 0
+    checkCount: 0
+    unlockTargetType: 0

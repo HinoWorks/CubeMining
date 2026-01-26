@@ -72,16 +72,16 @@ public static class SOLoader
         }
     }
 
-    private static SO_GameEventData so_gameEventData;
-    public static SO_GameEventData GameEventData
+    private static SO_UnlockData so_unlockData;
+    public static SO_UnlockData UnlockData
     {
         get
         {
-            if (so_gameEventData == null)
+            if (so_unlockData == null)
             {
-                so_gameEventData = LoadSO<SO_GameEventData>(pathBase + nameof(SO_GameEventData));
+                so_unlockData = LoadSO<SO_UnlockData>(pathBase + nameof(SO_UnlockData));
             }
-            return so_gameEventData;
+            return so_unlockData;
         }
     }
 
