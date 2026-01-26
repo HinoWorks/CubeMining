@@ -7,13 +7,6 @@ using System;
 using System.Linq;
 
 
-public static class InitialCreateData
-{
-    public static int skillTreeIndex_first = 1;
-
-}
-
-
 
 [System.Serializable]
 public class SkillTreeData
@@ -34,6 +27,12 @@ public class ItemData
     //
 }
 
+[System.Serializable]
+public class ArtifactData
+{
+    public int artifactIndex;
+    public int level = 1;
+}
 
 
 public enum state
@@ -45,44 +44,40 @@ public enum state
 public class SaveLoader : MonoBehaviour
 {
     public static SaveLoader Inst;
-    private string key_playerSaveData = "key_playerSaveData";
     public state currentState { get; private set; } = state.InitialLoad;
 
 
-
-    private const string KEY_GoalLevel = "key_GoalLevel";
-    private int goalLevel;
-    public int GoalLevel
-    {
-        get => goalLevel;
-        private set
-        {
-            goalLevel = value;
-            ES3.Save(KEY_GoalLevel, goalLevel);
-        }
-    }
-
+    private string KEY_CREATE_INITIAL_DATA = "key_createInitialData";
 
     private const string KEY_COIN = "key_coin";
     private BigInteger coin;
-    public BigInteger Coin
-    {
-        get => coin;
-    }
+    public BigInteger Coin { get => coin; }
+
+    private const string KEY_UNLOCK_EVENTINDEX = "key_unlockEventIndex";
+    private int unlockEventIndex;
+    public int UnlockEventIndex { get => unlockEventIndex; }
 
 
 
+    #region -- result param --
     private const string KEY_BLOCKCOUNT = "key_blockCount";
     private int blockCount;
-    public int BlockCount
-    {
-        get => blockCount;
-        private set
-        {
-            blockCount = value;
-            ES3.Save(KEY_BLOCKCOUNT, blockCount);
-        }
-    }
+    public int BlockCount { get => blockCount; }
+
+    private const string KEY_INGAME_COUNT = "key_ingameCount";
+    private int ingameCount;
+    public int IngameCount { get => ingameCount; }
+
+    private const string KEY_PLAYER_LEVEL = "key_playerLevel";
+    private int playerLevel;
+    public int PlayerLevel { get => playerLevel; }
+
+    private const string KEY_PLAYER_EXP = "key_playerExp";
+    private int playerExp;
+    public int PlayerExp { get => playerExp; }
+    #endregion
+
+
 
     private Queue<Action> allQueue = new();
     private bool isProcessingQueue = false;
@@ -108,19 +103,20 @@ public class SaveLoader : MonoBehaviour
 
     private async UniTask SaveData_InitialLoad()
     {
-        var createdInitialData = ES3.KeyExists(StaticManager.KEY_CREATE_INITIAL_DATA);
+        var createdInitialData = ES3.KeyExists(KEY_CREATE_INITIAL_DATA);
         if (!createdInitialData)
         {
             InitialData_Create();
-            ES3.Save(StaticManager.KEY_CREATE_INITIAL_DATA, true);
+            ES3.Save(KEY_CREATE_INITIAL_DATA, true);
         }
 
-        // Initial Load Data
+        // === Initial Load Data
         coin = ES3.KeyExists(KEY_COIN) ? BigInteger.Parse(ES3.Load<string>(KEY_COIN)) : 0;
-
-        //blockCount = ES3.KeyExists(KEY_BLOCKCOUNT) ? ES3.Load<int>(KEY_BLOCKCOUNT) : 0;
-        //GoalCount = ES3.KeyExists(KEY_GoalCount) ? ES3.Load<int>(KEY_GoalCount) : 0;
-        //GoalLevel = ES3.KeyExists(KEY_GoalLevel) ? ES3.Load<int>(KEY_GoalLevel) : 1;
+        unlockEventIndex = ES3.KeyExists(KEY_UNLOCK_EVENTINDEX) ? ES3.Load<int>(KEY_UNLOCK_EVENTINDEX) : 1;
+        blockCount = ES3.KeyExists(KEY_BLOCKCOUNT) ? ES3.Load<int>(KEY_BLOCKCOUNT) : 0;
+        ingameCount = ES3.KeyExists(KEY_INGAME_COUNT) ? ES3.Load<int>(KEY_INGAME_COUNT) : 0;
+        playerLevel = ES3.KeyExists(KEY_PLAYER_LEVEL) ? ES3.Load<int>(KEY_PLAYER_LEVEL) : 0;
+        playerExp = ES3.KeyExists(KEY_PLAYER_EXP) ? ES3.Load<int>(KEY_PLAYER_EXP) : 0;
 
         currentState = state.Idling;
     }
@@ -148,7 +144,6 @@ public class SaveLoader : MonoBehaviour
         EnqueueMethod(async () =>
         {
             await UniTask.Yield();
-
             try
             {
                 if (ES3.KeyExists(key))
@@ -166,7 +161,6 @@ public class SaveLoader : MonoBehaviour
                 tcs.TrySetResult((false, default));
             }
         });
-
         return tcs.Task;
     }
 
@@ -175,19 +169,6 @@ public class SaveLoader : MonoBehaviour
 
     void Update()
     {
-        /*
-        // -- coin --
-        if (isSavePending_coin)
-        {
-            saveTimer_coin -= Time.deltaTime;
-            if (saveTimer_coin <= 0f)
-            {
-                EnqueueMethod(SavePendeingCoin);
-                isSavePending_coin = false;
-            }
-        }
-        */
-
         //処理中またはキューにアイテムがない場合、何もしない
         if (isProcessingQueue || allQueue.Count <= 0) return;
         ProcessSaveQueue();
@@ -227,6 +208,73 @@ public class SaveLoader : MonoBehaviour
     }
     #endregion
 
+
+    #region -- unlock event index data --
+    /// <summary>
+    /// イベントインデックスセーブリクエスト
+    /// </summary>
+    public void Request_SaveUnlockEventIndex(int _index)
+    {
+        EnqueueMethod(() => { SaveUnlockEventIndex(_index); });
+    }
+    private void SaveUnlockEventIndex(int _index)
+    {
+        unlockEventIndex = _index;
+        ES3.Save(KEY_UNLOCK_EVENTINDEX, unlockEventIndex);
+    }
+    #endregion
+
+
+    #region -- Ingame result data --
+    /// <summary>
+    /// ブロック破壊カウントセーブリクエスト
+    /// </summary>
+    public void Request_SaveBlockBreakCount(int _count)
+    {
+        EnqueueMethod(() => { SaveBlockBreakCount(_count); });
+    }
+    private void SaveBlockBreakCount(int _count)
+    {
+        blockCount += _count;
+        ES3.Save(KEY_BLOCKCOUNT, blockCount);
+    }
+    /// <summary>
+    /// インゲームプレイカウント
+    /// </summary>
+    public void Request_SaveIngameCount(int _count)
+    {
+        EnqueueMethod(() => { SaveIngameCount(_count); });
+    }
+    private void SaveIngameCount(int _count)
+    {
+        ingameCount += _count;
+        ES3.Save(KEY_INGAME_COUNT, ingameCount);
+    }
+    /// <summary>
+    /// プレイヤーレベルセーブリクエスト
+    /// </summary>
+    public void Request_SavePlayerLevel(int _level)
+    {
+        EnqueueMethod(() => { SavePlayerLevel(_level); });
+    }
+    private void SavePlayerLevel(int _level)
+    {
+        playerLevel += _level;
+        ES3.Save(KEY_PLAYER_LEVEL, playerLevel);
+    }
+    /// <summary>
+    /// プレイヤー経験値セーブリクエスト
+    /// </summary>
+    public void Request_SavePlayerExp(int _exp)
+    {
+        EnqueueMethod(() => { SavePlayerExp(_exp); });
+    }
+    private void SavePlayerExp(int _exp)
+    {
+        playerExp += _exp;
+        ES3.Save(KEY_PLAYER_EXP, playerExp);
+    }
+    #endregion
 
 
 
@@ -297,6 +345,39 @@ public class SaveLoader : MonoBehaviour
     }
     #endregion
 
+
+
+
+    #region -- Artifact --
+    public async UniTask<ArtifactData> Get_ArtifactData(int _artifactIndex)
+    {
+        string saveKey = GetArtifactDataKey(_artifactIndex);
+        var loadData = await LoadAsync<ArtifactData>(saveKey);
+        if (loadData.success)
+        {
+            return loadData.data;
+        }
+        return null;
+    }
+    public void Request_SaveArtifactData(int _artifactIndex, int _level)
+    {
+        EnqueueMethod(() => { SaveArtifactData(_artifactIndex, _level); });
+    }
+    private void SaveArtifactData(int _artifactIndex, int _level)
+    {
+        var saveKey = GetArtifactDataKey(_artifactIndex);
+        var newData = new ArtifactData()
+        {
+            artifactIndex = _artifactIndex,
+            level = _level
+        };
+        ES3.Save(saveKey, newData);
+    }
+    private string GetArtifactDataKey(int _artifactIndex)
+    {
+        return $"ArtifactData-{_artifactIndex}";
+    }
+    #endregion
 
 
 

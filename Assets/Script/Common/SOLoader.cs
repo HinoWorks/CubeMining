@@ -59,7 +59,31 @@ public static class SOLoader
             return so_skillTreeData;
         }
     }
+    private static SO_ArtifactData so_artifactData;
+    public static SO_ArtifactData ArtifactData
+    {
+        get
+        {
+            if (so_artifactData == null)
+            {
+                so_artifactData = LoadSO<SO_ArtifactData>(pathBase + nameof(SO_ArtifactData));
+            }
+            return so_artifactData;
+        }
+    }
 
+    private static SO_GameEventData so_gameEventData;
+    public static SO_GameEventData GameEventData
+    {
+        get
+        {
+            if (so_gameEventData == null)
+            {
+                so_gameEventData = LoadSO<SO_GameEventData>(pathBase + nameof(SO_GameEventData));
+            }
+            return so_gameEventData;
+        }
+    }
 
 
     private static SO_SoundData so_soundData;

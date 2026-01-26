@@ -30,6 +30,8 @@ public class DataBase : MonoBehaviour
     [SerializeField] SO_AttackUnitData mSO_AttackUnitData;
     [SerializeField] SO_BlockData mSO_BlockData;
     [SerializeField] SO_ObjectUnit mSO_ObjectUnitData;
+    [SerializeField] SO_ArtifactData mSO_ArtifactData;
+    [SerializeField] SO_GameEventData mSO_GameEventData;
 
 
     public async UniTask LoadData()
@@ -38,6 +40,8 @@ public class DataBase : MonoBehaviour
         await DataLoad_AttackUnitData();
         await DataLoad_BlockData();
         await DataLoad_ObjectUnitData();
+        await DataLoad_ArtifactData();
+
 
 #if UNITY_EDITOR
         Debug.Log($"<color=yellow>End Master Data update!</color>");
@@ -47,6 +51,10 @@ public class DataBase : MonoBehaviour
         EditorUtility.SetDirty(mSO_AttackUnitData);
         EditorUtility.SetDirty(mSO_BlockData);
         EditorUtility.SetDirty(mSO_ObjectUnitData);
+        EditorUtility.SetDirty(mSO_ArtifactData);
+        EditorUtility.SetDirty(mSO_GameEventData);
+
+
         // -- save --
         AssetDatabase.SaveAssets();
 #endif
@@ -82,6 +90,19 @@ public class DataBase : MonoBehaviour
         mSO_ObjectUnitData.objectUnitDatas = convData;
     }
 
+    private async UniTask DataLoad_ArtifactData()
+    {
+        var loadData = await DataLoad("Artifact");
+        var convData = CSVSerializer.Deserialize<ArtifactUnitData>(loadData);
+        mSO_ArtifactData.artifactDatas = convData;
+    }
+
+    private async UniTask DataLoad_GameEventData()
+    {
+        var loadData = await DataLoad("GameEvent");
+        var convData = CSVSerializer.Deserialize<GameEventUnitData>(loadData);
+        mSO_GameEventData.gameEventDatas = convData;
+    }
 
 
     private async UniTask<string> DataLoad(string _sheetName)

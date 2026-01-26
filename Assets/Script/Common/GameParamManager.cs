@@ -22,8 +22,6 @@ public class GameBaseParam
     private float blockGenerateTimeRate_enhanced = 0f;
 
 
-
-
     public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
@@ -34,6 +32,10 @@ public class GameBaseParam
             case ParamType.CoinBonusRate:
                 coinBonusRate_enhanced += _setParam;
                 break;
+
+                // ==== TODO HERE ====
+                // Add here Artifact param
+
         }
     }
 }
@@ -238,7 +240,6 @@ public static class GameParamManager
         // ゲームの基本的なパラメタを読み込む
         Init_GameBaseParam();
 
-
         await Init_SkillTreeParam(); // skill treeによるデータ更新
         await Init_ArtifactParam(); // artifactによるデータ更新
 
@@ -288,16 +289,12 @@ public static class GameParamManager
 
     private static async UniTask Init_ArtifactParam()
     {
-        // ==== TODO HERE ====
-        /*
         foreach (var artifactData in SOLoader.ArtifactData.artifactDatas)
         {
-            var saveData = await SaveLoader.Inst.Get_SkillTreeData(skillData.index);
+            var saveData = await SaveLoader.Inst.Get_ArtifactData(artifactData.artifactIndex);
             if (saveData == null) continue;
-            var setParam = skillData.baseValue + skillData.deltaValue * saveData.level;
-            Set_DeltaParam(skillData, setParam);
+            Set_DeltaParam(ParamCategory.GameSystem, -1, artifactData.paramType, artifactData.value);
         }
-        */
     }
 
 
