@@ -56,7 +56,7 @@ public partial class SROptions
 
 
     private int targetIndex;
-    [Category("要素アンロック -- Attack")]
+    [Category("要素アンロックAttack")]
     [DisplayName("index")]
     [Sort(0)]
     public int SetTargetIndex
@@ -64,8 +64,8 @@ public partial class SROptions
         get { return targetIndex; }
         set { targetIndex = value; }
     }
-    [Category("要素アンロック -- Attack")]
-    [DisplayName("アンロック")]
+    [Category("要素アンロックAttack")]
+    [DisplayName("アンロック(Attack)")]
     [Sort(1)]
     public void UnlockIndex()
     {
@@ -75,6 +75,25 @@ public partial class SROptions
         GameParamManager.DEBUG_AttackParam_Unlock(targetIndex);
     }
 
+    private int targetIndex_block;
+    [Category("要素アンロックBlock")]
+    [DisplayName("index")]
+    [Sort(0)]
+    public int SetTargetIndex_block
+    {
+        get { return targetIndex_block; }
+        set { targetIndex_block = value; }
+    }
+    [Category("要素アンロックBlock")]
+    [DisplayName("アンロック(Block)")]
+    [Sort(1)]
+    public void UnlockIndex_block()
+    {
+        var targetSkillTreeData = SOLoader.SkillTreeData.GetSkillTreeDatas(ParamCategory.Block, targetIndex_block, ParamType.Unlock);
+        if (targetSkillTreeData == null) return;
+        SaveLoader.Inst.Request_SaveSkillTreeData(targetSkillTreeData.index, 1);
+
+    }
 
 
 

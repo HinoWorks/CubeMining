@@ -54,12 +54,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6424524226056089217, guid: 32208ad11c7064fd28426e9ad3482184, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5508115125370531001}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1319541156741826578, guid: 32208ad11c7064fd28426e9ad3482184, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5139740904801890243}
   m_SourcePrefab: {fileID: 100100000, guid: 32208ad11c7064fd28426e9ad3482184, type: 3}
+--- !u!4 &1965341811137122579 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6424524226056089217, guid: 32208ad11c7064fd28426e9ad3482184, type: 3}
+  m_PrefabInstance: {fileID: 4786822038838574994}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5774114967898896256 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1319541156741826578, guid: 32208ad11c7064fd28426e9ad3482184, type: 3}
@@ -77,4 +85,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa74349c12a45452da2586a8ff5e6b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiningTarget_Tresure
-  value: 0
+--- !u!1001 &5503584539800061323
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1965341811137122579}
+    m_Modifications:
+    - target: {fileID: 1265803993966126, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+      propertyPath: m_Name
+      value: chest_wood
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619594811042098, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619594811042098, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619594811042098, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619594811042098, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619594811042098, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619594811042098, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619594811042098, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619594811042098, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619594811042098, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619594811042098, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+--- !u!4 &5508115125370531001 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4619594811042098, guid: 77d54b7dafce7415b9406ca06fa75ef1, type: 3}
+  m_PrefabInstance: {fileID: 5503584539800061323}
+  m_PrefabAsset: {fileID: 0}

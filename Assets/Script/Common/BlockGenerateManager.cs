@@ -121,6 +121,12 @@ public class BlockGenerateManager : MonoBehaviour
             GenerateBlock(targetBlockData, targetBlockData.sizeType);
         }
 
+        var targetBlockData2 = list_generateBlockDatas[1];
+        for (int i = 0; i < initialGenerateCount; i++)
+        {
+            GenerateBlock(targetBlockData2, targetBlockData2.sizeType);
+        }
+
     }
     public void Set_GenerateState(bool _state)
     {
@@ -168,7 +174,7 @@ public class BlockGenerateManager : MonoBehaviour
             }
 
             targetBlock.transform.position = GetRandomPosition();
-            targetBlock.transform.rotation = Quaternion.identity;
+            targetBlock.transform.rotation = GetRandomRotation();
 
             targetBlock.Init(_blockData.param.hp, _blockData.param.baseValue, _blockData.param.blockIndex);
             var blockSizeRate = _blockSizeType == BlockSize.Big ? bigBlockSizeRate : 1f;
@@ -178,6 +184,10 @@ public class BlockGenerateManager : MonoBehaviour
     private Vector3 GetRandomPosition()
     {
         return new Vector3(Random.Range(range_x.x, range_x.y), Random.Range(range_y.x, range_y.y), Random.Range(range_z.x, range_z.y));
+    }
+    private Quaternion GetRandomRotation()
+    {
+        return Quaternion.Euler(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f));
     }
 
     public void BreakBigBlock(int _blockIndex, Vector3 _position)
@@ -226,7 +236,7 @@ public class BlockGenerateManager : MonoBehaviour
             list_targetObjects.Add(targetObject);
         }
         targetObject.transform.position = GetRandomPosition();
-        targetObject.transform.rotation = Quaternion.identity;
+        targetObject.transform.rotation = GetRandomRotation();
         targetObject.Init(_objectData.param);
     }
     #endregion
