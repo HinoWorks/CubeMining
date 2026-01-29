@@ -14,7 +14,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     protected float animScale_rate;
     private Vector3 animScale_1 => animScale_rate * new Vector3(1.1f, 0.9f, 1.1f);
     private Vector3 animScale_2 => animScale_rate * new Vector3(0.9f, 1.1f, 0.9f);
-    private float animDuration = 0.075f;
+    private float animDuration = 0.05f;
     private Sequence seq_anim;
 
     private Collider col;

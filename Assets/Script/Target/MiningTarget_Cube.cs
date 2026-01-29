@@ -11,6 +11,7 @@ public class MiningTarget_Cube : MiningTargetBase
     {
         base.Init(_hp, _value, _index);
         transform.localScale = Vector3.one;
+        base.animScale_rate = 1f;
         //hitFlash.Init_Crack();
     }
     public void Set_BreakCallback(Action _callback)

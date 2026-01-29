@@ -38,12 +38,19 @@ public static class GameEvent
         {
             pointerMove.OnNext(pos);
         }
-
         private static readonly Subject<bool> pointerAreaIn = new();
         public static IObservable<bool> PointerAreaIn => pointerAreaIn.AsObservable();
         public static void PublishPointerAreaIn(bool isAreaIn)
         {
             pointerAreaIn.OnNext(isAreaIn);
+        }
+
+
+        private static readonly Subject<IDamagable> pointerDamage = new();
+        public static IObservable<IDamagable> PointerDamage => pointerDamage.AsObservable();
+        public static void PublishPointerDamage(IDamagable target)
+        {
+            pointerDamage.OnNext(target);
         }
     }
 

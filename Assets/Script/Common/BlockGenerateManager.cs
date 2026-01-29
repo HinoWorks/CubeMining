@@ -48,9 +48,10 @@ public class GenerateBlockLayerCont
         breakBlockCount++;
         if (breakBlockCount >= blockCount)
         {
-            GenerateBlock();
+            BlockGenerateManager.Inst.LayerClear(this);
         }
     }
+
 
 }
 
@@ -63,12 +64,11 @@ public class BlockGenerateManager : MonoBehaviour
     private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
     private List<MiningTarget_Object> list_targetObjects = new List<MiningTarget_Object>(); // 生成されたオブジェクトのリスト
     private List<GenerateBlockLayerCont> list_layerConts = new List<GenerateBlockLayerCont>(); // 生成されたレイヤーのリスト
-    public BlockGenerateParam_Layer blockGenerateParam_Layer_max { get; private set; } // 一番上のレイヤー
 
 
     private int initialCreateLayer = 10;
     private int currentCreateLayer = 0;
-
+    private int cameraTargetLayer = 0;
 
     void Awake()
     {
@@ -116,6 +116,9 @@ public class BlockGenerateManager : MonoBehaviour
     {
         list_layerConts.Remove(_layerCont);
         CreateNewLayerCont();
+
+        cameraTargetLayer = _layerCont.layerIndex + 1;
+        CameraManager.Inst.SetCameraPosition(cameraTargetLayer);
     }
 
 
