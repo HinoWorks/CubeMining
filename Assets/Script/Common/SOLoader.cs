@@ -85,6 +85,18 @@ public static class SOLoader
         }
     }
 
+    private static SO_BlockLayerData so_blockLayerData;
+    public static SO_BlockLayerData BlockLayerData
+    {
+        get
+        {
+            if (so_blockLayerData == null)
+            {
+                so_blockLayerData = LoadSO<SO_BlockLayerData>(pathBase + nameof(SO_BlockLayerData));
+            }
+            return so_blockLayerData;
+        }
+    }
 
     private static SO_SoundData so_soundData;
     public static SO_SoundData SoundData

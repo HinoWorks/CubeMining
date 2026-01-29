@@ -16,8 +16,9 @@ public class MiningTarget_Tresure : MiningTarget_Object
         effect.SetActive(true);
 
         // ===== treasure value ======
-        var getTresureCoin = (int)(BlockGenerateManager.Inst.blockGenerateParam_max.baseValue
-                                    * treasureValueRate * objectGenerateParam.so.valueRate);
+        //var getTresureCoin = (int)(BlockGenerateManager.Inst.blockGenerateParam_max.baseValue
+        //                            * treasureValueRate * objectGenerateParam.so.valueRate);
+        var getTresureCoin = 10;
 
         InGameManager.Inst.AddGetCoin(getTresureCoin);
         var ui_textCoinGet = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);

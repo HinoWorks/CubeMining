@@ -12,47 +12,43 @@ public enum BlockSize
 
 
 [System.Serializable]
-public class GenerateBlockData
+public class GenerateBlockLayerCont
 {
-    public BlockGenerateParam param { get; private set; }
-    private float timer = 0f;
-    public BlockSize sizeType => Random.Range(0f, 1f) < param.bigBlockRate ? BlockSize.Big : BlockSize.Normal;
+    public BlockGenerateParam_Layer param;
+    public int layerIndex;
+    public int blockCount => param.so.layerSize * param.so.layerSize;
+    private int breakBlockCount = 0;
 
-    public void Init(BlockGenerateParam _param)
+    public void Init(BlockGenerateParam_Layer _param, int _layerIndex)
     {
         param = _param;
+        layerIndex = _layerIndex;
+        breakBlockCount = 0;
+        GenerateBlock();
     }
-    public void UnityUpdate()
+
+    private void GenerateBlock()
     {
-        timer += Time.deltaTime;
-        if (timer >= param.generateInterval)
+        for (int i = 0; i < blockCount; i++)
         {
-            BlockGenerateManager.Inst.GenerateBlock(this, sizeType);
-            timer = 0f;
+            var newBlock = BlockGenerateManager.Inst.GenerateBlock(param.SelectBlockIndex());
+            newBlock.transform.localPosition = GetBlockPosition(i);
+            newBlock.Set_BreakCallback(BlockBreakCall);
         }
     }
-
-}
-
-
-[System.Serializable]
-public class GenerateObjectData
-{
-    public ObjectGenerateParam param { get; private set; }
-    private float checkInterval = 1f;
-    private float timer = 0f;
-    public void Init(ObjectGenerateParam _param)
+    public Vector3 GetBlockPosition(int _blockIndex)
     {
-        param = _param;
+        var row = _blockIndex / param.so.layerSize;
+        var col = _blockIndex % param.so.layerSize;
+        return new Vector3(row, -layerIndex, -col);
     }
-    public void UnityUpdate()
+
+    private void BlockBreakCall()
     {
-        if (param.generateRate <= 0f) return;
-        timer += Time.deltaTime;
-        if (timer >= checkInterval)
+        breakBlockCount++;
+        if (breakBlockCount >= blockCount)
         {
-            BlockGenerateManager.Inst.GenerateObject(this);
-            timer = 0f;
+            GenerateBlock();
         }
     }
 
@@ -62,29 +58,16 @@ public class GenerateObjectData
 public class BlockGenerateManager : MonoBehaviour
 {
     public static BlockGenerateManager Inst;
-    [SerializeField] Vector2 range_x;
-    [SerializeField] Vector2 range_y;
-    [SerializeField] Vector2 range_z;
-
 
     // -- loc
     private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
-    private List<GenerateBlockData> list_generateBlockDatas = new List<GenerateBlockData>(); // 生成されるブロックのデータリスト
-
     private List<MiningTarget_Object> list_targetObjects = new List<MiningTarget_Object>(); // 生成されたオブジェクトのリスト
-    private List<GenerateObjectData> list_objectGenerateDatas = new List<GenerateObjectData>(); // 生成されるオブジェクトのデータリスト
+    private List<GenerateBlockLayerCont> list_layerConts = new List<GenerateBlockLayerCont>(); // 生成されたレイヤーのリスト
+    public BlockGenerateParam_Layer blockGenerateParam_Layer_max { get; private set; } // 一番上のレイヤー
 
-    public BlockGenerateParam blockGenerateParam_max { get; private set; } // 最大ブロックパラメータ
-    private bool isGenerate = false;
-    private int initialGenerateCount = 15;
 
-    private float bigBlockSizeRate = 2f;
-    private Vector3[] array_position = new Vector3[6]
-    {
-        new Vector3(1, 0, -1),new Vector3(-1, 1, 1),new Vector3(1, 0, 1),
-        new Vector3(-1, 1, -1),new Vector3(-1, 0, 1),new Vector3(1, 1, 1),
-    };
-
+    private int initialCreateLayer = 10;
+    private int currentCreateLayer = 0;
 
 
     void Awake()
@@ -95,42 +78,17 @@ public class BlockGenerateManager : MonoBehaviour
 
 
 
-    void Update()
-    {
-        if (!isGenerate) return;
-
-        for (int i = 0; i < list_generateBlockDatas.Count; i++)
-        {
-            list_generateBlockDatas[i].UnityUpdate();
-        }
-        for (int i = 0; i < list_objectGenerateDatas.Count; i++)
-        {
-            list_objectGenerateDatas[i].UnityUpdate();
-        }
-    }
-
     public void Init()
     {
-        Set_BlockGenerateDatas();
-        Set_ObjectGenerateDatas();
-
-        // pool init
-        var targetBlockData = list_generateBlockDatas[0];
-        for (int i = 0; i < initialGenerateCount; i++)
+        list_layerConts.Clear();
+        for (int i = 0; i < initialCreateLayer; i++)
         {
-            GenerateBlock(targetBlockData, targetBlockData.sizeType);
+            CreateNewLayerCont();
         }
-
-        var targetBlockData2 = list_generateBlockDatas[1];
-        for (int i = 0; i < initialGenerateCount; i++)
-        {
-            GenerateBlock(targetBlockData2, targetBlockData2.sizeType);
-        }
-
     }
     public void Set_GenerateState(bool _state)
     {
-        isGenerate = _state;
+        //isGenerate = _state;
     }
     public void ResetAllBlocks()
     {
@@ -142,104 +100,43 @@ public class BlockGenerateManager : MonoBehaviour
         {
             targetObject.NotActivate();
         }
+        list_layerConts.Clear();
     }
 
+    private void CreateNewLayerCont()
+    {
+        var blockLayerData = GameParamManager.Get_BlockGenerateParam_Layer(currentCreateLayer);
+        var newLayerCont = new GenerateBlockLayerCont();
+        newLayerCont.Init(blockLayerData, currentCreateLayer);
+        list_layerConts.Add(newLayerCont);
+        currentCreateLayer++;
+    }
+
+    public void LayerClear(GenerateBlockLayerCont _layerCont)
+    {
+        list_layerConts.Remove(_layerCont);
+        CreateNewLayerCont();
+    }
 
 
 
     #region == Block Generate ==
-    private void Set_BlockGenerateDatas()
+    public MiningTarget_Cube GenerateBlock(int _blockIndex)
     {
-        list_generateBlockDatas.Clear();
-        foreach (var blockData in GameParamManager.list_blockGenerateParam)
+        var targetBlock = list_targetBlocks.Find(x => x.isActiveAndEnabled == false && x.index == _blockIndex);
+        if (targetBlock == null)
         {
-            if (!blockData.isActive) continue;
-            var generateBlockData = new GenerateBlockData();
-            generateBlockData.Init(blockData);
-            list_generateBlockDatas.Add(generateBlockData);
-            blockGenerateParam_max = blockData;
+            var blockData = SOLoader.BlockData.GetBlockData(_blockIndex);
+            var newBlock = Instantiate(blockData.pf, InGameManager.Inst.ParentPool) as GameObject;
+            targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
+            targetBlock.Init(blockData.hp, blockData.baseValue, _blockIndex);
+            list_targetBlocks.Add(targetBlock);
         }
-    }
-
-    public void GenerateBlock(GenerateBlockData _blockData, BlockSize _blockSizeType)
-    {
-        for (int i = 0; i < _blockData.param.count; i++)
-        {
-            var targetBlock = list_targetBlocks.Find(x => x.isActiveAndEnabled == false && x.index == _blockData.param.blockIndex);
-            if (targetBlock == null)
-            {
-                var newBlock = Instantiate(_blockData.param.so.pf, InGameManager.Inst.ParentPool) as GameObject;
-                targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
-                list_targetBlocks.Add(targetBlock);
-            }
-
-            targetBlock.transform.position = GetRandomPosition();
-            targetBlock.transform.rotation = GetRandomRotation();
-
-            targetBlock.Init(_blockData.param.hp, _blockData.param.baseValue, _blockData.param.blockIndex);
-            var blockSizeRate = _blockSizeType == BlockSize.Big ? bigBlockSizeRate : 1f;
-            targetBlock.Set_BlockSize(_blockSizeType, _blockData.param.size * blockSizeRate);
-        }
-    }
-    private Vector3 GetRandomPosition()
-    {
-        return new Vector3(Random.Range(range_x.x, range_x.y), Random.Range(range_y.x, range_y.y), Random.Range(range_z.x, range_z.y));
-    }
-    private Quaternion GetRandomRotation()
-    {
-        return Quaternion.Euler(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f));
-    }
-
-    public void BreakBigBlock(int _blockIndex, Vector3 _position)
-    {
-        var blockData = GameParamManager.list_blockGenerateParam.Find(x => x.blockIndex == _blockIndex);
-        if (blockData == null) return;
-        for (int i = 0; i < blockData.separateBlockCount; i++)
-        {
-            var targetBlock = list_targetBlocks.Find(x => x.isActiveAndEnabled == false && x.index == blockData.blockIndex);
-            if (targetBlock == null)
-            {
-                var newBlock = Instantiate(blockData.so.pf, InGameManager.Inst.ParentPool) as GameObject;
-                targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
-                list_targetBlocks.Add(targetBlock);
-            }
-
-            targetBlock.transform.position = _position + 0.3f * array_position[i];
-            targetBlock.transform.rotation = Quaternion.identity;
-            targetBlock.Init(blockData.hp, blockData.baseValue, blockData.blockIndex);
-            targetBlock.Set_BlockSize(BlockSize.Normal, blockData.size);
-        }
+        return targetBlock;
     }
     #endregion
 
 
-
-    #region == Object Generate ==
-    private void Set_ObjectGenerateDatas()
-    {
-        list_objectGenerateDatas.Clear();
-        foreach (var objectData in GameParamManager.list_objectGenerateParam)
-        {
-            var generateObjectData = new GenerateObjectData();
-            generateObjectData.Init(objectData);
-            list_objectGenerateDatas.Add(generateObjectData);
-        }
-    }
-    public void GenerateObject(GenerateObjectData _objectData)
-    {
-        var targetObject = list_targetObjects.Find(x => x.isActiveAndEnabled == false
-            && x.index == _objectData.param.so.objectIndex);
-        if (targetObject == null)
-        {
-            var newObject = Instantiate(_objectData.param.so.pf, InGameManager.Inst.ParentPool) as GameObject;
-            targetObject = newObject.GetComponent<MiningTarget_Object>();
-            list_targetObjects.Add(targetObject);
-        }
-        targetObject.transform.position = GetRandomPosition();
-        targetObject.transform.rotation = GetRandomRotation();
-        targetObject.Init(_objectData.param);
-    }
-    #endregion
 
 
 

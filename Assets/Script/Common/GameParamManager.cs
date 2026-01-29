@@ -132,9 +132,73 @@ public class BlockGenerateParam
                 break;
         }
     }
-
-
 }
+
+/// <summary>
+/// ブロックの生成パラメータ
+/// </summary>
+public class BlockGenerateParam_Layer
+{
+    public BlockLayerData so;
+    public int layerMin;
+    public int layerMax;
+    public int layerSize;
+    public float rate_block1;
+    public float rate_block2;
+    public float rate_block3;
+    public float rate_block4;
+    public float rate_block5;
+    public float rate_block6;
+
+
+    public void Init(BlockLayerData _blockLayerData)
+    {
+        so = _blockLayerData;
+        layerMin = _blockLayerData.layerMin;
+        layerMax = _blockLayerData.layerMax;
+        layerSize = _blockLayerData.layerSize;
+        rate_block1 = _blockLayerData.rate_block1;
+        rate_block2 = _blockLayerData.rate_block2;
+        rate_block3 = _blockLayerData.rate_block3;
+        rate_block4 = _blockLayerData.rate_block4;
+        rate_block5 = _blockLayerData.rate_block5;
+        rate_block6 = _blockLayerData.rate_block6;
+    }
+    /// <summary>
+    /// ブロックのインデックスをランダムで選択
+    /// </summary>
+    public int SelectBlockIndex()
+    {
+        var random = UnityEngine.Random.Range(0f, 1f);
+        switch (random)
+        {
+            case var _ when random < rate_block1:
+                return 1;
+            case var _ when random < rate_block1 + rate_block2:
+                return 2;
+            case var _ when random < rate_block1 + rate_block2 + rate_block3:
+                return 3;
+            case var _ when random < rate_block1 + rate_block2 + rate_block3 + rate_block4:
+                return 4;
+            case var _ when random < rate_block1 + rate_block2 + rate_block3 + rate_block4 + rate_block5:
+                return 5;
+            case var _ when random < rate_block1 + rate_block2 + rate_block3 + rate_block4 + rate_block5 + rate_block6:
+                return 6;
+            default:
+                return 0;
+        }
+    }
+
+    public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
+    {
+        switch (_paramType)
+        {
+            case ParamType.Unlock:
+                break;
+        }
+    }
+}
+
 
 /// <summary>
 /// アタックユニットのパラメータ
@@ -208,8 +272,10 @@ public class AttackParam
 public static class GameParamManager
 {
     public readonly static GameBaseParam gameBaseParam = new GameBaseParam();
+
     public readonly static List<ObjectGenerateParam> list_objectGenerateParam = new List<ObjectGenerateParam>();
     public readonly static List<BlockGenerateParam> list_blockGenerateParam = new List<BlockGenerateParam>();
+    public readonly static List<BlockGenerateParam_Layer> list_blockGenerateParam_Layer = new List<BlockGenerateParam_Layer>();
     public readonly static List<AttackParam> list_attackParam = new List<AttackParam>();
 
 
@@ -231,6 +297,15 @@ public static class GameParamManager
             Debug.LogError($"AttackUnitData is not found: {_attackIndex} // ==> 初期ロードで読み込み失敗");
         }
         return targetAttack;
+    }
+    public static BlockGenerateParam_Layer Get_BlockGenerateParam_Layer(int _layerIndex)
+    {
+        var targetLayer = list_blockGenerateParam_Layer.Find(x => x.layerMin <= _layerIndex && x.layerMax > _layerIndex);
+        if (targetLayer == null)
+        {
+            Debug.LogError($"BlockLayerData is not found: {_layerIndex} // ==> 初期ロードで読み込み失敗");
+        }
+        return targetLayer;
     }
     #endregion
 
@@ -257,6 +332,14 @@ public static class GameParamManager
             list_blockGenerateParam.Add(blockParam);
         }
 
+        // block generate param layer init
+        list_blockGenerateParam_Layer.Clear();
+        foreach (var blockLayerData in SOLoader.BlockLayerData.blockLayerDatas)
+        {
+            var blockGenerateParam_Layer = new BlockGenerateParam_Layer();
+            blockGenerateParam_Layer.Init(blockLayerData);
+            list_blockGenerateParam_Layer.Add(blockGenerateParam_Layer);
+        }
         // object generate param init
         list_objectGenerateParam.Clear();
         foreach (var objectData in SOLoader.ObjectUnitData.objectUnitDatas)

@@ -32,6 +32,7 @@ public class DataBase : MonoBehaviour
     [SerializeField] SO_ObjectUnit mSO_ObjectUnitData;
     [SerializeField] SO_ArtifactData mSO_ArtifactData;
     [SerializeField] SO_UnlockData mSO_UnlockData;
+    [SerializeField] SO_BlockLayerData mSO_BlockGenerateParam_LayerData;
 
 
     public async UniTask LoadData()
@@ -42,6 +43,7 @@ public class DataBase : MonoBehaviour
         await DataLoad_ObjectUnitData();
         await DataLoad_ArtifactData();
         await DataLoad_UnlockData();
+        await DataLoad_BlockGenerateParam_LayerData();
 
 #if UNITY_EDITOR
         Debug.Log($"<color=yellow>End Master Data update!</color>");
@@ -53,7 +55,7 @@ public class DataBase : MonoBehaviour
         EditorUtility.SetDirty(mSO_ObjectUnitData);
         EditorUtility.SetDirty(mSO_ArtifactData);
         EditorUtility.SetDirty(mSO_UnlockData);
-
+        EditorUtility.SetDirty(mSO_BlockGenerateParam_LayerData);
 
         // -- save --
         AssetDatabase.SaveAssets();
@@ -103,7 +105,12 @@ public class DataBase : MonoBehaviour
         var convData = CSVSerializer.Deserialize<UnlockData>(loadData);
         mSO_UnlockData.unlockDatas = convData;
     }
-
+    private async UniTask DataLoad_BlockGenerateParam_LayerData()
+    {
+        var loadData = await DataLoad("BlockLayer");
+        var convData = CSVSerializer.Deserialize<BlockLayerData>(loadData);
+        mSO_BlockGenerateParam_LayerData.blockLayerDatas = convData;
+    }
 
     private async UniTask<string> DataLoad(string _sheetName)
     {
