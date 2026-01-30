@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 2861517300625660208}
   - component: {fileID: 1018478582891199486}
   - component: {fileID: 1622577381328085681}
-  - component: {fileID: 1923660652122969737}
-  - component: {fileID: 667920292030731688}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -91,39 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1923660652122969737
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616203758151026818}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &667920292030731688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616203758151026818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 989aec71f72cf480db7c89f7d74be6bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TriggerSender
 --- !u!1 &9024363205940861645
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,9 +98,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7500497014446616773}
-  - component: {fileID: 4368322820385507527}
+  - component: {fileID: 5109239275171971453}
   m_Layer: 0
-  m_Name: pf_attackUnit_1
+  m_Name: pf_attackUnit_1(pointer)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +122,7 @@ Transform:
   - {fileID: 2861517300625660208}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4368322820385507527
+--- !u!114 &5109239275171971453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,8 +131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9024363205940861645}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ccbbc18aeae84565ad9347400bc4426, type: 3}
+  m_Script: {fileID: 11500000, guid: 93431c4abd9784815bbd2ac8ff1052ea, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackCont_PointerArea
+  m_EditorClassIdentifier: Assembly-CSharp::AttackCont_MousePointer
   obj_pointerArea: {fileID: 8616203758151026818}
-  triggerSender: {fileID: 667920292030731688}

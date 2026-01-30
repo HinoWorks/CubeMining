@@ -6,14 +6,15 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     public int index { get; private set; }
     protected virtual int hp { get; set; } = 10;
     protected virtual int hp_max { get; set; } = 10;
+    public int layerIndex { get; protected set; }
     protected float hp_rate => (float)hp / hp_max;
     public int value { get; private set; }
     public bool isAlive => hp > 0;
 
 
     protected float animScale_rate;
-    private Vector3 animScale_1 => animScale_rate * new Vector3(1.1f, 0.9f, 1.1f);
-    private Vector3 animScale_2 => animScale_rate * new Vector3(0.9f, 1.1f, 0.9f);
+    private Vector3 animScale_1 => animScale_rate * new Vector3(1.05f, 0.95f, 1.05f);
+    private Vector3 animScale_2 => animScale_rate * new Vector3(0.95f, 1.05f, 0.95f);
     private float animDuration = 0.05f;
     private Sequence seq_anim;
 
@@ -25,12 +26,13 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     }
 
 
-    public virtual void Init(int _hp, int _value, int _index)
+    public virtual void Init(int _hp, int _value, int _index, int _layerIndex)
     {
         hp_max = _hp;
         index = _index;
         value = _value;
         hp = hp_max;
+        layerIndex = _layerIndex;
 
         col.enabled = true;
         gameObject.SetActive(true);

@@ -171,7 +171,7 @@ namespace OldSystem
                 targetBlock.transform.position = GetRandomPosition();
                 targetBlock.transform.rotation = GetRandomRotation();
 
-                targetBlock.Init(_blockData.param.hp, _blockData.param.baseValue, _blockData.param.blockIndex);
+                targetBlock.Init(_blockData.param.hp, _blockData.param.baseValue, _blockData.param.blockIndex, 0);
                 var blockSizeRate = _blockSizeType == BlockSize.Big ? bigBlockSizeRate : 1f;
                 targetBlock.Set_BlockSize(_blockSizeType, _blockData.param.size * blockSizeRate);
             }
@@ -201,7 +201,7 @@ namespace OldSystem
 
                 targetBlock.transform.position = _position + 0.3f * array_position[i];
                 targetBlock.transform.rotation = Quaternion.identity;
-                targetBlock.Init(blockData.hp, blockData.baseValue, blockData.blockIndex);
+                targetBlock.Init(blockData.hp, blockData.baseValue, blockData.blockIndex, 0);
                 targetBlock.Set_BlockSize(BlockSize.Normal, blockData.size);
             }
         }

@@ -14,7 +14,7 @@ public class MiningTarget_Object : MiningTargetBase
         //var hp = (int)(BlockGenerateManager.Inst.blockGenerateParam_max.hp * objectGenerateParam.so.hpRate);
         var hp = 10;
 
-        base.Init(hp, 0, objectGenerateParam.so.objectIndex);
+        base.Init(hp, 0, objectGenerateParam.so.objectIndex, 0);
         base.animScale_rate = this.transform.localScale.x;
     }
 }

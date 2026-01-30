@@ -7,9 +7,9 @@ public class MiningTarget_Cube : MiningTargetBase
 
     private Action breakCallback;
 
-    public override void Init(int _hp, int _value, int _index)
+    public override void Init(int _hp, int _value, int _index, int _layerIndex)
     {
-        base.Init(_hp, _value, _index);
+        base.Init(_hp, _value, _index, _layerIndex);
         transform.localScale = Vector3.one;
         base.animScale_rate = 1f;
         //hitFlash.Init_Crack();
