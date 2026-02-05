@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using System.Xml.Serialization;
 
 
 /// <summary>
@@ -188,17 +189,90 @@ public class BlockGenerateParam_Layer
                 return 0;
         }
     }
+}
+
+
+public enum BlockType
+{
+    None, Gold, Iron, Emerald,
+    Rate_4, Rate_5, Rate_6,
+}
+
+
+
+/// <summary>
+/// ブロックの変化率パラメータ
+/// </summary>
+public class BlockChangeRateParam
+{
+    public BlockChangeRateData so;
+    public int baseRate;
+    public int rate_gold;
+    public int rate_iron;
+    public int rate_emerald;
+    public int rate_4;
+    public int rate_5;
+    public int rate_6;
+
+    public void Init(BlockChangeRateData _blockChangeRateData)
+    {
+        so = _blockChangeRateData;
+        baseRate = _blockChangeRateData.baseRate;
+        rate_gold = _blockChangeRateData.rate_gold;
+        rate_iron = _blockChangeRateData.rate_iron;
+        rate_emerald = _blockChangeRateData.rate_emerald;
+        rate_4 = _blockChangeRateData.rate_4;
+        rate_5 = _blockChangeRateData.rate_5;
+        rate_6 = _blockChangeRateData.rate_6;
+    }
+    public BlockType SelectBlockType()
+    {
+        var total = baseRate + rate_gold + rate_iron + rate_emerald + rate_4 + rate_5 + rate_6;
+        var random = UnityEngine.Random.Range(0, total);
+        switch (random)
+        {
+            case var _ when random < rate_gold:
+                return BlockType.Gold;
+            case var _ when random < rate_gold + rate_iron:
+                return BlockType.Iron;
+            case var _ when random < rate_gold + rate_iron + rate_emerald:
+                return BlockType.Emerald;
+            case var _ when random < rate_gold + rate_iron + rate_emerald + rate_4:
+                return BlockType.Rate_4;
+            case var _ when random < rate_gold + rate_iron + rate_emerald + rate_4 + rate_5:
+                return BlockType.Rate_5;
+            case var _ when random < rate_gold + rate_iron + rate_emerald + rate_4 + rate_5 + rate_6:
+                return BlockType.Rate_6;
+            default:
+                return BlockType.None;
+        }
+    }
 
     public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
         {
-            case ParamType.Unlock:
+            case ParamType.Rate_Gold:
+                rate_gold += (int)_setParam;
+                break;
+            case ParamType.Rate_Iron:
+                rate_iron += (int)_setParam;
+                break;
+            case ParamType.Rate_Emerald:
+                rate_emerald += (int)_setParam;
+                break;
+            case ParamType.Rate_4:
+                rate_4 += (int)_setParam;
+                break;
+            case ParamType.Rate_5:
+                rate_5 += (int)_setParam;
+                break;
+            case ParamType.Rate_6:
+                rate_6 += (int)_setParam;
                 break;
         }
     }
 }
-
 
 /// <summary>
 /// アタックユニットのパラメータ
@@ -276,7 +350,9 @@ public static class GameParamManager
     public readonly static List<ObjectGenerateParam> list_objectGenerateParam = new List<ObjectGenerateParam>();
     public readonly static List<BlockGenerateParam> list_blockGenerateParam = new List<BlockGenerateParam>();
     public readonly static List<BlockGenerateParam_Layer> list_blockGenerateParam_Layer = new List<BlockGenerateParam_Layer>();
+    public readonly static List<BlockChangeRateParam> list_blockChangeRateParam = new List<BlockChangeRateParam>();
     public readonly static List<AttackParam> list_attackParam = new List<AttackParam>();
+
 
 
     #region get param reference
@@ -288,6 +364,15 @@ public static class GameParamManager
             Debug.LogError($"BlockData is not found: {_blockIndex} // ==> 初期ロードで読み込み失敗");
         }
         return targetBlock;
+    }
+    public static BlockChangeRateParam Get_BlockChangeRateParam(int _blockIndex)
+    {
+        var targetBlockChangeRate = list_blockChangeRateParam.Find(x => x.so.blockIndex == _blockIndex);
+        if (targetBlockChangeRate == null)
+        {
+            Debug.LogError($"BlockChangeRateData is not found: {_blockIndex} // ==> 初期ロードで読み込み失敗");
+        }
+        return targetBlockChangeRate;
     }
     public static AttackParam Get_AttackParam(int _attackIndex)
     {
@@ -340,6 +425,15 @@ public static class GameParamManager
             blockGenerateParam_Layer.Init(blockLayerData);
             list_blockGenerateParam_Layer.Add(blockGenerateParam_Layer);
         }
+        // block change rate param init
+        list_blockChangeRateParam.Clear();
+        foreach (var blockChangeRateData in SOLoader.BlockData.blockChangeRateDatas)
+        {
+            var blockChangeRateParam = new BlockChangeRateParam();
+            blockChangeRateParam.Init(blockChangeRateData);
+            list_blockChangeRateParam.Add(blockChangeRateParam);
+        }
+
         // object generate param init
         list_objectGenerateParam.Clear();
         foreach (var objectData in SOLoader.ObjectUnitData.objectUnitDatas)
@@ -394,6 +488,9 @@ public static class GameParamManager
             case ParamCategory.Block:
                 Set_BlockParam(_targetIndex, _paramType, _setParam);
                 break;
+            case ParamCategory.BlockChangeRate:
+                Set_BlockChangeRateParam(_targetIndex, _paramType, _setParam);
+                break;
             case ParamCategory.OtherObject:
                 Set_BlockParam(_targetIndex, _paramType, _setParam);
                 break;
@@ -416,6 +513,16 @@ public static class GameParamManager
             return;
         }
         targetBlock.Set_SkillTreeParam(_paramType, _setParam);
+    }
+    private static void Set_BlockChangeRateParam(int _blockIndex, ParamType _paramType, float _setParam)
+    {
+        var targetBlockChangeRate = list_blockChangeRateParam.Find(x => x.so.blockIndex == _blockIndex);
+        if (targetBlockChangeRate == null)
+        {
+            Debug.LogError($"BlockData is not found: {_blockIndex} // ==> 初期ロードで読み込み失敗");
+            return;
+        }
+        targetBlockChangeRate.Set_SkillTreeParam(_paramType, _setParam);
     }
     private static void Set_AttackParam(int _attackIndex, ParamType _paramType, float _setParam)
     {

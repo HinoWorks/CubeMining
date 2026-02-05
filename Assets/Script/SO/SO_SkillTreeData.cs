@@ -7,6 +7,7 @@ public enum ParamCategory
 {
     GameSystem,
     Block,
+    BlockChangeRate,
     OtherObject,
     Attack
 }
@@ -19,6 +20,13 @@ public enum ParamType
     CoinBonusRate,
 
 
+    // ==== block change rate param ====
+    Rate_Gold,
+    Rate_Iron,
+    Rate_Emerald,
+    Rate_4,
+    Rate_5,
+    Rate_6,
 
     // ==== object generate param ====
     Rate_Generate,

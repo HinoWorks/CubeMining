@@ -2,8 +2,10 @@ using UnityEngine;
 using System;
 public class MiningTarget_Cube : MiningTargetBase
 {
+    [SerializeField] BlockTypeSetter[] blockTypeSetters;
     private Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
     private BlockSize blockSize;
+    private BlockType blockType;
 
     private Action breakCallback;
 
@@ -17,6 +19,14 @@ public class MiningTarget_Cube : MiningTargetBase
     public void Set_BreakCallback(Action _callback)
     {
         breakCallback = _callback;
+    }
+    public void Set_BlockType(BlockType _blockType)
+    {
+        blockType = _blockType;
+        foreach (var blockTypeSetter in blockTypeSetters)
+        {
+            blockTypeSetter.Set_BlockTypeObject(blockType);
+        }
     }
     public void Set_BlockSize(BlockSize _blockSize, float _size)
     {

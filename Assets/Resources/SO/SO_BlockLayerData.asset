@@ -15,7 +15,7 @@ MonoBehaviour:
   blockLayerDatas:
   - layerParamIndex: 1
     layerMin: 0
-    layerMax: 5
+    layerMax: 3
     layerSize: 3
     rate_block1: 1
     rate_block2: 0
@@ -24,26 +24,36 @@ MonoBehaviour:
     rate_block5: 0
     rate_block6: 0
   - layerParamIndex: 2
-    layerMin: 5
-    layerMax: 10
+    layerMin: 3
+    layerMax: 6
     layerSize: 4
-    rate_block1: 0.9
-    rate_block2: 0.1
-    rate_block3: 0.05
+    rate_block1: 0.75
+    rate_block2: 0.15
+    rate_block3: 0.1
     rate_block4: 0
     rate_block5: 0
     rate_block6: 0
   - layerParamIndex: 3
+    layerMin: 6
+    layerMax: 10
+    layerSize: 4
+    rate_block1: 0.5
+    rate_block2: 0.35
+    rate_block3: 0.15
+    rate_block4: 0
+    rate_block5: 0
+    rate_block6: 0
+  - layerParamIndex: 4
     layerMin: 10
     layerMax: 15
-    layerSize: 4
+    layerSize: 5
     rate_block1: 0.9
     rate_block2: 0.1
     rate_block3: 0.05
     rate_block4: 0
     rate_block5: 0
     rate_block6: 0
-  - layerParamIndex: 4
+  - layerParamIndex: 5
     layerMin: 15
     layerMax: 20
     layerSize: 5
@@ -53,17 +63,17 @@ MonoBehaviour:
     rate_block4: 0
     rate_block5: 0
     rate_block6: 0
-  - layerParamIndex: 5
+  - layerParamIndex: 6
     layerMin: 20
     layerMax: 25
-    layerSize: 5
+    layerSize: 6
     rate_block1: 0.9
     rate_block2: 0.1
     rate_block3: 0.05
     rate_block4: 0
     rate_block5: 0
     rate_block6: 0
-  - layerParamIndex: 6
+  - layerParamIndex: 7
     layerMin: 25
     layerMax: 30
     layerSize: 6
@@ -73,17 +83,17 @@ MonoBehaviour:
     rate_block4: 0
     rate_block5: 0
     rate_block6: 0
-  - layerParamIndex: 7
+  - layerParamIndex: 8
     layerMin: 30
     layerMax: 35
-    layerSize: 6
+    layerSize: 7
     rate_block1: 0.9
     rate_block2: 0.1
     rate_block3: 0.05
     rate_block4: 0
     rate_block5: 0
     rate_block6: 0
-  - layerParamIndex: 8
+  - layerParamIndex: 9
     layerMin: 35
     layerMax: 40
     layerSize: 7
@@ -93,18 +103,8 @@ MonoBehaviour:
     rate_block4: 0
     rate_block5: 0
     rate_block6: 0
-  - layerParamIndex: 9
-    layerMin: 40
-    layerMax: 45
-    layerSize: 7
-    rate_block1: 0.9
-    rate_block2: 0.1
-    rate_block3: 0.05
-    rate_block4: 0
-    rate_block5: 0
-    rate_block6: 0
   - layerParamIndex: 10
-    layerMin: 45
+    layerMin: 40
     layerMax: 50
     layerSize: 8
     rate_block1: 0.9

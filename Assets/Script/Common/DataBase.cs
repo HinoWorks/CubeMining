@@ -83,6 +83,10 @@ public class DataBase : MonoBehaviour
         var loadData = await DataLoad("BlockUnit");
         var convData = CSVSerializer.Deserialize<BlockData>(loadData);
         mSO_BlockData.blockDatas = convData;
+
+        var loadData2 = await DataLoad("BlockChangeRate");
+        var convData2 = CSVSerializer.Deserialize<BlockChangeRateData>(loadData2);
+        mSO_BlockData.blockChangeRateDatas = convData2;
     }
 
     private async UniTask DataLoad_ObjectUnitData()

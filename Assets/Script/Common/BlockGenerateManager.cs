@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UniRx;
+using System.IO.Hashing;
 
 
 public enum BlockSize
@@ -29,9 +30,10 @@ public class GenerateBlockLayerCont
 
     private void GenerateBlock()
     {
-        var blockData = SOLoader.BlockData.GetBlockData(param.SelectBlockIndex());
         for (int i = 0; i < blockCount; i++)
         {
+            //現在の確率でブロックを抽選
+            var blockData = SOLoader.BlockData.GetBlockData(param.SelectBlockIndex());
             var newBlock = BlockGenerateManager.Inst.GenerateBlock(blockData, layerIndex);
             newBlock.transform.localPosition = GetBlockPosition(i);
             newBlock.Set_BreakCallback(BlockBreakCall);
@@ -124,7 +126,7 @@ public class BlockGenerateManager : MonoBehaviour
     {
         list_layerConts.Remove(_layerCont);
 
-        var topLayerIndex = 99999;
+        var topLayerIndex = 9999999;
         foreach (var layerCont in list_layerConts)
         {
             if (layerCont.layerIndex < topLayerIndex)
@@ -151,6 +153,10 @@ public class BlockGenerateManager : MonoBehaviour
             list_targetBlocks.Add(targetBlock);
         }
         targetBlock.Init(_blockData.hp, _blockData.baseValue, _blockData.blockIndex, _layerIndex);
+
+        var blockTypeData = GameParamManager.Get_BlockChangeRateParam(_blockData.blockIndex);
+        var blockType = blockTypeData.SelectBlockType();
+        targetBlock.Set_BlockType(blockType);
         return targetBlock;
     }
     #endregion

@@ -24,10 +24,27 @@ public class BlockData
 }
 
 
+
+[System.Serializable]
+public class BlockChangeRateData
+{
+    public int blockIndex;
+    public int baseRate;
+    public int rate_gold;
+    public int rate_iron;
+    public int rate_emerald;
+    public int rate_4;
+    public int rate_5;
+    public int rate_6;
+}
+
+
 [CreateAssetMenu(menuName = "SO/SO_BlockData")]
 public class SO_BlockData : ScriptableObject
 {
     public BlockData[] blockDatas;
+    public BlockChangeRateData[] blockChangeRateDatas;
+
 
 
     public BlockData GetBlockData(int _blockIndex)
@@ -40,4 +57,7 @@ public class SO_BlockData : ScriptableObject
         }
         return data;
     }
+
+
+
 }
