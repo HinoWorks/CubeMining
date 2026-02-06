@@ -13,8 +13,11 @@ public class BulletCont_ThunderStrike : BulletBase
         damage = _damage;
 
         gameObject.SetActive(true);
+        if (col == null)
+        {
+            ConnectComponents();
+        }
         base.SetLifetime();
-
 
         var effUnit = EffectManager.Inst.Get_Effect(EffectType.ThunderStrike);
         effUnit.transform.position = transform.position + offsetPosition;

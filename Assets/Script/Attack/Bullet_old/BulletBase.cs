@@ -27,7 +27,7 @@ public class BulletBase : MonoBehaviour
     protected BulletType bulletType;
 
 
-    private void ConnectComponents()
+    protected void ConnectComponents()
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
@@ -61,7 +61,10 @@ public class BulletBase : MonoBehaviour
 
     public virtual void OnDestroy()
     {
-        col.enabled = false;
+        if (col != null)
+        {
+            col.enabled = false;
+        }
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         Destroy(this.gameObject);
@@ -80,6 +83,7 @@ public class BulletBase : MonoBehaviour
                 col.enabled = false;
                 rb.linearVelocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
+
                 this.gameObject.SetActive(false);
             }).AddTo(this);
     }

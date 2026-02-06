@@ -67,7 +67,7 @@ public class BlockGenerateManager : MonoBehaviour
     private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
     private List<MiningTarget_Object> list_targetObjects = new List<MiningTarget_Object>(); // 生成されたオブジェクトのリスト
     private List<GenerateBlockLayerCont> list_layerConts = new List<GenerateBlockLayerCont>(); // 生成されたレイヤーのリスト
-    private GenerateBlockLayerCont currentLayerCont;
+    private GenerateBlockLayerCont currentLayerCont; //最上層のレイヤー
 
 
     private int initialCreateLayer = 10;
@@ -116,7 +116,7 @@ public class BlockGenerateManager : MonoBehaviour
         list_layerConts.Add(newLayerCont);
         currentCreateLayer++;
 
-        if (currentLayerCont == null || currentLayerCont.layerIndex < newLayerCont.layerIndex)
+        if (currentLayerCont == null || currentLayerCont.layerIndex > newLayerCont.layerIndex)
         {
             currentLayerCont = newLayerCont;
         }
@@ -126,7 +126,8 @@ public class BlockGenerateManager : MonoBehaviour
     {
         list_layerConts.Remove(_layerCont);
 
-        var topLayerIndex = 9999999;
+        // 最上層 = 掘り進めている一番上 = layerIndex が最小のレイヤー
+        var topLayerIndex = 99999;
         foreach (var layerCont in list_layerConts)
         {
             if (layerCont.layerIndex < topLayerIndex)
@@ -138,6 +139,7 @@ public class BlockGenerateManager : MonoBehaviour
         CameraManager.Inst.SetCameraPosition(cameraTargetLayer);
         AroundLayerManager.Inst.CreateNewLayerCont(currentCreateLayer);
         CreateNewLayerCont();
+        Debug.Log($"currentLayerCont : {currentLayerCont.layerIndex}");
     }
 
 
@@ -182,7 +184,7 @@ public class BlockGenerateManager : MonoBehaviour
     public Vector3 Get_RandomTargetArea()
     {
         var areaSize = currentLayerCont.param.so.layerSize;
-        return new Vector3(Random.Range(0, areaSize), 0, Random.Range(0, areaSize));
+        return new Vector3(Random.Range(0, areaSize - 1), 0, Random.Range(0, -(areaSize - 1)));
     }
 
     /// <summary>
@@ -191,7 +193,12 @@ public class BlockGenerateManager : MonoBehaviour
     public MiningTarget_Cube Get_TopTarget()
     {
         var topAreaBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled && x.layerIndex == currentLayerCont.layerIndex);
+        if (topAreaBlocks.Count == 0)
+        {
+            topAreaBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled && x.layerIndex == currentLayerCont.layerIndex + 1);
+        }
         if (topAreaBlocks.Count == 0) return null;
+
         return topAreaBlocks[Random.Range(0, topAreaBlocks.Count)];
     }
 

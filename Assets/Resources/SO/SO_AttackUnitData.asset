@@ -27,88 +27,49 @@ MonoBehaviour:
     count: 1
     size: 0.5
   - attackIndex: 2
-    unitName: Bullet Shot
+    unitName: Small pickaxe
     unitDescription: 
     icon: {fileID: 0}
-    pf: {fileID: 601605801108607667, guid: a04d40441070042f8bd468435cd2208b, type: 3}
+    pf: {fileID: 601605801108607667, guid: 22601e14ec2664fe7adeacaac4628aae, type: 3}
     attackType: 1
     damage: 1
-    attackInterval: 0.5
+    attackInterval: 2
     speed: 5
     aliveTime: 5
     ct: 1
     count: 1
-    size: 1
+    size: 0.35
   - attackIndex: 3
-    unitName: Piar
+    unitName: Thunder(Top)
     unitDescription: 
     icon: {fileID: 0}
-    pf: {fileID: 601605801108607667, guid: fce8c512f8d4d47f99474347f22678f8, type: 3}
+    pf: {fileID: 601605801108607667, guid: 32963baef2720410fa437525ec84df92, type: 3}
     attackType: 1
-    damage: 1
-    attackInterval: -1
-    speed: 6
-    aliveTime: 999
-    ct: -1
-    count: 1
-    size: 1
-  - attackIndex: 4
-    unitName: Thunder
-    unitDescription: 
-    icon: {fileID: 0}
-    pf: {fileID: 601605801108607667, guid: cf76259b3ea4e43bda25b30158e2f8f6, type: 3}
-    attackType: 1
-    damage: 10
-    attackInterval: 1
-    speed: 0
-    aliveTime: 1
-    ct: 1
-    count: 1
-    size: 1
-  - attackIndex: 5
-    unitName: Turret
-    unitDescription: 
-    icon: {fileID: 0}
-    pf: {fileID: 601605801108607667, guid: 1ec363dbc86154beabdaf64ca4740ef0, type: 3}
-    attackType: 2
-    damage: 2
+    damage: 5
     attackInterval: 3
-    speed: 5
-    aliveTime: 3
+    speed: 10
+    aliveTime: 2
     ct: 3
     count: 1
     size: 1
-  - attackIndex: 6
-    unitName: Laser
+  - attackIndex: 4
+    unitName: Thunder(Random)
     unitDescription: 
     icon: {fileID: 0}
-    pf: {fileID: 601605801108607667, guid: 3b9107d39044a4df2ac6d15d983daed1, type: 3}
+    pf: {fileID: 0}
     attackType: 1
-    damage: 2
-    attackInterval: 2
-    speed: -1
+    damage: 5
+    attackInterval: 3
+    speed: 10
     aliveTime: 2
-    ct: -1
-    count: 2
+    ct: 3
+    count: 1
     size: 1
-  - attackIndex: 7
-    unitName: Laser
-    unitDescription: 
-    icon: {fileID: 0}
-    pf: {fileID: 601605801108607667, guid: 91b76da92bb7247eaa25ba96c2de1278, type: 3}
-    attackType: 1
-    damage: 2
-    attackInterval: 2
-    speed: -1
-    aliveTime: 2
-    ct: -1
-    count: 2
-    size: 1
-  - attackIndex: 8
+  - attackIndex: 5
     unitName: AroundStar
     unitDescription: 
     icon: {fileID: 0}
-    pf: {fileID: 9024363205940861645, guid: 00873199f4d04477692648e487a17b22, type: 3}
+    pf: {fileID: 9024363205940861645, guid: 5f1b6953892d747e2b7a42c6bb215a23, type: 3}
     attackType: 2
     damage: 1
     attackInterval: -1
@@ -117,3 +78,42 @@ MonoBehaviour:
     ct: -1
     count: 2
     size: 1
+  - attackIndex: 6
+    unitName: bom
+    unitDescription: 
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    attackType: 0
+    damage: 0
+    attackInterval: 0
+    speed: 0
+    aliveTime: 0
+    ct: 0
+    count: 0
+    size: 0
+  - attackIndex: 7
+    unitName: 
+    unitDescription: 
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    attackType: 0
+    damage: 0
+    attackInterval: 0
+    speed: 0
+    aliveTime: 0
+    ct: 0
+    count: 0
+    size: 0
+  - attackIndex: 8
+    unitName: 
+    unitDescription: 
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    attackType: 0
+    damage: 0
+    attackInterval: 0
+    speed: 0
+    aliveTime: 0
+    ct: 0
+    count: 0
+    size: 0
