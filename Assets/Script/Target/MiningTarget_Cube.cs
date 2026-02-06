@@ -45,6 +45,9 @@ public class MiningTarget_Cube : MiningTargetBase
     public override bool Damage(int damage)
     {
         //hitFlash.Flash();
+        var effect = EffectManager.Inst.Get_Effect(EffectType.BlockDamage);
+        effect.transform.position = transform.position;
+        effect.SetActive(true);
         var isBreak = base.Damage(damage);
         //hitFlash.Set_Crack(hp_rate);
         return isBreak;

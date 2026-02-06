@@ -412,9 +412,11 @@ public static class GameParamManager
     public static ObjectGenerateParam SelectOtherObject()
     {
         var random = UnityEngine.Random.Range(0, otherObjectRate);
+        var currentRate = 0;
         foreach (var objectParam in list_objectGenerateParam)
         {
-            if (random < objectParam.generateRate)
+            currentRate += (int)objectParam.generateRate;
+            if (random < currentRate)
             {
                 return objectParam;
             }

@@ -78,6 +78,13 @@ public static class GameEvent
         {
             coinMod.OnNext(mod);
         }
+
+        private static readonly Subject<int> depthCount = new();
+        public static IObservable<int> DepthCount => depthCount.AsObservable();
+        public static void PublishDepthCount(int depth)
+        {
+            depthCount.OnNext(depth);
+        }
     }
 
 

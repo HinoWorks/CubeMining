@@ -200,9 +200,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa6ad634912b432a8991399d62c1dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AroundLayerCont
+  layerIndex: 0
   parent_units: {fileID: 2548091874659322390}
   pf_unit: {fileID: 5236384440042456526, guid: 196d06bd637534bdc8520a202a8d98f0, type: 3}
   edgePosition: {x: -2, y: 0, z: 2}
+  sideUnit_left: {fileID: 1507827851555869173}
+  sideUnit_right: {fileID: 1421711082714276923}
 --- !u!1001 &648580676749547531
 PrefabInstance:
   m_ObjectHideFlags: 0

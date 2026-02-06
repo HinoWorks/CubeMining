@@ -6,7 +6,8 @@ using System.Collections.Generic;
 public enum EffectType
 {
     None,
-    BlockBreak,
+    BlockDamage = 1,
+    BlockBreak = 2,
 
     ThunderStrike = 100,
 }
@@ -15,14 +16,14 @@ public class EffectManager : MonoBehaviour
 {
     public static EffectManager Inst;
 
+    [SerializeField] GameObject pf_eff_blockDamage;
     [SerializeField] GameObject pf_eff_blockBreak;
     [SerializeField] GameObject pf_eff_thunderStrike;
+    private List<GameObject> pool_eff_blockDamage = new List<GameObject>();
     private List<GameObject> pool_eff_blockBreak = new List<GameObject>();
     private List<GameObject> pool_eff_thunderStrike = new List<GameObject>();
 
-
     private int createCountInit = 20;
-
 
     void Awake()
     {
@@ -37,6 +38,12 @@ public class EffectManager : MonoBehaviour
             var newUnit = Instantiate(pf_eff_blockBreak, InGameManager.Inst.ParentPool) as GameObject;
             newUnit.SetActive(false);
             pool_eff_blockBreak.Add(newUnit);
+        }
+        for (int i = 0; i < createCountInit; i++)
+        {
+            var newUnit = Instantiate(pf_eff_blockDamage, InGameManager.Inst.ParentPool) as GameObject;
+            newUnit.SetActive(false);
+            pool_eff_blockDamage.Add(newUnit);
         }
         for (int i = 0; i < createCountInit; i++)
         {
@@ -63,6 +70,8 @@ public class EffectManager : MonoBehaviour
     {
         switch (_effectType)
         {
+            case EffectType.BlockDamage:
+                return (pf_eff_blockDamage, pool_eff_blockDamage);
             case EffectType.BlockBreak:
                 return (pf_eff_blockBreak, pool_eff_blockBreak);
             case EffectType.ThunderStrike:

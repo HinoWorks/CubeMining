@@ -102,6 +102,7 @@ public class BlockGenerateManager : MonoBehaviour
         {
             CreateNewLayerCont();
         }
+        GameEvent.UI.PublishDepthCount(0);
     }
     public void Set_GenerateState(bool _state)
     {
@@ -151,6 +152,8 @@ public class BlockGenerateManager : MonoBehaviour
         CameraManager.Inst.SetCameraPosition(cameraTargetLayer);
         AroundLayerManager.Inst.CreateNewLayerCont(currentCreateLayer);
         CreateNewLayerCont();
+
+        GameEvent.UI.PublishDepthCount(currentLayerCont.layerIndex);
         Debug.Log($"currentLayerCont : {currentLayerCont.layerIndex}");
     }
 

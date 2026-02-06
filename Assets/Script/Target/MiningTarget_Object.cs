@@ -4,7 +4,7 @@ public class MiningTarget_Object : MiningTargetBase
 {
     protected Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
     protected ObjectGenerateParam objectGenerateParam;
-    private Action breakCallback;
+    protected Action breakCallback;
 
 
     public void Set_BreakCallback(Action _callback)
@@ -29,5 +29,11 @@ public class MiningTarget_Object : MiningTargetBase
 
         base.Init(hp, 0, objectGenerateParam.so.objectIndex, 0);
         base.animScale_rate = this.transform.localScale.x;
+    }
+
+    public override void BreakFromDamage()
+    {
+        base.BreakFromDamage();
+        breakCallback?.Invoke();
     }
 }

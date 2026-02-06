@@ -10,6 +10,7 @@ public class UIManager_InGame : MonoBehaviour
     public static UIManager_InGame Inst;
     [SerializeField] TextMeshProUGUI tmp_timer;
     [SerializeField] TextMeshProUGUI tmp_coin;
+    [SerializeField] TextMeshProUGUI tmp_depthCount;
     public UI_ResultManager ui_ResultManager;
     public UI_EventManager ui_EventManager;
     private float currentCoinFloat;
@@ -22,6 +23,7 @@ public class UIManager_InGame : MonoBehaviour
 
         GameEvent.UI.TimeLimit.Subscribe(Set_TimeLimit).AddTo(this);
         GameEvent.UI.CoinMod.Subscribe(Set_CoinMod).AddTo(this);
+        GameEvent.UI.DepthCount.Subscribe(Set_DepthCount).AddTo(this);
         GameEvent.GameState.SetGameState.Subscribe(ChangeGateState).AddTo(this);
     }
 
@@ -44,6 +46,11 @@ public class UIManager_InGame : MonoBehaviour
     private void Set_TimeLimit(float time)
     {
         tmp_timer.text = time.ToString("F2");
+    }
+
+    private void Set_DepthCount(int depth)
+    {
+        tmp_depthCount.text = depth.ToString();
     }
 
     private void Set_CoinMod(BigInteger mod)
