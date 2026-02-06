@@ -32,6 +32,7 @@ public class ArtifactData
 {
     public int artifactIndex;
     public int level = 1;
+    public int equipSlotIndex = -1;
 }
 
 

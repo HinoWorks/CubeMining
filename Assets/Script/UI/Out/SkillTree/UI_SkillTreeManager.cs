@@ -42,6 +42,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     private Vector2 lastMousePos;
     private float duration_zoom = 0.05f;
 
+    private bool onceInitFin = false;
 
 
 
@@ -100,27 +101,35 @@ public class UI_SkillTreeMaanger : MonoBehaviour
 
 
 
-    void Awake()
+
+    void OnceInit()
     {
         foreach (var skillTreeUnit in skillTreeUnits)
         {
             skillTreeUnit.AwakeCall(OnMouseOver, OnClick_Enhance, UpdateNodeState);
         }
         ui_skillTreeDetail.gameObject.SetActive(false);
+        onceInitFin = true;
     }
 
 
     public void Init(OutGame_MenuType _outGameMenuType)
     {
         var isActive = _outGameMenuType == OutGame_MenuType.SkillTree;
-        this.gameObject.SetActive(isActive);
-        ui_skillTreeDetail.gameObject.SetActive(false);
-        if (!isActive) return;
-
-        foreach (var skillTreeUnit in skillTreeUnits)
+        if (isActive)
         {
-            skillTreeUnit.Init();
+            if (!onceInitFin)
+            {
+                OnceInit();
+            }
+            ui_skillTreeDetail.gameObject.SetActive(false);
+            foreach (var skillTreeUnit in skillTreeUnits)
+            {
+                skillTreeUnit.Init();
+            }
         }
+        this.gameObject.SetActive(isActive);
+
 
         // 実行時に接続線を更新
         // UpdateAllConnections();
