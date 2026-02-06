@@ -25,7 +25,9 @@ public class UIManager_OutGame : MonoBehaviour
     [Header(" -- Main --")]
     [SerializeField] GameObject main;
     [SerializeField] UI_SkillTreeMaanger ui_skillTreeMaanger;
+    [SerializeField] UI_ArtifactManager ui_artifactManager;
     public UI_SkillTreeMaanger UI_SkillTreeManager => ui_skillTreeMaanger;
+    public UI_ArtifactManager UI_ArtifactManager => ui_artifactManager;
 
 
 
@@ -36,6 +38,8 @@ public class UIManager_OutGame : MonoBehaviour
         OutGame_MenuType.Artifact,
     };
     private OutGame_MenuType currentMenuType;
+
+
 
 
     void Awake()
@@ -98,7 +102,7 @@ public class UIManager_OutGame : MonoBehaviour
         currentMenuType = _outGameMenuType;
 
         ui_skillTreeMaanger.Init(_outGameMenuType);
-
+        ui_artifactManager.Init(_outGameMenuType);
 
         foreach (var headerButton in headerButtons)
         {
