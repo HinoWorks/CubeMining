@@ -136,7 +136,7 @@ public class BlockGenerateParam
 }
 
 /// <summary>
-/// ブロックの生成パラメータ
+/// ブロックの生成パラメータ == レイヤー毎にブロックの抽選率を設定
 /// </summary>
 public class BlockGenerateParam_Layer
 {
@@ -197,11 +197,8 @@ public enum BlockType
     None, Gold, Iron, Emerald,
     Rate_4, Rate_5, Rate_6,
 }
-
-
-
 /// <summary>
-/// ブロックの変化率パラメータ
+/// ブロックの変化率パラメータ == 土、岩などのブロックタイプ毎に鉱石の抽選率を設定
 /// </summary>
 public class BlockChangeRateParam
 {
@@ -353,6 +350,9 @@ public static class GameParamManager
     public readonly static List<BlockChangeRateParam> list_blockChangeRateParam = new List<BlockChangeRateParam>();
     public readonly static List<AttackParam> list_attackParam = new List<AttackParam>();
 
+    public static int otherObjectRate { get; private set; } = 0;
+    public static int otherObjectBaseRate { get; private set; } = 100;
+
 
 
     #region get param reference
@@ -391,6 +391,35 @@ public static class GameParamManager
             Debug.LogError($"BlockLayerData is not found: {_layerIndex} // ==> 初期ロードで読み込み失敗");
         }
         return targetLayer;
+    }
+    #endregion
+
+    #region -- other object generate param --
+    public static void Set_OtherObjectRate()
+    {
+        otherObjectRate = 0;
+        foreach (var objectParam in list_objectGenerateParam)
+        {
+            otherObjectRate += (int)objectParam.generateRate;
+        }
+    }
+    public static bool IsOtherObjectGenerate()
+    {
+        var random = UnityEngine.Random.Range(0, otherObjectBaseRate + otherObjectRate);
+        //Debug.Log($"otherObjectRate: {otherObjectRate} / {otherObjectBaseRate + otherObjectRate} / {random} => {random < otherObjectRate}");
+        return random < otherObjectRate;
+    }
+    public static ObjectGenerateParam SelectOtherObject()
+    {
+        var random = UnityEngine.Random.Range(0, otherObjectRate);
+        foreach (var objectParam in list_objectGenerateParam)
+        {
+            if (random < objectParam.generateRate)
+            {
+                return objectParam;
+            }
+        }
+        return null;
     }
     #endregion
 
@@ -442,6 +471,7 @@ public static class GameParamManager
             objectParam.Init(objectData);
             list_objectGenerateParam.Add(objectParam);
         }
+        Set_OtherObjectRate();
 
         // attack param init
         list_attackParam.Clear();
@@ -493,6 +523,7 @@ public static class GameParamManager
                 break;
             case ParamCategory.OtherObject:
                 Set_BlockParam(_targetIndex, _paramType, _setParam);
+                Set_OtherObjectRate();
                 break;
             case ParamCategory.Attack:
                 Set_AttackParam(_targetIndex, _paramType, _setParam);

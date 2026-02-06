@@ -4,10 +4,6 @@ public class MiningTarget_Timer : MiningTarget_Object
 {
     private float exTimeBase = 1f;
 
-    public override void Init(ObjectGenerateParam _objectGenerateParam)
-    {
-        base.Init(_objectGenerateParam);
-    }
     public override void BreakFromDamage()
     {
         // effect

@@ -32,11 +32,23 @@ public class GenerateBlockLayerCont
     {
         for (int i = 0; i < blockCount; i++)
         {
-            //現在の確率でブロックを抽選
-            var blockData = SOLoader.BlockData.GetBlockData(param.SelectBlockIndex());
-            var newBlock = BlockGenerateManager.Inst.GenerateBlock(blockData, layerIndex);
-            newBlock.transform.localPosition = GetBlockPosition(i);
-            newBlock.Set_BreakCallback(BlockBreakCall);
+            if (GameParamManager.IsOtherObjectGenerate())
+            {
+                var otherObject = GameParamManager.SelectOtherObject();
+                var newObject = BlockGenerateManager.Inst.GenerateOtherObject(otherObject, layerIndex);
+                newObject.transform.localPosition = GetBlockPosition(i);
+                newObject.Set_BreakCallback(BlockBreakCall);
+            }
+            else
+            {
+                //現在の確率でブロックを抽選
+                var blockIndex = param.SelectBlockIndex();
+                var blockData = SOLoader.BlockData.GetBlockData(blockIndex);
+                var newBlock = BlockGenerateManager.Inst.GenerateBlock(blockData, layerIndex);
+                newBlock.transform.localPosition = GetBlockPosition(i);
+                newBlock.Set_BreakCallback(BlockBreakCall);
+            }
+
         }
     }
     public Vector3 GetBlockPosition(int _blockIndex)
@@ -160,6 +172,22 @@ public class BlockGenerateManager : MonoBehaviour
         var blockType = blockTypeData.SelectBlockType();
         targetBlock.Set_BlockType(blockType);
         return targetBlock;
+    }
+    #endregion
+
+
+    #region == Other Object Generate ==
+    public MiningTarget_Object GenerateOtherObject(ObjectGenerateParam _objectData, int _layerIndex)
+    {
+        var targetObject = list_targetObjects.Find(x => x.isActiveAndEnabled == false && x.index == _objectData.so.objectIndex);
+        if (targetObject == null)
+        {
+            var newObject = Instantiate(_objectData.so.pf, InGameManager.Inst.ParentPool) as GameObject;
+            targetObject = newObject.GetComponent<MiningTarget_Object>();
+            list_targetObjects.Add(targetObject);
+        }
+        targetObject.Init(_objectData, _layerIndex);
+        return targetObject;
     }
     #endregion
 

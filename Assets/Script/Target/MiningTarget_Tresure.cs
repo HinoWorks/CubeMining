@@ -4,10 +4,7 @@ public class MiningTarget_Tresure : MiningTarget_Object
 {
     private int treasureValueRate = 10;
 
-    public override void Init(ObjectGenerateParam _objectGenerateParam)
-    {
-        base.Init(_objectGenerateParam);
-    }
+
     public override void BreakFromDamage()
     {
         // effect
