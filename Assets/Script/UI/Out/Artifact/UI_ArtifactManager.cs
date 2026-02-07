@@ -2,29 +2,42 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using System.Collections.Generic;
+using System;
+using Cysharp.Threading.Tasks;
+
 
 public class UI_ArtifactManager : MonoBehaviour
 {
-
     [SerializeField] UI_ArtifactEquipUnit[] artifactEquipUnits;
     [SerializeField] UI_ArtifactLibraryUnit[] artifactLibraryUnits;
+    [SerializeField] UI_ArtifactDetailUnit detailUnit;
 
+    private List<int> equipedArtifactIndexes = new List<int>(10);
 
     private bool onceInitFin = false;
 
-    void OnceInit()
+
+
+    void OnceInit()//主にコールバックを設定
     {
         var index = 1;
         foreach (var artifactLibraryUnit in artifactLibraryUnits)
         {
-            artifactLibraryUnit.Init_Once(index, OnMouseOver, OnClick_Equip);
+            artifactLibraryUnit.Init_Once(index, OnMouseOver_ArtifactUnit, OnClick_ArtifactUnit);
             index++;
         }
 
+        index = 1;
+        foreach (var artifactEquipUnit in artifactEquipUnits)
+        {
+            artifactEquipUnit.Init_Once(index, OnMouseOver_ArtifactUnit, OnClick_ArtifactUnit);
+            index++;
+        }
         onceInitFin = true;
     }
 
-    public void Init(OutGame_MenuType _outGameMenuType)
+
+    public async void Init(OutGame_MenuType _outGameMenuType)
     {
         var isActive = _outGameMenuType == OutGame_MenuType.Artifact;
         if (isActive)
@@ -33,17 +46,56 @@ public class UI_ArtifactManager : MonoBehaviour
             {
                 OnceInit();
             }
-            Set_ArtifactEquip();
+            await Set_ArtifactEquip();
             Set_ArtifactLibrary();
         }
+        detailUnit.SetData(null);
         this.gameObject.SetActive(isActive);
     }
 
-
-    private void Set_ArtifactEquip()
+    /// <summary>
+    /// アーティファクト装備Unitの初期化
+    /// </summary>
+    private async UniTask Set_ArtifactEquip()
     {
+        // 装備リストをクリア
+        equipedArtifactIndexes.Clear();
+        foreach (var artifactLibraryUnit in artifactLibraryUnits)
+        {
+            artifactLibraryUnit.Set_EquipState(false);
+        }
 
+        // 装備リストを更新
+        foreach (var artifactEquipUnit in artifactEquipUnits)
+        {
+            var equipedArtifactIndex = await artifactEquipUnit.Init();
+            Set_EquipedArtifactIndexes(equipedArtifactIndex, true);
+        }
     }
+    /// <summary>
+    /// アーティファクト装備リストを更新, ライブラリunitの装備状態を更新
+    /// </summary>
+    private void Set_EquipedArtifactIndexes(int _index, bool _isEquiped)
+    {
+        if (_index == -1) return;
+        if (_isEquiped)
+        {
+            equipedArtifactIndexes.Add(_index);
+        }
+        else
+        {
+            equipedArtifactIndexes.Remove(_index);
+        }
+        var targetUnit = Array.Find(artifactLibraryUnits, x => x.artifactIndex == _index);
+        if (targetUnit != null)
+        {
+            targetUnit.Set_EquipState(_isEquiped);
+        }
+    }
+
+    /// <summary>
+    /// アーティファクトライブラリUnitの初期化
+    /// </summary>
     private void Set_ArtifactLibrary()
     {
         foreach (var artifactLibraryUnit in artifactLibraryUnits)
@@ -54,47 +106,65 @@ public class UI_ArtifactManager : MonoBehaviour
 
 
 
+
+    #region -- callBack --
     /// <summary>
-    /// unit にマウスオーバーした時の処理
+    /// マウスオーバー 
     /// </summary>
-    private void OnMouseOver(bool _isEnter, UI_ArtifactLibraryUnit _artifactLibraryUnit)
+    private void OnMouseOver_ArtifactUnit(bool _isEnter, ArtifactUnitData _so, Vector3 _position)
     {
         if (_isEnter)
         {
-            Debug.Log("OnMouseOver: " + _artifactLibraryUnit.artifactIndex);
-            //ui_artifactLibraryDetail.transform.position = _artifactLibraryUnit.transform.position;
-            //ui_artifactLibraryDetail.SetData(_artifactLibraryUnit);
+            detailUnit.transform.position = _position;
+            detailUnit.SetData(_so);
         }
         else
         {
-            Debug.Log("OnMouseExit: " + _artifactLibraryUnit.artifactIndex);
-            //ui_artifactLibraryDetail.SetData(null);
+            detailUnit.SetData(null);
         }
     }
 
     /// <summary>
     /// unit をクリックした時の処理
     /// </summary>
-    private async void OnClick_Equip(UI_ArtifactLibraryUnit _artifactLibraryUnit)
+    private async void OnClick_ArtifactUnit(ArtifactUnitData _so, int _equipSlotIndex)
     {
-        /*
-        if (_skillTreeUnit.unlockState != SkillTreeUnlockState.EnhanceReady) return;
-        if (StaticManager.CoinCheck(_skillTreeUnit.skillTree.cost) == false) return;
-        SaveLoader.Inst.Request_SaveSkillTreeData(_skillTreeUnit.skillIndex, _skillTreeUnit.level + 1);
-        SaveLoader.Inst.Request_SaveCoin(-_skillTreeUnit.skillTree.cost);
-
-        await UniTask.DelayFrame(2);
-        _skillTreeUnit.Init();
-
-        // ベーススキルの更新
-        var checkTargetUnit = Array.FindAll(skillTreeUnits, x => x.skillTree.baseSkillIndex == _skillTreeUnit.skillIndex);
-        foreach (var unit in checkTargetUnit)
+        // 空きスロットを見つけて登録
+        if (_equipSlotIndex == -1)
         {
-            unit.Init();
+            var freeSlot = Array.Find(artifactEquipUnits, x => x.isFreeSlot);
+            if (freeSlot != null)
+            {
+                Set_EquipedArtifactIndexes(_so.artifactIndex, true);
+                SaveLoader.Inst.Request_SaveArtifactSlotData(freeSlot.slotIndex, true, _so.artifactIndex);
+                await UniTask.DelayFrame(1);
+                freeSlot.Init();
+                Debug.Log($"空きスロット:{freeSlot.slotIndex} / アーティファクト:{_so.artifactIndex}");
+            }
+            else
+            {
+                Debug.LogError("空きスロットが見つかりません");
+            }
         }
-        ui_skillTreeDetail.SetData_Enhanced(_skillTreeUnit.level + 1);
-        UpdateNodeState(_skillTreeUnit.skillTree.baseSkillIndex, _skillTreeUnit.skillIndex, _skillTreeUnit.unlockState, _skillTreeUnit.level + 1);
-        */
+        else // 指定したスロットから削除
+        {
+            var targetSlot = Array.Find(artifactEquipUnits, x => x.slotIndex == _equipSlotIndex);
+            if (targetSlot != null)
+            {
+                if (targetSlot.isFreeSlot) return;
+                Set_EquipedArtifactIndexes(_so.artifactIndex, false);
+                SaveLoader.Inst.Request_SaveArtifactSlotData(_equipSlotIndex, true, -1);
+                await UniTask.DelayFrame(1);
+                targetSlot.Init();
+                Debug.Log($"指定したスロット:{_equipSlotIndex} のアーティファクトを削除");
+            }
+            else
+            {
+                Debug.LogError($"指定したスロット:{_equipSlotIndex} が見つかりません");
+            }
+        }
+
     }
+    #endregion
 
 }

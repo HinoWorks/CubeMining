@@ -32,8 +32,18 @@ public class ArtifactData
 {
     public int artifactIndex;
     public int level = 1;
-    public int equipSlotIndex = -1;
+    //public int equipSlotIndex = -1;
 }
+
+
+[System.Serializable]
+public class ArtifactSlotData
+{
+    public int slotIndex;
+    public bool isOpen = false;
+    public int equipedArtifactIndex;
+}
+
 
 
 public enum state
@@ -377,6 +387,41 @@ public class SaveLoader : MonoBehaviour
     private string GetArtifactDataKey(int _artifactIndex)
     {
         return $"ArtifactData-{_artifactIndex}";
+    }
+    #endregion
+
+
+
+
+    #region -- Artifact Slot --
+    public async UniTask<ArtifactSlotData> Get_ArtifactSlotData(int _slotIndex)
+    {
+        string saveKey = GetArtifactSlotDataKey(_slotIndex);
+        var loadData = await LoadAsync<ArtifactSlotData>(saveKey);
+        if (loadData.success)
+        {
+            return loadData.data;
+        }
+        return null;
+    }
+    public void Request_SaveArtifactSlotData(int _slotIndex, bool _isOpen, int _equipedArtifactIndex)
+    {
+        EnqueueMethod(() => { SaveArtifactSlotData(_slotIndex, _isOpen, _equipedArtifactIndex); });
+    }
+    private void SaveArtifactSlotData(int _slotIndex, bool _isOpen, int _equipedArtifactIndex)
+    {
+        var saveKey = GetArtifactSlotDataKey(_slotIndex);
+        var newData = new ArtifactSlotData()
+        {
+            slotIndex = _slotIndex,
+            isOpen = _isOpen,
+            equipedArtifactIndex = _equipedArtifactIndex
+        };
+        ES3.Save(saveKey, newData);
+    }
+    private string GetArtifactSlotDataKey(int _slotIndex)
+    {
+        return $"ArtifactSlotData-{_slotIndex}";
     }
     #endregion
 

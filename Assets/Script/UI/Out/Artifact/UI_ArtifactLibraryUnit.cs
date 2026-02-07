@@ -13,18 +13,18 @@ public class UI_ArtifactLibraryUnit : MonoBehaviour
     public ArtifactUnitData so { get; private set; }
     public int equipSlotIndex { get; private set; } = -1;
     public bool isOpen { get; private set; } = false;
+    public bool isEquiped { get; private set; } = false;
+    private Action<bool, ArtifactUnitData, Vector3> onMouseOver;
+    private Action<ArtifactUnitData, int> onClick_Equip;
 
-    private Action<bool, UI_ArtifactLibraryUnit> onMouseOver;
-    private Action<UI_ArtifactLibraryUnit> onClick_Equip;
 
 
-
-    public void Init_Once(int _index, Action<bool, UI_ArtifactLibraryUnit> _onMouseOver,
-                            Action<UI_ArtifactLibraryUnit> _onClick_Equip)
+    public void Init_Once(int _index, Action<bool, ArtifactUnitData, Vector3> _onMouseOver,
+                            Action<ArtifactUnitData, int> _onClick_Equip)
     {
         this.onMouseOver = _onMouseOver;
         this.onClick_Equip = _onClick_Equip;
-        //btn.onMouseOver += OnPointerEnter;
+        btn.onMouseOver += OnMouseOver_LibraryUnit;
         artifactIndex = _index;
         so = SOLoader.ArtifactData.Get_ArtifactData(_index);
         if (so == null) return;
@@ -33,25 +33,32 @@ public class UI_ArtifactLibraryUnit : MonoBehaviour
     public async void Init()
     {
         var saveData = await SaveLoader.Inst.Get_ArtifactData(artifactIndex);
-        isOpen = saveData != null;
-
+        isOpen = artifactIndex == 1 || saveData != null;
 
         obj_locked.SetActive(!isOpen);
-        equipSlotIndex = saveData == null ? -1 : saveData.equipSlotIndex;
         btn.enabled = isOpen;
-        obj_equip.SetActive(equipSlotIndex != -1);
+    }
+
+    // 装備状態はここで更新する
+    public void Set_EquipState(bool _isEquiped)
+    {
+        isEquiped = _isEquiped;
+        obj_equip.SetActive(isEquiped);
     }
 
 
-    private void OnPointerEnter(bool _isEnter)
+    #region -- マウスアクション --
+    private void OnMouseOver_LibraryUnit(bool _isEnter)
     {
         if (!isOpen) return;
-        onMouseOver?.Invoke(_isEnter, this);
+        onMouseOver?.Invoke(_isEnter, so, transform.position);
     }
 
     public void OnClick_Equip()
     {
-        Debug.Log("OnClick_Equip");
+        if (isEquiped) return;
+        onClick_Equip?.Invoke(so, equipSlotIndex);
     }
+    #endregion
 
 }
