@@ -7,6 +7,11 @@ using System.Numerics;
 
 public class StaticManager : MonoBehaviour
 {
+    public static int artifactSlotCount = 5;
+
+
+
+
 
     private static BigInteger Get_Num(int _count)
     {

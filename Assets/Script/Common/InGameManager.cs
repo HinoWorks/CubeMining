@@ -1,20 +1,29 @@
 using UnityEngine;
 using UniRx;
 using System.Numerics;
+using System.Collections.Generic;
+
+
+
+public class ResourceData
+{
+    public ResourceType resourceType;
+    public BigInteger resourceCount;
+}
+
 
 public class InGameManager : MonoBehaviour
 {
     public static InGameManager Inst;
-
     [SerializeField] Transform parentPool;
     public Transform ParentPool => parentPool;
-
 
 
     private float timer = 0;
     private float timeLimit => GameParamManager.gameBaseParam.ingameTime + exTime;
     private float exTime = 0f;
     private BigInteger getCoin;
+    private List<ResourceData> resourceDataList = new List<ResourceData>();
 
 
     void Awake()
@@ -37,7 +46,8 @@ public class InGameManager : MonoBehaviour
             case GameStateType.InGame_Ready:
                 AttackManager.Inst.Set_Ready();
                 BlockGenerateManager.Inst.Init();
-                getCoin = 0;
+                //getCoin = 0;
+                resourceDataList.Clear();
                 exTime = 0f;
                 GameEvent.UI.PublishCoinMod(getCoin);
                 GameEvent.UI.PublishTimeLimit(timeLimit);
@@ -78,6 +88,24 @@ public class InGameManager : MonoBehaviour
         getCoin += _deltaCoin;
         GameEvent.UI.PublishCoinMod(getCoin);
     }
+
+    public void AddGetResource(ResourceType _resourceType, BigInteger _deltaResource)
+    {
+        var targetData = resourceDataList.Find(d => d.resourceType == _resourceType);
+        if (targetData == null)
+        {
+            targetData = new ResourceData()
+            {
+                resourceType = _resourceType,
+                resourceCount = 0
+            };
+            resourceDataList.Add(targetData);
+        }
+        targetData.resourceCount += _deltaResource;
+        GameEvent.UI.PublishResourceMod(_resourceType, targetData.resourceCount);
+        Debug.Log($"AddGetResource: {_resourceType} {targetData.resourceCount}");
+    }
+
     public void AddGetExTime(float _deltaExTime)
     {
         exTime += _deltaExTime;

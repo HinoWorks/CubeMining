@@ -79,6 +79,13 @@ public static class GameEvent
             coinMod.OnNext(mod);
         }
 
+        private static readonly Subject<(ResourceType, System.Numerics.BigInteger)> resourceMod = new();
+        public static IObservable<(ResourceType, System.Numerics.BigInteger)> ResourceMod => resourceMod.AsObservable();
+        public static void PublishResourceMod(ResourceType resourceType, System.Numerics.BigInteger mod)
+        {
+            resourceMod.OnNext((resourceType, mod));
+        }
+
         private static readonly Subject<int> depthCount = new();
         public static IObservable<int> DepthCount => depthCount.AsObservable();
         public static void PublishDepthCount(int depth)

@@ -16,8 +16,7 @@ public class UI_PoolManager : MonoBehaviour
     [SerializeField] GameObject pf_getCoinText;
     [SerializeField] GameObject pf_damageText;
     [SerializeField] GameObject pf_moveIcon_Coin;
-    [SerializeField] GameObject pf_moveIcon_Gem;
-    [SerializeField] GameObject pf_ballCounter;
+    [SerializeField] GameObject pf_getResourceCont;
     [SerializeField] GameObject pf_speechBubble;
 
 
@@ -31,7 +30,7 @@ public class UI_PoolManager : MonoBehaviour
     private List<UI_CircleTimer> pool_gauge_circle = new List<UI_CircleTimer>();
     private List<UI_TextCoinGet> pool_textCoinGet = new List<UI_TextCoinGet>();
     private List<UI_TextDamage> pool_damageText = new List<UI_TextDamage>();
-    private List<UI_GetResourceMove> pool_moveItemCont_coin = new List<UI_GetResourceMove>(15);
+    private List<UI_GetResourceCont> pool_getResourceCont = new List<UI_GetResourceCont>();
     private List<UI_SpeechBubble> pool_speechBubble = new List<UI_SpeechBubble>(10);
 
 
@@ -69,6 +68,13 @@ public class UI_PoolManager : MonoBehaviour
             var newUnit = Instantiate(pf_damageText, parent_base) as GameObject;
             var selectUnit = newUnit.GetComponent<UI_TextDamage>();
             pool_damageText.Add(selectUnit);
+            selectUnit.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < 50; i++)
+        {
+            var newUnit = Instantiate(pf_getResourceCont, parent_base) as GameObject;
+            var selectUnit = newUnit.GetComponent<UI_GetResourceCont>();
+            pool_getResourceCont.Add(selectUnit);
             selectUnit.gameObject.SetActive(false);
         }
     }
@@ -137,24 +143,21 @@ public class UI_PoolManager : MonoBehaviour
         return selectUnit;
     }
 
-    #region -- Get Item icon --
-    public void Set_GetItemIcon_Coin(int _count, Vector3 _buttonPosition)
-    {
-        for (int i = 0; i < _count; i++)
-        {
-            UI_GetResourceMove selectUnit = null;
-            selectUnit = pool_moveItemCont_coin.Find(d => d.isActive == false);
-            if (selectUnit == null)
-            {
-                var newUnit = Instantiate(pf_moveIcon_Coin, parent_over) as GameObject;
-                selectUnit = newUnit.GetComponent<UI_GetResourceMove>();
-                newUnit.gameObject.SetActive(false);
-                pool_moveItemCont_coin.Add(selectUnit);
-            }
-            selectUnit.UnitActivate_SetPosi(target_coin.position, _buttonPosition);
-        }
-    }
 
+
+    #region -- Get Resource Cont --
+    public UI_GetResourceCont Set_GetResourceCont()
+    {
+        UI_GetResourceCont selectUnit = null;
+        selectUnit = pool_getResourceCont.Find(d => d.gameObject.activeSelf == false);
+        if (selectUnit == null)
+        {
+            var newUnit = Instantiate(pf_getResourceCont, parent_over) as GameObject;
+            selectUnit = newUnit.GetComponent<UI_GetResourceCont>();
+            pool_getResourceCont.Add(selectUnit);
+        }
+        return selectUnit;
+    }
     #endregion --
 
 

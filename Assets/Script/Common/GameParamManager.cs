@@ -23,7 +23,7 @@ public class GameBaseParam
     private float blockGenerateTimeRate_enhanced = 0f;
 
 
-    public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
+    public void Set_Param(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
         {
@@ -56,7 +56,7 @@ public class ObjectGenerateParam
         generateRate = _objectUnitData.generateRate;
         valueRate = _objectUnitData.valueRate;
     }
-    public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
+    public void Set_Param(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
         {
@@ -105,7 +105,7 @@ public class BlockGenerateParam
         separateBlockCount = _blockData.separateBlock;
     }
 
-    public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
+    public void Set_Param(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
         {
@@ -245,7 +245,7 @@ public class BlockChangeRateParam
         }
     }
 
-    public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
+    public void Set_Param(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
         {
@@ -302,7 +302,7 @@ public class AttackParam
         size = _attackUnitData.size;
     }
 
-    public void Set_SkillTreeParam(ParamType _paramType, float _setParam)
+    public void Set_Param(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
         {
@@ -498,10 +498,11 @@ public static class GameParamManager
 
     private static async UniTask Init_ArtifactParam()
     {
-        foreach (var artifactData in SOLoader.ArtifactData.artifactDatas)
+        for (int i = 0; i < StaticManager.artifactSlotCount; i++)
         {
-            var saveData = await SaveLoader.Inst.Get_ArtifactData(artifactData.artifactIndex);
+            var saveData = await SaveLoader.Inst.Get_ArtifactSlotData(i);
             if (saveData == null) continue;
+            var artifactData = SOLoader.ArtifactData.artifactDatas[saveData.equipedArtifactIndex];
             Set_DeltaParam(ParamCategory.GameSystem, -1, artifactData.paramType, artifactData.value);
         }
     }
@@ -535,7 +536,7 @@ public static class GameParamManager
 
     private static void Set_GamesystemParam(ParamType _paramType, float _setParam)
     {
-        gameBaseParam.Set_SkillTreeParam(_paramType, _setParam);
+        gameBaseParam.Set_Param(_paramType, _setParam);
     }
     private static void Set_BlockParam(int _blockIndex, ParamType _paramType, float _setParam)
     {
@@ -545,7 +546,7 @@ public static class GameParamManager
             Debug.LogError($"BlockData is not found: {_blockIndex} // ==> 初期ロードで読み込み失敗");
             return;
         }
-        targetBlock.Set_SkillTreeParam(_paramType, _setParam);
+        targetBlock.Set_Param(_paramType, _setParam);
     }
     private static void Set_BlockChangeRateParam(int _blockIndex, ParamType _paramType, float _setParam)
     {
@@ -555,7 +556,7 @@ public static class GameParamManager
             Debug.LogError($"BlockData is not found: {_blockIndex} // ==> 初期ロードで読み込み失敗");
             return;
         }
-        targetBlockChangeRate.Set_SkillTreeParam(_paramType, _setParam);
+        targetBlockChangeRate.Set_Param(_paramType, _setParam);
     }
     private static void Set_AttackParam(int _attackIndex, ParamType _paramType, float _setParam)
     {
@@ -564,7 +565,7 @@ public static class GameParamManager
         {
             Debug.LogError($"AttackUnitData is not found: {_attackIndex} // ==> 初期ロードで読み込み失敗");
         }
-        targetAttack.Set_SkillTreeParam(_paramType, _setParam);
+        targetAttack.Set_Param(_paramType, _setParam);
     }
 
 
@@ -582,7 +583,7 @@ public static class GameParamManager
             Debug.LogError($"AttackUnitData is not found: {_attackIndex} // ==> 初期ロードで読み込み失敗");
             return;
         }
-        targetAttack.Set_SkillTreeParam(ParamType.Unlock, 1f);
+        targetAttack.Set_Param(ParamType.Unlock, 1f);
     }
 
     #endregion

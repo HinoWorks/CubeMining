@@ -38,6 +38,17 @@ public class BlockChangeRateData
     public int rate_6;
 }
 
+public enum ResourceType
+{
+    Stone,
+    Gold,
+    Iron,
+    Emerald,
+    Diamond,
+    Ruby,
+    Sapphire,
+}
+
 
 [CreateAssetMenu(menuName = "SO/SO_BlockData")]
 public class SO_BlockData : ScriptableObject

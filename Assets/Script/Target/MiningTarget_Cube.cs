@@ -75,9 +75,34 @@ public class MiningTarget_Cube : MiningTargetBase
         effect.transform.position = transform.position + EffectOffset;
         effect.SetActive(true);
 
-        InGameManager.Inst.AddGetCoin(base.value);
-        var ui_textCoinGet = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
-        ui_textCoinGet.SetText_Coin(StaticManager.Get_BigintegerToString(base.value), Color.green);
+        AddGetResource();
         NotActivate();
+    }
+
+    private void AddGetResource()
+    {
+        var resourceType = blockType switch
+        {
+            BlockType.None => ResourceType.Stone,
+            BlockType.Gold => ResourceType.Gold,
+            BlockType.Iron => ResourceType.Iron,
+            BlockType.Emerald => ResourceType.Emerald,
+            BlockType.Rate_4 => ResourceType.Diamond,
+            BlockType.Rate_5 => ResourceType.Ruby,
+            BlockType.Rate_6 => ResourceType.Sapphire,
+            _ => ResourceType.Stone,
+        };
+
+        var resourceRate = resourceType == ResourceType.Stone ? 1f : 0.5f;
+        var getCount = (int)resourceRate * base.value;
+        if (getCount <= 0) getCount = 1;
+        InGameManager.Inst.AddGetResource(resourceType, getCount);
+
+        for (int i = 0; i < getCount; i++)
+        {
+            var ui_resourceCont = UI_PoolManager.Inst.Set_GetResourceCont();
+            ui_resourceCont.Set_ResourceType(resourceType);
+            ui_resourceCont.SetInit(transform.position);
+        }
     }
 }

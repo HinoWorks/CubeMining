@@ -8,12 +8,12 @@ using DG.Tweening;
 public class UIManager_InGame : MonoBehaviour
 {
     public static UIManager_InGame Inst;
+    [SerializeField] UI_ResourceCounter[] ui_resourceCounters;
     [SerializeField] TextMeshProUGUI tmp_timer;
-    [SerializeField] TextMeshProUGUI tmp_coin;
     [SerializeField] TextMeshProUGUI tmp_depthCount;
     public UI_ResultManager ui_ResultManager;
     public UI_EventManager ui_EventManager;
-    private float currentCoinFloat;
+    //private float currentCoinFloat;
 
 
     void Awake()
@@ -21,8 +21,13 @@ public class UIManager_InGame : MonoBehaviour
         if (Inst == null) { Inst = this; }
         else { Destroy(this); }
 
+        foreach (var ui_resourceCounter in ui_resourceCounters)
+        {
+            ui_resourceCounter.AwakeCall();
+        }
+
         GameEvent.UI.TimeLimit.Subscribe(Set_TimeLimit).AddTo(this);
-        GameEvent.UI.CoinMod.Subscribe(Set_CoinMod).AddTo(this);
+        //GameEvent.UI.CoinMod.Subscribe(Set_CoinMod).AddTo(this);
         GameEvent.UI.DepthCount.Subscribe(Set_DepthCount).AddTo(this);
         GameEvent.GameState.SetGameState.Subscribe(ChangeGateState).AddTo(this);
     }
@@ -33,6 +38,10 @@ public class UIManager_InGame : MonoBehaviour
         {
             case GameStateType.InGame_Ready:
                 ui_EventManager.StateGame();
+                foreach (var ui_resourceCounter in ui_resourceCounters)
+                {
+                    ui_resourceCounter.Set_Init();
+                }
                 break;
             case GameStateType.InGame_End:
                 ui_EventManager.EndGame();
@@ -53,6 +62,22 @@ public class UIManager_InGame : MonoBehaviour
         tmp_depthCount.text = depth.ToString();
     }
 
+
+    /// <summary>
+    /// リソースを飛ばす際のターゲット位置を取得
+    /// </summary>
+    public Transform Get_ResourceCounterTargetPosition(ResourceType _resourceType)
+    {
+        foreach (var ui_resourceCounter in ui_resourceCounters)
+        {
+            if (ui_resourceCounter.ResourceType == _resourceType)
+                return ui_resourceCounter.targetPosition;
+        }
+        return null;
+    }
+
+
+    /*
     private void Set_CoinMod(BigInteger mod)
     {
         var modCoin = StaticManager.Get_BigintegerToUnit(mod);
@@ -70,4 +95,5 @@ public class UIManager_InGame : MonoBehaviour
         //var setText = StaticManager.Get_BigintegerToString(mod);
         //tmp_coin.text = setText;
     }
+    */
 }
