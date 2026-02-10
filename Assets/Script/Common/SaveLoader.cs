@@ -9,6 +9,13 @@ using System.Linq;
 
 
 [System.Serializable]
+public class ResourceData
+{
+    public ResourceType resourceType;
+    public BigInteger count;
+}
+
+[System.Serializable]
 public class SkillTreeData
 {
     public string key = "";
@@ -63,6 +70,40 @@ public class SaveLoader : MonoBehaviour
     private const string KEY_COIN = "key_coin";
     private BigInteger coin;
     public BigInteger Coin { get => coin; }
+
+
+    #region -- resource data --
+    private const string KEY_RESOURCE_STONE = "key_resource_stone";
+    private BigInteger resourceStone;
+    private const string KEY_RESOURCE_IRON = "key_resource_iron";
+    private BigInteger resourceIron;
+    private const string KEY_RESOURCE_GOLD = "key_resource_gold";
+    private BigInteger resourceGold;
+    private const string KEY_RESOURCE_EMERALD = "key_resource_emerald";
+    private BigInteger resourceEmerald;
+    private const string KEY_RESOURCE_RUBY = "key_resource_ruby";
+    private BigInteger resourceRuby;
+    private const string KEY_RESOURCE_SAPPHIRE = "key_resource_sapphire";
+    private BigInteger resourceSapphire;
+    private const string KEY_RESOURCE_DIAMOND = "key_resource_diamond";
+    private BigInteger resourceDiamond;
+    public BigInteger Get_ResourceCount(ResourceType _resourceType)
+    {
+        switch (_resourceType)
+        {
+            case ResourceType.Stone: return resourceStone;
+            case ResourceType.Iron: return resourceIron;
+            case ResourceType.Gold: return resourceGold;
+            case ResourceType.Emerald: return resourceEmerald;
+            case ResourceType.Ruby: return resourceRuby;
+            case ResourceType.Sapphire: return resourceSapphire;
+            case ResourceType.Diamond: return resourceDiamond;
+            default: return 0;
+        }
+    }
+    #endregion
+
+
 
     private const string KEY_UNLOCK_EVENTINDEX = "key_unlockEventIndex";
     private int unlockEventIndex;
@@ -123,6 +164,14 @@ public class SaveLoader : MonoBehaviour
 
         // === Initial Load Data
         coin = ES3.KeyExists(KEY_COIN) ? BigInteger.Parse(ES3.Load<string>(KEY_COIN)) : 0;
+        resourceStone = ES3.KeyExists(KEY_RESOURCE_STONE) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_STONE)) : 0;
+        resourceIron = ES3.KeyExists(KEY_RESOURCE_IRON) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_IRON)) : 0;
+        resourceGold = ES3.KeyExists(KEY_RESOURCE_GOLD) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_GOLD)) : 0;
+        resourceEmerald = ES3.KeyExists(KEY_RESOURCE_EMERALD) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_EMERALD)) : 0;
+        resourceRuby = ES3.KeyExists(KEY_RESOURCE_RUBY) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_RUBY)) : 0;
+        resourceSapphire = ES3.KeyExists(KEY_RESOURCE_SAPPHIRE) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_SAPPHIRE)) : 0;
+        resourceDiamond = ES3.KeyExists(KEY_RESOURCE_DIAMOND) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_DIAMOND)) : 0;
+
         unlockEventIndex = ES3.KeyExists(KEY_UNLOCK_EVENTINDEX) ? ES3.Load<int>(KEY_UNLOCK_EVENTINDEX) : 1;
         blockCount = ES3.KeyExists(KEY_BLOCKCOUNT) ? ES3.Load<int>(KEY_BLOCKCOUNT) : 0;
         ingameCount = ES3.KeyExists(KEY_INGAME_COUNT) ? ES3.Load<int>(KEY_INGAME_COUNT) : 0;
@@ -216,6 +265,45 @@ public class SaveLoader : MonoBehaviour
         coin += _delta;
         ES3.Save(KEY_COIN, coin.ToString());
         GameEvent.UI.PublishCoinMod(coin);
+    }
+    #endregion
+
+
+
+    #region -- resource data --
+    /// <summary>
+    /// リソースセーブリクエスト - デルタを加算してセーブ
+    /// </summary>
+    public void Request_SaveResource(ResourceType _resourceType, BigInteger _delta)
+    {
+        EnqueueMethod(() => { SavePendeingResource(_resourceType, _delta); });
+    }
+    private void SavePendeingResource(ResourceType _resourceType, BigInteger _delta)
+    {
+        var (key, value) = GetResourceDataKey(_resourceType);
+        value += _delta;
+        ES3.Save(key, value.ToString());
+        GameEvent.UI.PublishResourceMod(_resourceType, value);
+    }
+    private (string, BigInteger) GetResourceDataKey(ResourceType _resourceType)
+    {
+        switch (_resourceType)
+        {
+            case ResourceType.Stone: return (KEY_RESOURCE_STONE, resourceStone);
+            case ResourceType.Iron: return (KEY_RESOURCE_IRON, resourceIron);
+            case ResourceType.Gold: return (KEY_RESOURCE_GOLD, resourceGold);
+            case ResourceType.Emerald: return (KEY_RESOURCE_EMERALD, resourceEmerald);
+            case ResourceType.Ruby: return (KEY_RESOURCE_RUBY, resourceRuby);
+            case ResourceType.Sapphire: return (KEY_RESOURCE_SAPPHIRE, resourceSapphire);
+            case ResourceType.Diamond: return (KEY_RESOURCE_DIAMOND, resourceDiamond);
+            default: return (null, 0);
+        }
+    }
+
+    public bool Check_ResourceKeyExists(ResourceType _resourceType)
+    {
+        var (key, value) = GetResourceDataKey(_resourceType);
+        return ES3.KeyExists(key);
     }
     #endregion
 

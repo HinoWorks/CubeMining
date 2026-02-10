@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Numerics;
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 
 public enum OutGame_MenuType
 {
@@ -18,7 +19,8 @@ public class UIManager_OutGame : MonoBehaviour
 
     [Header(" -- Header --")]
     [SerializeField] UI_OutGame_HeaderButton[] headerButtons;
-    [SerializeField] TextMeshProUGUI tmp_coin;
+    [SerializeField] UI_ResourceCounter[] ui_resourceCounters;
+    //[SerializeField] TextMeshProUGUI tmp_coin;
     private float currentCoinFloat;
 
     [Space(10)]
@@ -46,10 +48,10 @@ public class UIManager_OutGame : MonoBehaviour
     {
         if (Inst == null) Inst = this;
         else Destroy(this);
-
-        GameEvent.UI.CoinMod.Subscribe(Set_CoinMod).AddTo(this);
+    }
+    void Start()
+    {
         GameEvent.GameState.SetGameState.Subscribe(ChangeGateState).AddTo(this);
-
         // -- header button set --
         var counter = 0;
         foreach (var headerButton in headerButtons)
@@ -62,9 +64,14 @@ public class UIManager_OutGame : MonoBehaviour
             headerButton.AwakeCall(outGameMenuTypes[counter], OnSelect_HeaderButton);
             counter++;
         }
+
+        // -- resource counter set --
+        foreach (var ui_resourceCounter in ui_resourceCounters)
+        {
+            ui_resourceCounter.AwakeCall(false);
+        }
+        Debug.Log("UI_ResourceCounter set === OutGame");
     }
-
-
 
     private void ChangeGateState(GameStateType _state)
     {
@@ -73,11 +80,16 @@ public class UIManager_OutGame : MonoBehaviour
             currentMenuType = OutGame_MenuType.None;
             main.SetActive(true);
             OnSelect_HeaderButton(OutGame_MenuType.SkillTree);
+
+            foreach (var ui_resourceCounter in ui_resourceCounters)
+            {
+                ui_resourceCounter.CounterUpdateCheck();
+            }
         }
     }
 
 
-
+    /*
     private void Set_CoinMod(BigInteger mod)
     {
         var modCoin = StaticManager.Get_BigintegerToUnit(mod);
@@ -93,6 +105,7 @@ public class UIManager_OutGame : MonoBehaviour
             }
         });
     }
+    */
 
 
     #region -- on Click --

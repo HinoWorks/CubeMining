@@ -28,7 +28,7 @@ public class UIManager_InGame : MonoBehaviour
 
         foreach (var ui_resourceCounter in ui_resourceCounters)
         {
-            ui_resourceCounter.AwakeCall();
+            ui_resourceCounter.AwakeCall(true);
         }
     }
 

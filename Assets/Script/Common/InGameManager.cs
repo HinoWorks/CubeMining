@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 
 
-public class ResourceData
+public class ResourceData_Result
 {
     public ResourceType resourceType;
     public BigInteger resourceCount;
@@ -23,7 +23,7 @@ public class InGameManager : MonoBehaviour
     private float timeLimit => GameParamManager.gameBaseParam.ingameTime + exTime;
     private float exTime = 0f;
     private BigInteger getCoin;
-    private List<ResourceData> resourceDataList = new List<ResourceData>();
+    private List<ResourceData_Result> resourceDataList = new List<ResourceData_Result>();
 
 
     void Awake()
@@ -94,7 +94,7 @@ public class InGameManager : MonoBehaviour
         var targetData = resourceDataList.Find(d => d.resourceType == _resourceType);
         if (targetData == null)
         {
-            targetData = new ResourceData()
+            targetData = new ResourceData_Result()
             {
                 resourceType = _resourceType,
                 resourceCount = 0
@@ -102,7 +102,7 @@ public class InGameManager : MonoBehaviour
             resourceDataList.Add(targetData);
         }
         targetData.resourceCount += _deltaResource;
-        GameEvent.UI.PublishResourceMod(_resourceType, targetData.resourceCount);
+        GameEvent.UI.PublishResourceMod_Ingame(_resourceType, targetData.resourceCount);
         //Debug.Log($"AddGetResource: {_resourceType} {targetData.resourceCount}");
     }
 
@@ -114,9 +114,14 @@ public class InGameManager : MonoBehaviour
     }
 
 
+
     private void Save_IngameResult()
     {
-        SaveLoader.Inst.Request_SaveCoin(getCoin);
+        foreach (var data in resourceDataList)
+        {
+            SaveLoader.Inst.Request_SaveResource(data.resourceType, data.resourceCount);
+        }
+        //SaveLoader.Inst.Request_SaveCoin(getCoin);
     }
 
 

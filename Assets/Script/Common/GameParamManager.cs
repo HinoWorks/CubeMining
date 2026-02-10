@@ -207,9 +207,9 @@ public class BlockChangeRateParam
     public int rate_gold;
     public int rate_iron;
     public int rate_emerald;
-    public int rate_4;
-    public int rate_5;
-    public int rate_6;
+    public int rate_ruby;
+    public int rate_sapphire;
+    public int rate_diamond;
 
     public void Init(BlockChangeRateData _blockChangeRateData)
     {
@@ -218,13 +218,13 @@ public class BlockChangeRateParam
         rate_gold = _blockChangeRateData.rate_gold;
         rate_iron = _blockChangeRateData.rate_iron;
         rate_emerald = _blockChangeRateData.rate_emerald;
-        rate_4 = _blockChangeRateData.rate_4;
-        rate_5 = _blockChangeRateData.rate_5;
-        rate_6 = _blockChangeRateData.rate_6;
+        rate_ruby = _blockChangeRateData.rate_ruby;
+        rate_sapphire = _blockChangeRateData.rate_sapphire;
+        rate_diamond = _blockChangeRateData.rate_diamond;
     }
     public BlockType SelectBlockType()
     {
-        var total = baseRate + rate_gold + rate_iron + rate_emerald + rate_4 + rate_5 + rate_6;
+        var total = baseRate + rate_gold + rate_iron + rate_emerald + rate_ruby + rate_sapphire + rate_diamond;
         var random = UnityEngine.Random.Range(0, total);
         switch (random)
         {
@@ -234,11 +234,11 @@ public class BlockChangeRateParam
                 return BlockType.Gold;
             case var _ when random < rate_iron + rate_gold + rate_emerald:
                 return BlockType.Emerald;
-            case var _ when random < rate_iron + rate_gold + rate_emerald + rate_4:
+            case var _ when random < rate_iron + rate_gold + rate_emerald + rate_ruby:
                 return BlockType.Rate_4;
-            case var _ when random < rate_iron + rate_gold + rate_emerald + rate_4 + rate_5:
+            case var _ when random < rate_iron + rate_gold + rate_emerald + rate_ruby + rate_sapphire:
                 return BlockType.Rate_5;
-            case var _ when random < rate_iron + rate_gold + rate_emerald + rate_4 + rate_5 + rate_6:
+            case var _ when random < rate_iron + rate_gold + rate_emerald + rate_ruby + rate_sapphire + rate_diamond:
                 return BlockType.Rate_6;
             default:
                 return BlockType.None;
@@ -259,13 +259,13 @@ public class BlockChangeRateParam
                 rate_emerald += (int)_setParam;
                 break;
             case ParamType.Rate_4:
-                rate_4 += (int)_setParam;
+                rate_ruby += (int)_setParam;
                 break;
             case ParamType.Rate_5:
-                rate_5 += (int)_setParam;
+                rate_sapphire += (int)_setParam;
                 break;
             case ParamType.Rate_6:
-                rate_6 += (int)_setParam;
+                rate_diamond += (int)_setParam;
                 break;
         }
     }

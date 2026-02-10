@@ -19,20 +19,48 @@ public class UI_ResourceCounter : MonoBehaviour
     public Transform targetPosition => icon.transform;
 
 
-    public void AwakeCall()
+    public void AwakeCall(bool _isIngame)
     {
-        GameEvent.UI.ResourceMod.Subscribe(Set_ResourceMod).AddTo(this);
+        if (_isIngame)
+        {
+            GameEvent.UI.ResourceMod_Ingame.Subscribe(Set_ResourceMod).AddTo(this);
+        }
+        else
+        {
+            GameEvent.UI.ResourceMod.Subscribe(Set_ResourceMod).AddTo(this);
+        }
         icon.sprite = SOLoader.ItemData.GetItemUnitData((int)resourceType).icon;
+        ActivateCheck();
     }
 
+
+
+    /// <summary>
+    /// 主にインゲームでのカウンター初期化用
+    /// </summary>
     public void Set_Init()
     {
         currentResourceFloat = 0;
         tmp_resourceCount.text = "0";
-        var initialActive = resourceType == ResourceType.Stone ? true : false;
+    }
+    public void ActivateCheck()
+    {
+        var initialActive = SaveLoader.Inst.Check_ResourceKeyExists(resourceType);
         this.gameObject.SetActive(initialActive);
     }
 
+    /// <summary>
+    /// カウンター更新チェック
+    /// </summary>
+    public void CounterUpdateCheck()
+    {
+        var haveResource = SaveLoader.Inst.Check_ResourceKeyExists(resourceType);
+        if (!haveResource) return;
+
+        if (!this.gameObject.activeSelf) this.gameObject.SetActive(true);
+        var resourceCount = SaveLoader.Inst.Get_ResourceCount(resourceType);
+        Set_ResourceMod((resourceType, resourceCount));
+    }
     private void Set_ResourceMod((ResourceType, BigInteger) _resourceMod)
     {
         if (_resourceMod.Item1 != resourceType) return;

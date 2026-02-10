@@ -79,11 +79,21 @@ public static class GameEvent
             coinMod.OnNext(mod);
         }
 
+
+        // インゲームリザルト, アウトゲームでリソースが変化した時のイベント
         private static readonly Subject<(ResourceType, System.Numerics.BigInteger)> resourceMod = new();
         public static IObservable<(ResourceType, System.Numerics.BigInteger)> ResourceMod => resourceMod.AsObservable();
         public static void PublishResourceMod(ResourceType resourceType, System.Numerics.BigInteger mod)
         {
             resourceMod.OnNext((resourceType, mod));
+        }
+
+        // インゲームでリソースが変化した時のイベント
+        private static readonly Subject<(ResourceType, System.Numerics.BigInteger)> resourceMod_Ingame = new();
+        public static IObservable<(ResourceType, System.Numerics.BigInteger)> ResourceMod_Ingame => resourceMod_Ingame.AsObservable();
+        public static void PublishResourceMod_Ingame(ResourceType resourceType, System.Numerics.BigInteger mod)
+        {
+            resourceMod_Ingame.OnNext((resourceType, mod));
         }
 
         private static readonly Subject<int> depthCount = new();
