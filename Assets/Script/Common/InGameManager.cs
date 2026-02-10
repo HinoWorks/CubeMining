@@ -103,7 +103,7 @@ public class InGameManager : MonoBehaviour
         }
         targetData.resourceCount += _deltaResource;
         GameEvent.UI.PublishResourceMod(_resourceType, targetData.resourceCount);
-        Debug.Log($"AddGetResource: {_resourceType} {targetData.resourceCount}");
+        //Debug.Log($"AddGetResource: {_resourceType} {targetData.resourceCount}");
     }
 
     public void AddGetExTime(float _deltaExTime)

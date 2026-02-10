@@ -21,15 +21,15 @@ public class UIManager_InGame : MonoBehaviour
         if (Inst == null) { Inst = this; }
         else { Destroy(this); }
 
-        foreach (var ui_resourceCounter in ui_resourceCounters)
-        {
-            ui_resourceCounter.AwakeCall();
-        }
-
         GameEvent.UI.TimeLimit.Subscribe(Set_TimeLimit).AddTo(this);
         //GameEvent.UI.CoinMod.Subscribe(Set_CoinMod).AddTo(this);
         GameEvent.UI.DepthCount.Subscribe(Set_DepthCount).AddTo(this);
         GameEvent.GameState.SetGameState.Subscribe(ChangeGateState).AddTo(this);
+
+        foreach (var ui_resourceCounter in ui_resourceCounters)
+        {
+            ui_resourceCounter.AwakeCall();
+        }
     }
 
     private void ChangeGateState(GameStateType _state)

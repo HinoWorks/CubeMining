@@ -30,23 +30,23 @@ public class BlockChangeRateData
 {
     public int blockIndex;
     public int baseRate;
-    public int rate_gold;
     public int rate_iron;
+    public int rate_gold;
     public int rate_emerald;
-    public int rate_4;
-    public int rate_5;
-    public int rate_6;
+    public int rate_ruby;
+    public int rate_sapphire;
+    public int rate_diamond;
 }
 
 public enum ResourceType
 {
-    Stone,
-    Gold,
-    Iron,
-    Emerald,
-    Diamond,
-    Ruby,
-    Sapphire,
+    Stone = 1,
+    Iron = 2,
+    Gold = 3,
+    Emerald = 4,
+    Ruby = 5,
+    Sapphire = 6,
+    Diamond = 7,
 }
 
 

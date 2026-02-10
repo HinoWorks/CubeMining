@@ -43,7 +43,7 @@ MonoBehaviour:
     icon: {fileID: 0}
     pf: {fileID: 8585812083356289928, guid: adc2acd4f4c124ce9b48db5cf8f215d2, type: 3}
     hp: 16
-    baseValue: 12
+    baseValue: 10
     generateInterval: 3
     count: 1
     size: 1
@@ -54,8 +54,8 @@ MonoBehaviour:
     unitDescription: Block - 1 description
     icon: {fileID: 0}
     pf: {fileID: 8585812083356289928, guid: ab021019a89f6440a84da4f18d051c8e, type: 3}
-    hp: 22
-    baseValue: 20
+    hp: 30
+    baseValue: 17
     generateInterval: 4
     count: 1
     size: 1
@@ -66,8 +66,8 @@ MonoBehaviour:
     unitDescription: Block - 1 description
     icon: {fileID: 0}
     pf: {fileID: 8585812083356289928, guid: ab021019a89f6440a84da4f18d051c8e, type: 3}
-    hp: 25
-    baseValue: 35
+    hp: 45
+    baseValue: 25
     generateInterval: 5
     count: 1
     size: 1
@@ -78,8 +78,8 @@ MonoBehaviour:
     unitDescription: Block - 1 description
     icon: {fileID: 0}
     pf: {fileID: 8585812083356289928, guid: ab021019a89f6440a84da4f18d051c8e, type: 3}
-    hp: 30
-    baseValue: 50
+    hp: 65
+    baseValue: 35
     generateInterval: 6
     count: 1
     size: 1
@@ -88,49 +88,49 @@ MonoBehaviour:
   blockChangeRateDatas:
   - blockIndex: 1
     baseRate: 100
-    rate_gold: 10
     rate_iron: 0
+    rate_gold: 10
     rate_emerald: 0
     rate_4: 0
     rate_5: 0
     rate_6: 0
   - blockIndex: 2
     baseRate: 100
-    rate_gold: 12
     rate_iron: 5
+    rate_gold: 12
     rate_emerald: 1
     rate_4: 0
     rate_5: 0
     rate_6: 0
   - blockIndex: 3
     baseRate: 100
-    rate_gold: 7
     rate_iron: 10
+    rate_gold: 7
     rate_emerald: 3
     rate_4: 0
     rate_5: 0
     rate_6: 0
   - blockIndex: 4
     baseRate: 100
-    rate_gold: 5
     rate_iron: 12
+    rate_gold: 5
     rate_emerald: 7
-    rate_4: 1
+    rate_4: 0
     rate_5: 0
     rate_6: 0
   - blockIndex: 5
     baseRate: 100
-    rate_gold: 0
     rate_iron: 5
+    rate_gold: 0
     rate_emerald: 10
-    rate_4: 3
-    rate_5: 1
+    rate_4: 0
+    rate_5: 0
     rate_6: 0
   - blockIndex: 6
     baseRate: 100
-    rate_gold: 0
     rate_iron: 0
+    rate_gold: 0
     rate_emerald: 5
-    rate_4: 7
-    rate_5: 5
-    rate_6: 1
+    rate_4: 0
+    rate_5: 0
+    rate_6: 0

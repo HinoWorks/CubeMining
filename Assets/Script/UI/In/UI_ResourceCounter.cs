@@ -22,6 +22,7 @@ public class UI_ResourceCounter : MonoBehaviour
     public void AwakeCall()
     {
         GameEvent.UI.ResourceMod.Subscribe(Set_ResourceMod).AddTo(this);
+        icon.sprite = SOLoader.ItemData.GetItemUnitData((int)resourceType).icon;
     }
 
     public void Set_Init()

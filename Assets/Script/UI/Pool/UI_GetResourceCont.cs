@@ -8,11 +8,11 @@ public class UI_GetResourceCont : MonoBehaviour
 {
     [SerializeField] Image icon;
     [SerializeField] UI_GetResourceMove moveCont;
-
     private Vector3 targetPosition;
 
     public void Set_ResourceType(ResourceType _resourceType)
     {
+        icon.sprite = SOLoader.ItemData.GetItemUnitData((int)_resourceType).icon;
         var target = UIManager_InGame.Inst.Get_ResourceCounterTargetPosition(_resourceType);
         if (target == null) return;
         targetPosition = target.position;

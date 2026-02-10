@@ -3063,7 +3063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6446760335841843314, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
       propertyPath: resourceType
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7948473545149356829, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
       propertyPath: m_Pivot.x
@@ -10962,12 +10962,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 606231025}
     m_Modifications:
+    - target: {fileID: 2184906996098860695, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cbce8c2bef3424f74ad0e6c3e8919ffc, type: 3}
     - target: {fileID: 3884963467896645909, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
       propertyPath: m_Name
       value: pf_HUD_resourceInfo (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3884963467896645909, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446760335841843314, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
+      propertyPath: resourceType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7948473545149356829, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
@@ -11288,7 +11296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6446760335841843314, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
       propertyPath: resourceType
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7948473545149356829, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
       propertyPath: m_Pivot.x
@@ -14187,7 +14195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6446760335841843314, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
       propertyPath: resourceType
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7948473545149356829, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
       propertyPath: m_Pivot.x
@@ -14376,6 +14384,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 606231025}
     m_Modifications:
+    - target: {fileID: 2184906996098860695, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1f4e0442942964fb5a4b3094cf0b9435, type: 3}
     - target: {fileID: 3884963467896645909, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
       propertyPath: m_Name
       value: pf_HUD_resourceInfo (2)
@@ -14386,7 +14398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6446760335841843314, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
       propertyPath: resourceType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7948473545149356829, guid: 29ee0fc249dbb41f8b4e7e5486106fda, type: 3}
       propertyPath: m_Pivot.x

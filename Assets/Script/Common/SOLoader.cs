@@ -98,6 +98,20 @@ public static class SOLoader
         }
     }
 
+
+    private static SO_ItemData so_itemData;
+    public static SO_ItemData ItemData
+    {
+        get
+        {
+            if (so_itemData == null)
+            {
+                so_itemData = LoadSO<SO_ItemData>(pathBase + nameof(SO_ItemData));
+            }
+            return so_itemData;
+        }
+    }
+
     private static SO_SoundData so_soundData;
     public static SO_SoundData SoundData
     {

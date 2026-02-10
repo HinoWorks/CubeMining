@@ -228,17 +228,17 @@ public class BlockChangeRateParam
         var random = UnityEngine.Random.Range(0, total);
         switch (random)
         {
-            case var _ when random < rate_gold:
-                return BlockType.Gold;
-            case var _ when random < rate_gold + rate_iron:
+            case var _ when random < rate_iron:
                 return BlockType.Iron;
-            case var _ when random < rate_gold + rate_iron + rate_emerald:
+            case var _ when random < rate_iron + rate_gold:
+                return BlockType.Gold;
+            case var _ when random < rate_iron + rate_gold + rate_emerald:
                 return BlockType.Emerald;
-            case var _ when random < rate_gold + rate_iron + rate_emerald + rate_4:
+            case var _ when random < rate_iron + rate_gold + rate_emerald + rate_4:
                 return BlockType.Rate_4;
-            case var _ when random < rate_gold + rate_iron + rate_emerald + rate_4 + rate_5:
+            case var _ when random < rate_iron + rate_gold + rate_emerald + rate_4 + rate_5:
                 return BlockType.Rate_5;
-            case var _ when random < rate_gold + rate_iron + rate_emerald + rate_4 + rate_5 + rate_6:
+            case var _ when random < rate_iron + rate_gold + rate_emerald + rate_4 + rate_5 + rate_6:
                 return BlockType.Rate_6;
             default:
                 return BlockType.None;

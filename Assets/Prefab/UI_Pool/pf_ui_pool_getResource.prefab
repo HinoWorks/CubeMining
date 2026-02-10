@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_GetResourceMove
   setEase: 4
   duration: 1
-  isMoveEndNotActive: 0
+  isMoveEndNotActive: 1
   positionRange: 100
   moveRate: 0.35
   waitActiveRange: 0.25
@@ -105,7 +105,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 35, y: 35}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7554718100964923703
 CanvasRenderer:
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 56d6624c6f0014a7c8870cbbf2c74cbe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66a42e69bacd1474882607ab0685b4b9, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
