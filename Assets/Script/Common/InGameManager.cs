@@ -24,7 +24,7 @@ public class InGameManager : MonoBehaviour
     private float exTime = 0f;
     private BigInteger getCoin;
     private List<ResourceData_Result> resourceDataList = new List<ResourceData_Result>();
-
+    public List<ResourceData_Result> Get_ResourceDataList() => resourceDataList;
 
     void Awake()
     {

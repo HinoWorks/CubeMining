@@ -20,7 +20,6 @@ public class UIManager_OutGame : MonoBehaviour
     [Header(" -- Header --")]
     [SerializeField] UI_OutGame_HeaderButton[] headerButtons;
     [SerializeField] UI_ResourceCounter[] ui_resourceCounters;
-    //[SerializeField] TextMeshProUGUI tmp_coin;
     private float currentCoinFloat;
 
     [Space(10)]
@@ -87,25 +86,6 @@ public class UIManager_OutGame : MonoBehaviour
             }
         }
     }
-
-
-    /*
-    private void Set_CoinMod(BigInteger mod)
-    {
-        var modCoin = StaticManager.Get_BigintegerToUnit(mod);
-        DOTween.To(() => currentCoinFloat, x => currentCoinFloat = x, modCoin.num, 0.5f).OnUpdate(() =>
-        {
-            if (modCoin.unit == "")
-            {
-                tmp_coin.text = $"{currentCoinFloat.ToString("F0")} {modCoin.unit}";
-            }
-            else
-            {
-                tmp_coin.text = $"{currentCoinFloat.ToString("F2")} {modCoin.unit}";
-            }
-        });
-    }
-    */
 
 
     #region -- on Click --

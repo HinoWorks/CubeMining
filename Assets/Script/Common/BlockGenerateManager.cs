@@ -19,12 +19,14 @@ public class GenerateBlockLayerCont
     public int layerIndex;
     public int blockCount => param.so.layerSize * param.so.layerSize;
     private int breakBlockCount = 0;
+    private int createdBlockCount = 0;
 
     public void Init(BlockGenerateParam_Layer _param, int _layerIndex)
     {
         param = _param;
         layerIndex = _layerIndex;
         breakBlockCount = 0;
+        createdBlockCount = 0;
         GenerateBlock();
     }
 
@@ -37,7 +39,7 @@ public class GenerateBlockLayerCont
                 var otherObject = GameParamManager.SelectOtherObject();
                 var newObject = BlockGenerateManager.Inst.GenerateOtherObject(otherObject, layerIndex);
                 newObject.transform.localPosition = GetBlockPosition(i);
-                newObject.Set_BreakCallback(BlockBreakCall);
+                //newObject.Set_BreakCallback(BlockBreakCall);
             }
             else
             {
@@ -47,6 +49,7 @@ public class GenerateBlockLayerCont
                 var newBlock = BlockGenerateManager.Inst.GenerateBlock(blockData, layerIndex);
                 newBlock.transform.localPosition = GetBlockPosition(i);
                 newBlock.Set_BreakCallback(BlockBreakCall);
+                createdBlockCount++;
             }
 
         }
@@ -61,7 +64,7 @@ public class GenerateBlockLayerCont
     private void BlockBreakCall()
     {
         breakBlockCount++;
-        if (breakBlockCount >= blockCount)
+        if (breakBlockCount >= createdBlockCount)
         {
             BlockGenerateManager.Inst.LayerClear(this);
         }
