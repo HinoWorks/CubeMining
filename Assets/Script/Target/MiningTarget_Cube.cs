@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 public class MiningTarget_Cube : MiningTargetBase
 {
+    [SerializeField] GameObject[] obj_blockMeshes;
     [SerializeField] BlockTypeSetter[] blockTypeSetters;
     private Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
     private BlockSize blockSize;
@@ -9,12 +10,17 @@ public class MiningTarget_Cube : MiningTargetBase
 
     private Action breakCallback;
 
+
+    private float meshThreshold_1 = 0.7f;
+    private float meshThreshold_2 = 0.35f;
+
     public override void Init(int _hp, int _value, int _index, int _layerIndex)
     {
         base.Init(_hp, _value, _index, _layerIndex);
         transform.localScale = Vector3.one;
         base.animScale_rate = 1f;
         //hitFlash.Init_Crack();
+        Set_BlockMesh();
     }
     public void Set_BreakCallback(Action _callback)
     {
@@ -36,6 +42,18 @@ public class MiningTarget_Cube : MiningTargetBase
         base.animScale_rate = _size;
     }
 
+    private void Set_BlockMesh()
+    {
+        var currentHpRate = base.hp_rate;
+        var targetIndex = 0;
+        if (currentHpRate <= meshThreshold_2) targetIndex = 2;
+        else if (currentHpRate <= meshThreshold_1) targetIndex = 1;
+        for (int i = 0; i < obj_blockMeshes.Length; i++)
+        {
+            obj_blockMeshes[i].SetActive(i == targetIndex);
+        }
+    }
+
     public override void NotActivate()
     {
         base.NotActivate();
@@ -50,6 +68,7 @@ public class MiningTarget_Cube : MiningTargetBase
         effect.SetActive(true);
         var isBreak = base.Damage(damage);
         //hitFlash.Set_Crack(hp_rate);
+        Set_BlockMesh();
         return isBreak;
     }
 
