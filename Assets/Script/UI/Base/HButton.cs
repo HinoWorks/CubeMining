@@ -31,6 +31,15 @@ public class HButton : Button
         //hButtonConnect = this.GetComponent<HButtonConnect>();
     }
 
+    public void Set_StateInit()
+    {
+        var hbutton = this.GetComponent<HButtonConnect>();
+        if (hbutton != null)
+        {
+            hbutton.Set_StateInit();
+        }
+    }
+
     public override void OnPointerEnter(PointerEventData eventData)
     {
         base.OnPointerEnter(eventData);

@@ -46,7 +46,6 @@ public class InGameManager : MonoBehaviour
             case GameStateType.InGame_Ready:
                 AttackManager.Inst.Set_Ready();
                 BlockGenerateManager.Inst.Init();
-                //getCoin = 0;
                 resourceDataList.Clear();
                 exTime = 0f;
                 GameEvent.UI.PublishCoinMod(getCoin);
@@ -64,9 +63,17 @@ public class InGameManager : MonoBehaviour
             case GameStateType.Result:
                 AttackManager.Inst.AttackUnitDelete();
                 break;
-            case GameStateType.OutGame:
+            case GameStateType.ResultEnd_ToOutGame:
                 BlockGenerateManager.Inst.ResetAllBlocks();
                 Save_IngameResult();
+                GameWatcher.Inst.SetGameState(GameStateType.OutGame);
+                break;
+            case GameStateType.ResultEnd_ToIngameReady:
+                BlockGenerateManager.Inst.ResetAllBlocks();
+                Save_IngameResult();
+                GameWatcher.Inst.SetGameState(GameStateType.InGame_Ready);
+                break;
+            case GameStateType.OutGame:
                 break;
         }
     }
@@ -121,7 +128,6 @@ public class InGameManager : MonoBehaviour
         {
             SaveLoader.Inst.Request_SaveResource(data.resourceType, data.resourceCount);
         }
-        //SaveLoader.Inst.Request_SaveCoin(getCoin);
     }
 
 

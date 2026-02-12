@@ -11,6 +11,8 @@ public enum GameStateType
     InGame,
     InGame_End,
     Result,
+    ResultEnd_ToOutGame,
+    ResultEnd_ToIngameReady,
     OutGame,
 }
 

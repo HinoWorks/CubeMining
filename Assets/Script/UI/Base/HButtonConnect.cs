@@ -16,6 +16,12 @@ public class HButtonConnect : MonoBehaviour
         button.rightClick += RightClickAction;
     }
 
+    public void Set_StateInit()
+    {
+        if (obj_mouseOver != null) obj_mouseOver.SetActive(false);
+        if (obj_clickSelect != null) obj_clickSelect.SetActive(false);
+    }
+
     public void Set_MouseOverActive(bool _active)
     {
         if (obj_mouseOver == null) return;

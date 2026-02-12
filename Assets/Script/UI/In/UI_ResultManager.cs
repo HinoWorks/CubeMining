@@ -28,6 +28,8 @@ public class UI_ResultManager : UI_PopUpBase
 
         var resourceDataList = InGameManager.Inst.Get_ResourceDataList();
         resourceDataList.Sort((a, b) => a.resourceType.CompareTo(b.resourceType));
+
+        await UniTask.Delay(500);
         int index = 0;
         foreach (var resourceData in resourceDataList)
         {
@@ -45,10 +47,15 @@ public class UI_ResultManager : UI_PopUpBase
 
 
     #region -- on Click --
-    public void OnClick_Next()
+    public void OnClick_IngameReady()
     {
         Close();
-        GameWatcher.Inst.SetGameState(GameStateType.OutGame);
+        GameWatcher.Inst.SetGameState(GameStateType.ResultEnd_ToIngameReady);
+    }
+    public void OnClick_OutGame()
+    {
+        Close();
+        GameWatcher.Inst.SetGameState(GameStateType.ResultEnd_ToOutGame);
     }
     #endregion
 }

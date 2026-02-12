@@ -1712,6 +1712,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1727321719964764643}
     m_Modifications:
+    - target: {fileID: 367433039821726065, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
+      propertyPath: m_text
+      value: GO MINING
+      objectReference: {fileID: 0}
     - target: {fileID: 367433040615277788, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_Name
       value: pf_ui_buttonBase (1)
@@ -1814,7 +1818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5569257798595416298, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnClick_Next
+      value: OnClick_IngameReady
       objectReference: {fileID: 0}
     - target: {fileID: 5569257798595416298, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1842,6 +1846,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1727321719964764643}
     m_Modifications:
+    - target: {fileID: 367433039821726065, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
+      propertyPath: m_text
+      value: UPGRADE
+      objectReference: {fileID: 0}
     - target: {fileID: 367433040615277788, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_Name
       value: pf_ui_buttonBase
@@ -1944,7 +1952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5569257798595416298, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnClick_Next
+      value: OnClick_OutGame
       objectReference: {fileID: 0}
     - target: {fileID: 5569257798595416298, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

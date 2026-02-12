@@ -12,6 +12,7 @@ public class UI_PopUpBase : MonoBehaviour
     [Header("AnimType")]
     [SerializeField] animType type;
     [SerializeField] CanvasGroup CG_target;
+    protected HButton[] hButtons;
     public enum animType
     {
         scaleIn, moveIn_y, moveIn_x
@@ -23,6 +24,19 @@ public class UI_PopUpBase : MonoBehaviour
     private Vector3 posi_ini;
     private Sequence seq_open;
 
+    void Awake()
+    {
+        hButtons = this.GetComponentsInChildren<HButton>();
+        AllButtonSet_StateInit();
+    }
+
+    protected virtual void AllButtonSet_StateInit()
+    {
+        foreach (var hButton in hButtons)
+        {
+            hButton.Set_StateInit();
+        }
+    }
 
 
     public virtual void Open()
@@ -41,6 +55,7 @@ public class UI_PopUpBase : MonoBehaviour
     {
         seq_open.Pause();
         this.gameObject.SetActive(false);
+        AllButtonSet_StateInit();
     }
 
     private void CreateSeqence()
