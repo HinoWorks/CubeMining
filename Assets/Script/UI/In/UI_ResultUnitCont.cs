@@ -19,9 +19,15 @@ public class UI_ResultUnitCont : MonoBehaviour
 
     public async UniTask SetData(ResourceType _resourceType, BigInteger _getCount, BigInteger _currentTotal)
     {
+        // icon
         var getIcon = SOLoader.ItemData.GetItemUnitData((int)_resourceType).icon;
         icon.sprite = getIcon;
         icon_total.sprite = getIcon;
+
+        // color
+        var textColor = SOLoader.UISetting.GetTextColor(_resourceType);
+        tmp_resourceCount.color = textColor;
+        tmp_resourceTotal.color = textColor;
 
         Set_ResourceCount(tmp_resourceCount, _getCount);
         Set_ResourceCount(tmp_resourceTotal, _currentTotal);

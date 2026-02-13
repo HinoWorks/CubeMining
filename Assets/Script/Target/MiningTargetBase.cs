@@ -41,7 +41,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     public virtual bool Damage(int damage)
     {
         hp -= damage;
-        Set_DamageText(damage);
+        //Set_DamageText(damage);
         DamageAction();
         if (hp <= 0)
         {

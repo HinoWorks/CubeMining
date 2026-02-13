@@ -192,11 +192,18 @@ public class BlockGenerateParam_Layer
 }
 
 
+/*
 public enum BlockType
 {
-    None, Gold, Iron, Emerald,
-    Rate_4, Rate_5, Rate_6,
+    None,
+    Iron,
+    Gold,
+    Emerald,
+    Ruby,
+    Sapphire,
+    Diamond,
 }
+*/
 /// <summary>
 /// ブロックの変化率パラメータ == 土、岩などのブロックタイプ毎に鉱石の抽選率を設定
 /// </summary>
@@ -222,26 +229,26 @@ public class BlockChangeRateParam
         rate_sapphire = _blockChangeRateData.rate_sapphire;
         rate_diamond = _blockChangeRateData.rate_diamond;
     }
-    public BlockType SelectBlockType()
+    public ResourceType SelectBlockType()
     {
         var total = baseRate + rate_gold + rate_iron + rate_emerald + rate_ruby + rate_sapphire + rate_diamond;
         var random = UnityEngine.Random.Range(0, total);
         switch (random)
         {
             case var _ when random < rate_iron:
-                return BlockType.Iron;
+                return ResourceType.Iron;
             case var _ when random < rate_iron + rate_gold:
-                return BlockType.Gold;
+                return ResourceType.Gold;
             case var _ when random < rate_iron + rate_gold + rate_emerald:
-                return BlockType.Emerald;
+                return ResourceType.Emerald;
             case var _ when random < rate_iron + rate_gold + rate_emerald + rate_ruby:
-                return BlockType.Rate_4;
+                return ResourceType.Ruby;
             case var _ when random < rate_iron + rate_gold + rate_emerald + rate_ruby + rate_sapphire:
-                return BlockType.Rate_5;
+                return ResourceType.Sapphire;
             case var _ when random < rate_iron + rate_gold + rate_emerald + rate_ruby + rate_sapphire + rate_diamond:
-                return BlockType.Rate_6;
+                return ResourceType.Diamond;
             default:
-                return BlockType.None;
+                return ResourceType.Stone;
         }
     }
 

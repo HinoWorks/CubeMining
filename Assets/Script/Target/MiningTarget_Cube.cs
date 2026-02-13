@@ -6,7 +6,7 @@ public class MiningTarget_Cube : MiningTargetBase
     [SerializeField] BlockTypeSetter[] blockTypeSetters;
     private Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
     private BlockSize blockSize;
-    private BlockType blockType;
+    private ResourceType resourceType;
 
     private Action breakCallback;
 
@@ -26,12 +26,12 @@ public class MiningTarget_Cube : MiningTargetBase
     {
         breakCallback = _callback;
     }
-    public void Set_BlockType(BlockType _blockType)
+    public void Set_BlockType(ResourceType _resourceType)
     {
-        blockType = _blockType;
+        resourceType = _resourceType;
         foreach (var blockTypeSetter in blockTypeSetters)
         {
-            blockTypeSetter.Set_BlockTypeObject(blockType);
+            blockTypeSetter.Set_BlockTypeObject(_resourceType);
         }
     }
     public void Set_BlockSize(BlockSize _blockSize, float _size)
@@ -100,18 +100,6 @@ public class MiningTarget_Cube : MiningTargetBase
 
     private void AddGetResource()
     {
-        var resourceType = blockType switch
-        {
-            BlockType.None => ResourceType.Stone,
-            BlockType.Gold => ResourceType.Gold,
-            BlockType.Iron => ResourceType.Iron,
-            BlockType.Emerald => ResourceType.Emerald,
-            BlockType.Rate_4 => ResourceType.Diamond,
-            BlockType.Rate_5 => ResourceType.Ruby,
-            BlockType.Rate_6 => ResourceType.Sapphire,
-            _ => ResourceType.Stone,
-        };
-
         var resourceRate = resourceType == ResourceType.Stone ? 1f : 0.5f;
         var getCount = (int)resourceRate * base.value;
         if (getCount <= 0) getCount = 1;
@@ -123,5 +111,8 @@ public class MiningTarget_Cube : MiningTargetBase
             ui_resourceCont.Set_ResourceType(resourceType);
             ui_resourceCont.SetInit(transform.position);
         }
+
+        var getText = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
+        getText.SetText_Coin(StaticManager.Get_BigintegerToString(getCount), SOLoader.UISetting.GetTextColor(resourceType));
     }
 }

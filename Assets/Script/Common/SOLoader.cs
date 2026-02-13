@@ -111,6 +111,18 @@ public static class SOLoader
             return so_itemData;
         }
     }
+    private static SO_UISetting so_uiSetting;
+    public static SO_UISetting UISetting
+    {
+        get
+        {
+            if (so_uiSetting == null)
+            {
+                so_uiSetting = LoadSO<SO_UISetting>(pathBase + nameof(SO_UISetting));
+            }
+            return so_uiSetting;
+        }
+    }
 
     private static SO_SoundData so_soundData;
     public static SO_SoundData SoundData
