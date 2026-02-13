@@ -19,6 +19,16 @@ public class ArtifactUnitData
 }
 
 
+[System.Serializable]
+public class ArtifactGenerateRateData
+{
+    public int generateLevel;
+    public int artifactCount;
+    public float baseRate;
+    public float deltaInterval;
+    public float deltaRate;
+}
+
 
 
 
@@ -26,6 +36,8 @@ public class ArtifactUnitData
 public class SO_ArtifactData : ScriptableObject
 {
     public ArtifactUnitData[] artifactDatas;
+    public ArtifactGenerateRateData[] artifactGenerateRateDatas;
+
 
     public ArtifactUnitData Get_ArtifactData(int _artifactIndex)
     {
@@ -34,6 +46,16 @@ public class SO_ArtifactData : ScriptableObject
         if (data == null)
         {
             Debug.LogError($"ArtifactUnitData is not found: {_artifactIndex}");
+        }
+        return data;
+    }
+
+    public ArtifactGenerateRateData Get_ArtifactGenerateRateData(int artifactCount)
+    {
+        var data = Array.Find(artifactGenerateRateDatas, x => x.artifactCount >= artifactCount);
+        if (data == null)
+        {
+            Debug.LogError($"ArtifactGenerateRateData is not found: {artifactCount}");
         }
         return data;
     }

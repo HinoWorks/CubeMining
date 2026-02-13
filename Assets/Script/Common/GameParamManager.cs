@@ -191,19 +191,6 @@ public class BlockGenerateParam_Layer
     }
 }
 
-
-/*
-public enum BlockType
-{
-    None,
-    Iron,
-    Gold,
-    Emerald,
-    Ruby,
-    Sapphire,
-    Diamond,
-}
-*/
 /// <summary>
 /// ブロックの変化率パラメータ == 土、岩などのブロックタイプ毎に鉱石の抽選率を設定
 /// </summary>
@@ -256,27 +243,36 @@ public class BlockChangeRateParam
     {
         switch (_paramType)
         {
-            case ParamType.Rate_Gold:
-                rate_gold += (int)_setParam;
-                break;
-            case ParamType.Rate_Iron:
-                rate_iron += (int)_setParam;
-                break;
-            case ParamType.Rate_Emerald:
-                rate_emerald += (int)_setParam;
-                break;
-            case ParamType.Rate_4:
-                rate_ruby += (int)_setParam;
-                break;
-            case ParamType.Rate_5:
-                rate_sapphire += (int)_setParam;
-                break;
-            case ParamType.Rate_6:
-                rate_diamond += (int)_setParam;
-                break;
+            case ParamType.Rate_Gold: rate_gold += (int)_setParam; break;
+            case ParamType.Rate_Iron: rate_iron += (int)_setParam; break;
+            case ParamType.Rate_Emerald: rate_emerald += (int)_setParam; break;
+            case ParamType.Rate_4: rate_ruby += (int)_setParam; break;
+            case ParamType.Rate_5: rate_sapphire += (int)_setParam; break;
+            case ParamType.Rate_6: rate_diamond += (int)_setParam; break;
         }
     }
 }
+
+
+
+/// <summary>
+/// アーティファクトの生成率パラメータ --- インゲーム開始時に設定、ゲーム中は変更不可
+/// </summary>
+public class ArtifactGenerateRateParam
+{
+    private ArtifactGenerateRateData so;
+    public float generateRate { get; private set; } = 0f;
+    public void Init()
+    {
+        var alredyArtifactCount = SaveLoader.Inst.Get_ArtifactTotalCount();
+        so = SOLoader.ArtifactData.Get_ArtifactGenerateRateData(alredyArtifactCount);
+        var currentBlockCount = SaveLoader.Inst.ArtifactCurrentBlockCount;
+
+        generateRate = so.baseRate + so.deltaRate * currentBlockCount / so.deltaInterval;
+        Debug.Log($"<color=green>========== artifactGenerateRate: {generateRate} ==========</color>");
+    }
+}
+
 
 /// <summary>
 /// アタックユニットのパラメータ
@@ -350,6 +346,7 @@ public class AttackParam
 public static class GameParamManager
 {
     public readonly static GameBaseParam gameBaseParam = new GameBaseParam();
+    public readonly static ArtifactGenerateRateParam artifactGenerateRateParam = new ArtifactGenerateRateParam();
 
     public readonly static List<ObjectGenerateParam> list_objectGenerateParam = new List<ObjectGenerateParam>();
     public readonly static List<BlockGenerateParam> list_blockGenerateParam = new List<BlockGenerateParam>();
@@ -357,6 +354,7 @@ public static class GameParamManager
     public readonly static List<BlockChangeRateParam> list_blockChangeRateParam = new List<BlockChangeRateParam>();
     public readonly static List<AttackParam> list_attackParam = new List<AttackParam>();
 
+    public static float artifactGenerateRate => artifactGenerateRateParam.generateRate;
     public static int otherObjectRate { get; private set; } = 0;
     public static int otherObjectBaseRate { get; private set; } = 100;
 
@@ -433,6 +431,17 @@ public static class GameParamManager
     #endregion
 
 
+
+    #region -- other object generate param --
+    public static bool IsArtifactGenerate()
+    {
+        var random = UnityEngine.Random.Range(0, 100);
+        //Debug.Log($"otherObjectRate: {otherObjectRate} / {otherObjectBaseRate + otherObjectRate} / {random} => {random < otherObjectRate}");
+        return random < artifactGenerateRate;
+    }
+    #endregion
+
+
     public static async UniTask Init()
     {
         // ゲームの基本的なパラメタを読み込む
@@ -442,6 +451,14 @@ public static class GameParamManager
         await Init_ArtifactParam(); // artifactによるデータ更新
 
         await UniTask.DelayFrame(1);
+    }
+
+    /// <summary>
+    /// インゲーム開始時に更新するパラメータはここに記載
+    /// </summary>
+    public static void Init_IngameStart()
+    {
+        artifactGenerateRateParam.Init();
     }
 
     public static void Init_GameBaseParam()

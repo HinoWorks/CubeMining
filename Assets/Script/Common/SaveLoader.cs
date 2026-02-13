@@ -9,11 +9,26 @@ using System.Linq;
 
 
 [System.Serializable]
-public class ResourceData
+public class GameRecordData
 {
-    public ResourceType resourceType;
-    public BigInteger count;
+    // -- total record --
+    public BigInteger total_ingameCount;
+    public BigInteger total_blockBreakCount;
+    public BigInteger total_playerExp;
+    public BigInteger total_totalDamage;
+    public BigInteger total_depth;
+    public BigInteger total_skillTreeCount;
+    public BigInteger total_artifactCount;
+
+
+    // -- one game record --
+    public BigInteger oneGame_blockBreakCount;
+    public BigInteger oneGame_playerExp;
+    public BigInteger oneGame_totalDamage;
+    public BigInteger oneGame_maxDepth;
 }
+
+
 
 [System.Serializable]
 public class SkillTreeData
@@ -28,12 +43,9 @@ public class ItemData
 {
     public string key = ""; //不要だが一旦保持
     public int count = 0;
-
-    // -- for future use --
-    //
-    //
 }
 
+#region -- Artifact --
 [System.Serializable]
 public class ArtifactData
 {
@@ -41,8 +53,6 @@ public class ArtifactData
     public int level = 1;
     //public int equipSlotIndex = -1;
 }
-
-
 [System.Serializable]
 public class ArtifactSlotData
 {
@@ -50,6 +60,8 @@ public class ArtifactSlotData
     public bool isOpen = false;
     public int equipedArtifactIndex;
 }
+
+#endregion
 
 
 
@@ -104,27 +116,20 @@ public class SaveLoader : MonoBehaviour
     #endregion
 
 
-
-    private const string KEY_UNLOCK_EVENTINDEX = "key_unlockEventIndex";
-    private int unlockEventIndex;
-    public int UnlockEventIndex { get => unlockEventIndex; }
+    private const string KEY_ARTIFACT_CURRENTBLOCKCOUNT = "key_artifactCurrentBlockCount";
+    private int artifactCurrentBlockCount;
+    public int ArtifactCurrentBlockCount { get => artifactCurrentBlockCount; }
 
 
 
     #region -- result param --
-    private const string KEY_BLOCKCOUNT = "key_blockCount";
+    // TODO HERE -- のちに削除 --
     private int blockCount;
     public int BlockCount { get => blockCount; }
-
-    private const string KEY_INGAME_COUNT = "key_ingameCount";
     private int ingameCount;
     public int IngameCount { get => ingameCount; }
-
-    private const string KEY_PLAYER_LEVEL = "key_playerLevel";
     private int playerLevel;
     public int PlayerLevel { get => playerLevel; }
-
-    private const string KEY_PLAYER_EXP = "key_playerExp";
     private int playerExp;
     public int PlayerExp { get => playerExp; }
     #endregion
@@ -141,8 +146,6 @@ public class SaveLoader : MonoBehaviour
         if (Inst == null) Inst = this;
         else { Destroy(this); }
     }
-
-
     async void Start()
     {
         currentState = state.InitialLoad;
@@ -172,11 +175,11 @@ public class SaveLoader : MonoBehaviour
         resourceSapphire = ES3.KeyExists(KEY_RESOURCE_SAPPHIRE) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_SAPPHIRE)) : 0;
         resourceDiamond = ES3.KeyExists(KEY_RESOURCE_DIAMOND) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_DIAMOND)) : 0;
 
-        unlockEventIndex = ES3.KeyExists(KEY_UNLOCK_EVENTINDEX) ? ES3.Load<int>(KEY_UNLOCK_EVENTINDEX) : 1;
-        blockCount = ES3.KeyExists(KEY_BLOCKCOUNT) ? ES3.Load<int>(KEY_BLOCKCOUNT) : 0;
-        ingameCount = ES3.KeyExists(KEY_INGAME_COUNT) ? ES3.Load<int>(KEY_INGAME_COUNT) : 0;
-        playerLevel = ES3.KeyExists(KEY_PLAYER_LEVEL) ? ES3.Load<int>(KEY_PLAYER_LEVEL) : 0;
-        playerExp = ES3.KeyExists(KEY_PLAYER_EXP) ? ES3.Load<int>(KEY_PLAYER_EXP) : 0;
+        //unlockEventIndex = ES3.KeyExists(KEY_UNLOCK_EVENTINDEX) ? ES3.Load<int>(KEY_UNLOCK_EVENTINDEX) : 1;
+        //blockCount = ES3.KeyExists(KEY_BLOCKCOUNT) ? ES3.Load<int>(KEY_BLOCKCOUNT) : 0;
+        //ingameCount = ES3.KeyExists(KEY_INGAME_COUNT) ? ES3.Load<int>(KEY_INGAME_COUNT) : 0;
+        //playerLevel = ES3.KeyExists(KEY_PLAYER_LEVEL) ? ES3.Load<int>(KEY_PLAYER_LEVEL) : 0;
+        //playerExp = ES3.KeyExists(KEY_PLAYER_EXP) ? ES3.Load<int>(KEY_PLAYER_EXP) : 0;
 
         currentState = state.Idling;
     }
@@ -318,61 +321,14 @@ public class SaveLoader : MonoBehaviour
     }
     private void SaveUnlockEventIndex(int _index)
     {
-        unlockEventIndex = _index;
-        ES3.Save(KEY_UNLOCK_EVENTINDEX, unlockEventIndex);
+        //unlockEventIndex = _index;
+        // ES3.Save(KEY_UNLOCK_EVENTINDEX, unlockEventIndex);
     }
     #endregion
 
 
+
     #region -- Ingame result data --
-    /// <summary>
-    /// ブロック破壊カウントセーブリクエスト
-    /// </summary>
-    public void Request_SaveBlockBreakCount(int _count)
-    {
-        EnqueueMethod(() => { SaveBlockBreakCount(_count); });
-    }
-    private void SaveBlockBreakCount(int _count)
-    {
-        blockCount += _count;
-        ES3.Save(KEY_BLOCKCOUNT, blockCount);
-    }
-    /// <summary>
-    /// インゲームプレイカウント
-    /// </summary>
-    public void Request_SaveIngameCount(int _count)
-    {
-        EnqueueMethod(() => { SaveIngameCount(_count); });
-    }
-    private void SaveIngameCount(int _count)
-    {
-        ingameCount += _count;
-        ES3.Save(KEY_INGAME_COUNT, ingameCount);
-    }
-    /// <summary>
-    /// プレイヤーレベルセーブリクエスト
-    /// </summary>
-    public void Request_SavePlayerLevel(int _level)
-    {
-        EnqueueMethod(() => { SavePlayerLevel(_level); });
-    }
-    private void SavePlayerLevel(int _level)
-    {
-        playerLevel += _level;
-        ES3.Save(KEY_PLAYER_LEVEL, playerLevel);
-    }
-    /// <summary>
-    /// プレイヤー経験値セーブリクエスト
-    /// </summary>
-    public void Request_SavePlayerExp(int _exp)
-    {
-        EnqueueMethod(() => { SavePlayerExp(_exp); });
-    }
-    private void SavePlayerExp(int _exp)
-    {
-        playerExp += _exp;
-        ES3.Save(KEY_PLAYER_EXP, playerExp);
-    }
     #endregion
 
 
@@ -475,6 +431,23 @@ public class SaveLoader : MonoBehaviour
     private string GetArtifactDataKey(int _artifactIndex)
     {
         return $"ArtifactData-{_artifactIndex}";
+    }
+
+    /// <summary>
+    /// アーティファクトの所持数を取得
+    /// </summary>
+    public int Get_ArtifactTotalCount()
+    {
+        var artifactCount = 0;
+        foreach (var artifactData in SOLoader.ArtifactData.artifactDatas)
+        {
+            var key = GetArtifactDataKey(artifactData.artifactIndex);
+            if (ES3.KeyExists(key))
+            {
+                artifactCount++;
+            }
+        }
+        return artifactCount;
     }
     #endregion
 

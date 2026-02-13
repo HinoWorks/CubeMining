@@ -79,6 +79,10 @@ public class DataBase : MonoBehaviour
         var loadData = await DataLoad("AttackUnit");
         var convData = CSVSerializer.Deserialize<AttackUnitData>(loadData);
         mSO_AttackUnitData.attackUnitDatas = convData;
+
+        var loadData2 = await DataLoad("ArtifactRate");
+        var convData2 = CSVSerializer.Deserialize<ArtifactGenerateRateData>(loadData2);
+        mSO_ArtifactData.artifactGenerateRateDatas = convData2;
     }
 
     private async UniTask DataLoad_BlockData()

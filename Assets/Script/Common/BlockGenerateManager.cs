@@ -39,7 +39,20 @@ public class GenerateBlockLayerCont
                 var otherObject = GameParamManager.SelectOtherObject();
                 var newObject = BlockGenerateManager.Inst.GenerateOtherObject(otherObject, layerIndex);
                 newObject.transform.localPosition = GetBlockPosition(i);
-                //newObject.Set_BreakCallback(BlockBreakCall);
+                //newObject.Set_BreakCallback(BlockBreakCall); //重力で下層に落ちるので、layerカウントに含めない
+            }
+            else if (GameParamManager.IsArtifactGenerate())
+            {
+                // == TODO HERE ==
+                // アーティファクトを生成
+                // アーティファクトのパラメータを取得
+                // == TODO HERE ==
+                /*
+                var artifactIndex = 1;
+                var newArtifact = BlockGenerateManager.Inst.GenerateArtifact(artifact, layerIndex);
+                newArtifact.transform.localPosition = GetBlockPosition(i);
+                newArtifact.Set_BreakCallback(BlockBreakCall);
+            */
             }
             else
             {
@@ -81,6 +94,7 @@ public class BlockGenerateManager : MonoBehaviour
     // -- loc
     private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
     private List<MiningTarget_Object> list_targetObjects = new List<MiningTarget_Object>(); // 生成されたオブジェクトのリスト
+    private List<MiningTarget_Object> list_targetArtifacts = new List<MiningTarget_Object>(); // 生成されたアーティファクトのリスト
     private List<GenerateBlockLayerCont> list_layerConts = new List<GenerateBlockLayerCont>(); // 生成されたレイヤーのリスト
     private GenerateBlockLayerCont currentLayerCont; //最上層のレイヤー
 
@@ -197,7 +211,23 @@ public class BlockGenerateManager : MonoBehaviour
     }
     #endregion
 
-
+    #region == Artifact Generate ==
+    public MiningTarget_Object GenerateArtifact(ArtifactGenerateRateParam _artifactData, int _layerIndex)
+    {
+        /*
+        var targetArtifact = list_targetArtifacts.Find(x => x.isActiveAndEnabled == false && x.index == _artifactData.so.artifactIndex);
+        if (targetArtifact == null)
+        {
+            var newArtifact = Instantiate(_artifactData.so.pf, InGameManager.Inst.ParentPool) as GameObject;
+            targetArtifact = newArtifact.GetComponent<MiningTarget_Object>();
+            list_targetArtifacts.Add(targetArtifact);
+        }
+        targetArtifact.Init(_artifactData, _layerIndex);
+        return targetArtifact;
+        */
+        return null;
+    }
+    #endregion
 
 
 

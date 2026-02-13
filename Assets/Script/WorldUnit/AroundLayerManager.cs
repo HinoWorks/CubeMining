@@ -45,6 +45,7 @@ public class AroundLayerManager : MonoBehaviour
     }
 #endif
 
+
     void Start()
     {
         GameEvent.GameState.SetGameState.Subscribe(SetGameState).AddTo(this);
@@ -66,9 +67,9 @@ public class AroundLayerManager : MonoBehaviour
         {
             case GameStateType.Title:
                 break;
-
             case GameStateType.InGame_Ready:
-                Set_GroundAnimation(true);
+                Set_GroundInitialPosition();
+                Set_GroundAnimation();
                 Init_AllLayers();
                 break;
             case GameStateType.InGame:
@@ -77,7 +78,7 @@ public class AroundLayerManager : MonoBehaviour
                 break;
             case GameStateType.OutGame:
                 NotActivate_AllLayers();
-                Set_GroundAnimation(false);
+                Set_GroundInitialPosition();
                 break;
         }
     }
@@ -123,23 +124,19 @@ public class AroundLayerManager : MonoBehaviour
     }
 
 
-
-    private void Set_GroundAnimation(bool _isOpen)
+    private void Set_GroundInitialPosition()
     {
-        if (_isOpen)
-        {
-            parent_startAnim.gameObject.SetActive(true);
-            parent_startAnim.DOLocalMoveY(-10, 1.5f).SetEase(Ease.InBack).SetDelay(0.25f)
-                .OnComplete(() =>
-                {
-                    parent_startAnim.gameObject.SetActive(false);
-                });
-        }
-        else
-        {
-            parent_startAnim.gameObject.SetActive(true);
-            parent_startAnim.localPosition = startAnim_basePosition;
-        }
+        parent_startAnim.gameObject.SetActive(true);
+        parent_startAnim.localPosition = startAnim_basePosition;
+    }
+    private void Set_GroundAnimation()
+    {
+        parent_startAnim.DOLocalMoveY(-10, 1.5f).SetEase(Ease.InBack).SetDelay(0.25f)
+            .OnComplete(() =>
+            {
+                parent_startAnim.gameObject.SetActive(false);
+            });
+
     }
 
 

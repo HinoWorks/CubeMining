@@ -44,6 +44,7 @@ public class InGameManager : MonoBehaviour
         switch (state)
         {
             case GameStateType.InGame_Ready:
+                GameParamManager.Init_IngameStart();
                 AttackManager.Inst.Set_Ready();
                 BlockGenerateManager.Inst.Init();
                 resourceDataList.Clear();

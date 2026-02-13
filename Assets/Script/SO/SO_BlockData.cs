@@ -55,6 +55,7 @@ public class SO_BlockData : ScriptableObject
 {
     public BlockData[] blockDatas;
     public BlockChangeRateData[] blockChangeRateDatas;
+    public GameObject pf_Artifact;
 
 
 
