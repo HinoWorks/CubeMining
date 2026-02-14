@@ -31,6 +31,17 @@ public static class GameEvent
     }
 
 
+    public static class InGame
+    {
+        // インゲームでゲーム記録データが変化した時のイベント、主に1回のインゲーム中の記録データ変化を通知
+        private static readonly Subject<(GameRecordData_Type, System.Numerics.BigInteger)> gameRecordDataMod_Ingame = new();
+        public static IObservable<(GameRecordData_Type, System.Numerics.BigInteger)> GameRecordDataMod_Ingame => gameRecordDataMod_Ingame.AsObservable();
+        public static void PublishGameRecordDataMod_Ingame(GameRecordData_Type gameRecordData_Type, System.Numerics.BigInteger mod)
+        {
+            gameRecordDataMod_Ingame.OnNext((gameRecordData_Type, mod));
+        }
+    }
+
 
     public static class Input
     {
@@ -90,7 +101,7 @@ public static class GameEvent
             resourceMod.OnNext((resourceType, mod));
         }
 
-        // インゲームでリソースが変化した時のイベント
+        // インゲームでリソースが変化した時のイベント、主に1回のインゲーム中のリソース変化を通知
         private static readonly Subject<(ResourceType, System.Numerics.BigInteger)> resourceMod_Ingame = new();
         public static IObservable<(ResourceType, System.Numerics.BigInteger)> ResourceMod_Ingame => resourceMod_Ingame.AsObservable();
         public static void PublishResourceMod_Ingame(ResourceType resourceType, System.Numerics.BigInteger mod)
@@ -104,6 +115,7 @@ public static class GameEvent
         {
             depthCount.OnNext(depth);
         }
+
     }
 
 

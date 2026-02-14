@@ -4,6 +4,13 @@ public class MiningTarget_Timer : MiningTarget_Object
 {
     private float exTimeBase = 1f;
 
+    public override void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData, int _layerIndex)
+    {
+        base.Init(_objectGenerateParam, _blockData, _layerIndex);
+        exTimeBase = _objectGenerateParam.so.valueRate;
+        base.Init_MiningTargetBase(hp, 0, _objectGenerateParam.so.objectIndex, _layerIndex);
+    }
+
     public override void BreakFromDamage()
     {
         // effect

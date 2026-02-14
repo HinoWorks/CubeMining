@@ -36,8 +36,11 @@ public class GenerateBlockLayerCont
         {
             if (GameParamManager.IsOtherObjectGenerate())
             {
+                var blockIndex = param.SelectBlockIndex();
+                var blockData = SOLoader.BlockData.GetBlockData(blockIndex);
+
                 var otherObject = GameParamManager.SelectOtherObject();
-                var newObject = BlockGenerateManager.Inst.GenerateOtherObject(otherObject, layerIndex);
+                var newObject = BlockGenerateManager.Inst.GenerateOtherObject(otherObject, blockData, layerIndex);
                 newObject.transform.localPosition = GetBlockPosition(i);
                 //newObject.Set_BreakCallback(BlockBreakCall); //重力で下層に落ちるので、layerカウントに含めない
             }
@@ -178,6 +181,7 @@ public class BlockGenerateManager : MonoBehaviour
         CreateNewLayerCont();
 
         GameEvent.UI.PublishDepthCount(currentLayerCont.layerIndex);
+        GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.Depth, currentLayerCont.layerIndex);
         Debug.Log($"currentLayerCont : {currentLayerCont.layerIndex}");
     }
 
@@ -204,7 +208,7 @@ public class BlockGenerateManager : MonoBehaviour
 
 
     #region == Other Object Generate ==
-    public MiningTarget_Object GenerateOtherObject(ObjectGenerateParam _objectData, int _layerIndex)
+    public MiningTarget_Object GenerateOtherObject(ObjectGenerateParam _objectData, BlockData _blockData, int _layerIndex)
     {
         var targetObject = list_targetObjects.Find(x => x.isActiveAndEnabled == false && x.index == _objectData.so.objectIndex);
         if (targetObject == null)
@@ -213,7 +217,7 @@ public class BlockGenerateManager : MonoBehaviour
             targetObject = newObject.GetComponent<MiningTarget_Object>();
             list_targetObjects.Add(targetObject);
         }
-        targetObject.Init(_objectData, _layerIndex);
+        targetObject.Init(_objectData, _blockData, _layerIndex);
         return targetObject;
     }
     #endregion

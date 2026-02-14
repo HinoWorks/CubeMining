@@ -22,14 +22,16 @@ public class GameRecordData_thisGame
     public BigInteger blockBreakCount;
     public BigInteger playerExp;
     public BigInteger totalDamage;
-    public BigInteger maxDepth;
+    public int Depth;
+    public int treasureCount;
 }
 public enum GameRecordData_Type
 {
     BlockBreakCount,
     PlayerExp = 1,
-    TotalDamage = 2,
-    MaxDepth = 3,
+    Damage = 2,
+    Depth = 3,
+    TreasureCount = 4,
 }
 
 
@@ -62,6 +64,7 @@ public class InGameManager : MonoBehaviour
     void Start()
     {
         GameEvent.GameState.SetGameState.Subscribe(SetGameState).AddTo(this);
+        GameEvent.InGame.GameRecordDataMod_Ingame.Subscribe(Fix_GameRecordData).AddTo(this);
     }
 
 
@@ -189,8 +192,8 @@ public class InGameManager : MonoBehaviour
         gameRecordData_Now.total_blockBreakCount += gameRecordData_thisGame.blockBreakCount;
         gameRecordData_Now.total_playerExp += gameRecordData_thisGame.playerExp;
         gameRecordData_Now.total_totalDamage += gameRecordData_thisGame.totalDamage;
-        gameRecordData_Now.total_depth += gameRecordData_thisGame.maxDepth;
-
+        gameRecordData_Now.total_depth += gameRecordData_thisGame.Depth;
+        gameRecordData_Now.total_treasureCount += gameRecordData_thisGame.treasureCount;
         // one game data -> 今回のゲーム結果が最高値ならそれを更新
         if (gameRecordData_thisGame.blockBreakCount > gameRecordData_Now.oneGame_blockBreakCount)
         {
@@ -207,21 +210,24 @@ public class InGameManager : MonoBehaviour
         SaveLoader.Inst.Request_SaveGameRecordData(gameRecordData_Now);
     }
 
-    public void Fix_GameRecordData(GameRecordData_Type _gameRecordData_Type, BigInteger _value)
+    private void Fix_GameRecordData((GameRecordData_Type type, BigInteger delta) _gameRecordData)
     {
-        switch (_gameRecordData_Type)
+        switch (_gameRecordData.type)
         {
             case GameRecordData_Type.BlockBreakCount:
-                gameRecordData_thisGame.blockBreakCount += _value;
+                gameRecordData_thisGame.blockBreakCount += _gameRecordData.delta;
                 break;
             case GameRecordData_Type.PlayerExp:
-                gameRecordData_thisGame.playerExp += _value;
+                gameRecordData_thisGame.playerExp += _gameRecordData.delta;
                 break;
-            case GameRecordData_Type.TotalDamage:
-                gameRecordData_thisGame.totalDamage += _value;
+            case GameRecordData_Type.Damage:
+                gameRecordData_thisGame.totalDamage += _gameRecordData.delta;
                 break;
-            case GameRecordData_Type.MaxDepth:
-                gameRecordData_thisGame.maxDepth = _value;
+            case GameRecordData_Type.Depth:
+                gameRecordData_thisGame.Depth = (int)_gameRecordData.delta;
+                break;
+            case GameRecordData_Type.TreasureCount:
+                gameRecordData_thisGame.treasureCount += (int)_gameRecordData.delta;
                 break;
         }
     }

@@ -2,8 +2,25 @@ using UnityEngine;
 
 public class MiningTarget_Tresure : MiningTarget_Object
 {
+    private ResourceType resourceType;
     private int treasureValueRate = 10;
+    private int rate_max = 10;
+    private int rate_min = 5;
 
+
+    public override void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData, int _layerIndex)
+    {
+        var hp = (int)(_blockData.hp * _objectGenerateParam.so.hpRate);
+        treasureValueRate = UnityEngine.Random.Range(rate_min, rate_max);
+        var getTreasureValue = (int)(_blockData.baseValue * _objectGenerateParam.so.valueRate * treasureValueRate);
+        if (getTreasureValue <= 0) getTreasureValue = 1;
+
+        base.Init_MiningTargetBase(hp, getTreasureValue, _objectGenerateParam.so.objectIndex, _layerIndex);
+
+        // ブロックのタイプを自分で抽選
+        var blockTypeData = GameParamManager.Get_BlockChangeRateParam(_blockData.blockIndex);
+        resourceType = blockTypeData.SelectBlockType();
+    }
 
     public override void BreakFromDamage()
     {
@@ -13,15 +30,26 @@ public class MiningTarget_Tresure : MiningTarget_Object
         effect.SetActive(true);
 
         // ===== treasure value ======
-        //var getTresureCoin = (int)(BlockGenerateManager.Inst.blockGenerateParam_max.baseValue
-        //                            * treasureValueRate * objectGenerateParam.so.valueRate);
-        var getTresureCoin = 10;
+        AddGetResource();
 
-        InGameManager.Inst.AddGetCoin(getTresureCoin);
-        var ui_textCoinGet = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
-        ui_textCoinGet.SetText_Coin(StaticManager.Get_BigintegerToString(getTresureCoin), Color.green);
+        GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.TreasureCount, 1);
+        GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.Damage, hp_max);
+
         base.BreakFromDamage();
     }
 
+    private void AddGetResource()
+    {
+        InGameManager.Inst.AddGetResource(resourceType, base.value);
+        for (int i = 0; i < base.value; i++)
+        {
+            var ui_resourceCont = UI_PoolManager.Inst.Set_GetResourceCont();
+            ui_resourceCont.Set_ResourceType(resourceType);
+            ui_resourceCont.SetInit(transform.position);
+        }
+
+        var getText = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
+        getText.SetText_Coin(StaticManager.Get_BigintegerToString(base.value), SOLoader.UISetting.GetTextColor(resourceType));
+    }
 
 }

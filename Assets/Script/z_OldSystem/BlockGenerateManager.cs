@@ -232,7 +232,7 @@ namespace OldSystem
             }
             targetObject.transform.position = GetRandomPosition();
             targetObject.transform.rotation = GetRandomRotation();
-            targetObject.Init(_objectData.param, 0);
+            targetObject.Init(_objectData.param, null, 0);
         }
         #endregion
 

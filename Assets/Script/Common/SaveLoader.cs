@@ -14,6 +14,7 @@ public class GameRecordData
     // -- total record --
     public BigInteger total_ingameCount = 0;
     public BigInteger total_blockBreakCount = 0;
+    public BigInteger total_treasureCount = 0;
     public BigInteger total_playerExp = 0;
     public BigInteger total_totalDamage = 0;
     public BigInteger total_depth = 0;
@@ -22,6 +23,7 @@ public class GameRecordData
 
     // -- one game record --
     public BigInteger oneGame_blockBreakCount = 0;
+    public BigInteger oneGame_treasureCount = 0;
     public BigInteger oneGame_playerExp = 0;
     public BigInteger oneGame_totalDamage = 0;
     public BigInteger oneGame_maxDepth = 0;
@@ -35,12 +37,15 @@ public class GameRecordDataSave
 {
     public string total_ingameCount;
     public string total_blockBreakCount;
+    public string total_treasureCount;
     public string total_playerExp;
     public string total_totalDamage;
     public string total_depth;
     public string total_skillTreeCount;
     public string total_artifactCount;
+
     public string oneGame_blockBreakCount;
+    public string oneGame_treasureCount;
     public string oneGame_playerExp;
     public string oneGame_totalDamage;
     public string oneGame_maxDepth;
@@ -141,21 +146,6 @@ public class SaveLoader : MonoBehaviour
     public int ArtifactCurrentBlockCount { get => artifactCurrentBlockCount; }
 
 
-
-    #region -- result param --
-    // TODO HERE -- のちに削除 --
-    private int blockCount;
-    public int BlockCount { get => blockCount; }
-    private int ingameCount;
-    public int IngameCount { get => ingameCount; }
-    private int playerLevel;
-    public int PlayerLevel { get => playerLevel; }
-    private int playerExp;
-    public int PlayerExp { get => playerExp; }
-    #endregion
-
-
-
     private Queue<Action> allQueue = new();
     private bool isProcessingQueue = false;
 
@@ -194,7 +184,6 @@ public class SaveLoader : MonoBehaviour
         resourceRuby = ES3.KeyExists(KEY_RESOURCE_RUBY) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_RUBY)) : 0;
         resourceSapphire = ES3.KeyExists(KEY_RESOURCE_SAPPHIRE) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_SAPPHIRE)) : 0;
         resourceDiamond = ES3.KeyExists(KEY_RESOURCE_DIAMOND) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_DIAMOND)) : 0;
-
 
         currentState = state.Idling;
     }
@@ -569,12 +558,15 @@ public class SaveLoader : MonoBehaviour
         {
             total_ingameCount = _gameRecordData.total_ingameCount.ToString(),
             total_blockBreakCount = _gameRecordData.total_blockBreakCount.ToString(),
+            total_treasureCount = _gameRecordData.total_treasureCount.ToString(),
             total_playerExp = _gameRecordData.total_playerExp.ToString(),
             total_totalDamage = _gameRecordData.total_totalDamage.ToString(),
             total_depth = _gameRecordData.total_depth.ToString(),
             total_skillTreeCount = _gameRecordData.total_skillTreeCount.ToString(),
             total_artifactCount = _gameRecordData.total_artifactCount.ToString(),
+
             oneGame_blockBreakCount = _gameRecordData.oneGame_blockBreakCount.ToString(),
+            oneGame_treasureCount = _gameRecordData.oneGame_treasureCount.ToString(),
             oneGame_playerExp = _gameRecordData.oneGame_playerExp.ToString(),
             oneGame_totalDamage = _gameRecordData.oneGame_totalDamage.ToString(),
             oneGame_maxDepth = _gameRecordData.oneGame_maxDepth.ToString(),
@@ -593,12 +585,15 @@ public class SaveLoader : MonoBehaviour
         {
             total_ingameCount = ParseBigInteger(save.total_ingameCount),
             total_blockBreakCount = ParseBigInteger(save.total_blockBreakCount),
+            total_treasureCount = ParseBigInteger(save.total_treasureCount),
             total_playerExp = ParseBigInteger(save.total_playerExp),
             total_totalDamage = ParseBigInteger(save.total_totalDamage),
             total_depth = ParseBigInteger(save.total_depth),
             total_skillTreeCount = ParseBigInteger(save.total_skillTreeCount),
             total_artifactCount = ParseBigInteger(save.total_artifactCount),
+
             oneGame_blockBreakCount = ParseBigInteger(save.oneGame_blockBreakCount),
+            oneGame_treasureCount = ParseBigInteger(save.oneGame_treasureCount),
             oneGame_playerExp = ParseBigInteger(save.oneGame_playerExp),
             oneGame_totalDamage = ParseBigInteger(save.oneGame_totalDamage),
             oneGame_maxDepth = ParseBigInteger(save.oneGame_maxDepth),

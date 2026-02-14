@@ -18,16 +18,18 @@ public class MiningTarget_Object : MiningTargetBase
     }
 
 
-    public virtual void Init(ObjectGenerateParam _objectGenerateParam, int _layerIndex)
+    public virtual void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData, int _layerIndex)
     {
         objectGenerateParam = _objectGenerateParam;
         layerIndex = _layerIndex;
 
-        // 生成中のブロックのうち、最大レベルのHPを基準に計算
-        //var hp = (int)(BlockGenerateManager.Inst.blockGenerateParam_max.hp * objectGenerateParam.so.hpRate);
-        var hp = 10;
+        //base.Init(_blockData.hp, 0, objectGenerateParam.so.objectIndex, 0);
+        //base.animScale_rate = this.transform.localScale.x;
+    }
 
-        base.Init(hp, 0, objectGenerateParam.so.objectIndex, 0);
+    public virtual void Init_MiningTargetBase(int _hp, int _value, int _index, int _layerIndex)
+    {
+        base.Init(_hp, _value, _index, _layerIndex);
         base.animScale_rate = this.transform.localScale.x;
     }
 
