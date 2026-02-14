@@ -5,11 +5,33 @@ using System.Collections.Generic;
 
 
 
+/// <summary>
+/// リザルト時のリソースデータ
+/// </summary>
 public class ResourceData_Result
 {
     public ResourceType resourceType;
     public BigInteger resourceCount;
 }
+
+/// <summary>
+/// 今回のゲーム結果データ
+/// </summary>
+public class GameRecordData_thisGame
+{
+    public BigInteger blockBreakCount;
+    public BigInteger playerExp;
+    public BigInteger totalDamage;
+    public BigInteger maxDepth;
+}
+public enum GameRecordData_Type
+{
+    BlockBreakCount,
+    PlayerExp = 1,
+    TotalDamage = 2,
+    MaxDepth = 3,
+}
+
 
 
 public class InGameManager : MonoBehaviour
@@ -19,12 +41,17 @@ public class InGameManager : MonoBehaviour
     public Transform ParentPool => parentPool;
 
 
+    private GameRecordData_thisGame gameRecordData_thisGame;
     private float timer = 0;
     private float timeLimit => GameParamManager.gameBaseParam.ingameTime + exTime;
     private float exTime = 0f;
     private BigInteger getCoin;
     private List<ResourceData_Result> resourceDataList = new List<ResourceData_Result>();
     public List<ResourceData_Result> Get_ResourceDataList() => resourceDataList;
+
+    private List<int> artifactIndexList = new List<int>();
+    public List<int> Get_ArtifactIndexList() => artifactIndexList;
+
 
     void Awake()
     {
@@ -44,14 +71,18 @@ public class InGameManager : MonoBehaviour
         switch (state)
         {
             case GameStateType.InGame_Ready:
+                // インゲーム開始前の初期化
+                gameRecordData_thisGame = new GameRecordData_thisGame();
                 GameParamManager.Init_IngameStart();
                 AttackManager.Inst.Set_Ready();
                 BlockGenerateManager.Inst.Init();
                 resourceDataList.Clear();
+                artifactIndexList.Clear();
                 exTime = 0f;
                 GameEvent.UI.PublishCoinMod(getCoin);
                 GameEvent.UI.PublishTimeLimit(timeLimit);
                 break;
+
             case GameStateType.InGame:
                 timer = 0;
                 AttackManager.Inst.Set_AttackState(true);
@@ -60,18 +91,19 @@ public class InGameManager : MonoBehaviour
             case GameStateType.InGame_End:
                 AttackManager.Inst.Set_AttackState(false);
                 BlockGenerateManager.Inst.Set_GenerateState(false);
+                Save_IngameResult();
                 break;
             case GameStateType.Result:
                 AttackManager.Inst.AttackUnitDelete();
                 break;
             case GameStateType.ResultEnd_ToOutGame:
                 BlockGenerateManager.Inst.ResetAllBlocks();
-                Save_IngameResult();
+                //Save_IngameResult();
                 GameWatcher.Inst.SetGameState(GameStateType.OutGame);
                 break;
             case GameStateType.ResultEnd_ToIngameReady:
                 BlockGenerateManager.Inst.ResetAllBlocks();
-                Save_IngameResult();
+                //Save_IngameResult();
                 GameWatcher.Inst.SetGameState(GameStateType.InGame_Ready);
                 break;
             case GameStateType.OutGame:
@@ -97,6 +129,10 @@ public class InGameManager : MonoBehaviour
         GameEvent.UI.PublishCoinMod(getCoin);
     }
 
+
+    /// <summary>
+    /// リソース取得
+    /// </summary>
     public void AddGetResource(ResourceType _resourceType, BigInteger _deltaResource)
     {
         var targetData = resourceDataList.Find(d => d.resourceType == _resourceType);
@@ -114,6 +150,9 @@ public class InGameManager : MonoBehaviour
         //Debug.Log($"AddGetResource: {_resourceType} {targetData.resourceCount}");
     }
 
+    /// <summary>
+    /// 時間取得
+    /// </summary>
     public void AddGetExTime(float _deltaExTime)
     {
         exTime += _deltaExTime;
@@ -121,7 +160,16 @@ public class InGameManager : MonoBehaviour
         GameEvent.UI.PublishTimeLimit(timeLimit - timer);
     }
 
-
+    /// <summary>
+    /// アーティファクト取得
+    /// </summary>
+    public void AddGetArtifact(int _artifactIndex)
+    {
+        artifactIndexList.Add(_artifactIndex);
+        // アーティファクトはここでセーブする
+        SaveLoader.Inst.Request_SaveArtifactData(_artifactIndex, 1);
+        SaveLoader.Inst.Request_ArtifactCount(-1, true);
+    }
 
     private void Save_IngameResult()
     {
@@ -130,6 +178,54 @@ public class InGameManager : MonoBehaviour
             SaveLoader.Inst.Request_SaveResource(data.resourceType, data.resourceCount);
         }
     }
+
+    #region -- GameRecordData --
+    private async void Save_Status()
+    {
+        var gameRecordData_Now = await SaveLoader.Inst.Get_GameRecordData();
+
+        // total data -> 今回のゲーム結果を加算
+        gameRecordData_Now.total_ingameCount++;
+        gameRecordData_Now.total_blockBreakCount += gameRecordData_thisGame.blockBreakCount;
+        gameRecordData_Now.total_playerExp += gameRecordData_thisGame.playerExp;
+        gameRecordData_Now.total_totalDamage += gameRecordData_thisGame.totalDamage;
+        gameRecordData_Now.total_depth += gameRecordData_thisGame.maxDepth;
+
+        // one game data -> 今回のゲーム結果が最高値ならそれを更新
+        if (gameRecordData_thisGame.blockBreakCount > gameRecordData_Now.oneGame_blockBreakCount)
+        {
+            gameRecordData_Now.oneGame_blockBreakCount = gameRecordData_thisGame.blockBreakCount;
+        }
+        if (gameRecordData_thisGame.playerExp > gameRecordData_Now.oneGame_playerExp)
+        {
+            gameRecordData_Now.oneGame_playerExp = gameRecordData_thisGame.playerExp;
+        }
+        if (gameRecordData_thisGame.totalDamage > gameRecordData_Now.oneGame_totalDamage)
+        {
+            gameRecordData_Now.oneGame_totalDamage = gameRecordData_thisGame.totalDamage;
+        }
+        SaveLoader.Inst.Request_SaveGameRecordData(gameRecordData_Now);
+    }
+
+    public void Fix_GameRecordData(GameRecordData_Type _gameRecordData_Type, BigInteger _value)
+    {
+        switch (_gameRecordData_Type)
+        {
+            case GameRecordData_Type.BlockBreakCount:
+                gameRecordData_thisGame.blockBreakCount += _value;
+                break;
+            case GameRecordData_Type.PlayerExp:
+                gameRecordData_thisGame.playerExp += _value;
+                break;
+            case GameRecordData_Type.TotalDamage:
+                gameRecordData_thisGame.totalDamage += _value;
+                break;
+            case GameRecordData_Type.MaxDepth:
+                gameRecordData_thisGame.maxDepth = _value;
+                break;
+        }
+    }
+    #endregion
 
 
 }

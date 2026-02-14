@@ -7,26 +7,45 @@ using System;
 using System.Linq;
 
 
-
+#region -- GameRecordData --
 [System.Serializable]
 public class GameRecordData
 {
     // -- total record --
-    public BigInteger total_ingameCount;
-    public BigInteger total_blockBreakCount;
-    public BigInteger total_playerExp;
-    public BigInteger total_totalDamage;
-    public BigInteger total_depth;
-    public BigInteger total_skillTreeCount;
-    public BigInteger total_artifactCount;
-
+    public BigInteger total_ingameCount = 0;
+    public BigInteger total_blockBreakCount = 0;
+    public BigInteger total_playerExp = 0;
+    public BigInteger total_totalDamage = 0;
+    public BigInteger total_depth = 0;
+    public BigInteger total_skillTreeCount = 0;
+    public BigInteger total_artifactCount = 0;
 
     // -- one game record --
-    public BigInteger oneGame_blockBreakCount;
-    public BigInteger oneGame_playerExp;
-    public BigInteger oneGame_totalDamage;
-    public BigInteger oneGame_maxDepth;
+    public BigInteger oneGame_blockBreakCount = 0;
+    public BigInteger oneGame_playerExp = 0;
+    public BigInteger oneGame_totalDamage = 0;
+    public BigInteger oneGame_maxDepth = 0;
 }
+
+/// <summary>
+/// GameRecordDataのセーブ用（BigIntegerをstringに変換）
+/// </summary>
+[System.Serializable]
+public class GameRecordDataSave
+{
+    public string total_ingameCount;
+    public string total_blockBreakCount;
+    public string total_playerExp;
+    public string total_totalDamage;
+    public string total_depth;
+    public string total_skillTreeCount;
+    public string total_artifactCount;
+    public string oneGame_blockBreakCount;
+    public string oneGame_playerExp;
+    public string oneGame_totalDamage;
+    public string oneGame_maxDepth;
+}
+#endregion
 
 
 
@@ -77,7 +96,8 @@ public class SaveLoader : MonoBehaviour
     public state currentState { get; private set; } = state.InitialLoad;
 
 
-    private string KEY_CREATE_INITIAL_DATA = "key_createInitialData";
+    private string KEY_CREATE_INITIAL_DATA = "key_createInitialData"; // 初期データ作成フラグ
+    private string KEY_GAME_RECORD_DATA = "key_gameRecordData"; // ゲーム記録データ
 
     private const string KEY_COIN = "key_coin";
     private BigInteger coin;
@@ -116,7 +136,7 @@ public class SaveLoader : MonoBehaviour
     #endregion
 
 
-    private const string KEY_ARTIFACT_CURRENTBLOCKCOUNT = "key_artifactCurrentBlockCount";
+    private const string KEY_ARTIFACT_CURRENTBLOCKCOUNT = "key_artifactCurrentBlockCount"; // アーティファクト用生成ブロック数
     private int artifactCurrentBlockCount;
     public int ArtifactCurrentBlockCount { get => artifactCurrentBlockCount; }
 
@@ -175,18 +195,12 @@ public class SaveLoader : MonoBehaviour
         resourceSapphire = ES3.KeyExists(KEY_RESOURCE_SAPPHIRE) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_SAPPHIRE)) : 0;
         resourceDiamond = ES3.KeyExists(KEY_RESOURCE_DIAMOND) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_DIAMOND)) : 0;
 
-        //unlockEventIndex = ES3.KeyExists(KEY_UNLOCK_EVENTINDEX) ? ES3.Load<int>(KEY_UNLOCK_EVENTINDEX) : 1;
-        //blockCount = ES3.KeyExists(KEY_BLOCKCOUNT) ? ES3.Load<int>(KEY_BLOCKCOUNT) : 0;
-        //ingameCount = ES3.KeyExists(KEY_INGAME_COUNT) ? ES3.Load<int>(KEY_INGAME_COUNT) : 0;
-        //playerLevel = ES3.KeyExists(KEY_PLAYER_LEVEL) ? ES3.Load<int>(KEY_PLAYER_LEVEL) : 0;
-        //playerExp = ES3.KeyExists(KEY_PLAYER_EXP) ? ES3.Load<int>(KEY_PLAYER_EXP) : 0;
 
         currentState = state.Idling;
     }
 
     private void InitialData_Create()
     {
-
 
     }
 
@@ -283,30 +297,44 @@ public class SaveLoader : MonoBehaviour
     }
     private void SavePendeingResource(ResourceType _resourceType, BigInteger _delta)
     {
-        var (key, value) = GetResourceDataKey(_resourceType);
+        ref var value = ref GetResourceRef(_resourceType);
         value += _delta;
-        ES3.Save(key, value.ToString());
+        ES3.Save(GetResourceKey(_resourceType), value.ToString());
         GameEvent.UI.PublishResourceMod(_resourceType, value);
     }
-    private (string, BigInteger) GetResourceDataKey(ResourceType _resourceType)
+    private static string GetResourceKey(ResourceType _resourceType)
     {
         switch (_resourceType)
         {
-            case ResourceType.Stone: return (KEY_RESOURCE_STONE, resourceStone);
-            case ResourceType.Iron: return (KEY_RESOURCE_IRON, resourceIron);
-            case ResourceType.Gold: return (KEY_RESOURCE_GOLD, resourceGold);
-            case ResourceType.Emerald: return (KEY_RESOURCE_EMERALD, resourceEmerald);
-            case ResourceType.Ruby: return (KEY_RESOURCE_RUBY, resourceRuby);
-            case ResourceType.Sapphire: return (KEY_RESOURCE_SAPPHIRE, resourceSapphire);
-            case ResourceType.Diamond: return (KEY_RESOURCE_DIAMOND, resourceDiamond);
-            default: return (null, 0);
+            case ResourceType.Stone: return KEY_RESOURCE_STONE;
+            case ResourceType.Iron: return KEY_RESOURCE_IRON;
+            case ResourceType.Gold: return KEY_RESOURCE_GOLD;
+            case ResourceType.Emerald: return KEY_RESOURCE_EMERALD;
+            case ResourceType.Ruby: return KEY_RESOURCE_RUBY;
+            case ResourceType.Sapphire: return KEY_RESOURCE_SAPPHIRE;
+            case ResourceType.Diamond: return KEY_RESOURCE_DIAMOND;
+            default: return null;
+        }
+    }
+    private ref BigInteger GetResourceRef(ResourceType _resourceType)
+    {
+        switch (_resourceType)
+        {
+            case ResourceType.Stone: return ref resourceStone;
+            case ResourceType.Iron: return ref resourceIron;
+            case ResourceType.Gold: return ref resourceGold;
+            case ResourceType.Emerald: return ref resourceEmerald;
+            case ResourceType.Ruby: return ref resourceRuby;
+            case ResourceType.Sapphire: return ref resourceSapphire;
+            case ResourceType.Diamond: return ref resourceDiamond;
+            default: throw new System.ArgumentOutOfRangeException(nameof(_resourceType));
         }
     }
 
     public bool Check_ResourceKeyExists(ResourceType _resourceType)
     {
-        var (key, value) = GetResourceDataKey(_resourceType);
-        return ES3.KeyExists(key);
+        var key = GetResourceKey(_resourceType);
+        return key != null && ES3.KeyExists(key);
     }
     #endregion
 
@@ -449,6 +477,38 @@ public class SaveLoader : MonoBehaviour
         }
         return artifactCount;
     }
+
+    /// <summary>
+    /// アーティファクト未所持のインデックスを全て取得
+    /// </summary>
+    public int[] Get_ArtifactIndex_NotGet()
+    {
+        var list = new List<int>();
+        foreach (var artifactData in SOLoader.ArtifactData.artifactDatas)
+        {
+            var key = GetArtifactDataKey(artifactData.artifactIndex);
+            if (!ES3.KeyExists(key))
+            {
+                list.Add(artifactData.artifactIndex);
+            }
+        }
+        return list.ToArray();
+    }
+    public void Request_ArtifactCount(int _deltaCount, bool _isReset = false)
+    {
+        EnqueueMethod(() =>
+        {
+            if (_isReset)
+            {
+                artifactCurrentBlockCount = 0;
+            }
+            else
+            {
+                artifactCurrentBlockCount += _deltaCount;
+            }
+            ES3.Save(KEY_ARTIFACT_CURRENTBLOCKCOUNT, artifactCurrentBlockCount);
+        });
+    }
     #endregion
 
 
@@ -487,6 +547,64 @@ public class SaveLoader : MonoBehaviour
     #endregion
 
 
+
+
+    #region -- Artifact Slot --
+    public async UniTask<GameRecordData> Get_GameRecordData()
+    {
+        var loadData = await LoadAsync<GameRecordDataSave>(KEY_GAME_RECORD_DATA);
+        if (loadData.success)
+        {
+            return GameRecordDataFromSave(loadData.data);
+        }
+        return new GameRecordData();
+    }
+    public void Request_SaveGameRecordData(GameRecordData _gameRecordData)
+    {
+        EnqueueMethod(() => { SaveGameRecordData(_gameRecordData); });
+    }
+    private void SaveGameRecordData(GameRecordData _gameRecordData)
+    {
+        var saveData = new GameRecordDataSave
+        {
+            total_ingameCount = _gameRecordData.total_ingameCount.ToString(),
+            total_blockBreakCount = _gameRecordData.total_blockBreakCount.ToString(),
+            total_playerExp = _gameRecordData.total_playerExp.ToString(),
+            total_totalDamage = _gameRecordData.total_totalDamage.ToString(),
+            total_depth = _gameRecordData.total_depth.ToString(),
+            total_skillTreeCount = _gameRecordData.total_skillTreeCount.ToString(),
+            total_artifactCount = _gameRecordData.total_artifactCount.ToString(),
+            oneGame_blockBreakCount = _gameRecordData.oneGame_blockBreakCount.ToString(),
+            oneGame_playerExp = _gameRecordData.oneGame_playerExp.ToString(),
+            oneGame_totalDamage = _gameRecordData.oneGame_totalDamage.ToString(),
+            oneGame_maxDepth = _gameRecordData.oneGame_maxDepth.ToString(),
+        };
+        ES3.Save(KEY_GAME_RECORD_DATA, saveData);
+    }
+    private static BigInteger ParseBigInteger(string s)
+    {
+        if (string.IsNullOrEmpty(s)) return 0;
+        return BigInteger.Parse(s);
+    }
+    private static GameRecordData GameRecordDataFromSave(GameRecordDataSave save)
+    {
+        if (save == null) return null;
+        return new GameRecordData
+        {
+            total_ingameCount = ParseBigInteger(save.total_ingameCount),
+            total_blockBreakCount = ParseBigInteger(save.total_blockBreakCount),
+            total_playerExp = ParseBigInteger(save.total_playerExp),
+            total_totalDamage = ParseBigInteger(save.total_totalDamage),
+            total_depth = ParseBigInteger(save.total_depth),
+            total_skillTreeCount = ParseBigInteger(save.total_skillTreeCount),
+            total_artifactCount = ParseBigInteger(save.total_artifactCount),
+            oneGame_blockBreakCount = ParseBigInteger(save.oneGame_blockBreakCount),
+            oneGame_playerExp = ParseBigInteger(save.oneGame_playerExp),
+            oneGame_totalDamage = ParseBigInteger(save.oneGame_totalDamage),
+            oneGame_maxDepth = ParseBigInteger(save.oneGame_maxDepth),
+        };
+    }
+    #endregion
 
 
 }

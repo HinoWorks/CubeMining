@@ -41,31 +41,33 @@ public class GenerateBlockLayerCont
                 newObject.transform.localPosition = GetBlockPosition(i);
                 //newObject.Set_BreakCallback(BlockBreakCall); //重力で下層に落ちるので、layerカウントに含めない
             }
-            else if (GameParamManager.IsArtifactGenerate())
+            else if (!BlockGenerateManager.Inst.isGenerateArtifact && GameParamManager.IsArtifactGenerate())
             {
-                // == TODO HERE ==
                 // アーティファクトを生成
-                // アーティファクトのパラメータを取得
-                // == TODO HERE ==
-                /*
-                var artifactIndex = 1;
-                var newArtifact = BlockGenerateManager.Inst.GenerateArtifact(artifact, layerIndex);
+                var newArtifact = BlockGenerateManager.Inst.GenerateArtifact(layerIndex);
                 newArtifact.transform.localPosition = GetBlockPosition(i);
-                newArtifact.Set_BreakCallback(BlockBreakCall);
-            */
+                //newArtifact.Set_BreakCallback(BlockBreakCall);
+                if (newArtifact == null)
+                {
+                    GenerateNormalBlock(i);
+                }
             }
             else
             {
-                //現在の確率でブロックを抽選
-                var blockIndex = param.SelectBlockIndex();
-                var blockData = SOLoader.BlockData.GetBlockData(blockIndex);
-                var newBlock = BlockGenerateManager.Inst.GenerateBlock(blockData, layerIndex);
-                newBlock.transform.localPosition = GetBlockPosition(i);
-                newBlock.Set_BreakCallback(BlockBreakCall);
-                createdBlockCount++;
+                GenerateNormalBlock(i);
             }
-
         }
+    }
+
+    private void GenerateNormalBlock(int _blockCounter)
+    {
+        //現在の確率でブロックを抽選
+        var blockIndex = param.SelectBlockIndex();
+        var blockData = SOLoader.BlockData.GetBlockData(blockIndex);
+        var newBlock = BlockGenerateManager.Inst.GenerateBlock(blockData, layerIndex);
+        newBlock.transform.localPosition = GetBlockPosition(_blockCounter);
+        newBlock.Set_BreakCallback(BlockBreakCall);
+        createdBlockCount++;
     }
     public Vector3 GetBlockPosition(int _blockIndex)
     {
@@ -90,18 +92,20 @@ public class GenerateBlockLayerCont
 public class BlockGenerateManager : MonoBehaviour
 {
     public static BlockGenerateManager Inst;
-
     // -- loc
     private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
     private List<MiningTarget_Object> list_targetObjects = new List<MiningTarget_Object>(); // 生成されたオブジェクトのリスト
-    private List<MiningTarget_Object> list_targetArtifacts = new List<MiningTarget_Object>(); // 生成されたアーティファクトのリスト
+    private List<MiningTarget_Artifact> list_targetArtifacts = new List<MiningTarget_Artifact>(); // 生成されたアーティファクトのリスト
     private List<GenerateBlockLayerCont> list_layerConts = new List<GenerateBlockLayerCont>(); // 生成されたレイヤーのリスト
     private GenerateBlockLayerCont currentLayerCont; //最上層のレイヤー
-
 
     private int initialCreateLayer = 10;
     private int currentCreateLayer = 0;
     private int cameraTargetLayer => currentLayerCont == null ? 0 : currentLayerCont.layerIndex + 1;
+
+    public bool isGenerateArtifact { get; private set; } = false; // アーティファクト生成フラグ　（ingame中一度しか生成しない）
+
+
 
     void Awake()
     {
@@ -110,11 +114,14 @@ public class BlockGenerateManager : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// インゲーム開始時の初期化
+    /// </summary>
     public void Init()
     {
         list_layerConts.Clear();
         currentCreateLayer = 0;
+        isGenerateArtifact = false;
         for (int i = 0; i < initialCreateLayer; i++)
         {
             CreateNewLayerCont();
@@ -212,20 +219,23 @@ public class BlockGenerateManager : MonoBehaviour
     #endregion
 
     #region == Artifact Generate ==
-    public MiningTarget_Object GenerateArtifact(ArtifactGenerateRateParam _artifactData, int _layerIndex)
+    public MiningTarget_Artifact GenerateArtifact(int _layerIndex)
     {
-        /*
-        var targetArtifact = list_targetArtifacts.Find(x => x.isActiveAndEnabled == false && x.index == _artifactData.so.artifactIndex);
+        var targetArtifact = list_targetArtifacts.Find(x => x.isActiveAndEnabled == false);
         if (targetArtifact == null)
         {
-            var newArtifact = Instantiate(_artifactData.so.pf, InGameManager.Inst.ParentPool) as GameObject;
-            targetArtifact = newArtifact.GetComponent<MiningTarget_Object>();
+            var newArtifact = Instantiate(SOLoader.BlockData.pf_Artifact, InGameManager.Inst.ParentPool) as GameObject;
+            targetArtifact = newArtifact.GetComponent<MiningTarget_Artifact>();
             list_targetArtifacts.Add(targetArtifact);
         }
-        targetArtifact.Init(_artifactData, _layerIndex);
+        var artifactIndexes = SaveLoader.Inst.Get_ArtifactIndex_NotGet();
+        if (artifactIndexes.Length == 0) return null;
+
+        // 未所持のアーティファクトをランダムで選択
+        var artifactIndex = artifactIndexes[Random.Range(0, artifactIndexes.Length)];
+        targetArtifact.Init(artifactIndex, _layerIndex);
+        isGenerateArtifact = true;
         return targetArtifact;
-        */
-        return null;
     }
     #endregion
 

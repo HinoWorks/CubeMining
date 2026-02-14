@@ -30,14 +30,14 @@ public class UI_ResultUnitCont : MonoBehaviour
         tmp_resourceTotal.color = textColor;
 
         Set_ResourceCount(tmp_resourceCount, _getCount);
-        Set_ResourceCount(tmp_resourceTotal, _currentTotal);
+        Set_ResourceCount(tmp_resourceTotal, _currentTotal - _getCount);
         this.gameObject.SetActive(true);
 
         await UniTask.Delay(200);
-        var modCoin_total = StaticManager.Get_BigintegerToUnit(_currentTotal + _getCount);
+        var modCoin_total = StaticManager.Get_BigintegerToUnit(_currentTotal);
         tmp_resourceTotal.transform.DOScale(1.05f, 0.05f).SetEase(Ease.OutSine);
 
-        var currentResourceFloat = StaticManager.Get_BigintegerToUnit(_currentTotal + _getCount).num;
+        var currentResourceFloat = StaticManager.Get_BigintegerToUnit(_currentTotal - _getCount).num;
         DOTween.To(() => currentResourceFloat, x => currentResourceFloat = x, modCoin_total.num, 0.75f)
             .OnUpdate(() =>
             {
