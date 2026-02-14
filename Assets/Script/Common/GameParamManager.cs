@@ -269,7 +269,7 @@ public class ArtifactGenerateRateParam
         var currentBlockCount = SaveLoader.Inst.ArtifactCurrentBlockCount;
 
         generateRate = so.baseRate + so.deltaRate * currentBlockCount / so.deltaInterval;
-        Debug.Log($"<color=green>========== artifactGenerateRate: {generateRate} ==========</color>");
+        Debug.Log($"<color=green>=** baseRate: {so.baseRate} / deltaRate: {so.deltaRate} / deltaInterval: {so.deltaInterval} / currentBlockCount: {currentBlockCount} => artifactGenerateRate: {generateRate} **=</color>");
     }
 }
 
@@ -435,7 +435,7 @@ public static class GameParamManager
     #region -- other object generate param --
     public static bool IsArtifactGenerate()
     {
-        var random = UnityEngine.Random.Range(0, 100);
+        var random = UnityEngine.Random.Range(0f, 1f);
         //Debug.Log($"otherObjectRate: {otherObjectRate} / {otherObjectBaseRate + otherObjectRate} / {random} => {random < otherObjectRate}");
         return random < artifactGenerateRate;
     }

@@ -15,6 +15,7 @@ public class MiningTarget_Tresure : MiningTarget_Object
         var getTreasureValue = (int)(_blockData.baseValue * _objectGenerateParam.so.valueRate * treasureValueRate);
         if (getTreasureValue <= 0) getTreasureValue = 1;
 
+        //Debug.Log($"Set_Tresure - hp: {hp}, getTreasureValue: {getTreasureValue}");
         base.Init_MiningTargetBase(hp, getTreasureValue, _objectGenerateParam.so.objectIndex, _layerIndex);
 
         // ブロックのタイプを自分で抽選

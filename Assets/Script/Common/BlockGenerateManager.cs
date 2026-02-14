@@ -145,6 +145,10 @@ public class BlockGenerateManager : MonoBehaviour
         {
             targetObject.NotActivate();
         }
+        foreach (var targetArtifact in list_targetArtifacts)
+        {
+            targetArtifact.NotActivate();
+        }
         list_layerConts.Clear();
     }
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.Analytics;
 
 
 public class MiningTarget_Artifact : MiningTargetBase
@@ -7,11 +8,10 @@ public class MiningTarget_Artifact : MiningTargetBase
     protected Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
     protected Action breakCallback;
     protected int artifactIndex;
+    private int breakAttackCount; // ブロックを破壊するために必要な攻撃回数
+    private int breakAttackCount_max = 8;
+    private int breakAttackCount_min = 5;
 
-    public void Set_BreakCallback(Action _callback)
-    {
-        breakCallback = _callback;
-    }
     public override void NotActivate()
     {
         base.NotActivate();
@@ -24,12 +24,21 @@ public class MiningTarget_Artifact : MiningTargetBase
         artifactIndex = _artifactIndex;
         layerIndex = _layerIndex;
 
-        // 生成中のブロックのうち、最大レベルのHPを基準に計算
-        //var hp = (int)(BlockGenerateManager.Inst.blockGenerateParam_max.hp * objectGenerateParam.so.hpRate);
-        var hp = 10;
+        var hp = 100;
+        breakAttackCount = UnityEngine.Random.Range(breakAttackCount_min, breakAttackCount_max);
 
         base.Init(hp, 0, -1, 0);
         base.animScale_rate = this.transform.localScale.x;
+
+        Debug.Log($"<color=green>== artifact Set: artifactIndex: {artifactIndex} / layerIndex: {layerIndex} ===</color>");
+    }
+
+    public override bool Damage(int damage)
+    {
+        // ダメージを受けた回数で判定する
+        var fixDamage = base.hp_max / breakAttackCount;
+        Debug.Log($"<color=green>== artifact Damage: damage: {damage} / fixDamage: {fixDamage} => remain hp: {hp - fixDamage} ===</color>");
+        return base.Damage(fixDamage);
     }
 
     public override void BreakFromDamage()

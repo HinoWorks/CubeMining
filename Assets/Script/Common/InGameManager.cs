@@ -94,7 +94,9 @@ public class InGameManager : MonoBehaviour
             case GameStateType.InGame_End:
                 AttackManager.Inst.Set_AttackState(false);
                 BlockGenerateManager.Inst.Set_GenerateState(false);
-                Save_IngameResult();
+                ResultSave_IngameResult();
+                ResultSave_ArtifactCurrentBlockCount();
+                ResultSave_Status();
                 break;
             case GameStateType.Result:
                 AttackManager.Inst.AttackUnitDelete();
@@ -164,17 +166,29 @@ public class InGameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// アーティファクト取得
+    /// アーティファクト取得、　即座にsaveする
     /// </summary>
     public void AddGetArtifact(int _artifactIndex)
     {
         artifactIndexList.Add(_artifactIndex);
         // アーティファクトはここでセーブする
         SaveLoader.Inst.Request_SaveArtifactData(_artifactIndex, 1);
-        SaveLoader.Inst.Request_ArtifactCount(-1, true);
+        SaveLoader.Inst.Request_ArtifactCurrentBlockCount(0, true);
     }
 
-    private void Save_IngameResult()
+
+    /// <summary>
+    /// アーティファクト用、破壊したブロック数をカウントしてセーブ
+    /// </summary>
+    private void ResultSave_ArtifactCurrentBlockCount()
+    {
+        if (artifactIndexList.Count > 0) return; //アーティファクトを獲得したゲームの時、破壊したブロック数をカウントしない
+        SaveLoader.Inst.Request_ArtifactCurrentBlockCount((int)gameRecordData_thisGame.blockBreakCount);
+    }
+    /// <summary>
+    /// 獲得したリソースデータをセーブ
+    /// </summary>
+    private void ResultSave_IngameResult()
     {
         foreach (var data in resourceDataList)
         {
@@ -182,8 +196,9 @@ public class InGameManager : MonoBehaviour
         }
     }
 
+
     #region -- GameRecordData --
-    private async void Save_Status()
+    private async void ResultSave_Status()
     {
         var gameRecordData_Now = await SaveLoader.Inst.Get_GameRecordData();
 
@@ -208,6 +223,7 @@ public class InGameManager : MonoBehaviour
             gameRecordData_Now.oneGame_totalDamage = gameRecordData_thisGame.totalDamage;
         }
         SaveLoader.Inst.Request_SaveGameRecordData(gameRecordData_Now);
+
     }
 
     private void Fix_GameRecordData((GameRecordData_Type type, BigInteger delta) _gameRecordData)

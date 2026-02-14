@@ -185,6 +185,8 @@ public class SaveLoader : MonoBehaviour
         resourceSapphire = ES3.KeyExists(KEY_RESOURCE_SAPPHIRE) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_SAPPHIRE)) : 0;
         resourceDiamond = ES3.KeyExists(KEY_RESOURCE_DIAMOND) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_DIAMOND)) : 0;
 
+        artifactCurrentBlockCount = ES3.KeyExists(KEY_ARTIFACT_CURRENTBLOCKCOUNT) ? ES3.Load<int>(KEY_ARTIFACT_CURRENTBLOCKCOUNT) : 0;
+
         currentState = state.Idling;
     }
 
@@ -483,7 +485,10 @@ public class SaveLoader : MonoBehaviour
         }
         return list.ToArray();
     }
-    public void Request_ArtifactCount(int _deltaCount, bool _isReset = false)
+    /// <summary>
+    /// アーティファクト確率計算用、破壊したブロック数をカウント
+    /// </summary>
+    public void Request_ArtifactCurrentBlockCount(int _deltaCount, bool _isReset = false)
     {
         EnqueueMethod(() =>
         {
