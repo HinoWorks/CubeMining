@@ -85,7 +85,7 @@ public class MiningTarget_Cube : MiningTargetBase
         var index_SE = index_SE_Damage;
         if (resourceType != ResourceType.Stone)
         {
-            index_SE = 100;
+            index_SE = 9;
         }
         SoundManager.Inst.PlaySE(index_SE);
     }
@@ -94,7 +94,7 @@ public class MiningTarget_Cube : MiningTargetBase
         var index_SE = index_SE_Break;
         if (resourceType != ResourceType.Stone)
         {
-            index_SE = 100;
+            index_SE = 19;
         }
         SoundManager.Inst.PlaySE(index_SE);
     }
