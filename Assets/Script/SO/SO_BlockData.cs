@@ -8,11 +8,11 @@ public class BlockData
     public int blockIndex;
     public string unitName;
     public string unitDescription;
+    public BaseBlockType baseBlockType;
     public Sprite icon;
-
     public GameObject pf;
 
-
+    // ----
     public int hp;
     public int baseValue;
     public float generateInterval;
@@ -47,6 +47,17 @@ public enum ResourceType
     Ruby = 5,
     Sapphire = 6,
     Diamond = 7,
+}
+
+public enum BaseBlockType
+{
+    Dirt,
+    Stone,
+    BlackStone,
+    Sand,
+    Glass,
+    Wood,
+    Ice,
 }
 
 

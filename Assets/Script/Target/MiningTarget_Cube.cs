@@ -6,6 +6,7 @@ public class MiningTarget_Cube : MiningTargetBase
     [SerializeField] BlockTypeSetter[] blockTypeSetters;
     private Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
     private BlockSize blockSize;
+    private BaseBlockType baseBlockType;
     private ResourceType resourceType;
 
     private Action breakCallback;
@@ -13,6 +14,12 @@ public class MiningTarget_Cube : MiningTargetBase
 
     private float meshThreshold_1 = 0.7f;
     private float meshThreshold_2 = 0.35f;
+
+
+    // -- se
+    private int index_SE_Damage => (int)baseBlockType;
+    private int index_SE_Break => (int)baseBlockType + 10;
+
 
     public override void Init(int _hp, int _value, int _index, int _layerIndex)
     {
@@ -26,8 +33,9 @@ public class MiningTarget_Cube : MiningTargetBase
     {
         breakCallback = _callback;
     }
-    public void Set_BlockType(ResourceType _resourceType)
+    public void Set_BlockType(BaseBlockType _baseBlockType, ResourceType _resourceType)
     {
+        baseBlockType = _baseBlockType;
         resourceType = _resourceType;
         foreach (var blockTypeSetter in blockTypeSetters)
         {
@@ -72,6 +80,25 @@ public class MiningTarget_Cube : MiningTargetBase
         return isBreak;
     }
 
+    protected override void PlaySE_Damage()
+    {
+        var index_SE = index_SE_Damage;
+        if (resourceType != ResourceType.Stone)
+        {
+            index_SE = 100;
+        }
+        SoundManager.Inst.PlaySE(index_SE);
+    }
+    protected override void PlaySE_Break()
+    {
+        var index_SE = index_SE_Break;
+        if (resourceType != ResourceType.Stone)
+        {
+            index_SE = 100;
+        }
+        SoundManager.Inst.PlaySE(index_SE);
+    }
+
     public override void BreakFromDamage()
     {
         /*
@@ -93,6 +120,7 @@ public class MiningTarget_Cube : MiningTargetBase
         var effect = EffectManager.Inst.Get_Effect(EffectType.BlockBreak);
         effect.transform.position = transform.position + EffectOffset;
         effect.SetActive(true);
+        //CameraManager.Inst?.ShakeBlockBreak();
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.BlockBreakCount, 1);
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.Damage, hp_max);
 

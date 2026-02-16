@@ -114,6 +114,11 @@ public class CSVSerializer
             GameObject gameObject = AssetDatabase.LoadAssetAtPath<GameObject>(value.ToString());
             fieldinfo.SetValue(v, gameObject);
         }
+        else if (fieldinfo.FieldType == typeof(AudioClip))
+        {
+            AudioClip audioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(value.ToString());
+            fieldinfo.SetValue(v, audioClip);
+        }
 #endif
         else if (fieldinfo.FieldType == typeof(string))
             fieldinfo.SetValue(v, value);

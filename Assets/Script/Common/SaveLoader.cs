@@ -69,6 +69,18 @@ public class ItemData
     public int count = 0;
 }
 
+#region -- Sound Settings --
+[System.Serializable]
+public class SoundSettingsData
+{
+    public float volumeBGM = 80f;
+    public float volumeSE = 80f;
+    public bool muteBGM;
+    public bool muteSE;
+}
+#endregion
+
+
 #region -- Artifact --
 [System.Serializable]
 public class ArtifactData
@@ -143,6 +155,8 @@ public class SaveLoader : MonoBehaviour
 
     private const string KEY_ARTIFACT_CURRENTBLOCKCOUNT = "key_artifactCurrentBlockCount"; // アーティファクト用生成ブロック数
     private int artifactCurrentBlockCount;
+
+    private const string KEY_SOUND_SETTINGS = "key_soundSettings";
     public int ArtifactCurrentBlockCount { get => artifactCurrentBlockCount; }
 
 
@@ -189,6 +203,24 @@ public class SaveLoader : MonoBehaviour
 
         currentState = state.Idling;
     }
+
+    #region -- Sound Settings --
+    public void Request_SaveSoundSettings(float volumeBGM, float volumeSE, bool muteBGM, bool muteSE)
+    {
+        EnqueueMethod(() => SaveSoundSettings(volumeBGM, volumeSE, muteBGM, muteSE));
+    }
+    private void SaveSoundSettings(float volumeBGM, float volumeSE, bool muteBGM, bool muteSE)
+    {
+        var data = new SoundSettingsData
+        {
+            volumeBGM = volumeBGM,
+            volumeSE = volumeSE,
+            muteBGM = muteBGM,
+            muteSE = muteSE
+        };
+        ES3.Save(KEY_SOUND_SETTINGS, data);
+    }
+    #endregion
 
     private void InitialData_Create()
     {

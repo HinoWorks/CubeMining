@@ -5,8 +5,6 @@ using System;
 
 
 
-
-
 [System.Serializable]
 public class SO_SoundElement
 {
@@ -17,17 +15,12 @@ public class SO_SoundElement
 }
 
 
-
-
 [CreateAssetMenu(menuName = "SO/SoundData")]
 public class SO_SoundData : ScriptableObject
 {
     public SO_SoundElement[] SoundData_BGM;
     public SO_SoundElement[] SoundData_SE;
-
-
-
-
+    public SO_SoundElement[] SoundData_SE_UI;
 
 
     public SO_SoundElement Get_SoundData_BGM(int _index)
@@ -44,12 +37,10 @@ public class SO_SoundData : ScriptableObject
         return data;
     }
 
-    public SO_SoundElement Get_SoundData_SE_Random(int _min, int _max)
+    public SO_SoundElement Get_SoundData_SE_UI(int _index)
     {
-        int _index = UnityEngine.Random.Range(_min, _max + 1);
-        var data = Array.Find(SoundData_SE, d => d.index == _index);
+        var data = Array.Find(SoundData_SE_UI, d => d.index == _index);
         return data;
     }
-
 
 }

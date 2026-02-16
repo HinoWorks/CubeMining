@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 367433040615277789}
   - component: {fileID: 5569257798595416298}
   - component: {fileID: 131074205011108064}
+  - component: {fileID: 5970964120148150451}
   m_Layer: 5
   m_Name: pf_ui_buttonBase
   m_TagString: Untagged
@@ -235,9 +236,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HButtonConnect
   obj_mouseOver: {fileID: 6429285382588237226}
   obj_clickSelect: {fileID: 0}
-  rightClick:
-    m_PersistentCalls:
-      m_Calls: []
+--- !u!114 &5970964120148150451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367433040615277788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4816af139603442a290a38a8e0266e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HButtonSound
+  index_SE_Click: 0
+  index_SE_Hover: 2
 --- !u!1 &367433040807141592
 GameObject:
   m_ObjectHideFlags: 0

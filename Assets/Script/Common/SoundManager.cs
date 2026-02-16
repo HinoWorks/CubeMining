@@ -1,18 +1,25 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using DG.Tweening;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Inst;
 
     [Range(0, 100)]
-    public float Volume_BGM;
+    public float Volume_BGM = 80f;
     [Range(0, 100)]
-    public float Volume_Sound;
+    public float Volume_Sound = 80f;
+    public bool Mute_BGM;
+    public bool Mute_SE;
 
-    // 音量
-    //public SoundVolume volume = new SoundVolume();
+    private const string KEY_SOUND_SETTINGS = "key_soundSettings";
+    private const int MAX_SIMULTANEOUS_SE = 8;
+    private const float BGM_FADE_DURATION = 0.5f;
+    [Tooltip("SE再生時のピッチランダム範囲（連続再生の違和感軽減）")]
+    [SerializeField] private float sePitchMin = 0.92f;
+    [SerializeField] private float sePitchMax = 1.08f;
 
     // === AudioSource ===
     private AudioSource BGMsource;
@@ -24,8 +31,8 @@ public class SoundManager : MonoBehaviour
     private float duration_SE = 0.2f;
     private bool isSEPlayed = false;
 
-
-
+    private bool isPaused;
+    private bool isLoadingSettings;
 
     void Awake()
     {
@@ -40,6 +47,8 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
+        LoadSettings();
+
         // BGM AudioSource
         BGMsource = gameObject.AddComponent<AudioSource>();
         BGMsource.loop = true;
@@ -49,15 +58,13 @@ public class SoundManager : MonoBehaviour
         {
             SEsources[i] = gameObject.AddComponent<AudioSource>();
         }
-    }
 
+        ApplyVolumeAndMute();
+    }
 
     void Start()
     {
-        // BGM Start
-        //Instance.PlayBGM(0);
     }
-
 
     void Update()
     {
@@ -70,38 +77,87 @@ public class SoundManager : MonoBehaviour
                 timer = 0;
             }
         }
-        /*
-        // ミュート設定
-        BGMsource.mute = volume.Mute;
-        foreach (AudioSource source in SEsources)
-        {
-            source.mute = volume.Mute;
-        }
-        foreach (AudioSource source in VoiceSources)
-        {
-            source.mute = volume.Mute;
-        }
-        */
-
-        /*
-        // ボリューム設定
-        BGMsource.volume = volume.BGM;
-        foreach (AudioSource source in SEsources)
-        {
-            source.volume = volume.SE;
-        }
-        foreach (AudioSource source in VoiceSources)
-        {
-            source.volume = volume.Voice;
-        }
-        */
     }
 
+    #region -- Settings Persistence --
+    private void LoadSettings()
+    {
+        isLoadingSettings = true;
+        if (ES3.KeyExists(KEY_SOUND_SETTINGS))
+        {
+            var data = ES3.Load<SoundSettingsData>(KEY_SOUND_SETTINGS);
+            Volume_BGM = data.volumeBGM;
+            Volume_Sound = data.volumeSE;
+            Mute_BGM = data.muteBGM;
+            Mute_SE = data.muteSE;
+        }
+        isLoadingSettings = false;
+    }
 
+    private void SaveSettings()
+    {
+        if (isLoadingSettings) return;
+        if (SaveLoader.Inst != null)
+        {
+            SaveLoader.Inst.Request_SaveSoundSettings(Volume_BGM, Volume_Sound, Mute_BGM, Mute_SE);
+        }
+    }
 
+    private void ApplyVolumeAndMute()
+    {
+        if (BGMsource == null) return;
 
+        BGMsource.mute = Mute_BGM || isPaused;
+        BGMsource.volume = Mute_BGM ? 0f : (Volume_BGM / 100f);
 
+        for (int i = 0; i < SEsources.Length; i++)
+        {
+            if (SEsources[i] != null)
+            {
+                SEsources[i].mute = Mute_SE;
+            }
+        }
+    }
 
+    /// <summary>音量・ミュート変更時に呼ぶ（設定UIから）</summary>
+    public void SetVolumeBGM(float value)
+    {
+        Volume_BGM = Mathf.Clamp(value, 0, 100);
+        ChangeVolume_ForBGM();
+        SaveSettings();
+    }
+
+    public void SetVolumeSE(float value)
+    {
+        Volume_Sound = Mathf.Clamp(value, 0, 100);
+        SaveSettings();
+    }
+
+    public void SetMuteBGM(bool mute)
+    {
+        Mute_BGM = mute;
+        ApplyVolumeAndMute();
+        SaveSettings();
+    }
+
+    public void SetMuteSE(bool mute)
+    {
+        Mute_SE = mute;
+        ApplyVolumeAndMute();
+        SaveSettings();
+    }
+
+    /// <summary>一時停止時に呼ぶ（ポーズ画面など）</summary>
+    public void SetPaused(bool paused)
+    {
+        isPaused = paused;
+        if (BGMsource == null) return;
+        if (paused)
+            BGMsource.Pause();
+        else
+            BGMsource.UnPause();
+    }
+    #endregion
 
     #region -- BGM --
     public void PlayBGM(int _index)
@@ -109,7 +165,7 @@ public class SoundManager : MonoBehaviour
         var getData = SOLoader.SoundData.Get_SoundData_BGM(_index);
         if (getData == null) return;
 
-        // -- set 
+        BGMsource.DOKill();
         BGMsource.Stop();
         soundData_BGM = getData;
         BGMsource.clip = soundData_BGM.clip;
@@ -117,75 +173,94 @@ public class SoundManager : MonoBehaviour
         ChangeVolume_ForBGM();
     }
 
+    /// <summary>BGMをフェード付きで再生</summary>
+    public void PlayBGMWithFade(int _index, float fadeDuration = -1f)
+    {
+        var d = fadeDuration > 0 ? fadeDuration : BGM_FADE_DURATION;
+        var getData = SOLoader.SoundData.Get_SoundData_BGM(_index);
+        if (getData == null) return;
+
+        BGMsource.DOKill();
+        BGMsource.Stop();
+        soundData_BGM = getData;
+        BGMsource.clip = soundData_BGM.clip;
+        BGMsource.volume = 0f;
+        BGMsource.Play();
+        var targetVol = Mute_BGM ? 0f : (Volume_BGM / 100f);
+        BGMsource.DOFade(targetVol, d).SetUpdate(true);
+    }
+
     public void StopBGM()
     {
+        BGMsource.DOKill();
         BGMsource.Stop();
         BGMsource.clip = null;
     }
+
+    /// <summary>BGMをフェードアウトして停止</summary>
+    public void StopBGMWithFade(float fadeDuration = -1f, Action onComplete = null)
+    {
+        var d = fadeDuration > 0 ? fadeDuration : BGM_FADE_DURATION;
+        BGMsource.DOKill();
+        BGMsource.DOFade(0f, d).SetUpdate(true).OnComplete(() =>
+        {
+            BGMsource.Stop();
+            BGMsource.clip = null;
+            onComplete?.Invoke();
+        });
+    }
+
     public void ChangeVolume_ForBGM()
     {
-        BGMsource.volume = Volume_BGM / 100f;
+        if (BGMsource == null) return;
+        BGMsource.mute = Mute_BGM || isPaused;
+        BGMsource.volume = Mute_BGM ? 0f : (Volume_BGM / 100f);
     }
     #endregion
 
 
+
     #region -- SE --
-    public void PlaySE_BallCol(bool _isForceON = false)
+    /// <summary>インデックス指定でSE再生（汎用）</summary>
+    public void PlaySE(int index)
     {
-        if (!_isForceON && isSEPlayed) return;
-        isSEPlayed = true;
-        SO_SoundElement getData;
-        getData = SOLoader.SoundData.Get_SoundData_SE_Random(0, 4);
-
+        var getData = SOLoader.SoundData.Get_SoundData_SE(index);
+        if (getData == null) return;
         PlaySE(getData);
     }
-    public void PlaySE_BallTap(bool _isForceON = true)
+    public void PlaySE_UI(int index)
     {
-        if (!_isForceON && isSEPlayed) return;
-        isSEPlayed = true;
-        SO_SoundElement getData;
-        getData = SOLoader.SoundData.Get_SoundData_SE(11);
-
+        var getData = SOLoader.SoundData.Get_SoundData_SE_UI(index);
+        if (getData == null) return;
         PlaySE(getData);
     }
-    public void PlaySE_SPBallGenerate(bool _isForceON = true)
-    {
-        if (!_isForceON && isSEPlayed) return;
-        isSEPlayed = true;
-        SO_SoundElement getData;
-        getData = SOLoader.SoundData.Get_SoundData_SE(12);
-
-        PlaySE(getData);
-    }
-
     public void PlaySE(SO_SoundElement getData)
     {
-        //if (!_isForceON && isSEPlayed) return;
-        //isSEPlayed = true;
-        //SO_SoundElement getData;
-        //getData = DataBase.Inst.mSO_SoundData.Get_SoundData_SE(_index);
+        if (getData == null || getData.clip == null) return;
 
-        // 再生中で無いAudioSouceで鳴らす
+        int count = 0;
         foreach (AudioSource source in SEsources)
         {
-            if (source.isPlaying == false)
+            if (count >= MAX_SIMULTANEOUS_SE) break;
+            if (!source.isPlaying)
             {
                 source.clip = getData.clip;
                 source.volume = getData.Volume * Volume_Sound / 100f;
+                source.pitch = UnityEngine.Random.Range(sePitchMin, sePitchMax);
                 source.Play();
                 return;
             }
+            count++;
         }
     }
-    // SE停止
+
     public void StopSE()
     {
-        // 全てのSE用のAudioSouceを停止する
         foreach (AudioSource source in SEsources)
         {
             source.Stop();
             source.clip = null;
         }
     }
-    #endregion 
+    #endregion
 }

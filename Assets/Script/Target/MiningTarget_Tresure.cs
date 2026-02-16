@@ -7,6 +7,8 @@ public class MiningTarget_Tresure : MiningTarget_Object
     private int rate_max = 10;
     private int rate_min = 5;
 
+    private int index_SE_Damage => 20;
+
 
     public override void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData, int _layerIndex)
     {
@@ -29,6 +31,7 @@ public class MiningTarget_Tresure : MiningTarget_Object
         var effect = EffectManager.Inst.Get_Effect(EffectType.BlockBreak);
         effect.transform.position = transform.position + EffectOffset;
         effect.SetActive(true);
+        CameraManager.Inst?.ShakeBlockBreak();
 
         // ===== treasure value ======
         AddGetResource();
@@ -53,4 +56,13 @@ public class MiningTarget_Tresure : MiningTarget_Object
         getText.SetText_Coin(StaticManager.Get_BigintegerToString(base.value), SOLoader.UISetting.GetTextColor(resourceType));
     }
 
+
+    protected override void PlaySE_Damage()
+    {
+        SoundManager.Inst.PlaySE(index_SE_Damage);
+    }
+    protected override void PlaySE_Break()
+    {
+        SoundManager.Inst.PlaySE(index_SE_Damage);
+    }
 }

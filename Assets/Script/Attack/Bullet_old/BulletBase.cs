@@ -47,7 +47,8 @@ public class BulletBase : MonoBehaviour
         col.enabled = true;
         rb.linearVelocity = _direction;
         rb.angularVelocity = Vector3.zero;
-        transform.rotation = Quaternion.LookRotation(_direction);
+        if (_direction != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(_direction);
 
         SetLifetime();
     }

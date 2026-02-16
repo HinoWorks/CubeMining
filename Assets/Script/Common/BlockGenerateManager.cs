@@ -48,11 +48,14 @@ public class GenerateBlockLayerCont
             {
                 // アーティファクトを生成
                 var newArtifact = BlockGenerateManager.Inst.GenerateArtifact(layerIndex);
-                newArtifact.transform.localPosition = GetBlockPosition(i);
                 //newArtifact.Set_BreakCallback(BlockBreakCall);
                 if (newArtifact == null)
                 {
                     GenerateNormalBlock(i);
+                }
+                else
+                {
+                    newArtifact.transform.localPosition = GetBlockPosition(i);
                 }
             }
             else
@@ -205,7 +208,7 @@ public class BlockGenerateManager : MonoBehaviour
 
         var blockTypeData = GameParamManager.Get_BlockChangeRateParam(_blockData.blockIndex);
         var blockType = blockTypeData.SelectBlockType();
-        targetBlock.Set_BlockType(blockType);
+        targetBlock.Set_BlockType(_blockData.baseBlockType, blockType);
         return targetBlock;
     }
     #endregion
@@ -229,6 +232,13 @@ public class BlockGenerateManager : MonoBehaviour
     #region == Artifact Generate ==
     public MiningTarget_Artifact GenerateArtifact(int _layerIndex)
     {
+        var artifactIndexes = SaveLoader.Inst.Get_ArtifactIndex_NotGet();
+        if (artifactIndexes.Length == 0)
+        {
+            Debug.Log(" ===**** アーティファクトは全て所持 => 通常ブロック生成");
+            return null;
+        }
+
         var targetArtifact = list_targetArtifacts.Find(x => x.isActiveAndEnabled == false);
         if (targetArtifact == null)
         {
@@ -236,8 +246,6 @@ public class BlockGenerateManager : MonoBehaviour
             targetArtifact = newArtifact.GetComponent<MiningTarget_Artifact>();
             list_targetArtifacts.Add(targetArtifact);
         }
-        var artifactIndexes = SaveLoader.Inst.Get_ArtifactIndex_NotGet();
-        if (artifactIndexes.Length == 0) return null;
 
         // 未所持のアーティファクトをランダムで選択
         var artifactIndex = artifactIndexes[Random.Range(0, artifactIndexes.Length)];

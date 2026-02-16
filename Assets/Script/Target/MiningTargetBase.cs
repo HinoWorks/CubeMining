@@ -47,10 +47,15 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         {
             col.enabled = false;
             BreakFromDamage();
+            PlaySE_Break();
             return true;
         }
+        PlaySE_Damage();
         return false;
     }
+
+    protected virtual void PlaySE_Damage() { }
+    protected virtual void PlaySE_Break() { }
 
 
 
