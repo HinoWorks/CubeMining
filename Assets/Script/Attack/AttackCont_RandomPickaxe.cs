@@ -7,7 +7,7 @@ public class AttackCont_RandomPickaxe : AttackContBase
 {
     [SerializeField] GameObject bulletPrefab;
     private List<BulletCont_RandomPickaxe> bullets = new List<BulletCont_RandomPickaxe>();
-    private Vector3 offsetPosition = new Vector3(0, 2.5f, 0); // 発射位置オフセット
+    private Vector3 offsetPosition = new Vector3(0, 5.5f, 0); // 発射位置オフセット
 
 
     protected override void AwakeCall() { }
