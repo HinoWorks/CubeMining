@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class BulletCont_ThunderStrike : BulletBase
 {
-    private Vector3 offsetPosition = new Vector3(0, 5f, 0); // 雷発生位置のオフセット
-
-
     /// <summary>
     /// 雷発生, triggerではなく触接指定したブロックにダメージを与える
     /// </summary>
@@ -20,7 +17,7 @@ public class BulletCont_ThunderStrike : BulletBase
         base.SetLifetime();
 
         var effUnit = EffectManager.Inst.Get_Effect(EffectType.ThunderStrike);
-        effUnit.transform.position = transform.position + offsetPosition;
+        effUnit.transform.position = transform.position;
         effUnit.SetActive(true);
 
         _target.Damage(damage);

@@ -7,8 +7,6 @@ public class AttackCont_Thunder : AttackContBase
 {
     [SerializeField] GameObject bulletPrefab;
     private List<BulletCont_ThunderStrike> bullets = new List<BulletCont_ThunderStrike>();
-    //private Vector3 offsetPosition = new Vector3(0, 2.5f, 0); // 雷発生位置のオフセット
-
 
 
     protected override void AwakeCall() { }
