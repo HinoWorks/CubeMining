@@ -276,21 +276,39 @@ public class BlockGenerateManager : MonoBehaviour
         var areaSize = currentLayerCont.param.so.layerSize;
         return new Vector3(Random.Range(0, areaSize - 1), 0, Random.Range(0, -(areaSize - 1)));
     }
+    /// <summary>
+    /// 上層から指定した層数分までのうち、ランダムな外周ブロック位置を習得
+    /// </summary>
+    public (bool isShotLine_z, Vector3 position) Get_RandomTargetArea_Around(int _deltaLayer = 0)
+    {
+        var targetLayer = Random.Range(currentLayerCont.layerIndex, currentLayerCont.layerIndex + _deltaLayer);
+        var targetLayerCont = list_layerConts.Find(x => x.layerIndex == targetLayer);
+        if (targetLayerCont == null) targetLayerCont = currentLayerCont;
+        var areaSize = currentLayerCont.param.so.layerSize;
+        bool isRandomX = Random.Range(0, 2) == 0;
+        if (isRandomX)
+        {
+            return (true, new Vector3(Random.Range(0, areaSize - 1), 0, -(areaSize - 1)));
+        }
+        else
+        {
+            return (false, new Vector3(areaSize - 1, 0, -Random.Range(0, areaSize - 1)));
+        }
+    }
 
     /// <summary>
     /// 最上層のランダムなブロック位置を習得
     /// </summary>
-    public MiningTarget_Cube Get_TopTarget()
+    public MiningTarget_Cube Get_TopTarget(int _deltaLayer = 0)
     {
-        var topAreaBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled && x.layerIndex == currentLayerCont.layerIndex);
+        var topAreaBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled && x.layerIndex <= currentLayerCont.layerIndex + _deltaLayer);
         if (topAreaBlocks.Count == 0)
         {
-            topAreaBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled && x.layerIndex == currentLayerCont.layerIndex + 1);
+            topAreaBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled && x.layerIndex <= currentLayerCont.layerIndex + _deltaLayer);
         }
         if (topAreaBlocks.Count == 0) return null;
 
         return topAreaBlocks[Random.Range(0, topAreaBlocks.Count)];
     }
-
     #endregion
 }
