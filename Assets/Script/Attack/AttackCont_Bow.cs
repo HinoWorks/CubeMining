@@ -12,8 +12,8 @@ public class AttackCont_Bow : AttackContBase
     private List<AttackCont_BowUnit> bowUnits = new List<AttackCont_BowUnit>();
     private int deltaLayer = 3;
 
-    private Vector3 offsetPosition_vertical = new Vector3(0, 5.5f, 0); // 発射位置オフセット
-    private float offsetPosition_horizontal = 2.5f; // 発射位置オフセット
+    private Vector3 offsetPosition_vertical = new Vector3(0, 3f, 0); // 発射位置オフセット
+    private float offsetPosition_horizontal = 3.5f; // 発射位置オフセット
 
 
 

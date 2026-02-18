@@ -235,7 +235,7 @@ public class BlockGenerateManager : MonoBehaviour
         var artifactIndexes = SaveLoader.Inst.Get_ArtifactIndex_NotGet();
         if (artifactIndexes.Length == 0)
         {
-            Debug.Log(" ===**** アーティファクトは全て所持 => 通常ブロック生成");
+            //Debug.Log(" ===**** アーティファクトは全て所持 => 通常ブロック生成");
             return null;
         }
 
@@ -288,11 +288,11 @@ public class BlockGenerateManager : MonoBehaviour
         bool isRandomX = Random.Range(0, 2) == 0;
         if (isRandomX)
         {
-            return (true, new Vector3(Random.Range(0, areaSize - 1), 0, -(areaSize - 1)));
+            return (true, new Vector3(Random.Range(0, areaSize - 1), -targetLayer, -(areaSize - 1)));
         }
         else
         {
-            return (false, new Vector3(areaSize - 1, 0, -Random.Range(0, areaSize - 1)));
+            return (false, new Vector3(areaSize - 1, -targetLayer, -Random.Range(0, areaSize - 1)));
         }
     }
 
