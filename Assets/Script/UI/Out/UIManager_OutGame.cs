@@ -28,8 +28,10 @@ public class UIManager_OutGame : MonoBehaviour
     [SerializeField] GameObject main;
     [SerializeField] UI_SkillTreeMaanger ui_skillTreeMaanger;
     [SerializeField] UI_ArtifactManager ui_artifactManager;
+    [SerializeField] UI_PickaxeManager ui_pickaxeManager;
     public UI_SkillTreeMaanger UI_SkillTreeManager => ui_skillTreeMaanger;
     public UI_ArtifactManager UI_ArtifactManager => ui_artifactManager;
+    public UI_PickaxeManager UI_PickaxeManager => ui_pickaxeManager;
 
 
 
@@ -38,6 +40,7 @@ public class UIManager_OutGame : MonoBehaviour
     private OutGame_MenuType[] outGameMenuTypes = new OutGame_MenuType[] {
         OutGame_MenuType.SkillTree,
         OutGame_MenuType.Artifact,
+        OutGame_MenuType.Pickaxe,
     };
     private OutGame_MenuType currentMenuType;
 
@@ -97,6 +100,7 @@ public class UIManager_OutGame : MonoBehaviour
 
         ui_skillTreeMaanger.Init(_outGameMenuType);
         ui_artifactManager.Init(_outGameMenuType);
+        ui_pickaxeManager.Init(_outGameMenuType);
 
         foreach (var headerButton in headerButtons)
         {
