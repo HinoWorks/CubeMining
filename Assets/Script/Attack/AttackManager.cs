@@ -1,30 +1,67 @@
 using UnityEngine;
+using UniRx;
 using System.Collections.Generic;
 
 public class AttackManager : MonoBehaviour
 {
     public static AttackManager Inst;
+    [SerializeField] List<AttackCont_Pickaxe> pickaxeConts = new List<AttackCont_Pickaxe>();
     [SerializeField] List<AttackContBase> attackConts = new List<AttackContBase>();
     private bool isAttacking = false;
+    private int currentPickaxeIndex = 0;
+    private int[] slotIndexes = { 0, 1 };
 
     void Awake()
     {
         if (Inst == null) { Inst = this; }
         else { Destroy(this); }
+    }
 
+    void Start()
+    {
+        GameEvent.Input.PointerPrimaryDown.Subscribe(_ => TryChangePickaxe(0)).AddTo(this);
+        GameEvent.Input.PointerSecondaryDown.Subscribe(_ => TryChangePickaxe(1)).AddTo(this);
     }
 
 
 
-    public void Set_Ready()
+    public async void Set_Ready()
     {
         isAttacking = false;
+
+        // 装備中のピッケルを生成
+        foreach (var slotIndex in slotIndexes)
+        {
+            var pickaxeSlotData = await SaveLoader.Inst.Get_PickaxeSlotData(slotIndex);
+            if (pickaxeSlotData == null || pickaxeSlotData.equipedPickaxeIndex <= 0) continue;
+
+            var pickaxeUnitData = GameParamManager.Get_PickaxeParam(pickaxeSlotData.equipedPickaxeIndex);
+            if (pickaxeUnitData != null)
+            {
+                PickaxeUnitGenerate(slotIndex, pickaxeUnitData);
+            }
+        }
+        // 攻撃ユニット生成 == スキルツリー分のパラメータを読み込む
         foreach (var attackParam in GameParamManager.list_attackParam)
         {
             if (!attackParam.isActive) continue;
             AttackUnitGenerate(attackParam);
         }
+
+        currentPickaxeIndex = 0;
+        SelectPickaxe(currentPickaxeIndex);
     }
+
+    private void PickaxeUnitGenerate(int _slotIndex, PickaxeParam _pickaxeParam)
+    {
+        var pickaxeUnit = Instantiate(_pickaxeParam.so.pf, transform) as GameObject;
+        pickaxeUnit.transform.position = transform.position;
+
+        var pickaxeCont = pickaxeUnit.GetComponent<AttackCont_Pickaxe>();
+        pickaxeConts.Add(pickaxeCont);
+        pickaxeCont.Init(_slotIndex, _pickaxeParam);
+    }
+
 
     private void AttackUnitGenerate(AttackParam _attackParam)
     {
@@ -46,6 +83,10 @@ public class AttackManager : MonoBehaviour
         {
             attackCont.Set_AttackTrigger(isStart);
         }
+        foreach (var pickaxeCont in pickaxeConts)
+        {
+            pickaxeCont.Set_AttackTrigger(isStart);
+        }
     }
 
 
@@ -56,7 +97,40 @@ public class AttackManager : MonoBehaviour
             attackCont.OnDestroy();
         }
         attackConts.Clear();
+        foreach (var pickaxeCont in pickaxeConts)
+        {
+            pickaxeCont.OnDestroy();
+        }
+        pickaxeConts.Clear();
     }
 
+
+
+
+    #region -- Change pickaxe --
+    private void TryChangePickaxe(int _slotIndex)
+    {
+        if (!isAttacking || pickaxeConts.Count == 0) return;
+        if (!HasPickaxeInSlot(_slotIndex)) return;
+        currentPickaxeIndex = _slotIndex;
+        SelectPickaxe(currentPickaxeIndex);
+    }
+    private bool HasPickaxeInSlot(int _slotIndex)
+    {
+        foreach (var pickaxeCont in pickaxeConts)
+        {
+            if (pickaxeCont.slotIndex == _slotIndex) return true;
+        }
+        return false;
+    }
+    private void SelectPickaxe(int _slotIndex)
+    {
+        Debug.Log($"ChangePickaxe: {_slotIndex}");
+        foreach (var pickaxeCont in pickaxeConts)
+        {
+            pickaxeCont.Set_SelectPickaxe(_slotIndex);
+        }
+    }
+    #endregion
 
 }

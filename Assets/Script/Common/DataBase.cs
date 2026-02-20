@@ -82,9 +82,13 @@ public class DataBase : MonoBehaviour
         var convData = CSVSerializer.Deserialize<AttackUnitData>(loadData);
         mSO_AttackUnitData.attackUnitDatas = convData;
 
-        var loadData2 = await DataLoad("ArtifactRate");
-        var convData2 = CSVSerializer.Deserialize<ArtifactGenerateRateData>(loadData2);
-        mSO_ArtifactData.artifactGenerateRateDatas = convData2;
+        var loadData2 = await DataLoad("PickaxeUnit");
+        var convData2 = CSVSerializer.Deserialize<PickaxeUnitData>(loadData2);
+        mSO_AttackUnitData.pickaxeUnitDatas = convData2;
+
+        var loadData3 = await DataLoad("PickaxeResource");
+        var convData3 = CSVSerializer.Deserialize<PickaxeResourceData>(loadData3);
+        mSO_AttackUnitData.pickaxeResourceDatas = convData3;
     }
 
     private async UniTask DataLoad_BlockData()
@@ -110,6 +114,10 @@ public class DataBase : MonoBehaviour
         var loadData = await DataLoad("Artifact");
         var convData = CSVSerializer.Deserialize<ArtifactUnitData>(loadData);
         mSO_ArtifactData.artifactDatas = convData;
+
+        var loadData2 = await DataLoad("ArtifactRate");
+        var convData2 = CSVSerializer.Deserialize<ArtifactGenerateRateData>(loadData2);
+        mSO_ArtifactData.artifactGenerateRateDatas = convData2;
     }
 
     private async UniTask DataLoad_UnlockData()

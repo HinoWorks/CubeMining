@@ -14,19 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_AttackUnitData
   attackUnitDatas:
   - attackIndex: 1
-    unitName: Base Attack
-    unitDescription: 
-    icon: {fileID: 0}
-    pf: {fileID: 9024363205940861645, guid: b01f45b95c0cf4ee2bce95722cc5a0af, type: 3}
-    attackType: 0
-    damage: 2
-    attackInterval: 0.5
-    speed: -1
-    aliveTime: 999
-    ct: 1
-    count: 1
-    size: 0.5
-  - attackIndex: 2
     unitName: Small pickaxe
     unitDescription: 
     icon: {fileID: 0}
@@ -39,7 +26,7 @@ MonoBehaviour:
     ct: 1
     count: 1
     size: 0.35
-  - attackIndex: 3
+  - attackIndex: 2
     unitName: Thunder(Top)
     unitDescription: 
     icon: {fileID: 0}
@@ -52,11 +39,11 @@ MonoBehaviour:
     ct: 3
     count: 1
     size: 1
-  - attackIndex: 4
+  - attackIndex: 3
     unitName: Thunder(Random)
     unitDescription: 
     icon: {fileID: 0}
-    pf: {fileID: 0}
+    pf: {fileID: 601605801108607667, guid: 32963baef2720410fa437525ec84df92, type: 3}
     attackType: 1
     damage: 5
     attackInterval: 3
@@ -65,7 +52,7 @@ MonoBehaviour:
     ct: 3
     count: 1
     size: 1
-  - attackIndex: 5
+  - attackIndex: 4
     unitName: AroundStar
     unitDescription: 
     icon: {fileID: 0}
@@ -104,16 +91,170 @@ MonoBehaviour:
     ct: 3
     count: 1
     size: 1
-  - attackIndex: 8
-    unitName: 
+  - attackIndex: 999
+    unitName: Base Attack
     unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 0}
     attackType: 0
-    damage: 0
-    attackInterval: 0
-    speed: 0
-    aliveTime: 0
-    ct: 0
-    count: 0
-    size: 0
+    damage: 2
+    attackInterval: 0.5
+    speed: -1
+    aliveTime: 999
+    ct: 1
+    count: 1
+    size: 0.5
+  pickaxeUnitDatas:
+  - pickaxeIndex: 1
+    unitName: normal pickaxe
+    icon: {fileID: 0}
+    pf: {fileID: 6150116085842143346, guid: 1f161d31724c043c5a4b58798a37e1e4, type: 3}
+    damage: 2
+    attackInterval: 0.5
+    criticalRate: 0
+    resourceRate: 1
+    areaIcon: {fileID: 0}
+    size: 1
+  - pickaxeIndex: 2
+    unitName: pickaxe 2
+    icon: {fileID: 0}
+    pf: {fileID: 6150116085842143346, guid: 5f620ebfe64a8473ca8cbdeef0061eda, type: 3}
+    damage: 6
+    attackInterval: 1
+    criticalRate: 1
+    resourceRate: 1
+    areaIcon: {fileID: 0}
+    size: 1
+  - pickaxeIndex: 3
+    unitName: pickaxe 3
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    damage: 15
+    attackInterval: 0.4
+    criticalRate: 2
+    resourceRate: 1
+    areaIcon: {fileID: 0}
+    size: 1
+  - pickaxeIndex: 4
+    unitName: pickaxe 4
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    damage: 24
+    attackInterval: 0.4
+    criticalRate: 3
+    resourceRate: 1
+    areaIcon: {fileID: 0}
+    size: 1
+  - pickaxeIndex: 5
+    unitName: pickaxe 5
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    damage: 33
+    attackInterval: 0.4
+    criticalRate: 4
+    resourceRate: 1
+    areaIcon: {fileID: 0}
+    size: 1
+  - pickaxeIndex: 6
+    unitName: pickaxe 6
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    damage: 42
+    attackInterval: 0.4
+    criticalRate: 5
+    resourceRate: 1
+    areaIcon: {fileID: 0}
+    size: 1
+  - pickaxeIndex: 7
+    unitName: pickaxe 7
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    damage: 51
+    attackInterval: 0.4
+    criticalRate: 6
+    resourceRate: 1
+    areaIcon: {fileID: 0}
+    size: 1
+  - pickaxeIndex: 8
+    unitName: pickaxe 8
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    damage: 60
+    attackInterval: 0.4
+    criticalRate: 7
+    resourceRate: 1
+    areaIcon: {fileID: 0}
+    size: 1
+  pickaxeResourceDatas:
+  - pickaxeIndex: 1
+    req_stone: -1
+    req_iron: -1
+    req_gold: -1
+    req_emerald: -1
+    req_ruby: -1
+    req_sapphire: -1
+    req_diamond: -1
+    createTime: 30
+  - pickaxeIndex: 2
+    req_stone: 100
+    req_iron: 5
+    req_gold: -1
+    req_emerald: -1
+    req_ruby: -1
+    req_sapphire: -1
+    req_diamond: -1
+    createTime: 60
+  - pickaxeIndex: 3
+    req_stone: 200
+    req_iron: 30
+    req_gold: 10
+    req_emerald: -1
+    req_ruby: -1
+    req_sapphire: -1
+    req_diamond: -1
+    createTime: 120
+  - pickaxeIndex: 4
+    req_stone: 500
+    req_iron: 60
+    req_gold: 30
+    req_emerald: -1
+    req_ruby: -1
+    req_sapphire: -1
+    req_diamond: -1
+    createTime: 120
+  - pickaxeIndex: 5
+    req_stone: -1
+    req_iron: 100
+    req_gold: 50
+    req_emerald: 20
+    req_ruby: -1
+    req_sapphire: -1
+    req_diamond: -1
+    createTime: 150
+  - pickaxeIndex: 6
+    req_stone: -1
+    req_iron: 300
+    req_gold: 150
+    req_emerald: 50
+    req_ruby: 10
+    req_sapphire: -1
+    req_diamond: -1
+    createTime: 150
+  - pickaxeIndex: 7
+    req_stone: -1
+    req_iron: -1
+    req_gold: 300
+    req_emerald: 100
+    req_ruby: 30
+    req_sapphire: 10
+    req_diamond: -1
+    createTime: 200
+  - pickaxeIndex: 8
+    req_stone: -1
+    req_iron: -1
+    req_gold: -1
+    req_emerald: 300
+    req_ruby: 150
+    req_sapphire: 75
+    req_diamond: 10
+    createTime: 200

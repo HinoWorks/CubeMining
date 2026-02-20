@@ -11,6 +11,7 @@ public enum OutGame_MenuType
     None,
     SkillTree,
     Artifact,
+    Pickaxe,
 }
 
 public class UIManager_OutGame : MonoBehaviour

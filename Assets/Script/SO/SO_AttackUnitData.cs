@@ -33,11 +33,47 @@ public class AttackUnitData
 }
 
 
+[System.Serializable]
+public class PickaxeUnitData
+{
+    public int pickaxeIndex;
+    public string unitName;
+    public Sprite icon;
+    public GameObject pf;
+    public int damage;
+    public float attackInterval;
+    public float criticalRate;
+    public float resourceRate;
+    public Sprite areaIcon;
+    public float size;
+
+}
+
+
+
+[System.Serializable]
+public class PickaxeResourceData
+{
+    public int pickaxeIndex;
+    public int req_stone;
+    public int req_iron;
+    public int req_gold;
+    public int req_emerald;
+    public int req_ruby;
+    public int req_sapphire;
+    public int req_diamond;
+    public int createTime;
+}
+
+
 
 [CreateAssetMenu(menuName = "SO/AttackUnitData")]
 public class SO_AttackUnitData : ScriptableObject
 {
     public AttackUnitData[] attackUnitDatas;
+    public PickaxeUnitData[] pickaxeUnitDatas;
+    public PickaxeResourceData[] pickaxeResourceDatas;
+
 
 
     public AttackUnitData GetAttackUnitData(int _attackIndex)
@@ -46,6 +82,28 @@ public class SO_AttackUnitData : ScriptableObject
         if (data == null)
         {
             Debug.LogError($"AttackUnitData not found: {_attackIndex}");
+            return null;
+        }
+        return data;
+    }
+
+    public PickaxeUnitData GetPickaxeUnitData(int _pickaxeIndex)
+    {
+        var data = Array.Find(pickaxeUnitDatas, x => x.pickaxeIndex == _pickaxeIndex);
+        if (data == null)
+        {
+            Debug.LogError($"PickaxeUnitData not found: {_pickaxeIndex}");
+            return null;
+        }
+        return data;
+    }
+
+    public PickaxeResourceData GetPickaxeResourceData(int _pickaxeIndex)
+    {
+        var data = Array.Find(pickaxeResourceDatas, x => x.pickaxeIndex == _pickaxeIndex);
+        if (data == null)
+        {
+            Debug.LogError($"PickaxeResourceData not found: {_pickaxeIndex}");
             return null;
         }
         return data;

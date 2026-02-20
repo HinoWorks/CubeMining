@@ -65,6 +65,22 @@ public static class GameEvent
         {
             pointerDamage.OnNext(target);
         }
+
+        // 左クリック（主ボタン）押下
+        private static readonly Subject<Unit> pointerPrimaryDown = new();
+        public static IObservable<Unit> PointerPrimaryDown => pointerPrimaryDown.AsObservable();
+        public static void PublishPointerPrimaryDown()
+        {
+            pointerPrimaryDown.OnNext(Unit.Default);
+        }
+
+        // 右クリック（副ボタン）押下
+        private static readonly Subject<Unit> pointerSecondaryDown = new();
+        public static IObservable<Unit> PointerSecondaryDown => pointerSecondaryDown.AsObservable();
+        public static void PublishPointerSecondaryDown()
+        {
+            pointerSecondaryDown.OnNext(Unit.Default);
+        }
     }
 
 

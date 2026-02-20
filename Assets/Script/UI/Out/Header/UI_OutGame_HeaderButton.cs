@@ -5,6 +5,7 @@ using System;
 
 public class UI_OutGame_HeaderButton : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI tmp_title;
     private OutGame_MenuType outGameMenuType;
     private HButton hButton;
 
@@ -16,6 +17,7 @@ public class UI_OutGame_HeaderButton : MonoBehaviour
     {
         this.gameObject.SetActive(true);
         outGameMenuType = _outGameMenuType;
+        tmp_title.text = outGameMenuType.ToString();
         hButton = this.GetComponent<HButton>();
         onSelect = _onSelect;
     }

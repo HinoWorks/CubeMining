@@ -96,7 +96,23 @@ public class ArtifactSlotData
     public bool isOpen = false;
     public int equipedArtifactIndex;
 }
+#endregion
 
+
+
+#region -- Pickaxe --
+[System.Serializable]
+public class PickaxeData
+{
+    public int pickaxeIndex;
+    public int level = 0;
+}
+[System.Serializable]
+public class PickaxeSlotData
+{
+    public int slotIndex;
+    public int equipedPickaxeIndex;
+}
 #endregion
 
 
@@ -204,27 +220,16 @@ public class SaveLoader : MonoBehaviour
         currentState = state.Idling;
     }
 
-    #region -- Sound Settings --
-    public void Request_SaveSoundSettings(float volumeBGM, float volumeSE, bool muteBGM, bool muteSE)
-    {
-        EnqueueMethod(() => SaveSoundSettings(volumeBGM, volumeSE, muteBGM, muteSE));
-    }
-    private void SaveSoundSettings(float volumeBGM, float volumeSE, bool muteBGM, bool muteSE)
-    {
-        var data = new SoundSettingsData
-        {
-            volumeBGM = volumeBGM,
-            volumeSE = volumeSE,
-            muteBGM = muteBGM,
-            muteSE = muteSE
-        };
-        ES3.Save(KEY_SOUND_SETTINGS, data);
-    }
-    #endregion
 
     private void InitialData_Create()
     {
+        // 初期データ作成
+        Request_SavePickaxeData(1, 1); // 初期つるはしゲット
+        Request_SavePickaxeSlotData(0, 1); // 初期スロット0番目に装備
 
+        // DEBUG
+        Request_SavePickaxeData(2, 1); // 初期スパイダーゲット
+        Request_SavePickaxeSlotData(1, 2); // 初期スロット1番目に装備
     }
 
 
@@ -575,7 +580,69 @@ public class SaveLoader : MonoBehaviour
 
 
 
-    #region -- Artifact Slot --
+    #region -- Pickaxe --
+    public async UniTask<PickaxeData> Get_PickaxeData(int _pickaxeIndex)
+    {
+        string saveKey = GetPickaxeDataKey(_pickaxeIndex);
+        var loadData = await LoadAsync<PickaxeData>(saveKey);
+        if (loadData.success)
+        {
+            return loadData.data;
+        }
+        return null;
+    }
+    public void Request_SavePickaxeData(int _pickaxeIndex, int _level)
+    {
+        EnqueueMethod(() => { SavePickaxeData(_pickaxeIndex, _level); });
+    }
+    private void SavePickaxeData(int _pickaxeIndex, int _level)
+    {
+        var saveKey = GetPickaxeDataKey(_pickaxeIndex);
+        var newData = new PickaxeData()
+        {
+            pickaxeIndex = _pickaxeIndex,
+            level = _level
+        };
+        ES3.Save(saveKey, newData);
+    }
+    private string GetPickaxeDataKey(int _pickaxeIndex)
+    {
+        return $"PickaxeData-{_pickaxeIndex}";
+    }
+
+    public async UniTask<PickaxeSlotData> Get_PickaxeSlotData(int _slotIndex)
+    {
+        string saveKey = GetPickaxeSlotDataKey(_slotIndex);
+        var loadData = await LoadAsync<PickaxeSlotData>(saveKey);
+        if (loadData.success)
+        {
+            return loadData.data;
+        }
+        return null;
+    }
+    public void Request_SavePickaxeSlotData(int _slotIndex, int _equipedPickaxeIndex)
+    {
+        EnqueueMethod(() => { SavePickaxeSlotData(_slotIndex, _equipedPickaxeIndex); });
+    }
+    private void SavePickaxeSlotData(int _slotIndex, int _equipedPickaxeIndex)
+    {
+        var saveKey = GetPickaxeSlotDataKey(_slotIndex);
+        var newData = new PickaxeSlotData()
+        {
+            slotIndex = _slotIndex,
+            equipedPickaxeIndex = _equipedPickaxeIndex
+        };
+        ES3.Save(saveKey, newData);
+    }
+    private string GetPickaxeSlotDataKey(int _slotIndex)
+    {
+        return $"PickaxeSlotData-{_slotIndex}";
+    }
+    #endregion
+
+
+
+    #region -- GameRecordData --
     public async UniTask<GameRecordData> Get_GameRecordData()
     {
         var loadData = await LoadAsync<GameRecordDataSave>(KEY_GAME_RECORD_DATA);
@@ -635,6 +702,26 @@ public class SaveLoader : MonoBehaviour
             oneGame_totalDamage = ParseBigInteger(save.oneGame_totalDamage),
             oneGame_maxDepth = ParseBigInteger(save.oneGame_maxDepth),
         };
+    }
+    #endregion
+
+
+
+    #region -- Sound Settings --
+    public void Request_SaveSoundSettings(float volumeBGM, float volumeSE, bool muteBGM, bool muteSE)
+    {
+        EnqueueMethod(() => SaveSoundSettings(volumeBGM, volumeSE, muteBGM, muteSE));
+    }
+    private void SaveSoundSettings(float volumeBGM, float volumeSE, bool muteBGM, bool muteSE)
+    {
+        var data = new SoundSettingsData
+        {
+            volumeBGM = volumeBGM,
+            volumeSE = volumeSE,
+            muteBGM = muteBGM,
+            muteSE = muteSE
+        };
+        ES3.Save(KEY_SOUND_SETTINGS, data);
     }
     #endregion
 

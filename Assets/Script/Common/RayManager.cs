@@ -25,6 +25,16 @@ public class RayManager : MonoBehaviour
         if (!isRaycast) return;
         //PointerMove();
         PointerDamageIfCheck();
+        PublishPointerButtonDown();
+    }
+
+    private void PublishPointerButtonDown()
+    {
+        if (Mouse.current == null) return;
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+            GameEvent.Input.PublishPointerPrimaryDown();
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+            GameEvent.Input.PublishPointerSecondaryDown();
     }
     private void PointerMove()
     {

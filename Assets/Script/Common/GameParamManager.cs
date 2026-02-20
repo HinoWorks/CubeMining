@@ -275,6 +275,32 @@ public class ArtifactGenerateRateParam
 
 
 /// <summary>
+/// ピッケルのパラメータ
+/// </summary>
+public class PickaxeParam
+{
+    public PickaxeUnitData so;
+    public int damage;
+    public float attackInterval;
+    public float criticalRate;
+    public float resourceRate;
+    public float size;
+
+    public void Init(PickaxeUnitData _pickaxeUnitData)
+    {
+        so = _pickaxeUnitData;
+        damage = _pickaxeUnitData.damage;
+        attackInterval = _pickaxeUnitData.attackInterval;
+        criticalRate = _pickaxeUnitData.criticalRate;
+        resourceRate = _pickaxeUnitData.resourceRate;
+        size = _pickaxeUnitData.size;
+    }
+}
+
+
+
+
+/// <summary>
 /// アタックユニットのパラメータ
 /// </summary>
 public class AttackParam
@@ -295,7 +321,7 @@ public class AttackParam
     {
         so = _attackUnitData;
         attackUnitIndex = _attackUnitData.attackIndex;
-        isActive = attackUnitIndex == 1 ? true : false;
+        isActive = false;
         damage = _attackUnitData.damage;
         aliveTime = _attackUnitData.aliveTime;
         ct = _attackUnitData.ct;
@@ -339,6 +365,7 @@ public class AttackParam
 
 
 
+
 /// <summary>
 /// ゲームのパラメータを管理するクラス
 /// 全てのパラはここを参照して取得する
@@ -353,7 +380,7 @@ public static class GameParamManager
     public readonly static List<BlockGenerateParam_Layer> list_blockGenerateParam_Layer = new List<BlockGenerateParam_Layer>();
     public readonly static List<BlockChangeRateParam> list_blockChangeRateParam = new List<BlockChangeRateParam>();
     public readonly static List<AttackParam> list_attackParam = new List<AttackParam>();
-
+    public readonly static List<PickaxeParam> list_pickaxeParam = new List<PickaxeParam>();
     public static float artifactGenerateRate => artifactGenerateRateParam.generateRate;
     public static int otherObjectRate { get; private set; } = 0;
     public static int otherObjectBaseRate { get; private set; } = 100;
@@ -387,6 +414,15 @@ public static class GameParamManager
             Debug.LogError($"AttackUnitData is not found: {_attackIndex} // ==> 初期ロードで読み込み失敗");
         }
         return targetAttack;
+    }
+    public static PickaxeParam Get_PickaxeParam(int _pickaxeIndex)
+    {
+        var targetPickaxe = list_pickaxeParam.Find(x => x.so.pickaxeIndex == _pickaxeIndex);
+        if (targetPickaxe == null)
+        {
+            Debug.LogError($"PickaxeUnitData is not found: {_pickaxeIndex} // ==> 初期ロードで読み込み失敗");
+        }
+        return targetPickaxe;
     }
     public static BlockGenerateParam_Layer Get_BlockGenerateParam_Layer(int _layerIndex)
     {
@@ -506,6 +542,15 @@ public static class GameParamManager
             var attackParam = new AttackParam();
             attackParam.Init(attackData);
             list_attackParam.Add(attackParam);
+        }
+
+        // pickaxe param init
+        list_pickaxeParam.Clear();
+        foreach (var pickaxeData in SOLoader.AttackUnitData.pickaxeUnitDatas)
+        {
+            var pickaxeParam = new PickaxeParam();
+            pickaxeParam.Init(pickaxeData);
+            list_pickaxeParam.Add(pickaxeParam);
         }
     }
 

@@ -7,10 +7,11 @@ using UniRx;
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Inst;
+    [SerializeField] Transform parent_camera;
     private CinemachineCamera vcam;
+    private Vector3 initialPosition_parent;
     private Vector3 initialPosition;
     private Tween shakeTween;
-
 
     void Awake()
     {
@@ -21,7 +22,8 @@ public class CameraManager : MonoBehaviour
 
     void Start()
     {
-        initialPosition = vcam.transform.position;
+        initialPosition_parent = parent_camera.position;
+        initialPosition = vcam.transform.localPosition;
         GameEvent.GameState.SetGameState.Subscribe(SetGameState).AddTo(this);
     }
 
@@ -33,7 +35,8 @@ public class CameraManager : MonoBehaviour
                 break;
 
             case GameStateType.InGame_Ready:
-                vcam.transform.position = initialPosition;
+                vcam.transform.localPosition = initialPosition;
+                parent_camera.position = initialPosition_parent;
                 break;
             case GameStateType.InGame:
             case GameStateType.InGame_End:
@@ -45,7 +48,8 @@ public class CameraManager : MonoBehaviour
 
     public void SetCameraPosition(int _layerIndex)
     {
-        vcam.transform.DOMove(initialPosition + new Vector3(0, -_layerIndex, 0), 0.2f).SetEase(Ease.InOutSine);
+        //vcam.transform.DOMove(initialPosition + new Vector3(0, -_layerIndex, 0), 0.2f).SetEase(Ease.InOutSine);
+        parent_camera.DOMove(initialPosition_parent + new Vector3(0, -_layerIndex, 0), 0.2f).SetEase(Ease.InOutSine);
     }
 
     /// <summary>
