@@ -33,11 +33,15 @@ public class AttackUnitData
 }
 
 
+
+/// <summary>
+/// ピッケルデータ
+/// </summary>
 [System.Serializable]
 public class PickaxeUnitData
 {
     public int pickaxeIndex;
-    public string unitName;
+    public string pickaxeName;
     public Sprite icon;
     public GameObject pf;
     public int damage;
@@ -49,8 +53,9 @@ public class PickaxeUnitData
 
 }
 
-
-
+/// <summary>
+/// ピッケル作成に必要なリソースデータ
+/// </summary>
 [System.Serializable]
 public class PickaxeResourceData
 {
@@ -65,6 +70,23 @@ public class PickaxeResourceData
     public int createTime;
 }
 
+public enum PickaxeParamType
+{
+    Damage,
+    AttackInterval,
+    CriticalRate,
+    ResourceRate,
+}
+
+[System.Serializable]
+public class PickaxeParamBase
+{
+    public PickaxeParamType paramType;
+    public Sprite icon;
+    public string paramName;
+}
+
+
 
 
 [CreateAssetMenu(menuName = "SO/AttackUnitData")]
@@ -73,6 +95,7 @@ public class SO_AttackUnitData : ScriptableObject
     public AttackUnitData[] attackUnitDatas;
     public PickaxeUnitData[] pickaxeUnitDatas;
     public PickaxeResourceData[] pickaxeResourceDatas;
+    public PickaxeParamBase[] pickaxeParamBases;
 
 
 
@@ -109,5 +132,14 @@ public class SO_AttackUnitData : ScriptableObject
         return data;
     }
 
-
+    public PickaxeParamBase GetPickaxeParamBase(PickaxeParamType _paramType)
+    {
+        var data = Array.Find(pickaxeParamBases, x => x.paramType == _paramType);
+        if (data == null)
+        {
+            Debug.LogError($"PickaxeParamBase not found: {_paramType}");
+            return null;
+        }
+        return data;
+    }
 }
