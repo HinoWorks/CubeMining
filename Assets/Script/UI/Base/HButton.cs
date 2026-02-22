@@ -10,8 +10,6 @@ using UnityEngine.Events;
 
 public class HButton : Button
 {
-
-
     const float duration_scaleChange = 0.2f;
     const float scale_push = 0.85f; // ボタンが押されたときのスケール
     const float scale_over = 1.1f; // ボタンにカーソルが乗ったときのスケール
@@ -19,6 +17,7 @@ public class HButton : Button
     //private HButtonConnect hButtonConnect;
     public UnityAction<bool> onMouseOver;
     public UnityAction<bool> onSelect;
+    public UnityAction<bool> onInteractableChange;
     public UnityAction rightClick;
     //public UnityAction onRightClick;
 
@@ -42,9 +41,9 @@ public class HButton : Button
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        if (!base.interactable) return;
         base.OnPointerEnter(eventData);
 
-        if (base.interactable == false) return;
         Anim_ScaleChange_PointerOn();
         if (onMouseOver != null)
         {
@@ -54,9 +53,8 @@ public class HButton : Button
 
     public override void OnPointerExit(PointerEventData eventData)
     {
+        if (!base.interactable) return;
         base.OnPointerExit(eventData);
-
-        if (base.interactable == false) return;
         Anim_ScaleChange_ToNormal();
         if (onMouseOver != null)
         {
@@ -66,6 +64,7 @@ public class HButton : Button
 
     public override void OnPointerDown(PointerEventData eventData)
     {
+        if (!base.interactable) return;
         Anim_ScaleChange_ToSmall();
         base.OnPointerDown(eventData);
     }
@@ -73,12 +72,14 @@ public class HButton : Button
     // Button is released
     public override void OnPointerUp(PointerEventData eventData)
     {
+        if (!base.interactable) return;
         Anim_ScaleChange_ToNormal();
         base.OnPointerUp(eventData);
     }
 
     public override void OnPointerClick(PointerEventData eventData)
     {
+        if (!base.interactable) return;
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             base.OnPointerClick(eventData);
@@ -99,6 +100,12 @@ public class HButton : Button
         {
             onSelect(_active);
         }
+    }
+
+    public void Set_Interactable(bool _interactable)
+    {
+        this.interactable = _interactable;
+        onInteractableChange?.Invoke(_interactable);
     }
 
 

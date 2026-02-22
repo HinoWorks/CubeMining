@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 public class HButtonConnect : MonoBehaviour
 {
+    [SerializeField] GameObject obj_OFF;
     [SerializeField] GameObject obj_mouseOver;
     [SerializeField] GameObject obj_clickSelect;
 
@@ -14,6 +15,7 @@ public class HButtonConnect : MonoBehaviour
         button.onMouseOver += Set_MouseOverActive;
         button.onSelect += Set_SelectActive;
         button.rightClick += RightClickAction;
+        button.onInteractableChange += Set_Interactable;
     }
 
     public void Set_StateInit()
@@ -40,6 +42,11 @@ public class HButtonConnect : MonoBehaviour
         {
             rightClick.Invoke();
         }
+    }
+
+    public void Set_Interactable(bool _interactable)
+    {
+        if (obj_OFF != null) obj_OFF.SetActive(!_interactable);
     }
 
 
