@@ -19,6 +19,8 @@ public class UI_PickaxeSelectInfoCont : UI_PickaxeParamCont
     [Space(10)]
     [SerializeField] TextMeshProUGUI tmp_pickaxeName;
     [SerializeField] Image image_areaIcon;
+    [SerializeField] GameObject obj_equiped;
+
 
     [Space(10)]
     [Header("Craft Area")]
@@ -144,6 +146,7 @@ public class UI_PickaxeSelectInfoCont : UI_PickaxeParamCont
     {
         obj_craft.SetActive(false);
         obj_equip.SetActive(true);
+        obj_equiped.SetActive(_equipedSlotIndexNow != -1);
 
         btn_equip_slot0.Set_Interactable(0 != _equipedSlotIndexNow);
         btn_equip_slot1.Set_Interactable(1 != _equipedSlotIndexNow);
