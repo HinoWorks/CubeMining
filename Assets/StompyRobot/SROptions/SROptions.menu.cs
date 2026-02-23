@@ -1,19 +1,13 @@
 ﻿using UnityEngine;
 using System.ComponentModel;
-using Cysharp.Threading.Tasks;
 using SRF.Service;
 using SRDebugger.Services;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System;
 
 
-
-
 public partial class SROptions
 {
-    // private BlockType selectBlockType;
-
     // -----------------------------------
     [Category("Time")]
     [DisplayName("TimeScale")]
@@ -46,12 +40,55 @@ public partial class SROptions
     {
         SaveLoader.Inst.Request_SaveCoin(100);
     }
+
     [Category("アイテム取得")]
-    [DisplayName("コイン +10000")]
-    [Sort(1)]
-    public void ItemGet_Coin_10000()
+    [DisplayName("石 +10")]
+    [Sort(2)]
+    public void ItemGet_Stone_10()
     {
-        SaveLoader.Inst.Request_SaveCoin(10000);
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Stone, 10);
+    }
+    [Category("アイテム取得")]
+    [DisplayName("鉄 +10")]
+    [Sort(3)]
+    public void ItemGet_Iron_10()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Iron, 10);
+    }
+    [Category("アイテム取得")]
+    [DisplayName("金 +10")]
+    [Sort(4)]
+    public void ItemGet_Gold_10()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Gold, 10);
+    }
+    [Category("アイテム取得")]
+    [DisplayName("エメラルド +10")]
+    [Sort(5)]
+    public void ItemGet_Emerald_10()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Emerald, 10);
+    }
+    [Category("アイテム取得")]
+    [DisplayName("ルビー +10")]
+    [Sort(6)]
+    public void ItemGet_Ruby_10()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Ruby, 10);
+    }
+    [Category("アイテム取得")]
+    [DisplayName("サファイア +10")]
+    [Sort(7)]
+    public void ItemGet_Sapphire_10()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Sapphire, 10);
+    }
+    [Category("アイテム取得")]
+    [DisplayName("ダイアモンド +10")]
+    [Sort(8)]
+    public void ItemGet_Diamond_10()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Diamond, 10);
     }
 
 

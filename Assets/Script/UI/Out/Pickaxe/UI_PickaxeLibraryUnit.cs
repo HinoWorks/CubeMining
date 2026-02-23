@@ -57,7 +57,6 @@ public class UI_PickaxeLibraryUnit : MonoBehaviour
     #region -- マウスアクション --
     public void OnClick_Select()
     {
-        if (isEquiped) return;
         onClick_Select?.Invoke(so);
     }
     #endregion

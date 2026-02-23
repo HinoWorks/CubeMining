@@ -4079,6 +4079,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8740242789758591422}
     m_Modifications:
+    - target: {fileID: 3267481026177877696, guid: 8694a90fe62b34b48aa2e248f4c4c5c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: 8694a90fe62b34b48aa2e248f4c4c5c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: 8694a90fe62b34b48aa2e248f4c4c5c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4187314217094531762}
+    - target: {fileID: 3267481026177877696, guid: 8694a90fe62b34b48aa2e248f4c4c5c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: 8694a90fe62b34b48aa2e248f4c4c5c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick_Craft
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: 8694a90fe62b34b48aa2e248f4c4c5c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UI_PickaxeSelectInfoCont, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: 8694a90fe62b34b48aa2e248f4c4c5c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5493716790991303524, guid: 8694a90fe62b34b48aa2e248f4c4c5c5, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -4200,6 +4228,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5586324971263821416}
     m_Modifications:
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4187314217094531762}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick_Equip
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UI_PickaxeSelectInfoCont, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7280337888907310939, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
       propertyPath: m_text
       value: Equip
@@ -4777,6 +4833,38 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 267167212b86f4805af9269044d8e542, type: 3}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4187314217094531762}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick_Equip
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UI_PickaxeSelectInfoCont, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7280337889172280054, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
       propertyPath: m_Name
       value: pf_ui_buttonBase Variant(pickaxeEquip) (1)

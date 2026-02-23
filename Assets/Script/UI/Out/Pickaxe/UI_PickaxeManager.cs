@@ -4,7 +4,8 @@ using DG.Tweening;
 using System.Collections.Generic;
 using System;
 using Cysharp.Threading.Tasks;
-
+using System.Linq;
+using JetBrains.Annotations;
 
 public class UI_PickaxeManager : MonoBehaviour
 {
@@ -12,8 +13,9 @@ public class UI_PickaxeManager : MonoBehaviour
     [SerializeField] UI_PickaxeLibraryUnit[] pickaxeLibraryUnits;
     [SerializeField] UI_PickaxeSelectInfoCont selectInfoUnit;
     private bool onceInitFin = false;
-
     private int[] slotIndexes = { 0, 1 };
+    private HashSet<int> equipedPickaxeIndexes = new HashSet<int>();
+    private bool isDoingAction = false;
 
 
     void OnceInit()//主にコールバックを設定
@@ -24,8 +26,8 @@ public class UI_PickaxeManager : MonoBehaviour
             pickaxeLibraryUnit.Init_Once(index, SelectPickaxeUnit);
             index++;
         }
+        selectInfoUnit.Init_Once(OnClick_CraftPickaxe, OnClick_EquipPickaxe);
 
-        index = 0;
         onceInitFin = true;
     }
 
@@ -35,12 +37,16 @@ public class UI_PickaxeManager : MonoBehaviour
         var isActive = _outGameMenuType == OutGame_MenuType.Pickaxe;
         if (isActive)
         {
+            isDoingAction = true;
             if (!onceInitFin)
             {
                 OnceInit();
             }
             await Set_PickaxeEquip();
             Set_PickaxeLibrary();
+            Set_PickaxeLibraryEquipState();
+            SelectPickaxeUnit(equipedPickaxeIndexes.First());
+            isDoingAction = false;
         }
         this.gameObject.SetActive(isActive);
     }
@@ -50,42 +56,23 @@ public class UI_PickaxeManager : MonoBehaviour
     /// </summary>
     private async UniTask Set_PickaxeEquip()
     {
+        equipedPickaxeIndexes.Clear();
         foreach (var slotIndex in slotIndexes)
         {
             var slotData = await SaveLoader.Inst.Get_PickaxeSlotData(slotIndex);
-            if (slotData == null)
+            if (slotData == null || slotData.equipedPickaxeIndex <= 0)
             {
                 pickaxeEquipConts[slotIndex].SetData(null);
+                Debug.Log($"初期Equip --> スロット: {slotIndex} => 装備: --- ");
                 continue;
             }
             var pickaxeUnitData = SOLoader.AttackUnitData.GetPickaxeUnitData(slotData.equipedPickaxeIndex);
             pickaxeEquipConts[slotIndex].SetData(pickaxeUnitData);
+            equipedPickaxeIndexes.Add(slotData.equipedPickaxeIndex);
+            Debug.Log($"初期Equip --> スロット: {slotIndex} => 装備: {slotData.equipedPickaxeIndex}");
         }
     }
 
-
-    /// <summary>
-    /// ピッケル装備リストを更新, ライブラリunitの装備状態を更新
-    /// </summary>
-    private void Set_EquipedPickaxeIndexes(int _index, bool _isEquiped)
-    {
-        /*
-        if (_index == -1 || _index <= 0) return;
-        if (_isEquiped)
-        {
-            equipedPickaxeIndexes.Add(_index);
-        }
-        else
-        {
-            equipedPickaxeIndexes.Remove(_index);
-        }
-        var targetUnit = Array.Find(pickaxeLibraryUnits, x => x.pickaxeIndex == _index);
-        if (targetUnit != null)
-        {
-            targetUnit.Set_EquipState(_isEquiped);
-        }
-        */
-    }
 
     /// <summary>
     /// ピッケルライブラリUnitの初期化
@@ -97,8 +84,13 @@ public class UI_PickaxeManager : MonoBehaviour
             pickaxeLibraryUnit.Init();
         }
     }
-
-
+    private void Set_PickaxeLibraryEquipState()
+    {
+        foreach (var pickaxeLibraryUnit in pickaxeLibraryUnits)
+        {
+            pickaxeLibraryUnit.Set_EquipState(equipedPickaxeIndexes.Contains(pickaxeLibraryUnit.pickaxeIndex));
+        }
+    }
 
 
     #region -- callBack --
@@ -116,48 +108,70 @@ public class UI_PickaxeManager : MonoBehaviour
     }
 
 
-    /*
+
     /// <summary>
     ///  装備ボタンをクリックした時の処理
     /// </summary>
-    private async void OnClick_SelectPickaxeUnit(PickaxeUnitData _so, int _equipSlotIndex)
+    private async void OnClick_EquipPickaxe(PickaxeUnitData _so, int _equipSlotIndex)
     {
-        // 空きスロットを見つけて登録
-        if (_equipSlotIndex == -1)
+        if (isDoingAction) return;
+        isDoingAction = true;
+        //装備中のピッケルの位置替え
+        if (equipedPickaxeIndexes.Contains(_so.pickaxeIndex))
         {
-            var freeSlot = Array.Find(pickaxeEquipConts, x => x.isFreeSlot);
-            if (freeSlot != null)
-            {
-                Set_EquipedPickaxeIndexes(_so.pickaxeIndex, true);
-                SaveLoader.Inst.Request_SavePickaxeSlotData(freeSlot.slotIndex, _so.pickaxeIndex);
-                await UniTask.DelayFrame(1);
-                freeSlot.Init();
-                Debug.Log($"空きスロット:{freeSlot.slotIndex} / ピッケル:{_so.pickaxeIndex}");
-            }
-            else
-            {
-                Debug.LogError("空きスロットが見つかりません");
-            }
+            var slotData_0 = await SaveLoader.Inst.Get_PickaxeSlotData(0);
+            var equipedPickaxeIndex_0 = slotData_0 == null ? -1 : slotData_0.equipedPickaxeIndex;
+            var slotData_1 = await SaveLoader.Inst.Get_PickaxeSlotData(1);
+            var equipedPickaxeIndex_1 = slotData_1 == null ? -1 : slotData_1.equipedPickaxeIndex;
+            SaveLoader.Inst.Request_SavePickaxeSlotData(0, equipedPickaxeIndex_1);
+            SaveLoader.Inst.Request_SavePickaxeSlotData(1, equipedPickaxeIndex_0);
+
+            await UniTask.DelayFrame(2);
         }
-        else // 指定したスロットから削除
+        else
         {
-            var targetSlot = Array.Find(pickaxeEquipConts, x => x.slotIndex == _equipSlotIndex);
-            if (targetSlot != null)
-            {
-                if (targetSlot.isFreeSlot) return;
-                Set_EquipedPickaxeIndexes(_so.pickaxeIndex, false);
-                SaveLoader.Inst.Request_SavePickaxeSlotData(_equipSlotIndex, -1);
-                await UniTask.DelayFrame(1);
-                targetSlot.Init();
-                Debug.Log($"指定したスロット:{_equipSlotIndex} のピッケルを削除");
-            }
-            else
-            {
-                Debug.LogError($"指定したスロット:{_equipSlotIndex} が見つかりません");
-            }
+            SaveLoader.Inst.Request_SavePickaxeSlotData(_equipSlotIndex, _so.pickaxeIndex);
+            await UniTask.DelayFrame(1);
         }
+        selectInfoUnit.Set_EquipState(_equipSlotIndex);
+        await Set_PickaxeEquip();
+        Set_PickaxeLibraryEquipState();
+
+        isDoingAction = false;
     }
-    */
+
+
+    /// <summary>
+    ///  クラフトボタンをクリックした時の処理
+    /// </summary>
+    private async void OnClick_CraftPickaxe(PickaxeUnitData _so)
+    {
+        if (isDoingAction) return;
+        isDoingAction = true;
+
+        // 一応チェック
+        foreach (var resourceCount in selectInfoUnit.RequredResources)
+        {
+            if (SaveLoader.Inst.Get_ResourceCount(resourceCount.resourceType) < resourceCount.requiredCount)
+            {
+                isDoingAction = false;
+                Debug.Log($"クラフト不可 --> リソース不足: {resourceCount.resourceType} => {resourceCount.requiredCount}");
+                return;
+            }
+        }
+        // クラフト処理 
+        foreach (var resourceCount in selectInfoUnit.RequredResources)
+        {
+            SaveLoader.Inst.Request_SaveResource(resourceCount.resourceType, -resourceCount.requiredCount);
+        }
+        SaveLoader.Inst.Request_SavePickaxeData(_so.pickaxeIndex, 1);
+        await UniTask.DelayFrame(1);
+
+        Set_PickaxeLibrary();
+        selectInfoUnit.Set_EquipState(-1);
+
+        isDoingAction = false;
+    }
     #endregion
 
 }

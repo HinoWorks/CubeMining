@@ -47,6 +47,8 @@ public class HButtonConnect : MonoBehaviour
     public void Set_Interactable(bool _interactable)
     {
         if (obj_OFF != null) obj_OFF.SetActive(!_interactable);
+        if (obj_mouseOver != null) obj_mouseOver.SetActive(false); //リセット
+        if (obj_clickSelect != null) obj_clickSelect.SetActive(false); //リセット
     }
 
 
