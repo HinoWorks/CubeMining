@@ -296,22 +296,23 @@ public class SaveLoader : MonoBehaviour
 
 
 
-
-    #region -- coin data --
-    /// <summary>
-    /// コインセーブリクエスト - デルタを加算してセーブ
-    /// </summary>
-    public void Request_SaveCoin(BigInteger _delta)
-    {
-        EnqueueMethod(() => { SavePendeingCoin(_delta); });
-    }
-    private void SavePendeingCoin(BigInteger _delta)
-    {
-        coin += _delta;
-        ES3.Save(KEY_COIN, coin.ToString());
-        GameEvent.UI.PublishCoinMod(coin);
-    }
-    #endregion
+    /*
+        #region -- coin data --
+        /// <summary>
+        /// コインセーブリクエスト - デルタを加算してセーブ
+        /// </summary>
+        public void Request_SaveCoin(BigInteger _delta)
+        {
+            EnqueueMethod(() => { SavePendeingCoin(_delta); });
+        }
+        private void SavePendeingCoin(BigInteger _delta)
+        {
+            coin += _delta;
+            ES3.Save(KEY_COIN, coin.ToString());
+            GameEvent.UI.PublishCoinMod(coin);
+        }
+        #endregion
+    */
 
 
 

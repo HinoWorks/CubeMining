@@ -246,9 +246,9 @@ public class BlockChangeRateParam
             case ParamType.Rate_Gold: rate_gold += (int)_setParam; break;
             case ParamType.Rate_Iron: rate_iron += (int)_setParam; break;
             case ParamType.Rate_Emerald: rate_emerald += (int)_setParam; break;
-            case ParamType.Rate_4: rate_ruby += (int)_setParam; break;
-            case ParamType.Rate_5: rate_sapphire += (int)_setParam; break;
-            case ParamType.Rate_6: rate_diamond += (int)_setParam; break;
+            case ParamType.Rate_Ruby: rate_ruby += (int)_setParam; break;
+            case ParamType.Rate_Sapphire: rate_sapphire += (int)_setParam; break;
+            case ParamType.Rate_Diamond: rate_diamond += (int)_setParam; break;
         }
     }
 }

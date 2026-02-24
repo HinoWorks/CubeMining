@@ -33,13 +33,15 @@ public partial class SROptions
 
 
     // =============================
+    /*
     [Category("アイテム取得")]
     [DisplayName("コイン +100")]
     [Sort(0)]
     public void ItemGet_Coin()
     {
-        SaveLoader.Inst.Request_SaveCoin(100);
+         SaveLoader.Inst.Request_SaveCoin(100);
     }
+    */
 
     [Category("アイテム取得")]
     [DisplayName("石 +10")]

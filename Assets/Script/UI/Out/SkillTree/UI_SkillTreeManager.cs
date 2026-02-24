@@ -100,12 +100,13 @@ public class UI_SkillTreeMaanger : MonoBehaviour
 #endif
 
 
-
-
     void OnceInit()
     {
         foreach (var skillTreeUnit in skillTreeUnits)
         {
+            // ランタイムでは常にSOから最新のSkillTreeを参照する（プレハブにコピーされた古い値でrequiredCountが0になるのを防ぐ）
+            skillTreeUnit.skillTree = SOLoader.SkillTreeData.GetSkillTreeData(skillTreeUnit.skillIndex);
+            if (skillTreeUnit.skillTree == null) continue;
             skillTreeUnit.AwakeCall(OnMouseOver, OnClick_Enhance, UpdateNodeState);
         }
         ui_skillTreeDetail.gameObject.SetActive(false);
@@ -226,9 +227,15 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     private async void OnClick_Enhance(UI_SkillTreeUnit _skillTreeUnit)
     {
         if (_skillTreeUnit.unlockState != SkillTreeUnlockState.EnhanceReady) return;
-        if (StaticManager.CoinCheck(_skillTreeUnit.skillTree.cost) == false) return;
+        if (ui_skillTreeDetail.IsCraftReady == false) return;
+
+        foreach (var resource in ui_skillTreeDetail.RequredResources)
+        {
+            // コスト消費
+            if (resource.requiredCount <= 0) continue;
+            SaveLoader.Inst.Request_SaveResource(resource.resourceType, -resource.requiredCount);
+        }
         SaveLoader.Inst.Request_SaveSkillTreeData(_skillTreeUnit.skillIndex, _skillTreeUnit.level + 1);
-        SaveLoader.Inst.Request_SaveCoin(-_skillTreeUnit.skillTree.cost);
 
         await UniTask.DelayFrame(2);
         _skillTreeUnit.Init();

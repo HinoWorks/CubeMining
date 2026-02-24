@@ -2360,27 +2360,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.maxLevel
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
-      propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseValue
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
-      value: skill_5
+      value: Block - 2 unlock
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
-      value: 0.15
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.description
       value: skill description --- 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
@@ -2545,6 +2561,10 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
       value: SHOT
       objectReference: {fileID: 0}
@@ -2562,7 +2582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -2712,35 +2732,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.maxLevel
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
-      value: skill_4
+      value: 'Thunder '
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
-      value: 0.15
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.description
-      value: skill description --- 12
+      value: New Attack Skill -- Thunder
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -2893,12 +2929,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 5
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -2913,12 +2961,16 @@ PrefabInstance:
       value: skill description --- 24
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -3071,12 +3123,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 3
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -3089,6 +3153,10 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.description
       value: skill description --- 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
@@ -3249,12 +3317,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 5
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -3269,12 +3349,16 @@ PrefabInstance:
       value: skill description --- 26
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -3427,12 +3511,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 3
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -3445,6 +3541,10 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.description
       value: skill description --- 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
@@ -3605,12 +3705,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 5
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -3625,12 +3737,16 @@ PrefabInstance:
       value: skill description --- 25
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -3783,12 +3899,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 5
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -3803,12 +3931,16 @@ PrefabInstance:
       value: skill description --- 23
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -3957,12 +4089,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -3982,7 +4126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -4135,12 +4279,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 4
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -4155,12 +4311,16 @@ PrefabInstance:
       value: skill description --- 20
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -4313,12 +4473,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 5
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -4333,12 +4505,16 @@ PrefabInstance:
       value: skill description --- 27
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -4491,12 +4667,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 5
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -4511,12 +4699,16 @@ PrefabInstance:
       value: skill description --- 21
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -4669,12 +4861,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 3
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -4687,6 +4891,10 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.description
       value: skill description --- 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
@@ -4847,12 +5055,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 5
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -4867,12 +5087,16 @@ PrefabInstance:
       value: skill description --- 22
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -5029,6 +5253,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
       value: Ingame Time up
       objectReference: {fileID: 0}
@@ -5099,6 +5327,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 152722955680469825, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374462084963631759, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374462084963631759, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374462084963631759, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374462084963631759, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -5182,9 +5426,57 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4915263626287160114, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4915263626287160114, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4915263626287160114, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4915263626287160114, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428242215683417382, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428242215683417382, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428242215683417382, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428242215683417382, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6790620336251871532, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
       propertyPath: m_Name
       value: pf_ui_skillTreeDetail
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483179819831475399, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483179819831475399, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483179819831475399, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483179819831475399, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8523588578071009522, guid: 8a20290b11b284e4381224df5b6fdb61, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5368,12 +5660,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 5
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -5388,12 +5692,16 @@ PrefabInstance:
       value: skill description --- 29
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -5546,12 +5854,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 5
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -5566,12 +5886,16 @@ PrefabInstance:
       value: skill description --- 28
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -5724,12 +6048,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_gold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_iron
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 3
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_stone
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
@@ -5742,6 +6078,10 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.description
       value: skill description --- 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.req_emerald
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex

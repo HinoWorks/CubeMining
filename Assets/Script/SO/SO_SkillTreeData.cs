@@ -24,9 +24,9 @@ public enum ParamType
     Rate_Gold,
     Rate_Iron,
     Rate_Emerald,
-    Rate_4,
-    Rate_5,
-    Rate_6,
+    Rate_Ruby,
+    Rate_Sapphire,
+    Rate_Diamond,
 
     // ==== object generate param ====
     Rate_Generate,
@@ -66,14 +66,20 @@ public class SkillTree
     public ParamType paramType;
     public float baseValue;
     public float deltaValue;
-    public int cost;
+
+    public int req_stone;
+    public int req_iron;
+    public int req_gold;
+    public int req_emerald;
+    public int req_ruby;
+    public int req_sapphire;
+    public int req_diamond;
 }
 
 
 [CreateAssetMenu(menuName = "SO/SO_SkillTreeData")]
 public class SO_SkillTreeData : ScriptableObject
 {
-
     public SkillTree[] skillTreeDatas;
 
 
