@@ -175,12 +175,14 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         float newScale = Mathf.Clamp(oldScale + wheel * zoomSpeed, minScale, maxScale);
         if (Mathf.Approximately(oldScale, newScale)) return;
 
-        float scaleRatio = newScale / oldScale;
-        // scrollContent.localScale = Vector3.one * newScale;
-        // マウス位置基準ズーム
-        //scrollContent.anchoredPosition -= localMousePos * (scaleRatio - 1f);
-        //DOTween.To(() => scrollContent.localScale, x => scrollContent.localScale = x, Vector3.one * newScale, duration_zoom);
-        //DOTween.To(() => scrollContent.anchoredPosition, x => scrollContent.anchoredPosition = x, scrollContent.anchoredPosition - localMousePos * (scaleRatio - 1f), duration_zoom);
+        // マウス位置を固定したままズーム: コンテンツ上の点 localMousePos が画面で動かないように position を補正
+        Vector2 posDelta = localMousePos * (oldScale - newScale);
+        Vector2 targetPos = scrollContent.anchoredPosition + posDelta;
+
+        scrollContent.localScale = Vector3.one * newScale;
+        scrollContent.anchoredPosition = targetPos;
+        DOTween.To(() => scrollContent.localScale, x => scrollContent.localScale = x, Vector3.one * newScale, duration_zoom);
+        DOTween.To(() => scrollContent.anchoredPosition, x => scrollContent.anchoredPosition = x, targetPos, duration_zoom);
     }
 
     // ---------- Pan ----------
