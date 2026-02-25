@@ -52,8 +52,13 @@ public enum ResourceType
 public enum BaseBlockType
 {
     Dirt,
+    Dirt_Hard,
     Stone,
+    Stone_Hard,
     BlackStone,
+    obsidian, // 黒曜石
+
+    // == ??
     Sand,
     Glass,
     Wood,

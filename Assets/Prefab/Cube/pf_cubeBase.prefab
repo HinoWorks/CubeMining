@@ -97,9 +97,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MiningTarget_Cube
   obj_blockMeshes: []
   blockTypeSetters:
+  - {fileID: 8037781435368066600}
   - {fileID: 285433088064078622}
   - {fileID: 1344064737282748358}
-  - {fileID: 8037781435368066600}
+  - {fileID: 7791973036994994891}
+  - {fileID: 6788920337008096541}
+  - {fileID: 2110534613679071448}
 --- !u!1 &2192529952489397097
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +315,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8606938074827453974, guid: 2de394160a526472c8ec3bd27de4d791, type: 3}
   m_PrefabInstance: {fileID: 2274753487213620626}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7791973036994994891 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8337053579599728473, guid: 2de394160a526472c8ec3bd27de4d791, type: 3}
+  m_PrefabInstance: {fileID: 2274753487213620626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e654ed0264b7494ea1ad367d77e5881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlockTypeSetter
 --- !u!1001 &3279813622770580036
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -378,6 +392,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8606938074827453974, guid: 4faa4dd1fe91d44ab9a508438c486e0b, type: 3}
   m_PrefabInstance: {fileID: 3279813622770580036}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6788920337008096541 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8337053579599728473, guid: 4faa4dd1fe91d44ab9a508438c486e0b, type: 3}
+  m_PrefabInstance: {fileID: 3279813622770580036}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e654ed0264b7494ea1ad367d77e5881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlockTypeSetter
 --- !u!1001 &6995279682328141983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -521,6 +546,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8606938074827453974, guid: f69323caeb6944f12994f6ee0fb9eba1, type: 3}
   m_PrefabInstance: {fileID: 7996433623856263041}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2110534613679071448 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8337053579599728473, guid: f69323caeb6944f12994f6ee0fb9eba1, type: 3}
+  m_PrefabInstance: {fileID: 7996433623856263041}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e654ed0264b7494ea1ad367d77e5881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlockTypeSetter
 --- !u!1001 &8089914011925285959
 PrefabInstance:
   m_ObjectHideFlags: 0
