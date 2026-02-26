@@ -183,7 +183,7 @@ public class BlockGenerateManager : MonoBehaviour
                 currentLayerCont = layerCont;
             }
         }
-        CameraManager.Inst.SetCameraPosition(cameraTargetLayer);
+        CameraManager.Inst.SetCameraPosition(cameraTargetLayer, currentLayerCont.param.so.layerSize);
         AroundLayerManager.Inst.CreateNewLayerCont(currentCreateLayer);
         CreateNewLayerCont();
 

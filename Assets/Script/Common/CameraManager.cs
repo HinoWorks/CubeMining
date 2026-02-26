@@ -9,9 +9,18 @@ public class CameraManager : MonoBehaviour
     public static CameraManager Inst;
     [SerializeField] Transform parent_camera;
     private CinemachineCamera vcam;
-    private Vector3 initialPosition_parent;
-    private Vector3 initialPosition;
+    private Vector3 initialPosition_parent; // 主にlayer移動用
+    private Vector3 initialPosition; //主にshake用
+    private float initialZoom;
     private Tween shakeTween;
+
+    // -- caemraMoveParam --
+    [Space(10)]
+    [Header("CameraMoveParam")]
+    [SerializeField] float cameraMoveDelta_XZ = 4f / 7f;
+    [SerializeField] float cameraZoomDelta = 1.5f / 7f;
+    private int initialAreaSize = 3;
+
 
     void Awake()
     {
@@ -24,8 +33,10 @@ public class CameraManager : MonoBehaviour
     {
         initialPosition_parent = parent_camera.position;
         initialPosition = vcam.transform.localPosition;
+        initialZoom = vcam.Lens.OrthographicSize;
         GameEvent.GameState.SetGameState.Subscribe(SetGameState).AddTo(this);
     }
+
 
     private void SetGameState(GameStateType state)
     {
@@ -36,6 +47,7 @@ public class CameraManager : MonoBehaviour
 
             case GameStateType.InGame_Ready:
                 vcam.transform.localPosition = initialPosition;
+                vcam.Lens.OrthographicSize = initialZoom;
                 parent_camera.position = initialPosition_parent;
                 break;
             case GameStateType.InGame:
@@ -46,10 +58,14 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public void SetCameraPosition(int _layerIndex)
+    public void SetCameraPosition(int _layerIndex, int _areaSize)
     {
-        //vcam.transform.DOMove(initialPosition + new Vector3(0, -_layerIndex, 0), 0.2f).SetEase(Ease.InOutSine);
-        parent_camera.DOMove(initialPosition_parent + new Vector3(0, -_layerIndex, 0), 0.2f).SetEase(Ease.InOutSine);
+        var deltaPosition_XZ = cameraMoveDelta_XZ * (_areaSize - initialAreaSize);
+        var deltaPosition = new Vector3(deltaPosition_XZ, -_layerIndex, -deltaPosition_XZ);
+        parent_camera.DOMove(initialPosition_parent + deltaPosition, 0.2f).SetEase(Ease.InOutSine);
+
+        var deltaZoom = cameraZoomDelta * (_areaSize - initialAreaSize);
+        DOTween.To(() => vcam.Lens.OrthographicSize, x => vcam.Lens.OrthographicSize = x, initialZoom + deltaZoom, 0.2f).SetEase(Ease.InOutSine);
     }
 
     /// <summary>
