@@ -21,8 +21,13 @@ public class MiningTarget_Tresure : MiningTarget_Object
         base.Init_MiningTargetBase(hp, getTreasureValue, _objectGenerateParam.so.objectIndex, _layerIndex);
 
         // ブロックのタイプを自分で抽選
-        var blockTypeData = GameParamManager.Get_BlockChangeRateParam(_blockData.blockIndex);
-        resourceType = blockTypeData.SelectBlockType();
+        var blockTypeData = GameParamManager.Get_RandamBlockType(_blockData.blockIndex);
+        resourceType = blockTypeData;
+        //resourceType = blockTypeData.SelectBlockType();
+
+        Debug.Log($"トレジャーの中身の種類は後で決める！！ resourceType: {resourceType}");
+
+        // TODO here 
     }
 
     public override void BreakFromDamage()

@@ -11,16 +11,35 @@ public class GameBaseParam
 {
     // インゲーム時間
     public float ingameTime => ingameTime_Base + ingameTime_enhanced;
-    private float ingameTime_Base = 10f;
+    private float ingameTime_Base = 15f;
     private float ingameTime_enhanced = 0f;
 
-    // リザルト時のコインボーナス
-    public float coinBonusRate => 1f + coinBonusRate_enhanced;
-    private float coinBonusRate_enhanced = 0f;
+    //再生成確率xアップ(上から降ってくる)
 
-    // ブロック生成時間の短縮率
-    public float blockGenerateTimeRate => 1f - blockGenerateTimeRate_enhanced;
-    private float blockGenerateTimeRate_enhanced = 0f;
+    //ラッキーマイン - 採掘量が1.5倍になる確率x
+    public float luckyMineRate => 0 + luckyMineRate_enhanced;
+    private float luckyMineRate_enhanced = 0f;
+
+    //ラッキーマインの増加量+50%
+    public float luckyMineRate_Resource => 1.5f + luckyMineRate_Resource_enhanced;
+    private float luckyMineRate_Resource_enhanced = 0f;
+
+    //下層ボーナスxx
+    public float deepLayer_Bonus => 0 + deepLayer_Bonus_enhanced;
+    private float deepLayer_Bonus_enhanced = 0f;
+
+
+    // ピッケルの基礎パラメータ向上
+    public float pickaxeBase_AttackDamage => 1f + pickaxeBase_AttackDamage_enhanced;
+    private float pickaxeBase_AttackDamage_enhanced = 0f;
+    public float pickaxeBase_AttackInterval => 1f + pickaxeBase_AttackInterval_enhanced;
+    private float pickaxeBase_AttackInterval_enhanced = 0f;
+    public float pickaxeBase_CriticalRate => 1f + pickaxeBase_CriticalRate_enhanced;
+    private float pickaxeBase_CriticalRate_enhanced = 0f;
+    public float pickaxeBase_ResourceRate => 1f + pickaxeBase_ResourceRate_enhanced;
+    private float pickaxeBase_ResourceRate_enhanced = 0f;
+    public float pickaxeBase_Size => 1f + pickaxeBase_Size_enhanced;
+    private float pickaxeBase_Size_enhanced = 0f;
 
 
     public void Set_Param(ParamType _paramType, float _setParam)
@@ -30,13 +49,29 @@ public class GameBaseParam
             case ParamType.IngameTime:
                 ingameTime_enhanced += _setParam;
                 break;
-            case ParamType.CoinBonusRate:
-                coinBonusRate_enhanced += _setParam;
+            case ParamType.LuckyMineRate:
+                luckyMineRate_enhanced += _setParam;
+                break;
+            case ParamType.LuckyMineRate_Resource:
+                luckyMineRate_Resource_enhanced += _setParam;
+                break;
+            case ParamType.DeepLayerBonus:
+                deepLayer_Bonus_enhanced += _setParam;
                 break;
 
-                // ==== TODO HERE ====
-                // Add here Artifact param
-
+            // -- ピッケルの基礎パラメータ向上 --
+            case ParamType.Damage:
+                pickaxeBase_AttackDamage_enhanced += _setParam;
+                break;
+            case ParamType.Interval:
+                pickaxeBase_AttackInterval_enhanced += _setParam;
+                break;
+            case ParamType.CriticalRate:
+                pickaxeBase_CriticalRate_enhanced += _setParam;
+                break;
+            case ParamType.ResourceRate:
+                pickaxeBase_ResourceRate_enhanced += _setParam;
+                break;
         }
     }
 }
@@ -72,39 +107,23 @@ public class ObjectGenerateParam
 
 
 /// <summary>
-/// ブロックの生成パラメータ
+/// ブロックの基本パラメータ
 /// </summary>
-public class BlockGenerateParam
+public class BlockBaseParam
 {
     public BlockData so;
     public bool isActive { get; private set; } = false;
-
-    public int blockIndex { get; private set; }
-    public int hp { get; private set; }
-    public int baseValue { get; private set; }
-    public float generateInterval { get; private set; }
-    public int count { get; private set; }
-    public float size { get; private set; }
-
-    public float bigBlockRate { get; private set; }
-    public int separateBlockCount { get; private set; }
-
+    public int blockIndex => so.blockIndex;
+    public int hp => so.hp + hp_enhanced;
+    private int hp_enhanced = 0;
+    public int baseValue => so.baseValue + baseValue_enhanced;
+    private int baseValue_enhanced = 0;
 
     public void Init(BlockData _blockData)
     {
         so = _blockData;
-
-        blockIndex = _blockData.blockIndex;
-        isActive = so.blockIndex == 1 ? true : false;
-        hp = _blockData.hp;
-        baseValue = _blockData.baseValue;
-        generateInterval = _blockData.generateInterval;
-        count = _blockData.count;
-        size = _blockData.size;
-        bigBlockRate = _blockData.bigBlockRate;
-        separateBlockCount = _blockData.separateBlock;
+        isActive = false;
     }
-
     public void Set_Param(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
@@ -112,27 +131,12 @@ public class BlockGenerateParam
             case ParamType.Unlock:
                 isActive = true;
                 break;
-
             case ParamType.Value:
-                baseValue += (int)_setParam;
-                break;
-            case ParamType.Interval:
-                generateInterval += _setParam;
-                break;
-            case ParamType.Count:
-                count += (int)_setParam;
-                break;
-            case ParamType.Size:
-                size += _setParam;
-                break;
-            case ParamType.BigBlockRate:
-                bigBlockRate += _setParam;
-                break;
-            case ParamType.SeparateBlockCount:
-                separateBlockCount += (int)_setParam;
+                baseValue_enhanced += (int)_setParam;
                 break;
         }
     }
+
 }
 
 /// <summary>
@@ -141,29 +145,12 @@ public class BlockGenerateParam
 public class BlockGenerateParam_Layer
 {
     public BlockLayerData so;
-    public int layerMin;
-    public int layerMax;
-    public int layerSize;
-    public float rate_block1;
-    public float rate_block2;
-    public float rate_block3;
-    public float rate_block4;
-    public float rate_block5;
-    public float rate_block6;
-
-
+    public int layerMin => so.layerMin;
+    public int layerMax => so.layerMax;
+    public int layerSize => so.layerSize;
     public void Init(BlockLayerData _blockLayerData)
     {
         so = _blockLayerData;
-        layerMin = _blockLayerData.layerMin;
-        layerMax = _blockLayerData.layerMax;
-        layerSize = _blockLayerData.layerSize;
-        rate_block1 = _blockLayerData.rate_block1;
-        rate_block2 = _blockLayerData.rate_block2;
-        rate_block3 = _blockLayerData.rate_block3;
-        rate_block4 = _blockLayerData.rate_block4;
-        rate_block5 = _blockLayerData.rate_block5;
-        rate_block6 = _blockLayerData.rate_block6;
     }
     /// <summary>
     /// ブロックのインデックスをランダムで選択
@@ -173,17 +160,17 @@ public class BlockGenerateParam_Layer
         var random = UnityEngine.Random.Range(0f, 1f);
         switch (random)
         {
-            case var _ when random < rate_block1:
+            case var _ when random < so.rate_block1:
                 return 1;
-            case var _ when random < rate_block1 + rate_block2:
+            case var _ when random < so.rate_block1 + so.rate_block2:
                 return 2;
-            case var _ when random < rate_block1 + rate_block2 + rate_block3:
+            case var _ when random < so.rate_block1 + so.rate_block2 + so.rate_block3:
                 return 3;
-            case var _ when random < rate_block1 + rate_block2 + rate_block3 + rate_block4:
+            case var _ when random < so.rate_block1 + so.rate_block2 + so.rate_block3 + so.rate_block4:
                 return 4;
-            case var _ when random < rate_block1 + rate_block2 + rate_block3 + rate_block4 + rate_block5:
+            case var _ when random < so.rate_block1 + so.rate_block2 + so.rate_block3 + so.rate_block4 + so.rate_block5:
                 return 5;
-            case var _ when random < rate_block1 + rate_block2 + rate_block3 + rate_block4 + rate_block5 + rate_block6:
+            case var _ when random < so.rate_block1 + so.rate_block2 + so.rate_block3 + so.rate_block4 + so.rate_block5 + so.rate_block6:
                 return 6;
             default:
                 return 0;
@@ -196,61 +183,124 @@ public class BlockGenerateParam_Layer
 /// </summary>
 public class BlockChangeRateParam
 {
-    public BlockChangeRateData so;
-    public int baseRate;
-    public int rate_gold;
-    public int rate_iron;
-    public int rate_emerald;
-    public int rate_ruby;
-    public int rate_sapphire;
-    public int rate_diamond;
+    private int baseRate = 100;
+    private int rate_iron_enhanced;
+    private int rate_gold_enhanced;
+    private int rate_emerald_enhanced;
+    private int rate_ruby_enhanced;
+    private int rate_sapphire_enhanced;
+    private int rate_diamond_enhanced;
 
-    public void Init(BlockChangeRateData _blockChangeRateData)
+    private BlockChangeRateData blockChangeData;
+    private int rate_iron_total => rate_iron_enhanced + blockChangeData.rate_iron;
+    private int rate_gold_total => rate_gold_enhanced + blockChangeData.rate_gold;
+    private int rate_emerald_total => rate_emerald_enhanced + blockChangeData.rate_emerald;
+    private int rate_ruby_total => rate_ruby_enhanced + blockChangeData.rate_ruby;
+    private int rate_sapphire_total => rate_sapphire_enhanced + blockChangeData.rate_sapphire;
+    private int rate_diamond_total => rate_diamond_enhanced + blockChangeData.rate_diamond;
+
+    public void Init()
     {
-        so = _blockChangeRateData;
-        baseRate = _blockChangeRateData.baseRate;
-        rate_gold = _blockChangeRateData.rate_gold;
-        rate_iron = _blockChangeRateData.rate_iron;
-        rate_emerald = _blockChangeRateData.rate_emerald;
-        rate_ruby = _blockChangeRateData.rate_ruby;
-        rate_sapphire = _blockChangeRateData.rate_sapphire;
-        rate_diamond = _blockChangeRateData.rate_diamond;
+        rate_iron_enhanced = 0;
+        rate_gold_enhanced = 0;
+        rate_emerald_enhanced = 0;
+        rate_ruby_enhanced = 0;
+        rate_sapphire_enhanced = 0;
+        rate_diamond_enhanced = 0;
     }
-    public ResourceType SelectBlockType()
+    public void Set_Param(int _targetBlockIndex, float _setParam)
     {
-        var total = baseRate + rate_gold + rate_iron + rate_emerald + rate_ruby + rate_sapphire + rate_diamond;
-        var random = UnityEngine.Random.Range(0, total);
+        switch (_targetBlockIndex)
+        {
+            case 1: rate_iron_enhanced += (int)_setParam; break;
+            case 2: rate_gold_enhanced += (int)_setParam; break;
+            case 3: rate_emerald_enhanced += (int)_setParam; break;
+            case 4: rate_ruby_enhanced += (int)_setParam; break;
+            case 5: rate_sapphire_enhanced += (int)_setParam; break;
+            case 6: rate_diamond_enhanced += (int)_setParam; break;
+        }
+    }
+    public ResourceType SelectBlockType(BlockChangeRateData _blockChangeData)
+    {
+        blockChangeData = _blockChangeData;
+        var total = baseRate + rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total + rate_sapphire_total + rate_diamond_total;
+        var random = Random.Range(0, total);
         switch (random)
         {
-            case var _ when random < rate_iron:
+            case var _ when random < rate_iron_total:
                 return ResourceType.Iron;
-            case var _ when random < rate_iron + rate_gold:
+            case var _ when random < rate_iron_total + rate_gold_total:
                 return ResourceType.Gold;
-            case var _ when random < rate_iron + rate_gold + rate_emerald:
+            case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total:
                 return ResourceType.Emerald;
-            case var _ when random < rate_iron + rate_gold + rate_emerald + rate_ruby:
+            case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total:
                 return ResourceType.Ruby;
-            case var _ when random < rate_iron + rate_gold + rate_emerald + rate_ruby + rate_sapphire:
+            case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total + rate_sapphire_total:
                 return ResourceType.Sapphire;
-            case var _ when random < rate_iron + rate_gold + rate_emerald + rate_ruby + rate_sapphire + rate_diamond:
+            case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total + rate_sapphire_total + rate_diamond_total:
                 return ResourceType.Diamond;
             default:
                 return ResourceType.Stone;
         }
     }
 
+    /*
+    public BlockChangeRateData so;
+    private int baseRate;
+    private int rate_iron_enhanced;
+    private int rate_gold_enhanced;
+    private int rate_emerald_enhanced;
+    private int rate_ruby_enhanced;
+    private int rate_sapphire_enhanced;
+    private int rate_diamond_enhanced;
+    private int rate_iron_total => rate_iron_enhanced + so.rate_iron;
+    private int rate_gold_total => rate_gold_enhanced + so.rate_gold;
+    private int rate_emerald_total => rate_emerald_enhanced + so.rate_emerald;
+    private int rate_ruby_total => rate_ruby_enhanced + so.rate_ruby;
+    private int rate_sapphire_total => rate_sapphire_enhanced + so.rate_sapphire;
+    private int rate_diamond_total => rate_diamond_enhanced + so.rate_diamond;
+
+    public void Init(BlockChangeRateData _blockChangeRateData)
+    {
+        so = _blockChangeRateData;
+        baseRate = _blockChangeRateData.baseRate;
+    }
     public void Set_Param(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
         {
-            case ParamType.Rate_Gold: rate_gold += (int)_setParam; break;
-            case ParamType.Rate_Iron: rate_iron += (int)_setParam; break;
-            case ParamType.Rate_Emerald: rate_emerald += (int)_setParam; break;
-            case ParamType.Rate_Ruby: rate_ruby += (int)_setParam; break;
-            case ParamType.Rate_Sapphire: rate_sapphire += (int)_setParam; break;
-            case ParamType.Rate_Diamond: rate_diamond += (int)_setParam; break;
+            case ParamType.Rate_ChangeGold: rate_gold_enhanced += (int)_setParam; break;
+            case ParamType.Rate_ChangeIron: rate_iron_enhanced += (int)_setParam; break;
+            case ParamType.Rate_ChangeEmerald: rate_emerald_enhanced += (int)_setParam; break;
+            case ParamType.Rate_ChangeRuby: rate_ruby_enhanced += (int)_setParam; break;
+            case ParamType.Rate_ChangeSapphire: rate_sapphire_enhanced += (int)_setParam; break;
+            case ParamType.Rate_ChangeDiamond: rate_diamond_enhanced += (int)_setParam; break;
         }
     }
+    public ResourceType SelectBlockType()
+    {
+        var total = baseRate + rate_iron_total + rate_gold_total + rate_emerald_total
+            + rate_ruby_total + rate_sapphire_total + rate_diamond_total;
+        var random = Random.Range(0, total);
+        switch (random)
+        {
+            case var _ when random < rate_iron_total:
+                return ResourceType.Iron;
+            case var _ when random < rate_iron_total + rate_gold_total:
+                return ResourceType.Gold;
+            case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total:
+                return ResourceType.Emerald;
+            case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total:
+                return ResourceType.Ruby;
+            case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total + rate_sapphire_total:
+                return ResourceType.Sapphire;
+            case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total + rate_sapphire_total + rate_diamond_total:
+                return ResourceType.Diamond;
+            default:
+                return ResourceType.Stone;
+        }
+    }
+    */
 }
 
 
@@ -374,11 +424,12 @@ public static class GameParamManager
 {
     public readonly static GameBaseParam gameBaseParam = new GameBaseParam();
     public readonly static ArtifactGenerateRateParam artifactGenerateRateParam = new ArtifactGenerateRateParam();
+    public readonly static BlockChangeRateParam blockChangeRateParam = new BlockChangeRateParam();
 
     public readonly static List<ObjectGenerateParam> list_objectGenerateParam = new List<ObjectGenerateParam>();
-    public readonly static List<BlockGenerateParam> list_blockGenerateParam = new List<BlockGenerateParam>();
+    public readonly static List<BlockBaseParam> list_blockGenerateParam = new List<BlockBaseParam>();
     public readonly static List<BlockGenerateParam_Layer> list_blockGenerateParam_Layer = new List<BlockGenerateParam_Layer>();
-    public readonly static List<BlockChangeRateParam> list_blockChangeRateParam = new List<BlockChangeRateParam>();
+    //public readonly static List<BlockChangeRateParam> list_blockChangeRateParam = new List<BlockChangeRateParam>();
     public readonly static List<AttackParam> list_attackParam = new List<AttackParam>();
     public readonly static List<PickaxeParam> list_pickaxeParam = new List<PickaxeParam>();
     public static float artifactGenerateRate => artifactGenerateRateParam.generateRate;
@@ -388,7 +439,7 @@ public static class GameParamManager
 
 
     #region get param reference
-    public static BlockGenerateParam Get_BlockGenerateParam(int _blockIndex)
+    public static BlockBaseParam Get_BlockGenerateParam(int _blockIndex)
     {
         var targetBlock = list_blockGenerateParam.Find(x => x.blockIndex == _blockIndex);
         if (targetBlock == null)
@@ -397,14 +448,19 @@ public static class GameParamManager
         }
         return targetBlock;
     }
-    public static BlockChangeRateParam Get_BlockChangeRateParam(int _blockIndex)
+    public static ResourceType Get_RandamBlockType(int _blockIndex)
     {
+        var blockChangeBaseParam = SOLoader.BlockData.GetBlockChangeRateData(_blockIndex);
+        var selectType = blockChangeRateParam.SelectBlockType(blockChangeBaseParam);
+        return selectType;
+        /*
         var targetBlockChangeRate = list_blockChangeRateParam.Find(x => x.so.blockIndex == _blockIndex);
         if (targetBlockChangeRate == null)
         {
             Debug.LogError($"BlockChangeRateData is not found: {_blockIndex} // ==> 初期ロードで読み込み失敗");
         }
         return targetBlockChangeRate;
+        */
     }
     public static AttackParam Get_AttackParam(int _attackIndex)
     {
@@ -503,7 +559,7 @@ public static class GameParamManager
         list_blockGenerateParam.Clear();
         foreach (var blockData in SOLoader.BlockData.blockDatas)
         {
-            var blockParam = new BlockGenerateParam();
+            var blockParam = new BlockBaseParam();
             blockParam.Init(blockData);
             list_blockGenerateParam.Add(blockParam);
         }
@@ -516,7 +572,10 @@ public static class GameParamManager
             blockGenerateParam_Layer.Init(blockLayerData);
             list_blockGenerateParam_Layer.Add(blockGenerateParam_Layer);
         }
+
         // block change rate param init
+        blockChangeRateParam.Init();
+        /*
         list_blockChangeRateParam.Clear();
         foreach (var blockChangeRateData in SOLoader.BlockData.blockChangeRateDatas)
         {
@@ -524,6 +583,7 @@ public static class GameParamManager
             blockChangeRateParam.Init(blockChangeRateData);
             list_blockChangeRateParam.Add(blockChangeRateParam);
         }
+        */
 
         // object generate param init
         list_objectGenerateParam.Clear();
@@ -591,9 +651,9 @@ public static class GameParamManager
                 Set_BlockParam(_targetIndex, _paramType, _setParam);
                 break;
             case ParamCategory.BlockChangeRate:
-                Set_BlockChangeRateParam(_targetIndex, _paramType, _setParam);
+                Set_BlockChangeRateParam(_targetIndex, _setParam);
                 break;
-            case ParamCategory.OtherObject:
+            case ParamCategory.OtherBlock:
                 Set_BlockParam(_targetIndex, _paramType, _setParam);
                 Set_OtherObjectRate();
                 break;
@@ -617,8 +677,10 @@ public static class GameParamManager
         }
         targetBlock.Set_Param(_paramType, _setParam);
     }
-    private static void Set_BlockChangeRateParam(int _blockIndex, ParamType _paramType, float _setParam)
+    private static void Set_BlockChangeRateParam(int _targetBlockIndex, float _setParam)
     {
+        blockChangeRateParam.Set_Param(_targetBlockIndex, _setParam);
+        /*
         var targetBlockChangeRate = list_blockChangeRateParam.Find(x => x.so.blockIndex == _blockIndex);
         if (targetBlockChangeRate == null)
         {
@@ -626,6 +688,7 @@ public static class GameParamManager
             return;
         }
         targetBlockChangeRate.Set_Param(_paramType, _setParam);
+        */
     }
     private static void Set_AttackParam(int _attackIndex, ParamType _paramType, float _setParam)
     {

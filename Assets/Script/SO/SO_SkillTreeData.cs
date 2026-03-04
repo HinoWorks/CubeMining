@@ -8,8 +8,8 @@ public enum ParamCategory
     GameSystem,
     Block,
     BlockChangeRate,
-    OtherObject,
-    Attack
+    OtherBlock,
+    Attack,
 }
 public enum ParamType
 {
@@ -17,27 +17,17 @@ public enum ParamType
 
     // ==== game system param ====
     IngameTime,
-    CoinBonusRate,
+    LuckyMineRate,
+    LuckyMineRate_Resource,
+    DeepLayerBonus,
+    BlockRegenRate,
+    InstantShatterRate,
 
 
-    // ==== block change rate param ====
-    Rate_Gold,
-    Rate_Iron,
-    Rate_Emerald,
-    Rate_Ruby,
-    Rate_Sapphire,
-    Rate_Diamond,
-
-    // ==== object generate param ====
+    // ==== その他 generate param ====
     Rate_Generate,
     Rate_Value,
-
-
-    // ==== block param ====
     Value,
-    BigBlockRate,
-    SeparateBlockCount,
-
 
 
     // ==== attack param ====
@@ -48,7 +38,8 @@ public enum ParamType
     Speed,
     Interval,
     Size,
-
+    CriticalRate,
+    ResourceRate,
 }
 
 

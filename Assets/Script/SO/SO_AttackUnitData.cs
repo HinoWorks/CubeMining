@@ -2,15 +2,6 @@ using UnityEngine;
 using System;
 
 
-public enum AttackType
-{
-    Always, // 常時発生している
-    Shot, // 弾を撃つ、撃ってすぐCTが開始される
-    AreaLoop // 範囲がAliveTimeの間続き、 その後CTが発生する
-}
-
-
-
 [System.Serializable]
 public class AttackUnitData
 {
@@ -20,7 +11,6 @@ public class AttackUnitData
     public Sprite icon;
     public GameObject pf;
 
-    public AttackType attackType;
     public int damage;
     public float attackInterval;
 

@@ -70,6 +70,7 @@ public class GenerateBlockLayerCont
         //現在の確率でブロックを抽選
         var blockIndex = param.SelectBlockIndex();
         var blockData = SOLoader.BlockData.GetBlockData(blockIndex);
+        //var blockParam = GameParamManager.Get_BlockGenerateParam(blockIndex);
         var newBlock = BlockGenerateManager.Inst.GenerateBlock(blockData, layerIndex);
         newBlock.transform.localPosition = GetBlockPosition(_blockCounter);
         newBlock.Set_BreakCallback(BlockBreakCall);
@@ -206,8 +207,9 @@ public class BlockGenerateManager : MonoBehaviour
         }
         targetBlock.Init(_blockData.hp, _blockData.baseValue, _blockData.blockIndex, _layerIndex);
 
-        var blockTypeData = GameParamManager.Get_BlockChangeRateParam(_blockData.blockIndex);
-        var blockType = blockTypeData.SelectBlockType();
+        //var blockTypeData = GameParamManager.Get_BlockChangeRateParam(_blockData.blockIndex);
+        //var blockType = blockTypeData.SelectBlockType();
+        var blockType = GameParamManager.Get_RandamBlockType(_blockData.blockIndex);
         targetBlock.Set_BlockType(_blockData.baseBlockType, blockType);
         return targetBlock;
     }

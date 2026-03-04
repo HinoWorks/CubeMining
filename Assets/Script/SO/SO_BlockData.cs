@@ -15,14 +15,7 @@ public class BlockData
     // ----
     public int hp;
     public int baseValue;
-    public float generateInterval;
-    public int count;
-    public float size;
-
-    public float bigBlockRate;
-    public int separateBlock;
 }
-
 
 
 [System.Serializable]
@@ -86,6 +79,16 @@ public class SO_BlockData : ScriptableObject
         return data;
     }
 
+    public BlockChangeRateData GetBlockChangeRateData(int _blockIndex)
+    {
+        var data = Array.Find(blockChangeRateDatas, data => data.blockIndex == _blockIndex);
+        if (data == null)
+        {
+            Debug.LogError($"BlockChangeRateData not found: {_blockIndex}");
+            return null;
+        }
+        return data;
+    }
 
 
 }

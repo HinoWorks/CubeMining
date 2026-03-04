@@ -64,8 +64,8 @@ public class UI_DebugParamPanel : MonoBehaviour
         // GameBaseParamの表示
         stringBuilder_gameBase.AppendLine("=== Game Base Param ===");
         stringBuilder_gameBase.AppendLine($"Ingame Time: {GameParamManager.gameBaseParam.ingameTime:F2}");
-        stringBuilder_gameBase.AppendLine($"Coin Bonus Rate: {GameParamManager.gameBaseParam.coinBonusRate:F2}");
-        stringBuilder_gameBase.AppendLine($"Block Generate Time Rate: {GameParamManager.gameBaseParam.blockGenerateTimeRate:F2}");
+        //stringBuilder_gameBase.AppendLine($"Coin Bonus Rate: {GameParamManager.gameBaseParam.coinBonusRate:F2}");
+        //stringBuilder_gameBase.AppendLine($"Block Generate Time Rate: {GameParamManager.gameBaseParam.blockGenerateTimeRate:F2}");
         stringBuilder_gameBase.AppendLine();
 
         // BlockGenerateParamの表示
@@ -74,12 +74,8 @@ public class UI_DebugParamPanel : MonoBehaviour
         {
             var blockParam = GameParamManager.list_blockGenerateParam[i];
             stringBuilder_blockGenerate.AppendLine($"Block [{blockParam.blockIndex}]");
-            stringBuilder_blockGenerate.AppendLine($"  Active: {blockParam.isActive}");
             stringBuilder_blockGenerate.AppendLine($"  HP: {blockParam.hp}");
             stringBuilder_blockGenerate.AppendLine($"  Base Value: {blockParam.baseValue}");
-            stringBuilder_blockGenerate.AppendLine($"  Generate Interval: {blockParam.generateInterval:F2}");
-            stringBuilder_blockGenerate.AppendLine($"  Count: {blockParam.count}");
-            stringBuilder_blockGenerate.AppendLine($"  Size: {blockParam.size:F2}");
             stringBuilder_blockGenerate.AppendLine();
         }
 

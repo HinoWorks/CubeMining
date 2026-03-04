@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_SkillTreeData
   skillTreeDatas:
   - index: 1
-    skillName: Ingame Time up
-    description: Ingame Time up
+    skillName: Power Strike
+    description: Increases pickaxe damage to break blocks faster.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 1
     baseSkillIndex: -1
     paramCategory: 0
     targetIndex: -1
-    paramType: 1
+    paramType: 10
     baseValue: 1
     deltaValue: 0.15
     req_stone: 10
@@ -31,15 +31,15 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
-  - index: 10
-    skillName: SHOT
-    description: 'New Attack Skill -- Shot '
+  - index: 2
+    skillName: Rapid Swing
+    description: Increases the attack speed of the pickaxe.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 1
     baseSkillIndex: 1
-    paramCategory: 4
-    targetIndex: 2
-    paramType: 0
+    paramCategory: 0
+    targetIndex: -1
+    paramType: 15
     baseValue: -1
     deltaValue: -1
     req_stone: 15
@@ -49,15 +49,15 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
-  - index: 11
-    skillName: Bound SHOT
-    description: New Attack Skill -- Bound
+  - index: 3
+    skillName: Wide Reach
+    description: Expands the area of effect for pickaxe attacks.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 1
-    baseSkillIndex: 10
-    paramCategory: 4
-    targetIndex: 3
-    paramType: 0
+    baseSkillIndex: 2
+    paramCategory: 0
+    targetIndex: -1
+    paramType: 16
     baseValue: -1
     deltaValue: -1
     req_stone: 10
@@ -67,17 +67,71 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
-  - index: 12
-    skillName: 'Thunder '
-    description: New Attack Skill -- Thunder
+  - index: 4
+    skillName: Precision Hitting
+    description: Boosts the chance of landing a critical hit for massive damage.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 1
-    baseSkillIndex: 11
-    paramCategory: 4
-    targetIndex: 4
+    baseSkillIndex: 3
+    paramCategory: 0
+    targetIndex: -1
     paramType: 0
     baseValue: -1
     deltaValue: -1
+    req_stone: 10
+    req_iron: 10
+    req_gold: 10
+    req_emerald: 10
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 5
+    skillName: Lucky Miner
+    description: Increases the probability of triggering lucky mining events.
+    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    maxLevel: 1
+    baseSkillIndex: 11
+    paramCategory: 0
+    targetIndex: -1
+    paramType: 0
+    baseValue: -1
+    deltaValue: -1
+    req_stone: 10
+    req_iron: 10
+    req_gold: 10
+    req_emerald: 10
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 11
+    skillName: Icicle Surge
+    description: Unlocks the ability to generate [x] icicles to strike blocks
+    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    maxLevel: 3
+    baseSkillIndex: 11
+    paramCategory: 4
+    targetIndex: 1
+    paramType: 0
+    baseValue: 1
+    deltaValue: 0.15
+    req_stone: 10
+    req_iron: 10
+    req_gold: 10
+    req_emerald: 10
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 12
+    skillName: Frostbite Power
+    description: Increases the damage dealt by icicles.
+    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    maxLevel: 3
+    baseSkillIndex: 13
+    paramCategory: 4
+    targetIndex: 1
+    paramType: 10
+    baseValue: 1
+    deltaValue: 0.15
     req_stone: 10
     req_iron: 10
     req_gold: 10
@@ -86,16 +140,16 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 13
-    skillName: Block - 2 unlock
-    description: skill description --- 13
+    skillName: Cold Interval
+    description: Reduces the time between icicle attacks.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 1
-    baseSkillIndex: 11
-    paramCategory: 1
-    targetIndex: 2
-    paramType: 0
-    baseValue: -1
-    deltaValue: -1
+    maxLevel: 3
+    baseSkillIndex: 15
+    paramCategory: 4
+    targetIndex: 1
+    paramType: 15
+    baseValue: 1
+    deltaValue: 0.15
     req_stone: 10
     req_iron: 10
     req_gold: 10
@@ -104,14 +158,14 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 14
-    skillName: skill_6
-    description: skill description --- 14
+    skillName: Multi-Icicle
+    description: Increases the number of icicles generated simultaneously.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 11
-    paramCategory: 1
-    targetIndex: 3
-    paramType: 11
+    baseSkillIndex: 15
+    paramCategory: 4
+    targetIndex: 1
+    paramType: 13
     baseValue: 1
     deltaValue: 0.15
     req_stone: 10
@@ -122,104 +176,14 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 15
-    skillName: skill_7
-    description: skill description --- 15
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 3
-    baseSkillIndex: 13
-    paramCategory: 1
-    targetIndex: 1
-    paramType: 11
-    baseValue: 1
-    deltaValue: 0.15
-    req_stone: 10
-    req_iron: 10
-    req_gold: 10
-    req_emerald: 10
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - index: 16
-    skillName: skill_8
-    description: skill description --- 16
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 3
-    baseSkillIndex: 15
-    paramCategory: 1
-    targetIndex: 2
-    paramType: 11
-    baseValue: 1
-    deltaValue: 0.15
-    req_stone: 10
-    req_iron: 10
-    req_gold: 10
-    req_emerald: 10
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - index: 17
-    skillName: skill_9
-    description: skill description --- 17
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 3
-    baseSkillIndex: 15
-    paramCategory: 1
-    targetIndex: 3
-    paramType: 11
-    baseValue: 1
-    deltaValue: 0.15
-    req_stone: 10
-    req_iron: 10
-    req_gold: 10
-    req_emerald: 10
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - index: 18
-    skillName: skill_10
-    description: skill description --- 18
+    skillName: Precision Hitting
+    description: Boosts the chance of landing a critical hit for massive damage.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 111
-    paramCategory: 1
-    targetIndex: 5
-    paramType: 11
-    baseValue: 1
-    deltaValue: 0.15
-    req_stone: 10
-    req_iron: 10
-    req_gold: 10
-    req_emerald: 10
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - index: 19
-    skillName: skill_11
-    description: skill description --- 19
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 3
-    baseSkillIndex: 111
-    paramCategory: 1
-    targetIndex: 1
-    paramType: 11
-    baseValue: 1
-    deltaValue: 0.15
-    req_stone: 10
-    req_iron: 10
-    req_gold: 10
-    req_emerald: 10
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - index: 20
-    skillName: skill_20
-    description: skill description --- 20
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 3
-    baseSkillIndex: 1
     paramCategory: 4
     targetIndex: 1
-    paramType: 14
+    paramType: 9
     baseValue: 1
     deltaValue: 0.15
     req_stone: 10
@@ -230,14 +194,14 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 21
-    skillName: skill_21
-    description: skill description --- 21
+    skillName: Apex Bolt
+    description: Strikes the highest block with [x] powerful lightning bolts.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 20
+    baseSkillIndex: 111
     paramCategory: 4
-    targetIndex: 1
-    paramType: 15
+    targetIndex: 2
+    paramType: 0
     baseValue: 1
     deltaValue: 0.15
     req_stone: 10
@@ -248,14 +212,14 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 22
-    skillName: skill_22
-    description: skill description --- 22
+    skillName: High-Voltage
+    description: Increases the damage of lightning strikes on the highest blocks.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 21
+    baseSkillIndex: 1
     paramCategory: 4
     targetIndex: 2
-    paramType: 15
+    paramType: 10
     baseValue: 1
     deltaValue: 0.15
     req_stone: 10
@@ -266,13 +230,13 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 23
-    skillName: skill_23
-    description: skill description --- 23
+    skillName: Volt Interval
+    description: Reduces the time between icicle attacks.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 22
+    baseSkillIndex: 20
     paramCategory: 4
-    targetIndex: 3
+    targetIndex: 2
     paramType: 15
     baseValue: 1
     deltaValue: 0.15
@@ -284,14 +248,14 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 24
-    skillName: skill_24
-    description: skill description --- 24
+    skillName: Multi-Bolt
+    description: Increases the number of icicles generated simultaneously.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 22
+    baseSkillIndex: 21
     paramCategory: 4
-    targetIndex: 5
-    paramType: 15
+    targetIndex: 2
+    paramType: 13
     baseValue: 1
     deltaValue: 0.15
     req_stone: 10
@@ -302,14 +266,50 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 25
-    skillName: skill_25
-    description: skill description --- 25
+    skillName: Precision Hitting
+    description: Boosts the chance of landing a critical hit for massive damage.
+    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    maxLevel: 3
+    baseSkillIndex: 22
+    paramCategory: 4
+    targetIndex: 2
+    paramType: 9
+    baseValue: 1
+    deltaValue: 0.15
+    req_stone: 10
+    req_iron: 10
+    req_gold: 10
+    req_emerald: 10
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 31
+    skillName: Chaos Bolt
+    description: Strikes random blocks with [x] chaotic lightning bolts.
+    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    maxLevel: 3
+    baseSkillIndex: 22
+    paramCategory: 4
+    targetIndex: 3
+    paramType: 0
+    baseValue: 1
+    deltaValue: 0.15
+    req_stone: 10
+    req_iron: 10
+    req_gold: 10
+    req_emerald: 10
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 32
+    skillName: Surge Power
+    description: Increases the damage of random lightning strikes.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 24
     paramCategory: 4
-    targetIndex: 1
-    paramType: 15
+    targetIndex: 3
+    paramType: 10
     baseValue: 1
     deltaValue: 0.15
     req_stone: 10
@@ -319,30 +319,12 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
-  - index: 26
-    skillName: skill_26
-    description: skill description --- 26
+  - index: 33
+    skillName: Surge Interval
+    description: Reduces the time between random lightning strikes.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 23
-    paramCategory: 4
-    targetIndex: 2
-    paramType: 15
-    baseValue: 1
-    deltaValue: 0.15
-    req_stone: 10
-    req_iron: 10
-    req_gold: 10
-    req_emerald: 10
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - index: 27
-    skillName: skill_27
-    description: skill description --- 27
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 3
-    baseSkillIndex: 26
     paramCategory: 4
     targetIndex: 3
     paramType: 15
@@ -355,12 +337,84 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
-  - index: 28
-    skillName: skill_28
-    description: skill description --- 28
+  - index: 34
+    skillName: Multi-Surge
+    description: Strikes more random blocks simultaneously.
+    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    maxLevel: 3
+    baseSkillIndex: 26
+    paramCategory: 4
+    targetIndex: 3
+    paramType: 13
+    baseValue: 1
+    deltaValue: 0.15
+    req_stone: 10
+    req_iron: 10
+    req_gold: 10
+    req_emerald: 10
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 35
+    skillName: Precision Hitting
+    description: Boosts the chance of landing a critical hit for massive damage.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
     baseSkillIndex: 25
+    paramCategory: 4
+    targetIndex: 3
+    paramType: 9
+    baseValue: 1
+    deltaValue: 0.15
+    req_stone: 10
+    req_iron: 10
+    req_gold: 10
+    req_emerald: 10
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 41
+    skillName: Orbiting Star
+    description: Creates [x] stars that orbit and damage nearby blocks.
+    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    maxLevel: 3
+    baseSkillIndex: 25
+    paramCategory: 4
+    targetIndex: 4
+    paramType: 0
+    baseValue: 1
+    deltaValue: 0.15
+    req_stone: 10
+    req_iron: 10
+    req_gold: 10
+    req_emerald: 10
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 42
+    skillName: Starlight Power
+    description: ncreases the damage dealt by orbiting stars.
+    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    maxLevel: 3
+    baseSkillIndex: 20
+    paramCategory: 4
+    targetIndex: 4
+    paramType: 10
+    baseValue: 1
+    deltaValue: 0.15
+    req_stone: 10
+    req_iron: 10
+    req_gold: 10
+    req_emerald: 10
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 43
+    skillName: Orbit Speed
+    description: Increases the rotation speed/attack frequency of the stars.
+    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    maxLevel: 3
+    baseSkillIndex: 20
     paramCategory: 4
     targetIndex: 4
     paramType: 15
@@ -373,15 +427,15 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
-  - index: 29
-    skillName: skill_29
-    description: skill description --- 29
+  - index: 44
+    skillName: Star Cluster
+    description: ncreases the number of stars orbiting the player.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 25
+    baseSkillIndex: 20
     paramCategory: 4
-    targetIndex: 5
-    paramType: 15
+    targetIndex: 4
+    paramType: 13
     baseValue: 1
     deltaValue: 0.15
     req_stone: 10
@@ -391,57 +445,796 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
-  - index: 30
-    skillName: skill_22
-    description: skill description --- 30
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 3
-    baseSkillIndex: 20
+  - index: 45
+    skillName: Precision Hitting
+    description: Boosts the chance of landing a critical hit for massive damage.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
     paramCategory: 4
+    targetIndex: 4
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 51
+    skillName: Horizon Arrow
+    description: Fires a piercing arrow to damage a random horizontal row of blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 4
+    targetIndex: 5
+    paramType: 0
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 52
+    skillName: Piercing Power
+    description: Increases the damage of horizontal arrows.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 4
+    targetIndex: 5
+    paramType: 10
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 53
+    skillName: Arrow Interval
+    description: Reduces the time between arrow shots.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 4
+    targetIndex: 5
+    paramType: 15
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 54
+    skillName: Volley Shot
+    description: Increases the number of arrows fired simultaneously.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 4
+    targetIndex: 5
+    paramType: 13
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 55
+    skillName: Precision Hitting
+    description: Boosts the chance of landing a critical hit for massive damage.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 4
+    targetIndex: 5
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 61
+    skillName: Vertical Arrow
+    description: Fires a piercing arrow to damage a random vertical column of blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 4
+    targetIndex: 6
+    paramType: 0
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 62
+    skillName: Piercing Power
+    description: Increases the damage of vertical arrows.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 4
+    targetIndex: 6
+    paramType: 10
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 63
+    skillName: Arrow Interval
+    description: Reduces the time between arrow shots.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 4
+    targetIndex: 6
+    paramType: 15
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 64
+    skillName: Volley Shot
+    description: Increases the number of arrows fired simultaneously.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 4
+    targetIndex: 6
+    paramType: 13
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 65
+    skillName: Precision Hitting
+    description: Boosts the chance of landing a critical hit for massive damage.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 4
+    targetIndex: 6
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1011
+    skillName: Ore Vein Finder
+    description: Increases the probability of finding ore blocks in the layers.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 2
     targetIndex: 1
-    paramType: 15
-    baseValue: 1
-    deltaValue: 0.15
-    req_stone: 10
-    req_iron: 10
-    req_gold: 10
-    req_emerald: 10
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
-  - index: 31
-    skillName: skill_23
-    description: skill description --- 31
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 3
-    baseSkillIndex: 20
-    paramCategory: 4
+  - index: 1012
+    skillName: Bountiful Harvest
+    description: Increases the amount of resources gathered from breaking blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 1
+    targetIndex: 1
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1021
+    skillName: Unlock Gold
+    description: Unlocks the appearance of Gold ore in mining layers.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 1
+    targetIndex: 2
+    paramType: 0
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1022
+    skillName: Ore Vein Finder
+    description: Increases the probability of finding ore blocks in the layers.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 2
+    targetIndex: 2
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1023
+    skillName: Bountiful Harvest
+    description: Increases the amount of resources gathered from breaking blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 1
+    targetIndex: 2
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1031
+    skillName: Unlock Emerald
+    description: Unlocks the appearance of Emerald ore in mining layers.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 1
     targetIndex: 3
-    paramType: 15
-    baseValue: 1
-    deltaValue: 0.15
-    req_stone: 10
-    req_iron: 10
-    req_gold: 10
-    req_emerald: 10
+    paramType: 0
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
-  - index: 32
-    skillName: skill_24
-    description: skill description --- 32
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
-    maxLevel: 3
-    baseSkillIndex: 20
-    paramCategory: 4
+  - index: 1032
+    skillName: Ore Vein Finder
+    description: Increases the probability of finding ore blocks in the layers.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 2
+    targetIndex: 3
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1033
+    skillName: Bountiful Harvest
+    description: Increases the amount of resources gathered from breaking blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 1
+    targetIndex: 3
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1041
+    skillName: Unlock Ruby
+    description: Unlocks the appearance of Ruby ore in mining layers.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 1
+    targetIndex: 4
+    paramType: 0
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1042
+    skillName: Ore Vein Finder
+    description: Increases the probability of finding ore blocks in the layers.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 2
+    targetIndex: 4
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1043
+    skillName: Bountiful Harvest
+    description: Increases the amount of resources gathered from breaking blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 1
+    targetIndex: 4
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1051
+    skillName: Unlock Sapphire
+    description: Unlocks the appearance of Sapphire ore in mining layers
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 1
     targetIndex: 5
-    paramType: 15
-    baseValue: 1
-    deltaValue: 0.15
-    req_stone: 10
-    req_iron: 10
-    req_gold: 10
-    req_emerald: 10
+    paramType: 0
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1052
+    skillName: Ore Vein Finder
+    description: Increases the probability of finding ore blocks in the layers.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 2
+    targetIndex: 5
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1053
+    skillName: Bountiful Harvest
+    description: Increases the amount of resources gathered from breaking blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 1
+    targetIndex: 5
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1061
+    skillName: Unlock Diamond
+    description: Unlocks the appearance of Diamond ore in mining layers.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 1
+    targetIndex: 6
+    paramType: 0
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1062
+    skillName: Ore Vein Finder
+    description: Increases the probability of finding ore blocks in the layers.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 2
+    targetIndex: 6
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1063
+    skillName: Bountiful Harvest
+    description: Increases the amount of resources gathered from breaking blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 1
+    targetIndex: 6
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2011
+    skillName: Unlock Timer
+    description: Unlocks the appearance of special Timer blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 3
+    targetIndex: 1
+    paramType: 0
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2012
+    skillName: Timer Frequency
+    description: Increases the spawn rate of Timer blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 3
+    targetIndex: 1
+    paramType: 7
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2013
+    skillName: Timer Potency
+    description: Enhances the time-extending effect of Timer blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 3
+    targetIndex: 1
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2021
+    skillName: Unlock Crate
+    description: Unlocks the appearance of Wooden Crate blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 3
+    targetIndex: 2
+    paramType: 0
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2022
+    skillName: Crate Frequency
+    description: Increases the spawn rate of Wooden Crate blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 3
+    targetIndex: 2
+    paramType: 7
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2023
+    skillName: Loot Quality
+    description: Improves the quality/amount of items found inside crates.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 3
+    targetIndex: 2
+    paramType: 9
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2031
+    skillName: Unlock Bomb
+    description: Unlocks the appearance of explosive Bomb blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 3
+    targetIndex: 3
+    paramType: 0
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2032
+    skillName: Bomb Frequency
+    description: Increases the spawn rate of Bomb blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 3
+    targetIndex: 3
+    paramType: 7
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2033
+    skillName: Blast Radius
+    description: Expands the explosion range of Bomb blocks.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 3
+    targetIndex: 3
+    paramType: 8
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2034
+    skillName: Blast Force
+    description: Increases the damage dealt by Bomb block explosions.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 3
+    targetIndex: 3
+    paramType: 10
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 3001
+    skillName: Block Regen
+    description: Increases the chance of blocks falling from above to refill the
+      area.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 0
+    targetIndex: -1
+    paramType: 5
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 3002
+    skillName: Jackpot Chance
+    description: Increases the probability of a Lucky Mine event occurring.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 0
+    targetIndex: -1
+    paramType: 2
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 3003
+    skillName: Jackpot Mine
+    description: Increases the bonus resources from Lucky Mine by 50%
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 0
+    targetIndex: -1
+    paramType: 3
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 3004
+    skillName: Time Extension
+    description: Adds extra time to your current mining session.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 0
+    targetIndex: -1
+    paramType: 1
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 3005
+    skillName: Deep Mine Bonus
+    description: Provides extra rewards for mining in deeper layers.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 0
+    targetIndex: -1
+    paramType: 4
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 3006
+    skillName: Instant Shatter
+    description: Grants a small chance to destroy any block in a single hit.
+    icon: {fileID: 0}
+    maxLevel: 0
+    baseSkillIndex: 0
+    paramCategory: 0
+    targetIndex: -1
+    paramType: 6
+    baseValue: 0
+    deltaValue: 0
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
