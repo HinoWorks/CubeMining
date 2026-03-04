@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77aa265b89bf4c54811353ee9d56eec, type: 3}
   m_Name: SO_SoundData
   m_EditorClassIdentifier: 
-  SoundData_BGM: []
+  SoundData_BGM:
+  - index: 0
+    memo: "\u57FA\u672CBGM"
+    clip: {fileID: 8300000, guid: d1363d209b3e5479e833f0911e969f5c, type: 3}
+    Volume: 0.15
   SoundData_SE:
   - index: 0
     memo: 

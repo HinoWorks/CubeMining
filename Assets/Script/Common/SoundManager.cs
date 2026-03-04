@@ -64,6 +64,7 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
+        PlayBGM(0);
     }
 
     void Update()
@@ -108,7 +109,8 @@ public class SoundManager : MonoBehaviour
         if (BGMsource == null) return;
 
         BGMsource.mute = Mute_BGM || isPaused;
-        BGMsource.volume = Mute_BGM ? 0f : (Volume_BGM / 100f);
+        float bgmBaseVolume = (soundData_BGM != null) ? soundData_BGM.Volume : 1f;
+        BGMsource.volume = (Mute_BGM || isPaused) ? 0f : bgmBaseVolume * (Volume_BGM / 100f);
 
         for (int i = 0; i < SEsources.Length; i++)
         {
@@ -186,7 +188,7 @@ public class SoundManager : MonoBehaviour
         BGMsource.clip = soundData_BGM.clip;
         BGMsource.volume = 0f;
         BGMsource.Play();
-        var targetVol = Mute_BGM ? 0f : (Volume_BGM / 100f);
+        var targetVol = Mute_BGM ? 0f : soundData_BGM.Volume * (Volume_BGM / 100f);
         BGMsource.DOFade(targetVol, d).SetUpdate(true);
     }
 
@@ -195,6 +197,7 @@ public class SoundManager : MonoBehaviour
         BGMsource.DOKill();
         BGMsource.Stop();
         BGMsource.clip = null;
+        soundData_BGM = null;
     }
 
     /// <summary>BGMをフェードアウトして停止</summary>
@@ -206,6 +209,7 @@ public class SoundManager : MonoBehaviour
         {
             BGMsource.Stop();
             BGMsource.clip = null;
+            soundData_BGM = null;
             onComplete?.Invoke();
         });
     }
@@ -214,7 +218,8 @@ public class SoundManager : MonoBehaviour
     {
         if (BGMsource == null) return;
         BGMsource.mute = Mute_BGM || isPaused;
-        BGMsource.volume = Mute_BGM ? 0f : (Volume_BGM / 100f);
+        float bgmBaseVolume = (soundData_BGM != null) ? soundData_BGM.Volume : 1f;
+        BGMsource.volume = (Mute_BGM || isPaused) ? 0f : bgmBaseVolume * (Volume_BGM / 100f);
     }
     #endregion
 
