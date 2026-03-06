@@ -30,15 +30,15 @@ public class GameBaseParam
 
 
     // ピッケルの基礎パラメータ向上
-    public float pickaxeBase_AttackDamage => 1f + pickaxeBase_AttackDamage_enhanced;
+    public float pickaxeBase_AttackDamage => pickaxeBase_AttackDamage_enhanced;
     private float pickaxeBase_AttackDamage_enhanced = 0f;
-    public float pickaxeBase_AttackInterval => 1f + pickaxeBase_AttackInterval_enhanced;
+    public float pickaxeBase_AttackInterval => pickaxeBase_AttackInterval_enhanced;
     private float pickaxeBase_AttackInterval_enhanced = 0f;
-    public float pickaxeBase_CriticalRate => 1f + pickaxeBase_CriticalRate_enhanced;
+    public float pickaxeBase_CriticalRate => pickaxeBase_CriticalRate_enhanced;
     private float pickaxeBase_CriticalRate_enhanced = 0f;
-    public float pickaxeBase_ResourceRate => 1f + pickaxeBase_ResourceRate_enhanced;
+    public float pickaxeBase_ResourceRate => pickaxeBase_ResourceRate_enhanced;
     private float pickaxeBase_ResourceRate_enhanced = 0f;
-    public float pickaxeBase_Size => 1f + pickaxeBase_Size_enhanced;
+    public float pickaxeBase_Size => pickaxeBase_Size_enhanced;
     private float pickaxeBase_Size_enhanced = 0f;
 
 
@@ -71,6 +71,9 @@ public class GameBaseParam
                 break;
             case ParamType.ResourceRate:
                 pickaxeBase_ResourceRate_enhanced += _setParam;
+                break;
+            case ParamType.Size:
+                pickaxeBase_Size_enhanced += _setParam;
                 break;
         }
     }
@@ -453,14 +456,6 @@ public static class GameParamManager
         var blockChangeBaseParam = SOLoader.BlockData.GetBlockChangeRateData(_blockIndex);
         var selectType = blockChangeRateParam.SelectBlockType(blockChangeBaseParam);
         return selectType;
-        /*
-        var targetBlockChangeRate = list_blockChangeRateParam.Find(x => x.so.blockIndex == _blockIndex);
-        if (targetBlockChangeRate == null)
-        {
-            Debug.LogError($"BlockChangeRateData is not found: {_blockIndex} // ==> 初期ロードで読み込み失敗");
-        }
-        return targetBlockChangeRate;
-        */
     }
     public static AttackParam Get_AttackParam(int _attackIndex)
     {
@@ -575,15 +570,6 @@ public static class GameParamManager
 
         // block change rate param init
         blockChangeRateParam.Init();
-        /*
-        list_blockChangeRateParam.Clear();
-        foreach (var blockChangeRateData in SOLoader.BlockData.blockChangeRateDatas)
-        {
-            var blockChangeRateParam = new BlockChangeRateParam();
-            blockChangeRateParam.Init(blockChangeRateData);
-            list_blockChangeRateParam.Add(blockChangeRateParam);
-        }
-        */
 
         // object generate param init
         list_objectGenerateParam.Clear();
@@ -680,15 +666,6 @@ public static class GameParamManager
     private static void Set_BlockChangeRateParam(int _targetBlockIndex, float _setParam)
     {
         blockChangeRateParam.Set_Param(_targetBlockIndex, _setParam);
-        /*
-        var targetBlockChangeRate = list_blockChangeRateParam.Find(x => x.so.blockIndex == _blockIndex);
-        if (targetBlockChangeRate == null)
-        {
-            Debug.LogError($"BlockData is not found: {_blockIndex} // ==> 初期ロードで読み込み失敗");
-            return;
-        }
-        targetBlockChangeRate.Set_Param(_paramType, _setParam);
-        */
     }
     private static void Set_AttackParam(int _attackIndex, ParamType _paramType, float _setParam)
     {

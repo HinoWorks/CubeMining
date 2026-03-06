@@ -11,7 +11,7 @@ public class MiningTarget_Timer : MiningTarget_Object
         base.Init_MiningTargetBase(hp, 0, _objectGenerateParam.so.objectIndex, _layerIndex);
     }
 
-    public override void BreakFromDamage()
+    public override void BreakFromDamage(float _resourceUpRate = 1f)
     {
         // effect
         var effect = EffectManager.Inst.Get_Effect(EffectType.BlockBreak);

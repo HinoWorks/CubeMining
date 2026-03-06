@@ -38,7 +38,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         gameObject.SetActive(true);
     }
 
-    public virtual bool Damage(int damage)
+    public virtual bool Damage(int damage, float _resourceUpRate = 1f)
     {
         hp -= damage;
         //Set_DamageText(damage);
@@ -46,7 +46,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         if (hp <= 0)
         {
             col.enabled = false;
-            BreakFromDamage();
+            BreakFromDamage(_resourceUpRate);
             PlaySE_Break();
             return true;
         }
@@ -59,7 +59,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
 
 
 
-    public virtual void BreakFromDamage()
+    public virtual void BreakFromDamage(float _resourceUpRate = 1f)
     {
         gameObject.SetActive(false);
     }

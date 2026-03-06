@@ -51,7 +51,7 @@ public class SkillTree
     public string description;
     public Sprite icon;
     public int maxLevel;
-    public int baseSkillIndex;
+    public int[] baseSkillIndex;
     public ParamCategory paramCategory;
     public int targetIndex;
     public ParamType paramType;

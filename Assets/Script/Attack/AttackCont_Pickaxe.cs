@@ -12,11 +12,11 @@ public class AttackCont_Pickaxe : MonoBehaviour
     protected bool isSelectPickaxe = false;
     protected bool isActive = false;//　Init後、攻撃開始タイミング同期用。trueになったら攻撃開始
 
-    protected int damage => (int)pickaxeParam.damage;
-    protected float attackInterval => pickaxeParam.attackInterval;
-    protected float criticalRate => pickaxeParam.criticalRate;
-    protected float resourceRate => pickaxeParam.resourceRate;
-    protected float size => pickaxeParam.size;
+    protected int damage => (int)(pickaxeParam.damage * (1f + GameParamManager.gameBaseParam.pickaxeBase_AttackDamage));
+    protected float attackInterval => pickaxeParam.attackInterval * (1f - GameParamManager.gameBaseParam.pickaxeBase_AttackInterval);
+    protected float criticalRate => pickaxeParam.criticalRate + GameParamManager.gameBaseParam.pickaxeBase_CriticalRate;
+    protected float resourceRate => pickaxeParam.resourceRate + GameParamManager.gameBaseParam.pickaxeBase_ResourceRate;
+    protected float size => pickaxeParam.size * (1f + GameParamManager.gameBaseParam.pickaxeBase_Size);
 
 
     [SerializeField] GameObject obj_pointerArea;
@@ -26,6 +26,7 @@ public class AttackCont_Pickaxe : MonoBehaviour
     private readonly List<IDamagable> removeBuffer = new();
 
     private Vector3 offsetPosition = new Vector3(0, 0.1f, 0);
+    private float criticalDamageRate = 2f;
 
 
     protected void Awake()
@@ -42,9 +43,14 @@ public class AttackCont_Pickaxe : MonoBehaviour
     {
         slotIndex = _slotIndex;
         pickaxeParam = _pickaxeParam;
+        obj_pointerArea.transform.localScale = size * Vector3.one;
         targets.Clear();
         CreateAttackRoop();
         this.gameObject.SetActive(false);
+
+#if UNITY_EDITOR
+        DebugLog();
+#endif
     }
 
     public virtual void Set_SelectPickaxe(int _activeSlotIndex)
@@ -80,7 +86,10 @@ public class AttackCont_Pickaxe : MonoBehaviour
                 foreach (var t in targets)
                 {
                     if (!t.isAlive) continue;
-                    if (t.Damage(damage))
+
+                    // critical check
+                    var selectedDamageRate = UnityEngine.Random.Range(0f, 1f) < criticalRate ? criticalDamageRate : 1f;
+                    if (t.Damage((int)(damage * selectedDamageRate)))
                     {
                         removeBuffer.Add(t);
                     }
@@ -122,6 +131,14 @@ public class AttackCont_Pickaxe : MonoBehaviour
             targets.Remove(target);
         }
     }
-
     #endregion
+
+
+
+    private void DebugLog()
+    {
+        Debug.Log($"damage: {pickaxeParam.damage} / attackInterval: {pickaxeParam.attackInterval} / criticalRate: {pickaxeParam.criticalRate} / resourceRate: {pickaxeParam.resourceRate} / size: {pickaxeParam.size}");
+        Debug.Log($"gameBaseParam: {GameParamManager.gameBaseParam.pickaxeBase_AttackDamage} / {GameParamManager.gameBaseParam.pickaxeBase_AttackInterval} / {GameParamManager.gameBaseParam.pickaxeBase_CriticalRate} / {GameParamManager.gameBaseParam.pickaxeBase_ResourceRate} / {GameParamManager.gameBaseParam.pickaxeBase_Size}");
+        Debug.Log($"RESULT == > damage: {damage} / attackInterval: {attackInterval} / criticalRate: {criticalRate} / resourceRate: {resourceRate} / size: {size}");
+    }
 }

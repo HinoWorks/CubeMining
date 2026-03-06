@@ -33,7 +33,7 @@ public class MiningTarget_Artifact : MiningTargetBase
         Debug.Log($"<color=green>== artifact Set: artifactIndex: {artifactIndex} / layerIndex: {layerIndex} ===</color>");
     }
 
-    public override bool Damage(int damage)
+    public override bool Damage(int damage, float _resourceUpRate = 1f)
     {
         // ダメージを受けた回数で判定する
         var fixDamage = base.hp_max / breakAttackCount;
@@ -41,7 +41,7 @@ public class MiningTarget_Artifact : MiningTargetBase
         return base.Damage(fixDamage);
     }
 
-    public override void BreakFromDamage()
+    public override void BreakFromDamage(float _resourceUpRate = 1f)
     {
         // effect
         var effect = EffectManager.Inst.Get_Effect(EffectType.BlockBreak);

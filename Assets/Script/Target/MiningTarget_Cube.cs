@@ -11,7 +11,11 @@ public class MiningTarget_Cube : MiningTargetBase
 
     private Action breakCallback;
 
+    // -- resource up rate --
+    private float resourceUpRate = 1f;
 
+
+    // -- mesh --
     private float meshThreshold_1 = 0.7f;
     private float meshThreshold_2 = 0.35f;
 
@@ -68,13 +72,13 @@ public class MiningTarget_Cube : MiningTargetBase
         breakCallback = null;
     }
 
-    public override bool Damage(int damage)
+    public override bool Damage(int damage, float _resourceUpRate = 1f)
     {
         //hitFlash.Flash();
         var effect = EffectManager.Inst.Get_Effect(EffectType.BlockDamage);
         effect.transform.position = transform.position;
         effect.SetActive(true);
-        var isBreak = base.Damage(damage);
+        var isBreak = base.Damage(damage, _resourceUpRate);
         //hitFlash.Set_Crack(hp_rate);
         Set_BlockMesh();
         return isBreak;
@@ -99,22 +103,8 @@ public class MiningTarget_Cube : MiningTargetBase
         SoundManager.Inst.PlaySE(index_SE);
     }
 
-    public override void BreakFromDamage()
+    public override void BreakFromDamage(float _resourceUpRate = 1f)
     {
-        /*
-        switch (blockSize)
-        {
-            case BlockSize.Big:
-                BlockGenerateManager.Inst.BreakBigBlock(index, transform.position);
-                break;
-            case BlockSize.Normal:
-                var effect = EffectManager.Inst.Get_Effect(EffectType.BlockBreak);
-                effect.transform.position = transform.position + EffectOffset;
-                effect.SetActive(true);
-                break;
-        }
-        */
-
         breakCallback?.Invoke();
 
         var effect = EffectManager.Inst.Get_Effect(EffectType.BlockBreak);
@@ -124,14 +114,14 @@ public class MiningTarget_Cube : MiningTargetBase
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.BlockBreakCount, 1);
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.Damage, hp_max);
 
-        AddGetResource();
+        AddGetResource(_resourceUpRate);
         NotActivate();
     }
 
-    private void AddGetResource()
+    private void AddGetResource(float _resourceUpRate = 1f)
     {
         var resourceRate = resourceType == ResourceType.Stone ? 1f : 0.5f;
-        var getCount = (int)resourceRate * base.value;
+        var getCount = (int)(resourceRate * base.value * (1f + _resourceUpRate));
         if (getCount <= 0) getCount = 1;
         InGameManager.Inst.AddGetResource(resourceType, getCount);
 

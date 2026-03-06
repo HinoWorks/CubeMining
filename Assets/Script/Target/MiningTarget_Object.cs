@@ -33,7 +33,7 @@ public class MiningTarget_Object : MiningTargetBase
         base.animScale_rate = this.transform.localScale.x;
     }
 
-    public override void BreakFromDamage()
+    public override void BreakFromDamage(float _resourceUpRate = 1f)
     {
         base.BreakFromDamage();
         breakCallback?.Invoke();

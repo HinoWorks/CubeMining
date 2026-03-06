@@ -30,7 +30,7 @@ public class MiningTarget_Tresure : MiningTarget_Object
         // TODO here 
     }
 
-    public override void BreakFromDamage()
+    public override void BreakFromDamage(float _resourceUpRate = 1f)
     {
         // effect
         var effect = EffectManager.Inst.Get_Effect(EffectType.BlockBreak);
@@ -39,7 +39,7 @@ public class MiningTarget_Tresure : MiningTarget_Object
         CameraManager.Inst?.ShakeBlockBreak();
 
         // ===== treasure value ======
-        AddGetResource();
+        AddGetResource(_resourceUpRate);
 
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.TreasureCount, 1);
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.Damage, hp_max);
@@ -47,9 +47,11 @@ public class MiningTarget_Tresure : MiningTarget_Object
         base.BreakFromDamage();
     }
 
-    private void AddGetResource()
+    private void AddGetResource(float _resourceUpRate = 1f)
     {
-        InGameManager.Inst.AddGetResource(resourceType, base.value);
+        var getCount = (int)(base.value * (1f + _resourceUpRate));
+        if (getCount <= 0) getCount = 1;
+        InGameManager.Inst.AddGetResource(resourceType, getCount);
         for (int i = 0; i < base.value; i++)
         {
             var ui_resourceCont = UI_PoolManager.Inst.Set_GetResourceCont();

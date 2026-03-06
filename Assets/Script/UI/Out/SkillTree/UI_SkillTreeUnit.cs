@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using Cysharp.Threading.Tasks;
 
 
 public class UI_SkillTreeUnit : MonoBehaviour
@@ -59,7 +60,8 @@ public class UI_SkillTreeUnit : MonoBehaviour
     public async void Init()
     {
         var skillTreeData = await SaveLoader.Inst.Get_SkillTreeData(skillIndex);
-        if (skillTree.baseSkillIndex == -1) //初期スキルのみ
+        // ベーススキルが一切無い場合のみ「初期スキル」とみなす
+        if (!HasAnyBaseSkill()) //初期スキルのみ
         {
             if (skillTreeData == null)
             {
@@ -72,23 +74,11 @@ public class UI_SkillTreeUnit : MonoBehaviour
                  SkillTreeUnlockState.EnhanceComplete : SkillTreeUnlockState.EnhanceReady;
             }
         }
-        else if (skillTreeData == null) //データない場合、ベーススキルを確認
+        else if (skillTreeData == null) //データない場合、ベーススキル群を確認
         {
-            var baseSkillUnitState = UIManager_OutGame.Inst.UI_SkillTreeManager.Get_SkillTreeUnlockState(skillTree.baseSkillIndex);
-            switch (baseSkillUnitState)
-            {
-                case SkillTreeUnlockState.Hide:
-                case SkillTreeUnlockState.Locked:
-                    unlockState = SkillTreeUnlockState.Hide;
-                    break;
-                case SkillTreeUnlockState.EnhanceReady:
-                    var baseSkillData = await SaveLoader.Inst.Get_SkillTreeData(skillTree.baseSkillIndex);
-                    unlockState = baseSkillData == null ? SkillTreeUnlockState.Locked : SkillTreeUnlockState.EnhanceReady;
-                    break;
-                case SkillTreeUnlockState.EnhanceComplete:
-                    unlockState = SkillTreeUnlockState.EnhanceReady;
-                    break;
-            }
+            // 複数のベーススキルのいずれかを取得していれば解放
+            var isAnyBaseAcquired = await IsAnyBaseSkillAcquired();
+            unlockState = isAnyBaseAcquired ? SkillTreeUnlockState.EnhanceReady : SkillTreeUnlockState.Hide;
         }
         else //データありの場合、レベルを確認
         {
@@ -98,8 +88,58 @@ public class UI_SkillTreeUnit : MonoBehaviour
                  SkillTreeUnlockState.EnhanceComplete : SkillTreeUnlockState.EnhanceReady;
         }
         // Debug.Log($"SkillTreeUnit: {skillIndex} ----> unlockState: {unlockState}");
-        onUpdateNodeState?.Invoke(skillTree.baseSkillIndex, skillIndex, unlockState, level);
+        // 線の更新は UI_SkillTreeManager 側で TargetSkillIndex のみを見て行うため、
+        // 第1引数（baseSkillIndex）はダミー値で良い
+        onUpdateNodeState?.Invoke(-1, skillIndex, unlockState, level);
         SetState();
+    }
+
+
+    /// <summary>
+    /// 何かしらのベーススキルを持っているかどうか
+    /// </summary>
+    private bool HasAnyBaseSkill()
+    {
+        return skillTree.baseSkillIndex != null && skillTree.baseSkillIndex[0] != -1;
+    }
+
+    /// <summary>
+    /// 複数候補のベーススキルのうち、いずれか 1 つでも「取得済み」かどうかを判定する
+    /// （レベル 1 以上、もしくは EnhanceComplete）
+    /// </summary>
+    private async UniTask<bool> IsAnyBaseSkillAcquired()
+    {
+        if (skillTree.baseSkillIndex == null || skillTree.baseSkillIndex.Length == 0) return false;
+
+        // baseSkillIndex 配列のどれか 1 つでも取得済みであれば OK
+        foreach (var idx in skillTree.baseSkillIndex)
+        {
+            if (idx == -1) continue;
+            if (await IsSingleBaseSkillAcquired(idx)) return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 単一のベーススキルが取得済みかどうか判定する
+    /// </summary>
+    private async UniTask<bool> IsSingleBaseSkillAcquired(int baseSkillIndex)
+    {
+        var baseSkillUnitState = UIManager_OutGame.Inst.UI_SkillTreeManager.Get_SkillTreeUnlockState(baseSkillIndex);
+        switch (baseSkillUnitState)
+        {
+            case SkillTreeUnlockState.Hide:
+            case SkillTreeUnlockState.Locked:
+                return false;
+            case SkillTreeUnlockState.EnhanceReady:
+                // EnhanceReady でも、実際にレベル 0 の場合はまだ未取得なので NG
+                var baseSkillData = await SaveLoader.Inst.Get_SkillTreeData(baseSkillIndex);
+                return baseSkillData != null && baseSkillData.level > 0;
+            case SkillTreeUnlockState.EnhanceComplete:
+                return true;
+        }
+        return false;
     }
 
 

@@ -79,12 +79,18 @@ public class UI_SkillTreeMaanger : MonoBehaviour
 
     private void NodeCreate(UI_SkillTreeUnit _unit)
     {
-        if (_unit.skillTree.baseSkillIndex == -1) return;
-        var baseUnit = Array.Find(skillTreeUnits, x => x.skillIndex == _unit.skillTree.baseSkillIndex);
-        if (baseUnit == null) return;
+        if (_unit.skillTree.baseSkillIndex == null || _unit.skillTree.baseSkillIndex.Length == 0) return;
 
-        var nodeCont = Get_FreeNodeCont();
-        nodeCont.SetNodeCont(baseUnit, _unit, nodeLineHeight);
+        // baseSkillIndex 配列の全ての要素と線を接続する
+        foreach (var baseIndex in _unit.skillTree.baseSkillIndex)
+        {
+            if (baseIndex == -1) continue;
+            var baseUnit = Array.Find(skillTreeUnits, x => x.skillIndex == baseIndex);
+            if (baseUnit == null) continue;
+
+            var nodeCont = Get_FreeNodeCont();
+            nodeCont.SetNodeCont(baseUnit, _unit, nodeLineHeight);
+        }
     }
 
     private UI_SkillTreeNodeCont Get_FreeNodeCont()
@@ -242,19 +248,27 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         await UniTask.DelayFrame(2);
         _skillTreeUnit.Init();
 
-        // ベーススキルの更新
-        var checkTargetUnit = Array.FindAll(skillTreeUnits, x => x.skillTree.baseSkillIndex == _skillTreeUnit.skillIndex);
+        // ベーススキルの更新（baseSkillIndex 配列の中にこのスキルを含む全てのユニットを更新）
+        var checkTargetUnit = Array.FindAll(skillTreeUnits,
+            x => x.skillTree.baseSkillIndex != null &&
+                 Array.Exists(x.skillTree.baseSkillIndex, idx => idx == _skillTreeUnit.skillIndex));
         foreach (var unit in checkTargetUnit)
         {
             unit.Init();
         }
         ui_skillTreeDetail.SetData_Enhanced(_skillTreeUnit.level + 1);
-        UpdateNodeState(_skillTreeUnit.skillTree.baseSkillIndex, _skillTreeUnit.skillIndex, _skillTreeUnit.unlockState, _skillTreeUnit.level + 1);
+        // 線の更新は「ターゲットスキルID」だけ見て行う
+        UpdateNodeState(-1, _skillTreeUnit.skillIndex, _skillTreeUnit.unlockState, _skillTreeUnit.level + 1);
+
+        // gameParamManager の更新
+        GameParamManager.Set_DeltaParam(_skillTreeUnit.skillTree.paramCategory,
+            _skillTreeUnit.skillTree.targetIndex, _skillTreeUnit.skillTree.paramType, _skillTreeUnit.skillTree.deltaValue);
     }
 
     private void UpdateNodeState(int _baseSkillIndex, int _targetSkillIndex, SkillTreeUnlockState _unlockState, int _level)
     {
-        var targetNodes = nodeConts.FindAll(x => x.BaseSkillIndex == _baseSkillIndex && x.TargetSkillIndex == _targetSkillIndex);
+        // baseSkillIndex は見ずに、対象スキル（ターゲット）の線を全て更新する
+        var targetNodes = nodeConts.FindAll(x => x.TargetSkillIndex == _targetSkillIndex);
         foreach (var node in targetNodes)
         {
             node.Set_LineState(_unlockState, _level);

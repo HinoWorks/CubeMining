@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Text;
 using System.Collections.Generic;
@@ -84,7 +84,12 @@ public class CSVSerializer
         if (fieldinfo.FieldType.IsArray)
         {
             Type elementType = fieldinfo.FieldType.GetElementType();
-            string[] elem = value.Split(',');
+            // 配列フィールド用の区切り文字
+            // - 通常の CSV のカラム区切りとは別に、1 セル内での配列表現用に
+            //   '|' を優先的に使う（例: "1|2|3"）
+            // - 互換性のため、'|' が無い場合は従来通り ',' でも分割する
+            char[] separators = value.IndexOf('|') >= 0 ? new[] { '|' } : new[] { ',' };
+            string[] elem = value.Split(separators, StringSplitOptions.RemoveEmptyEntries);
             Array array_value = Array.CreateInstance(elementType, elem.Length);
             for (int i = 0; i < elem.Length; i++)
             {

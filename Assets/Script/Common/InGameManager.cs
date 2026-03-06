@@ -67,49 +67,27 @@ public class InGameManager : MonoBehaviour
         GameEvent.InGame.GameRecordDataMod_Ingame.Subscribe(Fix_GameRecordData).AddTo(this);
     }
 
-
-
     private void SetGameState(GameStateType state)
     {
         switch (state)
         {
             case GameStateType.InGame_Ready:
-                // インゲーム開始前の初期化
-                gameRecordData_thisGame = new GameRecordData_thisGame();
-                GameParamManager.Init_IngameStart();
-                AttackManager.Inst.Set_Ready();
-                BlockGenerateManager.Inst.Init();
-                resourceDataList.Clear();
-                artifactIndexList.Clear();
-                exTime = 0f;
-                GameEvent.UI.PublishCoinMod(getCoin);
-                GameEvent.UI.PublishTimeLimit(timeLimit);
+                SetState_InGameReady();
                 break;
-
             case GameStateType.InGame:
-                timer = 0;
-                AttackManager.Inst.Set_AttackState(true);
-                BlockGenerateManager.Inst.Set_GenerateState(true);
+                SetState_InGame();
                 break;
             case GameStateType.InGame_End:
-                AttackManager.Inst.Set_AttackState(false);
-                BlockGenerateManager.Inst.Set_GenerateState(false);
-                ResultSave_IngameResult();
-                ResultSave_ArtifactCurrentBlockCount();
-                ResultSave_Status();
+                SetState_InGameEnd();
                 break;
             case GameStateType.Result:
-                AttackManager.Inst.AttackUnitDelete();
+                SetState_Result();
                 break;
             case GameStateType.ResultEnd_ToOutGame:
-                BlockGenerateManager.Inst.ResetAllBlocks();
-                //Save_IngameResult();
-                GameWatcher.Inst.SetGameState(GameStateType.OutGame);
+                SetState_ResultEnd_ToOutGame();
                 break;
             case GameStateType.ResultEnd_ToIngameReady:
-                BlockGenerateManager.Inst.ResetAllBlocks();
-                //Save_IngameResult();
-                GameWatcher.Inst.SetGameState(GameStateType.InGame_Ready);
+                SetState_ResultEnd_ToIngameReady();
                 break;
             case GameStateType.OutGame:
                 break;
@@ -128,11 +106,54 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    public void AddGetCoin(BigInteger _deltaCoin)
+    #region -- SetState --
+    private void SetState_InGameReady()
     {
-        getCoin += _deltaCoin;
+        // インゲーム開始前の初期化
+        gameRecordData_thisGame = new GameRecordData_thisGame();
+        GameParamManager.Init_IngameStart();
+        AttackManager.Inst.Set_Ready();
+        BlockGenerateManager.Inst.Init();
+        resourceDataList.Clear();
+        artifactIndexList.Clear();
+        exTime = 0f;
         GameEvent.UI.PublishCoinMod(getCoin);
+        GameEvent.UI.PublishTimeLimit(timeLimit);
+
+        SoundManager.Inst.PlaySE(100);
     }
+
+    private void SetState_InGame()
+    {
+        timer = 0;
+        AttackManager.Inst.Set_AttackState(true);
+        BlockGenerateManager.Inst.Set_GenerateState(true);
+    }
+    private void SetState_InGameEnd()
+    {
+        AttackManager.Inst.Set_AttackState(false);
+        BlockGenerateManager.Inst.Set_GenerateState(false);
+        ResultSave_IngameResult();
+        ResultSave_ArtifactCurrentBlockCount();
+        ResultSave_Status();
+
+        SoundManager.Inst.PlaySE(101);
+    }
+    private void SetState_Result()
+    {
+        AttackManager.Inst.AttackUnitDelete();
+    }
+    private void SetState_ResultEnd_ToOutGame()
+    {
+        BlockGenerateManager.Inst.ResetAllBlocks();
+        GameWatcher.Inst.SetGameState(GameStateType.OutGame);
+    }
+    private void SetState_ResultEnd_ToIngameReady()
+    {
+        BlockGenerateManager.Inst.ResetAllBlocks();
+        GameWatcher.Inst.SetGameState(GameStateType.InGame_Ready);
+    }
+    #endregion
 
 
     /// <summary>
