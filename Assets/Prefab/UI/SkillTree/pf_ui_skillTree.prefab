@@ -288,7 +288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3231822508819291424
 RectTransform:
   m_ObjectHideFlags: 0
@@ -296,7 +296,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331421801690177788}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.38268346, w: 0.9238795}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -305,8 +305,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 650, y: -75}
-  m_SizeDelta: {x: 150, y: 10}
+  m_AnchoredPosition: {x: 500, y: 300}
+  m_SizeDelta: {x: 282.8427, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2609979380308747728
 CanvasRenderer:
@@ -358,8 +358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
-  baseSkillIndex: 15
-  targetSkillIndex: 17
+  baseSkillIndex: 101
+  targetSkillIndex: 103
 --- !u!1 &2710164781739359686
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6739283214474794440
 RectTransform:
   m_ObjectHideFlags: 0
@@ -485,7 +485,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 600, y: 300}
   m_SizeDelta: {x: 200, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7541650852009441551
@@ -538,8 +538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
-  baseSkillIndex: 1
-  targetSkillIndex: 20
+  baseSkillIndex: 102
+  targetSkillIndex: 103
 --- !u!1 &2841180574831032908
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,7 +763,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3933676462058146504}
-  m_LocalRotation: {x: 0, y: 0, z: 0.27750313, w: 0.9607247}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268346, w: 0.9238795}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -772,8 +772,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 142, y: 89.5}
-  m_SizeDelta: {x: 335.70374, y: 10}
+  m_AnchoredPosition: {x: 100, y: 100}
+  m_SizeDelta: {x: 282.8427, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2083879661430224925
 CanvasRenderer:
@@ -853,7 +853,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4353784327697685605}
-  m_LocalRotation: {x: 0, y: 0, z: -0.03837652, w: 0.99926335}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -862,8 +862,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 199.5, y: 185.5}
-  m_SizeDelta: {x: 169.49927, y: 10}
+  m_AnchoredPosition: {x: 100, y: 200}
+  m_SizeDelta: {x: 200, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9089008305957189939
 CanvasRenderer:
@@ -1019,7 +1019,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4826736615102080732}
-  m_LocalRotation: {x: 0, y: 0, z: -0.6508814, w: 0.7591794}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1028,8 +1028,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 310.5, y: 7.5}
-  m_SizeDelta: {x: 347.0706, y: 10}
+  m_AnchoredPosition: {x: 200, y: 300}
+  m_SizeDelta: {x: 200, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4252331719691792785
 CanvasRenderer:
@@ -1191,7 +1191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5956254648881907732
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1199,7 +1199,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5781871248295564932}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0.52573115, w: 0.8506508}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1208,8 +1208,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -425}
-  m_SizeDelta: {x: 150, y: 10}
+  m_AnchoredPosition: {x: 700, y: 200}
+  m_SizeDelta: {x: 447.2136, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1174875907732884562
 CanvasRenderer:
@@ -1261,8 +1261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
-  baseSkillIndex: 21
-  targetSkillIndex: 22
+  baseSkillIndex: 104
+  targetSkillIndex: 105
 --- !u!1 &5879721438262012218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,7 +1493,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6837149042410475919}
-  m_LocalRotation: {x: 0, y: 0, z: 0.49303216, w: 0.8700111}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1502,8 +1502,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 57.5, y: 96}
-  m_SizeDelta: {x: 223.80573, y: 10}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: 200, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2609568750450244307
 CanvasRenderer:
@@ -1575,7 +1575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5023836976057963795
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1592,8 +1592,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -275}
-  m_SizeDelta: {x: 150, y: 10}
+  m_AnchoredPosition: {x: 600, y: 100}
+  m_SizeDelta: {x: 200, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7159071726967705606
 CanvasRenderer:
@@ -1645,8 +1645,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
-  baseSkillIndex: 20
-  targetSkillIndex: 21
+  baseSkillIndex: 103
+  targetSkillIndex: 104
 --- !u!1 &7240632776609266052
 GameObject:
   m_ObjectHideFlags: 0
@@ -1816,7 +1816,7 @@ Transform:
   m_GameObject: {fileID: 7291021322089718531}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 200, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1848,7 +1848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &958313395716848702
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1856,7 +1856,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7902134634052238989}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1865,8 +1865,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 650, y: 75}
-  m_SizeDelta: {x: 150, y: 10}
+  m_AnchoredPosition: {x: 500, y: 400}
+  m_SizeDelta: {x: 200, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &182467117375982826
 CanvasRenderer:
@@ -1918,8 +1918,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
-  baseSkillIndex: 15
-  targetSkillIndex: 16
+  baseSkillIndex: 101
+  targetSkillIndex: 102
 --- !u!1 &7933793421665862776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,7 +1938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1435808223815539077
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1955,8 +1955,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 575, y: 0}
-  m_SizeDelta: {x: 150, y: 10}
+  m_AnchoredPosition: {x: 300, y: 400}
+  m_SizeDelta: {x: 200, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6287932234362973657
 CanvasRenderer:
@@ -2008,8 +2008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdf84e4b21b446f942cfb9fcfb739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_SkillTreeNodeCont
-  baseSkillIndex: 13
-  targetSkillIndex: 15
+  baseSkillIndex: 4
+  targetSkillIndex: 101
 --- !u!1 &8906277668177451695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2036,7 +2036,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8906277668177451695}
-  m_LocalRotation: {x: 0, y: 0, z: -0.48521045, w: 0.8743974}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268346, w: 0.9238795}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2045,8 +2045,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 226, y: 14}
-  m_SizeDelta: {x: 419.54736, y: 10}
+  m_AnchoredPosition: {x: 100, y: 300}
+  m_SizeDelta: {x: 282.8427, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6690314848393355198
 CanvasRenderer:
@@ -2201,14 +2201,14 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 2932069515276859599, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_text
-      value: 1011
+      value: 101
       objectReference: {fileID: 0}
     - target: {fileID: 2932069515276859599, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_fontSize
-      value: 20.85
+      value: 26.85
       objectReference: {fileID: 0}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
@@ -2276,11 +2276,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 300
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2296,7 +2296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillIndex
-      value: 1011
+      value: 101
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.cost
@@ -2305,22 +2305,22 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.icon
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
-      value: 1011
+      value: 101
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.maxLevel
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_gold
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_iron
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
@@ -2328,27 +2328,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_stone
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
-      value: Ore Vein Finder
+      value: Icicle Surge
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.description
-      value: Increases the probability of finding ore blocks in the layers.
+      value: Unlocks the ability to generate [x] icicles to strike blocks
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_emerald
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
@@ -2356,7 +2356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -2365,6 +2365,14 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: 'skillTree.baseSkillIndex.Array.data[0]'
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -2470,11 +2478,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 192
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2522,7 +2530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_stone
@@ -2672,11 +2680,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 137
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -164
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2807,14 +2815,14 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 2932069515276859599, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_text
-      value: 1011
+      value: 102
       objectReference: {fileID: 0}
     - target: {fileID: 2932069515276859599, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_fontSize
-      value: 20.85
+      value: 26.85
       objectReference: {fileID: 0}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
@@ -2882,11 +2890,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 300
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -150
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2902,7 +2910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillIndex
-      value: 1011
+      value: 102
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.cost
@@ -2911,22 +2919,22 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.icon
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
-      value: 1011
+      value: 102
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.maxLevel
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_gold
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_iron
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
@@ -2934,27 +2942,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_stone
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
-      value: Ore Vein Finder
+      value: Frostbite Power
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.description
-      value: Increases the probability of finding ore blocks in the layers.
+      value: Increases the damage dealt by icicles.
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_emerald
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
@@ -2962,7 +2970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -2971,6 +2979,14 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: 'skillTree.baseSkillIndex.Array.data[0]'
+      value: 101
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -3005,14 +3021,14 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 2932069515276859599, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_text
-      value: 1011
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 2932069515276859599, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_fontSize
-      value: 20.85
+      value: 26.85
       objectReference: {fileID: 0}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
@@ -3080,11 +3096,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 450
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3100,7 +3116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillIndex
-      value: 1011
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.cost
@@ -3109,22 +3125,22 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.icon
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
-      value: 1011
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.maxLevel
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_gold
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_iron
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
@@ -3132,27 +3148,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_stone
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
-      value: Ore Vein Finder
+      value: Multi-Icicle
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.description
-      value: Increases the probability of finding ore blocks in the layers.
+      value: Increases the number of icicles generated simultaneously.
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_emerald
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
@@ -3160,7 +3176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -3169,6 +3185,14 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: 'skillTree.baseSkillIndex.Array.data[0]'
+      value: 103
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -3274,11 +3298,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 84
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 179
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3326,7 +3350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 16
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_stone
@@ -3409,14 +3433,14 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 2932069515276859599, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_text
-      value: 1011
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 2932069515276859599, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_fontSize
-      value: 20.85
+      value: 26.85
       objectReference: {fileID: 0}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
@@ -3484,11 +3508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 450
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -150
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3504,7 +3528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillIndex
-      value: 1011
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.cost
@@ -3513,22 +3537,22 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.icon
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
-      value: 1011
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.maxLevel
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_gold
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_iron
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
@@ -3540,23 +3564,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_stone
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
-      value: Ore Vein Finder
+      value: Precision Hitting
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
-      value: 0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.description
-      value: Increases the probability of finding ore blocks in the layers.
+      value: Boosts the chance of landing a critical hit for massive damage.
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_emerald
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
@@ -3564,7 +3588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -3573,6 +3597,14 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: 'skillTree.baseSkillIndex.Array.data[0]'
+      value: 104
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -4030,14 +4062,14 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 2932069515276859599, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_text
-      value: 1011
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 2932069515276859599, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_fontSize
-      value: 20.85
+      value: 26.85
       objectReference: {fileID: 0}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
@@ -4105,11 +4137,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 450
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4125,7 +4157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillIndex
-      value: 1011
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.cost
@@ -4134,22 +4166,22 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.icon
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
-      value: 1011
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.maxLevel
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_gold
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_iron
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
@@ -4157,27 +4189,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 9
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_stone
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
-      value: Ore Vein Finder
+      value: Cold Interval
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
-      value: 0
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.description
-      value: Increases the probability of finding ore blocks in the layers.
+      value: Reduces the time between icicle attacks.
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_emerald
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
@@ -4185,7 +4217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex
@@ -4194,6 +4226,18 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: skillTree.baseSkillIndex.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: 'skillTree.baseSkillIndex.Array.data[0]'
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
+      propertyPath: 'skillTree.baseSkillIndex.Array.data[1]'
+      value: 102
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

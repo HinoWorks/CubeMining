@@ -32,8 +32,8 @@ public enum ParamType
 
     // ==== attack param ====
     Damage,
-    AliveTime,
-    CT,
+    //AliveTime,
+    //CT,
     Count,
     Speed,
     Interval,

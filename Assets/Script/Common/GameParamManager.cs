@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using System.Xml.Serialization;
+using Unity.VisualScripting;
 
 
 /// <summary>
@@ -113,12 +114,12 @@ public class ObjectGenerateParam
 
 
 /// <summary>
-/// ブロックの基本パラメータ
+/// ベースブロックの基本パラメータ
 /// </summary>
 public class BlockBaseParam
 {
     public BlockData so;
-    public bool isActive { get; private set; } = false;
+    //public bool isActive { get; private set; } = false;
     public int blockIndex => so.blockIndex;
     public int hp => so.hp + hp_enhanced;
     private int hp_enhanced = 0;
@@ -128,21 +129,20 @@ public class BlockBaseParam
     public void Init(BlockData _blockData)
     {
         so = _blockData;
-        isActive = false;
+        //isActive = false;
     }
     public void Set_Param(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
         {
             case ParamType.Unlock:
-                isActive = true;
+                //isActive = true;
                 break;
             case ParamType.Value:
                 baseValue_enhanced += (int)_setParam;
                 break;
         }
     }
-
 }
 
 /// <summary>
@@ -185,45 +185,60 @@ public class BlockGenerateParam_Layer
 }
 
 /// <summary>
-/// ブロックの変化率パラメータ == 土、岩などのブロックタイプ毎に鉱石の抽選率を設定
+/// 共通　 = ブロックの変化率パラメータ == 土、岩などのブロックタイプ毎に鉱石の抽選率を設定
 /// </summary>
 public class BlockChangeRateParam
 {
     private int baseRate = 100;
-    private int rate_iron_enhanced;
-    private int rate_gold_enhanced;
-    private int rate_emerald_enhanced;
-    private int rate_ruby_enhanced;
-    private int rate_sapphire_enhanced;
-    private int rate_diamond_enhanced;
+    private int rate_iron_enhanced = 0;
+    private int rate_gold_enhanced = 0;
+    private int rate_emerald_enhanced = 0;
+    private int rate_ruby_enhanced = 0;
+    private int rate_sapphire_enhanced = 0;
+    private int rate_diamond_enhanced = 0;
+
+    private bool isActive_gold = false;
+    private bool isActive_emerald = false;
+    private bool isActive_ruby = false;
+    private bool isActive_sapphire = false;
+    private bool isActive_diamond = false;
 
     private BlockChangeRateData blockChangeData;
     private int rate_iron_total => rate_iron_enhanced + blockChangeData.rate_iron;
-    private int rate_gold_total => rate_gold_enhanced + blockChangeData.rate_gold;
-    private int rate_emerald_total => rate_emerald_enhanced + blockChangeData.rate_emerald;
-    private int rate_ruby_total => rate_ruby_enhanced + blockChangeData.rate_ruby;
-    private int rate_sapphire_total => rate_sapphire_enhanced + blockChangeData.rate_sapphire;
-    private int rate_diamond_total => rate_diamond_enhanced + blockChangeData.rate_diamond;
+    private int rate_gold_total => isActive_gold ? rate_gold_enhanced + blockChangeData.rate_gold : 0;
+    private int rate_emerald_total => isActive_emerald ? rate_emerald_enhanced + blockChangeData.rate_emerald : 0;
+    private int rate_ruby_total => isActive_ruby ? rate_ruby_enhanced + blockChangeData.rate_ruby : 0;
+    private int rate_sapphire_total => isActive_sapphire ? rate_sapphire_enhanced + blockChangeData.rate_sapphire : 0;
+    private int rate_diamond_total => isActive_diamond ? rate_diamond_enhanced + blockChangeData.rate_diamond : 0;
 
     public void Init()
     {
-        rate_iron_enhanced = 0;
-        rate_gold_enhanced = 0;
-        rate_emerald_enhanced = 0;
-        rate_ruby_enhanced = 0;
-        rate_sapphire_enhanced = 0;
-        rate_diamond_enhanced = 0;
     }
-    public void Set_Param(int _targetBlockIndex, float _setParam)
+    public void Set_Param(ParamType _paramType, int _targetBlockIndex, float _setParam)
     {
-        switch (_targetBlockIndex)
+        switch (_paramType)
         {
-            case 1: rate_iron_enhanced += (int)_setParam; break;
-            case 2: rate_gold_enhanced += (int)_setParam; break;
-            case 3: rate_emerald_enhanced += (int)_setParam; break;
-            case 4: rate_ruby_enhanced += (int)_setParam; break;
-            case 5: rate_sapphire_enhanced += (int)_setParam; break;
-            case 6: rate_diamond_enhanced += (int)_setParam; break;
+            case ParamType.Unlock:
+                switch (_targetBlockIndex)
+                {
+                    case 2: isActive_gold = true; break;
+                    case 3: isActive_emerald = true; break;
+                    case 4: isActive_ruby = true; break;
+                    case 5: isActive_sapphire = true; break;
+                    case 6: isActive_diamond = true; break;
+                }
+                break;
+            case ParamType.Value:
+                switch (_targetBlockIndex)
+                {
+                    case 1: rate_iron_enhanced += (int)_setParam; break;
+                    case 2: rate_gold_enhanced += (int)_setParam; break;
+                    case 3: rate_emerald_enhanced += (int)_setParam; break;
+                    case 4: rate_ruby_enhanced += (int)_setParam; break;
+                    case 5: rate_sapphire_enhanced += (int)_setParam; break;
+                    case 6: rate_diamond_enhanced += (int)_setParam; break;
+                }
+                break;
         }
     }
     public ResourceType SelectBlockType(BlockChangeRateData _blockChangeData)
@@ -363,28 +378,27 @@ public class AttackParam
 {
     public AttackUnitData so;
     public bool isActive { get; private set; } = false;
-    public int attackUnitIndex { get; private set; }
+    public int attackUnitIndex => so.attackIndex;
 
-    public float damageRate { get; private set; }
-    public float aliveTime { get; private set; }
-    public float ct { get; private set; }
-    public float speed { get; private set; }
-    public int count { get; private set; }
-    public float attackInterval { get; private set; }
-    public float size { get; private set; }
+    public float damageRate => damageRate_enhanced + so.damageRate;
+    public float attackInterval => (1f - attackInterval_enhanced) * so.attackInterval;
+    public float criticalRate => criticalRate_enhanced + so.criticalRate;
+    public float size => size_enhanced + so.size;
+    public float aliveTime => so.aliveTime;
+    public float speed => so.speed + speed_enhanced;
+    public int count => count_enhanced + so.count;
+
+    private float damageRate_enhanced = 0f;
+    private float speed_enhanced = 0f;
+    private int count_enhanced = 0;
+    private float attackInterval_enhanced = 0f;
+    private float criticalRate_enhanced = 0f;
+    private float size_enhanced = 0f;
+
 
     public void Init(AttackUnitData _attackUnitData)
     {
         so = _attackUnitData;
-        attackUnitIndex = _attackUnitData.attackIndex;
-        isActive = false;
-        damageRate = _attackUnitData.damageRate;
-        aliveTime = _attackUnitData.aliveTime;
-        ct = _attackUnitData.ct;
-        speed = _attackUnitData.speed;
-        count = _attackUnitData.count;
-        attackInterval = _attackUnitData.attackInterval;
-        size = _attackUnitData.size;
     }
 
     public void Set_Param(ParamType _paramType, float _setParam)
@@ -395,25 +409,22 @@ public class AttackParam
                 isActive = true;
                 break;
             case ParamType.Damage:
-                damageRate += _setParam;
-                break;
-            case ParamType.AliveTime:
-                aliveTime += _setParam;
-                break;
-            case ParamType.CT:
-                ct += _setParam;
-                break;
-            case ParamType.Speed:
-                speed += _setParam;
-                break;
-            case ParamType.Count:
-                count += (int)_setParam;
+                damageRate_enhanced += _setParam;
                 break;
             case ParamType.Interval:
-                attackInterval += _setParam;
+                attackInterval_enhanced += _setParam;
+                break;
+            case ParamType.Speed:
+                speed_enhanced += _setParam;
+                break;
+            case ParamType.Count:
+                count_enhanced += (int)_setParam;
                 break;
             case ParamType.Size:
-                size += _setParam;
+                size_enhanced += _setParam;
+                break;
+            case ParamType.CriticalRate:
+                criticalRate_enhanced += _setParam;
                 break;
         }
     }
@@ -640,7 +651,7 @@ public static class GameParamManager
                 Set_BlockParam(_targetIndex, _paramType, _setParam);
                 break;
             case ParamCategory.BlockChangeRate:
-                Set_BlockChangeRateParam(_targetIndex, _setParam);
+                Set_BlockChangeRateParam(_paramType, _targetIndex, _setParam);
                 break;
             case ParamCategory.OtherBlock:
                 Set_BlockParam(_targetIndex, _paramType, _setParam);
@@ -666,9 +677,9 @@ public static class GameParamManager
         }
         targetBlock.Set_Param(_paramType, _setParam);
     }
-    private static void Set_BlockChangeRateParam(int _targetBlockIndex, float _setParam)
+    private static void Set_BlockChangeRateParam(ParamType _paramType, int _targetBlockIndex, float _setParam)
     {
-        blockChangeRateParam.Set_Param(_targetBlockIndex, _setParam);
+        blockChangeRateParam.Set_Param(_paramType, _targetBlockIndex, _setParam);
     }
     private static void Set_AttackParam(int _attackIndex, ParamType _paramType, float _setParam)
     {

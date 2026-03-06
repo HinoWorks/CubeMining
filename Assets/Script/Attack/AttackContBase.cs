@@ -19,6 +19,9 @@ public class AttackContBase : MonoBehaviour
     protected float aliveTime => attackParam.aliveTime;
     protected int count => attackParam.count;
     protected float size => attackParam.size;
+    protected float criticalRate => attackParam.criticalRate;
+    protected float criticalDamageRate => 2f;
+
 
 
     void Awake()
@@ -45,4 +48,10 @@ public class AttackContBase : MonoBehaviour
     protected virtual bool isActive { get; set; } = false; //　Init後、攻撃開始タイミング同期用。trueになったら攻撃開始
 
 
+
+    protected int CalculateDamage()
+    {
+        var selectedDamageRate = UnityEngine.Random.Range(0f, 1f) < criticalRate ? criticalDamageRate : 1f;
+        return (int)(damage * selectedDamageRate);
+    }
 }

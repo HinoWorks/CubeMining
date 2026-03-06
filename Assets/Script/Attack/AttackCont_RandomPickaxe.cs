@@ -39,6 +39,7 @@ public class AttackCont_RandomPickaxe : AttackContBase
     }
     private void CreateBullet()
     {
+        SoundManager.Inst.PlaySE(201);
         for (int i = 0; i < count; i++)
         {
             var targetBlock = BlockGenerateManager.Inst.Get_RandomTargetArea();
@@ -52,7 +53,9 @@ public class AttackCont_RandomPickaxe : AttackContBase
                 bullets.Add(freeBullet);
             }
             freeBullet.transform.position = targetBlock + offsetPosition;
-            freeBullet.Init(damage, aliveTime, Vector3.zero);
+
+
+            freeBullet.Init(CalculateDamage(), aliveTime, Vector3.zero);
         }
     }
 

@@ -39,7 +39,7 @@ MonoBehaviour:
     baseSkillIndex: 01000000
     paramCategory: 0
     targetIndex: -1
-    paramType: 15
+    paramType: 13
     baseValue: 0
     deltaValue: 0.01
     req_stone: 15
@@ -57,7 +57,7 @@ MonoBehaviour:
     baseSkillIndex: 0100000002000000
     paramCategory: 0
     targetIndex: -1
-    paramType: 16
+    paramType: 14
     baseValue: 0
     deltaValue: 0.02
     req_stone: 10
@@ -90,7 +90,7 @@ MonoBehaviour:
     description: Unlocks the ability to generate [x] icicles to strike blocks
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 1
-    baseSkillIndex: 0b000000
+    baseSkillIndex: 04000000
     paramCategory: 4
     targetIndex: 1
     paramType: 0
@@ -108,12 +108,12 @@ MonoBehaviour:
     description: Increases the damage dealt by icicles.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 5
-    baseSkillIndex: 0d000000
+    baseSkillIndex: 65000000
     paramCategory: 4
     targetIndex: 1
     paramType: 10
-    baseValue: 0.75
-    deltaValue: 0.05
+    baseValue: 0
+    deltaValue: 0.1
     req_stone: 10
     req_iron: 10
     req_gold: 10
@@ -126,10 +126,10 @@ MonoBehaviour:
     description: Reduces the time between icicle attacks.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 0f000000
+    baseSkillIndex: 6500000066000000
     paramCategory: 4
     targetIndex: 1
-    paramType: 15
+    paramType: 13
     baseValue: 0
     deltaValue: 0.03
     req_stone: 10
@@ -144,10 +144,10 @@ MonoBehaviour:
     description: Increases the number of icicles generated simultaneously.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 0f000000
+    baseSkillIndex: 67000000
     paramCategory: 4
     targetIndex: 1
-    paramType: 13
+    paramType: 11
     baseValue: 0
     deltaValue: 1
     req_stone: 10
@@ -162,7 +162,7 @@ MonoBehaviour:
     description: Boosts the chance of landing a critical hit for massive damage.
     icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
     maxLevel: 5
-    baseSkillIndex: 6f000000
+    baseSkillIndex: 68000000
     paramCategory: 4
     targetIndex: 1
     paramType: 9
@@ -202,8 +202,8 @@ MonoBehaviour:
     paramCategory: 4
     targetIndex: 2
     paramType: 10
-    baseValue: 0.75
-    deltaValue: 0.05
+    baseValue: 0
+    deltaValue: 0.1
     req_stone: 10
     req_iron: 10
     req_gold: 10
@@ -219,7 +219,7 @@ MonoBehaviour:
     baseSkillIndex: 14000000
     paramCategory: 4
     targetIndex: 2
-    paramType: 15
+    paramType: 13
     baseValue: 0
     deltaValue: 0.03
     req_stone: 10
@@ -237,7 +237,7 @@ MonoBehaviour:
     baseSkillIndex: 15000000
     paramCategory: 4
     targetIndex: 2
-    paramType: 13
+    paramType: 11
     baseValue: 0
     deltaValue: 1
     req_stone: 10
@@ -292,8 +292,8 @@ MonoBehaviour:
     paramCategory: 4
     targetIndex: 3
     paramType: 10
-    baseValue: 0.75
-    deltaValue: 0.05
+    baseValue: 0
+    deltaValue: 0.1
     req_stone: 10
     req_iron: 10
     req_gold: 10
@@ -309,7 +309,7 @@ MonoBehaviour:
     baseSkillIndex: 17000000
     paramCategory: 4
     targetIndex: 3
-    paramType: 15
+    paramType: 13
     baseValue: 0
     deltaValue: 0.03
     req_stone: 10
@@ -327,7 +327,7 @@ MonoBehaviour:
     baseSkillIndex: 1a000000
     paramCategory: 4
     targetIndex: 3
-    paramType: 13
+    paramType: 11
     baseValue: 0
     deltaValue: 1
     req_stone: 10
@@ -382,8 +382,8 @@ MonoBehaviour:
     paramCategory: 4
     targetIndex: 4
     paramType: 10
-    baseValue: 0.5
-    deltaValue: 0.05
+    baseValue: 0
+    deltaValue: 0.1
     req_stone: 10
     req_iron: 10
     req_gold: 10
@@ -399,7 +399,7 @@ MonoBehaviour:
     baseSkillIndex: 14000000
     paramCategory: 4
     targetIndex: 4
-    paramType: 15
+    paramType: 13
     baseValue: 0
     deltaValue: 0.1
     req_stone: 10
@@ -417,7 +417,7 @@ MonoBehaviour:
     baseSkillIndex: 14000000
     paramCategory: 4
     targetIndex: 4
-    paramType: 13
+    paramType: 11
     baseValue: 0
     deltaValue: 1
     req_stone: 10
@@ -438,8 +438,8 @@ MonoBehaviour:
     paramType: 9
     baseValue: 0
     deltaValue: 0.01
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -456,8 +456,8 @@ MonoBehaviour:
     paramType: 0
     baseValue: 0
     deltaValue: 1
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -472,10 +472,10 @@ MonoBehaviour:
     paramCategory: 4
     targetIndex: 5
     paramType: 10
-    baseValue: 0.75
-    deltaValue: 0.05
-    req_stone: 0
-    req_iron: 0
+    baseValue: 0
+    deltaValue: 0.1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -489,11 +489,11 @@ MonoBehaviour:
     baseSkillIndex: 
     paramCategory: 4
     targetIndex: 5
-    paramType: 15
+    paramType: 13
     baseValue: 0
     deltaValue: 0.03
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -507,11 +507,11 @@ MonoBehaviour:
     baseSkillIndex: 
     paramCategory: 4
     targetIndex: 5
-    paramType: 13
+    paramType: 11
     baseValue: 0
     deltaValue: 1
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -528,8 +528,8 @@ MonoBehaviour:
     paramType: 9
     baseValue: 0
     deltaValue: 0.01
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -546,8 +546,8 @@ MonoBehaviour:
     paramType: 0
     baseValue: 0
     deltaValue: 1
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -562,10 +562,10 @@ MonoBehaviour:
     paramCategory: 4
     targetIndex: 6
     paramType: 10
-    baseValue: 0.75
-    deltaValue: 0.05
-    req_stone: 0
-    req_iron: 0
+    baseValue: 0
+    deltaValue: 0.1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -579,11 +579,11 @@ MonoBehaviour:
     baseSkillIndex: 
     paramCategory: 4
     targetIndex: 6
-    paramType: 15
+    paramType: 13
     baseValue: 0
     deltaValue: 0.03
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -597,11 +597,11 @@ MonoBehaviour:
     baseSkillIndex: 
     paramCategory: 4
     targetIndex: 6
-    paramType: 13
+    paramType: 11
     baseValue: 0
     deltaValue: 1
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -618,8 +618,8 @@ MonoBehaviour:
     paramType: 9
     baseValue: 0
     deltaValue: 0.01
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -629,15 +629,15 @@ MonoBehaviour:
     skillName: Ore Vein Finder
     description: Increases the probability of finding ore blocks in the layers.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 10
     baseSkillIndex: 
     paramCategory: 2
     targetIndex: 1
     paramType: 9
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -647,15 +647,15 @@ MonoBehaviour:
     skillName: Bountiful Harvest
     description: Increases the amount of resources gathered from breaking blocks.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 3
     baseSkillIndex: 
     paramCategory: 1
     targetIndex: 1
     paramType: 9
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -667,13 +667,13 @@ MonoBehaviour:
     icon: {fileID: 0}
     maxLevel: 1
     baseSkillIndex: 
-    paramCategory: 1
+    paramCategory: 2
     targetIndex: 2
     paramType: 0
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -683,15 +683,15 @@ MonoBehaviour:
     skillName: Ore Vein Finder
     description: Increases the probability of finding ore blocks in the layers.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 10
     baseSkillIndex: 
     paramCategory: 2
     targetIndex: 2
     paramType: 9
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -701,15 +701,15 @@ MonoBehaviour:
     skillName: Bountiful Harvest
     description: Increases the amount of resources gathered from breaking blocks.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 3
     baseSkillIndex: 
     paramCategory: 1
     targetIndex: 2
     paramType: 9
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -721,13 +721,13 @@ MonoBehaviour:
     icon: {fileID: 0}
     maxLevel: 1
     baseSkillIndex: 
-    paramCategory: 1
+    paramCategory: 2
     targetIndex: 3
     paramType: 0
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -737,15 +737,15 @@ MonoBehaviour:
     skillName: Ore Vein Finder
     description: Increases the probability of finding ore blocks in the layers.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 10
     baseSkillIndex: 
     paramCategory: 2
     targetIndex: 3
     paramType: 9
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -755,15 +755,15 @@ MonoBehaviour:
     skillName: Bountiful Harvest
     description: Increases the amount of resources gathered from breaking blocks.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 3
     baseSkillIndex: 
     paramCategory: 1
     targetIndex: 3
     paramType: 9
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -775,13 +775,13 @@ MonoBehaviour:
     icon: {fileID: 0}
     maxLevel: 1
     baseSkillIndex: 
-    paramCategory: 1
+    paramCategory: 2
     targetIndex: 4
     paramType: 0
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -791,15 +791,15 @@ MonoBehaviour:
     skillName: Ore Vein Finder
     description: Increases the probability of finding ore blocks in the layers.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 10
     baseSkillIndex: 
     paramCategory: 2
     targetIndex: 4
     paramType: 9
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -809,15 +809,15 @@ MonoBehaviour:
     skillName: Bountiful Harvest
     description: Increases the amount of resources gathered from breaking blocks.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 3
     baseSkillIndex: 
     paramCategory: 1
     targetIndex: 4
     paramType: 9
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -829,13 +829,13 @@ MonoBehaviour:
     icon: {fileID: 0}
     maxLevel: 1
     baseSkillIndex: 
-    paramCategory: 1
+    paramCategory: 2
     targetIndex: 5
     paramType: 0
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -845,15 +845,15 @@ MonoBehaviour:
     skillName: Ore Vein Finder
     description: Increases the probability of finding ore blocks in the layers.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 10
     baseSkillIndex: 
     paramCategory: 2
     targetIndex: 5
     paramType: 9
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -863,15 +863,15 @@ MonoBehaviour:
     skillName: Bountiful Harvest
     description: Increases the amount of resources gathered from breaking blocks.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 3
     baseSkillIndex: 
     paramCategory: 1
     targetIndex: 5
     paramType: 9
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -883,13 +883,13 @@ MonoBehaviour:
     icon: {fileID: 0}
     maxLevel: 1
     baseSkillIndex: 
-    paramCategory: 1
+    paramCategory: 2
     targetIndex: 6
     paramType: 0
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -899,15 +899,15 @@ MonoBehaviour:
     skillName: Ore Vein Finder
     description: Increases the probability of finding ore blocks in the layers.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 10
     baseSkillIndex: 
     paramCategory: 2
     targetIndex: 6
     paramType: 9
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -917,15 +917,15 @@ MonoBehaviour:
     skillName: Bountiful Harvest
     description: Increases the amount of resources gathered from breaking blocks.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 3
     baseSkillIndex: 
     paramCategory: 1
     targetIndex: 6
     paramType: 9
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -941,9 +941,9 @@ MonoBehaviour:
     targetIndex: 1
     paramType: 0
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -960,8 +960,8 @@ MonoBehaviour:
     paramType: 7
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -978,8 +978,8 @@ MonoBehaviour:
     paramType: 9
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -995,9 +995,9 @@ MonoBehaviour:
     targetIndex: 2
     paramType: 0
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1014,8 +1014,8 @@ MonoBehaviour:
     paramType: 7
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1032,8 +1032,8 @@ MonoBehaviour:
     paramType: 9
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1049,9 +1049,9 @@ MonoBehaviour:
     targetIndex: 3
     paramType: 0
     baseValue: 0
-    deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    deltaValue: 1
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1068,8 +1068,8 @@ MonoBehaviour:
     paramType: 7
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1086,8 +1086,8 @@ MonoBehaviour:
     paramType: 8
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1104,8 +1104,8 @@ MonoBehaviour:
     paramType: 10
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1123,8 +1123,8 @@ MonoBehaviour:
     paramType: 5
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1141,8 +1141,8 @@ MonoBehaviour:
     paramType: 2
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1159,8 +1159,8 @@ MonoBehaviour:
     paramType: 3
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1177,8 +1177,8 @@ MonoBehaviour:
     paramType: 1
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1195,8 +1195,8 @@ MonoBehaviour:
     paramType: 4
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1213,8 +1213,8 @@ MonoBehaviour:
     paramType: 6
     baseValue: 0
     deltaValue: 0
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0

@@ -16,10 +16,10 @@ public class AttackUnitData
 
     public float damageRate;
     public float attackInterval;
+    public float criticalRate;
 
     public float speed;
     public float aliveTime;
-    public float ct;
 
     public int count;
     public float size;
