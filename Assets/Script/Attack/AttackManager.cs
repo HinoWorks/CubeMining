@@ -9,6 +9,7 @@ public class AttackManager : MonoBehaviour
     [SerializeField] List<AttackContBase> attackConts = new List<AttackContBase>();
     private bool isAttacking = false;
     private int currentPickaxeIndex = 0;
+    public int currentPickaxeDamage => pickaxeConts[currentPickaxeIndex].baseDamage;
     private int[] slotIndexes = { 0, 1 };
 
     void Awake()

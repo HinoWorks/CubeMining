@@ -86,7 +86,7 @@ public class UI_DebugParamPanel : MonoBehaviour
             var attackParam = GameParamManager.list_attackParam[i];
             stringBuilder_attack.AppendLine($"Attack [{attackParam.attackUnitIndex}]");
             stringBuilder_attack.AppendLine($"  Active: {attackParam.isActive}");
-            stringBuilder_attack.AppendLine($"  Damage: {attackParam.damage:F2}");
+            stringBuilder_attack.AppendLine($"  Damage: {attackParam.damageRate:F2}");
             stringBuilder_attack.AppendLine($"  Alive Time: {attackParam.aliveTime:F2}");
             stringBuilder_attack.AppendLine($"  CT: {attackParam.ct:F2}");
             stringBuilder_attack.AppendLine($"  Count: {attackParam.count}");

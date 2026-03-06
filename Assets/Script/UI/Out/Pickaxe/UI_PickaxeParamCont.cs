@@ -40,7 +40,7 @@ public class UI_PickaxeParamCont : MonoBehaviour
                     setText = $"{(so.criticalRate * 100).ToString("F1")} <size=75%>%</size>";
                     break;
                 case PickaxeParamType.ResourceRate:
-                    setText = $"+{(so.resourceRate * 100).ToString("F1")} <size=75%>%</size>";
+                    setText = $"+{(so.resourceUpRate * 100).ToString("F1")} <size=75%>%</size>";
                     break;
             }
             var paramBase = SOLoader.AttackUnitData.GetPickaxeParamBase(paramType);

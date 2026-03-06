@@ -15,18 +15,21 @@ public class GameBaseParam
     private float ingameTime_enhanced = 0f;
 
     //再生成確率xアップ(上から降ってくる)
+    // TODO here
+
 
     //ラッキーマイン - 採掘量が1.5倍になる確率x
     public float luckyMineRate => 0 + luckyMineRate_enhanced;
     private float luckyMineRate_enhanced = 0f;
 
     //ラッキーマインの増加量+50%
-    public float luckyMineRate_Resource => 1.5f + luckyMineRate_Resource_enhanced;
-    private float luckyMineRate_Resource_enhanced = 0f;
+    public float luckyMineRate_ResourceUpRate => luckyMineRate_ResourceUpRate_enhanced;
+    private float luckyMineRate_ResourceUpRate_enhanced = 0f;
 
     //下層ボーナスxx
     public float deepLayer_Bonus => 0 + deepLayer_Bonus_enhanced;
     private float deepLayer_Bonus_enhanced = 0f;
+
 
 
     // ピッケルの基礎パラメータ向上
@@ -36,8 +39,8 @@ public class GameBaseParam
     private float pickaxeBase_AttackInterval_enhanced = 0f;
     public float pickaxeBase_CriticalRate => pickaxeBase_CriticalRate_enhanced;
     private float pickaxeBase_CriticalRate_enhanced = 0f;
-    public float pickaxeBase_ResourceRate => pickaxeBase_ResourceRate_enhanced;
-    private float pickaxeBase_ResourceRate_enhanced = 0f;
+    public float pickaxeBase_ResourceUpRate => pickaxeBase_ResourceUpRate_enhanced;
+    private float pickaxeBase_ResourceUpRate_enhanced = 0f;
     public float pickaxeBase_Size => pickaxeBase_Size_enhanced;
     private float pickaxeBase_Size_enhanced = 0f;
 
@@ -53,7 +56,7 @@ public class GameBaseParam
                 luckyMineRate_enhanced += _setParam;
                 break;
             case ParamType.LuckyMineRate_Resource:
-                luckyMineRate_Resource_enhanced += _setParam;
+                luckyMineRate_ResourceUpRate_enhanced += _setParam;
                 break;
             case ParamType.DeepLayerBonus:
                 deepLayer_Bonus_enhanced += _setParam;
@@ -70,7 +73,7 @@ public class GameBaseParam
                 pickaxeBase_CriticalRate_enhanced += _setParam;
                 break;
             case ParamType.ResourceRate:
-                pickaxeBase_ResourceRate_enhanced += _setParam;
+                pickaxeBase_ResourceUpRate_enhanced += _setParam;
                 break;
             case ParamType.Size:
                 pickaxeBase_Size_enhanced += _setParam;
@@ -336,7 +339,7 @@ public class PickaxeParam
     public int damage;
     public float attackInterval;
     public float criticalRate;
-    public float resourceRate;
+    public float resourceUpRate;
     public float size;
 
     public void Init(PickaxeUnitData _pickaxeUnitData)
@@ -345,7 +348,7 @@ public class PickaxeParam
         damage = _pickaxeUnitData.damage;
         attackInterval = _pickaxeUnitData.attackInterval;
         criticalRate = _pickaxeUnitData.criticalRate;
-        resourceRate = _pickaxeUnitData.resourceRate;
+        resourceUpRate = _pickaxeUnitData.resourceUpRate;
         size = _pickaxeUnitData.size;
     }
 }
@@ -362,7 +365,7 @@ public class AttackParam
     public bool isActive { get; private set; } = false;
     public int attackUnitIndex { get; private set; }
 
-    public float damage { get; private set; }
+    public float damageRate { get; private set; }
     public float aliveTime { get; private set; }
     public float ct { get; private set; }
     public float speed { get; private set; }
@@ -375,7 +378,7 @@ public class AttackParam
         so = _attackUnitData;
         attackUnitIndex = _attackUnitData.attackIndex;
         isActive = false;
-        damage = _attackUnitData.damage;
+        damageRate = _attackUnitData.damageRate;
         aliveTime = _attackUnitData.aliveTime;
         ct = _attackUnitData.ct;
         speed = _attackUnitData.speed;
@@ -392,7 +395,7 @@ public class AttackParam
                 isActive = true;
                 break;
             case ParamType.Damage:
-                damage += _setParam;
+                damageRate += _setParam;
                 break;
             case ParamType.AliveTime:
                 aliveTime += _setParam;

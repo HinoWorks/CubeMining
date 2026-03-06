@@ -18,7 +18,7 @@ MonoBehaviour:
     unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 601605801108607667, guid: 22601e14ec2664fe7adeacaac4628aae, type: 3}
-    damage: 1
+    damageRate: 0.5
     attackInterval: 2
     speed: 5
     aliveTime: 5
@@ -30,7 +30,7 @@ MonoBehaviour:
     unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 601605801108607667, guid: 32963baef2720410fa437525ec84df92, type: 3}
-    damage: 5
+    damageRate: 2
     attackInterval: 3
     speed: 10
     aliveTime: 2
@@ -42,7 +42,7 @@ MonoBehaviour:
     unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 601605801108607667, guid: 32963baef2720410fa437525ec84df92, type: 3}
-    damage: 5
+    damageRate: 2
     attackInterval: 3
     speed: 10
     aliveTime: 2
@@ -54,7 +54,7 @@ MonoBehaviour:
     unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 9024363205940861645, guid: 5f1b6953892d747e2b7a42c6bb215a23, type: 3}
-    damage: 1
+    damageRate: 1
     attackInterval: -1
     speed: 200
     aliveTime: 999
@@ -66,7 +66,7 @@ MonoBehaviour:
     unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 601605801108607667, guid: e610f91cd533e4f088e7899d9be67211, type: 3}
-    damage: 1
+    damageRate: 1
     attackInterval: 2
     speed: 15
     aliveTime: 2
@@ -78,7 +78,7 @@ MonoBehaviour:
     unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 601605801108607667, guid: e40010afbff43460fac551280c1074de, type: 3}
-    damage: 1
+    damageRate: 1
     attackInterval: 2
     speed: 15
     aliveTime: 2
@@ -90,7 +90,7 @@ MonoBehaviour:
     unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 0}
-    damage: 2
+    damageRate: 2
     attackInterval: 0.5
     speed: -1
     aliveTime: 999
@@ -105,7 +105,7 @@ MonoBehaviour:
     damage: 2
     attackInterval: 0.5
     criticalRate: 0
-    resourceRate: 0
+    resourceUpRate: 0
     areaIcon: {fileID: 0}
     size: 1
   - pickaxeIndex: 2
@@ -115,7 +115,7 @@ MonoBehaviour:
     damage: 6
     attackInterval: 1
     criticalRate: 0.01
-    resourceRate: 0
+    resourceUpRate: 0.5
     areaIcon: {fileID: 0}
     size: 1
   - pickaxeIndex: 3
@@ -125,7 +125,7 @@ MonoBehaviour:
     damage: 15
     attackInterval: 0.4
     criticalRate: 0.02
-    resourceRate: 0
+    resourceUpRate: 0.5
     areaIcon: {fileID: 0}
     size: 1
   - pickaxeIndex: 4
@@ -135,7 +135,7 @@ MonoBehaviour:
     damage: 24
     attackInterval: 0.4
     criticalRate: 0.03
-    resourceRate: 0
+    resourceUpRate: 0
     areaIcon: {fileID: 0}
     size: 1
   - pickaxeIndex: 5
@@ -145,7 +145,7 @@ MonoBehaviour:
     damage: 33
     attackInterval: 0.4
     criticalRate: 0.04
-    resourceRate: 0
+    resourceUpRate: 0
     areaIcon: {fileID: 0}
     size: 1
   - pickaxeIndex: 6
@@ -155,7 +155,7 @@ MonoBehaviour:
     damage: 42
     attackInterval: 0.4
     criticalRate: 0.05
-    resourceRate: 0
+    resourceUpRate: 0
     areaIcon: {fileID: 0}
     size: 1
   - pickaxeIndex: 7
@@ -165,7 +165,7 @@ MonoBehaviour:
     damage: 51
     attackInterval: 0.4
     criticalRate: 0.06
-    resourceRate: 0
+    resourceUpRate: 0
     areaIcon: {fileID: 0}
     size: 1
   - pickaxeIndex: 8
@@ -175,7 +175,7 @@ MonoBehaviour:
     damage: 60
     attackInterval: 0.4
     criticalRate: 0.07
-    resourceRate: 0
+    resourceUpRate: 0
     areaIcon: {fileID: 0}
     size: 1
   pickaxeResourceDatas:

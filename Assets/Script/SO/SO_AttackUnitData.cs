@@ -2,6 +2,9 @@ using UnityEngine;
 using System;
 
 
+/// <summary>
+/// ピッケル以外の攻撃Unitデータ
+/// </summary>
 [System.Serializable]
 public class AttackUnitData
 {
@@ -11,7 +14,7 @@ public class AttackUnitData
     public Sprite icon;
     public GameObject pf;
 
-    public int damage;
+    public float damageRate;
     public float attackInterval;
 
     public float speed;
@@ -37,7 +40,7 @@ public class PickaxeUnitData
     public int damage;
     public float attackInterval;
     public float criticalRate;
-    public float resourceRate;
+    public float resourceUpRate;
     public Sprite areaIcon;
     public float size;
 

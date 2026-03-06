@@ -13,7 +13,7 @@ public class AttackContBase : MonoBehaviour
 {
     protected AttackParam attackParam;
 
-    protected int damage => (int)attackParam.damage;
+    protected int damage => (int)(AttackManager.Inst.currentPickaxeDamage * (1f + attackParam.damageRate));
     protected float attackInterval => attackParam.attackInterval;
     protected float speed => attackParam.speed;
     protected float aliveTime => attackParam.aliveTime;
