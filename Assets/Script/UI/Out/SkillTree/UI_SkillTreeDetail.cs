@@ -40,7 +40,7 @@ public class UI_SkillTreeDetail : MonoBehaviour
     {
         var so = currentUnit.skillTree;
         tmp_skillName.SetText(so.skillName);
-        tmp_level.SetText($"Lv.{_currentLevel} <size=75%>/ {so.maxLevel}</size>");
+        tmp_level.SetText($"<size=75%>Lv.</size>{_currentLevel} / <size=75%><color=black>{so.maxLevel}</color></size>");
         tmp_description.SetText(so.description);
 
         obj_param.SetActive(so.paramType != ParamType.Unlock);

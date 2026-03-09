@@ -82,8 +82,10 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     }
     private void Set_DamageText(int _damage)
     {
+        /*
         var ui_damageText = UI_PoolManager.Inst.Get_TextDamage();
         ui_damageText.SetPosition(transform.position);
         ui_damageText.SetText(_damage.ToString());
+        */
     }
 }

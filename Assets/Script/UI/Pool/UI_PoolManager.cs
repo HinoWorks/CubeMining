@@ -15,8 +15,9 @@ public class UI_PoolManager : MonoBehaviour
     [SerializeField] GameObject pf_circleGauge;
     [SerializeField] GameObject pf_getCoinText;
     [SerializeField] GameObject pf_damageText;
-    [SerializeField] GameObject pf_moveIcon_Coin;
+    //[SerializeField] GameObject pf_moveIcon_Coin;
     [SerializeField] GameObject pf_getResourceCont;
+    [SerializeField] GameObject pf_getTime;
     [SerializeField] GameObject pf_speechBubble;
 
 
@@ -25,6 +26,7 @@ public class UI_PoolManager : MonoBehaviour
     [Header(" -- target point set --")]
     [SerializeField] Transform target_coin;
     [SerializeField] Transform target_gem;
+    [SerializeField] Transform target_time;
 
 
     private List<UI_CircleTimer> pool_gauge_circle = new List<UI_CircleTimer>();
@@ -32,7 +34,7 @@ public class UI_PoolManager : MonoBehaviour
     private List<UI_TextDamage> pool_damageText = new List<UI_TextDamage>();
     private List<UI_GetResourceCont> pool_getResourceCont = new List<UI_GetResourceCont>();
     private List<UI_SpeechBubble> pool_speechBubble = new List<UI_SpeechBubble>(10);
-
+    private List<UI_TextCont> pool_getTime = new List<UI_TextCont>();
 
     //  -- screen out limit setting --
     public float screenOut_min_w { get; private set; }
@@ -156,6 +158,20 @@ public class UI_PoolManager : MonoBehaviour
             selectUnit = newUnit.GetComponent<UI_GetResourceCont>();
             pool_getResourceCont.Add(selectUnit);
         }
+        return selectUnit;
+    }
+
+    public UI_TextCont Set_TimeText()
+    {
+        UI_TextCont selectUnit = null;
+        selectUnit = pool_getTime.Find(d => d.gameObject.activeSelf == false);
+        if (selectUnit == null)
+        {
+            var newUnit = Instantiate(pf_getTime, parent_base) as GameObject;
+            selectUnit = newUnit.GetComponent<UI_TextCont>();
+            pool_getTime.Add(selectUnit);
+        }
+        selectUnit.transform.position = target_time.position;
         return selectUnit;
     }
     #endregion --
