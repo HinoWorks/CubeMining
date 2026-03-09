@@ -8,6 +8,7 @@ public class MiningTarget_Tresure : MiningTarget_Object
     private int rate_min = 5;
 
     private int index_SE_Damage => 20;
+    private int index_SE_Break => 21;
 
 
     public override void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData, int _layerIndex)

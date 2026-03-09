@@ -89,24 +89,34 @@ public class GameBaseParam
 public class ObjectGenerateParam
 {
     public ObjectUnitData so;
-    public float generateRate { get; private set; }
-    public float valueRate { get; private set; }
+
+    public bool isActive { get; private set; } = false;
+    public float generateRate_total => generateRate_base + generateRate_enhanced;
+    public float valueRate_total => valueRate_base + valueRate_enhanced;
+
+    private int generateRate_base = 0;
+    private float valueRate_base = 0;
+    private int generateRate_enhanced = 0;
+    private float valueRate_enhanced = 0;
 
     public void Init(ObjectUnitData _objectUnitData)
     {
         so = _objectUnitData;
-        generateRate = _objectUnitData.generateRate;
-        valueRate = _objectUnitData.valueRate;
+        generateRate_base = _objectUnitData.generateRate;
+        valueRate_base = _objectUnitData.valueRate;
     }
     public void Set_Param(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
         {
+            case ParamType.Unlock:
+                isActive = true;
+                break;
             case ParamType.Rate_Generate:
-                generateRate += _setParam;
+                generateRate_enhanced += (int)_setParam;
                 break;
             case ParamType.Rate_Value:
-                valueRate += _setParam;
+                valueRate_enhanced += _setParam;
                 break;
         }
     }
@@ -513,12 +523,13 @@ public static class GameParamManager
     #endregion
 
     #region -- other object generate param --
-    public static void Set_OtherObjectRate()
+    private static void Set_OtherObjectRate()
     {
         otherObjectRate = 0;
         foreach (var objectParam in list_objectGenerateParam)
         {
-            otherObjectRate += (int)objectParam.generateRate;
+            if (!objectParam.isActive) continue;
+            otherObjectRate += (int)objectParam.generateRate_total;
         }
     }
     public static bool IsOtherObjectGenerate()
@@ -533,7 +544,8 @@ public static class GameParamManager
         var currentRate = 0;
         foreach (var objectParam in list_objectGenerateParam)
         {
-            currentRate += (int)objectParam.generateRate;
+            if (!objectParam.isActive) continue;
+            currentRate += (int)objectParam.generateRate_total;
             if (random < currentRate)
             {
                 return objectParam;
@@ -666,7 +678,7 @@ public static class GameParamManager
                 Set_BlockChangeRateParam(_paramType, _targetIndex, _setParam);
                 break;
             case ParamCategory.OtherBlock:
-                Set_BlockParam(_targetIndex, _paramType, _setParam);
+                Set_ObjectGenerateParam(_targetIndex, _paramType, _setParam);
                 Set_OtherObjectRate();
                 break;
             case ParamCategory.Attack:
@@ -692,6 +704,15 @@ public static class GameParamManager
     private static void Set_BlockChangeRateParam(ParamType _paramType, int _targetBlockIndex, float _setParam)
     {
         blockChangeRateParam.Set_Param(_paramType, _targetBlockIndex, _setParam);
+    }
+    private static void Set_ObjectGenerateParam(int _objectIndex, ParamType _paramType, float _setParam)
+    {
+        var targetObject = list_objectGenerateParam.Find(x => x.so.objectIndex == _objectIndex);
+        if (targetObject == null)
+        {
+            Debug.LogError($"ObjectUnitData is not found: {_objectIndex} // ==> 初期ロードで読み込み失敗");
+        }
+        targetObject.Set_Param(_paramType, _setParam);
     }
     private static void Set_AttackParam(int _attackIndex, ParamType _paramType, float _setParam)
     {

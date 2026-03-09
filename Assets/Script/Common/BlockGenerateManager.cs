@@ -36,7 +36,7 @@ public class GenerateBlockLayerCont
         {
             if (GameParamManager.IsOtherObjectGenerate())
             {
-                var blockIndex = param.SelectBlockIndex();
+                var blockIndex = param.SelectBlockIndex(); // 階層に合わせた基本ブロックパラを取得
                 var blockData = SOLoader.BlockData.GetBlockData(blockIndex);
 
                 var otherObject = GameParamManager.SelectOtherObject();

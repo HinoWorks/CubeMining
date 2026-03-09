@@ -932,11 +932,11 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 2011
-    skillName: Unlock Timer
-    description: Unlocks the appearance of special Timer blocks.
+    skillName: Unlock Crate
+    description: Unlocks the appearance of Wooden Crate blocks.
     icon: {fileID: 0}
     maxLevel: 1
-    baseSkillIndex: 
+    baseSkillIndex: 01000000
     paramCategory: 3
     targetIndex: 1
     paramType: 0
@@ -950,16 +950,16 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 2012
-    skillName: Timer Frequency
-    description: Increases the spawn rate of Timer blocks.
+    skillName: Crate Frequency
+    description: Increases the spawn rate of Wooden Crate blocks.
     icon: {fileID: 0}
-    maxLevel: 0
-    baseSkillIndex: 
+    maxLevel: 3
+    baseSkillIndex: db070000
     paramCategory: 3
     targetIndex: 1
     paramType: 7
     baseValue: 0
-    deltaValue: 0
+    deltaValue: 1
     req_stone: 10
     req_iron: 10
     req_gold: 0
@@ -968,16 +968,16 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 2013
-    skillName: Timer Potency
-    description: Enhances the time-extending effect of Timer blocks.
+    skillName: Loot Quality
+    description: Improves the quality/amount of items found inside crates.
     icon: {fileID: 0}
-    maxLevel: 0
-    baseSkillIndex: 
+    maxLevel: 1
+    baseSkillIndex: dc070000
     paramCategory: 3
     targetIndex: 1
     paramType: 9
     baseValue: 0
-    deltaValue: 0
+    deltaValue: 1
     req_stone: 10
     req_iron: 10
     req_gold: 0
@@ -986,11 +986,11 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 2021
-    skillName: Unlock Crate
-    description: Unlocks the appearance of Wooden Crate blocks.
+    skillName: Unlock Timer
+    description: Unlocks the appearance of special Timer blocks.
     icon: {fileID: 0}
     maxLevel: 1
-    baseSkillIndex: 
+    baseSkillIndex: dd070000
     paramCategory: 3
     targetIndex: 2
     paramType: 0
@@ -1004,16 +1004,16 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 2022
-    skillName: Crate Frequency
-    description: Increases the spawn rate of Wooden Crate blocks.
+    skillName: Timer Frequency
+    description: Increases the spawn rate of Timer blocks.
     icon: {fileID: 0}
-    maxLevel: 0
-    baseSkillIndex: 
+    maxLevel: 3
+    baseSkillIndex: e5070000
     paramCategory: 3
     targetIndex: 2
     paramType: 7
     baseValue: 0
-    deltaValue: 0
+    deltaValue: 1
     req_stone: 10
     req_iron: 10
     req_gold: 0
@@ -1022,16 +1022,16 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 2023
-    skillName: Loot Quality
-    description: Improves the quality/amount of items found inside crates.
+    skillName: Timer Potency
+    description: Enhances the time-extending effect of Timer blocks.
     icon: {fileID: 0}
-    maxLevel: 0
-    baseSkillIndex: 
+    maxLevel: 3
+    baseSkillIndex: e6070000
     paramCategory: 3
     targetIndex: 2
     paramType: 9
     baseValue: 0
-    deltaValue: 0
+    deltaValue: 0.5
     req_stone: 10
     req_iron: 10
     req_gold: 0
@@ -1044,7 +1044,7 @@ MonoBehaviour:
     description: Unlocks the appearance of explosive Bomb blocks.
     icon: {fileID: 0}
     maxLevel: 1
-    baseSkillIndex: 
+    baseSkillIndex: e7070000
     paramCategory: 3
     targetIndex: 3
     paramType: 0
@@ -1061,13 +1061,13 @@ MonoBehaviour:
     skillName: Bomb Frequency
     description: Increases the spawn rate of Bomb blocks.
     icon: {fileID: 0}
-    maxLevel: 0
-    baseSkillIndex: 
+    maxLevel: 1
+    baseSkillIndex: ef070000
     paramCategory: 3
     targetIndex: 3
     paramType: 7
     baseValue: 0
-    deltaValue: 0
+    deltaValue: 1
     req_stone: 10
     req_iron: 10
     req_gold: 0
@@ -1079,13 +1079,13 @@ MonoBehaviour:
     skillName: Blast Radius
     description: Expands the explosion range of Bomb blocks.
     icon: {fileID: 0}
-    maxLevel: 0
-    baseSkillIndex: 
+    maxLevel: 1
+    baseSkillIndex: f0070000
     paramCategory: 3
     targetIndex: 3
     paramType: 8
     baseValue: 0
-    deltaValue: 0
+    deltaValue: 1
     req_stone: 10
     req_iron: 10
     req_gold: 0
@@ -1097,13 +1097,13 @@ MonoBehaviour:
     skillName: Blast Force
     description: Increases the damage dealt by Bomb block explosions.
     icon: {fileID: 0}
-    maxLevel: 0
-    baseSkillIndex: 
+    maxLevel: 1
+    baseSkillIndex: f1070000
     paramCategory: 3
     targetIndex: 3
     paramType: 10
     baseValue: 0
-    deltaValue: 0
+    deltaValue: 1
     req_stone: 10
     req_iron: 10
     req_gold: 0

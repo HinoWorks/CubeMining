@@ -71,7 +71,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         // -- node set --
         foreach (var skillTreeUnit in skillTreeUnits)
         {
-            Debug.Log($"NodeCreate: {skillTreeUnit.skillIndex}");
+            //Debug.Log($"NodeCreate: {skillTreeUnit.skillIndex}");
             NodeCreate(skillTreeUnit);
         }
 
