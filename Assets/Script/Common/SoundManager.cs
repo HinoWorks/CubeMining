@@ -233,12 +233,14 @@ public class SoundManager : MonoBehaviour
         if (getData == null) return;
         PlaySE(getData);
     }
+    /// <summary>主にボタンクリックなどのUI再生用</summary>
     public void PlaySE_UI(int index)
     {
         var getData = SOLoader.SoundData.Get_SoundData_SE_UI(index);
         if (getData == null) return;
         PlaySE(getData);
     }
+
     public void PlaySE(SO_SoundElement getData)
     {
         if (getData == null || getData.clip == null) return;

@@ -190,12 +190,12 @@ public class BlockGenerateParam_Layer
 public class BlockChangeRateParam
 {
     private int baseRate = 100;
-    private int rate_iron_enhanced = 0;
-    private int rate_gold_enhanced = 0;
-    private int rate_emerald_enhanced = 0;
-    private int rate_ruby_enhanced = 0;
-    private int rate_sapphire_enhanced = 0;
-    private int rate_diamond_enhanced = 0;
+    public int rate_iron_enhanced { get; private set; } = 0;
+    public int rate_gold_enhanced { get; private set; } = 0;
+    public int rate_emerald_enhanced { get; private set; } = 0;
+    public int rate_ruby_enhanced { get; private set; } = 0;
+    public int rate_sapphire_enhanced { get; private set; } = 0;
+    public int rate_diamond_enhanced { get; private set; } = 0;
 
     private bool isActive_gold = false;
     private bool isActive_emerald = false;
@@ -262,6 +262,18 @@ public class BlockChangeRateParam
                 return ResourceType.Diamond;
             default:
                 return ResourceType.Stone;
+        }
+    }
+    public bool IsBlockTypeUnlock(ResourceType _resourceType)
+    {
+        switch (_resourceType)
+        {
+            case ResourceType.Gold: return isActive_gold;
+            case ResourceType.Emerald: return isActive_emerald;
+            case ResourceType.Ruby: return isActive_ruby;
+            case ResourceType.Sapphire: return isActive_sapphire;
+            case ResourceType.Diamond: return isActive_diamond;
+            default: return true;
         }
     }
 

@@ -71,6 +71,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         // -- node set --
         foreach (var skillTreeUnit in skillTreeUnits)
         {
+            Debug.Log($"NodeCreate: {skillTreeUnit.skillIndex}");
             NodeCreate(skillTreeUnit);
         }
 
@@ -98,7 +99,8 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         var nodeCont = nodeConts.Find(x => x.gameObject.activeSelf == false);
         if (nodeCont == null)
         {
-            nodeCont = Instantiate(nodeContPrefab, nodeRoot).GetComponent<UI_SkillTreeNodeCont>();
+            var newCont = PrefabUtility.InstantiatePrefab(nodeContPrefab, nodeRoot) as GameObject;
+            nodeCont = newCont.GetComponent<UI_SkillTreeNodeCont>();
             nodeConts.Add(nodeCont);
         }
         return nodeCont;
@@ -234,8 +236,8 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     /// </summary>
     private async void OnClick_Enhance(UI_SkillTreeUnit _skillTreeUnit)
     {
-        if (_skillTreeUnit.unlockState != SkillTreeUnlockState.EnhanceReady) return;
-        if (ui_skillTreeDetail.IsCraftReady == false) return;
+        //if (_skillTreeUnit.unlockState != SkillTreeUnlockState.EnhanceReady) return;
+        if (ui_skillTreeDetail.IsEnhanceReady == false) return;
 
         foreach (var resource in ui_skillTreeDetail.RequredResources)
         {
@@ -244,6 +246,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
             SaveLoader.Inst.Request_SaveResource(resource.resourceType, -resource.requiredCount);
         }
         SaveLoader.Inst.Request_SaveSkillTreeData(_skillTreeUnit.skillIndex, _skillTreeUnit.level + 1);
+        SoundManager.Inst.PlaySE(120);
 
         await UniTask.DelayFrame(2);
         _skillTreeUnit.Init();

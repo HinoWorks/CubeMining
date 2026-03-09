@@ -23,6 +23,7 @@ public class HButtonSound : MonoBehaviour
     }
     private void PlaySE_Click()
     {
+        if (index_SE_Click < 0) return;
         SoundManager.Inst.PlaySE_UI(index_SE_Click);
     }
 

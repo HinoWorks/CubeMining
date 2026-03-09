@@ -41,7 +41,7 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
     /// </summary>
     public void UpdateConnection()
     {
-        Debug.Log($"UpdateConnection: {baseUnit.name}, {targetUnit.name}");
+        //Debug.Log($"UpdateConnection: {baseUnit.name}, {targetUnit.name}");
         rectTransform = GetComponent<RectTransform>();
         lineImage = GetComponent<Image>();
         if (baseUnit == null || targetUnit == null || rectTransform == null) return;
@@ -53,7 +53,7 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
         // 2つのUnitの中心位置を取得（ワールド座標）
         Vector3 baseWorldPos = baseRect.position;
         Vector3 targetWorldPos = targetRect.position;
-        Debug.Log($"baseWorldPos: {baseWorldPos}, targetWorldPos: {targetWorldPos}");
+        //Debug.Log($"baseWorldPos: {baseWorldPos}, targetWorldPos: {targetWorldPos}");
 
         // 親のRectTransformを取得（通常はnodeRoot）
         RectTransform parentRect = rectTransform.parent as RectTransform;

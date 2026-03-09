@@ -151,6 +151,8 @@ public class UI_SkillTreeUnit : MonoBehaviour
         obj_complete.SetActive(unlockState == SkillTreeUnlockState.EnhanceComplete);
 
         button.gameObject.SetActive(unlockState != SkillTreeUnlockState.Hide);
+        button.Set_Interactable(unlockState == SkillTreeUnlockState.EnhanceReady
+            || unlockState == SkillTreeUnlockState.EnhanceComplete);
     }
 
 
@@ -163,6 +165,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
     #region onClick
     public void OnClick_Enhance()
     {
+        if (this.unlockState != SkillTreeUnlockState.EnhanceReady) return;
         onClick_Enhance?.Invoke(this);
     }
     #endregion

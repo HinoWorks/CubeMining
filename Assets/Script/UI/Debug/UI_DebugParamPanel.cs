@@ -68,6 +68,16 @@ public class UI_DebugParamPanel : MonoBehaviour
         //stringBuilder_gameBase.AppendLine($"Block Generate Time Rate: {GameParamManager.gameBaseParam.blockGenerateTimeRate:F2}");
         stringBuilder_gameBase.AppendLine();
 
+        // BlockChangeRateParamの表示
+        stringBuilder_blockGenerate.AppendLine("=== Block Change Rate Param Delta ===");
+        stringBuilder_blockGenerate.AppendLine($"Iron: {GameParamManager.blockChangeRateParam.rate_iron_enhanced:F2}");
+        stringBuilder_blockGenerate.AppendLine($"Gold: {GameParamManager.blockChangeRateParam.rate_gold_enhanced:F2}");
+        stringBuilder_blockGenerate.AppendLine($"Emerald: {GameParamManager.blockChangeRateParam.rate_emerald_enhanced:F2}");
+        stringBuilder_blockGenerate.AppendLine($"Ruby: {GameParamManager.blockChangeRateParam.rate_ruby_enhanced:F2}");
+        stringBuilder_blockGenerate.AppendLine($"Sapphire: {GameParamManager.blockChangeRateParam.rate_sapphire_enhanced:F2}");
+        stringBuilder_blockGenerate.AppendLine($"Diamond: {GameParamManager.blockChangeRateParam.rate_diamond_enhanced:F2}");
+        stringBuilder_blockGenerate.AppendLine();
+
         // BlockGenerateParamの表示
         stringBuilder_blockGenerate.AppendLine("=== Block Generate Param ===");
         for (int i = 0; i < GameParamManager.list_blockGenerateParam.Count; i++)

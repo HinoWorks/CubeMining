@@ -136,9 +136,18 @@ public class UI_PickaxeSelectInfoCont : UI_PickaxeParamCont
     private void Set_ResourceCount(int _index, ResourceType _resourceType, int _requiredCount)
     {
         var modCount = StaticManager.Get_BigintegerToUnit(_requiredCount);
-        var overResource = _requiredCount <= SaveLoader.Inst.Get_ResourceCount(_resourceType);
-        ui_resourceCounts[_index].SetData(SOLoader.ItemData.GetItemUnitData((int)_resourceType).icon, modCount.num.ToString(), overResource ? Color.white : Color.red);
-        isCraftReady = isCraftReady && overResource;
+
+        if (!GameParamManager.blockChangeRateParam.IsBlockTypeUnlock(_resourceType))
+        {
+            ui_resourceCounts[_index].SetLock();
+            isCraftReady = false;
+        }
+        else
+        {
+            var overResource = _requiredCount <= SaveLoader.Inst.Get_ResourceCount(_resourceType);
+            ui_resourceCounts[_index].SetData(SOLoader.ItemData.GetItemUnitData((int)_resourceType).icon, modCount.num.ToString(), overResource ? Color.white : Color.red);
+            isCraftReady = isCraftReady && overResource;
+        }
         btn_craft.Set_Interactable(isCraftReady);
     }
 

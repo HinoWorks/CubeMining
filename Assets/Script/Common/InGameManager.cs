@@ -147,6 +147,7 @@ public class InGameManager : MonoBehaviour
     {
         BlockGenerateManager.Inst.ResetAllBlocks();
         GameWatcher.Inst.SetGameState(GameStateType.OutGame);
+        SoundManager.Inst.PlaySE(102);
     }
     private void SetState_ResultEnd_ToIngameReady()
     {

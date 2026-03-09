@@ -20,7 +20,7 @@ public class UI_SkillTreeDetail : MonoBehaviour
     private UI_SkillTreeUnit currentUnit;
     private List<ResourceCount> requredResources = new List<ResourceCount>();
     public List<ResourceCount> RequredResources => requredResources;
-    public bool IsCraftReady { get; private set; } = true;
+    public bool IsEnhanceReady { get; private set; } = true;
 
 
 
@@ -66,7 +66,7 @@ public class UI_SkillTreeDetail : MonoBehaviour
     private void SetData_RequiredCost()
     {
         requredResources.Clear();
-        IsCraftReady = true;
+        IsEnhanceReady = true;
 
         foreach (var cont in ui_resourceCounts)
         {
@@ -85,13 +85,24 @@ public class UI_SkillTreeDetail : MonoBehaviour
         foreach (var resource in requredResources)
         {
             if (resource.requiredCount <= 0) continue;
+
+
             var cont = ui_resourceCounts[count];
-            var overResource = resource.requiredCount <= SaveLoader.Inst.Get_ResourceCount(resource.resourceType);
-            cont.SetData(SOLoader.ItemData.GetItemUnitData((int)resource.resourceType).icon, resource.requiredCount.ToString(), overResource ? Color.white : Color.red);
+            if (!GameParamManager.blockChangeRateParam.IsBlockTypeUnlock(resource.resourceType))
+            {
+                cont.SetLock();
+                IsEnhanceReady = false;
+                Debug.Log($"Required Resource is not unlock: {resource.resourceType}");
+            }
+            else
+            {
+                var overResource = resource.requiredCount <= SaveLoader.Inst.Get_ResourceCount(resource.resourceType);
+                cont.SetData(SOLoader.ItemData.GetItemUnitData((int)resource.resourceType).icon, resource.requiredCount.ToString(), overResource ? Color.white : Color.red);
+                IsEnhanceReady = IsEnhanceReady && overResource;
+            }
             count++;
-            IsCraftReady = IsCraftReady && overResource;
         }
-        IsCraftReady = IsCraftReady && currentUnit.level < so.maxLevel;
+        IsEnhanceReady = IsEnhanceReady && currentUnit.level < so.maxLevel;
         //btn_enhance.Set_Interactable(IsCraftReady);
     }
 }

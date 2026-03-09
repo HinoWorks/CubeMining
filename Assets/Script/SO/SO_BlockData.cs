@@ -22,8 +22,8 @@ public class BlockData
 public class BlockChangeRateData
 {
     public int blockIndex;
-    public int rate_iron;
     public int rate_gold;
+    public int rate_iron;
     public int rate_emerald;
     public int rate_ruby;
     public int rate_sapphire;
