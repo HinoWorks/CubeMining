@@ -25,6 +25,7 @@ public class MiningTarget_Bomb : MiningTarget_Object
         bomb.transform.position = transform.position;
 
         var damage = AttackManager.Inst.currentPickaxeDamage * objectGenerateParam.damageRate_total;
+        Debug.Log($"bomb damage => base:{AttackManager.Inst.currentPickaxeDamage} DamageUpRate:{objectGenerateParam.damageRate_total} => damage:{damage}");
         bomb.Explode(damage, objectGenerateParam.valueRate_total);
 
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.Damage, hp_max);
