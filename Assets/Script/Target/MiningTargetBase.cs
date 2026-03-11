@@ -34,6 +34,10 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         hp = hp_max;
         layerIndex = _layerIndex;
 
+        if (col == null)
+        {
+            col = GetComponent<Collider>();
+        }
         col.enabled = true;
         gameObject.SetActive(true);
     }

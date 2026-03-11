@@ -75,9 +75,12 @@ public class MiningTarget_Cube : MiningTargetBase
     public override bool Damage(int damage, float _resourceUpRate = 1f)
     {
         //hitFlash.Flash();
-        var effect = EffectManager.Inst.Get_Effect(EffectType.BlockDamage);
-        effect.transform.position = transform.position;
-        effect.SetActive(true);
+        var effect = EffectManager.Inst?.Get_Effect(EffectType.BlockDamage);
+        if (effect != null)
+        {
+            effect.transform.position = transform.position;
+            effect.SetActive(true);
+        }
         var isBreak = base.Damage(damage, _resourceUpRate);
         //hitFlash.Set_Crack(hp_rate);
         Set_BlockMesh();
@@ -107,9 +110,12 @@ public class MiningTarget_Cube : MiningTargetBase
     {
         breakCallback?.Invoke();
 
-        var effect = EffectManager.Inst.Get_Effect(EffectType.BlockBreak);
-        effect.transform.position = transform.position + EffectOffset;
-        effect.SetActive(true);
+        var effect = EffectManager.Inst?.Get_Effect(EffectType.BlockBreak);
+        if (effect != null)
+        {
+            effect.transform.position = transform.position + EffectOffset;
+            effect.SetActive(true);
+        }
         //CameraManager.Inst?.ShakeBlockBreak();
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.BlockBreakCount, 1);
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.Damage, hp_max);

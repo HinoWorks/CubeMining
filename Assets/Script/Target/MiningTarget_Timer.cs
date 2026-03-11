@@ -10,6 +10,8 @@ public class MiningTarget_Timer : MiningTarget_Object
     {
         base.Init(_objectGenerateParam, _blockData, _layerIndex);
         exTimeBase = _objectGenerateParam.so.valueRate;
+        var hp = (int)(_blockData.hp * _objectGenerateParam.so.hpRate);
+        if (hp <= 0) hp = 1;
         base.Init_MiningTargetBase(hp, 0, _objectGenerateParam.so.objectIndex, _layerIndex);
     }
 

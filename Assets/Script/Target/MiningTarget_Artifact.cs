@@ -3,20 +3,14 @@ using System;
 using UnityEngine.Analytics;
 
 
-public class MiningTarget_Artifact : MiningTargetBase
+public class MiningTarget_Artifact : MiningTarget_Object
 {
-    protected Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
-    protected Action breakCallback;
+
     protected int artifactIndex;
     private int breakAttackCount; // ブロックを破壊するために必要な攻撃回数
     private int breakAttackCount_max = 8;
     private int breakAttackCount_min = 5;
 
-    public override void NotActivate()
-    {
-        base.NotActivate();
-        breakCallback = null;
-    }
 
 
     public virtual void Init(int _artifactIndex, int _layerIndex)

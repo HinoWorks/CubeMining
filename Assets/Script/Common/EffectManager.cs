@@ -60,8 +60,8 @@ public class EffectManager : MonoBehaviour
         var selectUnit = pool.Find(d => d.gameObject.activeSelf == false);
         if (selectUnit == null)
         {
-            var newUnit = Instantiate(pf, InGameManager.Inst.ParentPool) as GameObject;
-            pool.Add(newUnit);
+            selectUnit = Instantiate(pf, InGameManager.Inst.ParentPool) as GameObject;
+            pool.Add(selectUnit);
         }
         return selectUnit;
     }

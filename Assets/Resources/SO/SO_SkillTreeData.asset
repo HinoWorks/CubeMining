@@ -958,7 +958,7 @@ MonoBehaviour:
     paramCategory: 3
     targetIndex: 1
     paramType: 7
-    baseValue: 0
+    baseValue: 1
     deltaValue: 1
     req_stone: 10
     req_iron: 10
@@ -976,7 +976,7 @@ MonoBehaviour:
     paramCategory: 3
     targetIndex: 1
     paramType: 9
-    baseValue: 0
+    baseValue: 1
     deltaValue: 1
     req_stone: 10
     req_iron: 10
@@ -1079,13 +1079,13 @@ MonoBehaviour:
     skillName: Blast Radius
     description: Expands the explosion range of Bomb blocks.
     icon: {fileID: 0}
-    maxLevel: 1
+    maxLevel: 3
     baseSkillIndex: f0070000
     paramCategory: 3
     targetIndex: 3
     paramType: 8
     baseValue: 0
-    deltaValue: 1
+    deltaValue: 0.25
     req_stone: 10
     req_iron: 10
     req_gold: 0
@@ -1097,13 +1097,13 @@ MonoBehaviour:
     skillName: Blast Force
     description: Increases the damage dealt by Bomb block explosions.
     icon: {fileID: 0}
-    maxLevel: 1
+    maxLevel: 3
     baseSkillIndex: f1070000
     paramCategory: 3
     targetIndex: 3
     paramType: 10
     baseValue: 0
-    deltaValue: 1
+    deltaValue: 0.33
     req_stone: 10
     req_iron: 10
     req_gold: 0

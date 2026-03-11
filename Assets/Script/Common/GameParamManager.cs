@@ -93,11 +93,13 @@ public class ObjectGenerateParam
     public bool isActive { get; private set; } = false;
     public float generateRate_total => generateRate_base + generateRate_enhanced;
     public float valueRate_total => valueRate_base + valueRate_enhanced;
+    public float damageRate_total => 1f + damageRate_enhanced;
 
     private int generateRate_base = 0;
     private float valueRate_base = 0;
     private int generateRate_enhanced = 0;
     private float valueRate_enhanced = 0;
+    private float damageRate_enhanced = 0;
 
     public void Init(ObjectUnitData _objectUnitData)
     {
@@ -117,6 +119,9 @@ public class ObjectGenerateParam
                 break;
             case ParamType.Rate_Value:
                 valueRate_enhanced += _setParam;
+                break;
+            case ParamType.Damage:
+                damageRate_enhanced += _setParam;
                 break;
         }
     }

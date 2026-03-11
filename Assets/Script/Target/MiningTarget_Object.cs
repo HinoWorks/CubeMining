@@ -1,10 +1,18 @@
 using UnityEngine;
 using System;
+using Unity.Mathematics;
+using UniRx.Triggers;
 public class MiningTarget_Object : MiningTargetBase
 {
     protected Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
     protected ObjectGenerateParam objectGenerateParam;
     protected Action breakCallback;
+    protected Rigidbody rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
 
     public void Set_BreakCallback(Action _callback)
@@ -23,6 +31,7 @@ public class MiningTarget_Object : MiningTargetBase
         objectGenerateParam = _objectGenerateParam;
         layerIndex = _layerIndex;
 
+
         //base.Init(_blockData.hp, 0, objectGenerateParam.so.objectIndex, 0);
         //base.animScale_rate = this.transform.localScale.x;
     }
@@ -31,10 +40,16 @@ public class MiningTarget_Object : MiningTargetBase
     {
         base.Init(_hp, _value, _index, _layerIndex);
         base.animScale_rate = this.transform.localScale.x;
+
+        rb.isKinematic = false;
+        rb.useGravity = true;
     }
 
     public override void BreakFromDamage(float _resourceUpRate = 1f)
     {
+        rb.isKinematic = true;
+        rb.useGravity = false;
+
         base.BreakFromDamage();
         breakCallback?.Invoke();
     }

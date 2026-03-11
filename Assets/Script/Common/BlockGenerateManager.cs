@@ -227,6 +227,8 @@ public class BlockGenerateManager : MonoBehaviour
             list_targetObjects.Add(targetObject);
         }
         targetObject.Init(_objectData, _blockData, _layerIndex);
+        targetObject.transform.localPosition = Vector3.zero;
+        targetObject.transform.localRotation = Quaternion.identity;
         return targetObject;
     }
     #endregion
