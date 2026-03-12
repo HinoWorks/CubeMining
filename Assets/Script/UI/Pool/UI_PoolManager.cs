@@ -60,11 +60,21 @@ public class UI_PoolManager : MonoBehaviour
         // -- initialCreate --
         for (int i = 0; i < 50; i++)
         {
+            var newUnit = Instantiate(pf_getResourceCont, parent_base) as GameObject;
+            var selectUnit = newUnit.GetComponent<UI_GetResourceCont>();
+            pool_getResourceCont.Add(selectUnit);
+            selectUnit.gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < 50; i++)
+        {
             var newUnit = Instantiate(pf_getCoinText, parent_base) as GameObject;
             var selectUnit = newUnit.GetComponent<UI_TextCoinGet>();
             pool_textCoinGet.Add(selectUnit);
             selectUnit.gameObject.SetActive(false);
         }
+
+        /*
         for (int i = 0; i < 50; i++)
         {
             var newUnit = Instantiate(pf_damageText, parent_base) as GameObject;
@@ -72,13 +82,8 @@ public class UI_PoolManager : MonoBehaviour
             pool_damageText.Add(selectUnit);
             selectUnit.gameObject.SetActive(false);
         }
-        for (int i = 0; i < 50; i++)
-        {
-            var newUnit = Instantiate(pf_getResourceCont, parent_base) as GameObject;
-            var selectUnit = newUnit.GetComponent<UI_GetResourceCont>();
-            pool_getResourceCont.Add(selectUnit);
-            selectUnit.gameObject.SetActive(false);
-        }
+        */
+
     }
 
     private void Set_UIScaleChange(float _zoomRate)

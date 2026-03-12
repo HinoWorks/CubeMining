@@ -61,7 +61,7 @@ public class MiningTarget_Tresure : MiningTarget_Object
         }
 
         var getText = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
-        getText.SetText_Coin(StaticManager.Get_BigintegerToString(base.value), SOLoader.UISetting.GetTextColor(resourceType));
+        getText.SetText(StaticManager.Get_BigintegerToString(base.value), SOLoader.UISetting.GetTextColor(resourceType));
     }
 
 

@@ -37,11 +37,15 @@ public class MiningTarget_Timer : MiningTarget_Object
         var getExTime = exTimeBase + objectGenerateParam.valueRate_total;
 
         InGameManager.Inst.AddGetExTime(getExTime);
-        var ui_textCoinGet = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
-        ui_textCoinGet.SetText($"+{getExTime.ToString("F1")} <size=75%>Sec</size>");
 
+        // ブロック付近のUI
+        var ui_textCoinGet = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
+        ui_textCoinGet.SetText($"+{getExTime.ToString("F1")} <size=75%>sec</size>", Color.white);
+
+        // 時間付近のUI 
         var ui_timeText = UI_PoolManager.Inst.Set_TimeText();
-        ui_timeText.SetText($"+{getExTime.ToString("F1")} <size=75%>Sec</size>");
+        ui_timeText.SetText($"+{getExTime.ToString("F1")} <size=75%>sec</size>");
+
         base.BreakFromDamage();
     }
 

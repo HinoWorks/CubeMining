@@ -139,6 +139,6 @@ public class MiningTarget_Cube : MiningTargetBase
         }
 
         var getText = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
-        getText.SetText_Coin(StaticManager.Get_BigintegerToString(getCount), SOLoader.UISetting.GetTextColor(resourceType));
+        getText.SetText(StaticManager.Get_BigintegerToString(getCount), SOLoader.UISetting.GetTextColor(resourceType));
     }
 }

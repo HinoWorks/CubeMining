@@ -22,6 +22,7 @@ public class GameBaseParam
     //ラッキーマイン - 採掘量が1.5倍になる確率x
     public float luckyMineRate => 0 + luckyMineRate_enhanced;
     private float luckyMineRate_enhanced = 0f;
+    public bool isLuckyMine => UnityEngine.Random.Range(0f, 1f) < luckyMineRate;
 
     //ラッキーマインの増加量+50%
     public float luckyMineRate_ResourceUpRate => luckyMineRate_ResourceUpRate_enhanced;
@@ -30,6 +31,12 @@ public class GameBaseParam
     //下層ボーナスxx
     public float deepLayer_Bonus => 0 + deepLayer_Bonus_enhanced;
     private float deepLayer_Bonus_enhanced = 0f;
+
+
+    // インスタントシャッター(即破壊する確率)
+    public float instantShatterRate => 0f + instantShatterRate_enhanced;
+    private float instantShatterRate_enhanced = 0f;
+    public bool isInstantShatter => UnityEngine.Random.Range(0f, 1f) < instantShatterRate;
 
 
 
@@ -61,6 +68,9 @@ public class GameBaseParam
                 break;
             case ParamType.DeepLayerBonus:
                 deepLayer_Bonus_enhanced += _setParam;
+                break;
+            case ParamType.InstantShatterRate:
+                instantShatterRate_enhanced += _setParam;
                 break;
 
             // -- ピッケルの基礎パラメータ向上 --

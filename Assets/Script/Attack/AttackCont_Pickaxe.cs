@@ -28,6 +28,8 @@ public class AttackCont_Pickaxe : MonoBehaviour
 
     private Vector3 offsetPosition = new Vector3(0, 0.1f, 0);
     private float criticalDamageRate = 2f;
+    private int instantShatterDamage = 9999;
+
 
 
     protected void Awake()
@@ -90,9 +92,10 @@ public class AttackCont_Pickaxe : MonoBehaviour
 
                     // critical check
                     var selectedDamageRate = UnityEngine.Random.Range(0f, 1f) < criticalRate ? criticalDamageRate : 1f;
-                    var isLuckyMine = UnityEngine.Random.Range(0f, 1f) < GameParamManager.gameBaseParam.luckyMineRate;
-                    var resourceUpRate_LuckyMine = isLuckyMine ? GameParamManager.gameBaseParam.luckyMineRate_ResourceUpRate : 0f;
-                    if (t.Damage((int)(damage * selectedDamageRate), resourceUpRate_pickaxe + resourceUpRate_LuckyMine))
+                    var resourceUpRate_LuckyMine = GameParamManager.gameBaseParam.isLuckyMine ?
+                                         GameParamManager.gameBaseParam.luckyMineRate_ResourceUpRate : 0f;
+                    var damage_calc = GameParamManager.gameBaseParam.isInstantShatter ? instantShatterDamage : (int)(damage * selectedDamageRate);
+                    if (t.Damage(damage_calc, resourceUpRate_pickaxe + resourceUpRate_LuckyMine))
                     {
                         removeBuffer.Add(t);
                     }
