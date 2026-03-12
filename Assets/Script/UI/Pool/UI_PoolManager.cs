@@ -14,7 +14,7 @@ public class UI_PoolManager : MonoBehaviour
     [Header(" -- pf set --")]
     [SerializeField] GameObject pf_circleGauge;
     [SerializeField] GameObject pf_getCoinText;
-    [SerializeField] GameObject pf_damageText;
+    [SerializeField] GameObject pf_otherText;
     //[SerializeField] GameObject pf_moveIcon_Coin;
     [SerializeField] GameObject pf_getResourceCont;
     [SerializeField] GameObject pf_getTime;
@@ -31,7 +31,7 @@ public class UI_PoolManager : MonoBehaviour
 
     private List<UI_CircleTimer> pool_gauge_circle = new List<UI_CircleTimer>();
     private List<UI_TextCoinGet> pool_textCoinGet = new List<UI_TextCoinGet>();
-    private List<UI_TextDamage> pool_damageText = new List<UI_TextDamage>();
+    private List<UI_TextOtherGet> pool_otherText = new List<UI_TextOtherGet>();
     private List<UI_GetResourceCont> pool_getResourceCont = new List<UI_GetResourceCont>();
     private List<UI_SpeechBubble> pool_speechBubble = new List<UI_SpeechBubble>(10);
     private List<UI_TextCont> pool_getTime = new List<UI_TextCont>();
@@ -74,15 +74,14 @@ public class UI_PoolManager : MonoBehaviour
             selectUnit.gameObject.SetActive(false);
         }
 
-        /*
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 10; i++)
         {
-            var newUnit = Instantiate(pf_damageText, parent_base) as GameObject;
-            var selectUnit = newUnit.GetComponent<UI_TextDamage>();
-            pool_damageText.Add(selectUnit);
+            var newUnit = Instantiate(pf_otherText, parent_base) as GameObject;
+            var selectUnit = newUnit.GetComponent<UI_TextOtherGet>();
+            pool_otherText.Add(selectUnit);
             selectUnit.gameObject.SetActive(false);
         }
-        */
+
 
     }
 
@@ -122,16 +121,17 @@ public class UI_PoolManager : MonoBehaviour
         return selectUnit;
     }
 
-    public UI_TextDamage Get_TextDamage()
+    public UI_TextOtherGet Get_OtherText(Transform _target, Vector3 _offset)
     {
-        UI_TextDamage selectUnit = null;
-        selectUnit = pool_damageText.Find(d => d.gameObject.activeSelf == false);
+        UI_TextOtherGet selectUnit = null;
+        selectUnit = pool_otherText.Find(d => d.gameObject.activeSelf == false);
         if (selectUnit == null)
         {
-            var newUnit = Instantiate(pf_damageText, parent_base) as GameObject;
-            selectUnit = newUnit.GetComponent<UI_TextDamage>();
-            pool_damageText.Add(selectUnit);
+            var newUnit = Instantiate(pf_otherText, parent_base) as GameObject;
+            selectUnit = newUnit.GetComponent<UI_TextOtherGet>();
+            pool_otherText.Add(selectUnit);
         }
+        selectUnit.Initialize(_target, _offset);
         return selectUnit;
     }
 

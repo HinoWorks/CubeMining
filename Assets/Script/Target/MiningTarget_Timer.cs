@@ -39,7 +39,7 @@ public class MiningTarget_Timer : MiningTarget_Object
         InGameManager.Inst.AddGetExTime(getExTime);
 
         // ブロック付近のUI
-        var ui_textCoinGet = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
+        var ui_textCoinGet = UI_PoolManager.Inst.Get_OtherText(transform, Vector3.zero);
         ui_textCoinGet.SetText($"+{getExTime.ToString("F1")} <size=75%>sec</size>", Color.white);
 
         // 時間付近のUI 
