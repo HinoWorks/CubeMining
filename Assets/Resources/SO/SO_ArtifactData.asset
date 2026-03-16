@@ -32,7 +32,7 @@ MonoBehaviour:
     activeCheckTiming: 0
     activeCheckRate: -1
     effectType: 2
-    value: 0.05
+    value: -0.05
     effectType_2: 0
     value_2: 0
   - artifactIndex: 3
@@ -42,8 +42,8 @@ MonoBehaviour:
     icon: {fileID: 0}
     activeCheckTiming: 0
     activeCheckRate: -1
-    effectType: 3
-    value: 0.1
+    effectType: 5
+    value: 0.2
     effectType_2: 0
     value_2: 0
   - artifactIndex: 4
@@ -67,7 +67,7 @@ MonoBehaviour:
     effectType: 5
     value: 0.1
     effectType_2: 1
-    value_2: -0.15
+    value_2: 0.15
   - artifactIndex: 6
     artifactName: Artifact -- 6
     description: ' +15% Attack Power / -25% Size'
@@ -142,7 +142,7 @@ MonoBehaviour:
     activeCheckTiming: 20
     activeCheckRate: 0
     effectType: 2
-    value: 0.5
+    value: -0.5
     effectType_2: 0
     value_2: 0
   - artifactIndex: 13
@@ -219,7 +219,7 @@ MonoBehaviour:
     activeCheckTiming: 50
     activeCheckRate: -1
     effectType: 2
-    value: 0.5
+    value: -0.5
     effectType_2: 0
     value_2: 0
   - artifactIndex: 20
@@ -274,7 +274,7 @@ MonoBehaviour:
     activeCheckTiming: 40
     activeCheckRate: -1
     effectType: 2
-    value: 0.01
+    value: -0.01
     effectType_2: 0
     value_2: 0
   - artifactIndex: 25
@@ -286,6 +286,17 @@ MonoBehaviour:
     activeCheckRate: -1
     effectType: 50
     value: 1
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 0
+    artifactName: 
+    description: "\u5B9D\u7BB1\u306E\u4FA1\u5024\u304C1.5\u500D"
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 0
+    activeCheckRate: 0
+    effectType: 0
+    value: 0
     effectType_2: 0
     value_2: 0
   artifactGenerateRateDatas:

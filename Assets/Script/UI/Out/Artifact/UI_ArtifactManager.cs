@@ -139,7 +139,7 @@ public class UI_ArtifactManager : MonoBehaviour
                 SaveLoader.Inst.Request_SaveArtifactSlotData(freeSlot.slotIndex, true, _so.artifactIndex);
                 await UniTask.DelayFrame(1);
                 freeSlot.Init();
-                Debug.Log($"空きスロット:{freeSlot.slotIndex} / アーティファクト:{_so.artifactIndex}");
+                Debug.Log($"空きスロット:{freeSlot.slotIndex} / アーティファクト:{_so.artifactIndex} set");
             }
             else
             {

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-
 [System.Serializable]
 public class ArtifactControllUnit
 {
@@ -18,60 +17,100 @@ public class ArtifactControllUnit
     public void InitialSet()
     {
         if (so.activeCheckTiming != ActiveCheckTiming.Passive) return;
-        Set_ArtifactEffect();
+        ActiveCheck();
     }
 
     public void Set_5secIntervalCheck()
     {
         if (so.activeCheckTiming != ActiveCheckTiming.Interval_5sec) return;
-        Set_ArtifactEffect();
+        ActiveCheck();
     }
     public void Set_PickaxeAttackTimingCheck()
     {
         if (so.activeCheckTiming != ActiveCheckTiming.Interval_attackPickaxe) return;
-        Set_ArtifactEffect();
+        ActiveCheck();
     }
     public void Set_underGround_5TimingCheck()
     {
         if (so.activeCheckTiming != ActiveCheckTiming.Interval_underGround_5) return;
-        Set_ArtifactEffect();
+        ActiveCheck();
     }
     public void Set_BlockBreak_25TimingCheck()
     {
         if (so.activeCheckTiming != ActiveCheckTiming.Interval_breakBlock_25) return;
-        Set_ArtifactEffect();
+        ActiveCheck();
     }
     public void Set_LastBoosterCheck()
     {
         if (so.activeCheckTiming != ActiveCheckTiming.LastBooster) return;
-        Set_ArtifactEffect();
+        ActiveCheck();
+    }
+    private void ActiveCheck()
+    {
+        if (so.activeCheckRate >= 0f && Random.Range(0f, 1f) > so.activeCheckRate) return;
+        Set_ArtifactEffect(so.effectType, so.value);
+        Set_ArtifactEffect(so.effectType_2, so.value_2);
     }
 
-
-    private void Set_ArtifactEffect()
+    private void Set_ArtifactEffect(ArtifactEffectType _effectType, float _value)
     {
-        switch (so.effectType)
+        if (_effectType == ArtifactEffectType.None) return;
+        switch (_effectType)
         {
             case ArtifactEffectType.pickaxe_damage:
-                ArtifactManager.Inst.pickaxe_damage += (int)so.value;
+                ArtifactManager.Inst.pickaxe_damageRate += _value;
                 break;
             case ArtifactEffectType.pickaxe_attackInterval:
-                ArtifactManager.Inst.pickaxe_attackInterval += so.value;
+                ArtifactManager.Inst.pickaxe_attackInterval += _value;
                 break;
             case ArtifactEffectType.pickaxe_criticalRate:
-                ArtifactManager.Inst.pickaxe_criticalRate += so.value;
+                ArtifactManager.Inst.pickaxe_criticalRate += _value;
                 break;
             case ArtifactEffectType.pickaxe_resourceUpRate:
-                ArtifactManager.Inst.pickaxe_resourceUpRate += so.value;
+                ArtifactManager.Inst.pickaxe_resourceUpRate += _value;
                 break;
             case ArtifactEffectType.pickaxe_size:
-                ArtifactManager.Inst.pickaxe_size += so.value;
+                ArtifactManager.Inst.pickaxe_sizeRate += _value;
                 break;
+
+            // -- ボムの効果 --
+            case ArtifactEffectType.bomb_damage:
+                ArtifactManager.Inst.bomb_damageRate += _value;
+                break;
+            case ArtifactEffectType.bomb_size:
+                ArtifactManager.Inst.bomb_sizeRate += _value;
+                break;
+
+            // -- ピッケル以外 --
             case ArtifactEffectType.all_damage:
-                ArtifactManager.Inst.all_damage += (int)so.value;
+                ArtifactManager.Inst.all_damageRate += _value;
                 break;
             case ArtifactEffectType.all_attackInterval:
-                ArtifactManager.Inst.all_attackInterval += so.value;
+                ArtifactManager.Inst.all_attackInterval += _value;
+                break;
+
+            // -- 共通の効果 --
+            case ArtifactEffectType.changeBlockRate:
+                ArtifactManager.Inst.changeBlockRate += _value;
+                break;
+            case ArtifactEffectType.blockBreakRate:
+                ArtifactManager.Inst.instantShatterRate += _value;
+                break;
+            case ArtifactEffectType.resourceUpRate:
+                ArtifactManager.Inst.resourceUpRate += _value;
+                break;
+
+            // -- 生成 --
+            case ArtifactEffectType.create_bomb:
+                break;
+            case ArtifactEffectType.create_bonusChest:
+                break;
+            case ArtifactEffectType.create_miniPickaxe:
+                break;
+
+            // -- インゲーム時間追加 --
+            case ArtifactEffectType.get_ingameTime:
+                InGameManager.Inst.AddGetExTime(_value);
                 break;
         }
     }
@@ -88,21 +127,21 @@ public class ArtifactManager : MonoBehaviour
 
 
     // fix parameter
-    public int pickaxe_damage = 0;
+    public float pickaxe_damageRate = 0;
     public float pickaxe_attackInterval = 0f;
     public float pickaxe_criticalRate = 0f;
     public float pickaxe_resourceUpRate = 0f;
-    public float pickaxe_size = 0f;
-    public int all_damage = 0;
-    public float all_attackInterval = 0f;
-    public int bomb_damage = 0;
-    public float bomb_size = 0f;
-    public int create_bomb = 0;
-    public int create_miniPickaxe = 0;
-    public int create_bonusChest = 0;
-    public float changeBlockRate = 0f;
-    public float get_ingameTime = 0f;
+    public float pickaxe_sizeRate = 0f;
 
+    public float all_damageRate = 0;
+    public float all_attackInterval = 0f;
+
+    public float bomb_damageRate = 0;
+    public float bomb_sizeRate = 0f;
+
+    public float changeBlockRate = 0f;
+    public float resourceUpRate = 0f;
+    public float instantShatterRate = 0f;
 
 
     // 最後の5秒間のチェック
@@ -165,8 +204,6 @@ public class ArtifactManager : MonoBehaviour
             timer_for5secInterval = 0f;
         }
 
-
-
         if (InGameManager.Inst.RemainingTime <= lastBoosterCheckTime)
         {
             if (isLastBoosterCheckFin) return;
@@ -180,6 +217,23 @@ public class ArtifactManager : MonoBehaviour
     #region -- SetState --
     private async void SetState_InGameReady()
     {
+
+        pickaxe_damageRate = 0f;
+        pickaxe_attackInterval = 0f;
+        pickaxe_criticalRate = 0f;
+        pickaxe_resourceUpRate = 0f;
+        pickaxe_sizeRate = 0f;
+
+        all_damageRate = 0f;
+        all_attackInterval = 0f;
+
+        bomb_damageRate = 0f;
+        bomb_sizeRate = 0f;
+
+        changeBlockRate = 0f;
+        resourceUpRate = 0f;
+        instantShatterRate = 0f;
+
         isLastBoosterCheckFin = false;
         timer_for5secInterval = 0f;
 
@@ -189,14 +243,17 @@ public class ArtifactManager : MonoBehaviour
 
         // 装備中のアーティファクトセット、
         artifactControllUnitList.Clear();
-        for (int i = 0; i < StaticManager.artifactSlotCount; i++)
+        for (int i = 1; i < StaticManager.artifactSlotCount + 1; i++)
         {
             var saveData = await SaveLoader.Inst.Get_ArtifactSlotData(i);
             if (saveData == null) continue;
-            var artifactData = SOLoader.ArtifactData.artifactDatas[saveData.equipedArtifactIndex];
+
+            var artifactData = SOLoader.ArtifactData.Get_ArtifactData(saveData.equipedArtifactIndex);
+            if (artifactData == null) continue;
             var artifactCont = new ArtifactControllUnit();
             artifactCont.Init(artifactData);
             artifactControllUnitList.Add(artifactCont);
+            Debug.Log($"アーティファクトセット中 == SlotIndex:{saveData.slotIndex} / {saveData.equipedArtifactIndex}");
         }
         Check_InitialSet();
     }
@@ -208,7 +265,6 @@ public class ArtifactManager : MonoBehaviour
 
     }
     #endregion
-
 
 
     /// <summary>

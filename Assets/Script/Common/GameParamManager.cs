@@ -32,22 +32,24 @@ public class GameBaseParam
 
 
     // インスタントシャッター(即破壊する確率)
-    public float instantShatterRate => 0f + instantShatterRate_enhanced;
+    public float instantShatterRate => 0f + instantShatterRate_enhanced + ArtifactManager.Inst.instantShatterRate;
     private float instantShatterRate_enhanced = 0f;
     public bool isInstantShatter => UnityEngine.Random.Range(0f, 1f) < instantShatterRate;
 
 
 
     // ピッケルの基礎パラメータ向上
-    public float pickaxeBase_AttackDamage => pickaxeBase_AttackDamage_enhanced;
+    public float pickaxeBase_AttackDamage => pickaxeBase_AttackDamage_enhanced + ArtifactManager.Inst.pickaxe_damageRate;
     private float pickaxeBase_AttackDamage_enhanced = 0f;
-    public float pickaxeBase_AttackInterval => pickaxeBase_AttackInterval_enhanced;
+    public float pickaxeBase_AttackInterval => pickaxeBase_AttackInterval_enhanced + ArtifactManager.Inst.pickaxe_attackInterval;
     private float pickaxeBase_AttackInterval_enhanced = 0f;
-    public float pickaxeBase_CriticalRate => pickaxeBase_CriticalRate_enhanced;
+    public float pickaxeBase_CriticalRate => pickaxeBase_CriticalRate_enhanced + ArtifactManager.Inst.pickaxe_criticalRate;
     private float pickaxeBase_CriticalRate_enhanced = 0f;
-    public float pickaxeBase_ResourceUpRate => pickaxeBase_ResourceUpRate_enhanced;
+    public float pickaxeBase_ResourceUpRate => pickaxeBase_ResourceUpRate_enhanced
+                                                + ArtifactManager.Inst.pickaxe_resourceUpRate
+                                                + ArtifactManager.Inst.resourceUpRate;
     private float pickaxeBase_ResourceUpRate_enhanced = 0f;
-    public float pickaxeBase_Size => pickaxeBase_Size_enhanced;
+    public float pickaxeBase_Size => pickaxeBase_Size_enhanced + ArtifactManager.Inst.pickaxe_sizeRate;
     private float pickaxeBase_Size_enhanced = 0f;
 
 
@@ -267,7 +269,10 @@ public class BlockChangeRateParam
     public ResourceType SelectBlockType(BlockChangeRateData _blockChangeData)
     {
         blockChangeData = _blockChangeData;
-        var total = baseRate + rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total + rate_sapphire_total + rate_diamond_total;
+        var total = baseRate
+                    - (int)(ArtifactManager.Inst.changeBlockRate * 100) // アーティファクトによる確率上昇分
+                    + rate_iron_total + rate_gold_total + rate_emerald_total
+                    + rate_ruby_total + rate_sapphire_total + rate_diamond_total;
         var random = Random.Range(0, total);
         switch (random)
         {
@@ -442,6 +447,7 @@ public static class GameParamManager
         }
         return targetBlock;
     }
+    // 鉱石への変化check
     public static ResourceType Get_RandamBlockType(int _blockIndex)
     {
         var blockChangeBaseParam = SOLoader.BlockData.GetBlockChangeRateData(_blockIndex);
