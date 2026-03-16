@@ -958,7 +958,7 @@ MonoBehaviour:
     paramCategory: 3
     targetIndex: 1
     paramType: 7
-    baseValue: 1
+    baseValue: 0
     deltaValue: 1
     req_stone: 10
     req_iron: 10
@@ -976,7 +976,7 @@ MonoBehaviour:
     paramCategory: 3
     targetIndex: 1
     paramType: 9
-    baseValue: 1
+    baseValue: 0
     deltaValue: 1
     req_stone: 10
     req_iron: 10
@@ -1134,13 +1134,13 @@ MonoBehaviour:
     skillName: Jackpot Chance
     description: Increases the probability of a Lucky Mine event occurring.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 5
     baseSkillIndex: 
     paramCategory: 0
     targetIndex: -1
     paramType: 2
     baseValue: 0
-    deltaValue: 0
+    deltaValue: 0.01
     req_stone: 10
     req_iron: 10
     req_gold: 0
@@ -1152,13 +1152,13 @@ MonoBehaviour:
     skillName: Jackpot Mine
     description: Increases the bonus resources from Lucky Mine by 50%
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 3
     baseSkillIndex: 
     paramCategory: 0
     targetIndex: -1
     paramType: 3
     baseValue: 0
-    deltaValue: 0
+    deltaValue: 0.25
     req_stone: 10
     req_iron: 10
     req_gold: 0
@@ -1170,13 +1170,13 @@ MonoBehaviour:
     skillName: Time Extension
     description: Adds extra time to your current mining session.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 3
     baseSkillIndex: 
     paramCategory: 0
     targetIndex: -1
     paramType: 1
     baseValue: 0
-    deltaValue: 0
+    deltaValue: 1
     req_stone: 10
     req_iron: 10
     req_gold: 0
@@ -1188,13 +1188,13 @@ MonoBehaviour:
     skillName: Deep Mine Bonus
     description: Provides extra rewards for mining in deeper layers.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 5
     baseSkillIndex: 
     paramCategory: 0
     targetIndex: -1
     paramType: 4
     baseValue: 0
-    deltaValue: 0
+    deltaValue: 0.05
     req_stone: 10
     req_iron: 10
     req_gold: 0
@@ -1206,13 +1206,13 @@ MonoBehaviour:
     skillName: Instant Shatter
     description: Grants a small chance to destroy any block in a single hit.
     icon: {fileID: 0}
-    maxLevel: 0
+    maxLevel: 5
     baseSkillIndex: 
     paramCategory: 0
     targetIndex: -1
     paramType: 6
     baseValue: 0
-    deltaValue: 0
+    deltaValue: 0.01
     req_stone: 10
     req_iron: 10
     req_gold: 0

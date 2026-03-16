@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using System.Xml.Serialization;
-using Unity.VisualScripting;
 
 
 /// <summary>
@@ -301,64 +299,6 @@ public class BlockChangeRateParam
             default: return true;
         }
     }
-
-    /*
-    public BlockChangeRateData so;
-    private int baseRate;
-    private int rate_iron_enhanced;
-    private int rate_gold_enhanced;
-    private int rate_emerald_enhanced;
-    private int rate_ruby_enhanced;
-    private int rate_sapphire_enhanced;
-    private int rate_diamond_enhanced;
-    private int rate_iron_total => rate_iron_enhanced + so.rate_iron;
-    private int rate_gold_total => rate_gold_enhanced + so.rate_gold;
-    private int rate_emerald_total => rate_emerald_enhanced + so.rate_emerald;
-    private int rate_ruby_total => rate_ruby_enhanced + so.rate_ruby;
-    private int rate_sapphire_total => rate_sapphire_enhanced + so.rate_sapphire;
-    private int rate_diamond_total => rate_diamond_enhanced + so.rate_diamond;
-
-    public void Init(BlockChangeRateData _blockChangeRateData)
-    {
-        so = _blockChangeRateData;
-        baseRate = _blockChangeRateData.baseRate;
-    }
-    public void Set_Param(ParamType _paramType, float _setParam)
-    {
-        switch (_paramType)
-        {
-            case ParamType.Rate_ChangeGold: rate_gold_enhanced += (int)_setParam; break;
-            case ParamType.Rate_ChangeIron: rate_iron_enhanced += (int)_setParam; break;
-            case ParamType.Rate_ChangeEmerald: rate_emerald_enhanced += (int)_setParam; break;
-            case ParamType.Rate_ChangeRuby: rate_ruby_enhanced += (int)_setParam; break;
-            case ParamType.Rate_ChangeSapphire: rate_sapphire_enhanced += (int)_setParam; break;
-            case ParamType.Rate_ChangeDiamond: rate_diamond_enhanced += (int)_setParam; break;
-        }
-    }
-    public ResourceType SelectBlockType()
-    {
-        var total = baseRate + rate_iron_total + rate_gold_total + rate_emerald_total
-            + rate_ruby_total + rate_sapphire_total + rate_diamond_total;
-        var random = Random.Range(0, total);
-        switch (random)
-        {
-            case var _ when random < rate_iron_total:
-                return ResourceType.Iron;
-            case var _ when random < rate_iron_total + rate_gold_total:
-                return ResourceType.Gold;
-            case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total:
-                return ResourceType.Emerald;
-            case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total:
-                return ResourceType.Ruby;
-            case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total + rate_sapphire_total:
-                return ResourceType.Sapphire;
-            case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total + rate_sapphire_total + rate_diamond_total:
-                return ResourceType.Diamond;
-            default:
-                return ResourceType.Stone;
-        }
-    }
-    */
 }
 
 
@@ -588,7 +528,6 @@ public static class GameParamManager
         Init_GameBaseParam();
 
         await Init_SkillTreeParam(); // skill treeによるデータ更新
-        await Init_ArtifactParam(); // artifactによるデータ更新
 
         await UniTask.DelayFrame(1);
     }
@@ -663,18 +602,6 @@ public static class GameParamManager
             Set_DeltaParam(skillData.paramCategory, skillData.targetIndex, skillData.paramType, setParam);
         }
     }
-
-    private static async UniTask Init_ArtifactParam()
-    {
-        for (int i = 0; i < StaticManager.artifactSlotCount; i++)
-        {
-            var saveData = await SaveLoader.Inst.Get_ArtifactSlotData(i);
-            if (saveData == null) continue;
-            var artifactData = SOLoader.ArtifactData.artifactDatas[saveData.equipedArtifactIndex];
-            Set_DeltaParam(ParamCategory.GameSystem, -1, artifactData.paramType, artifactData.value);
-        }
-    }
-
 
     /// <summary>
     /// パラメータの差分fix

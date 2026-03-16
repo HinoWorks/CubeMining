@@ -40,6 +40,25 @@ public static class GameEvent
         {
             gameRecordDataMod_Ingame.OnNext((gameRecordData_Type, mod));
         }
+
+
+        // ピッケル攻撃時のイベント
+        private static readonly Subject<Unit> onPickaxeAttack = new();
+        public static IObservable<Unit> OnPickaxeAttack => onPickaxeAttack.AsObservable();
+        public static void PublishOnPickaxeAttack()
+        {
+            //Debug.Log("===Event publish===  PickaxeAttack");
+            onPickaxeAttack.OnNext(Unit.Default);
+        }
+
+        // 新しい地面レイヤーに到達
+        private static readonly Subject<int> onNewGroundLayer = new();
+        public static IObservable<int> OnNewGroundLayer => onNewGroundLayer.AsObservable();
+        public static void PublishOnNewGroundLayer(int layer)
+        {
+            //Debug.Log("===Event publish===  NewGroundLayer: " + layer);
+            onNewGroundLayer.OnNext(layer);
+        }
     }
 
 

@@ -25,7 +25,7 @@ public class UI_ArtifactDetailUnit : MonoBehaviour
     private void SetData_Base()
     {
         tmp_skillName.SetText(so.artifactName);
-        tmp_description.SetText(so.artifactDescription);
+        tmp_description.SetText(so.description);
 
         var paramNow = so.value;
         tmp_paramNow.SetText(paramNow.ToString("F2"));

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UniRx;
 using System.Collections.Generic;
+using UniRx;
 
 public class AttackManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class AttackManager : MonoBehaviour
     private int currentPickaxeIndex = 0;
     public int currentPickaxeDamage => pickaxeConts[currentPickaxeIndex].baseDamage;
     private int[] slotIndexes = { 0, 1 };
+
 
     void Awake()
     {

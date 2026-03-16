@@ -22,13 +22,18 @@ public class UI_ArtifactLibraryUnit : MonoBehaviour
     public void Init_Once(int _index, Action<bool, ArtifactUnitData, Vector3> _onMouseOver,
                             Action<ArtifactUnitData, int> _onClick_Equip)
     {
+        artifactIndex = _index;
+        so = SOLoader.ArtifactData.Get_ArtifactData(_index);
+        if (so == null)
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
         this.onMouseOver = _onMouseOver;
         this.onClick_Equip = _onClick_Equip;
         btn.onMouseOver += OnMouseOver_LibraryUnit;
-        artifactIndex = _index;
-        so = SOLoader.ArtifactData.Get_ArtifactData(_index);
-        if (so == null) return;
         icon.sprite = so.icon;
+        this.gameObject.SetActive(true);
     }
     public async void Init()
     {

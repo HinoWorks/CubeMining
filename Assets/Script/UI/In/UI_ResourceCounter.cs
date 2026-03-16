@@ -77,7 +77,7 @@ public class UI_ResourceCounter : MonoBehaviour
                 }
                 else
                 {
-                    tmp_resourceCount.text = $"{currentResourceFloat.ToString("F2")} {modCoin.unit}";
+                    tmp_resourceCount.text = $"{currentResourceFloat.ToString("F1")} {modCoin.unit}";
                 }
             }).OnComplete(() =>
         {

@@ -100,6 +100,7 @@ public class AttackCont_Pickaxe : MonoBehaviour
                         removeBuffer.Add(t);
                     }
                 }
+                if (targets.Count > 0) GameEvent.InGame.PublishOnPickaxeAttack();
                 foreach (var t in removeBuffer) targets.Remove(t);
             })
             .AddTo(this); // Destroy で自動終了

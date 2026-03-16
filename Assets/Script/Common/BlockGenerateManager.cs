@@ -190,7 +190,7 @@ public class BlockGenerateManager : MonoBehaviour
 
         GameEvent.UI.PublishDepthCount(currentLayerCont.layerIndex);
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.Depth, currentLayerCont.layerIndex);
-        Debug.Log($"currentLayerCont : {currentLayerCont.layerIndex}");
+        GameEvent.InGame.PublishOnNewGroundLayer(currentLayerCont.layerIndex);
     }
 
 

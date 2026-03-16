@@ -8921,6 +8921,7 @@ GameObject:
   - component: {fileID: 892646013}
   - component: {fileID: 892646014}
   - component: {fileID: 892646015}
+  - component: {fileID: 892646016}
   m_Layer: 0
   m_Name: ===Manager
   m_TagString: Untagged
@@ -9038,6 +9039,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217987d6c9e78418ab252633c87a7331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlockGenerateManager
+--- !u!114 &892646016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892646006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9047d478b951246b08369a3552d03cd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArtifactManager
+  pickaxe_damage: 0
+  pickaxe_attackInterval: 0
+  pickaxe_criticalRate: 0
+  pickaxe_resourceUpRate: 0
+  pickaxe_size: 0
+  all_damage: 0
+  all_attackInterval: 0
+  bomb_damage: 0
+  bomb_size: 0
+  create_bomb: 0
+  create_miniPickaxe: 0
+  create_bonusChest: 0
+  changeBlockRate: 0
+  get_ingameTime: 0
 --- !u!1 &893404566
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,6 +44,8 @@ public class InGameManager : MonoBehaviour
 
 
     private GameRecordData_thisGame gameRecordData_thisGame;
+
+    public float RemainingTime => timeLimit - timer;
     private float timer = 0;
     private float timeLimit => GameParamManager.gameBaseParam.ingameTime + exTime;
     private float exTime = 0f;

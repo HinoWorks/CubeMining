@@ -15,32 +15,279 @@ MonoBehaviour:
   artifactDatas:
   - artifactIndex: 1
     artifactName: Artifact -- 1
-    artifactDescription: 
+    description: Description artifact -- 1
+    rarity: 0
     icon: {fileID: 0}
-    pf: {fileID: 0}
-    paramType: 1
-    value: 1
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 1
+    value: 0.05
+    effectType_2: 0
+    value_2: 0
   - artifactIndex: 2
     artifactName: Artifact -- 2
-    artifactDescription: 
+    description: Description artifact -- 2
+    rarity: 0
     icon: {fileID: 0}
-    pf: {fileID: 0}
-    paramType: 1
-    value: 1
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 2
+    value: 0.05
+    effectType_2: 0
+    value_2: 0
   - artifactIndex: 3
     artifactName: Artifact -- 3
-    artifactDescription: 
+    description: Description artifact -- 3
+    rarity: 0
     icon: {fileID: 0}
-    pf: {fileID: 0}
-    paramType: 1
-    value: 1
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 3
+    value: 0.1
+    effectType_2: 0
+    value_2: 0
   - artifactIndex: 4
     artifactName: Artifact -- 4
-    artifactDescription: 
+    description: Description artifact -- 4
+    rarity: 0
     icon: {fileID: 0}
-    pf: {fileID: 0}
-    paramType: 1
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 4
+    value: 0.1
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 5
+    artifactName: Artifact -- 5
+    description: Description artifact -- 5
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 5
+    value: 0.1
+    effectType_2: 1
+    value_2: -0.15
+  - artifactIndex: 6
+    artifactName: Artifact -- 6
+    description: Description artifact -- 6
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 1
+    value: 0.15
+    effectType_2: 5
+    value_2: -0.25
+  - artifactIndex: 7
+    artifactName: Artifact -- 7
+    description: Description artifact -- 7
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 20
+    value: 0.2
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 8
+    artifactName: Artifact -- 8
+    description: Description artifact -- 8
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 21
+    value: 0.15
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 9
+    artifactName: Artifact -- 9
+    description: Description artifact -- 9
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 10
+    value: 0.2
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 10
+    artifactName: Artifact -- 10
+    description: Description artifact -- 10
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 11
+    value: 0.1
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 11
+    artifactName: Artifact -- 11
+    description: Description artifact -- 11
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 40
+    value: 0.03
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 12
+    artifactName: Artifact -- 12
+    description: Description artifact -- 12
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 20
+    activeCheckRate: 0
+    effectType: 2
+    value: 0.5
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 13
+    artifactName: Artifact -- 13
+    description: Description artifact -- 13
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 20
+    activeCheckRate: 0
+    effectType: 30
+    value: 0
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 14
+    artifactName: Artifact -- 14
+    description: Description artifact -- 14
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 20
+    activeCheckRate: 0
+    effectType: 32
+    value: 0
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 15
+    artifactName: Artifact -- 15
+    description: Description artifact -- 15
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 30
+    activeCheckRate: 0
+    effectType: 31
+    value: 0
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 16
+    artifactName: Artifact -- 16
+    description: Description artifact -- 16
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 30
+    activeCheckRate: 0
+    effectType: 30
+    value: 0
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 17
+    artifactName: Artifact -- 17
+    description: Description artifact -- 17
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 30
+    activeCheckRate: 0
+    effectType: 50
     value: 1
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 18
+    artifactName: Artifact -- 18
+    description: Description artifact -- 18
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 50
+    activeCheckRate: -1
+    effectType: 2
+    value: 0.25
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 19
+    artifactName: Artifact -- 19
+    description: Description artifact -- 19
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 50
+    activeCheckRate: -1
+    effectType: 2
+    value: 0.5
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 20
+    artifactName: Artifact -- 20
+    description: Description artifact -- 20
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 50
+    activeCheckRate: -1
+    effectType: 42
+    value: 0.03
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 21
+    artifactName: Artifact -- 21
+    description: Description artifact -- 21
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 50
+    activeCheckRate: -1
+    effectType: 41
+    value: 0.3
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 22
+    artifactName: Artifact -- 22
+    description: Description artifact -- 22
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 40
+    activeCheckRate: -1
+    effectType: 30
+    value: 0
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 23
+    artifactName: Artifact -- 23
+    description: Description artifact -- 23
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 40
+    activeCheckRate: -1
+    effectType: 1
+    value: 0.05
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 24
+    artifactName: Artifact -- 24
+    description: Description artifact -- 24
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 40
+    activeCheckRate: -1
+    effectType: 2
+    value: 0.01
+    effectType_2: 0
+    value_2: 0
+  - artifactIndex: 25
+    artifactName: Artifact -- 25
+    description: Description artifact -- 25
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 40
+    activeCheckRate: -1
+    effectType: 50
+    value: 1
+    effectType_2: 0
+    value_2: 0
   artifactGenerateRateDatas:
   - generateLevel: 1
     artifactCount: 3
