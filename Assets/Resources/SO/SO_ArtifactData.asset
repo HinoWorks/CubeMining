@@ -15,7 +15,7 @@ MonoBehaviour:
   artifactDatas:
   - artifactIndex: 1
     artifactName: Artifact -- 1
-    description: Description artifact -- 1
+    description: ' +5% Pickaxe Power'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 2
     artifactName: Artifact -- 2
-    description: Description artifact -- 2
+    description: ' +5% Pickaxe Attack Speed'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 3
     artifactName: Artifact -- 3
-    description: Description artifact -- 3
+    description: ' +20% Pickaxe Size '
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 4
     artifactName: Artifact -- 4
-    description: Description artifact -- 4
+    description: ' +10% Ore Yield from Pickaxe'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 5
     artifactName: Artifact -- 5
-    description: Description artifact -- 5
+    description: ' +10% Attack Speed / -15% Attack Power'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
     value_2: -0.15
   - artifactIndex: 6
     artifactName: Artifact -- 6
-    description: Description artifact -- 6
+    description: ' +15% Attack Power / -25% Size'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
     value_2: -0.25
   - artifactIndex: 7
     artifactName: Artifact -- 7
-    description: Description artifact -- 7
+    description: ' +20% Bomb Damage'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 8
     artifactName: Artifact -- 8
-    description: Description artifact -- 8
+    description: ' +15% Bomb Blast Radius'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 9
     artifactName: Artifact -- 9
-    description: Description artifact -- 9
+    description: ' +20% Non-Pickaxe Damage'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 10
     artifactName: Artifact -- 10
-    description: Description artifact -- 10
+    description: ' +10% Non-Pickaxe Attack Speed'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 11
     artifactName: Artifact -- 11
-    description: Description artifact -- 11
+    description: ' +3% Ore Conversion Rate'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 12
     artifactName: Artifact -- 12
-    description: Description artifact -- 12
+    description: 'Every 5s: 50% chance to gain +50% Pickaxe Speed'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 20
@@ -147,7 +147,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 13
     artifactName: Artifact -- 13
-    description: Description artifact -- 13
+    description: 'Every 5s: 50% chance for a Bomb Block to drop'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 20
@@ -158,7 +158,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 14
     artifactName: Artifact -- 14
-    description: Description artifact -- 14
+    description: 'Every 5s: 50% chance for a Bonus Chest to drop'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 20
@@ -169,7 +169,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 15
     artifactName: Artifact -- 15
-    description: Description artifact -- 15
+    description: '1% chance on hit: Drop a Mini-Pickaxe (deals 50% Pickaxe Damage)'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 30
@@ -180,7 +180,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 16
     artifactName: Artifact -- 16
-    description: Description artifact -- 16
+    description: '1% chance on hit: Spawn a Bomb Block'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 30
@@ -191,7 +191,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 17
     artifactName: Artifact -- 17
-    description: Description artifact -- 17
+    description: '1% chance on hit: +1s In-game Time'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 30
@@ -202,7 +202,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 18
     artifactName: Artifact -- 18
-    description: Description artifact -- 18
+    description: 'Last 5 Seconds: +25% Attack Power'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 50
@@ -213,7 +213,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 19
     artifactName: Artifact -- 19
-    description: Description artifact -- 19
+    description: 'Last 5 Seconds: +50% Attack Speed'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 50
@@ -224,7 +224,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 20
     artifactName: Artifact -- 20
-    description: Description artifact -- 20
+    description: 'Last 5 Seconds: +3% Instant Mine Chance'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 50
@@ -235,7 +235,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 21
     artifactName: Artifact -- 21
-    description: Description artifact -- 21
+    description: 'Last 5 Seconds: +30% Ore Yield'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 50
@@ -246,7 +246,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 22
     artifactName: Artifact -- 22
-    description: Description artifact -- 22
+    description: 'Every 5 Layers: Spawn a Bomb Block'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 40
@@ -257,7 +257,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 23
     artifactName: Artifact -- 23
-    description: Description artifact -- 23
+    description: 'Every 5 Layers: +5% Attack Power'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 40
@@ -268,7 +268,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 24
     artifactName: Artifact -- 24
-    description: Description artifact -- 24
+    description: 'Every 5 Layers: +1% Attack Speed'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 40
@@ -279,7 +279,7 @@ MonoBehaviour:
     value_2: 0
   - artifactIndex: 25
     artifactName: Artifact -- 25
-    description: Description artifact -- 25
+    description: 'Every 5 Layers: +1s In-game Time'
     rarity: 0
     icon: {fileID: 0}
     activeCheckTiming: 40
