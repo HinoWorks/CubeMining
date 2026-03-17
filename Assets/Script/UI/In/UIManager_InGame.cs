@@ -11,6 +11,7 @@ public class UIManager_InGame : MonoBehaviour
     [SerializeField] UI_ResourceCounter[] ui_resourceCounters;
     [SerializeField] TextMeshProUGUI tmp_timer;
     [SerializeField] TextMeshProUGUI tmp_depthCount;
+    [SerializeField] UI_EquipArtifactCont_HUD[] ui_equipArtifactConts;
     public UI_ResultManager ui_ResultManager;
     public UI_EventManager ui_EventManager;
     //private float currentCoinFloat;
@@ -41,6 +42,10 @@ public class UIManager_InGame : MonoBehaviour
                 foreach (var ui_resourceCounter in ui_resourceCounters)
                 {
                     ui_resourceCounter.Set_Init();
+                }
+                foreach (var ui_equipArtifactCont in ui_equipArtifactConts)
+                {
+                    ui_equipArtifactCont.Init_ArtifactData();
                 }
                 break;
             case GameStateType.InGame_End:
