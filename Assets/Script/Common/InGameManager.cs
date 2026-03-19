@@ -2,7 +2,8 @@ using UnityEngine;
 using UniRx;
 using System.Numerics;
 using System.Collections.Generic;
-
+using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
 
 
 /// <summary>
@@ -109,7 +110,7 @@ public class InGameManager : MonoBehaviour
     }
 
     #region -- SetState --
-    private void SetState_InGameReady()
+    private async Task SetState_InGameReady()
     {
         // インゲーム開始前の初期化
         gameRecordData_thisGame = new GameRecordData_thisGame();
@@ -123,6 +124,8 @@ public class InGameManager : MonoBehaviour
         GameEvent.UI.PublishTimeLimit(timeLimit);
 
         SoundManager.Inst.PlaySE(100);
+
+
     }
 
     private void SetState_InGame()
@@ -145,11 +148,14 @@ public class InGameManager : MonoBehaviour
     {
         AttackManager.Inst.AttackUnitDelete();
     }
-    private void SetState_ResultEnd_ToOutGame()
+    private async void SetState_ResultEnd_ToOutGame()
     {
-        BlockGenerateManager.Inst.ResetAllBlocks();
-        GameWatcher.Inst.SetGameState(GameStateType.OutGame);
         SoundManager.Inst.PlaySE(102);
+        UIManager_Title.Inst.Set_OverScreen().Forget();
+        await UniTask.Delay(250);
+        BlockGenerateManager.Inst.ResetAllBlocks();
+
+        GameWatcher.Inst.SetGameState(GameStateType.OutGame);
     }
     private void SetState_ResultEnd_ToIngameReady()
     {

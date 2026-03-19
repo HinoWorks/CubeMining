@@ -38,7 +38,7 @@ public class UIManager_InGame : MonoBehaviour
         switch (_state)
         {
             case GameStateType.InGame_Ready:
-                ui_EventManager.StateGame();
+                ui_EventManager.StartInGame();
                 foreach (var ui_resourceCounter in ui_resourceCounters)
                 {
                     ui_resourceCounter.Set_Init();

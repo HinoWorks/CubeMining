@@ -1,10 +1,9 @@
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
-using System.Numerics;
 using DG.Tweening;
 using TMPro;
-using Unity.VisualScripting;
+using Cysharp.Threading.Tasks;
 
 public enum OutGame_MenuType
 {
@@ -107,8 +106,10 @@ public class UIManager_OutGame : MonoBehaviour
             headerButton.Set_Select(currentMenuType);
         }
     }
-    public void OnClick_StartInGame()
+    public async void OnClick_StartInGame()
     {
+        UIManager_Title.Inst.Set_OverScreen().Forget();
+        await UniTask.Delay(300);
         main.SetActive(false);
         GameWatcher.Inst.SetGameState(GameStateType.InGame_Ready);
     }
