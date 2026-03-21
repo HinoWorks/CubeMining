@@ -50,8 +50,10 @@ public class UIManager_Title : MonoBehaviour
     {
         GameWatcher.Inst.SetGameState(GameStateType.InGame_Ready);
     }
-    public void OnClick_StartOutGame()
+    public async void OnClick_StartOutGame()
     {
+        Set_OverScreen().Forget();
+        await UniTask.Delay(350);
         GameWatcher.Inst.SetGameState(GameStateType.OutGame);
     }
     public void OnClick_Option()

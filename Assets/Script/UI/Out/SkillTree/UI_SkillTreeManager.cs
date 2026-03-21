@@ -42,8 +42,6 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     private Vector2 lastMousePos;
     private float duration_zoom = 0.05f;
 
-    private bool onceInitFin = false;
-
 
 
 #if UNITY_EDITOR
@@ -108,7 +106,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
 #endif
 
 
-    void OnceInit()
+    public void Start_OnceInit()
     {
         foreach (var skillTreeUnit in skillTreeUnits)
         {
@@ -118,7 +116,10 @@ public class UI_SkillTreeMaanger : MonoBehaviour
             skillTreeUnit.AwakeCall(OnMouseOver, OnClick_Enhance, UpdateNodeState);
         }
         ui_skillTreeDetail.gameObject.SetActive(false);
-        onceInitFin = true;
+        foreach (var skillTreeUnit in skillTreeUnits)
+        {
+            skillTreeUnit.Init();
+        }
     }
 
 
@@ -127,10 +128,6 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         var isActive = _outGameMenuType == OutGame_MenuType.SkillTree;
         if (isActive)
         {
-            if (!onceInitFin)
-            {
-                OnceInit();
-            }
             ui_skillTreeDetail.gameObject.SetActive(false);
             foreach (var skillTreeUnit in skillTreeUnits)
             {

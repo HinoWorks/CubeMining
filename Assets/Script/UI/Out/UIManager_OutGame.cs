@@ -72,7 +72,10 @@ public class UIManager_OutGame : MonoBehaviour
         {
             ui_resourceCounter.AwakeCall(false);
         }
-        Debug.Log("UI_ResourceCounter set === OutGame");
+
+        ui_skillTreeMaanger.Start_OnceInit();
+        ui_artifactManager.Start_OnceInit();
+        ui_pickaxeManager.Start_OnceInit();
     }
 
     private void ChangeGateState(GameStateType _state)
@@ -87,6 +90,8 @@ public class UIManager_OutGame : MonoBehaviour
             {
                 ui_resourceCounter.CounterUpdateCheck();
             }
+
+
         }
     }
 

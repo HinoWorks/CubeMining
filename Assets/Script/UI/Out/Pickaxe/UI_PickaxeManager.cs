@@ -12,13 +12,12 @@ public class UI_PickaxeManager : MonoBehaviour
     [SerializeField] UI_PickaxeEquipCont[] pickaxeEquipConts;
     [SerializeField] UI_PickaxeLibraryUnit[] pickaxeLibraryUnits;
     [SerializeField] UI_PickaxeSelectInfoCont selectInfoUnit;
-    private bool onceInitFin = false;
     private int[] slotIndexes = { 0, 1 };
     private HashSet<int> equipedPickaxeIndexes = new HashSet<int>();
     private bool isDoingAction = false;
 
 
-    void OnceInit()//主にコールバックを設定
+    public async void Start_OnceInit()//主にコールバックを設定
     {
         var index = 1;
         foreach (var pickaxeLibraryUnit in pickaxeLibraryUnits)
@@ -28,7 +27,10 @@ public class UI_PickaxeManager : MonoBehaviour
         }
         selectInfoUnit.Init_Once(OnClick_CraftPickaxe, OnClick_EquipPickaxe);
 
-        onceInitFin = true;
+        await Set_PickaxeEquip();
+        Set_PickaxeLibrary();
+        Set_PickaxeLibraryEquipState();
+        SelectPickaxeUnit(equipedPickaxeIndexes.First());
     }
 
 
@@ -38,10 +40,7 @@ public class UI_PickaxeManager : MonoBehaviour
         if (isActive)
         {
             isDoingAction = true;
-            if (!onceInitFin)
-            {
-                OnceInit();
-            }
+
             await Set_PickaxeEquip();
             Set_PickaxeLibrary();
             Set_PickaxeLibraryEquipState();

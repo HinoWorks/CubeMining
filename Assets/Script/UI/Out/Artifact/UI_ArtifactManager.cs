@@ -11,14 +11,11 @@ public class UI_ArtifactManager : MonoBehaviour
     [SerializeField] UI_ArtifactEquipUnit[] artifactEquipUnits;
     [SerializeField] UI_ArtifactLibraryUnit[] artifactLibraryUnits;
     [SerializeField] UI_ArtifactDetailUnit detailUnit;
-
     private List<int> equipedArtifactIndexes = new List<int>(10);
 
-    private bool onceInitFin = false;
 
 
-
-    void OnceInit()//主にコールバックを設定
+    public void Start_OnceInit()//主にコールバックを設定
     {
         var index = 1;
         foreach (var artifactLibraryUnit in artifactLibraryUnits)
@@ -33,8 +30,11 @@ public class UI_ArtifactManager : MonoBehaviour
             artifactEquipUnit.Init_Once(index, OnMouseOver_ArtifactUnit, OnClick_ArtifactUnit);
             index++;
         }
-        onceInitFin = true;
+        Set_ArtifactEquip().Forget();
+        Set_ArtifactLibrary();
     }
+
+
 
 
     public async void Init(OutGame_MenuType _outGameMenuType)
@@ -42,10 +42,6 @@ public class UI_ArtifactManager : MonoBehaviour
         var isActive = _outGameMenuType == OutGame_MenuType.Artifact;
         if (isActive)
         {
-            if (!onceInitFin)
-            {
-                OnceInit();
-            }
             await Set_ArtifactEquip();
             Set_ArtifactLibrary();
         }

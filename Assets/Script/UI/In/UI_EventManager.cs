@@ -10,7 +10,7 @@ public class UI_EventManager : MonoBehaviour
 
 
 
-    public async void StateGame()
+    public async void StartInGame()
     {
         obj_StartCall.SetActive(true);
         await UniTask.Delay(2000);
