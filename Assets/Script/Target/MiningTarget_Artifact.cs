@@ -44,9 +44,12 @@ public class MiningTarget_Artifact : MiningTarget_Object
         CameraManager.Inst?.ShakeBlockBreak();
 
         InGameManager.Inst.AddGetArtifact(artifactIndex);
+
         // ===== TODO Here === artifact icon show ======
-        //var ui_textArtifactGet = UI_PoolManager.Inst.Set_TextArtifactGet(transform, Vector3.zero);
-        //ui_textArtifactGet.SetText_Artifact(artifactValue.ToString(), Color.green);
+        var ui_textArtifactGet = UI_PoolManager.Inst.Set_GetArtifactCont();
+        ui_textArtifactGet.SetInit(artifactIndex, transform.position);
+
+
         base.BreakFromDamage();
         breakCallback?.Invoke();
     }

@@ -55,6 +55,7 @@ public class InGameManager : MonoBehaviour
     public List<ResourceData_Result> Get_ResourceDataList() => resourceDataList;
 
     private List<int> artifactIndexList = new List<int>();
+    public int Get_ArtifactCount() => artifactIndexList.Count;
     public List<int> Get_ArtifactIndexList() => artifactIndexList;
 
 

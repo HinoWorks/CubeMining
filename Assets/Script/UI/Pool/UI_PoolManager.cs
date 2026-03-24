@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 
 public class UI_PoolManager : MonoBehaviour
@@ -15,8 +16,8 @@ public class UI_PoolManager : MonoBehaviour
     [SerializeField] GameObject pf_circleGauge;
     [SerializeField] GameObject pf_getCoinText;
     [SerializeField] GameObject pf_otherText;
-    //[SerializeField] GameObject pf_moveIcon_Coin;
     [SerializeField] GameObject pf_getResourceCont;
+    [SerializeField] GameObject pf_getArtifactCont;
     [SerializeField] GameObject pf_getTime;
     [SerializeField] GameObject pf_speechBubble;
 
@@ -33,6 +34,7 @@ public class UI_PoolManager : MonoBehaviour
     private List<UI_TextCoinGet> pool_textCoinGet = new List<UI_TextCoinGet>();
     private List<UI_TextOtherGet> pool_otherText = new List<UI_TextOtherGet>();
     private List<UI_GetResourceCont> pool_getResourceCont = new List<UI_GetResourceCont>();
+    private List<UI_GetArtifactCont> pool_getArtifactCont = new List<UI_GetArtifactCont>();
     private List<UI_SpeechBubble> pool_speechBubble = new List<UI_SpeechBubble>(10);
     private List<UI_TextCont> pool_getTime = new List<UI_TextCont>();
 
@@ -82,8 +84,26 @@ public class UI_PoolManager : MonoBehaviour
             selectUnit.gameObject.SetActive(false);
         }
 
-
+        GameEvent.GameState.SetGameState.Subscribe(Init_GameStateChange).AddTo(this);
     }
+
+    private void Init_GameStateChange(GameStateType _state)
+    {
+        switch (_state)
+        {
+            case GameStateType.InGame_Ready:
+                foreach (var unit in pool_getArtifactCont)
+                {
+                    unit.gameObject.SetActive(false);
+                }
+                break;
+            case GameStateType.InGame:
+                break;
+            case GameStateType.InGame_End:
+                break;
+        }
+    }
+
 
     private void Set_UIScaleChange(float _zoomRate)
     {
@@ -92,19 +112,21 @@ public class UI_PoolManager : MonoBehaviour
 
 
 
-    public UI_CircleTimer Set_Gauge(Transform _target, Vector3 _offset)
-    {
-        UI_CircleTimer selectUnit = null;
-        selectUnit = pool_gauge_circle.Find(d => d.gameObject.activeSelf == false);
-        if (selectUnit == null)
+    /*
+        public UI_CircleTimer Set_Gauge(Transform _target, Vector3 _offset)
         {
-            var newUnit = Instantiate(pf_circleGauge, parent_base) as GameObject;
-            selectUnit = newUnit.GetComponent<UI_CircleTimer>();
-            pool_gauge_circle.Add(selectUnit);
+            UI_CircleTimer selectUnit = null;
+            selectUnit = pool_gauge_circle.Find(d => d.gameObject.activeSelf == false);
+            if (selectUnit == null)
+            {
+                var newUnit = Instantiate(pf_circleGauge, parent_base) as GameObject;
+                selectUnit = newUnit.GetComponent<UI_CircleTimer>();
+                pool_gauge_circle.Add(selectUnit);
+            }
+            selectUnit.Initialize(_target, _offset);
+            return selectUnit;
         }
-        selectUnit.Initialize(_target, _offset);
-        return selectUnit;
-    }
+        */
 
 
     public UI_TextCoinGet Set_TextCoinGet(Transform _target, Vector3 _offset)
@@ -135,21 +157,21 @@ public class UI_PoolManager : MonoBehaviour
         return selectUnit;
     }
 
-
-    public UI_SpeechBubble Set_SpeechBubbleGet(Transform _target, Vector3 _offset)
-    {
-        UI_SpeechBubble selectUnit = null;
-        selectUnit = pool_speechBubble.Find(d => d.gameObject.activeSelf == false);
-        if (selectUnit == null)
+    /*
+        public UI_SpeechBubble Set_SpeechBubbleGet(Transform _target, Vector3 _offset)
         {
-            var newUnit = Instantiate(pf_speechBubble, parent_base) as GameObject;
-            selectUnit = newUnit.GetComponent<UI_SpeechBubble>();
-            pool_speechBubble.Add(selectUnit);
+            UI_SpeechBubble selectUnit = null;
+            selectUnit = pool_speechBubble.Find(d => d.gameObject.activeSelf == false);
+            if (selectUnit == null)
+            {
+                var newUnit = Instantiate(pf_speechBubble, parent_base) as GameObject;
+                selectUnit = newUnit.GetComponent<UI_SpeechBubble>();
+                pool_speechBubble.Add(selectUnit);
+            }
+            selectUnit.Initialize(_target, _offset);
+            return selectUnit;
         }
-        selectUnit.Initialize(_target, _offset);
-        return selectUnit;
-    }
-
+    */
 
 
     #region -- Get Resource Cont --
@@ -162,6 +184,19 @@ public class UI_PoolManager : MonoBehaviour
             var newUnit = Instantiate(pf_getResourceCont, parent_over) as GameObject;
             selectUnit = newUnit.GetComponent<UI_GetResourceCont>();
             pool_getResourceCont.Add(selectUnit);
+        }
+        return selectUnit;
+    }
+
+    public UI_GetArtifactCont Set_GetArtifactCont()
+    {
+        UI_GetArtifactCont selectUnit = null;
+        selectUnit = pool_getArtifactCont.Find(d => d.gameObject.activeSelf == false);
+        if (selectUnit == null)
+        {
+            var newUnit = Instantiate(pf_getArtifactCont, parent_over) as GameObject;
+            selectUnit = newUnit.GetComponent<UI_GetArtifactCont>();
+            pool_getArtifactCont.Add(selectUnit);
         }
         return selectUnit;
     }

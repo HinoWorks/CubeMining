@@ -108,7 +108,7 @@ public class SO_AttackUnitData : ScriptableObject
         var data = Array.Find(pickaxeUnitDatas, x => x.pickaxeIndex == _pickaxeIndex);
         if (data == null)
         {
-            Debug.LogError($"PickaxeUnitData not found: {_pickaxeIndex}");
+            //Debug.LogError($"PickaxeUnitData not found: {_pickaxeIndex}");
             return null;
         }
         return data;

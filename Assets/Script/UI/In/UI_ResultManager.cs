@@ -5,6 +5,10 @@ using Cysharp.Threading.Tasks;
 public class UI_ResultManager : UI_PopUpBase
 {
     [SerializeField] UI_ResultUnitCont[] ui_resultUnitConts;
+
+    [SerializeField] Transform parent_artifact;
+    [SerializeField] GameObject pf_getArtifactCont;
+    private List<UI_GetArtifactCont> ui_getArtifactConts = new List<UI_GetArtifactCont>();
     [SerializeField] GameObject obj_buttons;
 
     public override void Open()
@@ -39,6 +43,9 @@ public class UI_ResultManager : UI_PopUpBase
             await ui_resultUnitCont.SetData(resourceData.resourceType, resourceData.resourceCount, currentCount);
             index++;
         }
+
+
+
         await UniTask.Delay(200);
         obj_buttons.SetActive(true);
     }

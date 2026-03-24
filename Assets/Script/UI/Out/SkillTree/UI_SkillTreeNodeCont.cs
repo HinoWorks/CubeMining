@@ -13,7 +13,7 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
 
     private float lineHeight = 4f;
     private RectTransform rectTransform;
-    private Image lineImage;
+    [SerializeField] private Image lineImage;
 
 
 #if UNITY_EDITOR
@@ -106,12 +106,6 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
     }
 #endif
 
-
-
-    void Awake()
-    {
-        lineImage = GetComponent<Image>();
-    }
 
 
 
