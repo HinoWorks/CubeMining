@@ -423,9 +423,25 @@ PrefabInstance:
       value: Skill Tree
       objectReference: {fileID: 0}
     - target: {fileID: 367433039821726065, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.9103774
+      objectReference: {fileID: 0}
+    - target: {fileID: 367433039821726065, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.98188645
+      objectReference: {fileID: 0}
+    - target: {fileID: 367433039821726065, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 367433039821726065, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 17029829b04b34923b3d530177e8d18a, type: 2}
+    - target: {fileID: 367433039821726065, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4293458687
+      objectReference: {fileID: 0}
     - target: {fileID: 367433040615277788, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_Name
       value: pf_ui_buttonBase Variant_header-category
@@ -512,15 +528,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 367433040807141574, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_Color.b
-      value: 0.5566038
+      value: 0.52354044
       objectReference: {fileID: 0}
     - target: {fileID: 367433040807141574, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_Color.g
-      value: 0.5566038
+      value: 0.58189666
       objectReference: {fileID: 0}
     - target: {fileID: 367433040807141574, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_Color.r
-      value: 0.5566038
+      value: 0.6132076
       objectReference: {fileID: 0}
     - target: {fileID: 367433040874670384, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_IsActive
@@ -540,7 +556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3182932831673345358, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5569257798595416298, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

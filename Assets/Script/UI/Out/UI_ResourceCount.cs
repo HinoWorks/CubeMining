@@ -8,13 +8,14 @@ public class UI_ResourceCount : MonoBehaviour
     [SerializeField] GameObject obj_lock;
     [SerializeField] Image icon;
     [SerializeField] TextMeshProUGUI tmp_resourceCount;
+    [SerializeField] Color color_normal;
 
 
     public void SetData(Sprite _icon, string _resourceCount, Color _color = default)
     {
         icon.sprite = _icon;
         tmp_resourceCount.text = _resourceCount;
-        tmp_resourceCount.color = _color == default ? Color.white : _color;
+        tmp_resourceCount.color = _color == Color.white ? color_normal : _color;
         obj_main.SetActive(true);
         obj_lock.SetActive(false);
 

@@ -147,7 +147,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
     {
         image_icon.enabled = unlockState == SkillTreeUnlockState.EnhanceReady || unlockState == SkillTreeUnlockState.EnhanceComplete;
         obj_lock.SetActive(unlockState == SkillTreeUnlockState.Locked);
-        obj_enhanceReady.SetActive(unlockState == SkillTreeUnlockState.EnhanceReady);
+        obj_enhanceReady.SetActive(unlockState != SkillTreeUnlockState.EnhanceReady || unlockState != SkillTreeUnlockState.EnhanceComplete);
         obj_complete.SetActive(unlockState == SkillTreeUnlockState.EnhanceComplete);
 
         button.gameObject.SetActive(unlockState != SkillTreeUnlockState.Hide);

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1986617340520008877
 RectTransform:
   m_ObjectHideFlags: 0
@@ -58,14 +58,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21484515, g: 0.6415094, b: 0.61451536, a: 1}
+  m_Color: {r: 0.4614377, g: 0.6320754, b: 0.12820399, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 13ad51c310d134a01aed1f97fd08efd4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cae8859ce1fb7425eb2975fe9789b066, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -92,6 +92,18 @@ PrefabInstance:
       value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 367433039821726065, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.9198113
+      objectReference: {fileID: 0}
+    - target: {fileID: 367433039821726065, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 367433039821726065, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9271012
+      objectReference: {fileID: 0}
+    - target: {fileID: 367433039821726065, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_fontSizeMax
       value: 35
       objectReference: {fileID: 0}
@@ -99,6 +111,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 17029829b04b34923b3d530177e8d18a, type: 2}
+    - target: {fileID: 367433039821726065, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4293656556
+      objectReference: {fileID: 0}
     - target: {fileID: 367433040615277788, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_Name
       value: pf_ui_buttonBase Variant_startMIning
@@ -197,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3182932831673345358, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6429285382588237226, guid: 0af3b4e414fd646488036f7583044ff6, type: 3}
       propertyPath: m_IsActive
