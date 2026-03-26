@@ -32,10 +32,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6956396324313487215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 175, y: 175}
+  m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5158089988807335602
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cfd19c5d6d57d4641a265b14968128aa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 529464d505747e24e9f2c51d9d37a0b9, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -411,6 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdbbb73a6c294f2fb943b251eaf320d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HButtonConnect
+  obj_OFF: {fileID: 0}
   obj_mouseOver: {fileID: 7431185926047132001}
   obj_clickSelect: {fileID: 8209119396920740234}
 --- !u!114 &7879613144832403043
