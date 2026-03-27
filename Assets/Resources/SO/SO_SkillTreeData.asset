@@ -34,7 +34,7 @@ MonoBehaviour:
   - index: 2
     skillName: Rapid Swing
     description: Increases the attack speed of the pickaxe.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 21300000, guid: fb940cb05d29e485298cb21e2c5d30a3, type: 3}
     maxLevel: 3
     baseSkillIndex: 01000000
     paramCategory: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   - index: 3
     skillName: Wide Reach
     description: Expands the area of effect for pickaxe attacks.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 21300000, guid: 596edee05e9e44070bf4364f9ba03faa, type: 3}
     maxLevel: 3
     baseSkillIndex: 0100000002000000
     paramCategory: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
   - index: 4
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 21300000, guid: cbe8cca43c9ff42c6b8e516517c9ee2f, type: 3}
     maxLevel: 3
     baseSkillIndex: 0200000003000000
     paramCategory: 0
@@ -88,7 +88,7 @@ MonoBehaviour:
   - index: 101
     skillName: Icicle Surge
     description: Unlocks the ability to generate [x] icicles to strike blocks
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 1
     baseSkillIndex: 04000000
     paramCategory: 4
@@ -106,7 +106,7 @@ MonoBehaviour:
   - index: 102
     skillName: Frostbite Power
     description: Increases the damage dealt by icicles.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 5
     baseSkillIndex: 65000000
     paramCategory: 4
@@ -124,7 +124,7 @@ MonoBehaviour:
   - index: 103
     skillName: Cold Interval
     description: Reduces the time between icicle attacks.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 3
     baseSkillIndex: 6500000066000000
     paramCategory: 4
@@ -142,7 +142,7 @@ MonoBehaviour:
   - index: 104
     skillName: Multi-Icicle
     description: Increases the number of icicles generated simultaneously.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 3
     baseSkillIndex: 67000000
     paramCategory: 4
@@ -160,7 +160,7 @@ MonoBehaviour:
   - index: 105
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 5
     baseSkillIndex: 68000000
     paramCategory: 4
@@ -178,7 +178,7 @@ MonoBehaviour:
   - index: 201
     skillName: Apex Bolt
     description: Strikes the highest block with [x] powerful lightning bolts.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 1
     baseSkillIndex: 6f000000
     paramCategory: 4
@@ -196,7 +196,7 @@ MonoBehaviour:
   - index: 202
     skillName: High-Voltage
     description: Increases the damage of lightning strikes on the highest blocks.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 5
     baseSkillIndex: 01000000
     paramCategory: 4
@@ -214,7 +214,7 @@ MonoBehaviour:
   - index: 203
     skillName: Volt Interval
     description: Reduces the time between icicle attacks.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 3
     baseSkillIndex: 14000000
     paramCategory: 4
@@ -232,7 +232,7 @@ MonoBehaviour:
   - index: 204
     skillName: Multi-Bolt
     description: Increases the number of icicles generated simultaneously.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 3
     baseSkillIndex: 15000000
     paramCategory: 4
@@ -250,7 +250,7 @@ MonoBehaviour:
   - index: 205
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 5
     baseSkillIndex: 16000000
     paramCategory: 4
@@ -268,7 +268,7 @@ MonoBehaviour:
   - index: 301
     skillName: Chaos Bolt
     description: Strikes random blocks with [x] chaotic lightning bolts.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 1
     baseSkillIndex: 16000000
     paramCategory: 4
@@ -286,7 +286,7 @@ MonoBehaviour:
   - index: 302
     skillName: Surge Power
     description: Increases the damage of random lightning strikes.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 5
     baseSkillIndex: 18000000
     paramCategory: 4
@@ -304,7 +304,7 @@ MonoBehaviour:
   - index: 303
     skillName: Surge Interval
     description: Reduces the time between random lightning strikes.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 3
     baseSkillIndex: 17000000
     paramCategory: 4
@@ -322,7 +322,7 @@ MonoBehaviour:
   - index: 304
     skillName: Multi-Surge
     description: Strikes more random blocks simultaneously.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 3
     baseSkillIndex: 1a000000
     paramCategory: 4
@@ -340,7 +340,7 @@ MonoBehaviour:
   - index: 305
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 5
     baseSkillIndex: 19000000
     paramCategory: 4
@@ -358,7 +358,7 @@ MonoBehaviour:
   - index: 401
     skillName: Orbiting Star
     description: Creates [x] stars that orbit and damage nearby blocks.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 1
     baseSkillIndex: 19000000
     paramCategory: 4
@@ -376,7 +376,7 @@ MonoBehaviour:
   - index: 402
     skillName: Starlight Power
     description: ncreases the damage dealt by orbiting stars.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 4
     baseSkillIndex: 14000000
     paramCategory: 4
@@ -394,7 +394,7 @@ MonoBehaviour:
   - index: 403
     skillName: Orbit Speed
     description: Increases the rotation speed/attack frequency of the stars.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 3
     baseSkillIndex: 14000000
     paramCategory: 4
@@ -412,7 +412,7 @@ MonoBehaviour:
   - index: 404
     skillName: Star Cluster
     description: ncreases the number of stars orbiting the player.
-    icon: {fileID: 21300000, guid: 540a0d69de7084b6687710a303ac8bbb, type: 3}
+    icon: {fileID: 0}
     maxLevel: 3
     baseSkillIndex: 14000000
     paramCategory: 4
