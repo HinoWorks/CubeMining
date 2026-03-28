@@ -43,7 +43,7 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
     {
         //Debug.Log($"UpdateConnection: {baseUnit.name}, {targetUnit.name}");
         rectTransform = GetComponent<RectTransform>();
-        lineImage = GetComponent<Image>();
+        //lineImage = GetComponent<Image>();
         if (baseUnit == null || targetUnit == null || rectTransform == null) return;
 
         RectTransform baseRect = baseUnit.GetComponent<RectTransform>();
