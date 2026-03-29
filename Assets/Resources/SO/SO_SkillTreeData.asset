@@ -88,7 +88,7 @@ MonoBehaviour:
   - index: 101
     skillName: Icicle Surge
     description: Unlocks the ability to generate [x] icicles to strike blocks
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 3f7321483ae3e406aa42e401f522479f, type: 3}
     maxLevel: 1
     baseSkillIndex: 04000000
     paramCategory: 4
@@ -106,7 +106,7 @@ MonoBehaviour:
   - index: 102
     skillName: Frostbite Power
     description: Increases the damage dealt by icicles.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 3646393c6aa624af097e547689549aba, type: 3}
     maxLevel: 5
     baseSkillIndex: 65000000
     paramCategory: 4
@@ -124,7 +124,7 @@ MonoBehaviour:
   - index: 103
     skillName: Cold Interval
     description: Reduces the time between icicle attacks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: afa1211184b7f4a19b10c8d833a7996f, type: 3}
     maxLevel: 3
     baseSkillIndex: 6500000066000000
     paramCategory: 4
@@ -142,7 +142,7 @@ MonoBehaviour:
   - index: 104
     skillName: Multi-Icicle
     description: Increases the number of icicles generated simultaneously.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 0855e2fc05eb340838840a3085e7c6a3, type: 3}
     maxLevel: 3
     baseSkillIndex: 67000000
     paramCategory: 4
@@ -160,7 +160,7 @@ MonoBehaviour:
   - index: 105
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: a04725aea4f7141798e92047118ac8d8, type: 3}
     maxLevel: 5
     baseSkillIndex: 68000000
     paramCategory: 4
@@ -178,9 +178,9 @@ MonoBehaviour:
   - index: 201
     skillName: Apex Bolt
     description: Strikes the highest block with [x] powerful lightning bolts.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 9b31b859c0c084189af72b76881a7340, type: 3}
     maxLevel: 1
-    baseSkillIndex: 6f000000
+    baseSkillIndex: 69000000
     paramCategory: 4
     targetIndex: 2
     paramType: 0
@@ -196,9 +196,9 @@ MonoBehaviour:
   - index: 202
     skillName: High-Voltage
     description: Increases the damage of lightning strikes on the highest blocks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: aa7853a506f8040fbb45af47e3442e5b, type: 3}
     maxLevel: 5
-    baseSkillIndex: 01000000
+    baseSkillIndex: c9000000
     paramCategory: 4
     targetIndex: 2
     paramType: 10
@@ -214,9 +214,9 @@ MonoBehaviour:
   - index: 203
     skillName: Volt Interval
     description: Reduces the time between icicle attacks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: d950f0405e8734bdab3a9c7bc081ede7, type: 3}
     maxLevel: 3
-    baseSkillIndex: 14000000
+    baseSkillIndex: ca000000
     paramCategory: 4
     targetIndex: 2
     paramType: 13
@@ -232,9 +232,9 @@ MonoBehaviour:
   - index: 204
     skillName: Multi-Bolt
     description: Increases the number of icicles generated simultaneously.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 585985363abdc4d01b715feaf61081d0, type: 3}
     maxLevel: 3
-    baseSkillIndex: 15000000
+    baseSkillIndex: cb000000
     paramCategory: 4
     targetIndex: 2
     paramType: 11
@@ -250,9 +250,9 @@ MonoBehaviour:
   - index: 205
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 6b37bf82b1d0b41859889c50e50c61a9, type: 3}
     maxLevel: 5
-    baseSkillIndex: 16000000
+    baseSkillIndex: cc000000
     paramCategory: 4
     targetIndex: 2
     paramType: 9
@@ -268,9 +268,9 @@ MonoBehaviour:
   - index: 301
     skillName: Chaos Bolt
     description: Strikes random blocks with [x] chaotic lightning bolts.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 9f9f790c11fdc4c739dc156bcc4d5545, type: 3}
     maxLevel: 1
-    baseSkillIndex: 16000000
+    baseSkillIndex: cd000000
     paramCategory: 4
     targetIndex: 3
     paramType: 0
@@ -286,9 +286,9 @@ MonoBehaviour:
   - index: 302
     skillName: Surge Power
     description: Increases the damage of random lightning strikes.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 7129f8f085a7a413785daf690382057d, type: 3}
     maxLevel: 5
-    baseSkillIndex: 18000000
+    baseSkillIndex: 2d010000
     paramCategory: 4
     targetIndex: 3
     paramType: 10
@@ -304,9 +304,9 @@ MonoBehaviour:
   - index: 303
     skillName: Surge Interval
     description: Reduces the time between random lightning strikes.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: a691ebbd049284fbb817bdae91f1c7da, type: 3}
     maxLevel: 3
-    baseSkillIndex: 17000000
+    baseSkillIndex: 2e010000
     paramCategory: 4
     targetIndex: 3
     paramType: 13
@@ -322,9 +322,9 @@ MonoBehaviour:
   - index: 304
     skillName: Multi-Surge
     description: Strikes more random blocks simultaneously.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 14cc648311ff6476c98725a0a0e7b62f, type: 3}
     maxLevel: 3
-    baseSkillIndex: 1a000000
+    baseSkillIndex: 2f010000
     paramCategory: 4
     targetIndex: 3
     paramType: 11
@@ -340,9 +340,9 @@ MonoBehaviour:
   - index: 305
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: c0505c970bd5b4fed948ab5e5ed37ddd, type: 3}
     maxLevel: 5
-    baseSkillIndex: 19000000
+    baseSkillIndex: 30010000
     paramCategory: 4
     targetIndex: 3
     paramType: 9
@@ -360,7 +360,7 @@ MonoBehaviour:
     description: Creates [x] stars that orbit and damage nearby blocks.
     icon: {fileID: 0}
     maxLevel: 1
-    baseSkillIndex: 19000000
+    baseSkillIndex: 31010000
     paramCategory: 4
     targetIndex: 4
     paramType: 0
@@ -378,7 +378,7 @@ MonoBehaviour:
     description: ncreases the damage dealt by orbiting stars.
     icon: {fileID: 0}
     maxLevel: 4
-    baseSkillIndex: 14000000
+    baseSkillIndex: 91010000
     paramCategory: 4
     targetIndex: 4
     paramType: 10
@@ -396,7 +396,7 @@ MonoBehaviour:
     description: Increases the rotation speed/attack frequency of the stars.
     icon: {fileID: 0}
     maxLevel: 3
-    baseSkillIndex: 14000000
+    baseSkillIndex: 92010000
     paramCategory: 4
     targetIndex: 4
     paramType: 13
@@ -414,7 +414,7 @@ MonoBehaviour:
     description: ncreases the number of stars orbiting the player.
     icon: {fileID: 0}
     maxLevel: 3
-    baseSkillIndex: 14000000
+    baseSkillIndex: 93010000
     paramCategory: 4
     targetIndex: 4
     paramType: 11
@@ -432,7 +432,7 @@ MonoBehaviour:
     description: Boosts the chance of landing a critical hit for massive damage.
     icon: {fileID: 0}
     maxLevel: 5
-    baseSkillIndex: 
+    baseSkillIndex: 94010000
     paramCategory: 4
     targetIndex: 4
     paramType: 9
@@ -448,9 +448,9 @@ MonoBehaviour:
   - index: 501
     skillName: Horizon Arrow
     description: Fires a piercing arrow to damage a random horizontal row of blocks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: cb89ae35b88d6450281707357b2393fc, type: 3}
     maxLevel: 1
-    baseSkillIndex: 
+    baseSkillIndex: 95010000
     paramCategory: 4
     targetIndex: 5
     paramType: 0
@@ -466,9 +466,9 @@ MonoBehaviour:
   - index: 502
     skillName: Piercing Power
     description: Increases the damage of horizontal arrows.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 9db3c24bf40cc4685bb8e851faffb227, type: 3}
     maxLevel: 5
-    baseSkillIndex: 
+    baseSkillIndex: f5010000
     paramCategory: 4
     targetIndex: 5
     paramType: 10
@@ -484,9 +484,9 @@ MonoBehaviour:
   - index: 503
     skillName: Arrow Interval
     description: Reduces the time between arrow shots.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 5e3b42128073c46ffb3f324df0c599a3, type: 3}
     maxLevel: 3
-    baseSkillIndex: 
+    baseSkillIndex: f6010000
     paramCategory: 4
     targetIndex: 5
     paramType: 13
@@ -502,9 +502,9 @@ MonoBehaviour:
   - index: 504
     skillName: Volley Shot
     description: Increases the number of arrows fired simultaneously.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: e7c05e67b6d2442febcaabbb5642d57e, type: 3}
     maxLevel: 3
-    baseSkillIndex: 
+    baseSkillIndex: f7010000
     paramCategory: 4
     targetIndex: 5
     paramType: 11
@@ -520,9 +520,9 @@ MonoBehaviour:
   - index: 505
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 20edb53adb70b415f9b188e793907cc5, type: 3}
     maxLevel: 5
-    baseSkillIndex: 
+    baseSkillIndex: f8010000
     paramCategory: 4
     targetIndex: 5
     paramType: 9
@@ -538,9 +538,9 @@ MonoBehaviour:
   - index: 601
     skillName: Vertical Arrow
     description: Fires a piercing arrow to damage a random vertical column of blocks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: c4931ca6586c74f87880120781a66f23, type: 3}
     maxLevel: 1
-    baseSkillIndex: 
+    baseSkillIndex: f9010000
     paramCategory: 4
     targetIndex: 6
     paramType: 0
@@ -556,9 +556,9 @@ MonoBehaviour:
   - index: 602
     skillName: Piercing Power
     description: Increases the damage of vertical arrows.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 244f1e90e39a94f35b68ae439da94173, type: 3}
     maxLevel: 5
-    baseSkillIndex: 
+    baseSkillIndex: 59020000
     paramCategory: 4
     targetIndex: 6
     paramType: 10
@@ -574,9 +574,9 @@ MonoBehaviour:
   - index: 603
     skillName: Arrow Interval
     description: Reduces the time between arrow shots.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 1b80329e20bc94fba8b8f29ffc0123cb, type: 3}
     maxLevel: 3
-    baseSkillIndex: 
+    baseSkillIndex: 5a020000
     paramCategory: 4
     targetIndex: 6
     paramType: 13
@@ -592,9 +592,9 @@ MonoBehaviour:
   - index: 604
     skillName: Volley Shot
     description: Increases the number of arrows fired simultaneously.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: c3ead6b32f14f42a8bf3121afa1e5c3a, type: 3}
     maxLevel: 3
-    baseSkillIndex: 
+    baseSkillIndex: 5b020000
     paramCategory: 4
     targetIndex: 6
     paramType: 11
@@ -610,9 +610,9 @@ MonoBehaviour:
   - index: 605
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 8a04bc2fbbe654ff6b43e8bb4ff1808b, type: 3}
     maxLevel: 5
-    baseSkillIndex: 
+    baseSkillIndex: 5c020000
     paramCategory: 4
     targetIndex: 6
     paramType: 9
@@ -934,7 +934,7 @@ MonoBehaviour:
   - index: 2011
     skillName: Unlock Crate
     description: Unlocks the appearance of Wooden Crate blocks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: a8e6d72d0144d43b4817c9d2710336ad, type: 3}
     maxLevel: 1
     baseSkillIndex: 01000000
     paramCategory: 3
@@ -952,7 +952,7 @@ MonoBehaviour:
   - index: 2012
     skillName: Crate Frequency
     description: Increases the spawn rate of Wooden Crate blocks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: d2f0a5470319942138c9256e5a7bbf34, type: 3}
     maxLevel: 3
     baseSkillIndex: db070000
     paramCategory: 3
@@ -970,7 +970,7 @@ MonoBehaviour:
   - index: 2013
     skillName: Loot Quality
     description: Improves the quality/amount of items found inside crates.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: e12dc540fcbf640abba72b853ea84961, type: 3}
     maxLevel: 1
     baseSkillIndex: dc070000
     paramCategory: 3
@@ -988,7 +988,7 @@ MonoBehaviour:
   - index: 2021
     skillName: Unlock Timer
     description: Unlocks the appearance of special Timer blocks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 9f2858d6dbaf04cca824d600d7703d13, type: 3}
     maxLevel: 1
     baseSkillIndex: dd070000
     paramCategory: 3
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   - index: 2022
     skillName: Timer Frequency
     description: Increases the spawn rate of Timer blocks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: e201a72cf4a2c4007addc3fe6b9a9bb5, type: 3}
     maxLevel: 3
     baseSkillIndex: e5070000
     paramCategory: 3
@@ -1024,7 +1024,7 @@ MonoBehaviour:
   - index: 2023
     skillName: Timer Potency
     description: Enhances the time-extending effect of Timer blocks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: bd6b17c5444e94455b7b512dbbcc6d38, type: 3}
     maxLevel: 3
     baseSkillIndex: e6070000
     paramCategory: 3
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   - index: 2031
     skillName: Unlock Bomb
     description: Unlocks the appearance of explosive Bomb blocks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 51f741c111efc47858a57676bd988468, type: 3}
     maxLevel: 1
     baseSkillIndex: e7070000
     paramCategory: 3
@@ -1060,7 +1060,7 @@ MonoBehaviour:
   - index: 2032
     skillName: Bomb Frequency
     description: Increases the spawn rate of Bomb blocks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 6d5d2ba5312044ae78add0be88b5eb23, type: 3}
     maxLevel: 1
     baseSkillIndex: ef070000
     paramCategory: 3
@@ -1078,7 +1078,7 @@ MonoBehaviour:
   - index: 2033
     skillName: Blast Radius
     description: Expands the explosion range of Bomb blocks.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 9b601a818082348e6b0c65c53a451bd2, type: 3}
     maxLevel: 3
     baseSkillIndex: f0070000
     paramCategory: 3
@@ -1096,7 +1096,7 @@ MonoBehaviour:
   - index: 2034
     skillName: Blast Force
     description: Increases the damage dealt by Bomb block explosions.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: af216b199581349c8abc39d933d7fff1, type: 3}
     maxLevel: 3
     baseSkillIndex: f1070000
     paramCategory: 3

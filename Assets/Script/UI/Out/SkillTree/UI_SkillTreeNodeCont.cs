@@ -111,7 +111,7 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
 
     public void Set_LineState(SkillTreeUnlockState _unlockState, int _level)
     {
-        lineImage.enabled = _unlockState != SkillTreeUnlockState.Hide;
+        lineImage.gameObject.SetActive(_unlockState != SkillTreeUnlockState.Hide);
         if (_unlockState == SkillTreeUnlockState.Hide) return;
         lineImage.color = _level == 0 ? Color.gray : Color.green;
     }
