@@ -10,6 +10,7 @@ public enum EffectType
     BlockBreak = 2,
 
     ThunderStrike = 100,
+    ThunderStrike_Red = 101,
 }
 
 public class EffectManager : MonoBehaviour
@@ -19,11 +20,13 @@ public class EffectManager : MonoBehaviour
     [SerializeField] GameObject pf_eff_blockDamage;
     [SerializeField] GameObject pf_eff_blockBreak;
     [SerializeField] GameObject pf_eff_thunderStrike;
+    [SerializeField] GameObject pf_eff_thunderStrike_red;
     private List<GameObject> pool_eff_blockDamage = new List<GameObject>();
     private List<GameObject> pool_eff_blockBreak = new List<GameObject>();
     private List<GameObject> pool_eff_thunderStrike = new List<GameObject>();
-
+    private List<GameObject> pool_eff_thunderStrike_red = new List<GameObject>();
     private int createCountInit = 20;
+    private int createCountInit_thunderStrike = 10;
 
     void Awake()
     {
@@ -45,11 +48,17 @@ public class EffectManager : MonoBehaviour
             newUnit.SetActive(false);
             pool_eff_blockDamage.Add(newUnit);
         }
-        for (int i = 0; i < createCountInit; i++)
+        for (int i = 0; i < createCountInit_thunderStrike; i++)
         {
             var newUnit = Instantiate(pf_eff_thunderStrike, InGameManager.Inst.ParentPool) as GameObject;
             newUnit.SetActive(false);
             pool_eff_thunderStrike.Add(newUnit);
+        }
+        for (int i = 0; i < createCountInit_thunderStrike; i++)
+        {
+            var newUnit = Instantiate(pf_eff_thunderStrike_red, InGameManager.Inst.ParentPool) as GameObject;
+            newUnit.SetActive(false);
+            pool_eff_thunderStrike_red.Add(newUnit);
         }
     }
 
@@ -76,6 +85,8 @@ public class EffectManager : MonoBehaviour
                 return (pf_eff_blockBreak, pool_eff_blockBreak);
             case EffectType.ThunderStrike:
                 return (pf_eff_thunderStrike, pool_eff_thunderStrike);
+            case EffectType.ThunderStrike_Red:
+                return (pf_eff_thunderStrike_red, pool_eff_thunderStrike_red);
             default:
                 return (null, new List<GameObject>());
         }

@@ -94,6 +94,17 @@ public partial class SROptions
     }
 
 
+    public static bool isSkillTreeUpgradeNoMaterial = false;
+    [Category("Skill")]
+    [DisplayName("SKill Tree アップグレード素材なし)")]
+    [Sort(0)]
+    public bool IsSkillTreeUpgradeNoMaterial
+    {
+        get { return isSkillTreeUpgradeNoMaterial; }
+        set { isSkillTreeUpgradeNoMaterial = value; }
+    }
+
+
     private int targetIndex;
     [Category("要素アンロックAttack")]
     [DisplayName("index")]
@@ -131,8 +142,9 @@ public partial class SROptions
         var targetSkillTreeData = SOLoader.SkillTreeData.GetSkillTreeDatas(ParamCategory.Block, targetIndex_block, ParamType.Unlock);
         if (targetSkillTreeData == null) return;
         SaveLoader.Inst.Request_SaveSkillTreeData(targetSkillTreeData.index, 1);
-
     }
+
+
 
 
 

@@ -1,9 +1,13 @@
+// GrabPass は Built-in 向け。URP では動作せず、UI マテリアルでは _GrabTexture_ST の登録エラーになることがあります。
+// 背景ブラーは Custom/UI/Blur URP + RenderTexture を使用してください。
 Shader "Custom/Blur"
 {
     Properties
     {
         _MainTex("Texture", 2D) = "white" {}
         _Blur("Blur", Float) = 10
+        // NoScaleOffset: Unity が _GrabTexture_ST を作らない（UGUI/URP の global property sheet エラー回避）
+        [HideInInspector][NoScaleOffset] _GrabTexture("Grab", 2D) = "white" {}
     }
     SubShader
     {

@@ -236,12 +236,29 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         //if (_skillTreeUnit.unlockState != SkillTreeUnlockState.EnhanceReady) return;
         if (ui_skillTreeDetail.IsEnhanceReady == false) return;
 
+
+#if UNITY_EDITOR
+        if (SROptions.isSkillTreeUpgradeNoMaterial)
+        {
+            Debug.Log("SkillTreeUpgradeNoMaterial");
+        }
+        else
+        {
+            foreach (var resource in ui_skillTreeDetail.RequredResources)
+            {
+                if (resource.requiredCount <= 0) continue;
+                SaveLoader.Inst.Request_SaveResource(resource.resourceType, -resource.requiredCount);
+            }
+        }
+#else
+// コスト消費
         foreach (var resource in ui_skillTreeDetail.RequredResources)
         {
-            // コスト消費
             if (resource.requiredCount <= 0) continue;
             SaveLoader.Inst.Request_SaveResource(resource.resourceType, -resource.requiredCount);
         }
+#endif
+
         SaveLoader.Inst.Request_SaveSkillTreeData(_skillTreeUnit.skillIndex, _skillTreeUnit.level + 1);
         SoundManager.Inst.PlaySE(120);
 
