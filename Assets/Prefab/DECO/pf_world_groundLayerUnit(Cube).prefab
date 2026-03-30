@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pf_world_groundLayerUnit(Cube)
       objectReference: {fileID: 0}
+    - target: {fileID: 8656574837309597398, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -75,6 +79,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7131653223956862607, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1173048279816098769}
+    - targetCorrespondingSourceObject: {fileID: 8656574837309597398, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 398011202244671035}
   m_SourcePrefab: {fileID: 100100000, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
 --- !u!23 &4555536062307883357 stripped
 MeshRenderer:
@@ -100,6 +107,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AroundLayerUnit
   mesh_1: {fileID: 4555536062307883357}
   mesh_2: {fileID: 6525550610244971438}
+--- !u!1 &5940727050192467351 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8656574837309597398, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
+  m_PrefabInstance: {fileID: 3050035591424693057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &398011202244671035
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5940727050192467351}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &6525550610244971438 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8132531712570095855, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
