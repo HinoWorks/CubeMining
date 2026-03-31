@@ -36,9 +36,13 @@ public class BulletBase : MonoBehaviour
 
     public virtual void Init(int _damage, float _lifetime, Vector3 _direction)
     {
-        damage = _damage;
-        lifetime = _lifetime;
+        Init(_damage, _direction);
+        SetLifetime();
+    }
 
+    public virtual void Init(int _damage, Vector3 _direction)
+    {
+        damage = _damage;
         gameObject.SetActive(true);
         if (col == null)
         {
@@ -49,9 +53,19 @@ public class BulletBase : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
         if (_direction != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(_direction);
-
-        SetLifetime();
     }
+    public virtual void Init(int _damage)
+    {
+        damage = _damage;
+        gameObject.SetActive(true);
+        if (col == null)
+        {
+            ConnectComponents();
+        }
+        col.enabled = true;
+        rb.angularVelocity = Vector3.zero;
+    }
+
     public virtual void ReturnToPool()
     {
         col.enabled = false;
@@ -66,8 +80,11 @@ public class BulletBase : MonoBehaviour
         {
             col.enabled = false;
         }
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
         Destroy(this.gameObject);
     }
 
