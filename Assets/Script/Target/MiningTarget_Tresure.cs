@@ -13,6 +13,7 @@ public class MiningTarget_Tresure : MiningTarget_Object
 
     public override void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData, int _layerIndex)
     {
+        base.Init(_objectGenerateParam, _blockData, _layerIndex);
         var hp = (int)(_blockData.hp * _objectGenerateParam.so.hpRate);
         treasureValueRate = UnityEngine.Random.Range(rate_min, rate_max);
         var getTreasureValue = (int)(_blockData.baseValue * _objectGenerateParam.so.valueRate * treasureValueRate);

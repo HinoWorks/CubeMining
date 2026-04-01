@@ -435,6 +435,8 @@ public static class GameParamManager
     public static int otherObjectRate { get; private set; } = 0;
     public static int otherObjectBaseRate { get; private set; } = 100;
 
+    public static bool isInitEnd { get; private set; } = false;
+
 
 
     #region get param reference
@@ -528,14 +530,14 @@ public static class GameParamManager
     #endregion
 
 
-    public static async UniTask Init()
+    public static async void Init()
     {
         // ゲームの基本的なパラメタを読み込む
         Init_GameBaseParam();
 
         await Init_SkillTreeParam(); // skill treeによるデータ更新
-
         await UniTask.DelayFrame(1);
+        isInitEnd = true;
     }
 
     /// <summary>
@@ -607,6 +609,7 @@ public static class GameParamManager
             var setParam = skillData.baseValue + skillData.deltaValue * saveData.level;
             Set_DeltaParam(skillData.paramCategory, skillData.targetIndex, skillData.paramType, setParam);
         }
+        Debug.Log("========== Init_SkillTreeParam End ==========");
     }
 
     /// <summary>

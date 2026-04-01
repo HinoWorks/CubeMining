@@ -111,7 +111,7 @@ public class InGameManager : MonoBehaviour
     }
 
     #region -- SetState --
-    private async Task SetState_InGameReady()
+    private void SetState_InGameReady()
     {
         // インゲーム開始前の初期化
         gameRecordData_thisGame = new GameRecordData_thisGame();

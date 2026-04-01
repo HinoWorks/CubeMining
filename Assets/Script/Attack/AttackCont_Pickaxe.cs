@@ -88,7 +88,11 @@ public class AttackCont_Pickaxe : MonoBehaviour
 
                 foreach (var t in targets)
                 {
-                    if (!t.isAlive) continue;
+                    if (!t.isAlive)
+                    {
+                        removeBuffer.Add(t);
+                        continue;
+                    }
 
                     // critical check
                     var selectedDamageRate = UnityEngine.Random.Range(0f, 1f) < criticalRate ? criticalDamageRate : 1f;

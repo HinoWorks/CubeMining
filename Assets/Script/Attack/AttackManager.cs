@@ -2,6 +2,7 @@ using UnityEngine;
 using UniRx;
 using System.Collections.Generic;
 using UniRx;
+using System.Threading.Tasks;
 
 public class AttackManager : MonoBehaviour
 {
@@ -63,6 +64,7 @@ public class AttackManager : MonoBehaviour
         var pickaxeCont = pickaxeUnit.GetComponent<AttackCont_Pickaxe>();
         pickaxeConts.Add(pickaxeCont);
         pickaxeCont.Init(_slotIndex, _pickaxeParam);
+        pickaxeCont.Set_AttackTrigger(isAttacking);
     }
 
 
@@ -75,6 +77,7 @@ public class AttackManager : MonoBehaviour
         var attackCont = attackUnit.GetComponent<AttackContBase>();
         attackConts.Add(attackCont);
         attackCont.Init(_attackParam);
+        attackCont.Set_AttackTrigger(isAttacking);
     }
 
 

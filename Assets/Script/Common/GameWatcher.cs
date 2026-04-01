@@ -20,13 +20,15 @@ public class GameWatcher : MonoBehaviour
 
     void Start()
     {
-        SetGameState(GameStateType.Title);
+        currentGameState = GameStateType.Title;
+        GameEvent.GameState.PublishGameState(currentGameState);
         GameParamManager.Init();
     }
 
 
     public void SetGameState(GameStateType state)
     {
+        if (!GameParamManager.isInitEnd) return;
         currentGameState = state;
         Debug.Log($"<color=yellow> ========= GameState: {currentGameState} ========= </color>");
         GameEvent.GameState.PublishGameState(currentGameState);

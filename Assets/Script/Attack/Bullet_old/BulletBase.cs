@@ -36,13 +36,14 @@ public class BulletBase : MonoBehaviour
 
     public virtual void Init(int _damage, float _lifetime, Vector3 _direction)
     {
+        this.lifetime = _lifetime;
         Init(_damage, _direction);
         SetLifetime();
     }
 
     public virtual void Init(int _damage, Vector3 _direction)
     {
-        damage = _damage;
+        this.damage = _damage;
         gameObject.SetActive(true);
         if (col == null)
         {
@@ -56,7 +57,7 @@ public class BulletBase : MonoBehaviour
     }
     public virtual void Init(int _damage)
     {
-        damage = _damage;
+        this.damage = _damage;
         gameObject.SetActive(true);
         if (col == null)
         {

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UniRx;
 using System.IO.Hashing;
+using UnityEngine.Analytics;
 
 
 public enum BlockSize
@@ -34,6 +35,7 @@ public class GenerateBlockLayerCont
     {
         for (int i = 0; i < blockCount; i++)
         {
+            // ノーマルブロック以外の特殊ブロックを生成
             if (GameParamManager.IsOtherObjectGenerate())
             {
                 var blockIndex = param.SelectBlockIndex(); // 階層に合わせた基本ブロックパラを取得
@@ -92,7 +94,6 @@ public class GenerateBlockLayerCont
         }
     }
 
-
 }
 
 
@@ -105,6 +106,7 @@ public class BlockGenerateManager : MonoBehaviour
     private List<MiningTarget_Artifact> list_targetArtifacts = new List<MiningTarget_Artifact>(); // 生成されたアーティファクトのリスト
     private List<GenerateBlockLayerCont> list_layerConts = new List<GenerateBlockLayerCont>(); // 生成されたレイヤーのリスト
     private GenerateBlockLayerCont currentLayerCont; //最上層のレイヤー
+    private GenerateBlockLayerCont lastLayerCont; //最下層のレイヤー
 
     private int initialCreateLayer = 10;
     private int currentCreateLayer = 0;
@@ -164,9 +166,20 @@ public class BlockGenerateManager : MonoBehaviour
         list_layerConts.Add(newLayerCont);
         currentCreateLayer++;
 
-        if (currentLayerCont == null || currentLayerCont.layerIndex > newLayerCont.layerIndex)
+        if (currentLayerCont == null)
         {
             currentLayerCont = newLayerCont;
+        }
+
+        if (lastLayerCont == null)
+        {
+            lastLayerCont = newLayerCont;
+        }
+        else if (lastLayerCont.layerIndex < newLayerCont.layerIndex)
+        {
+            // 重力を有効にする
+            Set_ActiveGravity(lastLayerCont.layerIndex);
+            lastLayerCont = newLayerCont;
         }
     }
 
@@ -228,9 +241,19 @@ public class BlockGenerateManager : MonoBehaviour
         }
         targetObject.Init(_objectData, _blockData, _layerIndex);
         targetObject.transform.localPosition = Vector3.zero;
-        targetObject.transform.localRotation = Quaternion.identity;
         return targetObject;
     }
+
+    // 最下層レイヤーで無くなった時、重力を有効にする
+    private void Set_ActiveGravity(int _activeLayerIndex)
+    {
+        foreach (var targetObject in list_targetObjects)
+        {
+            if (targetObject.layerIndex != _activeLayerIndex) continue;
+            targetObject.Set_ActiveGravity();
+        }
+    }
+
     #endregion
 
     #region == Artifact Generate ==

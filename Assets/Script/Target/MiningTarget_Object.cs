@@ -32,24 +32,20 @@ public class MiningTarget_Object : MiningTargetBase
     }
 
 
-
     public virtual void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData, int _layerIndex)
     {
         objectGenerateParam = _objectGenerateParam;
         layerIndex = _layerIndex;
-
-
-        //base.Init(_blockData.hp, 0, objectGenerateParam.so.objectIndex, 0);
-        //base.animScale_rate = this.transform.localScale.x;
+        rb.useGravity = false;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
     }
 
-    public virtual void Init_MiningTargetBase(int _hp, int _value, int _index, int _layerIndex)
+    protected void Init_MiningTargetBase(int _hp, int _value, int _index, int _layerIndex)
     {
         base.Init(_hp, _value, _index, _layerIndex);
         base.animScale_rate = this.transform.localScale.x;
-
-        rb.isKinematic = false;
-        rb.useGravity = true;
         Set_BlockMesh();
     }
 
@@ -63,6 +59,11 @@ public class MiningTarget_Object : MiningTargetBase
         {
             obj_blockMeshes[i].SetActive(i == targetIndex);
         }
+    }
+    public void Set_ActiveGravity()
+    {
+        rb.isKinematic = false;
+        rb.useGravity = true;
     }
 
 
