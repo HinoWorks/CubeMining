@@ -12,9 +12,11 @@ public class UI_PickaxeManager : MonoBehaviour
     [SerializeField] UI_PickaxeEquipCont[] pickaxeEquipConts;
     [SerializeField] UI_PickaxeLibraryUnit[] pickaxeLibraryUnits;
     [SerializeField] UI_PickaxeSelectInfoCont selectInfoUnit;
+    [SerializeField] UI_PickaxeGetAnimCont ui_getNewPickaxe;
     private int[] slotIndexes = { 0, 1 };
     private HashSet<int> equipedPickaxeIndexes = new HashSet<int>();
     private bool isDoingAction = false;
+    private int pickaxeAnimWaitTime = 1000;
 
 
     public async void Start_OnceInit()//主にコールバックを設定
@@ -164,13 +166,17 @@ public class UI_PickaxeManager : MonoBehaviour
             SaveLoader.Inst.Request_SaveResource(resourceCount.resourceType, -resourceCount.requiredCount);
         }
         SaveLoader.Inst.Request_SavePickaxeData(_so.pickaxeIndex, 1);
-        await UniTask.DelayFrame(1);
+
+        // 新しいピッケルを表示
+        ui_getNewPickaxe.SetIcon(_so.icon);
+        await UniTask.Delay(pickaxeAnimWaitTime);
 
         Set_PickaxeLibrary();
         selectInfoUnit.Set_EquipState(-1);
 
         isDoingAction = false;
     }
+
     #endregion
 
 }
