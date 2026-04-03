@@ -11,7 +11,8 @@ public class MiningTarget_Artifact : MiningTarget_Object
     private int breakAttackCount_max = 8;
     private int breakAttackCount_min = 5;
 
-
+    private int index_SE_Damage => 26;
+    private int index_SE_Break => 27;
 
     public virtual void Init(int _artifactIndex, int _layerIndex)
     {
@@ -32,6 +33,7 @@ public class MiningTarget_Artifact : MiningTarget_Object
         // ダメージを受けた回数で判定する
         var fixDamage = base.hp_max / breakAttackCount;
         Debug.Log($"<color=green>== artifact Damage: damage: {damage} / fixDamage: {fixDamage} => remain hp: {hp - fixDamage} ===</color>");
+
         return base.Damage(fixDamage);
     }
 
@@ -52,5 +54,16 @@ public class MiningTarget_Artifact : MiningTarget_Object
 
         base.BreakFromDamage();
         breakCallback?.Invoke();
+    }
+
+
+    protected override void PlaySE_Damage()
+    {
+        SoundManager.Inst.PlaySE(index_SE_Damage);
+    }
+
+    protected override void PlaySE_Break()
+    {
+        SoundManager.Inst.PlaySE(index_SE_Break);
     }
 }
