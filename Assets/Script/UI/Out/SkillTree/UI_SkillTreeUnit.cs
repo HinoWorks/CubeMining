@@ -20,6 +20,8 @@ public class UI_SkillTreeUnit : MonoBehaviour
     [SerializeField] GameObject obj_enhanceReady;
     [SerializeField] GameObject obj_complete;
     [SerializeField] GameObject obj_level0;
+    [SerializeField] GameObject obj_upgradeable;
+    [SerializeField] ParticleSystem eff_enhance;
     [SerializeField] HButton button;
 
     [Space(10)]
@@ -153,9 +155,24 @@ public class UI_SkillTreeUnit : MonoBehaviour
         button.gameObject.SetActive(unlockState != SkillTreeUnlockState.Hide);
         button.Set_Interactable(unlockState == SkillTreeUnlockState.EnhanceReady
             || unlockState == SkillTreeUnlockState.EnhanceComplete);
+
+
+        // アップグレード可能を示す矢印を表示
+        if (unlockState == SkillTreeUnlockState.EnhanceReady)
+        {
+            obj_upgradeable.SetActive(UIManager_OutGame.Inst.UI_SkillTreeManager.IsResourceEnough(skillTree));
+        }
+        else
+        {
+            obj_upgradeable.SetActive(false);
+        }
     }
 
 
+    public void CallBack_Enhance()
+    {
+        eff_enhance.Play();
+    }
     private void OnPointerEnter(bool _isEnter)
     {
         if (this.unlockState == SkillTreeUnlockState.Hide || this.unlockState == SkillTreeUnlockState.Locked) return;

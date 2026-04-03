@@ -155,6 +155,30 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     }
 */
 
+    public bool IsResourceEnough(SkillTree _skillTree)
+    {
+        var requredResources = new ResourceCount[7];
+        requredResources[0] = new ResourceCount() { resourceType = ResourceType.Stone, requiredCount = _skillTree.req_stone };
+        requredResources[1] = new ResourceCount() { resourceType = ResourceType.Iron, requiredCount = _skillTree.req_iron };
+        requredResources[2] = new ResourceCount() { resourceType = ResourceType.Gold, requiredCount = _skillTree.req_gold };
+        requredResources[3] = new ResourceCount() { resourceType = ResourceType.Emerald, requiredCount = _skillTree.req_emerald };
+        requredResources[4] = new ResourceCount() { resourceType = ResourceType.Ruby, requiredCount = _skillTree.req_ruby };
+        requredResources[5] = new ResourceCount() { resourceType = ResourceType.Sapphire, requiredCount = _skillTree.req_sapphire };
+        requredResources[6] = new ResourceCount() { resourceType = ResourceType.Diamond, requiredCount = _skillTree.req_diamond };
+
+        var isEnough = true;
+        foreach (var resource in requredResources)
+        {
+            if (resource.requiredCount <= 0) continue;
+            if (resource.requiredCount > SaveLoader.Inst.Get_ResourceCount(resource.resourceType))
+            {
+                isEnough = false;
+                break;
+            }
+        }
+        return isEnough;
+    }
+
 
     void Update()
     {
@@ -193,12 +217,12 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     // ---------- Pan ----------
     void HandlePan()
     {
-        if (Mouse.current.rightButton.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             lastMousePos = Mouse.current.position.ReadValue();
         }
 
-        if (Mouse.current.rightButton.isPressed)
+        if (Mouse.current.leftButton.isPressed)
         {
             Vector2 current = Mouse.current.position.ReadValue();
             Vector2 delta = current - lastMousePos;
@@ -264,7 +288,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
 
         await UniTask.DelayFrame(2);
         _skillTreeUnit.Init();
-
+        _skillTreeUnit.CallBack_Enhance();
         // ベーススキルの更新（baseSkillIndex 配列の中にこのスキルを含む全てのユニットを更新）
         var checkTargetUnit = Array.FindAll(skillTreeUnits,
             x => x.skillTree.baseSkillIndex != null &&
