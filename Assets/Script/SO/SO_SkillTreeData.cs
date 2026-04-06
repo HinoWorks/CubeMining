@@ -32,14 +32,17 @@ public enum ParamType
 
     // ==== attack param ====
     Damage,
-    //AliveTime,
-    //CT,
     Count,
     Speed,
     Interval,
     Size,
     CriticalRate,
     ResourceRate,
+
+
+
+    // ==== artifact param ====
+    ArtifactSlotCount,
 }
 
 

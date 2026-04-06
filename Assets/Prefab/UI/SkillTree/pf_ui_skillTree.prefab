@@ -743,7 +743,6 @@ RectTransform:
   - {fileID: 3053416855376485218}
   - {fileID: 3350383569364447261}
   - {fileID: 192229793801928275}
-  - {fileID: 3870937569565801792}
   - {fileID: 4154865745378900945}
   - {fileID: 1869487604685023552}
   - {fileID: 696212116652702823}
@@ -931,37 +930,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &7291021322089718531
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3870937569565801792}
-  m_Layer: 0
-  m_Name: area_1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3870937569565801792
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7291021322089718531}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6683896851426228539}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &112526682113167981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12091,7 +12059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4970634406333796561, guid: 1da136d527cad4086a54be0f22459095, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 282.8427
       objectReference: {fileID: 0}
     - target: {fileID: 4970634406333796561, guid: 1da136d527cad4086a54be0f22459095, type: 3}
       propertyPath: m_SizeDelta.y
@@ -12111,7 +12079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4970634406333796561, guid: 1da136d527cad4086a54be0f22459095, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9238795
       objectReference: {fileID: 0}
     - target: {fileID: 4970634406333796561, guid: 1da136d527cad4086a54be0f22459095, type: 3}
       propertyPath: m_LocalRotation.x
@@ -12123,15 +12091,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4970634406333796561, guid: 1da136d527cad4086a54be0f22459095, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.38268346
       objectReference: {fileID: 0}
     - target: {fileID: 4970634406333796561, guid: 1da136d527cad4086a54be0f22459095, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 700
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4970634406333796561, guid: 1da136d527cad4086a54be0f22459095, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 400
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 4970634406333796561, guid: 1da136d527cad4086a54be0f22459095, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12147,11 +12115,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4995135540606874049, guid: 1da136d527cad4086a54be0f22459095, type: 3}
       propertyPath: baseSkillIndex
-      value: 102
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4995135540606874049, guid: 1da136d527cad4086a54be0f22459095, type: 3}
       propertyPath: targetSkillIndex
-      value: 103
+      value: 3007
       objectReference: {fileID: 0}
     - target: {fileID: 6782105986626719673, guid: 1da136d527cad4086a54be0f22459095, type: 3}
       propertyPath: m_Name
@@ -16770,18 +16738,18 @@ PrefabInstance:
     - target: {fileID: 1662852856703402581, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: afa1211184b7f4a19b10c8d833a7996f, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2012689928994969218, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2932069515276859599, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_text
-      value: 103
+      value: 3007
       objectReference: {fileID: 0}
     - target: {fileID: 2932069515276859599, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_fontSize
-      value: 26.85
+      value: 20.15
       objectReference: {fileID: 0}
     - target: {fileID: 3179862186421672042, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_Name
@@ -16849,11 +16817,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 800
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 400
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 3958889852532875549, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -16909,7 +16877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillIndex
-      value: 103
+      value: 3007
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.cost
@@ -16918,14 +16886,14 @@ PrefabInstance:
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.icon
       value: 
-      objectReference: {fileID: 21300000, guid: afa1211184b7f4a19b10c8d833a7996f, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.index
       value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.maxLevel
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_gold
@@ -16937,7 +16905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseIndex
-      value: 103
+      value: 3007
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseValue
@@ -16945,7 +16913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramType
-      value: 13
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_stone
@@ -16953,15 +16921,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.skillName
-      value: Cold Interval
+      value: More Artifact
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.deltaValue
-      value: 0.03
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.description
-      value: Reduces the time between icicle attacks.
+      value: artifact slot +1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.req_emerald
@@ -16969,15 +16937,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.targetIndex
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTreeUnit.refIndex
-      value: 103
+      value: 3007
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTreeUnit.req_gold
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTreeUnit.req_iron
@@ -16985,7 +16953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.paramCategory
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTreeUnit.req_stone
@@ -16997,7 +16965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTreeUnit.req_emerald
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.unlockCheckIndex
@@ -17005,7 +16973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTreeUnit.skillTreeIndex
-      value: 103
+      value: 3007
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: skillTree.baseSkillIndex.Array.size
@@ -17021,7 +16989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702257946371924736, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: 'skillTreeUnit.unlockCheckIndexes.Array.data[0]'
-      value: 102
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8554398262898743583, guid: 7baeeec2fc5dc448fbf5cf5b6efb7309, type: 3}
       propertyPath: m_SortingLayer

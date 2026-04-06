@@ -29,6 +29,7 @@ public class UI_ArtifactEquipUnit : MonoBehaviour
     }
     public async UniTask<int> Init()
     {
+        /*
         var slotData = await SaveLoader.Inst.Get_ArtifactSlotData(slotIndex);
         if (slotIndex == 1)
         {
@@ -41,7 +42,9 @@ public class UI_ArtifactEquipUnit : MonoBehaviour
         obj_locked.SetActive(!isOpen);
         btn.enabled = isOpen;
         if (!isOpen) return -1;
+        */
 
+        var slotData = await SaveLoader.Inst.Get_ArtifactSlotData(slotIndex);
         // スロットにアーティファクトが登録されている場合
         if (slotData != null && slotData.equipedArtifactIndex != -1)
         {
@@ -54,8 +57,18 @@ public class UI_ArtifactEquipUnit : MonoBehaviour
             so = null;
             obj_icon.SetActive(false);
         }
+        isOpen = true;
+        obj_locked.SetActive(false);
+        btn.enabled = true;
 
         return slotData == null ? -1 : slotData.equipedArtifactIndex;
+    }
+    public void Set_Locked()
+    {
+        isOpen = false;
+        obj_icon.SetActive(false);
+        obj_locked.SetActive(true);
+        btn.enabled = false;
     }
 
 

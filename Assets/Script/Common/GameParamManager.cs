@@ -37,6 +37,10 @@ public class GameBaseParam
     public bool isInstantShatter => UnityEngine.Random.Range(0f, 1f) < instantShatterRate;
 
 
+    //アーティファクト周りのパラメタ
+    public int artifact_slotCount => artifact_slotCount_enhanced;
+    private int artifact_slotCount_enhanced = 0;
+
 
     // ピッケルの基礎パラメータ向上
     public float pickaxeBase_AttackDamage => pickaxeBase_AttackDamage_enhanced + ArtifactManager.Inst.pickaxe_damageRate;
@@ -71,6 +75,11 @@ public class GameBaseParam
                 break;
             case ParamType.InstantShatterRate:
                 instantShatterRate_enhanced += _setParam;
+                break;
+
+            // -- アーティファクトのスロット数向上 --
+            case ParamType.ArtifactSlotCount:
+                artifact_slotCount_enhanced += (int)_setParam;
                 break;
 
             // -- ピッケルの基礎パラメータ向上 --
@@ -154,7 +163,6 @@ public class BlockBaseParam
     public void Init(BlockData _blockData)
     {
         so = _blockData;
-        //isActive = false;
     }
     public void Set_Param(ParamType _paramType, float _setParam)
     {
@@ -349,8 +357,6 @@ public class PickaxeParam
         size = _pickaxeUnitData.size;
     }
 }
-
-
 
 
 /// <summary>

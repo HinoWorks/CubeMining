@@ -617,6 +617,15 @@ MonoBehaviour:
     icon: {fileID: 0}
     maxLevel: 5
     deltaValue: 0.01
+  - baseIndex: 3007
+    paramCategory: 0
+    paramType: 17
+    targetIndex: -1
+    skillName: More Artifact
+    description: artifact slot +1
+    icon: {fileID: 0}
+    maxLevel: 1
+    deltaValue: 1
   skillTreeUnits:
   - skillTreeIndex: 1
     refIndex: 1
@@ -1291,8 +1300,8 @@ MonoBehaviour:
   - skillTreeIndex: 3005
     refIndex: 3005
     unlockCheckIndexes: bc0b0000
-    req_stone: 0
-    req_iron: 0
+    req_stone: 10
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1301,6 +1310,66 @@ MonoBehaviour:
   - skillTreeIndex: 3006
     refIndex: 3006
     unlockCheckIndexes: bd0b0000
+    req_stone: 10
+    req_iron: 10
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 3007
+    refIndex: 3007
+    unlockCheckIndexes: 01000000
+    req_stone: 10
+    req_iron: 10
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 0
+    refIndex: 0
+    unlockCheckIndexes: 
+    req_stone: 10
+    req_iron: 10
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 0
+    refIndex: 0
+    unlockCheckIndexes: 
+    req_stone: 10
+    req_iron: 10
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 0
+    refIndex: 0
+    unlockCheckIndexes: 
+    req_stone: 10
+    req_iron: 10
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 0
+    refIndex: 0
+    unlockCheckIndexes: 
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 0
+    refIndex: 0
+    unlockCheckIndexes: 
     req_stone: 0
     req_iron: 0
     req_gold: 0

@@ -12,8 +12,8 @@ public class UI_ArtifactManager : MonoBehaviour
     [SerializeField] UI_ArtifactLibraryUnit[] artifactLibraryUnits;
     [SerializeField] UI_ArtifactDetailUnit detailUnit;
     private List<int> equipedArtifactIndexes = new List<int>(10);
-
-
+    private int artifact_activeSlotCount => 1 + GameParamManager.gameBaseParam.artifact_slotCount; //現在のアクティブスロット数
+    private int artifact_totalSlotCountMax = 4; //最大スロット数
 
     public void Start_OnceInit()//主にコールバックを設定
     {
@@ -61,12 +61,24 @@ public class UI_ArtifactManager : MonoBehaviour
             artifactLibraryUnit.Set_EquipState(false);
         }
 
-        // 装備リストを更新
-        foreach (var artifactEquipUnit in artifactEquipUnits)
+        // 解放済みのスロットのみ初期化処理
+        for (int i = 0; i < artifact_activeSlotCount; i++)
         {
-            var equipedArtifactIndex = await artifactEquipUnit.Init();
+            var equipedArtifactIndex = await artifactEquipUnits[i].Init();
             Set_EquipedArtifactIndexes(equipedArtifactIndex, true);
         }
+        for (int i = artifact_activeSlotCount; i < artifact_totalSlotCountMax; i++)
+        {
+            artifactEquipUnits[i].Set_Locked();
+        }
+        /*
+            // 装備リストを更新
+            foreach (var artifactEquipUnit in artifactEquipUnits)
+            {
+                var equipedArtifactIndex = await artifactEquipUnit.Init();
+                Set_EquipedArtifactIndexes(equipedArtifactIndex, true);
+            }
+         */
     }
     /// <summary>
     /// アーティファクト装備リストを更新, ライブラリunitの装備状態を更新
