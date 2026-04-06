@@ -44,20 +44,39 @@ public enum ParamType
 
 
 [System.Serializable]
-public class SkillTree
+public class SkillTreeBase
 {
-    public int index;
+    public int baseIndex;
+    public ParamCategory paramCategory;
+    public ParamType paramType;
+    public int targetIndex;
     public string skillName;
     public string description;
     public Sprite icon;
     public int maxLevel;
-    public int[] baseSkillIndex;
-    public ParamCategory paramCategory;
-    public int targetIndex;
-    public ParamType paramType;
-    public float baseValue;
+    //public int[] baseSkillIndex;
+    //public float baseValue;
     public float deltaValue;
 
+    /*
+        public int req_stone;
+        public int req_iron;
+        public int req_gold;
+        public int req_emerald;
+        public int req_ruby;
+        public int req_sapphire;
+        public int req_diamond;
+        */
+}
+
+[System.Serializable]
+public class SkillTreeUnit
+{
+    public int skillTreeIndex;
+    public int refIndex;
+    public int[] unlockCheckIndexes;
+    //public int  deltaValue;
+    //public int  maxLevel;
     public int req_stone;
     public int req_iron;
     public int req_gold;
@@ -71,12 +90,24 @@ public class SkillTree
 [CreateAssetMenu(menuName = "SO/SO_SkillTreeData")]
 public class SO_SkillTreeData : ScriptableObject
 {
-    public SkillTree[] skillTreeDatas;
+    public SkillTreeBase[] skillTreeDatas;
+    public SkillTreeUnit[] skillTreeUnits;
 
 
-    public SkillTree GetSkillTreeData(int _skillTreeIndex)
+
+    public SkillTreeUnit GetSkillTreeUnitData(int _skillTreeUnitIndex)
     {
-        var data = Array.Find(skillTreeDatas, data => data.index == _skillTreeIndex);
+        var data = Array.Find(skillTreeUnits, data => data.skillTreeIndex == _skillTreeUnitIndex);
+        if (data == null)
+        {
+            Debug.LogError($"SkillTreeUnit not found: {_skillTreeUnitIndex}");
+            return null;
+        }
+        return data;
+    }
+    public SkillTreeBase GetSkillTreeBaseData(int _skillTreeIndex)
+    {
+        var data = Array.Find(skillTreeDatas, data => data.baseIndex == _skillTreeIndex);
         if (data == null)
         {
             Debug.LogError($"SkillTreeData not found: {_skillTreeIndex}");
@@ -86,7 +117,7 @@ public class SO_SkillTreeData : ScriptableObject
     }
 
 
-    public SkillTree[] GetSkillTreeDatas(ParamCategory _paramCategory, int _targetIndex)
+    public SkillTreeBase[] GetSkillTreeBaseDatas(ParamCategory _paramCategory, int _targetIndex)
     {
         var datas = Array.FindAll(skillTreeDatas, data => data.paramCategory == _paramCategory && data.targetIndex == _targetIndex);
         if (datas.Length == 0)
@@ -97,9 +128,9 @@ public class SO_SkillTreeData : ScriptableObject
         return datas;
     }
 
-    public SkillTree GetSkillTreeDatas(ParamCategory _paramCategory, int _targetIndex, ParamType _paramType)
+    public SkillTreeBase GetSkillTreeBaseDatas(ParamCategory _paramCategory, int _targetIndex, ParamType _paramType)
     {
-        var targetDatas = GetSkillTreeDatas(_paramCategory, _targetIndex);
+        var targetDatas = GetSkillTreeBaseDatas(_paramCategory, _targetIndex);
         if (targetDatas == null) return null;
         var data = Array.Find(targetDatas, data => data.paramType == _paramType);
         if (data == null)

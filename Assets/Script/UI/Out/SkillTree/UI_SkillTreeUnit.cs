@@ -8,9 +8,11 @@ using Cysharp.Threading.Tasks;
 public class UI_SkillTreeUnit : MonoBehaviour
 {
     public int skillIndex;
-    public SkillTree skillTree;
+    public SkillTreeBase skillTree;
+    public SkillTreeUnit skillTreeUnit;
     public int level { get; private set; } = 0;
     public SkillTreeUnlockState unlockState;// { get; private set; }
+
 
 
     [Space(10)]
@@ -37,9 +39,10 @@ public class UI_SkillTreeUnit : MonoBehaviour
 
 
 #if UNITY_EDITOR
-    public void OnValidateCall(SkillTree _skillTree)
+    public void OnValidateCall(SkillTreeBase _skillTree, SkillTreeUnit _skillTreeUnit)
     {
         skillTree = _skillTree;
+        skillTreeUnit = _skillTreeUnit;
         image_icon.sprite = skillTree.icon;
         obj_debug.SetActive(true);
         tmp_debug.SetText($"{skillIndex}");
@@ -102,7 +105,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
     /// </summary>
     private bool HasAnyBaseSkill()
     {
-        return skillTree.baseSkillIndex != null && skillTree.baseSkillIndex[0] != -1;
+        return skillTreeUnit.unlockCheckIndexes != null && skillTreeUnit.unlockCheckIndexes.Length > 0;
     }
 
     /// <summary>
@@ -111,12 +114,12 @@ public class UI_SkillTreeUnit : MonoBehaviour
     /// </summary>
     private async UniTask<bool> IsAnyBaseSkillAcquired()
     {
-        if (skillTree.baseSkillIndex == null || skillTree.baseSkillIndex.Length == 0) return false;
+        if (skillTreeUnit.unlockCheckIndexes == null || skillTreeUnit.unlockCheckIndexes.Length == 0) return false;
 
         // baseSkillIndex 配列のどれか 1 つでも取得済みであれば OK
-        foreach (var idx in skillTree.baseSkillIndex)
+        foreach (var idx in skillTreeUnit.unlockCheckIndexes)
         {
-            if (idx == -1) continue;
+            if (idx == -1) return true;
             if (await IsSingleBaseSkillAcquired(idx)) return true;
         }
 
@@ -160,7 +163,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
         // アップグレード可能を示す矢印を表示
         if (unlockState == SkillTreeUnlockState.EnhanceReady)
         {
-            obj_upgradeable.SetActive(UIManager_OutGame.Inst.UI_SkillTreeManager.IsResourceEnough(skillTree));
+            obj_upgradeable.SetActive(UIManager_OutGame.Inst.UI_SkillTreeManager.IsResourceEnough(skillTreeUnit));
         }
         else
         {
@@ -182,7 +185,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
     #region onClick
     public void OnClick_Enhance()
     {
-        if (this.unlockState != SkillTreeUnlockState.EnhanceReady) return;
+        //if (this.unlockState != SkillTreeUnlockState.EnhanceReady) return;　本体側でcheckする
         onClick_Enhance?.Invoke(this);
     }
     #endregion

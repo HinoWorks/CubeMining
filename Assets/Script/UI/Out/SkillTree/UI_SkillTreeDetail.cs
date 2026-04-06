@@ -44,8 +44,8 @@ public class UI_SkillTreeDetail : MonoBehaviour
         tmp_description.SetText(so.description);
 
         obj_param.SetActive(so.paramType != ParamType.Unlock);
-        var paramNow = so.baseValue + so.deltaValue * _currentLevel;
-        var paramNext = so.baseValue + so.deltaValue * (_currentLevel + 1);
+        var paramNow = so.deltaValue * _currentLevel;
+        var paramNext = so.deltaValue * (_currentLevel + 1);
         tmp_paramNow.SetText(paramNow.ToString("F2"));
         tmp_paramNext.SetText(paramNext.ToString("F2"));
 
@@ -72,7 +72,7 @@ public class UI_SkillTreeDetail : MonoBehaviour
         {
             cont.NotActive();
         }
-        var so = currentUnit.skillTree;
+        var so = currentUnit.skillTreeUnit;
         requredResources.Add(new ResourceCount() { resourceType = ResourceType.Stone, requiredCount = so.req_stone });
         requredResources.Add(new ResourceCount() { resourceType = ResourceType.Iron, requiredCount = so.req_iron });
         requredResources.Add(new ResourceCount() { resourceType = ResourceType.Gold, requiredCount = so.req_gold });
@@ -102,7 +102,7 @@ public class UI_SkillTreeDetail : MonoBehaviour
             }
             count++;
         }
-        IsEnhanceReady = IsEnhanceReady && currentUnit.level < so.maxLevel;
+        IsEnhanceReady = IsEnhanceReady && currentUnit.level < currentUnit.skillTree.maxLevel;
         //btn_enhance.Set_Interactable(IsCraftReady);
     }
 }

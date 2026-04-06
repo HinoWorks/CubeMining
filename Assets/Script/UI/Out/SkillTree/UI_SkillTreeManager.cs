@@ -57,13 +57,20 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         skillTreeUnits = transform.GetComponentsInChildren<UI_SkillTreeUnit>();
         foreach (var skillTreeUnit in skillTreeUnits)
         {
-            var so = SOLoader.SkillTreeData.GetSkillTreeData(skillTreeUnit.skillIndex);
-            if (so == null)
+            var so_unit = SOLoader.SkillTreeData.GetSkillTreeUnitData(skillTreeUnit.skillIndex);
+            if (so_unit == null)
             {
-                Debug.LogError($"SkillTreeData not found: {skillTreeUnit.skillIndex}");
+                Debug.LogError($"SkillTreeUnit not found: {skillTreeUnit.skillIndex}");
                 return;
             }
-            skillTreeUnit.OnValidateCall(so);
+            var so_base = SOLoader.SkillTreeData.GetSkillTreeBaseData(so_unit.refIndex);
+            if (so_base == null)
+            {
+                Debug.LogError($"SkillTreeBase not found: {skillTreeUnit.skillIndex}");
+                return;
+            }
+
+            skillTreeUnit.OnValidateCall(so_base, so_unit);
         }
 
         // -- node set --
@@ -78,10 +85,10 @@ public class UI_SkillTreeMaanger : MonoBehaviour
 
     private void NodeCreate(UI_SkillTreeUnit _unit)
     {
-        if (_unit.skillTree.baseSkillIndex == null || _unit.skillTree.baseSkillIndex.Length == 0) return;
+        if (_unit.skillTreeUnit.unlockCheckIndexes == null || _unit.skillTreeUnit.unlockCheckIndexes.Length == 0) return;
 
         // baseSkillIndex 配列の全ての要素と線を接続する
-        foreach (var baseIndex in _unit.skillTree.baseSkillIndex)
+        foreach (var baseIndex in _unit.skillTreeUnit.unlockCheckIndexes)
         {
             if (baseIndex == -1) continue;
             var baseUnit = Array.Find(skillTreeUnits, x => x.skillIndex == baseIndex);
@@ -111,8 +118,8 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         foreach (var skillTreeUnit in skillTreeUnits)
         {
             // ランタイムでは常にSOから最新のSkillTreeを参照する（プレハブにコピーされた古い値でrequiredCountが0になるのを防ぐ）
-            skillTreeUnit.skillTree = SOLoader.SkillTreeData.GetSkillTreeData(skillTreeUnit.skillIndex);
-            if (skillTreeUnit.skillTree == null) continue;
+            //skillTreeUnit.skillTree = SOLoader.SkillTreeData.GetSkillTreeData(skillTreeUnit.skillIndex);
+            //if (skillTreeUnit.skillTree == null) continue;
             skillTreeUnit.AwakeCall(OnMouseOver, OnClick_Enhance, UpdateNodeState);
         }
         ui_skillTreeDetail.gameObject.SetActive(false);
@@ -155,16 +162,16 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     }
 */
 
-    public bool IsResourceEnough(SkillTree _skillTree)
+    public bool IsResourceEnough(SkillTreeUnit _skillTreeUnit)
     {
         var requredResources = new ResourceCount[7];
-        requredResources[0] = new ResourceCount() { resourceType = ResourceType.Stone, requiredCount = _skillTree.req_stone };
-        requredResources[1] = new ResourceCount() { resourceType = ResourceType.Iron, requiredCount = _skillTree.req_iron };
-        requredResources[2] = new ResourceCount() { resourceType = ResourceType.Gold, requiredCount = _skillTree.req_gold };
-        requredResources[3] = new ResourceCount() { resourceType = ResourceType.Emerald, requiredCount = _skillTree.req_emerald };
-        requredResources[4] = new ResourceCount() { resourceType = ResourceType.Ruby, requiredCount = _skillTree.req_ruby };
-        requredResources[5] = new ResourceCount() { resourceType = ResourceType.Sapphire, requiredCount = _skillTree.req_sapphire };
-        requredResources[6] = new ResourceCount() { resourceType = ResourceType.Diamond, requiredCount = _skillTree.req_diamond };
+        requredResources[0] = new ResourceCount() { resourceType = ResourceType.Stone, requiredCount = _skillTreeUnit.req_stone };
+        requredResources[1] = new ResourceCount() { resourceType = ResourceType.Iron, requiredCount = _skillTreeUnit.req_iron };
+        requredResources[2] = new ResourceCount() { resourceType = ResourceType.Gold, requiredCount = _skillTreeUnit.req_gold };
+        requredResources[3] = new ResourceCount() { resourceType = ResourceType.Emerald, requiredCount = _skillTreeUnit.req_emerald };
+        requredResources[4] = new ResourceCount() { resourceType = ResourceType.Ruby, requiredCount = _skillTreeUnit.req_ruby };
+        requredResources[5] = new ResourceCount() { resourceType = ResourceType.Sapphire, requiredCount = _skillTreeUnit.req_sapphire };
+        requredResources[6] = new ResourceCount() { resourceType = ResourceType.Diamond, requiredCount = _skillTreeUnit.req_diamond };
 
         var isEnough = true;
         foreach (var resource in requredResources)
@@ -257,10 +264,6 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     /// </summary>
     private async void OnClick_Enhance(UI_SkillTreeUnit _skillTreeUnit)
     {
-        //if (_skillTreeUnit.unlockState != SkillTreeUnlockState.EnhanceReady) return;
-        if (ui_skillTreeDetail.IsEnhanceReady == false) return;
-
-
 #if UNITY_EDITOR
         if (SROptions.isSkillTreeUpgradeNoMaterial)
         {
@@ -268,6 +271,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         }
         else
         {
+            if (ui_skillTreeDetail.IsEnhanceReady == false) return;
             foreach (var resource in ui_skillTreeDetail.RequredResources)
             {
                 if (resource.requiredCount <= 0) continue;
@@ -275,7 +279,8 @@ public class UI_SkillTreeMaanger : MonoBehaviour
             }
         }
 #else
-// コスト消費
+        if (ui_skillTreeDetail.IsEnhanceReady == false) return;
+        // コスト消費
         foreach (var resource in ui_skillTreeDetail.RequredResources)
         {
             if (resource.requiredCount <= 0) continue;
@@ -291,8 +296,8 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         _skillTreeUnit.CallBack_Enhance();
         // ベーススキルの更新（baseSkillIndex 配列の中にこのスキルを含む全てのユニットを更新）
         var checkTargetUnit = Array.FindAll(skillTreeUnits,
-            x => x.skillTree.baseSkillIndex != null &&
-                 Array.Exists(x.skillTree.baseSkillIndex, idx => idx == _skillTreeUnit.skillIndex));
+            x => x.skillTreeUnit.unlockCheckIndexes != null &&
+                 Array.Exists(x.skillTreeUnit.unlockCheckIndexes, idx => idx == _skillTreeUnit.skillIndex));
         foreach (var unit in checkTargetUnit)
         {
             unit.Init();

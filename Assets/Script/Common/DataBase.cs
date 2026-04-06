@@ -71,9 +71,13 @@ public class DataBase : MonoBehaviour
 
     private async UniTask DataLoad_SkillTreeData()
     {
-        var loadData = await DataLoad("SkillTree");
-        var convData = CSVSerializer.Deserialize<SkillTree>(loadData);
+        var loadData = await DataLoad("SkillTreeBase");
+        var convData = CSVSerializer.Deserialize<SkillTreeBase>(loadData);
         mSO_SkillTreeData.skillTreeDatas = convData;
+
+        var loadData2 = await DataLoad("SkillTreeUnit");
+        var convData2 = CSVSerializer.Deserialize<SkillTreeUnit>(loadData2);
+        mSO_SkillTreeData.skillTreeUnits = convData2;
     }
 
     private async UniTask DataLoad_AttackUnitData()
