@@ -3,9 +3,9 @@ using UnityEngine;
 public class MiningTarget_Tresure : MiningTarget_Object
 {
     private ResourceType resourceType;
-    private int treasureValueRate = 10;
-    private int rate_max = 10;
-    private int rate_min = 5;
+    private int treasureValueRate = 5;
+    private int rate_max = 7;
+    private int rate_min = 4;
 
     private int index_SE_Damage => 20;
     private int index_SE_Break => 21;
@@ -22,14 +22,8 @@ public class MiningTarget_Tresure : MiningTarget_Object
         //Debug.Log($"Set_Tresure - hp: {hp}, getTreasureValue: {getTreasureValue}");
         base.Init_MiningTargetBase(hp, getTreasureValue, _objectGenerateParam.so.objectIndex, _layerIndex);
 
-        // ブロックのタイプを自分で抽選
-        var blockTypeData = GameParamManager.Get_RandamBlockType(_blockData.blockIndex);
-        resourceType = blockTypeData;
-        //resourceType = blockTypeData.SelectBlockType();
-
-        Debug.Log($"トレジャーの中身の種類は後で決める！！ resourceType: {resourceType}");
-
-        // TODO here 
+        //現在のブロックタイプの鉱石への変化率から、タイプを設定
+        resourceType = GameParamManager.Get_RandamBlockType(_blockData.blockIndex);
     }
 
     public override void BreakFromDamage(float _resourceUpRate = 1f)
