@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aabccef138a84c0abb6bfb4bbdcb01f, type: 3}
+  m_Name: SO_MaterialData
+  m_EditorClassIdentifier: Assembly-CSharp::SO_MaterialData
+  materialData_Layers:
+  - layer_min: 0
+    layer_max: 1
+    materials:
+    - {fileID: 2100000, guid: 43547a9b54d1a48a98296b71e883944f, type: 2}
+  - layer_min: 1
+    layer_max: 3
+    materials:
+    - {fileID: 2100000, guid: 1fb2d977719804b139dc781ad9cbd042, type: 2}
+    - {fileID: 2100000, guid: 2103b306cb10e4ab094d6ed57296af57, type: 2}
+    - {fileID: 2100000, guid: d4cce016970af40289ec3b93305baca0, type: 2}
+  - layer_min: 3
+    layer_max: 6
+    materials:
+    - {fileID: 2100000, guid: 46e453714101d4dcbb879d1226c1cc14, type: 2}
+    - {fileID: 2100000, guid: 48aec5181ace84077a1db323d99319bb, type: 2}
+    - {fileID: 2100000, guid: 92579435e7a1b4a189815351c7382632, type: 2}
+  - layer_min: 6
+    layer_max: 10
+    materials:
+    - {fileID: 2100000, guid: e89d985fc5b064decb4b1275329af7df, type: 2}
+    - {fileID: 2100000, guid: b29f355e0cab34e7d8c6d960c6e71a71, type: 2}
+    - {fileID: 2100000, guid: a4a8a0077a2ac4bfba097b186f82bc59, type: 2}
+  - layer_min: 10
+    layer_max: 15
+    materials:
+    - {fileID: 2100000, guid: 22b75d8400e2c4413a83561328d75a02, type: 2}
+    - {fileID: 2100000, guid: 477fe552c134e4b75bbf7cd616bc849d, type: 2}
+    - {fileID: 2100000, guid: 34f6e4bcd5f944c69b79ca38eb4d4c6a, type: 2}
+  - layer_min: 15
+    layer_max: 99999
+    materials:
+    - {fileID: 2100000, guid: 296cb404f70f44f579c1ac22ef8ab93c, type: 2}
+    - {fileID: 2100000, guid: 694e01713d4f84a20b004c069bf0e8dc, type: 2}
+    - {fileID: 2100000, guid: d7798ce3fdc9743b58f30baf2a665493, type: 2}

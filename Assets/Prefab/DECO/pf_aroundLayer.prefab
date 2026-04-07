@@ -206,6 +206,12 @@ MonoBehaviour:
   edgePosition: {x: -2, y: 0, z: 2}
   sideUnit_left: {fileID: 1507827851555869173}
   sideUnit_right: {fileID: 1421711082714276923}
+  setMaterial_renderers:
+  - {fileID: 1962817025259464665}
+  - {fileID: 9118304844757996842}
+  - {fileID: 2047832074859827735}
+  - {fileID: 8781093696134193380}
+  - {fileID: 1267690051486614360}
 --- !u!1001 &648580676749547531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275,6 +281,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2156337746161650174, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
   m_PrefabInstance: {fileID: 648580676749547531}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &2047832074859827735 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1543438195381570076, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
+  m_PrefabInstance: {fileID: 648580676749547531}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8152197312001261277 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8656574837309597398, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
@@ -301,6 +312,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000001, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &8781093696134193380 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8132531712570095855, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
+  m_PrefabInstance: {fileID: 648580676749547531}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1033074132223323589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -370,6 +386,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2156337746161650174, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
   m_PrefabInstance: {fileID: 1033074132223323589}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &1962817025259464665 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1543438195381570076, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
+  m_PrefabInstance: {fileID: 1033074132223323589}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8535556595461688083 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8656574837309597398, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
@@ -396,3 +417,8 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000001, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &9118304844757996842 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8132531712570095855, guid: f2740aaefe5ad47c8a69b36ae5b7144b, type: 3}
+  m_PrefabInstance: {fileID: 1033074132223323589}
+  m_PrefabAsset: {fileID: 0}

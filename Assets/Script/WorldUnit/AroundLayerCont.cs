@@ -21,11 +21,19 @@ public class AroundLayerCont : MonoBehaviour
     private Vector3 sideUnit_basePosition_right = new Vector3(-1, 0, 4);
     private List<AroundLayerUnit> list_units = new List<AroundLayerUnit>();
 
+    [Space(5)]
+    [Header(" -- side unit setting --")]
+    [SerializeField] Renderer[] setMaterial_renderers;
+    private MaterialData_Layer materialData_Layer; // この層に対応するマテリアルデータ
+    private Material setMaterial;
 
 
     public void Init(int _layerIndex, int _layerSize)
     {
         layerIndex = _layerIndex;
+        materialData_Layer = SOLoader.MaterialData.GetMaterialData_Layer(layerIndex);
+        setMaterial = materialData_Layer.materials[UnityEngine.Random.Range(0, materialData_Layer.materials.Length)];
+
         var cntUnit = CreateUnits();
         cntUnit.transform.localPosition = edgePosition;
 
@@ -41,8 +49,9 @@ public class AroundLayerCont : MonoBehaviour
         }
         sideUnit_left.localPosition = sideUnit_basePosition_left + new Vector3(0, 0, -_layerSize);
         sideUnit_right.localPosition = sideUnit_basePosition_right + new Vector3(_layerSize, 0, 0);
-
         transform.localPosition = new Vector3(0, -layerIndex, 0);
+
+        Set_Material_renderers();
         this.gameObject.SetActive(true);
     }
 
@@ -70,8 +79,16 @@ public class AroundLayerCont : MonoBehaviour
             list_units.Add(freeUnit);
         }
         freeUnit.transform.localRotation = Quaternion.Euler(0, 45, 0);
-        freeUnit.Init();
+        freeUnit.Init(setMaterial);
         return freeUnit;
+    }
+
+    private void Set_Material_renderers()
+    {
+        foreach (var renderer in setMaterial_renderers)
+        {
+            renderer.material = setMaterial;
+        }
     }
 
     public void NotActivate()

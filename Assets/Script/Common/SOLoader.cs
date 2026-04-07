@@ -138,6 +138,19 @@ public static class SOLoader
     }
 
 
+    private static SO_MaterialData so_materialData;
+    public static SO_MaterialData MaterialData
+    {
+        get
+        {
+            if (so_materialData == null)
+            {
+                so_materialData = LoadSO<SO_MaterialData>(pathBase + nameof(SO_MaterialData));
+            }
+            return so_materialData;
+        }
+    }
+
 
 
     // ========= loc =============
