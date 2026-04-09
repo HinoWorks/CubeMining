@@ -23,6 +23,7 @@ public class MiningTarget_Artifact : MiningTarget_Object
         breakAttackCount = UnityEngine.Random.Range(breakAttackCount_min, breakAttackCount_max);
 
         base.Init(hp, 0, -1, 0);
+        Set_BlockMesh();
         base.animScale_rate = this.transform.localScale.x;
 
         Debug.Log($"<color=green>== artifact Set: artifactIndex: {artifactIndex} / layerIndex: {layerIndex} ===</color>");

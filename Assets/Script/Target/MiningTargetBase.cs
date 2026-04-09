@@ -11,6 +11,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     public int value { get; private set; }
     public bool isAlive => hp > 0;
 
+    public Transform GetTransform() => transform;
 
     protected float animScale_rate;
     private Vector3 animScale_1 => animScale_rate * new Vector3(1.05f, 0.95f, 1.05f);

@@ -15,12 +15,16 @@ public class UI_SkillTreeDetail : MonoBehaviour
     [SerializeField] GameObject obj_complete;
     [SerializeField] GameObject obj_resourceRoot;
     [SerializeField] UI_ResourceCount[] ui_resourceCounts;
+    [SerializeField] float hoverYOffset = 200f;
 
 
     private UI_SkillTreeUnit currentUnit;
     private List<ResourceCount> requredResources = new List<ResourceCount>();
     public List<ResourceCount> RequredResources => requredResources;
     public bool IsEnhanceReady { get; private set; } = true;
+    private RectTransform rectTr;
+    private Canvas rootCanvas;
+    private Vector3 anchorWorldPosition;
 
 
 
@@ -34,6 +38,20 @@ public class UI_SkillTreeDetail : MonoBehaviour
         }
         currentUnit = _skillTreeUnit;
         SetData_Base(currentUnit.level);
+    }
+
+    public void SetPositionWithAutoFlip(Vector3 _worldPosition)
+    {
+        EnsureCachedRefs();
+        anchorWorldPosition = _worldPosition;
+        ApplyVerticalOffset(hoverYOffset);
+
+        // サイズ更新後に判定しないと、初回だけ正しく判定できない場合がある
+        Canvas.ForceUpdateCanvases();
+        if (IsAnyCornerOutOfScreen())
+        {
+            ApplyVerticalOffset(-hoverYOffset);
+        }
     }
 
     private void SetData_Base(int _currentLevel)
@@ -56,6 +74,49 @@ public class UI_SkillTreeDetail : MonoBehaviour
         obj_complete.SetActive(currentUnit.unlockState == SkillTreeUnlockState.EnhanceComplete);
         obj_resourceRoot.SetActive(currentUnit.unlockState != SkillTreeUnlockState.EnhanceComplete);
         this.gameObject.SetActive(true);
+    }
+
+    private void EnsureCachedRefs()
+    {
+        if (rectTr == null) rectTr = transform as RectTransform;
+        if (rootCanvas == null) rootCanvas = GetComponentInParent<Canvas>();
+    }
+
+    private void ApplyVerticalOffset(float _offsetY)
+    {
+        var targetScreenPos = RectTransformUtility.WorldToScreenPoint(GetCanvasCamera(), anchorWorldPosition);
+        targetScreenPos.y += _offsetY;
+
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+            rectTr.parent as RectTransform,
+            targetScreenPos,
+            GetCanvasCamera(),
+            out var worldPos
+        );
+        rectTr.position = worldPos;
+    }
+
+    private Camera GetCanvasCamera()
+    {
+        if (rootCanvas == null) return null;
+        return rootCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : rootCanvas.worldCamera;
+    }
+
+    private bool IsAnyCornerOutOfScreen()
+    {
+        EnsureCachedRefs();
+        var corners = new Vector3[4];
+        rectTr.GetWorldCorners(corners);
+        var cam = GetCanvasCamera();
+        for (var i = 0; i < corners.Length; i++)
+        {
+            var screenPoint = RectTransformUtility.WorldToScreenPoint(cam, corners[i]);
+            if (screenPoint.x < 0f || screenPoint.x > Screen.width || screenPoint.y < 0f || screenPoint.y > Screen.height)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void SetData_Enhanced(int _currentLevel)

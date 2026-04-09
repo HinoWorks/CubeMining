@@ -96,12 +96,21 @@ public class AttackCont_Pickaxe : MonoBehaviour
 
                     // critical check
                     var selectedDamageRate = UnityEngine.Random.Range(0f, 1f) < criticalRate ? criticalDamageRate : 1f;
-                    var resourceUpRate_LuckyMine = GameParamManager.gameBaseParam.isLuckyMine ?
-                                         GameParamManager.gameBaseParam.luckyMineRate_ResourceUpRate : 0f;
+                    var isLuckyMine = GameParamManager.gameBaseParam.isLuckyMine;
+                    isLuckyMine = UnityEngine.Random.Range(0, 100) % 2 == 0;
+                    Debug.Log($"DEBUG ===> isLuckyMine: {isLuckyMine}");
+                    var resourceUpRate_LuckyMine = isLuckyMine ? GameParamManager.gameBaseParam.luckyMineRate_ResourceUpRate : 0f;
                     var damage_calc = GameParamManager.gameBaseParam.isInstantShatter ? instantShatterDamage : (int)(damage * selectedDamageRate);
                     if (t.Damage(damage_calc, resourceUpRate_pickaxe + resourceUpRate_LuckyMine))
                     {
+                        // 破壊されていた場合
                         removeBuffer.Add(t);
+                        if (isLuckyMine)
+                        {
+                            var textCont = UI_PoolManager.Inst.Set_LuckText();
+                            textCont.Initialize(t.GetTransform(), Vector3.zero);
+                            textCont.SetText($"+{(int)(resourceUpRate_LuckyMine * 100)}%");
+                        }
                     }
                 }
                 if (targets.Count > 0) GameEvent.InGame.PublishOnPickaxeAttack();

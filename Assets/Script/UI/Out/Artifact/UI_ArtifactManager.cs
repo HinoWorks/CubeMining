@@ -123,8 +123,8 @@ public class UI_ArtifactManager : MonoBehaviour
     {
         if (_isEnter)
         {
-            detailUnit.transform.position = _position;
             detailUnit.SetData(_so);
+            detailUnit.SetPositionWithAutoFlip(_position);
         }
         else
         {

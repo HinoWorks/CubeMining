@@ -49,7 +49,7 @@ public class MiningTarget_Object : MiningTargetBase
         Set_BlockMesh();
     }
 
-    private void Set_BlockMesh()
+    protected virtual void Set_BlockMesh()
     {
         var currentHpRate = base.hp_rate;
         var targetIndex = 0;

@@ -249,8 +249,8 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     {
         if (_isEnter)
         {
-            ui_skillTreeDetail.transform.position = _skillTreeUnit.transform.position;
             ui_skillTreeDetail.SetData(_skillTreeUnit);
+            ui_skillTreeDetail.SetPositionWithAutoFlip(_skillTreeUnit.transform.position);
         }
         else
         {

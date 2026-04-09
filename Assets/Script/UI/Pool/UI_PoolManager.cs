@@ -13,14 +13,13 @@ public class UI_PoolManager : MonoBehaviour
 
     [Space(10)]
     [Header(" -- pf set --")]
-    [SerializeField] GameObject pf_circleGauge;
     [SerializeField] GameObject pf_getCoinText;
     [SerializeField] GameObject pf_otherText;
     [SerializeField] GameObject pf_getResourceCont;
     [SerializeField] GameObject pf_getArtifactCont;
     [SerializeField] GameObject pf_getTime;
-    [SerializeField] GameObject pf_speechBubble;
-
+    [SerializeField] GameObject pf_criticalText;
+    [SerializeField] GameObject pf_luckText;
 
 
     [Space(10)]
@@ -35,9 +34,9 @@ public class UI_PoolManager : MonoBehaviour
     private List<UI_TextOtherGet> pool_otherText = new List<UI_TextOtherGet>();
     private List<UI_GetResourceCont> pool_getResourceCont = new List<UI_GetResourceCont>();
     private List<UI_GetArtifactCont> pool_getArtifactCont = new List<UI_GetArtifactCont>();
-    private List<UI_SpeechBubble> pool_speechBubble = new List<UI_SpeechBubble>(10);
     private List<UI_TextCont> pool_getTime = new List<UI_TextCont>();
-
+    private List<UI_TextOtherGet> pool_luckText = new List<UI_TextOtherGet>();
+    private List<UI_TextOtherGet> pool_criticalText = new List<UI_TextOtherGet>();
     //  -- screen out limit setting --
     public float screenOut_min_w { get; private set; }
     public float screenOut_max_w { get; private set; }
@@ -81,6 +80,21 @@ public class UI_PoolManager : MonoBehaviour
             var newUnit = Instantiate(pf_otherText, parent_base) as GameObject;
             var selectUnit = newUnit.GetComponent<UI_TextOtherGet>();
             pool_otherText.Add(selectUnit);
+            selectUnit.gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            var newUnit = Instantiate(pf_criticalText, parent_base) as GameObject;
+            var selectUnit = newUnit.GetComponent<UI_TextOtherGet>();
+            pool_criticalText.Add(selectUnit);
+            selectUnit.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            var newUnit = Instantiate(pf_luckText, parent_base) as GameObject;
+            var selectUnit = newUnit.GetComponent<UI_TextOtherGet>();
+            pool_luckText.Add(selectUnit);
             selectUnit.gameObject.SetActive(false);
         }
 
@@ -212,6 +226,32 @@ public class UI_PoolManager : MonoBehaviour
             pool_getTime.Add(selectUnit);
         }
         selectUnit.transform.position = target_time.position;
+        return selectUnit;
+    }
+
+    public UI_TextOtherGet Set_LuckText()
+    {
+        UI_TextOtherGet selectUnit = null;
+        selectUnit = pool_luckText.Find(d => d.gameObject.activeSelf == false);
+        if (selectUnit == null)
+        {
+            var newUnit = Instantiate(pf_luckText, parent_base) as GameObject;
+            selectUnit = newUnit.GetComponent<UI_TextOtherGet>();
+            pool_luckText.Add(selectUnit);
+        }
+        return selectUnit;
+    }
+
+    public UI_TextOtherGet Set_CriticalText()
+    {
+        UI_TextOtherGet selectUnit = null;
+        selectUnit = pool_criticalText.Find(d => d.gameObject.activeSelf == false);
+        if (selectUnit == null)
+        {
+            var newUnit = Instantiate(pf_criticalText, parent_base) as GameObject;
+            selectUnit = newUnit.GetComponent<UI_TextOtherGet>();
+            pool_criticalText.Add(selectUnit);
+        }
         return selectUnit;
     }
     #endregion --
