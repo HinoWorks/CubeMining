@@ -15,7 +15,7 @@ MonoBehaviour:
   skillTreeDatas:
   - baseIndex: 1
     paramCategory: 0
-    paramType: 10
+    paramType: 12
     targetIndex: -1
     skillName: Power Strike
     description: Increases pickaxe damage to break blocks faster.
@@ -24,7 +24,7 @@ MonoBehaviour:
     deltaValue: 0.01
   - baseIndex: 2
     paramCategory: 0
-    paramType: 13
+    paramType: 15
     targetIndex: -1
     skillName: Rapid Swing
     description: Increases the attack speed of the pickaxe.
@@ -33,7 +33,7 @@ MonoBehaviour:
     deltaValue: 0.01
   - baseIndex: 3
     paramCategory: 0
-    paramType: 14
+    paramType: 16
     targetIndex: -1
     skillName: Wide Reach
     description: Expands the area of effect for pickaxe attacks.
@@ -60,7 +60,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 102
     paramCategory: 4
-    paramType: 10
+    paramType: 12
     targetIndex: 1
     skillName: Frostbite Power
     description: Increases the damage dealt by icicles.
@@ -69,7 +69,7 @@ MonoBehaviour:
     deltaValue: 0.1
   - baseIndex: 103
     paramCategory: 4
-    paramType: 13
+    paramType: 15
     targetIndex: 1
     skillName: Cold Interval
     description: Reduces the time between icicle attacks.
@@ -78,7 +78,7 @@ MonoBehaviour:
     deltaValue: 0.03
   - baseIndex: 104
     paramCategory: 4
-    paramType: 11
+    paramType: 13
     targetIndex: 1
     skillName: Multi-Icicle
     description: Increases the number of icicles generated simultaneously.
@@ -87,7 +87,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 105
     paramCategory: 4
-    paramType: 9
+    paramType: 11
     targetIndex: 1
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
@@ -105,7 +105,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 202
     paramCategory: 4
-    paramType: 10
+    paramType: 12
     targetIndex: 2
     skillName: High-Voltage
     description: Increases the damage of lightning strikes on the highest blocks.
@@ -114,7 +114,7 @@ MonoBehaviour:
     deltaValue: 0.1
   - baseIndex: 203
     paramCategory: 4
-    paramType: 13
+    paramType: 15
     targetIndex: 2
     skillName: Volt Interval
     description: Reduces the time between icicle attacks.
@@ -123,7 +123,7 @@ MonoBehaviour:
     deltaValue: 0.03
   - baseIndex: 204
     paramCategory: 4
-    paramType: 11
+    paramType: 13
     targetIndex: 2
     skillName: Multi-Bolt
     description: Increases the number of icicles generated simultaneously.
@@ -132,7 +132,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 205
     paramCategory: 4
-    paramType: 9
+    paramType: 11
     targetIndex: 2
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
@@ -150,7 +150,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 302
     paramCategory: 4
-    paramType: 10
+    paramType: 12
     targetIndex: 3
     skillName: Surge Power
     description: Increases the damage of random lightning strikes.
@@ -159,7 +159,7 @@ MonoBehaviour:
     deltaValue: 0.1
   - baseIndex: 303
     paramCategory: 4
-    paramType: 13
+    paramType: 15
     targetIndex: 3
     skillName: Surge Interval
     description: Reduces the time between random lightning strikes.
@@ -168,7 +168,7 @@ MonoBehaviour:
     deltaValue: 0.03
   - baseIndex: 304
     paramCategory: 4
-    paramType: 11
+    paramType: 13
     targetIndex: 3
     skillName: Multi-Surge
     description: Strikes more random blocks simultaneously.
@@ -177,7 +177,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 305
     paramCategory: 4
-    paramType: 9
+    paramType: 11
     targetIndex: 3
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
@@ -195,7 +195,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 402
     paramCategory: 4
-    paramType: 10
+    paramType: 12
     targetIndex: 4
     skillName: Starlight Power
     description: ncreases the damage dealt by orbiting stars.
@@ -204,7 +204,7 @@ MonoBehaviour:
     deltaValue: 0.1
   - baseIndex: 403
     paramCategory: 4
-    paramType: 13
+    paramType: 15
     targetIndex: 4
     skillName: Orbit Speed
     description: Increases the rotation speed/attack frequency of the stars.
@@ -213,7 +213,7 @@ MonoBehaviour:
     deltaValue: 0.1
   - baseIndex: 404
     paramCategory: 4
-    paramType: 11
+    paramType: 13
     targetIndex: 4
     skillName: Star Cluster
     description: ncreases the number of stars orbiting the player.
@@ -222,7 +222,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 405
     paramCategory: 4
-    paramType: 9
+    paramType: 11
     targetIndex: 4
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
@@ -240,7 +240,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 502
     paramCategory: 4
-    paramType: 10
+    paramType: 12
     targetIndex: 5
     skillName: Piercing Power
     description: Increases the damage of horizontal arrows.
@@ -249,7 +249,7 @@ MonoBehaviour:
     deltaValue: 0.1
   - baseIndex: 503
     paramCategory: 4
-    paramType: 13
+    paramType: 15
     targetIndex: 5
     skillName: Arrow Interval
     description: Reduces the time between arrow shots.
@@ -258,7 +258,7 @@ MonoBehaviour:
     deltaValue: 0.03
   - baseIndex: 504
     paramCategory: 4
-    paramType: 11
+    paramType: 13
     targetIndex: 5
     skillName: Volley Shot
     description: Increases the number of arrows fired simultaneously.
@@ -267,7 +267,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 505
     paramCategory: 4
-    paramType: 9
+    paramType: 11
     targetIndex: 5
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
@@ -285,7 +285,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 602
     paramCategory: 4
-    paramType: 10
+    paramType: 12
     targetIndex: 6
     skillName: Piercing Power
     description: Increases the damage of vertical arrows.
@@ -294,7 +294,7 @@ MonoBehaviour:
     deltaValue: 0.1
   - baseIndex: 603
     paramCategory: 4
-    paramType: 13
+    paramType: 15
     targetIndex: 6
     skillName: Arrow Interval
     description: Reduces the time between arrow shots.
@@ -303,7 +303,7 @@ MonoBehaviour:
     deltaValue: 0.03
   - baseIndex: 604
     paramCategory: 4
-    paramType: 11
+    paramType: 13
     targetIndex: 6
     skillName: Volley Shot
     description: Increases the number of arrows fired simultaneously.
@@ -312,7 +312,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 605
     paramCategory: 4
-    paramType: 9
+    paramType: 11
     targetIndex: 6
     skillName: Precision Hitting
     description: Boosts the chance of landing a critical hit for massive damage.
@@ -329,13 +329,22 @@ MonoBehaviour:
     maxLevel: 10
     deltaValue: 1
   - baseIndex: 1012
-    paramCategory: 1
-    paramType: 9
+    paramCategory: 2
+    paramType: 11
     targetIndex: 1
     skillName: Bountiful Harvest
     description: Increases the amount of resources gathered from breaking blocks.
     icon: {fileID: 21300000, guid: 921423544533d4826bb0c0931b358e3a, type: 3}
     maxLevel: 3
+    deltaValue: 1
+  - baseIndex: 1013
+    paramCategory: 2
+    paramType: 10
+    targetIndex: 1
+    skillName: 
+    description: "\u30DF\u30CB\u9271\u77F3\u304B\u3089\u5DE8\u5927\u9271\u77F3\u3078\u306E\u5909\u5316\u7387\u30A2\u30C3\u30D7"
+    icon: {fileID: 0}
+    maxLevel: 5
     deltaValue: 1
   - baseIndex: 1021
     paramCategory: 2
@@ -356,13 +365,22 @@ MonoBehaviour:
     maxLevel: 10
     deltaValue: 1
   - baseIndex: 1023
-    paramCategory: 1
-    paramType: 9
+    paramCategory: 2
+    paramType: 11
     targetIndex: 2
     skillName: Bountiful Harvest
     description: Increases the amount of resources gathered from breaking blocks.
     icon: {fileID: 21300000, guid: 7d9199e27a0204adbb0386b6242bae94, type: 3}
     maxLevel: 3
+    deltaValue: 1
+  - baseIndex: 1024
+    paramCategory: 2
+    paramType: 10
+    targetIndex: 2
+    skillName: 
+    description: "\u30DF\u30CB\u9271\u77F3\u304B\u3089\u5DE8\u5927\u9271\u77F3\u3078\u306E\u5909\u5316\u7387\u30A2\u30C3\u30D7"
+    icon: {fileID: 0}
+    maxLevel: 5
     deltaValue: 1
   - baseIndex: 1031
     paramCategory: 2
@@ -383,13 +401,22 @@ MonoBehaviour:
     maxLevel: 10
     deltaValue: 1
   - baseIndex: 1033
-    paramCategory: 1
-    paramType: 9
+    paramCategory: 2
+    paramType: 11
     targetIndex: 3
     skillName: Bountiful Harvest
     description: Increases the amount of resources gathered from breaking blocks.
     icon: {fileID: 21300000, guid: 0eb3a7b41dda3434a98f7310938847a8, type: 3}
     maxLevel: 3
+    deltaValue: 1
+  - baseIndex: 1034
+    paramCategory: 2
+    paramType: 10
+    targetIndex: 3
+    skillName: 
+    description: "\u30DF\u30CB\u9271\u77F3\u304B\u3089\u5DE8\u5927\u9271\u77F3\u3078\u306E\u5909\u5316\u7387\u30A2\u30C3\u30D7"
+    icon: {fileID: 0}
+    maxLevel: 5
     deltaValue: 1
   - baseIndex: 1041
     paramCategory: 2
@@ -410,13 +437,22 @@ MonoBehaviour:
     maxLevel: 10
     deltaValue: 1
   - baseIndex: 1043
-    paramCategory: 1
-    paramType: 9
+    paramCategory: 2
+    paramType: 11
     targetIndex: 4
     skillName: Bountiful Harvest
     description: Increases the amount of resources gathered from breaking blocks.
     icon: {fileID: 21300000, guid: 1c4b9161c23f946e4907a90cf151c2c1, type: 3}
     maxLevel: 3
+    deltaValue: 1
+  - baseIndex: 1044
+    paramCategory: 2
+    paramType: 10
+    targetIndex: 4
+    skillName: 
+    description: "\u30DF\u30CB\u9271\u77F3\u304B\u3089\u5DE8\u5927\u9271\u77F3\u3078\u306E\u5909\u5316\u7387\u30A2\u30C3\u30D7"
+    icon: {fileID: 0}
+    maxLevel: 5
     deltaValue: 1
   - baseIndex: 1051
     paramCategory: 2
@@ -437,13 +473,22 @@ MonoBehaviour:
     maxLevel: 10
     deltaValue: 1
   - baseIndex: 1053
-    paramCategory: 1
-    paramType: 9
+    paramCategory: 2
+    paramType: 11
     targetIndex: 5
     skillName: Bountiful Harvest
     description: Increases the amount of resources gathered from breaking blocks.
     icon: {fileID: 21300000, guid: 28e9625637fed410584919ccf4db6863, type: 3}
     maxLevel: 3
+    deltaValue: 1
+  - baseIndex: 1054
+    paramCategory: 2
+    paramType: 10
+    targetIndex: 5
+    skillName: 
+    description: "\u30DF\u30CB\u9271\u77F3\u304B\u3089\u5DE8\u5927\u9271\u77F3\u3078\u306E\u5909\u5316\u7387\u30A2\u30C3\u30D7"
+    icon: {fileID: 0}
+    maxLevel: 5
     deltaValue: 1
   - baseIndex: 1061
     paramCategory: 2
@@ -464,13 +509,22 @@ MonoBehaviour:
     maxLevel: 10
     deltaValue: 1
   - baseIndex: 1063
-    paramCategory: 1
-    paramType: 9
+    paramCategory: 2
+    paramType: 11
     targetIndex: 6
     skillName: Bountiful Harvest
     description: Increases the amount of resources gathered from breaking blocks.
     icon: {fileID: 21300000, guid: 609196ce47db64357b002366183db8dd, type: 3}
     maxLevel: 3
+    deltaValue: 1
+  - baseIndex: 1064
+    paramCategory: 2
+    paramType: 10
+    targetIndex: 6
+    skillName: 
+    description: "\u30DF\u30CB\u9271\u77F3\u304B\u3089\u5DE8\u5927\u9271\u77F3\u3078\u306E\u5909\u5316\u7387\u30A2\u30C3\u30D7"
+    icon: {fileID: 0}
+    maxLevel: 5
     deltaValue: 1
   - baseIndex: 2011
     paramCategory: 3
@@ -483,7 +537,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 2012
     paramCategory: 3
-    paramType: 7
+    paramType: 9
     targetIndex: 1
     skillName: Crate Frequency
     description: Increases the spawn rate of Wooden Crate blocks.
@@ -492,7 +546,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 2013
     paramCategory: 3
-    paramType: 9
+    paramType: 11
     targetIndex: 1
     skillName: Loot Quality
     description: Improves the quality/amount of items found inside crates.
@@ -510,7 +564,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 2022
     paramCategory: 3
-    paramType: 7
+    paramType: 9
     targetIndex: 2
     skillName: Timer Frequency
     description: Increases the spawn rate of Timer blocks.
@@ -519,7 +573,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 2023
     paramCategory: 3
-    paramType: 9
+    paramType: 11
     targetIndex: 2
     skillName: Timer Potency
     description: Enhances the time-extending effect of Timer blocks.
@@ -537,7 +591,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 2032
     paramCategory: 3
-    paramType: 7
+    paramType: 9
     targetIndex: 3
     skillName: Bomb Frequency
     description: Increases the spawn rate of Bomb blocks.
@@ -546,7 +600,7 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 2033
     paramCategory: 3
-    paramType: 8
+    paramType: 10
     targetIndex: 3
     skillName: Blast Radius
     description: Expands the explosion range of Bomb blocks.
@@ -555,7 +609,7 @@ MonoBehaviour:
     deltaValue: 0.25
   - baseIndex: 2034
     paramCategory: 3
-    paramType: 10
+    paramType: 12
     targetIndex: 3
     skillName: Blast Force
     description: Increases the damage dealt by Bomb block explosions.
@@ -619,7 +673,7 @@ MonoBehaviour:
     deltaValue: 0.01
   - baseIndex: 3007
     paramCategory: 0
-    paramType: 17
+    paramType: 19
     targetIndex: -1
     skillName: More Artifact
     description: artifact slot +1

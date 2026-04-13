@@ -8,7 +8,7 @@ using Cysharp.Threading.Tasks;
 /// </summary>
 public class GameBaseParam
 {
-    // インゲーム時間
+    // インゲーム時間の初期値
     public float ingameTime => ingameTime_Base + ingameTime_enhanced;
     private float ingameTime_Base = 15f;
     private float ingameTime_enhanced = 0f;
@@ -22,7 +22,7 @@ public class GameBaseParam
     private float luckyMineRate_enhanced = 0f;
     public bool isLuckyMine => UnityEngine.Random.Range(0f, 1f) < luckyMineRate;
 
-    //ラッキーマインの増加量+50%
+    //ラッキーマイン時のリソース増加量
     public float luckyMineRate_ResourceUpRate => luckyMineRate_ResourceUpRate_enhanced;
     private float luckyMineRate_ResourceUpRate_enhanced = 0f;
 
@@ -35,6 +35,16 @@ public class GameBaseParam
     public float instantShatterRate => 0f + instantShatterRate_enhanced + ArtifactManager.Inst.instantShatterRate;
     private float instantShatterRate_enhanced = 0f;
     public bool isInstantShatter => UnityEngine.Random.Range(0f, 1f) < instantShatterRate;
+
+
+    // ピッケルで攻撃するたび、インゲーム時間が増加する確率
+    public float pickaxeAttack_AddIngameTimeRate => 0f + pickaxeAttack_AddIngameTimeRate_enhanced;
+    private float pickaxeAttack_AddIngameTimeRate_enhanced = 0f;
+    public bool isPickaxeAttack_AddIngameTime => UnityEngine.Random.Range(0f, 1f) < pickaxeAttack_AddIngameTimeRate;
+
+    // 鉱石の基本増加量
+    public int resourceBaseUpCount => resourceBaseUpCount_enhanced;
+    private int resourceBaseUpCount_enhanced = 0;
 
 
     //アーティファクト周りのパラメタ
@@ -75,6 +85,12 @@ public class GameBaseParam
                 break;
             case ParamType.InstantShatterRate:
                 instantShatterRate_enhanced += _setParam;
+                break;
+            case ParamType.PickaxeAttack_AddIngameTimeRate:
+                pickaxeAttack_AddIngameTimeRate_enhanced += _setParam;
+                break;
+            case ParamType.ResourceBaseUpCount:
+                resourceBaseUpCount_enhanced += (int)_setParam;
                 break;
 
             // -- アーティファクトのスロット数向上 --
@@ -153,11 +169,10 @@ public class ObjectGenerateParam
 public class BlockBaseParam
 {
     public BlockData so;
-    //public bool isActive { get; private set; } = false;
     public int blockIndex => so.blockIndex;
-    public int hp => so.hp + hp_enhanced;
-    private int hp_enhanced = 0;
-    public int baseValue => so.baseValue + baseValue_enhanced;
+    //public int hp => so.hp + hp_enhanced;
+    //private int hp_enhanced = 0;
+    public int baseValue => baseValue_enhanced;
     private int baseValue_enhanced = 0;
 
     public void Init(BlockData _blockData)
@@ -219,6 +234,7 @@ public class BlockGenerateParam_Layer
 
 /// <summary>
 /// 共通　 = ブロックの変化率パラメータ == 土、岩などのブロックタイプ毎に鉱石の抽選率を設定
+/// blockChangeRateDataを引数にして、その値に加算して抽選率を計算する
 /// </summary>
 public class BlockChangeRateParam
 {
@@ -229,14 +245,16 @@ public class BlockChangeRateParam
     private bool isActive_ruby = false;
     private bool isActive_sapphire = false;
     private bool isActive_diamond = false;
+
+
+    //ミニ鉱石への変化率
     public int rate_iron_enhanced { get; private set; } = 0;
     public int rate_gold_enhanced { get; private set; } = 0;
     public int rate_emerald_enhanced { get; private set; } = 0;
     public int rate_ruby_enhanced { get; private set; } = 0;
     public int rate_sapphire_enhanced { get; private set; } = 0;
     public int rate_diamond_enhanced { get; private set; } = 0;
-
-    private BlockChangeRateData blockChangeData;
+    private BlockChangeRateData blockChangeData; // 各ブロックにおける基本の変化率
     private int rate_iron_total => rate_iron_enhanced + blockChangeData.rate_iron;
     private int rate_gold_total => isActive_gold ? rate_gold_enhanced + blockChangeData.rate_gold : 0;
     private int rate_emerald_total => isActive_emerald ? rate_emerald_enhanced + blockChangeData.rate_emerald : 0;
@@ -244,6 +262,8 @@ public class BlockChangeRateParam
     private int rate_sapphire_total => isActive_sapphire ? rate_sapphire_enhanced + blockChangeData.rate_sapphire : 0;
     private int rate_diamond_total => isActive_diamond ? rate_diamond_enhanced + blockChangeData.rate_diamond : 0;
 
+
+    //ミニ鉱石からfull鉱石に変化する確率
     private int rate_changeMax_iron_enhanced = 0;
     private int rate_changeMax_gold_enhanced = 0;
     private int rate_changeMax_emerald_enhanced = 0;
@@ -257,6 +277,16 @@ public class BlockChangeRateParam
     private int rate_changeMax_sapphire_total => rate_changeMax_sapphire_enhanced + common_changeMaxRerource;
     private int rate_changeMax_diamond_total => rate_changeMax_diamond_enhanced + common_changeMaxRerource;
     private int common_changeMaxRerource = 5; // ミニ鉱石からfull鉱石に変化する初期確率
+
+
+    // 各鉱石の個別リソースアップ量
+    public int iron_resourceUpCount_enhanced { get; private set; } = 0;
+    public int gold_resourceUpCount_enhanced { get; private set; } = 0;
+    public int emerald_resourceUpCount_enhanced { get; private set; } = 0;
+    public int ruby_resourceUpCount_enhanced { get; private set; } = 0;
+    public int sapphire_resourceUpCount_enhanced { get; private set; } = 0;
+    public int diamond_resourceUpCount_enhanced { get; private set; } = 0;
+
 
     public void Init()
     {
@@ -275,7 +305,7 @@ public class BlockChangeRateParam
                     case 6: isActive_diamond = true; break;
                 }
                 break;
-            case ParamType.Value:
+            case ParamType.Rate_Generate:
                 switch (_targetBlockIndex)
                 {
                     case 1: rate_iron_enhanced += (int)_setParam; break;
@@ -284,6 +314,28 @@ public class BlockChangeRateParam
                     case 4: rate_ruby_enhanced += (int)_setParam; break;
                     case 5: rate_sapphire_enhanced += (int)_setParam; break;
                     case 6: rate_diamond_enhanced += (int)_setParam; break;
+                }
+                break;
+            case ParamType.Rate_Value:
+                switch (_targetBlockIndex)
+                {
+                    case 1: rate_changeMax_iron_enhanced += (int)_setParam; break;
+                    case 2: rate_changeMax_gold_enhanced += (int)_setParam; break;
+                    case 3: rate_changeMax_emerald_enhanced += (int)_setParam; break;
+                    case 4: rate_changeMax_ruby_enhanced += (int)_setParam; break;
+                    case 5: rate_changeMax_sapphire_enhanced += (int)_setParam; break;
+                    case 6: rate_changeMax_diamond_enhanced += (int)_setParam; break;
+                }
+                break;
+            case ParamType.Value:
+                switch (_targetBlockIndex)
+                {
+                    case 1: iron_resourceUpCount_enhanced += (int)_setParam; break;
+                    case 2: gold_resourceUpCount_enhanced += (int)_setParam; break;
+                    case 3: emerald_resourceUpCount_enhanced += (int)_setParam; break;
+                    case 4: ruby_resourceUpCount_enhanced += (int)_setParam; break;
+                    case 5: sapphire_resourceUpCount_enhanced += (int)_setParam; break;
+                    case 6: diamond_resourceUpCount_enhanced += (int)_setParam; break;
                 }
                 break;
         }
@@ -350,6 +402,23 @@ public class BlockChangeRateParam
             case ResourceType.Diamond: return isActive_diamond;
             default: return true;
         }
+    }
+    /// <summary>
+    /// 各鉱石のリソースアップ量を取得
+    /// </summary>
+    public int Get_ResourceUpCount(ResourceType _resourceType)
+    {
+        switch (_resourceType)
+        {
+            case ResourceType.Iron: return iron_resourceUpCount_enhanced;
+            case ResourceType.Gold: return gold_resourceUpCount_enhanced;
+            case ResourceType.Emerald: return emerald_resourceUpCount_enhanced;
+            case ResourceType.Ruby: return ruby_resourceUpCount_enhanced;
+            case ResourceType.Sapphire: return sapphire_resourceUpCount_enhanced;
+            case ResourceType.Diamond: return diamond_resourceUpCount_enhanced;
+            default: return 0;
+        }
+        ;
     }
 }
 
@@ -473,7 +542,6 @@ public static class GameParamManager
     public readonly static List<ObjectGenerateParam> list_objectGenerateParam = new List<ObjectGenerateParam>();
     public readonly static List<BlockBaseParam> list_blockGenerateParam = new List<BlockBaseParam>();
     public readonly static List<BlockGenerateParam_Layer> list_blockGenerateParam_Layer = new List<BlockGenerateParam_Layer>();
-    //public readonly static List<BlockChangeRateParam> list_blockChangeRateParam = new List<BlockChangeRateParam>();
     public readonly static List<AttackParam> list_attackParam = new List<AttackParam>();
     public readonly static List<PickaxeParam> list_pickaxeParam = new List<PickaxeParam>();
     public static float artifactGenerateRate => artifactGenerateRateParam.generateRate;
@@ -510,6 +578,27 @@ public static class GameParamManager
     public static bool IsMaxResource(ResourceType _resourceType)
     {
         return blockChangeRateParam.IsMaxResource(_resourceType);
+    }
+    /// <summary>
+    /// 鉱石の共通の基本増加量を取得
+    /// </summary>
+    public static int Get_ResourceBaseUpCount()
+    {
+        return gameBaseParam.resourceBaseUpCount;
+    }
+    /// <summary>
+    /// 鉱石の個別の基本増加量を取得
+    /// </summary>
+    public static int Get_ResourceUpCount(ResourceType _resourceType)
+    {
+        return blockChangeRateParam.Get_ResourceUpCount(_resourceType);
+    }
+    /// <summary>
+    /// ピッケルで攻撃するたび、インゲーム時間が増加するかチェック
+    /// </summary>  
+    public static bool IsPickaxeAttack_AddIngameTime()
+    {
+        return gameBaseParam.isPickaxeAttack_AddIngameTime;
     }
     public static AttackParam Get_AttackParam(int _attackIndex)
     {

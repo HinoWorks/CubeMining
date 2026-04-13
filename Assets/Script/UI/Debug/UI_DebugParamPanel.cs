@@ -84,8 +84,8 @@ public class UI_DebugParamPanel : MonoBehaviour
         {
             var blockParam = GameParamManager.list_blockGenerateParam[i];
             stringBuilder_blockGenerate.AppendLine($"Block [{blockParam.blockIndex}]");
-            stringBuilder_blockGenerate.AppendLine($"  HP: {blockParam.hp}");
             stringBuilder_blockGenerate.AppendLine($"  Base Value: {blockParam.baseValue}");
+            stringBuilder_blockGenerate.AppendLine($"  Resource Up Count: {GameParamManager.Get_ResourceUpCount(ResourceType.Iron)}");
             stringBuilder_blockGenerate.AppendLine();
         }
 

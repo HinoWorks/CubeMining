@@ -22,6 +22,8 @@ public enum ParamType
     DeepLayerBonus,
     BlockRegenRate,
     InstantShatterRate,
+    PickaxeAttack_AddIngameTimeRate,
+    ResourceBaseUpCount,
 
 
     // ==== その他 generate param ====

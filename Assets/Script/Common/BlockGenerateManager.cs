@@ -265,6 +265,8 @@ public class BlockGenerateManager : MonoBehaviour
             }
             var fixedResourceValue = (int)(resourceBlockData.baseValue
                                         * (isResourceMax ? 2f : 1f)
+                                        + GameParamManager.Get_ResourceUpCount(resourceType) //個別の増加量
+                                        + GameParamManager.Get_ResourceBaseUpCount() //共通の増加量
                                         );
             //Debug.Log($"{resourceType} => hp: {resourceBlockData.hp}, value: {fixedResourceValue}");
             targetBlock.Init(resourceBlockData.hp, fixedResourceValue, resourceBlockIndex, _layerIndex);
