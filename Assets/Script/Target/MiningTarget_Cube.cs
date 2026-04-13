@@ -6,9 +6,8 @@ public class MiningTarget_Cube : MiningTargetBase
     [SerializeField] BlockTypeSetter[] blockTypeSetters;
     private Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
     private BlockSize blockSize;
-    private BaseBlockType baseBlockType;
-    private ResourceType resourceType;
-
+    protected BaseBlockType baseBlockType;
+    protected ResourceType resourceType;
     private Action breakCallback;
 
     // -- resource up rate --
@@ -25,6 +24,7 @@ public class MiningTarget_Cube : MiningTargetBase
     private int index_SE_Break => (int)baseBlockType + 10;
 
 
+
     public override void Init(int _hp, int _value, int _index, int _layerIndex)
     {
         base.Init(_hp, _value, _index, _layerIndex);
@@ -37,15 +37,16 @@ public class MiningTarget_Cube : MiningTargetBase
     {
         breakCallback = _callback;
     }
-    public void Set_BlockType(BaseBlockType _baseBlockType, ResourceType _resourceType)
+    public virtual void Set_BlockType(BaseBlockType _baseBlockType, ResourceType _resourceType)
     {
         baseBlockType = _baseBlockType;
         resourceType = _resourceType;
         foreach (var blockTypeSetter in blockTypeSetters)
         {
-            blockTypeSetter.Set_BlockTypeObject(_resourceType);
+            blockTypeSetter.Set_BlockTypeObject(resourceType);
         }
     }
+    /*
     public void Set_BlockSize(BlockSize _blockSize, float _size)
     {
         blockSize = _blockSize;
@@ -53,6 +54,7 @@ public class MiningTarget_Cube : MiningTargetBase
         transform.localScale = _size * Vector3.one;
         base.animScale_rate = _size;
     }
+    */
 
     private void Set_BlockMesh()
     {

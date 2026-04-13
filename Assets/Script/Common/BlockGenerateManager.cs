@@ -1,9 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UniRx;
-using System.IO.Hashing;
-using UnityEngine.Analytics;
-
 
 public enum BlockSize
 {
@@ -72,7 +69,7 @@ public class GenerateBlockLayerCont
         //現在の確率でブロックを抽選
         var blockIndex = param.SelectBlockIndex();
         var blockData = SOLoader.BlockData.GetBlockData(blockIndex);
-        //var blockParam = GameParamManager.Get_BlockGenerateParam(blockIndex);
+
         var newBlock = BlockGenerateManager.Inst.GenerateBlock(blockData, layerIndex);
         newBlock.transform.localPosition = GetBlockPosition(_blockCounter);
         newBlock.Set_BreakCallback(BlockBreakCall);
@@ -102,6 +99,8 @@ public class BlockGenerateManager : MonoBehaviour
     public static BlockGenerateManager Inst;
     // -- loc
     private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
+    private List<MiningTarget_Cube> list_targetBlocks_Min = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
+    private List<MiningTarget_Cube> list_targetBlocks_Max = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
     private List<MiningTarget_Object> list_targetObjects = new List<MiningTarget_Object>(); // 生成されたオブジェクトのリスト
     private List<MiningTarget_Artifact> list_targetArtifacts = new List<MiningTarget_Artifact>(); // 生成されたアーティファクトのリスト
     private List<GenerateBlockLayerCont> list_layerConts = new List<GenerateBlockLayerCont>(); // 生成されたレイヤーのリスト
@@ -144,6 +143,14 @@ public class BlockGenerateManager : MonoBehaviour
     public void ResetAllBlocks()
     {
         foreach (var targetBlock in list_targetBlocks)
+        {
+            targetBlock.NotActivate();
+        }
+        foreach (var targetBlock in list_targetBlocks_Max)
+        {
+            targetBlock.NotActivate();
+        }
+        foreach (var targetBlock in list_targetBlocks_Min)
         {
             targetBlock.NotActivate();
         }
@@ -211,20 +218,51 @@ public class BlockGenerateManager : MonoBehaviour
     #region == Block Generate ==
     public MiningTarget_Cube GenerateBlock(BlockData _blockData, int _layerIndex)
     {
-        var targetBlock = list_targetBlocks.Find(x => x.isActiveAndEnabled == false && x.index == _blockData.blockIndex);
-        if (targetBlock == null)
-        {
-            var newBlock = Instantiate(_blockData.pf, InGameManager.Inst.ParentPool) as GameObject;
-            targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
-            list_targetBlocks.Add(targetBlock);
-        }
-        targetBlock.Init(_blockData.hp, _blockData.baseValue, _blockData.blockIndex, _layerIndex);
+        // リソースタイプ抽選
+        var resourceType = GameParamManager.Get_RandamBlockType(_blockData.blockIndex);
+        MiningTarget_Cube targetBlock = null;
 
-        //var blockTypeData = GameParamManager.Get_BlockChangeRateParam(_blockData.blockIndex);
-        //var blockType = blockTypeData.SelectBlockType();
-        var blockType = GameParamManager.Get_RandamBlockType(_blockData.blockIndex);
-        targetBlock.Set_BlockType(_blockData.baseBlockType, blockType);
-        return targetBlock;
+        // リソースなし
+        if (resourceType == ResourceType.Stone)
+        {
+            targetBlock = list_targetBlocks.Find(x => x.isActiveAndEnabled == false && x.index == _blockData.blockIndex);
+            if (targetBlock == null)
+            {
+                var newBlock = Instantiate(_blockData.pf, InGameManager.Inst.ParentPool) as GameObject;
+                targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
+                list_targetBlocks.Add(targetBlock);
+            }
+            targetBlock.Init(_blockData.hp, _blockData.baseValue, _blockData.blockIndex, _layerIndex);
+            targetBlock.Set_BlockType(_blockData.baseBlockType, resourceType);
+            return targetBlock;
+        }
+
+        else //リソース入り
+        {
+            var isResourceMax = UnityEngine.Random.Range(0, 100) < 50;
+            if (isResourceMax)//リソース最大サイズかチェック
+            {
+                targetBlock = list_targetBlocks_Max.Find(x => x.isActiveAndEnabled == false);
+                if (targetBlock == null)
+                {
+                    var newBlock = Instantiate(SOLoader.BlockData.pf_Block_ResourceMax, InGameManager.Inst.ParentPool) as GameObject;
+                    targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
+                    list_targetBlocks_Max.Add(targetBlock);
+                }
+            }
+            else
+            {
+                targetBlock = list_targetBlocks_Min.Find(x => x.isActiveAndEnabled == false);
+                if (targetBlock == null)
+                {
+                    var newBlock = Instantiate(SOLoader.BlockData.pf_Block_ResourceMin, InGameManager.Inst.ParentPool) as GameObject;
+                    targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
+                    list_targetBlocks_Min.Add(targetBlock);
+                }
+            }
+        }
+
+
     }
     #endregion
 
