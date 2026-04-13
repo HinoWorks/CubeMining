@@ -223,18 +223,18 @@ public class BlockGenerateParam_Layer
 public class BlockChangeRateParam
 {
     private int baseRate = 100;
-    public int rate_iron_enhanced { get; private set; } = 0;
-    public int rate_gold_enhanced { get; private set; } = 0;
-    public int rate_emerald_enhanced { get; private set; } = 0;
-    public int rate_ruby_enhanced { get; private set; } = 0;
-    public int rate_sapphire_enhanced { get; private set; } = 0;
-    public int rate_diamond_enhanced { get; private set; } = 0;
 
     private bool isActive_gold = false;
     private bool isActive_emerald = false;
     private bool isActive_ruby = false;
     private bool isActive_sapphire = false;
     private bool isActive_diamond = false;
+    public int rate_iron_enhanced { get; private set; } = 0;
+    public int rate_gold_enhanced { get; private set; } = 0;
+    public int rate_emerald_enhanced { get; private set; } = 0;
+    public int rate_ruby_enhanced { get; private set; } = 0;
+    public int rate_sapphire_enhanced { get; private set; } = 0;
+    public int rate_diamond_enhanced { get; private set; } = 0;
 
     private BlockChangeRateData blockChangeData;
     private int rate_iron_total => rate_iron_enhanced + blockChangeData.rate_iron;
@@ -243,6 +243,20 @@ public class BlockChangeRateParam
     private int rate_ruby_total => isActive_ruby ? rate_ruby_enhanced + blockChangeData.rate_ruby : 0;
     private int rate_sapphire_total => isActive_sapphire ? rate_sapphire_enhanced + blockChangeData.rate_sapphire : 0;
     private int rate_diamond_total => isActive_diamond ? rate_diamond_enhanced + blockChangeData.rate_diamond : 0;
+
+    private int rate_changeMax_iron_enhanced = 0;
+    private int rate_changeMax_gold_enhanced = 0;
+    private int rate_changeMax_emerald_enhanced = 0;
+    private int rate_changeMax_ruby_enhanced = 0;
+    private int rate_changeMax_sapphire_enhanced = 0;
+    private int rate_changeMax_diamond_enhanced = 0;
+    private int rate_changeMax_iron_total => rate_changeMax_iron_enhanced + common_changeMaxRerource;
+    private int rate_changeMax_gold_total => rate_changeMax_gold_enhanced + common_changeMaxRerource;
+    private int rate_changeMax_emerald_total => rate_changeMax_emerald_enhanced + common_changeMaxRerource;
+    private int rate_changeMax_ruby_total => rate_changeMax_ruby_enhanced + common_changeMaxRerource;
+    private int rate_changeMax_sapphire_total => rate_changeMax_sapphire_enhanced + common_changeMaxRerource;
+    private int rate_changeMax_diamond_total => rate_changeMax_diamond_enhanced + common_changeMaxRerource;
+    private int common_changeMaxRerource = 5; // ミニ鉱石からfull鉱石に変化する初期確率
 
     public void Init()
     {
@@ -274,6 +288,10 @@ public class BlockChangeRateParam
                 break;
         }
     }
+
+    /// <summary>
+    /// ブロックのリソースタイプを抽選
+    /// </summary>
     public ResourceType SelectBlockType(BlockChangeRateData _blockChangeData)
     {
         blockChangeData = _blockChangeData;
@@ -300,6 +318,27 @@ public class BlockChangeRateParam
                 return ResourceType.Stone;
         }
     }
+
+    /// <summary>
+    /// リソースがmax鉱石に変化するかチェック
+    /// </summary>
+    public bool IsMaxResource(ResourceType _resourceType)
+    {
+        var random = UnityEngine.Random.Range(0, 100);
+        switch (_resourceType)
+        {
+            case ResourceType.Iron: return random < rate_changeMax_iron_total;
+            case ResourceType.Gold: return random < rate_changeMax_gold_total;
+            case ResourceType.Emerald: return random < rate_changeMax_emerald_total;
+            case ResourceType.Ruby: return random < rate_changeMax_ruby_total;
+            case ResourceType.Sapphire: return random < rate_changeMax_sapphire_total;
+            case ResourceType.Diamond: return random < rate_changeMax_diamond_total;
+            default: return false;
+        }
+    }
+    /// <summary>
+    /// ブロックのリソースタイプがアンロック済み？
+    /// </summary>
     public bool IsBlockTypeUnlock(ResourceType _resourceType)
     {
         switch (_resourceType)
@@ -455,12 +494,22 @@ public static class GameParamManager
         }
         return targetBlock;
     }
-    // 鉱石への変化check
+
+    /// <summary>
+    /// リソースタイプを抽選
+    /// </summary>
     public static ResourceType Get_RandamBlockType(int _blockIndex)
     {
         var blockChangeBaseParam = SOLoader.BlockData.GetBlockChangeRateData(_blockIndex);
         var selectType = blockChangeRateParam.SelectBlockType(blockChangeBaseParam);
         return selectType;
+    }
+    /// <summary>
+    /// リソースがmax鉱石に変化するかチェック
+    /// </summary>
+    public static bool IsMaxResource(ResourceType _resourceType)
+    {
+        return blockChangeRateParam.IsMaxResource(_resourceType);
     }
     public static AttackParam Get_AttackParam(int _attackIndex)
     {

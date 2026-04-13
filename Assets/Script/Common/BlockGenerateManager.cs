@@ -239,7 +239,10 @@ public class BlockGenerateManager : MonoBehaviour
 
         else //リソース入り
         {
-            var isResourceMax = UnityEngine.Random.Range(0, 100) < 50;
+            var resourceBlockIndex = 100 + (int)resourceType;
+            var resourceBlockData = SOLoader.BlockData.GetBlockData(resourceBlockIndex);
+
+            var isResourceMax = GameParamManager.IsMaxResource(resourceType);
             if (isResourceMax)//リソース最大サイズかチェック
             {
                 targetBlock = list_targetBlocks_Max.Find(x => x.isActiveAndEnabled == false);
@@ -260,6 +263,13 @@ public class BlockGenerateManager : MonoBehaviour
                     list_targetBlocks_Min.Add(targetBlock);
                 }
             }
+            var fixedResourceValue = (int)(resourceBlockData.baseValue
+                                        * (isResourceMax ? 2f : 1f)
+                                        );
+            //Debug.Log($"{resourceType} => hp: {resourceBlockData.hp}, value: {fixedResourceValue}");
+            targetBlock.Init(resourceBlockData.hp, fixedResourceValue, resourceBlockIndex, _layerIndex);
+            targetBlock.Set_BlockType(_blockData.baseBlockType, resourceType);
+            return targetBlock;
         }
 
 

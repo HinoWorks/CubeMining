@@ -579,7 +579,7 @@ MonoBehaviour:
     skillName: Jackpot Chance
     description: Increases the probability of a Lucky Mine event occurring.
     icon: {fileID: 0}
-    maxLevel: 5
+    maxLevel: 2
     deltaValue: 0.01
   - baseIndex: 3003
     paramCategory: 0
@@ -588,7 +588,7 @@ MonoBehaviour:
     skillName: Jackpot Mine
     description: Increases the bonus resources from Lucky Mine by 50%
     icon: {fileID: 0}
-    maxLevel: 3
+    maxLevel: 1
     deltaValue: 0.25
   - baseIndex: 3004
     paramCategory: 0
@@ -597,7 +597,7 @@ MonoBehaviour:
     skillName: Time Extension
     description: Adds extra time to your current mining session.
     icon: {fileID: 0}
-    maxLevel: 3
+    maxLevel: 2
     deltaValue: 1
   - baseIndex: 3005
     paramCategory: 0
@@ -606,7 +606,7 @@ MonoBehaviour:
     skillName: Deep Mine Bonus
     description: Provides extra rewards for mining in deeper layers.
     icon: {fileID: 0}
-    maxLevel: 5
+    maxLevel: 2
     deltaValue: 0.05
   - baseIndex: 3006
     paramCategory: 0
@@ -615,7 +615,7 @@ MonoBehaviour:
     skillName: Instant Shatter
     description: Grants a small chance to destroy any block in a single hit.
     icon: {fileID: 0}
-    maxLevel: 5
+    maxLevel: 1
     deltaValue: 0.01
   - baseIndex: 3007
     paramCategory: 0
@@ -626,6 +626,51 @@ MonoBehaviour:
     icon: {fileID: 0}
     maxLevel: 1
     deltaValue: 1
+  - baseIndex: 3008
+    paramCategory: 0
+    paramType: 0
+    targetIndex: 0
+    skillName: 
+    description: 
+    icon: {fileID: 0}
+    maxLevel: 1
+    deltaValue: 0.0025
+  - baseIndex: 3009
+    paramCategory: 0
+    paramType: 0
+    targetIndex: 0
+    skillName: 
+    description: 
+    icon: {fileID: 0}
+    maxLevel: 2
+    deltaValue: 1
+  - baseIndex: 3010
+    paramCategory: 0
+    paramType: 0
+    targetIndex: 0
+    skillName: 
+    description: 
+    icon: {fileID: 0}
+    maxLevel: 0
+    deltaValue: 0
+  - baseIndex: 3011
+    paramCategory: 0
+    paramType: 0
+    targetIndex: 0
+    skillName: 
+    description: 
+    icon: {fileID: 0}
+    maxLevel: 0
+    deltaValue: 0
+  - baseIndex: 3012
+    paramCategory: 0
+    paramType: 0
+    targetIndex: 0
+    skillName: 
+    description: 
+    icon: {fileID: 0}
+    maxLevel: 0
+    deltaValue: 0
   skillTreeUnits:
   - skillTreeIndex: 1
     refIndex: 1

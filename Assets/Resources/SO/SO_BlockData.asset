@@ -28,7 +28,7 @@ MonoBehaviour:
     icon: {fileID: 0}
     pf: {fileID: 8585812083356289928, guid: 9114780d5dabb4aedac51714ba2cc3f9, type: 3}
     hp: 8
-    baseValue: 6
+    baseValue: 3
   - blockIndex: 3
     unitName: Block--3
     unitDescription: Block - 1 description
@@ -36,31 +36,79 @@ MonoBehaviour:
     icon: {fileID: 0}
     pf: {fileID: 8585812083356289928, guid: ab021019a89f6440a84da4f18d051c8e, type: 3}
     hp: 16
-    baseValue: 10
+    baseValue: 5
   - blockIndex: 4
     unitName: Block--4
     unitDescription: Block - 1 description
     baseBlockType: 3
     icon: {fileID: 0}
     pf: {fileID: 8585812083356289928, guid: de9a7082db3e2409cb51d9b82ccf4b64, type: 3}
-    hp: 30
-    baseValue: 17
+    hp: 32
+    baseValue: 8
   - blockIndex: 5
     unitName: Block--5
     unitDescription: Block - 1 description
     baseBlockType: 4
     icon: {fileID: 0}
     pf: {fileID: 8585812083356289928, guid: adc2acd4f4c124ce9b48db5cf8f215d2, type: 3}
-    hp: 45
-    baseValue: 25
+    hp: 64
+    baseValue: 13
   - blockIndex: 6
     unitName: Block--6
     unitDescription: Block - 1 description
     baseBlockType: 5
     icon: {fileID: 0}
     pf: {fileID: 8585812083356289928, guid: 7198db6cf3a5a464ba33c1d5b4cd2dbd, type: 3}
-    hp: 65
-    baseValue: 35
+    hp: 128
+    baseValue: 20
+  - blockIndex: 102
+    unitName: iron
+    unitDescription: --
+    baseBlockType: 0
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    hp: 6
+    baseValue: 3
+  - blockIndex: 103
+    unitName: gold
+    unitDescription: 
+    baseBlockType: 0
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    hp: 10
+    baseValue: 3
+  - blockIndex: 104
+    unitName: emerald
+    unitDescription: 
+    baseBlockType: 0
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    hp: 20
+    baseValue: 3
+  - blockIndex: 105
+    unitName: ruby
+    unitDescription: 
+    baseBlockType: 0
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    hp: 40
+    baseValue: 3
+  - blockIndex: 106
+    unitName: sapphire
+    unitDescription: 
+    baseBlockType: 0
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    hp: 80
+    baseValue: 3
+  - blockIndex: 107
+    unitName: diamond
+    unitDescription: 
+    baseBlockType: 0
+    icon: {fileID: 0}
+    pf: {fileID: 0}
+    hp: 150
+    baseValue: 3
   blockChangeRateDatas:
   - blockIndex: 1
     rate_gold: 0
