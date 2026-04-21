@@ -3,6 +3,7 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Globalization;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -84,29 +85,35 @@ public class CSVSerializer
         if (fieldinfo.FieldType.IsArray)
         {
             Type elementType = fieldinfo.FieldType.GetElementType();
+            value = UnwrapArrayTupleSyntax(NormalizeArrayCellRaw(value));
             // 配列フィールド用の区切り文字
-            // - 通常の CSV のカラム区切りとは別に、1 セル内での配列表現用に
-            //   '|' を優先的に使う（例: "1|2|3"）
-            // - 互換性のため、'|' が無い場合は従来通り ',' でも分割する
-            char[] separators = value.IndexOf('|') >= 0 ? new[] { '|' } : new[] { ',' };
+            // - '|' がある場合は '|' 優先（例: "1|2|3"）
+            // - それ以外は ','（全角 '，' も可）例: "1,2,3"
+            // - セル表記 "(1, 2)" は括弧を外してから分割する
+            bool usePipe = value.IndexOf('|') >= 0 || value.IndexOf('\uFF5C') >= 0;
+            char[] separators = usePipe ? new[] { '|', '\uFF5C' } : new[] { ',', '\uFF0C' };
             string[] elem = value.Split(separators, StringSplitOptions.RemoveEmptyEntries);
             Array array_value = Array.CreateInstance(elementType, elem.Length);
             for (int i = 0; i < elem.Length; i++)
             {
                 if (elementType == typeof(string))
-                    array_value.SetValue(elem[i], i);
+                    array_value.SetValue(elem[i].Trim(), i);
                 else
-                    array_value.SetValue(Convert.ChangeType(elem[i], elementType), i);
+                {
+                    string token = NormalizeScalarToken(elem[i]);
+                    array_value.SetValue(Convert.ChangeType(token, elementType, CultureInfo.InvariantCulture), i);
+                }
             }
             fieldinfo.SetValue(v, array_value);
         }
         else if (fieldinfo.FieldType.IsEnum)
-            fieldinfo.SetValue(v, Enum.Parse(fieldinfo.FieldType, value.ToString()));
+            fieldinfo.SetValue(v, Enum.Parse(fieldinfo.FieldType, NormalizeScalarToken(value)));
         else if (value.IndexOf('.') != -1 &&
             (fieldinfo.FieldType == typeof(Int32) || fieldinfo.FieldType == typeof(Int64) || fieldinfo.FieldType == typeof(Int16)))
         {
-            float f = (float)Convert.ChangeType(value, typeof(float));
-            fieldinfo.SetValue(v, Convert.ChangeType(f, fieldinfo.FieldType));
+            string n = NormalizeScalarToken(value);
+            float f = (float)Convert.ChangeType(n, typeof(float), CultureInfo.InvariantCulture);
+            fieldinfo.SetValue(v, Convert.ChangeType(f, fieldinfo.FieldType, CultureInfo.InvariantCulture));
         }
 #if UNITY_EDITOR
         else if (fieldinfo.FieldType == typeof(UnityEngine.Sprite))
@@ -128,7 +135,66 @@ public class CSVSerializer
         else if (fieldinfo.FieldType == typeof(string))
             fieldinfo.SetValue(v, value);
         else
-            fieldinfo.SetValue(v, Convert.ChangeType(value, fieldinfo.FieldType));
+            fieldinfo.SetValue(v, Convert.ChangeType(NormalizeScalarToken(value), fieldinfo.FieldType, CultureInfo.InvariantCulture));
+    }
+
+    static string NormalizeArrayCellRaw(string s)
+    {
+        if (string.IsNullOrEmpty(s))
+            return s;
+        s = s.Trim().Trim('\uFEFF');
+        var sb = new StringBuilder(s.Length);
+        for (int i = 0; i < s.Length; i++)
+        {
+            char c = s[i];
+            if (c == '\uFEFF' || c == '\u200B' || c == '\u200C' || c == '\u200D')
+                continue;
+            if (c == '\u3000')
+                sb.Append(' ');
+            else
+                sb.Append(c);
+        }
+        return sb.ToString();
+    }
+
+    static string UnwrapArrayTupleSyntax(string s)
+    {
+        if (string.IsNullOrEmpty(s))
+            return s;
+        s = s.Trim();
+        while (s.Length >= 2)
+        {
+            char a = s[0], b = s[s.Length - 1];
+            bool ascii = a == '(' && b == ')';
+            bool fullwidth = a == '\uFF08' && b == '\uFF09';
+            if (!ascii && !fullwidth)
+                break;
+            s = s.Substring(1, s.Length - 2).Trim();
+        }
+        return s;
+    }
+
+    static string NormalizeScalarToken(string s)
+    {
+        if (string.IsNullOrEmpty(s))
+            return s;
+        s = s.Trim().Trim('\uFEFF');
+        var sb = new StringBuilder(s.Length);
+        for (int i = 0; i < s.Length; i++)
+        {
+            char c = s[i];
+            if (c == '\uFEFF' || c == '\u200B' || c == '\u200C' || c == '\u200D')
+                continue;
+            if (c == '\u00A0' || c == '\u202F' || c == '\u3000')
+                sb.Append(' ');
+            else if (c >= '\uFF10' && c <= '\uFF19')
+                sb.Append((char)('0' + (c - '\uFF10')));
+            else if (c == '\u2212' || c == '\uFF0D')
+                sb.Append('-');
+            else
+                sb.Append(c);
+        }
+        return sb.ToString().Trim();
     }
 
     static object CreateIdValue(Type type, List<string[]> rows, int id_col = 0, int val_col = 1)

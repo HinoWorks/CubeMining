@@ -94,13 +94,17 @@ public class AttackCont_Pickaxe : MonoBehaviour
                         continue;
                     }
 
-                    // critical check
+                    // instant shatter check
                     var selectedDamageRate = UnityEngine.Random.Range(0f, 1f) < criticalRate ? criticalDamageRate : 1f;
+                    var damage_calc = GameParamManager.gameBaseParam.isInstantShatter ?
+                                            instantShatterDamage : (int)(damage * selectedDamageRate);
+
+                    // lucky mine check
                     var isLuckyMine = GameParamManager.gameBaseParam.isLuckyMine;
                     //isLuckyMine = UnityEngine.Random.Range(0, 100) % 2 == 0;
                     //Debug.Log($"DEBUG ===> isLuckyMine: {isLuckyMine}");
                     var resourceUpRate_LuckyMine = isLuckyMine ? GameParamManager.gameBaseParam.luckyMineRate_ResourceUpRate : 0f;
-                    var damage_calc = GameParamManager.gameBaseParam.isInstantShatter ? instantShatterDamage : (int)(damage * selectedDamageRate);
+
                     if (t.Damage(damage_calc, resourceUpRate_pickaxe + resourceUpRate_LuckyMine))
                     {
                         // 破壊されていた場合
@@ -113,7 +117,17 @@ public class AttackCont_Pickaxe : MonoBehaviour
                         }
                     }
                 }
-                if (targets.Count > 0) GameEvent.InGame.PublishOnPickaxeAttack();
+                if (targets.Count > 0)
+                {
+                    GameEvent.InGame.PublishOnPickaxeAttack();
+                    // add ingame time check
+                    if (GameParamManager.gameBaseParam.isPickaxeAttack_AddIngameTime)
+                    {
+                        InGameManager.Inst.AddGetExTime(1f);
+                        var ui_timeText = UI_PoolManager.Inst.Set_TimeText();
+                        ui_timeText.SetText($"+1 <size=75%>sec</size>");
+                    }
+                }
                 foreach (var t in removeBuffer) targets.Remove(t);
             })
             .AddTo(this); // Destroy で自動終了

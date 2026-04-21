@@ -215,6 +215,9 @@ public class UI_PoolManager : MonoBehaviour
         return selectUnit;
     }
 
+    /// <summary>
+    /// インゲーム時間増加通知用, 右上のHUD付近に表示される
+    /// </summary>
     public UI_TextCont Set_TimeText()
     {
         UI_TextCont selectUnit = null;

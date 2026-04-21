@@ -57,6 +57,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         skillTreeUnits = transform.GetComponentsInChildren<UI_SkillTreeUnit>();
         foreach (var skillTreeUnit in skillTreeUnits)
         {
+
             var so_unit = SOLoader.SkillTreeData.GetSkillTreeUnitData(skillTreeUnit.skillIndex);
             if (so_unit == null)
             {
