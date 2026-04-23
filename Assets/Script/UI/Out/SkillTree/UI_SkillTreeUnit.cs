@@ -34,7 +34,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
 
     private Action<bool, UI_SkillTreeUnit> onMouseOver;
     private Action<UI_SkillTreeUnit> onClick_Enhance;
-    private Action<int, int, SkillTreeUnlockState, int> onUpdateNodeState;
+    private Action<int, SkillTreeUnlockState, int> onUpdateNodeState;
 
 
 
@@ -53,7 +53,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
 
     public void AwakeCall(Action<bool, UI_SkillTreeUnit> _onMouseOver,
                             Action<UI_SkillTreeUnit> _onClick_Enhance,
-                            Action<int, int, SkillTreeUnlockState, int> _onUpdateNodeState)
+                            Action<int, SkillTreeUnlockState, int> _onUpdateNodeState)
     {
         this.onMouseOver = _onMouseOver;
         button.onMouseOver += OnPointerEnter;
@@ -95,7 +95,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
         // Debug.Log($"SkillTreeUnit: {skillIndex} ----> unlockState: {unlockState}");
         // 線の更新は UI_SkillTreeManager 側で TargetSkillIndex のみを見て行うため、
         // 第1引数（baseSkillIndex）はダミー値で良い
-        onUpdateNodeState?.Invoke(-1, skillIndex, unlockState, level);
+        onUpdateNodeState?.Invoke(skillIndex, unlockState, level);
         SetState();
     }
 

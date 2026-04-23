@@ -304,21 +304,31 @@ public class UI_SkillTreeMaanger : MonoBehaviour
             unit.Init();
         }
         ui_skillTreeDetail.SetData_Enhanced(_skillTreeUnit.level + 1);
-        // 線の更新は「ターゲットスキルID」だけ見て行う
-        UpdateNodeState(-1, _skillTreeUnit.skillIndex, _skillTreeUnit.unlockState, _skillTreeUnit.level + 1);
+
+        // 線の更新
+        UpdateNodeState(_skillTreeUnit.skillIndex, _skillTreeUnit.unlockState, _skillTreeUnit.level + 1);
 
         // gameParamManager の更新
         GameParamManager.Set_DeltaParam(_skillTreeUnit.skillTree.paramCategory,
             _skillTreeUnit.skillTree.targetIndex, _skillTreeUnit.skillTree.paramType, _skillTreeUnit.skillTree.deltaValue);
     }
 
-    private void UpdateNodeState(int _baseSkillIndex, int _targetSkillIndex, SkillTreeUnlockState _unlockState, int _level)
+    private void UpdateNodeState(int _skillIndex, SkillTreeUnlockState _unlockState, int _level)
     {
-        // baseSkillIndex は見ずに、対象スキル（ターゲット）の線を全て更新する
-        var targetNodes = nodeConts.FindAll(x => x.TargetSkillIndex == _targetSkillIndex);
+        var targetNodes = nodeConts.FindAll(x => Array.Exists(x.TargetSkillIndexes, idx => idx == _skillIndex));
         foreach (var node in targetNodes)
         {
-            node.Set_LineState(_unlockState, _level);
+            var unlockState_ref = SkillTreeUnlockState.Hide;
+            var level_ref = 0;
+            foreach (var targetIndex in node.TargetSkillIndexes)
+            {
+                if (targetIndex == _skillIndex) continue;
+                var targetRefUnit = Array.Find(skillTreeUnits, x => x.skillIndex == targetIndex);
+                if (targetRefUnit == null) continue;
+                unlockState_ref = targetRefUnit.unlockState;
+                level_ref = targetRefUnit.level;
+            }
+            node.Set_LineState(_unlockState, _level, unlockState_ref, level_ref);
         }
     }
 

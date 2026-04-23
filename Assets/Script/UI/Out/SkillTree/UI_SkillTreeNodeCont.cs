@@ -3,10 +3,12 @@ using UnityEngine.UI;
 
 public class UI_SkillTreeNodeCont : MonoBehaviour
 {
-    [SerializeField] private int baseSkillIndex;
-    [SerializeField] private int targetSkillIndex;
-    public int BaseSkillIndex => baseSkillIndex;
-    public int TargetSkillIndex => targetSkillIndex;
+    //[SerializeField] private int baseSkillIndex;
+    //[SerializeField] private int targetSkillIndex;
+    //public int BaseSkillIndex => baseSkillIndex;
+    //public int TargetSkillIndex => targetSkillIndex;
+    [SerializeField] int[] targetSkillIndexes;
+    public int[] TargetSkillIndexes => targetSkillIndexes;
 
     private UI_SkillTreeUnit baseUnit;
     private UI_SkillTreeUnit targetUnit;
@@ -22,8 +24,9 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
         baseUnit = _baseUnit;
         targetUnit = _targetUnit;
         lineHeight = _lineHeight;
-        baseSkillIndex = _baseUnit.skillIndex;
-        targetSkillIndex = _targetUnit.skillIndex;
+        // baseSkillIndex = _baseUnit.skillIndex;
+        // targetSkillIndex = _targetUnit.skillIndex;
+        targetSkillIndexes = new int[2] { _baseUnit.skillIndex, _targetUnit.skillIndex };
 
         if (baseUnit != null && targetUnit != null)
         {
@@ -109,11 +112,13 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
 
 
 
-    public void Set_LineState(SkillTreeUnlockState _unlockState, int _level)
+    public void Set_LineState(SkillTreeUnlockState _unlockState, int _level,
+                                    SkillTreeUnlockState _unlockState2, int _level2)
     {
-        lineImage.gameObject.SetActive(_unlockState != SkillTreeUnlockState.Hide);
-        if (_unlockState == SkillTreeUnlockState.Hide) return;
-        lineImage.color = _level == 0 ? Color.gray : Color.green;
+        var isUnlock_1 = _unlockState != SkillTreeUnlockState.Hide && _level > 0;
+        var isUnlock_2 = _unlockState2 != SkillTreeUnlockState.Hide && _level2 > 0;
+        lineImage.gameObject.SetActive(isUnlock_1 || isUnlock_2);
+        lineImage.color = isUnlock_1 && isUnlock_2 ? Color.green : Color.gray;
     }
 
 
