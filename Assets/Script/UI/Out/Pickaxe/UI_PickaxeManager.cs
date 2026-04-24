@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System;
 using Cysharp.Threading.Tasks;
 using System.Linq;
-using JetBrains.Annotations;
-
 public class UI_PickaxeManager : MonoBehaviour
 {
     [SerializeField] UI_PickaxeEquipCont[] pickaxeEquipConts;
@@ -21,6 +19,8 @@ public class UI_PickaxeManager : MonoBehaviour
 
     public async void Start_OnceInit()//主にコールバックを設定
     {
+        await UniTask.WaitUntil(() => SaveLoader.Inst.currentState != state.InitialLoad);
+
         var index = 1;
         foreach (var pickaxeLibraryUnit in pickaxeLibraryUnits)
         {

@@ -218,6 +218,7 @@ public class SaveLoader : MonoBehaviour
         artifactCurrentBlockCount = ES3.KeyExists(KEY_ARTIFACT_CURRENTBLOCKCOUNT) ? ES3.Load<int>(KEY_ARTIFACT_CURRENTBLOCKCOUNT) : 0;
 
         currentState = state.Idling;
+        Debug.Log($" == SaveData_InitialLoad: End == ");
     }
 
 
@@ -227,9 +228,12 @@ public class SaveLoader : MonoBehaviour
         Request_SavePickaxeData(1, 1); // 初期つるはしゲット
         Request_SavePickaxeSlotData(0, 1); // 初期スロット0番目に装備
 
-        // DEBUG
-        Request_SavePickaxeData(2, 1); // 初期スパイダーゲット
-        Request_SavePickaxeSlotData(1, 2); // 初期スロット1番目に装備
+
+
+        // == DEBUG ==
+        //Request_SavePickaxeData(2, 1); // 初期スパイダーゲット
+        //Request_SavePickaxeSlotData(1, 2); // 初期スロット1番目に装備
+        // == DEBUG ==
     }
 
 

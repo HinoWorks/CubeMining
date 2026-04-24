@@ -52,7 +52,6 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         {
             nodeCont.NotActivate();
         }
-
         // -- unit set --
         skillTreeUnits = transform.GetComponentsInChildren<UI_SkillTreeUnit>();
         foreach (var skillTreeUnit in skillTreeUnits)
@@ -70,7 +69,6 @@ public class UI_SkillTreeMaanger : MonoBehaviour
                 Debug.LogError($"SkillTreeBase not found: {skillTreeUnit.skillIndex}");
                 return;
             }
-
             skillTreeUnit.OnValidateCall(so_base, so_unit);
         }
 
@@ -80,7 +78,6 @@ public class UI_SkillTreeMaanger : MonoBehaviour
             //Debug.Log($"NodeCreate: {skillTreeUnit.skillIndex}");
             NodeCreate(skillTreeUnit);
         }
-
         EditorUtility.SetDirty(this);
     }
 
@@ -119,8 +116,6 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         foreach (var skillTreeUnit in skillTreeUnits)
         {
             // ランタイムでは常にSOから最新のSkillTreeを参照する（プレハブにコピーされた古い値でrequiredCountが0になるのを防ぐ）
-            //skillTreeUnit.skillTree = SOLoader.SkillTreeData.GetSkillTreeData(skillTreeUnit.skillIndex);
-            //if (skillTreeUnit.skillTree == null) continue;
             skillTreeUnit.AwakeCall(OnMouseOver, OnClick_Enhance, UpdateNodeState);
         }
         ui_skillTreeDetail.gameObject.SetActive(false);
@@ -129,7 +124,6 @@ public class UI_SkillTreeMaanger : MonoBehaviour
             skillTreeUnit.Init();
         }
     }
-
 
     public void Init(OutGame_MenuType _outGameMenuType)
     {
@@ -144,24 +138,10 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         }
         this.gameObject.SetActive(isActive);
 
-
         // 実行時に接続線を更新
         // UpdateAllConnections();
     }
 
-    /*
-    /// <summary>
-    /// 全ての接続線を更新する
-    /// </summary>
-    private void UpdateAllConnections()
-    {
-        foreach (var nodeCont in nodeConts)
-        {
-            if (!nodeCont.gameObject.activeSelf) continue;
-            nodeCont.UpdateConnection();
-        }
-    }
-*/
 
     public bool IsResourceEnough(SkillTreeUnit _skillTreeUnit)
     {
@@ -187,7 +167,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         return isEnough;
     }
 
-
+    #region -- update 主にズームと画面スクロール用 --
     void Update()
     {
         HandleZoom();
@@ -239,7 +219,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
             lastMousePos = current;
         }
     }
-
+    #endregion
 
 
 
@@ -295,6 +275,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         await UniTask.DelayFrame(2);
         _skillTreeUnit.Init();
         _skillTreeUnit.CallBack_Enhance();
+
         // ベーススキルの更新（baseSkillIndex 配列の中にこのスキルを含む全てのユニットを更新）
         var checkTargetUnit = Array.FindAll(skillTreeUnits,
             x => x.skillTreeUnit.unlockCheckIndexes != null &&
@@ -340,5 +321,54 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     }
 
 
+
+
+    // == Unitからリソース足りてるか確認するようの処理 ==
+    private void SetData_RequiredCost()
+    {
+        // ==TODO here ===
+
+        /*
+        requredResources.Clear();
+        IsEnhanceReady = true;
+
+        foreach (var cont in ui_resourceCounts)
+        {
+            cont.NotActive();
+        }
+        var so = currentUnit.skillTreeUnit;
+        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Stone, requiredCount = so.req_stone });
+        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Iron, requiredCount = so.req_iron });
+        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Gold, requiredCount = so.req_gold });
+        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Emerald, requiredCount = so.req_emerald });
+        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Ruby, requiredCount = so.req_ruby });
+        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Sapphire, requiredCount = so.req_sapphire });
+        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Diamond, requiredCount = so.req_diamond });
+
+        var count = 0;
+        foreach (var resource in requredResources)
+        {
+            if (resource.requiredCount <= 0) continue;
+
+
+            var cont = ui_resourceCounts[count];
+            if (!GameParamManager.blockChangeRateParam.IsBlockTypeUnlock(resource.resourceType))
+            {
+                cont.SetLock();
+                IsEnhanceReady = false;
+                Debug.Log($"Required Resource is not unlock: {resource.resourceType}");
+            }
+            else
+            {
+                var overResource = resource.requiredCount <= SaveLoader.Inst.Get_ResourceCount(resource.resourceType);
+                cont.SetData(SOLoader.ItemData.GetItemUnitData((int)resource.resourceType).icon, resource.requiredCount.ToString(), overResource ? Color.white : Color.red);
+                IsEnhanceReady = IsEnhanceReady && overResource;
+            }
+            count++;
+        }
+        IsEnhanceReady = IsEnhanceReady && currentUnit.level < currentUnit.skillTree.maxLevel;
+        //btn_enhance.Set_Interactable(IsCraftReady);
+        */
+    }
 
 }

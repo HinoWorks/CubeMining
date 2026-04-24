@@ -11,15 +11,11 @@ public class UI_PickaxeEquipCont : UI_PickaxeParamCont
 
     public override void SetData(PickaxeUnitData _so)
     {
-        if (_so == null)
-        {
-            obj_notEquip.SetActive(true);
-            obj_main.SetActive(false);
-            return;
-        }
+        obj_notEquip.SetActive(so == null);
+        obj_main.SetActive(so != null);
+        if (so == null) return;
         base.SetData(_so);
     }
-
 
 
     #region -- マウスアクション --

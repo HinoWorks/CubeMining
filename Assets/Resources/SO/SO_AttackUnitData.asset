@@ -188,7 +188,7 @@ MonoBehaviour:
     createTime: 30
   - pickaxeIndex: 2
     req_stone: 100
-    req_iron: 5
+    req_iron: 35
     req_gold: -1
     req_emerald: -1
     req_ruby: -1
@@ -196,16 +196,7 @@ MonoBehaviour:
     req_diamond: -1
     createTime: 60
   - pickaxeIndex: 3
-    req_stone: 200
-    req_iron: 30
-    req_gold: 10
-    req_emerald: -1
-    req_ruby: -1
-    req_sapphire: -1
-    req_diamond: -1
-    createTime: 120
-  - pickaxeIndex: 4
-    req_stone: 500
+    req_stone: 250
     req_iron: 60
     req_gold: 30
     req_emerald: -1
@@ -213,11 +204,20 @@ MonoBehaviour:
     req_sapphire: -1
     req_diamond: -1
     createTime: 120
+  - pickaxeIndex: 4
+    req_stone: 500
+    req_iron: 125
+    req_gold: 75
+    req_emerald: -1
+    req_ruby: -1
+    req_sapphire: -1
+    req_diamond: -1
+    createTime: 120
   - pickaxeIndex: 5
     req_stone: -1
-    req_iron: 100
-    req_gold: 50
-    req_emerald: 20
+    req_iron: 250
+    req_gold: 150
+    req_emerald: 30
     req_ruby: -1
     req_sapphire: -1
     req_diamond: -1
@@ -234,20 +234,29 @@ MonoBehaviour:
   - pickaxeIndex: 7
     req_stone: -1
     req_iron: -1
-    req_gold: 300
-    req_emerald: 100
-    req_ruby: 30
-    req_sapphire: 10
+    req_gold: 350
+    req_emerald: 250
+    req_ruby: 100
+    req_sapphire: 50
     req_diamond: -1
     createTime: 200
   - pickaxeIndex: 8
     req_stone: -1
     req_iron: -1
     req_gold: -1
-    req_emerald: 300
-    req_ruby: 150
-    req_sapphire: 75
-    req_diamond: 10
+    req_emerald: 500
+    req_ruby: 350
+    req_sapphire: 150
+    req_diamond: 50
+    createTime: 200
+  - pickaxeIndex: 9
+    req_stone: -1
+    req_iron: -1
+    req_gold: -1
+    req_emerald: 1250
+    req_ruby: 500
+    req_sapphire: 350
+    req_diamond: 300
     createTime: 200
   pickaxeParamBases:
   - paramType: 0

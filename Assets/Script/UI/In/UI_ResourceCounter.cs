@@ -30,7 +30,7 @@ public class UI_ResourceCounter : MonoBehaviour
             GameEvent.UI.ResourceMod.Subscribe(Set_ResourceMod).AddTo(this);
         }
         icon.sprite = SOLoader.ItemData.GetItemUnitData((int)resourceType).icon;
-        ActivateCheck();
+        ResourceUnlockCheck();
     }
 
 
@@ -42,11 +42,13 @@ public class UI_ResourceCounter : MonoBehaviour
     {
         currentResourceFloat = 0;
         tmp_resourceCount.text = "0";
+        ResourceUnlockCheck();
     }
-    public void ActivateCheck()
+    private bool ResourceUnlockCheck()
     {
-        var initialActive = SaveLoader.Inst.Check_ResourceKeyExists(resourceType);
-        this.gameObject.SetActive(initialActive);
+        var isResourceUnlock = GameParamManager.blockChangeRateParam.IsBlockTypeUnlock(resourceType);
+        this.gameObject.SetActive(isResourceUnlock);
+        return isResourceUnlock;
     }
 
     /// <summary>
@@ -54,8 +56,11 @@ public class UI_ResourceCounter : MonoBehaviour
     /// </summary>
     public void CounterUpdateCheck()
     {
-        var haveResource = SaveLoader.Inst.Check_ResourceKeyExists(resourceType);
-        if (!haveResource) return;
+        var isResourceUnlock = ResourceUnlockCheck();
+        if (!isResourceUnlock) return;
+
+        //var haveResource = SaveLoader.Inst.Check_ResourceKeyExists(resourceType);
+        //if (!haveResource) return;
 
         if (!this.gameObject.activeSelf) this.gameObject.SetActive(true);
         var resourceCount = SaveLoader.Inst.Get_ResourceCount(resourceType);

@@ -21,7 +21,6 @@ public class UI_SkillTreeUnit : MonoBehaviour
     [SerializeField] GameObject obj_lock;
     [SerializeField] GameObject obj_enhanceReady;
     [SerializeField] GameObject obj_complete;
-    [SerializeField] GameObject obj_level0;
     [SerializeField] GameObject obj_upgradeable;
     [SerializeField] ParticleSystem eff_enhance;
     [SerializeField] HButton button;
@@ -30,6 +29,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
     [Header("DEBUG VIEW")]
     [SerializeField] GameObject obj_debug;
     [SerializeField] TextMeshProUGUI tmp_debug;
+    [SerializeField] DEBUG_UI_ResourceUnit[] ui_debug_requiredResources;
 
 
     private Action<bool, UI_SkillTreeUnit> onMouseOver;
@@ -46,6 +46,13 @@ public class UI_SkillTreeUnit : MonoBehaviour
         image_icon.sprite = skillTree.icon;
         obj_debug.SetActive(true);
         tmp_debug.SetText($"{skillIndex}");
+        ui_debug_requiredResources[0].SetResourceCount(skillTreeUnit.req_stone);
+        ui_debug_requiredResources[1].SetResourceCount(skillTreeUnit.req_iron);
+        ui_debug_requiredResources[2].SetResourceCount(skillTreeUnit.req_gold);
+        ui_debug_requiredResources[3].SetResourceCount(skillTreeUnit.req_emerald);
+        ui_debug_requiredResources[4].SetResourceCount(skillTreeUnit.req_ruby);
+        ui_debug_requiredResources[5].SetResourceCount(skillTreeUnit.req_sapphire);
+        ui_debug_requiredResources[6].SetResourceCount(skillTreeUnit.req_diamond);
     }
 #endif
 
@@ -87,17 +94,17 @@ public class UI_SkillTreeUnit : MonoBehaviour
         }
         else //データありの場合、レベルを確認
         {
-            obj_level0.SetActive(skillTreeData.level == 0);
+            //obj_level0.SetActive(skillTreeData.level == 0);
             level = skillTreeData.level;
             unlockState = skillTreeData.level >= skillTree.maxLevel ?
                  SkillTreeUnlockState.EnhanceComplete : SkillTreeUnlockState.EnhanceReady;
         }
         // Debug.Log($"SkillTreeUnit: {skillIndex} ----> unlockState: {unlockState}");
-        // 線の更新は UI_SkillTreeManager 側で TargetSkillIndex のみを見て行うため、
-        // 第1引数（baseSkillIndex）はダミー値で良い
         onUpdateNodeState?.Invoke(skillIndex, unlockState, level);
         SetState();
     }
+
+
 
 
     /// <summary>
