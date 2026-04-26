@@ -104,9 +104,6 @@ public class UI_SkillTreeUnit : MonoBehaviour
         SetState();
     }
 
-
-
-
     /// <summary>
     /// 何かしらのベーススキルを持っているかどうか
     /// </summary>
@@ -165,17 +162,17 @@ public class UI_SkillTreeUnit : MonoBehaviour
         button.gameObject.SetActive(unlockState != SkillTreeUnlockState.Hide);
         button.Set_Interactable(unlockState == SkillTreeUnlockState.EnhanceReady
             || unlockState == SkillTreeUnlockState.EnhanceComplete);
-
-
-        // アップグレード可能を示す矢印を表示
-        if (unlockState == SkillTreeUnlockState.EnhanceReady)
-        {
-            obj_upgradeable.SetActive(UIManager_OutGame.Inst.UI_SkillTreeManager.IsResourceEnough(skillTreeUnit));
-        }
-        else
+        Set_UpgradeVector();
+    }
+    // アップグレード可能を示す矢印を表示
+    public void Set_UpgradeVector()
+    {
+        if (unlockState != SkillTreeUnlockState.EnhanceReady)
         {
             obj_upgradeable.SetActive(false);
+            return;
         }
+        obj_upgradeable.SetActive(UIManager_OutGame.Inst.UI_SkillTreeManager.IsResourceEnough(skillTreeUnit));
     }
 
 

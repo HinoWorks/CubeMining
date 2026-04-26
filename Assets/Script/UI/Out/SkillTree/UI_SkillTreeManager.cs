@@ -286,6 +286,12 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         }
         ui_skillTreeDetail.SetData_Enhanced(_skillTreeUnit.level + 1);
 
+        // 全てのunitにたいし、リソースチェックのみ行い、アップグレード可能を示す矢印を更新
+        foreach (var unit in skillTreeUnits)
+        {
+            unit.Set_UpgradeVector();
+        }
+
         // 線の更新
         UpdateNodeState(_skillTreeUnit.skillIndex, _skillTreeUnit.unlockState, _skillTreeUnit.level + 1);
 
@@ -320,55 +326,5 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         return skillTreeUnit.unlockState;
     }
 
-
-
-
-    // == Unitからリソース足りてるか確認するようの処理 ==
-    private void SetData_RequiredCost()
-    {
-        // ==TODO here ===
-
-        /*
-        requredResources.Clear();
-        IsEnhanceReady = true;
-
-        foreach (var cont in ui_resourceCounts)
-        {
-            cont.NotActive();
-        }
-        var so = currentUnit.skillTreeUnit;
-        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Stone, requiredCount = so.req_stone });
-        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Iron, requiredCount = so.req_iron });
-        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Gold, requiredCount = so.req_gold });
-        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Emerald, requiredCount = so.req_emerald });
-        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Ruby, requiredCount = so.req_ruby });
-        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Sapphire, requiredCount = so.req_sapphire });
-        requredResources.Add(new ResourceCount() { resourceType = ResourceType.Diamond, requiredCount = so.req_diamond });
-
-        var count = 0;
-        foreach (var resource in requredResources)
-        {
-            if (resource.requiredCount <= 0) continue;
-
-
-            var cont = ui_resourceCounts[count];
-            if (!GameParamManager.blockChangeRateParam.IsBlockTypeUnlock(resource.resourceType))
-            {
-                cont.SetLock();
-                IsEnhanceReady = false;
-                Debug.Log($"Required Resource is not unlock: {resource.resourceType}");
-            }
-            else
-            {
-                var overResource = resource.requiredCount <= SaveLoader.Inst.Get_ResourceCount(resource.resourceType);
-                cont.SetData(SOLoader.ItemData.GetItemUnitData((int)resource.resourceType).icon, resource.requiredCount.ToString(), overResource ? Color.white : Color.red);
-                IsEnhanceReady = IsEnhanceReady && overResource;
-            }
-            count++;
-        }
-        IsEnhanceReady = IsEnhanceReady && currentUnit.level < currentUnit.skillTree.maxLevel;
-        //btn_enhance.Set_Interactable(IsCraftReady);
-        */
-    }
 
 }
