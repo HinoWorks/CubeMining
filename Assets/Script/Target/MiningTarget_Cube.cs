@@ -128,7 +128,9 @@ public class MiningTarget_Cube : MiningTargetBase
 
     private void AddGetResource(float _resourceUpRate = 1f)
     {
-        var getCount = (int)(base.value * (1f + _resourceUpRate));
+        var baseResourceValue = base.value + GameParamManager.gameBaseParam.resourceBaseUpCount;
+        var getCount = (int)(baseResourceValue
+                                    * (1f + _resourceUpRate));
         if (getCount <= 0) getCount = 1;
         InGameManager.Inst.AddGetResource(resourceType, getCount);
 

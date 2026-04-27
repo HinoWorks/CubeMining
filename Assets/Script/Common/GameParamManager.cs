@@ -47,9 +47,16 @@ public class GameBaseParam
     private int resourceBaseUpCount_enhanced = 0;
 
 
+    // 共通の獲得鉱石量増加 (倍率増加)
+    public float resourceUpRate => ArtifactManager.Inst.resourceUpRate;
+
+
     //アーティファクト周りのパラメタ
     public int artifact_slotCount => artifact_slotCount_enhanced;
     private int artifact_slotCount_enhanced = 0;
+
+
+
 
 
     // ピッケルの基礎パラメータ向上
@@ -59,10 +66,7 @@ public class GameBaseParam
     private float pickaxeBase_AttackInterval_enhanced = 0f;
     public float pickaxeBase_CriticalRate => pickaxeBase_CriticalRate_enhanced + ArtifactManager.Inst.pickaxe_criticalRate;
     private float pickaxeBase_CriticalRate_enhanced = 0f;
-    public float pickaxeBase_ResourceUpRate => pickaxeBase_ResourceUpRate_enhanced
-                                                + ArtifactManager.Inst.pickaxe_resourceUpRate
-                                                + ArtifactManager.Inst.resourceUpRate;
-    private float pickaxeBase_ResourceUpRate_enhanced = 0f;
+    public float pickaxeBase_ResourceUpRate => ArtifactManager.Inst.pickaxe_resourceUpRate;
     public float pickaxeBase_Size => pickaxeBase_Size_enhanced + ArtifactManager.Inst.pickaxe_sizeRate;
     private float pickaxeBase_Size_enhanced = 0f;
 
@@ -98,6 +102,7 @@ public class GameBaseParam
                 artifact_slotCount_enhanced += (int)_setParam;
                 break;
 
+
             // -- ピッケルの基礎パラメータ向上 --
             case ParamType.Damage:
                 pickaxeBase_AttackDamage_enhanced += _setParam;
@@ -107,9 +112,6 @@ public class GameBaseParam
                 break;
             case ParamType.CriticalRate:
                 pickaxeBase_CriticalRate_enhanced += _setParam;
-                break;
-            case ParamType.ResourceRate:
-                pickaxeBase_ResourceUpRate_enhanced += _setParam;
                 break;
             case ParamType.Size:
                 pickaxeBase_Size_enhanced += _setParam;

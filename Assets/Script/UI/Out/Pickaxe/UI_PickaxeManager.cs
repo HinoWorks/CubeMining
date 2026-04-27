@@ -64,13 +64,13 @@ public class UI_PickaxeManager : MonoBehaviour
             if (slotData == null || slotData.equipedPickaxeIndex <= 0)
             {
                 pickaxeEquipConts[slotIndex].SetData(null);
-                Debug.Log($"初期Equip --> スロット: {slotIndex} => 装備: --- ");
+                //Debug.Log($"初期Equip --> スロット: {slotIndex} => 装備: --- ");
                 continue;
             }
             var pickaxeUnitData = SOLoader.AttackUnitData.GetPickaxeUnitData(slotData.equipedPickaxeIndex);
             pickaxeEquipConts[slotIndex].SetData(pickaxeUnitData);
             equipedPickaxeIndexes.Add(slotData.equipedPickaxeIndex);
-            Debug.Log($"初期Equip --> スロット: {slotIndex} => 装備: {slotData.equipedPickaxeIndex}");
+            //Debug.Log($"初期Equip --> スロット: {slotIndex} => 装備: {slotData.equipedPickaxeIndex}");
         }
     }
 

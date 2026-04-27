@@ -105,7 +105,9 @@ public class AttackCont_Pickaxe : MonoBehaviour
                     //Debug.Log($"DEBUG ===> isLuckyMine: {isLuckyMine}");
                     var resourceUpRate_LuckyMine = isLuckyMine ? GameParamManager.gameBaseParam.luckyMineRate_ResourceUpRate : 0f;
 
-                    if (t.Damage(damage_calc, resourceUpRate_pickaxe + resourceUpRate_LuckyMine))
+                    if (t.Damage(damage_calc, resourceUpRate_pickaxe
+                                        + resourceUpRate_LuckyMine
+                                        + GameParamManager.gameBaseParam.resourceUpRate))
                     {
                         // 破壊されていた場合
                         removeBuffer.Add(t);

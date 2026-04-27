@@ -739,7 +739,7 @@ MonoBehaviour:
   - skillTreeIndex: 101
     refIndex: 2
     unlockCheckIndexes: 640000006a0000006c000000
-    req_stone: 10
+    req_stone: 20
     req_iron: 0
     req_gold: 0
     req_emerald: 0
@@ -749,7 +749,7 @@ MonoBehaviour:
   - skillTreeIndex: 102
     refIndex: 3
     unlockCheckIndexes: 64000000690000006b000000
-    req_stone: 10
+    req_stone: 20
     req_iron: 0
     req_gold: 0
     req_emerald: 0
@@ -759,7 +759,7 @@ MonoBehaviour:
   - skillTreeIndex: 103
     refIndex: 4
     unlockCheckIndexes: 64000000690000006a000000ca000000
-    req_stone: 10
+    req_stone: 20
     req_iron: 0
     req_gold: 0
     req_emerald: 0
@@ -769,7 +769,7 @@ MonoBehaviour:
   - skillTreeIndex: 104
     refIndex: 3004
     unlockCheckIndexes: 640000006b0000006c0000002f010000
-    req_stone: 10
+    req_stone: 50
     req_iron: 0
     req_gold: 0
     req_emerald: 0
@@ -789,8 +789,8 @@ MonoBehaviour:
   - skillTreeIndex: 106
     refIndex: 101
     unlockCheckIndexes: 65000000670000006e0000006d000000
-    req_stone: 30
-    req_iron: 10
+    req_stone: 100
+    req_iron: 30
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -809,8 +809,8 @@ MonoBehaviour:
   - skillTreeIndex: 108
     refIndex: 2011
     unlockCheckIndexes: 65000000680000002c0100002e010000
-    req_stone: 30
-    req_iron: 10
+    req_stone: 100
+    req_iron: 30
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -916,6 +916,16 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
+  - skillTreeIndex: 123
+    refIndex: 3004
+    unlockCheckIndexes: 75000000
+    req_stone: 125
+    req_iron: 35
+    req_gold: 10
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
   - skillTreeIndex: 118
     refIndex: 401
     unlockCheckIndexes: 74000000
@@ -929,273 +939,263 @@ MonoBehaviour:
   - skillTreeIndex: 119
     refIndex: 402
     unlockCheckIndexes: 76000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 300
+    req_iron: 80
+    req_gold: 65
+    req_emerald: 15
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 120
     refIndex: 403
     unlockCheckIndexes: 76000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 350
+    req_iron: 80
+    req_gold: 65
+    req_emerald: 15
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 121
     refIndex: 404
     unlockCheckIndexes: 76000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 400
+    req_iron: 100
+    req_gold: 75
+    req_emerald: 15
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 122
     refIndex: 405
     unlockCheckIndexes: 79000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 123
-    refIndex: 3004
-    unlockCheckIndexes: 75000000
-    req_stone: 125
-    req_iron: 35
-    req_gold: 10
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 124
-    refIndex: 501
-    unlockCheckIndexes: 79000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 125
-    refIndex: 502
-    unlockCheckIndexes: 7c000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 126
-    refIndex: 503
-    unlockCheckIndexes: 7d00000080000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 127
-    refIndex: 504
-    unlockCheckIndexes: 7d00000080000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 128
-    refIndex: 505
-    unlockCheckIndexes: 7e0000007f000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 129
-    refIndex: 301
-    unlockCheckIndexes: 7c000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 130
-    refIndex: 302
-    unlockCheckIndexes: 8100000084000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 131
-    refIndex: 303
-    unlockCheckIndexes: 8100000084000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 132
-    refIndex: 304
-    unlockCheckIndexes: 8200000083000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 133
-    refIndex: 305
-    unlockCheckIndexes: 83000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 134
-    refIndex: 601
-    unlockCheckIndexes: 80000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 135
-    refIndex: 602
-    unlockCheckIndexes: 8600000089000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 136
-    refIndex: 603
-    unlockCheckIndexes: 8600000089000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 137
-    refIndex: 604
-    unlockCheckIndexes: 8700000088000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 138
-    refIndex: 605
-    unlockCheckIndexes: 89000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 400
+    req_iron: 100
+    req_gold: 75
+    req_emerald: 15
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 140
     refIndex: 3009
     unlockCheckIndexes: 7a000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 400
+    req_iron: 100
+    req_gold: 75
+    req_emerald: 15
     req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 124
+    refIndex: 501
+    unlockCheckIndexes: 79000000
+    req_stone: 0
+    req_iron: 200
+    req_gold: 150
+    req_emerald: 50
+    req_ruby: 10
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 141
     refIndex: 3002
     unlockCheckIndexes: 7c000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_stone: 0
+    req_iron: 200
+    req_gold: 150
+    req_emerald: 50
+    req_ruby: 10
     req_sapphire: 0
     req_diamond: 0
-  - skillTreeIndex: 142
-    refIndex: 3004
-    unlockCheckIndexes: 84000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+  - skillTreeIndex: 125
+    refIndex: 502
+    unlockCheckIndexes: 7c000000
+    req_stone: 0
+    req_iron: 250
+    req_gold: 150
+    req_emerald: 60
+    req_ruby: 15
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 126
+    refIndex: 503
+    unlockCheckIndexes: 7d00000080000000
+    req_stone: 0
+    req_iron: 250
+    req_gold: 150
+    req_emerald: 60
+    req_ruby: 15
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 127
+    refIndex: 504
+    unlockCheckIndexes: 7d00000080000000
+    req_stone: 0
+    req_iron: 250
+    req_gold: 150
+    req_emerald: 60
+    req_ruby: 15
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 143
     refIndex: 3004
     unlockCheckIndexes: 7f000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_stone: 0
+    req_iron: 250
+    req_gold: 150
+    req_emerald: 60
+    req_ruby: 15
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 144
     refIndex: 3007
     unlockCheckIndexes: 7f000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_stone: 0
+    req_iron: 350
+    req_gold: 175
+    req_emerald: 80
+    req_ruby: 25
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 145
     refIndex: 3009
     unlockCheckIndexes: 90000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_stone: 0
+    req_iron: 350
+    req_gold: 175
+    req_emerald: 80
+    req_ruby: 25
     req_sapphire: 0
     req_diamond: 0
+  - skillTreeIndex: 128
+    refIndex: 505
+    unlockCheckIndexes: 7e0000007f000000
+    req_stone: 0
+    req_iron: 250
+    req_gold: 150
+    req_emerald: 60
+    req_ruby: 15
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 129
+    refIndex: 301
+    unlockCheckIndexes: 7c000000
+    req_stone: 0
+    req_iron: 0
+    req_gold: 200
+    req_emerald: 100
+    req_ruby: 50
+    req_sapphire: 10
+    req_diamond: 0
+  - skillTreeIndex: 130
+    refIndex: 302
+    unlockCheckIndexes: 8100000084000000
+    req_stone: 0
+    req_iron: 0
+    req_gold: 200
+    req_emerald: 100
+    req_ruby: 50
+    req_sapphire: 10
+    req_diamond: 0
+  - skillTreeIndex: 131
+    refIndex: 303
+    unlockCheckIndexes: 8100000084000000
+    req_stone: 0
+    req_iron: 0
+    req_gold: 200
+    req_emerald: 100
+    req_ruby: 50
+    req_sapphire: 10
+    req_diamond: 0
+  - skillTreeIndex: 132
+    refIndex: 304
+    unlockCheckIndexes: 8200000083000000
+    req_stone: 0
+    req_iron: 0
+    req_gold: 200
+    req_emerald: 100
+    req_ruby: 50
+    req_sapphire: 10
+    req_diamond: 0
+  - skillTreeIndex: 142
+    refIndex: 3004
+    unlockCheckIndexes: 84000000
+    req_stone: 0
+    req_iron: 0
+    req_gold: 200
+    req_emerald: 100
+    req_ruby: 50
+    req_sapphire: 10
+    req_diamond: 0
+  - skillTreeIndex: 133
+    refIndex: 305
+    unlockCheckIndexes: 83000000
+    req_stone: 0
+    req_iron: 0
+    req_gold: 200
+    req_emerald: 100
+    req_ruby: 50
+    req_sapphire: 10
+    req_diamond: 0
+  - skillTreeIndex: 134
+    refIndex: 601
+    unlockCheckIndexes: 80000000
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 200
+    req_ruby: 100
+    req_sapphire: 50
+    req_diamond: 10
+  - skillTreeIndex: 135
+    refIndex: 602
+    unlockCheckIndexes: 8600000089000000
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 200
+    req_ruby: 100
+    req_sapphire: 50
+    req_diamond: 10
+  - skillTreeIndex: 136
+    refIndex: 603
+    unlockCheckIndexes: 8600000089000000
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 200
+    req_ruby: 100
+    req_sapphire: 50
+    req_diamond: 10
+  - skillTreeIndex: 137
+    refIndex: 604
+    unlockCheckIndexes: 8700000088000000
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 200
+    req_ruby: 100
+    req_sapphire: 50
+    req_diamond: 10
+  - skillTreeIndex: 138
+    refIndex: 605
+    unlockCheckIndexes: 89000000
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 200
+    req_ruby: 100
+    req_sapphire: 50
+    req_diamond: 10
   - skillTreeIndex: 146
     refIndex: 3008
     unlockCheckIndexes: 87000000
-    req_stone: 1
+    req_stone: 0
     req_iron: 0
     req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
+    req_emerald: 200
+    req_ruby: 100
+    req_sapphire: 50
+    req_diamond: 10
   - skillTreeIndex: 200
     refIndex: 1012
     unlockCheckIndexes: 69000000cb000000
@@ -1205,7 +1205,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 201
     refIndex: 1013
     unlockCheckIndexes: 69000000cb000000
@@ -1215,7 +1215,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 202
     refIndex: 3009
     unlockCheckIndexes: c900000067000000
@@ -1225,7 +1225,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 203
     refIndex: 1021
     unlockCheckIndexes: c8000000c9000000
@@ -1235,7 +1235,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 204
     refIndex: 1022
     unlockCheckIndexes: cb000000ce000000
@@ -1245,7 +1245,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 205
     refIndex: 1023
     unlockCheckIndexes: cb000000ce000000
@@ -1255,7 +1255,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 206
     refIndex: 1024
     unlockCheckIndexes: cc000000cd000000d1000000
@@ -1265,7 +1265,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 207
     refIndex: 3004
     unlockCheckIndexes: cc000000d1000000
@@ -1275,7 +1275,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 208
     refIndex: 3008
     unlockCheckIndexes: cc000000
@@ -1285,7 +1285,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 209
     refIndex: 1031
     unlockCheckIndexes: cf000000ce000000
@@ -1295,7 +1295,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 210
     refIndex: 3009
     unlockCheckIndexes: ce000000
@@ -1305,7 +1305,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 211
     refIndex: 1032
     unlockCheckIndexes: d1000000d4000000
@@ -1315,7 +1315,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 212
     refIndex: 1033
     unlockCheckIndexes: d3000000d5000000
@@ -1325,7 +1325,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 213
     refIndex: 1034
     unlockCheckIndexes: d1000000d4000000
@@ -1335,7 +1335,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 226
     refIndex: 3003
     unlockCheckIndexes: d4000000
@@ -1345,157 +1345,157 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 214
     refIndex: 1041
     unlockCheckIndexes: d5000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 500
+    req_iron: 170
+    req_gold: 50
+    req_emerald: 10
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 229
     refIndex: 2
     unlockCheckIndexes: d6000000d9000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 500
+    req_iron: 200
+    req_gold: 65
+    req_emerald: 10
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 215
     refIndex: 1042
     unlockCheckIndexes: d6000000d9000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 500
+    req_iron: 200
+    req_gold: 65
+    req_emerald: 10
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 216
     refIndex: 1043
     unlockCheckIndexes: d9000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 500
+    req_iron: 200
+    req_gold: 65
+    req_emerald: 15
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 217
     refIndex: 1044
     unlockCheckIndexes: d7000000e5000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 500
+    req_iron: 200
+    req_gold: 65
+    req_emerald: 10
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 227
     refIndex: 3009
     unlockCheckIndexes: d9000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 550
+    req_iron: 225
+    req_gold: 75
+    req_emerald: 15
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 218
     refIndex: 1051
     unlockCheckIndexes: d7000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_stone: 0
+    req_iron: 300
+    req_gold: 125
+    req_emerald: 50
+    req_ruby: 15
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 219
     refIndex: 1052
     unlockCheckIndexes: da000000dd000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_stone: 0
+    req_iron: 300
+    req_gold: 125
+    req_emerald: 50
+    req_ruby: 15
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 220
     refIndex: 1053
     unlockCheckIndexes: da000000dd000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_stone: 0
+    req_iron: 300
+    req_gold: 125
+    req_emerald: 50
+    req_ruby: 15
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 221
     refIndex: 1054
     unlockCheckIndexes: db000000dc000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_stone: 0
+    req_iron: 300
+    req_gold: 125
+    req_emerald: 50
+    req_ruby: 15
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 228
     refIndex: 3006
     unlockCheckIndexes: dd000000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_stone: 0
+    req_iron: 300
+    req_gold: 125
+    req_emerald: 50
+    req_ruby: 15
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: -1
   - skillTreeIndex: 222
     refIndex: 1061
     unlockCheckIndexes: dc000000
-    req_stone: 1
+    req_stone: 0
     req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
+    req_gold: 200
+    req_emerald: 125
+    req_ruby: 50
+    req_sapphire: 15
+    req_diamond: -1
   - skillTreeIndex: 223
     refIndex: 1062
     unlockCheckIndexes: de000000
-    req_stone: 1
+    req_stone: 0
     req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
+    req_gold: 200
+    req_emerald: 125
+    req_ruby: 50
+    req_sapphire: 15
+    req_diamond: -1
   - skillTreeIndex: 224
     refIndex: 1063
     unlockCheckIndexes: df000000
-    req_stone: 1
+    req_stone: 0
     req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
+    req_gold: 200
+    req_emerald: 125
+    req_ruby: 50
+    req_sapphire: 15
+    req_diamond: -1
   - skillTreeIndex: 225
     refIndex: 1064
     unlockCheckIndexes: e0000000
-    req_stone: 1
+    req_stone: 0
     req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
+    req_gold: 200
+    req_emerald: 125
+    req_ruby: 50
+    req_sapphire: 15
+    req_diamond: -1
   - skillTreeIndex: 300
     refIndex: 2012
     unlockCheckIndexes: 6c0000002d010000
@@ -1549,9 +1549,9 @@ MonoBehaviour:
   - skillTreeIndex: 305
     refIndex: 2031
     unlockCheckIndexes: 300100003201000033010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
+    req_stone: 150
+    req_iron: 50
+    req_gold: 10
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1559,9 +1559,9 @@ MonoBehaviour:
   - skillTreeIndex: 306
     refIndex: 2032
     unlockCheckIndexes: 3101000034010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
+    req_stone: 200
+    req_iron: 75
+    req_gold: 15
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1569,9 +1569,9 @@ MonoBehaviour:
   - skillTreeIndex: 307
     refIndex: 2033
     unlockCheckIndexes: 31010000350100003401000040010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
+    req_stone: 200
+    req_iron: 75
+    req_gold: 15
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1579,9 +1579,9 @@ MonoBehaviour:
   - skillTreeIndex: 308
     refIndex: 2034
     unlockCheckIndexes: 320100003301000041010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
+    req_stone: 200
+    req_iron: 75
+    req_gold: 15
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1589,9 +1589,9 @@ MonoBehaviour:
   - skillTreeIndex: 309
     refIndex: 3004
     unlockCheckIndexes: 3001000033010000360100003c010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
+    req_stone: 150
+    req_iron: 50
+    req_gold: 20
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1599,9 +1599,9 @@ MonoBehaviour:
   - skillTreeIndex: 310
     refIndex: 1
     unlockCheckIndexes: 350100002f0100003701000039010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
+    req_stone: 150
+    req_iron: 30
+    req_gold: 10
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1609,9 +1609,9 @@ MonoBehaviour:
   - skillTreeIndex: 311
     refIndex: 2022
     unlockCheckIndexes: 2e01000036010000380100003a010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
+    req_stone: 150
+    req_iron: 30
+    req_gold: 10
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1619,107 +1619,107 @@ MonoBehaviour:
   - skillTreeIndex: 312
     refIndex: 2023
     unlockCheckIndexes: 370100002d0100003d0100003b010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 313
-    refIndex: 3006
-    unlockCheckIndexes: 360100003a0100003c010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 314
-    refIndex: 3009
-    unlockCheckIndexes: 39010000370100003b01000042010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 315
-    refIndex: 3004
-    unlockCheckIndexes: 380100003a0100003f010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
-  - skillTreeIndex: 316
-    refIndex: 3003
-    unlockCheckIndexes: 350100003901000040010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 100
+    req_iron: 50
+    req_gold: 30
+    req_emerald: 10
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 317
     refIndex: 2
     unlockCheckIndexes: 38010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 100
+    req_iron: 50
+    req_gold: 30
+    req_emerald: 10
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 318
     refIndex: 3
     unlockCheckIndexes: 3d010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 100
+    req_iron: 50
+    req_gold: 30
+    req_emerald: 10
     req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 313
+    refIndex: 3006
+    unlockCheckIndexes: 360100003a0100003c010000
+    req_stone: 100
+    req_iron: 50
+    req_gold: 30
+    req_emerald: 10
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 314
+    refIndex: 3009
+    unlockCheckIndexes: 39010000370100003b01000042010000
+    req_stone: 100
+    req_iron: 50
+    req_gold: 30
+    req_emerald: 10
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 315
+    refIndex: 3004
+    unlockCheckIndexes: 380100003a0100003f010000
+    req_stone: 0
+    req_iron: 100
+    req_gold: 50
+    req_emerald: 30
+    req_ruby: 10
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 316
+    refIndex: 3003
+    unlockCheckIndexes: 350100003901000040010000
+    req_stone: 0
+    req_iron: 100
+    req_gold: 50
+    req_emerald: 30
+    req_ruby: 10
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 319
     refIndex: 3007
     unlockCheckIndexes: 3b01000042010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_stone: 0
+    req_iron: 100
+    req_gold: 50
+    req_emerald: 30
+    req_ruby: 10
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 320
     refIndex: 2022
     unlockCheckIndexes: 330100003c01000041010000
-    req_stone: 1
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_stone: 0
+    req_iron: 100
+    req_gold: 50
+    req_emerald: 30
+    req_ruby: 10
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 321
     refIndex: 2023
     unlockCheckIndexes: 3401000040010000
-    req_stone: 1
+    req_stone: 0
     req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
+    req_gold: 100
+    req_emerald: 50
+    req_ruby: 30
+    req_sapphire: 10
     req_diamond: 0
   - skillTreeIndex: 322
     refIndex: 3008
     unlockCheckIndexes: 3a0100003f010000
-    req_stone: 1
+    req_stone: 0
     req_iron: 0
     req_gold: 0
     req_emerald: 0
