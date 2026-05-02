@@ -696,7 +696,7 @@ MonoBehaviour:
     skillName: "\u9271\u77F3\u767A\u898B"
     description: "\u5168\u3066\u306E\u9271\u77F3\u306E\u7372\u5F97\u91CF+1"
     icon: {fileID: 21300000, guid: 3829715a594f44221b2c656a7a180eec, type: 3}
-    maxLevel: 2
+    maxLevel: 1
     deltaValue: 1
   - baseIndex: 3010
     paramCategory: 0
@@ -780,7 +780,7 @@ MonoBehaviour:
     refIndex: 1011
     unlockCheckIndexes: 6600000067000000c8000000c9000000
     req_stone: 30
-    req_iron: 10
+    req_iron: 5
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -869,9 +869,9 @@ MonoBehaviour:
   - skillTreeIndex: 113
     refIndex: 201
     unlockCheckIndexes: 6f0000008b000000
-    req_stone: 100
-    req_iron: 35
-    req_gold: 10
+    req_stone: 300
+    req_iron: 125
+    req_gold: 30
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -879,9 +879,9 @@ MonoBehaviour:
   - skillTreeIndex: 114
     refIndex: 202
     unlockCheckIndexes: 7100000074000000
-    req_stone: 100
-    req_iron: 35
-    req_gold: 10
+    req_stone: 250
+    req_iron: 100
+    req_gold: 30
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -889,9 +889,9 @@ MonoBehaviour:
   - skillTreeIndex: 115
     refIndex: 203
     unlockCheckIndexes: 7100000074000000
-    req_stone: 100
-    req_iron: 35
-    req_gold: 10
+    req_stone: 250
+    req_iron: 100
+    req_gold: 30
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -899,9 +899,9 @@ MonoBehaviour:
   - skillTreeIndex: 116
     refIndex: 204
     unlockCheckIndexes: 7200000073000000
-    req_stone: 150
-    req_iron: 50
-    req_gold: 20
+    req_stone: 300
+    req_iron: 100
+    req_gold: 50
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -909,9 +909,9 @@ MonoBehaviour:
   - skillTreeIndex: 117
     refIndex: 205
     unlockCheckIndexes: 73000000
-    req_stone: 120
-    req_iron: 35
-    req_gold: 15
+    req_stone: 200
+    req_iron: 100
+    req_gold: 30
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -919,9 +919,9 @@ MonoBehaviour:
   - skillTreeIndex: 123
     refIndex: 3004
     unlockCheckIndexes: 75000000
-    req_stone: 125
-    req_iron: 35
-    req_gold: 10
+    req_stone: 500
+    req_iron: 150
+    req_gold: 50
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -929,60 +929,60 @@ MonoBehaviour:
   - skillTreeIndex: 118
     refIndex: 401
     unlockCheckIndexes: 74000000
-    req_stone: 300
-    req_iron: 75
-    req_gold: 50
-    req_emerald: 10
+    req_stone: 750
+    req_iron: 250
+    req_gold: 100
+    req_emerald: 50
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 119
     refIndex: 402
     unlockCheckIndexes: 76000000
-    req_stone: 300
-    req_iron: 80
-    req_gold: 65
-    req_emerald: 15
+    req_stone: 1000
+    req_iron: 500
+    req_gold: 250
+    req_emerald: 100
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 120
     refIndex: 403
     unlockCheckIndexes: 76000000
-    req_stone: 350
-    req_iron: 80
-    req_gold: 65
-    req_emerald: 15
+    req_stone: 1000
+    req_iron: 500
+    req_gold: 250
+    req_emerald: 100
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 121
     refIndex: 404
     unlockCheckIndexes: 76000000
-    req_stone: 400
-    req_iron: 100
-    req_gold: 75
-    req_emerald: 15
+    req_stone: 1500
+    req_iron: 750
+    req_gold: 350
+    req_emerald: 125
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 122
     refIndex: 405
     unlockCheckIndexes: 79000000
-    req_stone: 400
-    req_iron: 100
-    req_gold: 75
-    req_emerald: 15
+    req_stone: 1000
+    req_iron: 500
+    req_gold: 250
+    req_emerald: 100
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 140
     refIndex: 3009
     unlockCheckIndexes: 7a000000
-    req_stone: 400
-    req_iron: 100
-    req_gold: 75
-    req_emerald: 15
+    req_stone: 1500
+    req_iron: 750
+    req_gold: 500
+    req_emerald: 150
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
@@ -1249,8 +1249,8 @@ MonoBehaviour:
   - skillTreeIndex: 205
     refIndex: 1023
     unlockCheckIndexes: cb000000ce000000
-    req_stone: 200
-    req_iron: 50
+    req_stone: 250
+    req_iron: 75
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1259,8 +1259,8 @@ MonoBehaviour:
   - skillTreeIndex: 206
     refIndex: 1024
     unlockCheckIndexes: cc000000cd000000d1000000
-    req_stone: 200
-    req_iron: 50
+    req_stone: 250
+    req_iron: 75
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1269,9 +1269,9 @@ MonoBehaviour:
   - skillTreeIndex: 207
     refIndex: 3004
     unlockCheckIndexes: cc000000d1000000
-    req_stone: 225
-    req_iron: 65
-    req_gold: 10
+    req_stone: 300
+    req_iron: 100
+    req_gold: 25
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1279,9 +1279,9 @@ MonoBehaviour:
   - skillTreeIndex: 208
     refIndex: 3008
     unlockCheckIndexes: cc000000
-    req_stone: 225
-    req_iron: 65
-    req_gold: 10
+    req_stone: 250
+    req_iron: 75
+    req_gold: 25
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1289,9 +1289,9 @@ MonoBehaviour:
   - skillTreeIndex: 209
     refIndex: 1031
     unlockCheckIndexes: cf000000ce000000
-    req_stone: 300
-    req_iron: 100
-    req_gold: 10
+    req_stone: 500
+    req_iron: 250
+    req_gold: 150
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1299,19 +1299,19 @@ MonoBehaviour:
   - skillTreeIndex: 210
     refIndex: 3009
     unlockCheckIndexes: ce000000
-    req_stone: 250
-    req_iron: 75
-    req_gold: 20
-    req_emerald: 0
+    req_stone: 400
+    req_iron: 200
+    req_gold: 100
+    req_emerald: 10
     req_ruby: 0
     req_sapphire: 0
     req_diamond: -1
   - skillTreeIndex: 211
     refIndex: 1032
     unlockCheckIndexes: d1000000d4000000
-    req_stone: 350
-    req_iron: 100
-    req_gold: 15
+    req_stone: 400
+    req_iron: 250
+    req_gold: 50
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1319,9 +1319,9 @@ MonoBehaviour:
   - skillTreeIndex: 212
     refIndex: 1033
     unlockCheckIndexes: d3000000d5000000
-    req_stone: 350
-    req_iron: 100
-    req_gold: 15
+    req_stone: 600
+    req_iron: 300
+    req_gold: 100
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1329,9 +1329,9 @@ MonoBehaviour:
   - skillTreeIndex: 213
     refIndex: 1034
     unlockCheckIndexes: d1000000d4000000
-    req_stone: 375
-    req_iron: 110
-    req_gold: 20
+    req_stone: 400
+    req_iron: 250
+    req_gold: 50
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1340,8 +1340,8 @@ MonoBehaviour:
     refIndex: 3003
     unlockCheckIndexes: d4000000
     req_stone: 400
-    req_iron: 130
-    req_gold: 30
+    req_iron: 150
+    req_gold: 50
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -1349,10 +1349,10 @@ MonoBehaviour:
   - skillTreeIndex: 214
     refIndex: 1041
     unlockCheckIndexes: d5000000
-    req_stone: 500
-    req_iron: 170
-    req_gold: 50
-    req_emerald: 10
+    req_stone: 1500
+    req_iron: 500
+    req_gold: 300
+    req_emerald: 100
     req_ruby: 0
     req_sapphire: 0
     req_diamond: -1

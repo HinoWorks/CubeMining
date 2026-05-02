@@ -110,7 +110,7 @@ MonoBehaviour:
     pickaxeName: pickaxe 3
     icon: {fileID: 21300000, guid: eb07ef2c35804f645aa3f1d1c76e5b28, type: 3}
     pf: {fileID: 6150116085842143346, guid: 8deef441d712d43acbe313fb092dbf4c, type: 3}
-    damage: 4
+    damage: 3
     attackInterval: 0.8
     criticalRate: 0.01
     resourceUpRate: 0.1
@@ -121,7 +121,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: a1c2f8b4ec4354948a77ce5ac8b6cbf7, type: 3}
     pf: {fileID: 6150116085842143346, guid: 7fae9ef957e7f40e3917ef1b1685436e, type: 3}
     damage: 4
-    attackInterval: 0.75
+    attackInterval: 0.7
     criticalRate: 0.01
     resourceUpRate: 0.2
     areaIcon: {fileID: 0}
@@ -130,8 +130,8 @@ MonoBehaviour:
     pickaxeName: pickaxe 5
     icon: {fileID: 21300000, guid: ebe94485927eba24b951084a637a8403, type: 3}
     pf: {fileID: 6150116085842143346, guid: 1c0e35539e4d84c18bfcad3beb16ba6c, type: 3}
-    damage: 6
-    attackInterval: 0.75
+    damage: 4
+    attackInterval: 0.7
     criticalRate: 0.02
     resourceUpRate: 0.2
     areaIcon: {fileID: 0}
@@ -140,8 +140,8 @@ MonoBehaviour:
     pickaxeName: pickaxe 6
     icon: {fileID: 21300000, guid: 47a978f25447392449578a7119ff4851, type: 3}
     pf: {fileID: 6150116085842143346, guid: 965a8e353a8994aac80c4c2522d9f388, type: 3}
-    damage: 6
-    attackInterval: 0.7
+    damage: 4
+    attackInterval: 0.65
     criticalRate: 0.02
     resourceUpRate: 0.2
     areaIcon: {fileID: 0}
@@ -150,8 +150,8 @@ MonoBehaviour:
     pickaxeName: pickaxe 7
     icon: {fileID: 21300000, guid: aa24e487592e10542bf6a1a4ccc06354, type: 3}
     pf: {fileID: 6150116085842143346, guid: 6bc8c82dcad844cfab33cf783e33cb3d, type: 3}
-    damage: 7
-    attackInterval: 0.65
+    damage: 4
+    attackInterval: 0.6
     criticalRate: 0.02
     resourceUpRate: 0.2
     areaIcon: {fileID: 0}
@@ -160,8 +160,8 @@ MonoBehaviour:
     pickaxeName: pickaxe 8
     icon: {fileID: 21300000, guid: 8a182023b6e26bf429ad2d1d57b8cfc8, type: 3}
     pf: {fileID: 6150116085842143346, guid: 9c878e0b0be2345dc9103533900bd0ee, type: 3}
-    damage: 8
-    attackInterval: 0.65
+    damage: 4
+    attackInterval: 0.55
     criticalRate: 0.03
     resourceUpRate: 0.2
     areaIcon: {fileID: 0}
@@ -170,8 +170,8 @@ MonoBehaviour:
     pickaxeName: pickaxe 9
     icon: {fileID: 21300000, guid: 1170899cf7162134f823d147fa40786e, type: 3}
     pf: {fileID: 6150116085842143346, guid: a3418298f58f744acbda391c0d10ac06, type: 3}
-    damage: 10
-    attackInterval: 0.6
+    damage: 5
+    attackInterval: 0.5
     criticalRate: 0.03
     resourceUpRate: 0.2
     areaIcon: {fileID: 0}
@@ -196,9 +196,9 @@ MonoBehaviour:
     req_diamond: -1
     createTime: 60
   - pickaxeIndex: 3
-    req_stone: 250
-    req_iron: 60
-    req_gold: 30
+    req_stone: 400
+    req_iron: 150
+    req_gold: 50
     req_emerald: -1
     req_ruby: -1
     req_sapphire: -1
@@ -206,8 +206,8 @@ MonoBehaviour:
     createTime: 120
   - pickaxeIndex: 4
     req_stone: 500
-    req_iron: 125
-    req_gold: 75
+    req_iron: 350
+    req_gold: 150
     req_emerald: -1
     req_ruby: -1
     req_sapphire: -1
@@ -215,19 +215,19 @@ MonoBehaviour:
     createTime: 120
   - pickaxeIndex: 5
     req_stone: -1
-    req_iron: 250
-    req_gold: 150
-    req_emerald: 30
+    req_iron: 500
+    req_gold: 250
+    req_emerald: 100
     req_ruby: -1
     req_sapphire: -1
     req_diamond: -1
     createTime: 150
   - pickaxeIndex: 6
     req_stone: -1
-    req_iron: 300
-    req_gold: 150
-    req_emerald: 50
-    req_ruby: 10
+    req_iron: 750
+    req_gold: 500
+    req_emerald: 250
+    req_ruby: 150
     req_sapphire: -1
     req_diamond: -1
     createTime: 150

@@ -42,6 +42,8 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     private Vector2 lastMousePos;
     private float duration_zoom = 0.05f;
 
+    private state currentState = state.Idling;
+
 
 
 #if UNITY_EDITOR
@@ -245,6 +247,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
     /// </summary>
     private async void OnClick_Enhance(UI_SkillTreeUnit _skillTreeUnit)
     {
+        if (currentState != state.Idling) return;
 #if UNITY_EDITOR
         if (SROptions.isSkillTreeUpgradeNoMaterial)
         {
@@ -261,6 +264,8 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         }
 #else
         if (ui_skillTreeDetail.IsEnhanceReady == false) return;
+        
+        currentState = state.Doing;
         // コスト消費
         foreach (var resource in ui_skillTreeDetail.RequredResources)
         {
@@ -269,12 +274,14 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         }
 #endif
 
-        SaveLoader.Inst.Request_SaveSkillTreeData(_skillTreeUnit.skillIndex, _skillTreeUnit.level + 1);
+        var newLevel = _skillTreeUnit.level + 1;
+        SaveLoader.Inst.Request_SaveSkillTreeData(_skillTreeUnit.skillIndex, newLevel);
         SoundManager.Inst.PlaySE(120);
 
         await UniTask.DelayFrame(2);
         _skillTreeUnit.Init();
         _skillTreeUnit.CallBack_Enhance();
+        ui_skillTreeDetail.SetData_Enhanced(newLevel);
 
         // ベーススキルの更新（baseSkillIndex 配列の中にこのスキルを含む全てのユニットを更新）
         var checkTargetUnit = Array.FindAll(skillTreeUnits,
@@ -284,7 +291,6 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         {
             unit.Init();
         }
-        ui_skillTreeDetail.SetData_Enhanced(_skillTreeUnit.level + 1);
 
         // 全てのunitにたいし、リソースチェックのみ行い、アップグレード可能を示す矢印を更新
         foreach (var unit in skillTreeUnits)
@@ -298,6 +304,9 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         // gameParamManager の更新
         GameParamManager.Set_DeltaParam(_skillTreeUnit.skillTree.paramCategory,
             _skillTreeUnit.skillTree.targetIndex, _skillTreeUnit.skillTree.paramType, _skillTreeUnit.skillTree.deltaValue);
+
+        await UniTask.DelayFrame(2);
+        currentState = state.Idling;
     }
 
     private void UpdateNodeState(int _skillIndex, SkillTreeUnlockState _unlockState, int _level)

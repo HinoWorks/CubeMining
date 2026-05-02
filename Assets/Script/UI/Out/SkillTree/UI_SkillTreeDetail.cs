@@ -21,7 +21,10 @@ public class UI_SkillTreeDetail : MonoBehaviour
     private UI_SkillTreeUnit currentUnit;
     private List<ResourceCount> requredResources = new List<ResourceCount>();
     public List<ResourceCount> RequredResources => requredResources;
-    public bool IsEnhanceReady { get; private set; } = true;
+    public bool IsEnhanceReady => resourceReady && !isMaxLevel;
+    private bool isMaxLevel = false;
+    private bool resourceReady = false;
+
     private RectTransform rectTr;
     private Canvas rootCanvas;
     private Vector3 anchorWorldPosition;
@@ -56,9 +59,11 @@ public class UI_SkillTreeDetail : MonoBehaviour
 
     private void SetData_Base(int _currentLevel)
     {
+        if (currentUnit == null) return;
+
         var so = currentUnit.skillTree;
         tmp_skillName.SetText(so.skillName);
-        tmp_level.SetText($"<size=75%>Lv.</size>{_currentLevel} / <size=75%><color=grey>{so.maxLevel}</color></size>");
+        tmp_level.SetText($"<size=75%>Lv.</size>{_currentLevel} <size=75%> / {so.maxLevel}</size>");
         tmp_description.SetText(so.description);
 
         obj_param.SetActive(so.paramType != ParamType.Unlock);
@@ -67,12 +72,13 @@ public class UI_SkillTreeDetail : MonoBehaviour
         tmp_paramNow.SetText(paramNow.ToString("F2"));
         tmp_paramNext.SetText(paramNext.ToString("F2"));
 
-        SetData_RequiredCost();
+        SetData_RequiredCost(_currentLevel);
+        isMaxLevel = _currentLevel >= so.maxLevel;
 
-        tmp_paramNext.gameObject.SetActive(currentUnit.unlockState == SkillTreeUnlockState.EnhanceReady);
-        obj_vec.SetActive(currentUnit.unlockState == SkillTreeUnlockState.EnhanceReady);
-        obj_complete.SetActive(currentUnit.unlockState == SkillTreeUnlockState.EnhanceComplete);
-        obj_resourceRoot.SetActive(currentUnit.unlockState != SkillTreeUnlockState.EnhanceComplete);
+        tmp_paramNext.gameObject.SetActive(!isMaxLevel);
+        obj_vec.SetActive(!isMaxLevel);
+        obj_complete.SetActive(isMaxLevel);
+        obj_resourceRoot.SetActive(!isMaxLevel);
         this.gameObject.SetActive(true);
     }
 
@@ -124,10 +130,10 @@ public class UI_SkillTreeDetail : MonoBehaviour
         SetData_Base(_currentLevel);
     }
 
-    private void SetData_RequiredCost()
+    private void SetData_RequiredCost(int _level)
     {
         requredResources.Clear();
-        IsEnhanceReady = true;
+        resourceReady = true;
 
         foreach (var cont in ui_resourceCounts)
         {
@@ -152,18 +158,16 @@ public class UI_SkillTreeDetail : MonoBehaviour
             if (!GameParamManager.blockChangeRateParam.IsBlockTypeUnlock(resource.resourceType))
             {
                 cont.SetLock();
-                IsEnhanceReady = false;
+                resourceReady = false;
                 Debug.Log($"Required Resource is not unlock: {resource.resourceType}");
             }
             else
             {
                 var overResource = resource.requiredCount <= SaveLoader.Inst.Get_ResourceCount(resource.resourceType);
                 cont.SetData(SOLoader.ItemData.GetItemUnitData((int)resource.resourceType).icon, resource.requiredCount.ToString(), overResource ? Color.white : Color.red);
-                IsEnhanceReady = IsEnhanceReady && overResource;
+                resourceReady = resourceReady && overResource;
             }
             count++;
         }
-        IsEnhanceReady = IsEnhanceReady && currentUnit.level < currentUnit.skillTree.maxLevel;
-        //btn_enhance.Set_Interactable(IsCraftReady);
     }
 }
