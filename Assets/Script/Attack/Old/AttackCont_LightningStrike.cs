@@ -3,8 +3,9 @@ using UniRx;
 using System.Collections.Generic;
 using System;
 
-
-
+/// <summary>
+/// 使っていない
+/// </summary>
 public class AttackCont_LightningStrike : AttackContBase
 {
     [SerializeField] GameObject bulletPrefab;
@@ -12,55 +13,53 @@ public class AttackCont_LightningStrike : AttackContBase
     private Vector3 offsetPosition = new Vector3(0, 0.25f, 0); // 雷発生位置のオフセット
 
 
-
-    protected override void AwakeCall() { }
-    public override void Init(AttackParam _attackParam)
-    {
-        base.Init(_attackParam);
-        CreateAttackRoop();
-    }
-
-    public override void OnDestroy()
-    {
-        foreach (var bullet in bullets)
+    /*
+        protected override void AwakeCall() { }
+        public override void Init(AttackParam _attackParam)
         {
-            bullet.OnDestroy();
+            base.Init(_attackParam);
+            CreateAttackRoop();
         }
-        bullets.Clear();
-        base.OnDestroy();
-    }
 
-    private void CreateAttackRoop()
-    {
-        Observable.Interval(TimeSpan.FromSeconds(attackInterval))
-                    .Where(_ => base.isActive)
-                    .Subscribe(_ =>
-                    {
-                        CreateBullet();
-                    })
-                    .AddTo(this); // Destroy で自動終了
-    }
-    private void CreateBullet()
-    {
-        for (int i = 0; i < count; i++)
+        public override void OnDestroy()
         {
-            var targetBlock = BlockGenerateManager.Inst.Get_RandomTargetBlock();
-            if (targetBlock == null) continue;
-
-
-            var freeBullet = bullets.Find(x => !x.gameObject.activeSelf);
-            if (freeBullet == null)
+            foreach (var bullet in bullets)
             {
-                var newBullet = Instantiate(bulletPrefab, InGameManager.Inst.ParentPool) as GameObject;
-                freeBullet = newBullet.GetComponent<BulletCont_ThunderStrike>();
-                bullets.Add(freeBullet);
+                bullet.OnDestroy();
             }
-            freeBullet.transform.position = targetBlock.transform.position + offsetPosition;
-            freeBullet.Init(damage, targetBlock);
+            bullets.Clear();
+            base.OnDestroy();
         }
-    }
+
+        private void CreateAttackRoop()
+        {
+            Observable.Interval(TimeSpan.FromSeconds(attackInterval))
+                        .Where(_ => base.isActive)
+                        .Subscribe(_ =>
+                        {
+                            CreateBullet();
+                        })
+                        .AddTo(this); // Destroy で自動終了
+        }
+        private void CreateBullet()
+        {
+            for (int i = 0; i < count; i++)
+            {
+                var targetBlock = BlockGenerateManager.Inst.Get_RandomTargetBlock();
+                if (targetBlock == null) continue;
 
 
-
+                var freeBullet = bullets.Find(x => !x.gameObject.activeSelf);
+                if (freeBullet == null)
+                {
+                    var newBullet = Instantiate(bulletPrefab, InGameManager.Inst.ParentPool) as GameObject;
+                    freeBullet = newBullet.GetComponent<BulletCont_ThunderStrike>();
+                    bullets.Add(freeBullet);
+                }
+                freeBullet.transform.position = targetBlock.transform.position + offsetPosition;
+                freeBullet.Init(damage, targetBlock);
+            }
+        }        
+        */
 
 }

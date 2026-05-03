@@ -94,16 +94,15 @@ public class BulletBase : MonoBehaviour
         bulletType = _bulletType;
     }
 
+    /// <summary>
+    /// Initでライフタイムを設定した場合のみ有効。それ以外は生存する。ヒット時の消滅はヒット時の処理に個別にoverrideする
+    /// </summary>
     protected virtual void SetLifetime()
     {
         Observable.Timer(TimeSpan.FromSeconds(lifetime))
             .Subscribe(_ =>
             {
-                col.enabled = false;
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-
-                this.gameObject.SetActive(false);
+                ReturnToPool();
             }).AddTo(this);
     }
 

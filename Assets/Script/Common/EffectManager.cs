@@ -10,7 +10,10 @@ public enum EffectType
     BlockBreak = 2,
 
     ThunderStrike = 100,
-    ThunderStrike_Red = 101,
+    ThunderStrike_Cross = 101,
+
+    ThunderStrike_Red = 110,
+    ThunderStrike_Red_Circle = 111,
 }
 
 public class EffectManager : MonoBehaviour
@@ -20,11 +23,15 @@ public class EffectManager : MonoBehaviour
     [SerializeField] GameObject pf_eff_blockDamage;
     [SerializeField] GameObject pf_eff_blockBreak;
     [SerializeField] GameObject pf_eff_thunderStrike;
+    [SerializeField] GameObject pf_eff_thunderStrike_cross;
     [SerializeField] GameObject pf_eff_thunderStrike_red;
+    [SerializeField] GameObject pf_eff_thunderStrike_red_circle;
     private List<GameObject> pool_eff_blockDamage = new List<GameObject>();
     private List<GameObject> pool_eff_blockBreak = new List<GameObject>();
     private List<GameObject> pool_eff_thunderStrike = new List<GameObject>();
+    private List<GameObject> pool_eff_thunderStrike_cross = new List<GameObject>();
     private List<GameObject> pool_eff_thunderStrike_red = new List<GameObject>();
+    private List<GameObject> pool_eff_thunderStrike_red_circle = new List<GameObject>();
     private int createCountInit = 20;
     private int createCountInit_thunderStrike = 10;
 
@@ -85,8 +92,12 @@ public class EffectManager : MonoBehaviour
                 return (pf_eff_blockBreak, pool_eff_blockBreak);
             case EffectType.ThunderStrike:
                 return (pf_eff_thunderStrike, pool_eff_thunderStrike);
+            case EffectType.ThunderStrike_Cross:
+                return (pf_eff_thunderStrike_cross, pool_eff_thunderStrike_cross);
             case EffectType.ThunderStrike_Red:
                 return (pf_eff_thunderStrike_red, pool_eff_thunderStrike_red);
+            case EffectType.ThunderStrike_Red_Circle:
+                return (pf_eff_thunderStrike_red_circle, pool_eff_thunderStrike_red_circle);
             default:
                 return (null, new List<GameObject>());
         }

@@ -374,17 +374,16 @@ public class BlockGenerateManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 最上層のランダムなブロック位置を習得
+    /// 最上層のランダムなブロックを習得
     /// </summary>
-    public MiningTarget_Cube Get_TopTarget(int _deltaLayer = 0)
+    public MiningTarget_Cube Get_TopTarget()
     {
-        var topAreaBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled && x.layerIndex <= currentLayerCont.layerIndex + _deltaLayer);
-        if (topAreaBlocks.Count == 0)
+        var topAreaBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled && x.layerIndex <= currentLayerCont.layerIndex);
+        if (topAreaBlocks.Count == 0) // ターゲットなければ、1層下のブロックでサーチ
         {
-            topAreaBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled && x.layerIndex <= currentLayerCont.layerIndex + _deltaLayer);
+            topAreaBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled && x.layerIndex <= currentLayerCont.layerIndex + 1);
         }
         if (topAreaBlocks.Count == 0) return null;
-
         return topAreaBlocks[Random.Range(0, topAreaBlocks.Count)];
     }
     #endregion
