@@ -98,9 +98,10 @@ public class BlockGenerateManager : MonoBehaviour
 {
     public static BlockGenerateManager Inst;
     // -- loc
-    private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
-    private List<MiningTarget_Cube> list_targetBlocks_Min = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
-    private List<MiningTarget_Cube> list_targetBlocks_Max = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト
+    private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト（石ブロック）
+    private List<MiningTarget_Cube> list_targetBlocks_Min = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト（資源ブロック 小）
+    private List<MiningTarget_Cube> list_targetBlocks_Max = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト（資源ブロック 大）
+    private List<MiningTarget_Cube> list_topTargetScratch = new List<MiningTarget_Cube>();
     private List<MiningTarget_Object> list_targetObjects = new List<MiningTarget_Object>(); // 生成されたオブジェクトのリスト
     private List<MiningTarget_Artifact> list_targetArtifacts = new List<MiningTarget_Artifact>(); // 生成されたアーティファクトのリスト
     private List<GenerateBlockLayerCont> list_layerConts = new List<GenerateBlockLayerCont>(); // 生成されたレイヤーのリスト
@@ -128,6 +129,8 @@ public class BlockGenerateManager : MonoBehaviour
     public void Init()
     {
         list_layerConts.Clear();
+        currentLayerCont = null;
+        lastLayerCont = null;
         currentCreateLayer = 0;
         isGenerateArtifact = false;
         for (int i = 0; i < initialCreateLayer; i++)
@@ -163,6 +166,8 @@ public class BlockGenerateManager : MonoBehaviour
             targetArtifact.NotActivate();
         }
         list_layerConts.Clear();
+        currentLayerCont = null;
+        lastLayerCont = null;
     }
 
     private void CreateNewLayerCont()
@@ -294,7 +299,7 @@ public class BlockGenerateManager : MonoBehaviour
         return targetObject;
     }
 
-    // 最下層レイヤーで無くなった時、重力を有効にする
+    // 最下層レイヤーではなくなった時、重力を有効にする
     private void Set_ActiveGravity(int _activeLayerIndex)
     {
         foreach (var targetObject in list_targetObjects)
@@ -303,8 +308,8 @@ public class BlockGenerateManager : MonoBehaviour
             targetObject.Set_ActiveGravity();
         }
     }
-
     #endregion
+
 
     #region == Artifact Generate ==
     public MiningTarget_Artifact GenerateArtifact(int _layerIndex)
@@ -351,7 +356,7 @@ public class BlockGenerateManager : MonoBehaviour
     public Vector3 Get_RandomTargetArea()
     {
         var areaSize = currentLayerCont.param.so.layerSize;
-        return new Vector3(Random.Range(0, areaSize - 1), 0, Random.Range(0, -(areaSize - 1)));
+        return new Vector3(Random.Range(0, areaSize), 0, Random.Range(0, -(areaSize)));
     }
     /// <summary>
     /// 上層から指定した層数分までのうち、ランダムな外周ブロック位置を習得
@@ -373,18 +378,36 @@ public class BlockGenerateManager : MonoBehaviour
         }
     }
 
+    private void AppendTopAreaCubes(List<MiningTarget_Cube> buffer, int maxLayerIndex)
+    {
+        foreach (var x in list_targetBlocks)
+        {
+            if (x.isActiveAndEnabled && x.layerIndex <= maxLayerIndex)
+                buffer.Add(x);
+        }
+        foreach (var x in list_targetBlocks_Min)
+        {
+            if (x.isActiveAndEnabled && x.layerIndex <= maxLayerIndex)
+                buffer.Add(x);
+        }
+        foreach (var x in list_targetBlocks_Max)
+        {
+            if (x.isActiveAndEnabled && x.layerIndex <= maxLayerIndex)
+                buffer.Add(x);
+        }
+    }
+
     /// <summary>
-    /// 最上層のランダムなブロックを習得
+    /// 最上層のランダムなブロックを習得（石・資源キューブ両方）
     /// </summary>
     public MiningTarget_Cube Get_TopTarget()
     {
-        var topAreaBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled && x.layerIndex <= currentLayerCont.layerIndex);
-        if (topAreaBlocks.Count == 0) // ターゲットなければ、1層下のブロックでサーチ
-        {
-            topAreaBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled && x.layerIndex <= currentLayerCont.layerIndex + 1);
-        }
-        if (topAreaBlocks.Count == 0) return null;
-        return topAreaBlocks[Random.Range(0, topAreaBlocks.Count)];
+        list_topTargetScratch.Clear();
+        AppendTopAreaCubes(list_topTargetScratch, currentLayerCont.layerIndex);
+        if (list_topTargetScratch.Count == 0)
+            AppendTopAreaCubes(list_topTargetScratch, currentLayerCont.layerIndex + 1);
+        if (list_topTargetScratch.Count == 0) return null;
+        return list_topTargetScratch[Random.Range(0, list_topTargetScratch.Count)];
     }
     #endregion
 }
