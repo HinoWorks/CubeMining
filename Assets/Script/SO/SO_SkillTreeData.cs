@@ -40,7 +40,7 @@ public enum ParamType
     Size,
     CriticalRate,
     ResourceRate,
-
+    ExLevel,
 
 
     // ==== artifact param ====

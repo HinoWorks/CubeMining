@@ -485,13 +485,17 @@ public class AttackParam
     public float aliveTime => so.aliveTime;
     public float speed => so.speed + speed_enhanced;
     public int count => count_enhanced + so.count;
+    public int exLevel => 1 + exLevel_enhanced;
 
+
+    // -- local enhanced --
     private float damageRate_enhanced = 0f;
     private float speed_enhanced = 0f;
     private int count_enhanced = 0;
     private float attackInterval_enhanced = 0f;
     private float criticalRate_enhanced = 0f;
     private float size_enhanced = 0f;
+    private int exLevel_enhanced = 0;
 
 
     public void Init(AttackUnitData _attackUnitData)
@@ -523,6 +527,9 @@ public class AttackParam
                 break;
             case ParamType.CriticalRate:
                 criticalRate_enhanced += _setParam;
+                break;
+            case ParamType.ExLevel:
+                exLevel_enhanced += (int)_setParam;
                 break;
         }
     }

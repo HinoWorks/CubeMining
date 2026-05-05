@@ -139,6 +139,15 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 6b37bf82b1d0b41859889c50e50c61a9, type: 3}
     maxLevel: 5
     deltaValue: 0.01
+  - baseIndex: 206
+    paramCategory: 4
+    paramType: 19
+    targetIndex: 2
+    skillName: Ex Power
+    description: xxx
+    icon: {fileID: 0}
+    maxLevel: 1
+    deltaValue: 1
   - baseIndex: 301
     paramCategory: 4
     paramType: 0
@@ -184,6 +193,15 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: c0505c970bd5b4fed948ab5e5ed37ddd, type: 3}
     maxLevel: 5
     deltaValue: 0.01
+  - baseIndex: 306
+    paramCategory: 4
+    paramType: 19
+    targetIndex: 3
+    skillName: Ex Power
+    description: xxx
+    icon: {fileID: 0}
+    maxLevel: 1
+    deltaValue: 1
   - baseIndex: 401
     paramCategory: 4
     paramType: 0
@@ -673,7 +691,7 @@ MonoBehaviour:
     deltaValue: 0.01
   - baseIndex: 3007
     paramCategory: 0
-    paramType: 19
+    paramType: 20
     targetIndex: -1
     skillName: More Artifact
     description: artifact slot +1
@@ -922,6 +940,16 @@ MonoBehaviour:
     req_stone: 500
     req_iron: 150
     req_gold: 50
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 147
+    refIndex: 206
+    unlockCheckIndexes: 75000000
+    req_stone: 500
+    req_iron: 250
+    req_gold: 100
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0

@@ -25,6 +25,7 @@ public class AttackCont_Thunder : AttackContBase
             {
                 new Vector3(1, 0, 0), new Vector3(-1, 0 , 0), new Vector3(0, 0, 1), new Vector3(0, 0, -1)
             };
+    private float damageRate_cross = 0.5f;
 
     // thunderType = random
     private EffectType effectType_red = EffectType.ThunderStrike_Red;
@@ -34,7 +35,7 @@ public class AttackCont_Thunder : AttackContBase
                     new Vector3(1, 0, 0), new Vector3(-1, 0 , 0), new Vector3(0, 0, 1), new Vector3(0, 0, -1),
                     new Vector3(1, 0, 1), new Vector3(-1, 0 , -1), new Vector3(-1, 0, 1), new Vector3(1, 0, -1)
                };
-
+    private float damageRate_red_circle = 0.5f;
 
 
 
@@ -84,6 +85,8 @@ public class AttackCont_Thunder : AttackContBase
         if (targetBlock == null) return;
 
         SetThunder_Top_Level1();
+
+        if (base.exLevel < 2) return;
         SetThunder_Top_Level2();
     }
 
@@ -117,7 +120,7 @@ public class AttackCont_Thunder : AttackContBase
         // クロス用の弾を生成
         for (int i = 0; i < offsetPosition_cross.Length; i++)
         {
-            ActivateThunderBullet(targetBlock.transform.position + offsetPosition_cross[i]);
+            ActivateThunderBullet(targetBlock.transform.position + offsetPosition_cross[i], damageRate_cross);
         }
     }
     #endregion
@@ -132,6 +135,8 @@ public class AttackCont_Thunder : AttackContBase
         if (targetBlock == null) return;
 
         SetThunder_Random_Level1();
+
+        if (base.exLevel < 2) return;
         SetThunder_Random_Level2();
     }
 
@@ -154,20 +159,21 @@ public class AttackCont_Thunder : AttackContBase
 
         for (int i = 0; i < offsetPosition_red_circle.Length; i++)
         {
-            ActivateThunderBullet(targetBlock.transform.position + offsetPosition_red_circle[i]);
+            ActivateThunderBullet(targetBlock.transform.position + offsetPosition_red_circle[i], damageRate_red_circle);
         }
     }
-
     #endregion
 
 
 
     // == Common ==
-    private void ActivateThunderBullet(Vector3 _position)
+    private void ActivateThunderBullet(Vector3 _position, float _damageRate = 1f)
     {
         var freeBullet = GetBulletCont();
         freeBullet.transform.position = _position;
-        freeBullet.Init(damage, 0.1f, velocity);
+        var damageFixed = (int)(this.damage * _damageRate);
+        if (damageFixed < 1) damageFixed = 1;
+        freeBullet.Init(damageFixed, 0.1f, velocity);
     }
     private BulletCont_ThunderStrike GetBulletCont()
     {

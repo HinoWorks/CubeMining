@@ -22,6 +22,7 @@ public class AttackContBase : MonoBehaviour
     protected float size => attackParam.size;
     protected float criticalRate => attackParam.criticalRate;
     protected float criticalDamageRate => 2f;
+    protected int exLevel => attackParam.exLevel;
 
 
     void Awake()
