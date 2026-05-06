@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4949069032726641708}
   - component: {fileID: -228338369611563307}
   m_Layer: 0
-  m_Name: pf_bullet_arrow
+  m_Name: pf_bullet_arrow_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6845195195444324942}
@@ -137,7 +137,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.4
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -164,8 +164,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.7836894, b: 0, a: 1}
-      key1: {r: 0, g: 1, b: 0.9381459, a: 0.4509804}
+      key0: {r: 1, g: 0, b: 0.46176243, a: 1}
+      key1: {r: 0, g: 0.6301079, b: 1, a: 0.4509804}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -5120,6 +5120,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23180093602216976, guid: 62dd07c3fd60ef0469ef48687b3d4c87, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 816030efa4d114438abe2251c57c3223, type: 2}
     m_RemovedComponents:
     - {fileID: 205328578299756934, guid: 62dd07c3fd60ef0469ef48687b3d4c87, type: 3}
     m_RemovedGameObjects:
