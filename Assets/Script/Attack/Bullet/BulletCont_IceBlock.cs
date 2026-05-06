@@ -1,21 +1,34 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
-public class BulletCont_RandomPickaxe : BulletBase
+public class BulletCont_IceBlock : BulletBase
 {
+    [SerializeField] GameObject obj_Ice_1;
+    [SerializeField] Gradient gradient_Ice_1;
+    [SerializeField] GameObject obj_Ice_2;
+    [SerializeField] Gradient gradient_Ice_2;
     private TrailRenderer trailRenderer;
-    private int boundCount = 3;
-    private int currentBoundCount = 0;
-    private Vector3 boundDirection = new Vector3(0, 5, 0);
 
-    public override void Init(int _damage, float _lifetime, Vector3 _direction)
+    private int colCount = 0;
+    private int attackableCount = 1;
+    private int attackableCount_level2 = 3;
+
+
+
+    public void Init_IceBlock(int _damage, Vector3 _direction, int _setLevel)
     {
         if (trailRenderer == null)
         {
             trailRenderer = GetComponent<TrailRenderer>();
         }
         trailRenderer.Clear();
-        base.Init(_damage, 99, _direction); //lifetime：99秒で固定、バウンド回数で制御する
-        currentBoundCount = (int)_lifetime;
+
+        trailRenderer.colorGradient = _setLevel == 1 ? gradient_Ice_1 : gradient_Ice_2;
+        obj_Ice_1.SetActive(_setLevel == 1);
+        obj_Ice_2.SetActive(_setLevel == 2);
+        colCount = 0;
+        attackableCount = _setLevel == 1 ? 1 : attackableCount_level2;
+
+        base.Init(_damage, 25, _direction);
     }
 
     public override void ReturnToPool()
@@ -29,33 +42,20 @@ public class BulletCont_RandomPickaxe : BulletBase
 
     protected override void OnTriggerEnter(Collider other)
     {
-        /*
-        if (other.CompareTag("AroundWall"))
-        {
-            Reflect(other);
-            return;
-        }
-        */
-
         if (other.TryGetComponent(out IDamagable target))
         {
             target.Damage(damage);
-            BoundCheck();
-
-            //if (bulletType != BulletType.Piercing) return;
-            //base.ReturnToPool();
+            ColCheck();
         }
     }
 
-    private void BoundCheck()
+    private void ColCheck()
     {
-        currentBoundCount++;
-        if (currentBoundCount >= boundCount)
+        colCount++;
+        if (colCount >= attackableCount)
         {
             base.ReturnToPool();
         }
-
-        rb.linearVelocity = boundDirection;
     }
 
 

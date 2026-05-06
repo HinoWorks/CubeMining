@@ -8,10 +8,12 @@ using System.Threading;
 public class AttackCont_RandomPickaxe : AttackContBase
 {
     [SerializeField] GameObject bulletPrefab;
-    private List<BulletCont_RandomPickaxe> bullets = new List<BulletCont_RandomPickaxe>();
+    private List<BulletCont_IceBlock> bullets = new List<BulletCont_IceBlock>();
     private Vector3 offsetPosition = new Vector3(0, 5.5f, 0); // 発射位置オフセット
     private float createDelay = 0.1f;
     private CancellationTokenSource CTS;
+    private float changeRate_level2 = 0.5f; // レベル2になる確率
+    private bool isLevel2 => UnityEngine.Random.Range(0f, 1f) < changeRate_level2;
 
 
     protected override void AwakeCall() { }
@@ -56,11 +58,17 @@ public class AttackCont_RandomPickaxe : AttackContBase
             if (freeBullet == null)
             {
                 var newBullet = Instantiate(bulletPrefab, InGameManager.Inst.ParentPool) as GameObject;
-                freeBullet = newBullet.GetComponent<BulletCont_RandomPickaxe>();
+                freeBullet = newBullet.GetComponent<BulletCont_IceBlock>();
                 bullets.Add(freeBullet);
             }
             freeBullet.transform.position = targetBlock + offsetPosition;
-            freeBullet.Init(CalculateDamage(), aliveTime, Vector3.zero);
+
+            var selectLevel = 1;
+            if (base.exLevel >= 2)
+            {
+                selectLevel = isLevel2 ? 2 : 1;
+            }
+            freeBullet.Init_IceBlock(CalculateDamage(), Vector3.zero, selectLevel);
             await UniTask.Delay(TimeSpan.FromSeconds(createDelay), cancellationToken: CTS.Token);
         }
     }

@@ -94,6 +94,15 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: a04725aea4f7141798e92047118ac8d8, type: 3}
     maxLevel: 5
     deltaValue: 0.01
+  - baseIndex: 106
+    paramCategory: 4
+    paramType: 19
+    targetIndex: 1
+    skillName: Ex Power
+    description: xxx
+    icon: {fileID: 0}
+    maxLevel: 1
+    deltaValue: 1
   - baseIndex: 201
     paramCategory: 4
     paramType: 0
@@ -869,6 +878,16 @@ MonoBehaviour:
     unlockCheckIndexes: 6f000000
     req_stone: 65
     req_iron: 20
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 148
+    refIndex: 106
+    unlockCheckIndexes: 6d00000070000000
+    req_stone: 100
+    req_iron: 50
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
