@@ -14,7 +14,7 @@ public class AttackCont_Bow : AttackContBase
 
     private Vector3 offsetPosition_vertical = new Vector3(0, 3f, 0); // 発射位置オフセット
     private float offsetPosition_horizontal = 3.5f; // 発射位置オフセット
-
+    public int ExLevel => base.exLevel + 1;
 
 
     protected override void AwakeCall() { }
