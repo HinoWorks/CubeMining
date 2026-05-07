@@ -14,6 +14,7 @@ public class AttackCont_BowUnit : MonoBehaviour
     [SerializeField] private float lineLength = 5f; // 線の長さ
 
     // -- level2
+    private bool isAddArrow = false;
     private Vector3[] shotDirections_level2 = new Vector3[2];
     private float Get_RandomShotDirection_Level2 => UnityEngine.Random.Range(10f, 30f);
 
@@ -41,12 +42,13 @@ public class AttackCont_BowUnit : MonoBehaviour
     {
         bowCont = _bowCont;
     }
-    public void Init(int _damage, float _lifetime, float _speed, Vector3 _direction)
+    public void Init(int _damage, float _lifetime, float _speed, Vector3 _direction, bool _isAddArrow)
     {
         this.damage = _damage;
         this.lifetime = _lifetime;
         this.speed = _speed;
         this.direction = _direction;
+        this.isAddArrow = _isAddArrow;
 
         this.gameObject.SetActive(true);
         anim.Play(animaName_spawn);
@@ -67,18 +69,37 @@ public class AttackCont_BowUnit : MonoBehaviour
         SetLineRenderer(0, startPosition, endPosition);
         lineRenderers[0].gameObject.SetActive(true);
 
-        if (bowCont.ExLevel < 1) return;
-        var offsetAngle = (-this.transform.rotation.eulerAngles.y + 90f) * Mathf.Deg2Rad;
-        var shotDirection = Get_RandomShotDirection_Level2;
-        for (int i = 0; i < 2; i++)
+        // -- level2 check
+        if (!isAddArrow) return;
+
+        if (bowCont.IsVertical) // 真上から撃ち落とす
         {
-            var plusMinus = i == 0 ? 1 : -1;
-            lineRenderers[i + 1].gameObject.SetActive(true);
-            endPosition = new Vector3(Mathf.Cos(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad), 0f, Mathf.Sin(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad));
-            SetLineRenderer(i + 1, startPosition, startPosition + endPosition * lineLength);
-            shotDirections_level2[i] = endPosition;
+            var offsetAngle = (-this.transform.rotation.eulerAngles.x + 90f) * Mathf.Deg2Rad;
+            var shotDirection = Get_RandomShotDirection_Level2;
+            for (int i = 0; i < 2; i++)
+            {
+                var plusMinus = i == 0 ? 1 : -1; // 扇状にうつ
+                lineRenderers[i + 1].gameObject.SetActive(true);
+                endPosition = new Vector3(Mathf.Sin(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad), -Mathf.Cos(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad), 0f);
+                SetLineRenderer(i + 1, startPosition, startPosition + endPosition * lineLength);
+                shotDirections_level2[i] = endPosition;
+            }
+        }
+        else // 側面から射つ
+        {
+            var offsetAngle = (-this.transform.rotation.eulerAngles.y + 90f) * Mathf.Deg2Rad;
+            var shotDirection = Get_RandomShotDirection_Level2;
+            for (int i = 0; i < 2; i++)
+            {
+                var plusMinus = i == 0 ? 1 : -1; // 扇状にうつ
+                lineRenderers[i + 1].gameObject.SetActive(true);
+                endPosition = new Vector3(Mathf.Cos(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad), 0f, Mathf.Sin(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad));
+                SetLineRenderer(i + 1, startPosition, startPosition + endPosition * lineLength);
+                shotDirections_level2[i] = endPosition;
+            }
         }
     }
+
     private void SetLineRenderer(int _index, Vector3 _startPosition, Vector3 _endPosition)
     {
         lineRenderers[_index].SetPosition(0, _startPosition);
@@ -91,10 +112,9 @@ public class AttackCont_BowUnit : MonoBehaviour
     {
         Shot_Level1();
 
-        if (bowCont.ExLevel >= 2)
-        {
-            Shot_Level2();
-        }
+        //  -- level2 check
+        if (!isAddArrow) return;
+        Shot_Level2();
     }
 
     private void Shot_Level1()
