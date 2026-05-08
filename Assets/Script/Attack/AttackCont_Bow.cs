@@ -14,12 +14,14 @@ public class AttackCont_Bow : AttackContBase
 
     private Vector3 offsetPosition_vertical = new Vector3(0, 3f, 0); // 発射位置オフセット
     private float offsetPosition_horizontal = 3.5f; // 発射位置オフセット
-    public int ExLevel => base.exLevel + 1;
-    private float rate_addArrow = 0.5f;
+    public int ExLevel => base.exLevel;
+
+    [Space(5)]
+    [Header("Level2 checkRate")]
+    [SerializeField] float rate_addArrow = 0.5f;
     private bool IsAddArrow => ExLevel >= 2 && UnityEngine.Random.Range(0f, 1f) < rate_addArrow;
+
     public bool IsVertical => isVertical;
-
-
 
     protected override void AwakeCall() { }
     public override void Init(AttackParam _attackParam)

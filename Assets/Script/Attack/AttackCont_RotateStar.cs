@@ -10,7 +10,9 @@ public class AttackCont_RotateStar : AttackContBase
     private List<AttackCont_RotateStarUnit> rotateStarUnits = new List<AttackCont_RotateStarUnit>();
     private Vector3 pointerPosition;
 
-    private float rate_verticalRotate = 0.3f;
+    [Space(5)]
+    [Header("Level2 checkRate")]
+    [SerializeField] private float rate_verticalRotate = 0.3f;
     private bool isVerticalRotate => UnityEngine.Random.Range(0f, 1f) < rate_verticalRotate;
 
 
