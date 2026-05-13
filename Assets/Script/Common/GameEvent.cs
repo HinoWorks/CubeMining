@@ -153,6 +153,23 @@ public static class GameEvent
 
     }
 
+    /// <summary>メタ進行（レベル・経験値・未使用ポイント）</summary>
+    public static class PlayerLevel
+    {
+        private static readonly Subject<(System.Numerics.BigInteger expInLevel, int level, System.Numerics.BigInteger expToNext)> playerLevelChanged = new();
+        public static IObservable<(System.Numerics.BigInteger expInLevel, int level, System.Numerics.BigInteger expToNext)> PlayerLevelChanged => playerLevelChanged.AsObservable();
+        public static void PublishPlayerLevelChanged(System.Numerics.BigInteger expInLevel, int level, System.Numerics.BigInteger expToNext)
+        {
+            playerLevelChanged.OnNext((expInLevel, level, expToNext));
+        }
+
+        private static readonly Subject<(int newLevel, int pointsGained)> levelUp = new();
+        public static IObservable<(int newLevel, int pointsGained)> LevelUp => levelUp.AsObservable();
+        public static void PublishPlayerLevelUp(int newLevel, int pointsGained)
+        {
+            levelUp.OnNext((newLevel, pointsGained));
+        }
+    }
 
 
 }

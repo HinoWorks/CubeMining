@@ -120,6 +120,7 @@ public class MiningTarget_Cube : MiningTargetBase
         }
         //CameraManager.Inst?.ShakeBlockBreak();
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.BlockBreakCount, 1);
+        GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.PlayerExp, 1);
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.Damage, hp_max);
 
         AddGetResource(_resourceUpRate);

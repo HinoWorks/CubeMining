@@ -76,7 +76,7 @@ public class InGameManager : MonoBehaviour
         switch (state)
         {
             case GameStateType.InGame_Ready:
-                SetState_InGameReady();
+                SetState_InGameReadyAsync().Forget();
                 break;
             case GameStateType.InGame:
                 SetState_InGame();
@@ -111,7 +111,7 @@ public class InGameManager : MonoBehaviour
     }
 
     #region -- SetState --
-    private void SetState_InGameReady()
+    private async UniTaskVoid SetState_InGameReadyAsync()
     {
         // インゲーム開始前の初期化
         gameRecordData_thisGame = new GameRecordData_thisGame();
@@ -124,9 +124,19 @@ public class InGameManager : MonoBehaviour
         GameEvent.UI.PublishCoinMod(getCoin);
         GameEvent.UI.PublishTimeLimit(timeLimit);
 
+
+        // TODO HERE
+        /*
+        var grd = await SaveLoader.Inst.Get_GameRecordData();
+        PlayerProgressRuntime.ApplyFromGameRecord(grd);
+        var levelTable = SOLoader.PlayerLevelData;
+        GameEvent.PlayerProgress.PublishMetaChanged(
+            PlayerProgressRuntime.TotalExp,
+            PlayerProgressRuntime.ExpInCurrentLevel,
+            PlayerProgressRuntime.Level,
+            levelTable.GetExpToNext(PlayerProgressRuntime.Level));
+*/
         SoundManager.Inst.PlaySE(100);
-
-
     }
 
     private void SetState_InGame()
@@ -236,7 +246,6 @@ public class InGameManager : MonoBehaviour
         // total data -> 今回のゲーム結果を加算
         gameRecordData_Now.total_ingameCount++;
         gameRecordData_Now.total_blockBreakCount += gameRecordData_thisGame.blockBreakCount;
-        gameRecordData_Now.total_playerExp += gameRecordData_thisGame.playerExp;
         gameRecordData_Now.total_totalDamage += gameRecordData_thisGame.totalDamage;
         gameRecordData_Now.total_depth += gameRecordData_thisGame.Depth;
         gameRecordData_Now.total_treasureCount += gameRecordData_thisGame.treasureCount;
@@ -266,6 +275,7 @@ public class InGameManager : MonoBehaviour
                 break;
             case GameRecordData_Type.PlayerExp:
                 gameRecordData_thisGame.playerExp += _gameRecordData.delta;
+                PlayerLevelManager.Inst.AddExp(_gameRecordData.delta);
                 break;
             case GameRecordData_Type.Damage:
                 gameRecordData_thisGame.totalDamage += _gameRecordData.delta;

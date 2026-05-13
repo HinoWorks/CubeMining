@@ -151,6 +151,22 @@ public static class SOLoader
         }
     }
 
+    private static SO_PlayerLevelData so_playerLevelData;
+    public static SO_PlayerLevelData PlayerLevelData
+    {
+        get
+        {
+            if (so_playerLevelData == null)
+            {
+                so_playerLevelData = LoadSO<SO_PlayerLevelData>(pathBase + nameof(SO_PlayerLevelData));
+                if (so_playerLevelData == null)
+                {
+                    so_playerLevelData = ScriptableObject.CreateInstance<SO_PlayerLevelData>();
+                }
+            }
+            return so_playerLevelData;
+        }
+    }
 
 
     // ========= loc =============

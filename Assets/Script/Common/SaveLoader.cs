@@ -44,6 +44,7 @@ public class GameRecordDataSave
     public string total_skillTreeCount;
     public string total_artifactCount;
 
+
     public string oneGame_blockBreakCount;
     public string oneGame_treasureCount;
     public string oneGame_playerExp;
@@ -115,6 +116,17 @@ public class PickaxeSlotData
 }
 #endregion
 
+
+#region -- PlayerLevel --
+[System.Serializable]
+public class PlayerLevelData
+{
+    public int level = 1;
+    public BigInteger totalExp = 0;
+    public BigInteger expInCurrentLevel = 0;
+    public int points = 0;
+}
+#endregion
 
 
 public enum state
@@ -392,6 +404,52 @@ public class SaveLoader : MonoBehaviour
     #region -- Ingame result data --
     #endregion
 
+
+
+
+
+    #region -- PlayerLevel --
+    public async UniTask<PlayerLevelData> Get_PlayerLevelData()
+    {
+        var saveKey = GetPlayerLevelDataKey();
+        var loadData = await LoadAsync<PlayerLevelData>(saveKey);
+        if (loadData.success)
+        {
+            return loadData.data;
+        }
+        return null;
+    }
+    public void Request_SavePlayerLevelData(PlayerLevelData _playerLevelData)
+    {
+        EnqueueMethod(() => { SavePlayerLevelData(_playerLevelData); });
+    }
+    private void SavePlayerLevelData(PlayerLevelData _playerLevelData)
+    {
+        var saveKey = GetPlayerLevelDataKey();
+        ES3.Save(saveKey, _playerLevelData);
+    }
+    /// <summary>
+    /// ポイントセーブリクエスト - デルタを加算してセーブ
+    /// </summary>
+    public void Request_SavePlayerLevelData(int _deltaPoints)
+    {
+        EnqueueMethod(async () => { await SavePlayerLevelData(_deltaPoints); });
+    }
+    private async UniTask SavePlayerLevelData(int _deltaPoints)
+    {
+        var saveKey = GetPlayerLevelDataKey();
+        var currentData = await LoadAsync<PlayerLevelData>(saveKey);
+        if (currentData.success)
+        {
+            currentData.data.points += _deltaPoints;
+            ES3.Save(saveKey, currentData.data);
+        }
+    }
+    private string GetPlayerLevelDataKey()
+    {
+        return $"PlayerLevelData";
+    }
+    #endregion
 
 
 
@@ -689,7 +747,7 @@ public class SaveLoader : MonoBehaviour
     }
     private static GameRecordData GameRecordDataFromSave(GameRecordDataSave save)
     {
-        if (save == null) return null;
+        if (save == null) return new GameRecordData();
         return new GameRecordData
         {
             total_ingameCount = ParseBigInteger(save.total_ingameCount),
