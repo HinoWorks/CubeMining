@@ -11,7 +11,7 @@ public class UI_PickaxeManager : MonoBehaviour
     [SerializeField] UI_PickaxeLibraryUnit[] pickaxeLibraryUnits;
     [SerializeField] UI_PickaxeSelectInfoCont selectInfoUnit;
     [SerializeField] UI_PickaxeGetAnimCont ui_getNewPickaxe;
-    private int[] slotIndexes = { 0, 1 };
+    private int[] slotIndexes = { 0 };
     private HashSet<int> equipedPickaxeIndexes = new HashSet<int>();
     private bool isDoingAction = false;
     private int pickaxeAnimWaitTime = 1000;

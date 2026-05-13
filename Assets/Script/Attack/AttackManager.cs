@@ -1,7 +1,6 @@
 using UnityEngine;
 using UniRx;
 using System.Collections.Generic;
-using UniRx;
 using System.Threading.Tasks;
 
 public class AttackManager : MonoBehaviour
@@ -12,7 +11,7 @@ public class AttackManager : MonoBehaviour
     private bool isAttacking = false;
     private int currentPickaxeIndex = 0;
     public int currentPickaxeDamage => pickaxeConts[currentPickaxeIndex].baseDamage;
-    private int[] slotIndexes = { 0, 1 };
+    private int[] slotIndexes = { 0 };
 
 
     void Awake()
@@ -23,8 +22,8 @@ public class AttackManager : MonoBehaviour
 
     void Start()
     {
-        GameEvent.Input.PointerPrimaryDown.Subscribe(_ => TryChangePickaxe(0)).AddTo(this);
-        GameEvent.Input.PointerSecondaryDown.Subscribe(_ => TryChangePickaxe(1)).AddTo(this);
+        GameEvent.Input.PointerPrimaryDown.Subscribe(_ => Click_LeftButton()).AddTo(this);
+        GameEvent.Input.PointerSecondaryDown.Subscribe(_ => Click_RightButton()).AddTo(this);
     }
 
 
@@ -53,7 +52,10 @@ public class AttackManager : MonoBehaviour
         }
 
         currentPickaxeIndex = 0;
-        SelectPickaxe(currentPickaxeIndex);
+        foreach (var pickaxeCont in pickaxeConts)
+        {
+            pickaxeCont.Set_SelectPickaxe(currentPickaxeIndex);
+        }
     }
 
     private void PickaxeUnitGenerate(int _slotIndex, PickaxeParam _pickaxeParam)
@@ -110,33 +112,48 @@ public class AttackManager : MonoBehaviour
         pickaxeConts.Clear();
     }
 
-
-
-
-    #region -- Change pickaxe --
-    private void TryChangePickaxe(int _slotIndex)
+    private void Click_LeftButton()
     {
-        if (!isAttacking || pickaxeConts.Count == 0) return;
-        if (!HasPickaxeInSlot(_slotIndex)) return;
-        currentPickaxeIndex = _slotIndex;
-        SelectPickaxe(currentPickaxeIndex);
+        if (!isAttacking) return;
+        Debug.Log("Ingame ---- Click_LeftButton");
     }
-    private bool HasPickaxeInSlot(int _slotIndex)
+    private void Click_RightButton()
     {
-        foreach (var pickaxeCont in pickaxeConts)
+        if (!isAttacking) return;
+        Debug.Log("Ingame ---- Click_RightButton");
+    }
+
+
+
+    #region -- Change pickaxe -- ピッケルの２種装備はなしに修正
+    /*
+        private void TryChangePickaxe(int _slotIndex)
         {
-            if (pickaxeCont.slotIndex == _slotIndex) return true;
+            Debug.Log($"ピッケル変更はなしに修正中");
+
+            return;
+            if (!isAttacking || pickaxeConts.Count == 0) return;
+            if (!HasPickaxeInSlot(_slotIndex)) return;
+            currentPickaxeIndex = _slotIndex;
+            SelectPickaxe(currentPickaxeIndex);
         }
-        return false;
-    }
-    private void SelectPickaxe(int _slotIndex)
-    {
-        Debug.Log($"ChangePickaxe: {_slotIndex}");
-        foreach (var pickaxeCont in pickaxeConts)
+        private bool HasPickaxeInSlot(int _slotIndex)
         {
-            pickaxeCont.Set_SelectPickaxe(_slotIndex);
+            foreach (var pickaxeCont in pickaxeConts)
+            {
+                if (pickaxeCont.slotIndex == _slotIndex) return true;
+            }
+            return false;
         }
-    }
+        private void SelectPickaxe(int _slotIndex)
+        {
+            Debug.Log($"ChangePickaxe: {_slotIndex}");
+            foreach (var pickaxeCont in pickaxeConts)
+            {
+                pickaxeCont.Set_SelectPickaxe(_slotIndex);
+            }
+        }
+        */
     #endregion
 
 }

@@ -33,10 +33,10 @@ public class UI_PickaxeSelectInfoCont : UI_PickaxeParamCont
     [Header("Equip Area")]
     [SerializeField] GameObject obj_equip;
     [SerializeField] HButton btn_equip_slot0;
-    [SerializeField] HButton btn_equip_slot1;
+    //[SerializeField] HButton btn_equip_slot1;
 
     private bool isCraftReady = true;
-    private int[] equipedPickaxeIndex = new int[2] { 0, 1 };
+    private int[] equipedPickaxeIndex = new int[1] { 0 };
     private Action<PickaxeUnitData> onClick_Craft;
     private Action<PickaxeUnitData, int> onClick_Equip;
     private List<ResourceCount> requredResources = new List<ResourceCount>();
@@ -158,7 +158,7 @@ public class UI_PickaxeSelectInfoCont : UI_PickaxeParamCont
         obj_equiped.SetActive(_equipedSlotIndexNow != -1);
 
         btn_equip_slot0.Set_Interactable(0 != _equipedSlotIndexNow);
-        btn_equip_slot1.Set_Interactable(1 != _equipedSlotIndexNow);
+        //btn_equip_slot1.Set_Interactable(1 != _equipedSlotIndexNow);
     }
 
 

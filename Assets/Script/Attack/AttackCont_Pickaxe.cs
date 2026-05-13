@@ -23,6 +23,8 @@ public class AttackCont_Pickaxe : MonoBehaviour
     [SerializeField] GameObject obj_pointerArea;
     [SerializeField] TriggerSender[] triggerSender;
 
+    // 複数 TriggerSender で同一対象と重なるとき、片方の Exit だけでは対象を外さない
+    private readonly Dictionary<IDamagable, int> targetOverlapRefCount = new Dictionary<IDamagable, int>();
     private HashSet<IDamagable> targets = new HashSet<IDamagable>();
     private readonly List<IDamagable> removeBuffer = new();
 
@@ -48,6 +50,7 @@ public class AttackCont_Pickaxe : MonoBehaviour
         pickaxeParam = _pickaxeParam;
         obj_pointerArea.transform.localScale = size * Vector3.one;
         targets.Clear();
+        targetOverlapRefCount.Clear();
         CreateAttackRoop();
         this.gameObject.SetActive(false);
 
@@ -154,18 +157,30 @@ public class AttackCont_Pickaxe : MonoBehaviour
     #region -- target fix --
     private void OnEnter(Collider other)
     {
-        if (other.TryGetComponent(out IDamagable target))
+        if (!other.TryGetComponent(out IDamagable target)) return;
+
+        if (targetOverlapRefCount.TryGetValue(target, out var n))
+            targetOverlapRefCount[target] = n + 1;
+        else
         {
+            targetOverlapRefCount[target] = 1;
             targets.Add(target);
         }
     }
 
     private void OnExit(Collider other)
     {
-        if (other.TryGetComponent(out IDamagable target))
+        if (!other.TryGetComponent(out IDamagable target)) return;
+        if (!targetOverlapRefCount.TryGetValue(target, out var n)) return;
+
+        n--;
+        if (n <= 0)
         {
+            targetOverlapRefCount.Remove(target);
             targets.Remove(target);
         }
+        else
+            targetOverlapRefCount[target] = n;
     }
     #endregion
 
