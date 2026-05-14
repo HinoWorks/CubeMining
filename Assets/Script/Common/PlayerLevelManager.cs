@@ -69,7 +69,7 @@ public class PlayerLevelManager : MonoBehaviour
             };
             SaveLoader.Inst.Request_SavePlayerLevelData(currentLevelData);
         }
-        requestExp = SOLoader.PlayerLevelData.GetExpToNext(currentLevelData.level);
+        requestExp = SOLoader.PlayerLevelData.GetPlayerLevel(currentLevelData.level).exp;
         GameEvent.PlayerLevel.PublishPlayerLevelChanged(currentLevelData.expInCurrentLevel, currentLevelData.level, requestExp);
     }
 
@@ -82,7 +82,8 @@ public class PlayerLevelManager : MonoBehaviour
         {
             currentLevelData.level++;
             currentLevelData.expInCurrentLevel -= requestExp;
-            requestExp = SOLoader.PlayerLevelData.GetExpToNext(currentLevelData.level);
+            requestExp = SOLoader.PlayerLevelData.GetPlayerLevel(currentLevelData.level).exp;
+            GameEvent.PlayerLevel.PublishPlayerLevelUp(currentLevelData.level, currentLevelData.level);
         }
         GameEvent.PlayerLevel.PublishPlayerLevelChanged(currentLevelData.expInCurrentLevel, currentLevelData.level, requestExp);
     }
