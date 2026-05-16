@@ -6,7 +6,7 @@ using System;
 using Cysharp.Threading.Tasks;
 
 
-public class UI_ArtifactManager : MonoBehaviour
+public class UI_ArtifactManager : UI_OutGameTabBase
 {
     [SerializeField] UI_ArtifactEquipUnit[] artifactEquipUnits;
     [SerializeField] UI_ArtifactLibraryUnit[] artifactLibraryUnits;
@@ -15,8 +15,9 @@ public class UI_ArtifactManager : MonoBehaviour
     private int artifact_activeSlotCount => 1 + GameParamManager.gameBaseParam.artifact_slotCount; //現在のアクティブスロット数
     private int artifact_totalSlotCountMax = 4; //最大スロット数
 
-    public void Start_OnceInit()//主にコールバックを設定
+    public override void Start_OnceInit()//主にコールバックを設定
     {
+        base.thisMenuType = OutGame_MenuType.Artifact;
         var index = 1;
         foreach (var artifactLibraryUnit in artifactLibraryUnits)
         {
@@ -36,17 +37,26 @@ public class UI_ArtifactManager : MonoBehaviour
 
 
 
-
-    public async void Init(OutGame_MenuType _outGameMenuType)
-    {
-        var isActive = _outGameMenuType == OutGame_MenuType.Artifact;
-        if (isActive)
+    /*
+        public async void Init(OutGame_MenuType _outGameMenuType)
         {
-            await Set_ArtifactEquip();
-            Set_ArtifactLibrary();
+            var isActive = _outGameMenuType == OutGame_MenuType.Artifact;
+            if (isActive)
+            {
+                await Set_ArtifactEquip();
+                Set_ArtifactLibrary();
+            }
+            detailUnit.SetData(null);
+            this.gameObject.SetActive(isActive);
         }
-        detailUnit.SetData(null);
-        this.gameObject.SetActive(isActive);
+    */
+
+    // アウトゲームに移行した時、一度だけデータを更新する
+    public override async void ToOutGame_InitData()
+    {
+        await Set_ArtifactEquip();
+        Set_ArtifactLibrary();
+        base.isReloadFin = true;
     }
 
     /// <summary>

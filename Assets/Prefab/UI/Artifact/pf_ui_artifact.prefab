@@ -260,7 +260,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -175}
-  m_SizeDelta: {x: -470, y: -550}
+  m_SizeDelta: {x: -300, y: -550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &302589365791725759
 GameObject:
@@ -1186,7 +1186,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -150}
+  m_AnchoredPosition: {x: 0, y: -140}
   m_SizeDelta: {x: -400, y: 275}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &3459421610026142065
@@ -1207,7 +1207,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 30
+  m_Spacing: 80
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -3697,7 +3697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4525137125141964034, guid: 2cf960ea8862d4ef59af26860762707f, type: 3}
       propertyPath: m_Size
-      value: 0.06619469
+      value: 0.088709675
       objectReference: {fileID: 0}
     - target: {fileID: 4525137125141964034, guid: 2cf960ea8862d4ef59af26860762707f, type: 3}
       propertyPath: m_Value
@@ -3850,8 +3850,8 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 200, y: 225}
-  m_Spacing: {x: 30, y: 30}
+  m_CellSize: {x: 175, y: 200}
+  m_Spacing: {x: 25, y: 30}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &1900545490641424125

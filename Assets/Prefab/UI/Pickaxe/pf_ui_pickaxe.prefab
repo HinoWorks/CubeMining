@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4368073, g: 0.30980393, b: 0.5176471, a: 1}
+  m_Color: {r: 0.6509804, g: 0.5999679, b: 0.34117648, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6370,7 +6370,6 @@ MonoBehaviour:
   - {fileID: 5261334728227814858}
   - {fileID: 5193565079455249171}
   - {fileID: 9088702467773462566}
-  obj_notEquip: {fileID: 0}
 --- !u!1 &2460424603427785671
 GameObject:
   m_ObjectHideFlags: 0
@@ -23080,7 +23079,6 @@ MonoBehaviour:
   btn_craft: {fileID: 774358349429760083}
   obj_equip: {fileID: 6620974015918940731}
   btn_equip_slot0: {fileID: 2122166597499009673}
-  btn_equip_slot1: {fileID: 7752523715417421301}
 --- !u!1 &6344678348889375295
 GameObject:
   m_ObjectHideFlags: 0
@@ -33712,7 +33710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7384113, g: 0.49411765, b: 0.8117647, a: 1}
+  m_Color: {r: 0.8666667, g: 0.8462188, b: 0.6, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -37100,17 +37098,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7280337889172280055, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
   m_PrefabInstance: {fileID: 5102036940972520245}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7752523715417421301 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3267481026177877696, guid: cb9425799c1ff4d308b5823a23e33e5d, type: 3}
-  m_PrefabInstance: {fileID: 5102036940972520245}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c8a05d926b654cad8932ca6c0834f15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5544200991593965575
 PrefabInstance:
   m_ObjectHideFlags: 0

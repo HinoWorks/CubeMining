@@ -15,7 +15,7 @@ public enum SkillTreeUnlockState
     EnhanceComplete
 }
 
-public class UI_SkillTreeMaanger : MonoBehaviour
+public class UI_SkillTreeMaanger : UI_OutGameTabBase
 {
     public UI_SkillTreeUnit[] skillTreeUnits;
     [SerializeField] UI_SkillTreeDetail ui_skillTreeDetail;
@@ -113,7 +113,7 @@ public class UI_SkillTreeMaanger : MonoBehaviour
 #endif
 
 
-    public void Start_OnceInit()
+    public override void Start_OnceInit()
     {
         foreach (var skillTreeUnit in skillTreeUnits)
         {
@@ -125,23 +125,35 @@ public class UI_SkillTreeMaanger : MonoBehaviour
         {
             skillTreeUnit.Init();
         }
+        base.thisMenuType = OutGame_MenuType.SkillTree;
     }
 
-    public void Init(OutGame_MenuType _outGameMenuType)
-    {
-        var isActive = _outGameMenuType == OutGame_MenuType.SkillTree;
-        if (isActive)
+    /*
+        public void Init(OutGame_MenuType _outGameMenuType)
         {
-            ui_skillTreeDetail.gameObject.SetActive(false);
-            foreach (var skillTreeUnit in skillTreeUnits)
+            var isActive = _outGameMenuType == OutGame_MenuType.SkillTree;
+            if (isActive)
             {
-                skillTreeUnit.Init();
+                ui_skillTreeDetail.gameObject.SetActive(false);
+                foreach (var skillTreeUnit in skillTreeUnits)
+                {
+                    skillTreeUnit.Init();
+                }
             }
-        }
-        this.gameObject.SetActive(isActive);
+            this.gameObject.SetActive(isActive);
 
-        // 実行時に接続線を更新
-        // UpdateAllConnections();
+            // 実行時に接続線を更新
+            // UpdateAllConnections();
+        }
+        */
+    public override async void ToOutGame_InitData()
+    {
+        ui_skillTreeDetail.gameObject.SetActive(false);
+        foreach (var skillTreeUnit in skillTreeUnits)
+        {
+            skillTreeUnit.Init();
+        }
+        base.isReloadFin = true;
     }
 
 
