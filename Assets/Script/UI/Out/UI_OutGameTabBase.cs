@@ -8,12 +8,16 @@ public class UI_OutGameTabBase : MonoBehaviour
     protected OutGame_MenuType thisMenuType;
 
 
+    /// <summary>
+    /// 初期化時に一度だけ呼ばれる.主にコールバックを設定
+    /// </summary>
+    public virtual void Start_OnceInit() { }
 
-    public virtual void Start_OnceInit()//主にコールバックを設定
-    {
-    }
 
-    public virtual async void Init(OutGame_MenuType _outGameMenuType)
+    /// <summary>
+    /// 自分のタイプの時のみ、アクティブにする。　ロード完了まで待機
+    /// </summary>
+    public async void Init(OutGame_MenuType _outGameMenuType)
     {
         var isActive = _outGameMenuType == thisMenuType;
 
@@ -29,6 +33,10 @@ public class UI_OutGameTabBase : MonoBehaviour
     /// </summary>
     public virtual async void ToOutGame_InitData() { }
 
+
+    /// <summary>
+    /// インゲームに移行した時、ロードフラグをリセットする
+    /// </summary>
     public void ToInGame_ResetLoadFlag()
     {
         isReloadFin = false;

@@ -1,0 +1,316 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca32c5d5643e5405a82d735165dd8041, type: 3}
+  m_Name: SO_PickaxePowerData
+  m_EditorClassIdentifier: Assembly-CSharp::SO_PickaxePowerData
+  pickaxePowerBases:
+  - index: 1
+    skillName: power1
+    description: xxxx 11
+    icon: {fileID: 0}
+  - index: 2
+    skillName: power2
+    description: xxxx 22
+    icon: {fileID: 0}
+  - index: 3
+    skillName: power3
+    description: xxxx 333
+    icon: {fileID: 0}
+  - index: 5
+    skillName: power4
+    description: xxxx 4444
+    icon: {fileID: 0}
+  - index: 5
+    skillName: power5
+    description: xxxx 55555
+    icon: {fileID: 0}
+  pickaxePowerLevels:
+  - index: 1
+    level: 1
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 1
+    req_stone: 10
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1
+    level: 2
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 2
+    req_stone: 100
+    req_iron: 30
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1
+    level: 3
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 3
+    req_stone: 250
+    req_iron: 150
+    req_gold: 50
+    req_emerald: 10
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 1
+    level: 4
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 4
+    req_stone: 0
+    req_iron: 500
+    req_gold: 300
+    req_emerald: 150
+    req_ruby: 100
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2
+    level: 1
+    value_1: 1
+    value_2: 1
+    value_3: 1
+    value_4: 0
+    req_point: 1
+    req_stone: 500
+    req_iron: 250
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2
+    level: 2
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 2
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2
+    level: 3
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 3
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 2
+    level: 4
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 4
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 3
+    level: 1
+    value_1: 1
+    value_2: 1
+    value_3: 1
+    value_4: 0
+    req_point: 1
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 3
+    level: 2
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 2
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 3
+    level: 3
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 3
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 3
+    level: 4
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 4
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 4
+    level: 1
+    value_1: 1
+    value_2: 1
+    value_3: 1
+    value_4: 0
+    req_point: 1
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 4
+    level: 2
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 2
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 4
+    level: 3
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 3
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 4
+    level: 4
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 4
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 5
+    level: 1
+    value_1: 1
+    value_2: 1
+    value_3: 1
+    value_4: 0
+    req_point: 1
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 5
+    level: 2
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 2
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 5
+    level: 3
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 3
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 5
+    level: 4
+    value_1: 1
+    value_2: 0
+    value_3: 0
+    value_4: 0
+    req_point: 4
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0

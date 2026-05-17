@@ -168,6 +168,20 @@ public static class SOLoader
         }
     }
 
+    private static SO_PickaxePowerData so_pickaxePowerData;
+    public static SO_PickaxePowerData PickaxePowerData
+    {
+        get
+        {
+            if (so_pickaxePowerData == null)
+            {
+                so_pickaxePowerData = LoadSO<SO_PickaxePowerData>(pathBase + nameof(SO_PickaxePowerData));
+            }
+            return so_pickaxePowerData;
+        }
+    }
+
+
 
     // ========= loc =============
     private static T LoadSO<T>(string path) where T : ScriptableObject

@@ -35,6 +35,7 @@ public class DataBase : MonoBehaviour
     [SerializeField] SO_BlockLayerData mSO_BlockGenerateParam_LayerData;
     [SerializeField] SO_ItemData mSO_ItemData;
     [SerializeField] SO_PlayerLevelData mSO_PlayerLevelData;
+    [SerializeField] SO_PickaxePowerData mSO_PickaxePowerData;
     [SerializeField] SO_SoundData mSO_SoundData;
 
     public async UniTask LoadData()
@@ -48,6 +49,7 @@ public class DataBase : MonoBehaviour
         await DataLoad_BlockGenerateParam_LayerData();
         await DataLoad_ItemData();
         await DataLoad_PlayerLevelData();
+        await DataLoad_PickaxePowerData();
         await DataLoad_SoundData();
 
 #if UNITY_EDITOR
@@ -63,6 +65,7 @@ public class DataBase : MonoBehaviour
         EditorUtility.SetDirty(mSO_BlockGenerateParam_LayerData);
         EditorUtility.SetDirty(mSO_ItemData);
         EditorUtility.SetDirty(mSO_PlayerLevelData);
+        EditorUtility.SetDirty(mSO_PickaxePowerData);
         EditorUtility.SetDirty(mSO_SoundData);
 
         // -- save --
@@ -159,6 +162,16 @@ public class DataBase : MonoBehaviour
         var loadData = await DataLoad("PlayerLevel");
         var convData = CSVSerializer.Deserialize<PlayerLevel>(loadData);
         mSO_PlayerLevelData.playerLevels = convData;
+    }
+    private async UniTask DataLoad_PickaxePowerData()
+    {
+        var loadData = await DataLoad("PickaxePowerBase");
+        var convData = CSVSerializer.Deserialize<PickaxePowerBase>(loadData);
+        mSO_PickaxePowerData.pickaxePowerBases = convData;
+
+        var loadData2 = await DataLoad("PickaxePowerLevel");
+        var convData2 = CSVSerializer.Deserialize<PickaxePowerLevel>(loadData2);
+        mSO_PickaxePowerData.pickaxePowerLevels = convData2;
     }
 
     private async UniTask<string> DataLoad(string _sheetName)
