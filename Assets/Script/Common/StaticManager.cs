@@ -7,7 +7,7 @@ using System.Numerics;
 
 public class StaticManager : MonoBehaviour
 {
-    public static int artifactSlotCount = 5;
+    public static int artifactSlotCount = 4;
 
 
 
@@ -116,11 +116,20 @@ public class StaticManager : MonoBehaviour
 
 
 
-    #region 
-    public static bool CoinCheck(BigInteger _cost)
+    #region --- resource check ---
+    public static bool IsResourceEnough(ResourceCount[] _requredResources)
     {
-        return _cost <= SaveLoader.Inst.Coin;
+        var isEnough = true;
+        foreach (var resource in _requredResources)
+        {
+            if (resource.requiredCount <= 0) continue;
+            if (resource.requiredCount > SaveLoader.Inst.Get_ResourceCount(resource.resourceType))
+            {
+                isEnough = false;
+                break;
+            }
+        }
+        return isEnough;
     }
     #endregion
-
 }

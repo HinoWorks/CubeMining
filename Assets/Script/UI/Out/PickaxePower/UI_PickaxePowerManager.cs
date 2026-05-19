@@ -5,14 +5,22 @@ using System.Collections.Generic;
 using System;
 using Cysharp.Threading.Tasks;
 using System.Linq;
+using TMPro;
 
 
 public class UI_PickaxePowerManager : UI_OutGameTabBase
 {
+    [SerializeField] TextMeshProUGUI tmp_points;
     [SerializeField] UI_PickaxePowerUnit[] ui_pickaxePowerUnits;
-    [SerializeField] UI_PickaxePowerInfo selectInfoUnit;
+    [SerializeField] UI_PickaxePowerInfo ui_selectInfo;
 
     private bool isDoingAction = false;
+
+    private int currentPoints = 0;
+    private int currentEquipedIndex = 0;
+    private UI_PickaxePowerUnit currentSelectUnit = null;
+
+
 
 
     public override async void Start_OnceInit()//主にコールバックを設定
@@ -30,17 +38,36 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
 
     public override async void ToOutGame_InitData()
     {
-        /*
-        await Set_PickaxeEquip();
-        Set_PickaxeLibrary();
-        Set_PickaxeLibraryEquipState();
-        SelectPickaxeUnit(equipedPickaxeIndexes.First());
-        base.isReloadFin = true;
-        */
+        var saveData = await SaveLoader.Inst.Get_PlayerLevelData();
+        currentPoints = saveData == null ? 0 : saveData.points;
+        tmp_points.SetText($"{currentPoints}");
+
+        // 各Unit初期化(主にリソースチェック)
+        foreach (var ui_pickaxePowerUnit in ui_pickaxePowerUnits)
+        {
+            ui_pickaxePowerUnit.Init(currentPoints);
+        }
+
+        // 装備状態更新
+        currentEquipedIndex = SaveLoader.Inst.PickaxePowerEquipedIndex;
+        foreach (var ui_pickaxePowerUnit in ui_pickaxePowerUnits)
+        {
+            ui_pickaxePowerUnit.EquipMark_Update(currentEquipedIndex);
+        }
+
+        // info UI 初期化 / 装備中のものがあればそれを表示する
+        ui_selectInfo.SetData(Get_Unit(currentEquipedIndex));
+
+
         base.isReloadFin = true;
     }
 
 
+
+    private UI_PickaxePowerUnit Get_Unit(int _index)
+    {
+        return Array.Find(ui_pickaxePowerUnits, unit => unit.so_base.index == _index);
+    }
 
 
 
@@ -48,15 +75,17 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
     /// <summary>
     /// unit をクリックした時の処理
     /// </summary>
-    private void OnClick_SelectPickaxePowerUnit(PickaxeUnitData _so)
+    private void OnClick_SelectPickaxePowerUnit(UI_PickaxePowerUnit _ui_pickaxePowerUnit)
     {
-        //selectInfoUnit.SetData(_so);
+        Debug.Log("aaa");
+        if (currentSelectUnit != null && currentSelectUnit.so_base.index == _ui_pickaxePowerUnit.so_base.index) return;
+
+        currentSelectUnit?.SelectMark_Update(false);
+        currentSelectUnit = _ui_pickaxePowerUnit;
+        currentSelectUnit.SelectMark_Update(true);
+        ui_selectInfo.SetData(currentSelectUnit);
     }
-    private void SelectPickaxeUnit(int _index)
-    {
-        //var so = SOLoader.AttackUnitData.GetPickaxeUnitData(_index);
-        //selectInfoUnit.SetData(so);
-    }
+
 
 
     /// <summary>

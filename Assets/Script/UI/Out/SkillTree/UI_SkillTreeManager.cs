@@ -128,24 +128,6 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
         base.thisMenuType = OutGame_MenuType.SkillTree;
     }
 
-    /*
-        public void Init(OutGame_MenuType _outGameMenuType)
-        {
-            var isActive = _outGameMenuType == OutGame_MenuType.SkillTree;
-            if (isActive)
-            {
-                ui_skillTreeDetail.gameObject.SetActive(false);
-                foreach (var skillTreeUnit in skillTreeUnits)
-                {
-                    skillTreeUnit.Init();
-                }
-            }
-            this.gameObject.SetActive(isActive);
-
-            // 実行時に接続線を更新
-            // UpdateAllConnections();
-        }
-        */
     public override async void ToOutGame_InitData()
     {
         ui_skillTreeDetail.gameObject.SetActive(false);
@@ -167,18 +149,7 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
         requredResources[4] = new ResourceCount() { resourceType = ResourceType.Ruby, requiredCount = _skillTreeUnit.req_ruby };
         requredResources[5] = new ResourceCount() { resourceType = ResourceType.Sapphire, requiredCount = _skillTreeUnit.req_sapphire };
         requredResources[6] = new ResourceCount() { resourceType = ResourceType.Diamond, requiredCount = _skillTreeUnit.req_diamond };
-
-        var isEnough = true;
-        foreach (var resource in requredResources)
-        {
-            if (resource.requiredCount <= 0) continue;
-            if (resource.requiredCount > SaveLoader.Inst.Get_ResourceCount(resource.resourceType))
-            {
-                isEnough = false;
-                break;
-            }
-        }
-        return isEnough;
+        return StaticManager.IsResourceEnough(requredResources);
     }
 
     #region -- update 主にズームと画面スクロール用 --

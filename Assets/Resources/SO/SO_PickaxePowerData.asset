@@ -17,25 +17,35 @@ MonoBehaviour:
     skillName: power1
     description: xxxx 11
     icon: {fileID: 0}
+    maxLevel: 0
   - index: 2
     skillName: power2
     description: xxxx 22
     icon: {fileID: 0}
+    maxLevel: 0
   - index: 3
     skillName: power3
     description: xxxx 333
     icon: {fileID: 0}
-  - index: 5
+    maxLevel: 0
+  - index: 4
     skillName: power4
     description: xxxx 4444
     icon: {fileID: 0}
+    maxLevel: 0
   - index: 5
     skillName: power5
     description: xxxx 55555
     icon: {fileID: 0}
+    maxLevel: 0
+  - index: 6
+    skillName: power6
+    description: xxxx 666666
+    icon: {fileID: 0}
+    maxLevel: 0
   pickaxePowerLevels:
   - index: 1
-    level: 1
+    level: 0
     value_1: 1
     value_2: 0
     value_3: 0
@@ -49,7 +59,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 1
-    level: 2
+    level: 1
     value_1: 1
     value_2: 0
     value_3: 0
@@ -63,7 +73,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 1
-    level: 3
+    level: 2
     value_1: 1
     value_2: 0
     value_3: 0
@@ -77,7 +87,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - index: 1
-    level: 4
+    level: 3
     value_1: 1
     value_2: 0
     value_3: 0

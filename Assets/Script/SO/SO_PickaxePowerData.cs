@@ -11,6 +11,7 @@ public class PickaxePowerBase
     public string skillName;
     public string description;
     public Sprite icon;
+    public int maxLevel;
 }
 
 [System.Serializable]
@@ -55,9 +56,9 @@ public class SO_PickaxePowerData : ScriptableObject
         return data;
     }
 
-    public PickaxePowerLevel GetPickaxePowerLevel(int _index)
+    public PickaxePowerLevel GetPickaxePowerLevel(int _index, int _level)
     {
-        var data = Array.Find(pickaxePowerLevels, data => data.index == _index);
+        var data = Array.Find(pickaxePowerLevels, data => data.index == _index && data.level == _level);
         if (data == null)
         {
             Debug.LogError($"PickaxePowerLevel not found: {_index}");

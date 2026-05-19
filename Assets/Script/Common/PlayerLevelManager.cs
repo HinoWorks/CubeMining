@@ -81,17 +81,18 @@ public class PlayerLevelManager : MonoBehaviour
         if (currentLevelData.expInCurrentLevel >= requestExp)
         {
             currentLevelData.level++;
+            currentLevelData.points++;
             currentLevelData.expInCurrentLevel -= requestExp;
             requestExp = SOLoader.PlayerLevelData.GetPlayerLevel(currentLevelData.level).exp;
             GameEvent.PlayerLevel.PublishPlayerLevelUp(currentLevelData.level, currentLevelData.level);
         }
         GameEvent.PlayerLevel.PublishPlayerLevelChanged(currentLevelData.expInCurrentLevel, currentLevelData.level, requestExp);
     }
-
-
     private void SavePlayerLevelData()
     {
         SaveLoader.Inst.Request_SavePlayerLevelData(currentLevelData);
     }
+
+
 
 }

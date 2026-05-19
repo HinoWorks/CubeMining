@@ -129,6 +129,18 @@ public class PlayerLevelData
 #endregion
 
 
+#region -- PickaxePower --
+[System.Serializable]
+public class PickaxePowerData
+{
+    public int pickaxePowerIndex;
+    public int level = 0;
+}
+#endregion
+
+
+
+
 public enum state
 {
     InitialLoad, Idling, Doing
@@ -181,11 +193,19 @@ public class SaveLoader : MonoBehaviour
     #endregion
 
 
+
     private const string KEY_ARTIFACT_CURRENTBLOCKCOUNT = "key_artifactCurrentBlockCount"; // アーティファクト用生成ブロック数
     private int artifactCurrentBlockCount;
+    public int ArtifactCurrentBlockCount { get => artifactCurrentBlockCount; }
+
+
+
+    private const string KEY_PICKAXEPOWER_EQUIPEDINDEX = "key_pickaxePowerEquipedIndex"; // ピッケルパワー装備インデックス
+    private int pickaxePowerEquipedIndex = 0;
+    public int PickaxePowerEquipedIndex { get => pickaxePowerEquipedIndex; }
+
 
     private const string KEY_SOUND_SETTINGS = "key_soundSettings";
-    public int ArtifactCurrentBlockCount { get => artifactCurrentBlockCount; }
 
 
     private Queue<Action> allQueue = new();
@@ -228,6 +248,7 @@ public class SaveLoader : MonoBehaviour
         resourceDiamond = ES3.KeyExists(KEY_RESOURCE_DIAMOND) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_DIAMOND)) : 0;
 
         artifactCurrentBlockCount = ES3.KeyExists(KEY_ARTIFACT_CURRENTBLOCKCOUNT) ? ES3.Load<int>(KEY_ARTIFACT_CURRENTBLOCKCOUNT) : 0;
+        pickaxePowerEquipedIndex = ES3.KeyExists(KEY_PICKAXEPOWER_EQUIPEDINDEX) ? ES3.Load<int>(KEY_PICKAXEPOWER_EQUIPEDINDEX) : 0;
 
         currentState = state.Idling;
         Debug.Log($" == SaveData_InitialLoad: End == ");
@@ -702,6 +723,56 @@ public class SaveLoader : MonoBehaviour
         return $"PickaxeSlotData-{_slotIndex}";
     }
     #endregion
+
+
+
+
+
+
+    #region -- Pickaxe --
+    public async UniTask<PickaxePowerData> Get_PickaxePowerData(int _pickaxePowerIndex)
+    {
+        string saveKey = GetPickaxePowerDataKey(_pickaxePowerIndex);
+        var loadData = await LoadAsync<PickaxePowerData>(saveKey);
+        if (loadData.success)
+        {
+            return loadData.data;
+        }
+        return null;
+    }
+    public void Request_SavePickaxePowerData_Level(int _pickaxePowerIndex, int _level)
+    {
+        EnqueueMethod(() => { SavePickaxePowerData_Level(_pickaxePowerIndex, _level); });
+    }
+    private void SavePickaxePowerData_Level(int _pickaxePowerIndex, int _level)
+    {
+        var saveKey = GetPickaxePowerDataKey(_pickaxePowerIndex);
+        var newData = new PickaxePowerData()
+        {
+            pickaxePowerIndex = _pickaxePowerIndex,
+            level = _level
+        };
+        ES3.Save(saveKey, newData);
+    }
+    private string GetPickaxePowerDataKey(int _pickaxePowerIndex)
+    {
+        return $"PickaxePowerData-{_pickaxePowerIndex}";
+    }
+
+
+    public void Request_SavePickaxePowerData_EquipedIndex(int _equipIndex)
+    {
+        EnqueueMethod(() => { SavePickaxePowerData_EquipedIndex(_equipIndex); });
+    }
+    private void SavePickaxePowerData_EquipedIndex(int _equipIndex)
+    {
+        pickaxePowerEquipedIndex = _equipIndex;
+        ES3.Save(KEY_PICKAXEPOWER_EQUIPEDINDEX, pickaxePowerEquipedIndex);
+    }
+    #endregion
+
+
+
 
 
 
