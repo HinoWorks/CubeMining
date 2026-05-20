@@ -11,15 +11,20 @@ public class UI_ResourceCount : MonoBehaviour
     [SerializeField] Color color_normal;
 
 
-    public void SetData(Sprite _icon, string _resourceCount, Color _color = default)
+    public void SetData(string _resourceCount, Color _color = default)
     {
-        icon.sprite = _icon;
         tmp_resourceCount.text = _resourceCount;
         tmp_resourceCount.color = _color == Color.white ? color_normal : _color;
         obj_main.SetActive(true);
         obj_lock.SetActive(false);
 
         this.gameObject.SetActive(true);
+    }
+
+    public void SetData(Sprite _icon, string _resourceCount, Color _color = default)
+    {
+        icon.sprite = _icon;
+        SetData(_resourceCount, _color);
     }
     public void SetLock()
     {

@@ -131,5 +131,9 @@ public class StaticManager : MonoBehaviour
         }
         return isEnough;
     }
+    public static bool IsResourceEnough(ResourceType _resourceType, int _requiredCount)
+    {
+        return SaveLoader.Inst.Get_ResourceCount(_resourceType) >= _requiredCount;
+    }
     #endregion
 }

@@ -56,7 +56,7 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
         }
 
         // info UI 初期化 / 装備中のものがあればそれを表示する
-        ui_selectInfo.SetData(Get_Unit(currentEquipedIndex));
+        ui_selectInfo.SetData(Get_Unit(currentEquipedIndex), currentPoints);
 
 
         base.isReloadFin = true;
@@ -77,13 +77,13 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
     /// </summary>
     private void OnClick_SelectPickaxePowerUnit(UI_PickaxePowerUnit _ui_pickaxePowerUnit)
     {
-        Debug.Log("aaa");
+
         if (currentSelectUnit != null && currentSelectUnit.so_base.index == _ui_pickaxePowerUnit.so_base.index) return;
 
         currentSelectUnit?.SelectMark_Update(false);
         currentSelectUnit = _ui_pickaxePowerUnit;
         currentSelectUnit.SelectMark_Update(true);
-        ui_selectInfo.SetData(currentSelectUnit);
+        ui_selectInfo.SetData(currentSelectUnit, currentPoints);
     }
 
 
