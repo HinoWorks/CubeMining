@@ -1893,6 +1893,7 @@ GameObject:
   - component: {fileID: 206919992}
   - component: {fileID: 206919995}
   - component: {fileID: 206919994}
+  - component: {fileID: 206919996}
   m_Layer: 0
   m_Name: ===Manager(Attack)
   m_TagString: Untagged
@@ -1945,6 +1946,18 @@ MonoBehaviour:
   raycastLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &206919996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206919991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e3a21b4c5d647e9a0b1c2d3e4f5678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickaxePowerManager
 --- !u!1 &213892051
 GameObject:
   m_ObjectHideFlags: 0
@@ -9530,6 +9543,7 @@ GameObject:
   - component: {fileID: 892646014}
   - component: {fileID: 892646015}
   - component: {fileID: 892646016}
+  - component: {fileID: 892646018}
   - component: {fileID: 892646017}
   m_Layer: 0
   m_Name: ===Manager
@@ -9687,6 +9701,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ff26bb2e9a34653b8dc063b9795773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLevelManager
+--- !u!114 &892646018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892646006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e3a21b4c5d647e9a0b1c2d3e4f5678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickaxePowerManager
 --- !u!1 &893404566
 GameObject:
   m_ObjectHideFlags: 0

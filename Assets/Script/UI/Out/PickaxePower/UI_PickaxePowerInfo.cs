@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System;
 
 
 public class UI_PickaxePowerInfo : MonoBehaviour
@@ -12,8 +13,15 @@ public class UI_PickaxePowerInfo : MonoBehaviour
     private PickaxePowerLevel so_level => currentUnit.so_level;
     private bool isMaxLevel => currentLevel >= so_base.maxLevel;
     private bool resourceReady = false;
+    private bool isEquiped = false;
     private List<ResourceCount> requredResources = new List<ResourceCount>();
+    public List<ResourceCount> RequredResources => requredResources;
     private int currentPoints = 0;
+    public int requiredPoints => so_level.req_point;
+
+    private Action onClick_Equip;
+    private Action onClick_Unlock;
+    private Action onClick_Enhance;
 
 
     [Header("Base Info")]
@@ -45,6 +53,12 @@ public class UI_PickaxePowerInfo : MonoBehaviour
 
 
 
+    public void Init_Once(Action _onClick_Equip, Action _onClick_Unlock, Action _onClick_Enhance)
+    {
+        onClick_Equip = _onClick_Equip;
+        onClick_Unlock = _onClick_Unlock;
+        onClick_Enhance = _onClick_Enhance;
+    }
 
 
     public void SetData(UI_PickaxePowerUnit _ui_pickaxePowerUnit, int _currentPoints)
@@ -59,7 +73,6 @@ public class UI_PickaxePowerInfo : MonoBehaviour
         tmp_powerName.SetText(so_base.skillName);
         tmp_powerDescription.SetText(so_base.description);
 
-
         for (int i = 0; i < ui_StarLevels.Length; i++)
         {
             ui_StarLevels[i].gameObject.SetActive(i < so_base.maxLevel);
@@ -69,15 +82,27 @@ public class UI_PickaxePowerInfo : MonoBehaviour
         SetData_Param(currentLevel);
         SetData_RequiredCost();
     }
+    public void SetData_Equiped(bool _isEquiped)
+    {
+        var isEquipable = currentLevel > 0;
+        isEquiped = _isEquiped;
+        obj_equipedMark.SetActive(isEquiped && isEquipable);
+        btn_equip.SetActive(!isEquiped && isEquipable);
+    }
 
 
     private void SetData_Param(int _currentLevel)
     {
     }
 
-    public void SetData_Enhanced(int _currentLevel)
+    public void CallBack_Enhanced()
     {
-        //SetData_Base(_currentLevel);
+        for (int i = 0; i < ui_StarLevels.Length; i++)
+        {
+            ui_StarLevels[i].Set_StarLevel(i < currentLevel);
+        }
+        SetData_Param(currentLevel);
+        SetData_RequiredCost();
     }
 
     private void SetData_RequiredCost()
@@ -87,7 +112,6 @@ public class UI_PickaxePowerInfo : MonoBehaviour
             parent_levelUp.SetActive(false);
             return;
         }
-
 
         parent_levelUp.SetActive(true);
         resourceReady = true;
@@ -139,19 +163,26 @@ public class UI_PickaxePowerInfo : MonoBehaviour
 
 
 
-
     #region -- OnClick --
     public void OnClick_Equip()
     {
-        Debug.Log("OnClick_Equip");
+        if (currentLevel <= 0) return;
+        if (isEquiped) return;
+        onClick_Equip?.Invoke();
     }
     public void OnClick_Enhance()
     {
-        Debug.Log("OnClick_Enhance");
+        if (isMaxLevel) return;
+        if (!resourceReady) return;
+
+        onClick_Enhance?.Invoke();
     }
     public void OnClick_Unlock()
     {
-        Debug.Log("OnClick_Unlock");
+        if (isMaxLevel) return;
+        if (!resourceReady) return;
+
+        onClick_Unlock?.Invoke();
     }
     #endregion
 }

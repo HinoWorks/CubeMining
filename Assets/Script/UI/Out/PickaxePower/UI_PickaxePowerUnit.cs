@@ -28,16 +28,20 @@ public class UI_PickaxePowerUnit : MonoBehaviour
         so_base = SOLoader.PickaxePowerData.GetPickaxePowerBase(_index);
         image_icon.sprite = so_base.icon;
 
-        // 初回のみレベルを保持しておく
         var pickaxePowerData = await SaveLoader.Inst.Get_PickaxePowerData(so_base.index);
-        if (pickaxePowerData != null)
-        {
-            currentLevel = pickaxePowerData.level;
-        }
-        else
-        {
-            currentLevel = 0;
-        }
+        currentLevel = pickaxePowerData == null ? 0 : pickaxePowerData.level;
+        so_level = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel);
+    }
+
+
+    /// <summary>
+    /// 初期化(アウトゲーム移行時に毎回呼ばれる)
+    /// </summary>
+    public async void Init(int _currentPoints)
+    {
+        var pickaxePowerData = await SaveLoader.Inst.Get_PickaxePowerData(so_base.index);
+        currentLevel = pickaxePowerData == null ? 0 : pickaxePowerData.level;
+        so_level = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel);
 
         var count = 1;
         foreach (var star in ui_starLevelUnits)
@@ -45,14 +49,7 @@ public class UI_PickaxePowerUnit : MonoBehaviour
             star.Set_StarLevel(count >= currentLevel);
             count++;
         }
-    }
 
-
-    /// <summary>
-    /// 初期化(アウトゲーム移行時に毎回呼ばれる)
-    /// </summary>
-    public void Init(int _currentPoints)
-    {
         // level max?
         if (currentLevel >= so_base.maxLevel)
         {
@@ -62,7 +59,11 @@ public class UI_PickaxePowerUnit : MonoBehaviour
         }
 
         // リソース見て、強化可能か確認
-        so_level = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel);
+        ResourceCheck(_currentPoints);
+    }
+
+    public void ResourceCheck(int _currentPoints)
+    {
         if (_currentPoints < so_level.req_point)
         {
             isEnhanceReady = false;
@@ -93,6 +94,20 @@ public class UI_PickaxePowerUnit : MonoBehaviour
     public void SelectMark_Update(bool _isSelect)
     {
         obj_selectFlame.SetActive(_isSelect);
+    }
+
+
+    public void Callback_Enhanced(int _currentLevel, int _currentPoints)
+    {
+        currentLevel = _currentLevel;
+        var count = 1;
+        foreach (var star in ui_starLevelUnits)
+        {
+            star.Set_StarLevel(count >= currentLevel);
+        }
+        // リソース見て、強化可能か確認
+        so_level = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel);
+        ResourceCheck(_currentPoints);
     }
 
 

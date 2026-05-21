@@ -120,7 +120,7 @@ public class AttackManager : MonoBehaviour
     private void Click_RightButton()
     {
         if (!isAttacking) return;
-        Debug.Log("Ingame ---- Click_RightButton");
+        PickaxePowerManager.Inst?.TryActivate();
     }
 
 

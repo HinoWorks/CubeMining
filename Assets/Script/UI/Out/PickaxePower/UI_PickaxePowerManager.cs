@@ -34,6 +34,7 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
             ui_pickaxePowerUnit.Init_Once(index, OnClick_SelectPickaxePowerUnit);
             index++;
         }
+        ui_selectInfo.Init_Once(OnClick_Equip, OnClick_Unlock, OnClick_Enhance);
     }
 
     public override async void ToOutGame_InitData()
@@ -56,8 +57,10 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
         }
 
         // info UI 初期化 / 装備中のものがあればそれを表示する
-        ui_selectInfo.SetData(Get_Unit(currentEquipedIndex), currentPoints);
-
+        var targetUnit = Get_Unit(currentEquipedIndex);
+        ui_selectInfo.SetData(targetUnit, currentPoints);
+        var isEquiped = targetUnit != null && targetUnit.so_base.index == currentEquipedIndex;
+        ui_selectInfo.SetData_Equiped(isEquiped);
 
         base.isReloadFin = true;
     }
@@ -77,86 +80,80 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
     /// </summary>
     private void OnClick_SelectPickaxePowerUnit(UI_PickaxePowerUnit _ui_pickaxePowerUnit)
     {
-
         if (currentSelectUnit != null && currentSelectUnit.so_base.index == _ui_pickaxePowerUnit.so_base.index) return;
 
         currentSelectUnit?.SelectMark_Update(false);
         currentSelectUnit = _ui_pickaxePowerUnit;
         currentSelectUnit.SelectMark_Update(true);
         ui_selectInfo.SetData(currentSelectUnit, currentPoints);
+        ui_selectInfo.SetData_Equiped(currentSelectUnit.so_base.index == currentEquipedIndex);
     }
-
-
 
     /// <summary>
     ///  装備ボタンをクリックした時の処理
     /// </summary>
-    private async void OnClick_EquipPickaxe(PickaxeUnitData _so, int _equipSlotIndex)
+    private async void OnClick_Equip()
     {
-        /*
         if (isDoingAction) return;
         isDoingAction = true;
-        //装備中のピッケルの位置替え
-        if (equipedPickaxeIndexes.Contains(_so.pickaxeIndex))
-        {
-            var slotData_0 = await SaveLoader.Inst.Get_PickaxeSlotData(0);
-            var equipedPickaxeIndex_0 = slotData_0 == null ? -1 : slotData_0.equipedPickaxeIndex;
-            var slotData_1 = await SaveLoader.Inst.Get_PickaxeSlotData(1);
-            var equipedPickaxeIndex_1 = slotData_1 == null ? -1 : slotData_1.equipedPickaxeIndex;
-            SaveLoader.Inst.Request_SavePickaxeSlotData(0, equipedPickaxeIndex_1);
-            SaveLoader.Inst.Request_SavePickaxeSlotData(1, equipedPickaxeIndex_0);
 
-            await UniTask.DelayFrame(2);
-        }
-        else
+        var newEquipedIndex = currentSelectUnit.so_base.index;
+        SaveLoader.Inst.Request_SavePickaxePowerData_EquipedIndex(newEquipedIndex);
+        // 装備状態更新
+        currentEquipedIndex = newEquipedIndex;
+        foreach (var ui_pickaxePowerUnit in ui_pickaxePowerUnits)
         {
-            SaveLoader.Inst.Request_SavePickaxeSlotData(_equipSlotIndex, _so.pickaxeIndex);
-            await UniTask.DelayFrame(1);
+            ui_pickaxePowerUnit.EquipMark_Update(newEquipedIndex);
         }
-        selectInfoUnit.Set_EquipState(_equipSlotIndex);
-        await Set_PickaxeEquip();
-        Set_PickaxeLibraryEquipState();
+        ui_selectInfo.SetData_Equiped(true);
 
+        await UniTask.DelayFrame(2);
         isDoingAction = false;
-        */
+    }
+
+    /// <summary>
+    ///  アンロックをクリックした時の処理
+    /// </summary>
+    private async void OnClick_Unlock()
+    {
+        if (isDoingAction) return;
+        isDoingAction = true;
+
+        // リソース消費
+        foreach (var resourceCount in ui_selectInfo.RequredResources)
+        {
+            SaveLoader.Inst.Request_SaveResource(resourceCount.resourceType, -resourceCount.requiredCount);
+        }
+        var pointCost = ui_selectInfo.requiredPoints;
+        SaveLoader.Inst.Request_SavePlayerLevelData(-pointCost);
+        currentPoints -= pointCost;
+
+        // 強化
+        var newLevel = currentSelectUnit.currentLevel + 1;
+        SaveLoader.Inst.Request_SavePickaxePowerData_Level(currentSelectUnit.so_base.index, newLevel);
+
+        //UIに反映
+        currentSelectUnit.Callback_Enhanced(newLevel, currentPoints);
+        await UniTask.DelayFrame(2);
+        ui_selectInfo.CallBack_Enhanced();
+        tmp_points.SetText($"{currentPoints}");
+
+        // 他のUnitのリソースチェック
+        foreach (var ui_pickaxePowerUnit in ui_pickaxePowerUnits)
+        {
+            if (ui_pickaxePowerUnit.so_base.index == currentSelectUnit.so_base.index) continue;
+            ui_pickaxePowerUnit.ResourceCheck(currentPoints);
+        }
+        isDoingAction = false;
     }
 
 
     /// <summary>
-    ///  クラフトボタンをクリックした時の処理
+    ///  強化をクリックした時の処理
     /// </summary>
-    private async void OnClick_CraftPickaxe(PickaxeUnitData _so)
+    private void OnClick_Enhance()
     {
-        /*
-        if (isDoingAction) return;
-        isDoingAction = true;
 
-        // 一応チェック
-        foreach (var resourceCount in selectInfoUnit.RequredResources)
-        {
-            if (SaveLoader.Inst.Get_ResourceCount(resourceCount.resourceType) < resourceCount.requiredCount)
-            {
-                isDoingAction = false;
-                Debug.Log($"クラフト不可 --> リソース不足: {resourceCount.resourceType} => {resourceCount.requiredCount}");
-                return;
-            }
-        }
-        // クラフト処理 
-        foreach (var resourceCount in selectInfoUnit.RequredResources)
-        {
-            SaveLoader.Inst.Request_SaveResource(resourceCount.resourceType, -resourceCount.requiredCount);
-        }
-        SaveLoader.Inst.Request_SavePickaxeData(_so.pickaxeIndex, 1);
-
-        // 新しいピッケルを表示
-        ui_getNewPickaxe.SetIcon(_so.icon);
-        await UniTask.Delay(pickaxeAnimWaitTime);
-
-        Set_PickaxeLibrary();
-        selectInfoUnit.Set_EquipState(-1);
-
-        isDoingAction = false;
-        */
     }
 
     #endregion
