@@ -153,9 +153,8 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
     /// </summary>
     private void OnClick_Enhance()
     {
-
+        OnClick_Unlock();
     }
-
     #endregion
 
 }
