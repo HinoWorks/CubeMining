@@ -28,6 +28,7 @@ public class AttackCont_Pickaxe : MonoBehaviour
     private HashSet<IDamagable> targets = new HashSet<IDamagable>();
     private readonly List<IDamagable> removeBuffer = new();
 
+    public Vector3 pickaxePosition => obj_pointerArea.transform.position;
     private Vector3 offsetPosition = new Vector3(0, 0.1f, 0);
     private float criticalDamageRate = 2f;
     private int instantShatterDamage = 9999;

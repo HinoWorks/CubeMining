@@ -69,14 +69,26 @@ public class CameraManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ブロック破壊時などに呼ぶ軽いカメラ振動
+    /// カメラ振動 :小さめ（ブロック破壊時など）
     /// </summary>
-    public void ShakeBlockBreak()
+    public void ShakeCamera_BlockBreak()
     {
         if (vcam == null) return;
 
         shakeTween?.Kill();
         shakeTween = vcam.transform
             .DOShakePosition(0.12f, 0.06f, 15, 60, false, true);
+    }
+
+    /// <summary>
+    /// カメラ振動:大きめ
+    /// </summary>
+    public void ShakeCamera_Large()
+    {
+        if (vcam == null) return;
+
+        shakeTween?.Kill();
+        shakeTween = vcam.transform
+            .DOShakePosition(0.2f, 0.1f, 15, 60, false, true);
     }
 }

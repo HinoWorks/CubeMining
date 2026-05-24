@@ -161,7 +161,7 @@ public class UI_ArtifactManager : UI_OutGameTabBase
             }
             else
             {
-                Debug.LogError("空きスロットが見つかりません");
+                Debug.Log("空きスロットが見つかりません");
             }
         }
         else // 指定したスロットから削除
@@ -178,7 +178,7 @@ public class UI_ArtifactManager : UI_OutGameTabBase
             }
             else
             {
-                Debug.LogError($"指定したスロット:{_equipSlotIndex} が見つかりません");
+                Debug.Log($"指定したスロット:{_equipSlotIndex} が見つかりません");
             }
         }
 

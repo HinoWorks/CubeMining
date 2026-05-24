@@ -44,7 +44,7 @@ public class MiningTarget_Artifact : MiningTarget_Object
         var effect = EffectManager.Inst.Get_Effect(EffectType.BlockBreak);
         effect.transform.position = transform.position + EffectOffset;
         effect.SetActive(true);
-        CameraManager.Inst?.ShakeBlockBreak();
+        CameraManager.Inst?.ShakeCamera_BlockBreak();
 
         InGameManager.Inst.AddGetArtifact(artifactIndex);
 

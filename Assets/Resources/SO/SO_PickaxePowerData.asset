@@ -24,7 +24,7 @@ MonoBehaviour:
     description: xxxx 22
     icon: {fileID: 21300000, guid: 16bd12464a9aa402db810694dd188923, type: 3}
     maxLevel: 3
-    pf: {fileID: 0}
+    pf: {fileID: 400877379012588226, guid: 029c19b5888864504b74e6abe7d82252, type: 3}
   - index: 3
     skillName: power3
     description: xxxx 333
@@ -52,7 +52,7 @@ MonoBehaviour:
   pickaxePowerLevels:
   - index: 1
     level: 0
-    value_1: 1
+    value_1: 2
     value_2: 1
     value_3: 1
     value_4: 0
@@ -66,9 +66,9 @@ MonoBehaviour:
     req_diamond: 0
   - index: 1
     level: 1
-    value_1: 1
-    value_2: 0
-    value_3: 0
+    value_1: 2.5
+    value_2: 1.5
+    value_3: 2
     value_4: 0
     req_point: 2
     req_stone: 100
@@ -80,9 +80,9 @@ MonoBehaviour:
     req_diamond: 0
   - index: 1
     level: 2
-    value_1: 1
-    value_2: 0
-    value_3: 0
+    value_1: 2.5
+    value_2: 2
+    value_3: 3
     value_4: 0
     req_point: 3
     req_stone: 250
@@ -94,9 +94,9 @@ MonoBehaviour:
     req_diamond: 0
   - index: 1
     level: 3
-    value_1: 1
-    value_2: 0
-    value_3: 0
+    value_1: 3
+    value_2: 2.5
+    value_3: 3
     value_4: 0
     req_point: 4
     req_stone: 0
@@ -108,8 +108,8 @@ MonoBehaviour:
     req_diamond: 0
   - index: 2
     level: 0
-    value_1: 1
-    value_2: 1
+    value_1: 2
+    value_2: 10
     value_3: 1
     value_4: 0
     req_point: 1
@@ -122,8 +122,8 @@ MonoBehaviour:
     req_diamond: 0
   - index: 2
     level: 1
-    value_1: 1
-    value_2: 0
+    value_1: 2.5
+    value_2: 15
     value_3: 0
     value_4: 0
     req_point: 2
@@ -136,8 +136,8 @@ MonoBehaviour:
     req_diamond: 0
   - index: 2
     level: 2
-    value_1: 1
-    value_2: 0
+    value_1: 2.5
+    value_2: 20
     value_3: 0
     value_4: 0
     req_point: 3
@@ -150,8 +150,8 @@ MonoBehaviour:
     req_diamond: 0
   - index: 2
     level: 3
-    value_1: 1
-    value_2: 0
+    value_1: 3
+    value_2: 25
     value_3: 0
     value_4: 0
     req_point: 4

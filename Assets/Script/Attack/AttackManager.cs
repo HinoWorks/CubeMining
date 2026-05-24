@@ -11,6 +11,7 @@ public class AttackManager : MonoBehaviour
     private bool isAttacking = false;
     private int currentPickaxeIndex = 0;
     public int currentPickaxeDamage => pickaxeConts[currentPickaxeIndex].baseDamage;
+    public Vector3 currentPickaxePosition => pickaxeConts[currentPickaxeIndex].pickaxePosition;
     private int[] slotIndexes = { 0 };
 
 

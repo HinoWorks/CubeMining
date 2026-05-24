@@ -27,7 +27,7 @@ public class MiningTarget_Bomb : MiningTarget_Object
 
     public override void BreakFromDamage(float _resourceUpRate = 1f)
     {
-        CameraManager.Inst?.ShakeBlockBreak();
+        CameraManager.Inst?.ShakeCamera_BlockBreak();
 
         // explosion damage to surrounding blocks
         var newBomb = Instantiate(pf_bomb, InGameManager.Inst.ParentPool) as GameObject;

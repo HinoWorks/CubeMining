@@ -22,10 +22,10 @@ public class PickaxePowerLevel
     public int index;
     public int level;
 
-    public int value_1;
-    public int value_2;
-    public int value_3;
-    public int value_4;
+    public float value_1;
+    public float value_2;
+    public float value_3;
+    public float value_4;
 
     public int req_point;
     public int req_stone;
