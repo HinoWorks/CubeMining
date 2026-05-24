@@ -651,7 +651,6 @@ public static class GameParamManager
     public static bool IsOtherObjectGenerate()
     {
         var random = UnityEngine.Random.Range(0, otherObjectBaseRate + otherObjectRate);
-        //Debug.Log($"otherObjectRate: {otherObjectRate} / {otherObjectBaseRate + otherObjectRate} / {random} => {random < otherObjectRate}");
         return random < otherObjectRate;
     }
     public static ObjectGenerateParam SelectOtherObject()

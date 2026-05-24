@@ -4,6 +4,11 @@ using UnityEngine;
 using UniRx;
 
 
+public enum UI_ResourceUnitSize
+{
+    Max2, Max, Mid, Min,
+}
+
 public class UI_PoolManager : MonoBehaviour
 {
 

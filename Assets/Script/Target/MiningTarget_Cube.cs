@@ -24,6 +24,11 @@ public class MiningTarget_Cube : MiningTargetBase
     private int index_SE_Break => (int)baseBlockType + 10;
 
 
+    // -- resource unit --
+    private int resourceMax2 = 30;
+    private int resourceMax = 10;
+    private int resourceMid = 5;
+
 
     public override void Init(int _hp, int _value, int _index, int _layerIndex)
     {
@@ -135,14 +140,41 @@ public class MiningTarget_Cube : MiningTargetBase
         if (getCount <= 0) getCount = 1;
         InGameManager.Inst.AddGetResource(resourceType, getCount);
 
-        for (int i = 0; i < getCount; i++)
+        Set_ResourceUnit(getCount);
+        //Set_GetText(getCount);
+    }
+
+
+    /// <summary>
+    /// リソースを飛ばすエフェクトを設定,　全て飛ばすと重いので刻みでまとめる 
+    /// </summary>
+    private void Set_ResourceUnit(int _getCount)
+    {
+        var count_Max2 = _getCount / resourceMax2;
+        var remainingCount = _getCount % resourceMax2;
+
+        var count_Max = remainingCount / resourceMax;
+        remainingCount = remainingCount % resourceMax;
+        var count_Mid = remainingCount / resourceMid;
+        remainingCount = remainingCount % resourceMid;
+
+        SetResource(remainingCount, 1, UI_ResourceUnitSize.Min);
+        SetResource(count_Mid, resourceMid, UI_ResourceUnitSize.Mid);
+        SetResource(count_Max, resourceMax, UI_ResourceUnitSize.Max);
+        SetResource(count_Max2, resourceMax2, UI_ResourceUnitSize.Max2);
+    }
+    private void SetResource(int _repeatCount, int _setCount, UI_ResourceUnitSize _unitSize)
+    {
+        for (int i = 0; i < _repeatCount; i++)
         {
             var ui_resourceCont = UI_PoolManager.Inst.Set_GetResourceCont();
-            ui_resourceCont.Set_ResourceType(resourceType);
+            ui_resourceCont.Set_ResourceType(resourceType, _setCount, _unitSize);
             ui_resourceCont.SetInit(transform.position);
         }
-
+    }
+    private void Set_GetText(int _getCount)
+    {
         var getText = UI_PoolManager.Inst.Set_TextCoinGet(transform, Vector3.zero);
-        getText.SetText(StaticManager.Get_BigintegerToString(getCount), SOLoader.UISetting.GetTextColor(resourceType));
+        getText.SetText(StaticManager.Get_BigintegerToString(_getCount), SOLoader.UISetting.GetTextColor(resourceType));
     }
 }

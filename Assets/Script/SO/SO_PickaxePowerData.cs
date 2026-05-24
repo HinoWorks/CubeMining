@@ -12,7 +12,9 @@ public class PickaxePowerBase
     public string description;
     public Sprite icon;
     public int maxLevel;
+    public GameObject pf;
 }
+
 
 [System.Serializable]
 public class PickaxePowerLevel

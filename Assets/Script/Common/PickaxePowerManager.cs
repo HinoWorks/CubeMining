@@ -2,6 +2,7 @@ using UnityEngine;
 using UniRx;
 using System.Numerics;
 using Cysharp.Threading.Tasks;
+using System;
 
 
 public class PickaxePowerManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class PickaxePowerManager : MonoBehaviour
     public int EquippedLevel { get; private set; }
     public PickaxePowerBase EquippedBase { get; private set; }
     public PickaxePowerLevel EquippedLevelData { get; private set; }
+    private PickaxePowerCont_Base pickaxePowerCont;
 
     public int CurrentGauge { get; private set; }
     public int MaxGauge { get; private set; }
@@ -24,11 +26,32 @@ public class PickaxePowerManager : MonoBehaviour
     public bool IsOnCooldown => CooldownRemaining > 0f;
     public float CooldownRate => CooldownDuration > 0f ? 1f - (CooldownRemaining / CooldownDuration) : 1f;
     public bool CanActivate => IsGaugeReady && !IsOnCooldown;
+    private bool canAccumulateGauge;
 
-    private float coolTime_test = 5f;
+
+
+    // ゲージ変更イベント
+    private Subject<float> powerGaugeRateChanged = new Subject<float>();
+    public IObservable<float> PowerGaugeRateChanged => powerGaugeRateChanged.AsObservable();
+    private void PublishPowerGaugeRateChanged(float rate)
+    {
+        powerGaugeRateChanged.OnNext(rate);
+    }
+    // スキル発動
+    private Subject<(int, int)> powerActivate = new Subject<(int, int)>();
+    public IObservable<(int, int)> PowerActivate => powerActivate.AsObservable();
+    private void PublishPowerActivate(int index, int CT)
+    {
+        powerActivate.OnNext((index, CT));
+    }
+
+
+
+    // Debug
+    private int CT_test = 5;
     private int blockCountMax_test = 20;
 
-    private bool canAccumulateGauge;
+
 
 
     void Awake()
@@ -88,11 +111,14 @@ public class PickaxePowerManager : MonoBehaviour
 
         EquippedBase = SOLoader.PickaxePowerData.GetPickaxePowerBase(EquippedIndex);
         EquippedLevelData = SOLoader.PickaxePowerData.GetPickaxePowerLevel(EquippedIndex, EquippedLevel);
+        var newPowerUnit = Instantiate(EquippedBase.pf, transform) as GameObject;
+        pickaxePowerCont = newPowerUnit.GetComponent<PickaxePowerCont_Base>();
+        pickaxePowerCont.Init(EquippedLevelData);
 
         MaxGauge = blockCountMax_test;
 
         IsActive = true;
-        CooldownDuration = coolTime_test;
+        CooldownDuration = CT_test;
 
         if (GameWatcher.Inst != null && GameWatcher.Inst.isInGameNow)
         {
@@ -136,6 +162,7 @@ public class PickaxePowerManager : MonoBehaviour
         if (add <= 0) add = 1;
 
         CurrentGauge = Mathf.Min(CurrentGauge + add, MaxGauge);
+        PublishPowerGaugeRateChanged(GaugeRate);
     }
 
 
@@ -147,8 +174,8 @@ public class PickaxePowerManager : MonoBehaviour
         if (GameWatcher.Inst == null || !GameWatcher.Inst.isInGameNow) return false;
         if (!CanActivate) return false;
 
-
-        Debug.Log(" ================== PickaxePower activated ");
+        pickaxePowerCont.Activate();
+        PublishPowerActivate(EquippedIndex, CT_test);
         ExecuteEffect();
         CurrentGauge = 0;
         StartCooldown();
@@ -157,7 +184,7 @@ public class PickaxePowerManager : MonoBehaviour
 
     private void StartCooldown()
     {
-        CooldownDuration = coolTime_test;
+        CooldownDuration = CT_test;
         CooldownRemaining = CooldownDuration;
     }
 

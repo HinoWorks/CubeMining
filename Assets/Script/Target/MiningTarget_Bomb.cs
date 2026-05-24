@@ -15,6 +15,16 @@ public class MiningTarget_Bomb : MiningTarget_Object
         base.Init_MiningTargetBase(hp, 0, _objectGenerateParam.so.objectIndex, _layerIndex);
     }
 
+    private const int ObjectIndex_Bomb = 3;
+
+    public void Init_SkillBom(int _hp)
+    {
+        var bombParam = GameParamManager.list_objectGenerateParam.Find(x => x.so.objectIndex == ObjectIndex_Bomb);
+        base.Init(bombParam, null, 0);
+        base.Init_MiningTargetBase(_hp, 0, bombParam?.so.objectIndex ?? 0, 0);
+        Set_ActiveGravity();
+    }
+
     public override void BreakFromDamage(float _resourceUpRate = 1f)
     {
         CameraManager.Inst?.ShakeBlockBreak();
@@ -24,11 +34,13 @@ public class MiningTarget_Bomb : MiningTarget_Object
         var bomb = newBomb.GetComponent<MiningTarget_BombAttackArea>();
         bomb.transform.position = transform.position;
 
+        var damageRate = objectGenerateParam != null ? objectGenerateParam.damageRate_total : 1f;
+        var valueRate = objectGenerateParam != null ? objectGenerateParam.valueRate_total : 0f;
         var damage = AttackManager.Inst.currentPickaxeDamage
-                        * objectGenerateParam.damageRate_total
+                        * damageRate
                         * (1f + ArtifactManager.Inst.bomb_damageRate);
-        var size = objectGenerateParam.valueRate_total + ArtifactManager.Inst.bomb_sizeRate;
-        Debug.Log($"bomb damage => base:{AttackManager.Inst.currentPickaxeDamage} DamageUpRate:{objectGenerateParam.damageRate_total} => damage:{damage}");
+        var size = valueRate + ArtifactManager.Inst.bomb_sizeRate;
+        Debug.Log($"bomb damage => base:{AttackManager.Inst.currentPickaxeDamage} DamageUpRate:{damageRate} => damage:{damage}");
         bomb.Explode(damage, size);
 
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.Damage, hp_max);
