@@ -15,6 +15,10 @@ public class PickaxePowerCont_BigPickUnit : MonoBehaviour
     {
         triggerSender.OnEnter -= OnEnter;
     }
+    void Awake()
+    {
+        triggerSender.OnEnter += OnEnter;
+    }
 
     public void Init(int _damage, float _sizeRate, Vector3 _targetPosition)
     {
@@ -22,7 +26,7 @@ public class PickaxePowerCont_BigPickUnit : MonoBehaviour
         sizeRate = _sizeRate;
         targetPosition = _targetPosition;
 
-        triggerSender.OnEnter += OnEnter;
+        obj_damageArea.SetActive(false);
     }
 
 
@@ -40,14 +44,15 @@ public class PickaxePowerCont_BigPickUnit : MonoBehaviour
     /// </summary>
     public void Set_DamageArea()
     {
-        obj_damageArea.transform.localScale = Vector3.zero;
+        var targetSize = sizeRate * Vector3.one;
+        obj_damageArea.transform.localScale = targetSize * 0.9f;
         obj_damageArea.transform.position = targetPosition;
         obj_damageArea.SetActive(true);
-        var targetSize = sizeRate * Vector3.one;
 
         eff_Attack.Play();
         CameraManager.Inst.ShakeCamera_Large();
-        obj_damageArea.transform.DOScale(targetSize, 0.15f).SetEase(Ease.Linear)
+        StaticManager.SlowGameTime(0.2f, 0.15f, 0.1f);
+        obj_damageArea.transform.DOScale(targetSize, 0.1f).SetEase(Ease.Linear)
         .OnComplete(() =>
         {
             DOVirtual.DelayedCall(0.5f, () =>

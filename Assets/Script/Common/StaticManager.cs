@@ -1,13 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Numerics;
+using DG.Tweening;
 
 
 public class StaticManager : MonoBehaviour
 {
     public static int artifactSlotCount = 4;
+
+
+    // 時間調整用
+    private const float NormalTimeScale = 1f;
+    private static Sequence slowGameTimeSequence;
 
 
 
@@ -110,6 +115,69 @@ public class StaticManager : MonoBehaviour
     public static DateTime Get_DateTimeFromString(string _date)
     {
         return System.DateTime.FromBinary(System.Convert.ToInt64(_date));
+    }
+
+    /// <summary>
+    /// ゲーム内時間を指定時間だけ遅くし、同じ実時間をかけて徐々に通常速度に戻す。
+    /// 減速・復帰の遷移はいずれも returnDuration（未指定時は slowDuration）を使用する。
+    /// </summary>
+    /// <param name="targetTimeScale">遅くする際の Time.timeScale（0.01～1）</param>
+    /// <param name="slowDuration">減速状態を維持する実時間（秒）</param>
+    /// <param name="returnDuration">通常速度へ戻す遷移の実時間（秒）。0以下なら slowDuration と同じ</param>
+    public static void SlowGameTime(float targetTimeScale, float slowDuration, float returnDuration = -1f)
+    {
+        if (returnDuration <= 0f) returnDuration = slowDuration;
+        targetTimeScale = Mathf.Clamp(targetTimeScale, 0.01f, 1f);
+        slowDuration = Mathf.Max(0f, slowDuration);
+        returnDuration = Mathf.Max(0f, returnDuration);
+
+        KillSlowGameTimeSequence();
+
+        var seq = DOTween.Sequence().SetUpdate(true);
+        var fadeIn = CreateTimeScaleTween(Time.timeScale, targetTimeScale, returnDuration);
+        if (fadeIn != null) seq.Append(fadeIn);
+        else ApplyTimeScale(targetTimeScale);
+
+        if (slowDuration > 0f) seq.AppendInterval(slowDuration);
+
+        var fadeOut = CreateTimeScaleTween(targetTimeScale, NormalTimeScale, returnDuration);
+        if (fadeOut != null) seq.Append(fadeOut);
+        else seq.AppendCallback(() => ApplyTimeScale(NormalTimeScale));
+
+        seq.OnComplete(() =>
+        {
+            ApplyTimeScale(NormalTimeScale);
+            slowGameTimeSequence = null;
+        });
+
+        slowGameTimeSequence = seq;
+        seq.Play();
+    }
+
+    /// <summary>ゲーム内時間を即座に通常速度に戻す</summary>
+    public static void ResetGameTime()
+    {
+        KillSlowGameTimeSequence();
+        ApplyTimeScale(NormalTimeScale);
+    }
+
+    static void KillSlowGameTimeSequence()
+    {
+        if (slowGameTimeSequence == null) return;
+        slowGameTimeSequence.Kill();
+        slowGameTimeSequence = null;
+    }
+
+    static Tween CreateTimeScaleTween(float from, float to, float duration)
+    {
+        if (duration <= 0f) return null;
+        return DOVirtual.Float(from, to, duration, ApplyTimeScale).SetUpdate(true);
+    }
+
+    static void ApplyTimeScale(float scale)
+    {
+        Time.timeScale = scale;
+        DOTween.timeScale = scale;
     }
     #endregion
 
