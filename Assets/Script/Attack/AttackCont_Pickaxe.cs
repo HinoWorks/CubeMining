@@ -33,10 +33,13 @@ public class AttackCont_Pickaxe : MonoBehaviour
     private float criticalDamageRate = 2f;
     private int instantShatterDamage = 9999;
 
+    private readonly SerialDisposable attackLoopDisposable = new SerialDisposable();
+
 
 
     protected void Awake()
     {
+        attackLoopDisposable.AddTo(this);
         GameEvent.Input.PointerAreaIn.Subscribe(isAreaIn => PointerAreaIn(isAreaIn)).AddTo(this);
         GameEvent.Input.PointerMove.Subscribe(pos => PointerMove(pos)).AddTo(this);
         foreach (var sender in triggerSender)
@@ -70,6 +73,13 @@ public class AttackCont_Pickaxe : MonoBehaviour
         isActive = isTrigger;
     }
 
+    public void RefreshAttackLoop()
+    {
+        CreateAttackRoop();
+        if (obj_pointerArea != null)
+            obj_pointerArea.transform.localScale = size * Vector3.one;
+    }
+
     public void OnDestroy()
     {
         foreach (var sender in triggerSender)
@@ -82,7 +92,7 @@ public class AttackCont_Pickaxe : MonoBehaviour
 
     private void CreateAttackRoop()
     {
-        Observable.Interval(TimeSpan.FromSeconds(attackInterval))
+        attackLoopDisposable.Disposable = Observable.Interval(TimeSpan.FromSeconds(attackInterval))
             .Where(_ => isActive && isSelectPickaxe)
             .Subscribe(_ =>
             {
@@ -135,8 +145,7 @@ public class AttackCont_Pickaxe : MonoBehaviour
                     }
                 }
                 foreach (var t in removeBuffer) targets.Remove(t);
-            })
-            .AddTo(this); // Destroy で自動終了
+            });
     }
 
 

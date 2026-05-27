@@ -59,15 +59,22 @@ public class GameBaseParam
 
 
 
-    // ピッケルの基礎パラメータ向上
-    public float pickaxeBase_AttackDamage => pickaxeBase_AttackDamage_enhanced + ArtifactManager.Inst.pickaxe_damageRate;
+    // === ピッケルの基礎パラメータ向上 (変更Rate分のみ, powerUp無し　=0f)===
+    public float pickaxeBase_AttackDamage => pickaxeBase_AttackDamage_enhanced
+                                                + ArtifactManager.Inst.pickaxe_damageRate
+                                                + PickaxePowerManager.Inst.pickaxeAttackDamageRate;
     private float pickaxeBase_AttackDamage_enhanced = 0f;
-    public float pickaxeBase_AttackInterval => pickaxeBase_AttackInterval_enhanced + ArtifactManager.Inst.pickaxe_attackInterval;
+    public float pickaxeBase_AttackInterval => pickaxeBase_AttackInterval_enhanced
+                                                + ArtifactManager.Inst.pickaxe_attackInterval
+                                                + PickaxePowerManager.Inst.pickaxeAttackIntervalRate;
     private float pickaxeBase_AttackInterval_enhanced = 0f;
-    public float pickaxeBase_CriticalRate => pickaxeBase_CriticalRate_enhanced + ArtifactManager.Inst.pickaxe_criticalRate;
+    public float pickaxeBase_CriticalRate => pickaxeBase_CriticalRate_enhanced
+                                                + ArtifactManager.Inst.pickaxe_criticalRate;
     private float pickaxeBase_CriticalRate_enhanced = 0f;
     public float pickaxeBase_ResourceUpRate => ArtifactManager.Inst.pickaxe_resourceUpRate;
-    public float pickaxeBase_Size => pickaxeBase_Size_enhanced + ArtifactManager.Inst.pickaxe_sizeRate;
+    public float pickaxeBase_Size => pickaxeBase_Size_enhanced
+                                                + ArtifactManager.Inst.pickaxe_sizeRate
+                                                + PickaxePowerManager.Inst.pickaxeSizeRate;
     private float pickaxeBase_Size_enhanced = 0f;
 
 

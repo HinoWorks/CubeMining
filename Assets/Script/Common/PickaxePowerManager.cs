@@ -45,11 +45,40 @@ public class PickaxePowerManager : MonoBehaviour
         powerActivate.OnNext((index, CT));
     }
 
+    // Power UP param for Pickaxe
+    public float pickaxeAttackDamageRate { get; private set; } = 0f;
+    public float pickaxeAttackIntervalRate { get; private set; } = 0f;
+    public float pickaxeSizeRate { get; private set; } = 0f;
 
+    private Subject<Unit> pickaxePowerParamChanged = new Subject<Unit>();
+    public IObservable<Unit> PickaxePowerParamChanged => pickaxePowerParamChanged.AsObservable();
+    private void PublishPickaxePowerParamChanged()
+    {
+        pickaxePowerParamChanged.OnNext(Unit.Default);
+    }
+
+    public void ApplyPickaxePowerBuff(float damageRate, float intervalRate, float sizeRate)
+    {
+        pickaxeAttackDamageRate = damageRate;
+        pickaxeAttackIntervalRate = intervalRate;
+        pickaxeSizeRate = sizeRate;
+        PublishPickaxePowerParamChanged();
+    }
+
+    public void EndPickaxePowerBuff()
+    {
+        if (pickaxeAttackDamageRate == 0f && pickaxeAttackIntervalRate == 0f && pickaxeSizeRate == 0f) return;
+        pickaxeAttackDamageRate = 0f;
+        pickaxeAttackIntervalRate = 0f;
+        pickaxeSizeRate = 0f;
+        PublishPickaxePowerParamChanged();
+    }
 
     // Debug
     private int CT_test = 5;
     private int blockCountMax_test = 20;
+
+
 
 
 
@@ -100,6 +129,12 @@ public class PickaxePowerManager : MonoBehaviour
         EquippedBase = null;
         EquippedLevelData = null;
         MaxGauge = 0;
+
+        // pickaxePower param reset
+        pickaxeAttackDamageRate = 0f;
+        pickaxeAttackIntervalRate = 0f;
+        pickaxeSizeRate = 0f;
+
 
         EquippedIndex = SaveLoader.Inst.PickaxePowerEquipedIndex;
         if (EquippedIndex <= 0) return;
