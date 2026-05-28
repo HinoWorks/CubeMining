@@ -24,6 +24,8 @@ public class PickaxePowerCont_PowerUp : PickaxePowerCont_Base
         Debug.Log("Power == PowerUp");
         powerUpDurationRemaining = powerUpDuration;
         PickaxePowerManager.Inst?.ApplyPickaxePowerBuff(damageUpRate, speedUpRate, sizeUpRate);
+        CameraManager.Inst.ShakeCamera_Large();
+        StaticManager.SlowGameTime_PickaxePower();
         CreatePowerUp();
         isPowerUp = true;
     }

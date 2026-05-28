@@ -51,7 +51,7 @@ public class PickaxePowerCont_BigPickUnit : MonoBehaviour
 
         eff_Attack.Play();
         CameraManager.Inst.ShakeCamera_Large();
-        StaticManager.SlowGameTime(0.2f, 0.15f, 0.1f);
+        StaticManager.SlowGameTime_PickaxePower();
         obj_damageArea.transform.DOScale(targetSize, 0.1f).SetEase(Ease.Linear)
         .OnComplete(() =>
         {

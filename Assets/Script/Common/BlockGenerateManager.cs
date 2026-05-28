@@ -111,6 +111,8 @@ public class BlockGenerateManager : MonoBehaviour
     private int initialCreateLayer = 10;
     private int currentCreateLayer = 0;
     private int cameraTargetLayer => currentLayerCont == null ? 0 : currentLayerCont.layerIndex + 1;
+    public int currentLayerSize => currentLayerCont == null ? 0 : currentLayerCont.param.so.layerSize;
+    public int currentLayerIndex => currentLayerCont == null ? 0 : currentLayerCont.layerIndex;
 
     public bool isGenerateArtifact { get; private set; } = false; // アーティファクト生成フラグ　（ingame中一度しか生成しない）
 

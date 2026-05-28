@@ -117,6 +117,11 @@ public class StaticManager : MonoBehaviour
         return System.DateTime.FromBinary(System.Convert.ToInt64(_date));
     }
 
+
+    public static void SlowGameTime_PickaxePower()
+    {
+        SlowGameTime(0.2f, 0.15f, 0.1f);
+    }
     /// <summary>
     /// ゲーム内時間を指定時間だけ遅くし、同じ実時間をかけて徐々に通常速度に戻す。
     /// 減速・復帰の遷移はいずれも returnDuration（未指定時は slowDuration）を使用する。

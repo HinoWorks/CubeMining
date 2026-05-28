@@ -49,6 +49,7 @@ public class PickaxePowerCont_LaserUnit : MonoBehaviour
                 }
             }
             list_targetBlocks.Clear();
+            StaticManager.SlowGameTime_PickaxePower();
             CameraManager.Inst.ShakeCamera_Large();
             Destroy(this.gameObject);
         }).Play();

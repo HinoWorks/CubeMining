@@ -14,6 +14,10 @@ public enum EffectType
 
     ThunderStrike_Red = 110,
     ThunderStrike_Red_Circle = 111,
+
+
+
+    ArrowHit = 200,
 }
 
 public class EffectManager : MonoBehaviour
@@ -26,12 +30,14 @@ public class EffectManager : MonoBehaviour
     [SerializeField] GameObject pf_eff_thunderStrike_cross;
     [SerializeField] GameObject pf_eff_thunderStrike_red;
     [SerializeField] GameObject pf_eff_thunderStrike_red_circle;
+    [SerializeField] GameObject pf_eff_arrowHit;
     private List<GameObject> pool_eff_blockDamage = new List<GameObject>();
     private List<GameObject> pool_eff_blockBreak = new List<GameObject>();
     private List<GameObject> pool_eff_thunderStrike = new List<GameObject>();
     private List<GameObject> pool_eff_thunderStrike_cross = new List<GameObject>();
     private List<GameObject> pool_eff_thunderStrike_red = new List<GameObject>();
     private List<GameObject> pool_eff_thunderStrike_red_circle = new List<GameObject>();
+    private List<GameObject> pool_eff_arrowHit = new List<GameObject>();
     private int createCountInit = 20;
     private int createCountInit_thunderStrike = 10;
 
@@ -98,6 +104,8 @@ public class EffectManager : MonoBehaviour
                 return (pf_eff_thunderStrike_red, pool_eff_thunderStrike_red);
             case EffectType.ThunderStrike_Red_Circle:
                 return (pf_eff_thunderStrike_red_circle, pool_eff_thunderStrike_red_circle);
+            case EffectType.ArrowHit:
+                return (pf_eff_arrowHit, pool_eff_arrowHit);
             default:
                 return (null, new List<GameObject>());
         }
