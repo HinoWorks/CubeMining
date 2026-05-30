@@ -14,6 +14,9 @@ public class PickaxePowerManager : MonoBehaviour
     public PickaxePowerBase EquippedBase { get; private set; }
     public PickaxePowerLevel EquippedLevelData { get; private set; }
     private PickaxePowerCont_Base pickaxePowerCont;
+    private int CT => EquippedBase.CD;
+    private int blockCountNeeded => EquippedBase.blockCount;
+
 
     public int CurrentGauge { get; private set; }
     public int MaxGauge { get; private set; }
@@ -74,9 +77,7 @@ public class PickaxePowerManager : MonoBehaviour
         PublishPickaxePowerParamChanged();
     }
 
-    // Debug
-    private int CT_test = 5;
-    private int blockCountMax_test = 20;
+
 
 
 
@@ -150,10 +151,10 @@ public class PickaxePowerManager : MonoBehaviour
         pickaxePowerCont = newPowerUnit.GetComponent<PickaxePowerCont_Base>();
         pickaxePowerCont.Init(EquippedLevelData);
 
-        MaxGauge = blockCountMax_test;
+        MaxGauge = blockCountNeeded;
 
         IsActive = true;
-        CooldownDuration = CT_test;
+        CooldownDuration = CT;
 
         if (GameWatcher.Inst != null && GameWatcher.Inst.isInGameNow)
         {
@@ -210,7 +211,7 @@ public class PickaxePowerManager : MonoBehaviour
         if (!CanActivate) return false;
 
         pickaxePowerCont.Activate();
-        PublishPowerActivate(EquippedIndex, CT_test);
+        PublishPowerActivate(EquippedIndex, CT);
         ExecuteEffect();
         CurrentGauge = 0;
         StartCooldown();
@@ -219,7 +220,7 @@ public class PickaxePowerManager : MonoBehaviour
 
     private void StartCooldown()
     {
-        CooldownDuration = CT_test;
+        CooldownDuration = CT;
         CooldownRemaining = CooldownDuration;
     }
 

@@ -14,39 +14,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_PickaxePowerData
   pickaxePowerBases:
   - index: 1
-    skillName: power1
-    description: xxxx 11
+    skillName: Overdrive
+    description: Temporarily boosts all pickaxe stats.
     icon: {fileID: 21300000, guid: 9a8110b064bd64f99824b00ab6a188b2, type: 3}
+    blockCount: 15
+    CD: 5
     maxLevel: 3
     pf: {fileID: 747459983867244030, guid: d7e5f5af4f6984d5480e7e543314db27, type: 3}
   - index: 2
-    skillName: power2
-    description: xxxx 22
+    skillName: Meteor Bomber
+    description: Spawns and drops a powerful Bomb Block from above. (Damage scales
+      with Pickaxe Power)
     icon: {fileID: 21300000, guid: 16bd12464a9aa402db810694dd188923, type: 3}
+    blockCount: 15
+    CD: 5
     maxLevel: 3
     pf: {fileID: 7060867681397398350, guid: a2612511c492244ccacccb2c3bf15d9c, type: 3}
   - index: 3
-    skillName: power3
-    description: xxxx 333
+    skillName: Horizon Laser
+    description: Fires a laser that sweeps across the current layer. (Damage scales
+      with Pickaxe Power)
     icon: {fileID: 21300000, guid: 18ee2e26897104df1a19bce2ff4c4838, type: 3}
+    blockCount: 15
+    CD: 5
     maxLevel: 3
     pf: {fileID: 400877379012588226, guid: 029c19b5888864504b74e6abe7d82252, type: 3}
   - index: 4
-    skillName: power4
-    description: xxxx 4444
+    skillName: Titan Pickaxe
+    description: Summons a giant pickaxe to smash the current mining area. (Damage
+      scales with Pickaxe Power)
     icon: {fileID: 21300000, guid: 709a1223eb6714bffb8bdae83eaf1684, type: 3}
+    blockCount: 15
+    CD: 5
     maxLevel: 3
     pf: {fileID: 1552349253804401439, guid: 0e9b67a3e0aa34316a2e2bbb0c9b810f, type: 3}
   - index: 5
-    skillName: power5
-    description: xxxx 55555
+    skillName: Arrow Volley
+    description: Fires a volley of arrows to strike random blocks. (Damage scales
+      with Pickaxe Power)
     icon: {fileID: 21300000, guid: 4accd5296491b4e64b7cab752feaf001, type: 3}
+    blockCount: 15
+    CD: 5
     maxLevel: 3
     pf: {fileID: 4866347856038464369, guid: 8afe324a251e54584bdff968cd5bce8d, type: 3}
   - index: 6
     skillName: power6
     description: xxxx 666666
     icon: {fileID: 21300000, guid: 3e4c49bb0a89e4b21831fd5cf1ddcfad, type: 3}
+    blockCount: 15
+    CD: 5
     maxLevel: 3
     pf: {fileID: 0}
   pickaxePowerLevels:

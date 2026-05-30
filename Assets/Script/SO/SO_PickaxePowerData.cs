@@ -11,6 +11,8 @@ public class PickaxePowerBase
     public string skillName;
     public string description;
     public Sprite icon;
+    public int blockCount;
+    public int CD;
     public int maxLevel;
     public GameObject pf;
 }
