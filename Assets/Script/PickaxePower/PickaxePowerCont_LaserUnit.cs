@@ -46,6 +46,12 @@ public class PickaxePowerCont_LaserUnit : MonoBehaviour
                 if (target.isAlive)
                 {
                     target.Damage(damage);
+                    var effect = EffectManager.Inst?.Get_Effect(EffectType.LasaerHit);
+                    if (effect != null)
+                    {
+                        effect.transform.position = target.GetTransform().position;
+                        effect.SetActive(true);
+                    }
                 }
             }
             list_targetBlocks.Clear();

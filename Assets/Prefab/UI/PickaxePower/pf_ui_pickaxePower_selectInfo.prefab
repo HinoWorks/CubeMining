@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 9133041027633062246}
   - component: {fileID: 8981077234419480673}
   m_Layer: 5
-  m_Name: tmp_paramNow
+  m_Name: tmp_CD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -472,6 +472,8 @@ MonoBehaviour:
   - {fileID: 7963640328314407967}
   - {fileID: 3893782801251894745}
   - {fileID: 6518738283701704868}
+  tmp_blockCount: {fileID: 629471872914720545}
+  tmp_CD: {fileID: 8981077234419480673}
   btn_equip: {fileID: 6195725243125302988}
   obj_equipedMark: {fileID: 5169159163165465261}
   parent_levelUp: {fileID: 6851797864789403968}
@@ -6332,7 +6334,7 @@ GameObject:
   - component: {fileID: 4336693699309604222}
   - component: {fileID: 629471872914720545}
   m_Layer: 5
-  m_Name: tmp_paramNow
+  m_Name: tmp_blockCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7247,7 +7249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 104, y: -237}
+  m_AnchoredPosition: {x: 104, y: -258}
   m_SizeDelta: {x: 250, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6827090849805242391
@@ -7405,7 +7407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 104, y: -269}
+  m_AnchoredPosition: {x: 104, y: -290}
   m_SizeDelta: {x: 250, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7695202489145140440
