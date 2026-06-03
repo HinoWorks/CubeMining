@@ -39,14 +39,15 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
 
     public override async void ToOutGame_InitData()
     {
-        var saveData = await SaveLoader.Inst.Get_PlayerLevelData();
-        currentPoints = saveData == null ? 0 : saveData.points;
+        var saveData_playerLevel = await SaveLoader.Inst.Get_PlayerLevelData();
+        currentPoints = saveData_playerLevel == null ? 0 : saveData_playerLevel.points;
         tmp_points.SetText($"{currentPoints}");
+        var currentPlayerLevel = saveData_playerLevel == null ? 0 : saveData_playerLevel.level;
 
         // 各Unit初期化(主にリソースチェック)
         foreach (var ui_pickaxePowerUnit in ui_pickaxePowerUnits)
         {
-            ui_pickaxePowerUnit.Init(currentPoints);
+            ui_pickaxePowerUnit.Init(currentPoints, currentPlayerLevel);
         }
 
         // 装備状態更新
@@ -122,6 +123,7 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
         // リソース消費
         foreach (var resourceCount in ui_selectInfo.RequredResources)
         {
+            if (resourceCount.requiredCount <= 0) continue;
             SaveLoader.Inst.Request_SaveResource(resourceCount.resourceType, -resourceCount.requiredCount);
         }
         var pointCost = ui_selectInfo.requiredPoints;
@@ -135,7 +137,7 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
         //UIに反映
         currentSelectUnit.Callback_Enhanced(newLevel, currentPoints);
         await UniTask.DelayFrame(2);
-        ui_selectInfo.CallBack_Enhanced();
+        ui_selectInfo.CallBack_Enhanced(newLevel);
         tmp_points.SetText($"{currentPoints}");
 
         // 他のUnitのリソースチェック
@@ -151,7 +153,7 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
     /// <summary>
     ///  強化をクリックした時の処理
     /// </summary>
-    private void OnClick_Enhance()
+    private async void OnClick_Enhance()
     {
         OnClick_Unlock();
     }

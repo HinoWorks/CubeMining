@@ -55,8 +55,6 @@ public class AroundGuradManager : MonoBehaviour
         currentLayerIndex = _currentLayerIndex;
         currentLayerMaxSize = BlockGenerateManager.Inst.currentLayerSize;
 
-
-        Debug.Log("=AroundGuradManager=   Check_NewGroundLayer: " + currentLayerIndex);
         parent_guards.transform.localPosition = new Vector3(0, -currentLayerIndex, 0);
         obj_guard_1.transform.localPosition = new Vector3(currentLayerMaxSize + offset_max, 0, -currentLayerMaxSize / 2f);
         obj_guard_2.transform.localPosition = new Vector3(currentLayerMaxSize / 2f, 0, -currentLayerMaxSize - offset_max);

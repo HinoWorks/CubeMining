@@ -61,6 +61,11 @@ public class UI_PickaxePowerInfo : MonoBehaviour
     [SerializeField] HButton btn_unlock;
     [SerializeField] HButton btn_enhance;
 
+    [Space(5)]
+    [Header("Locked Info")]
+    [SerializeField] GameObject obj_locked;
+    [SerializeField] TextMeshProUGUI tmp_lockedDescription;
+
 
 
     public void Init_Once(Action _onClick_Equip, Action _onClick_Unlock, Action _onClick_Enhance)
@@ -77,6 +82,14 @@ public class UI_PickaxePowerInfo : MonoBehaviour
         if (_ui_pickaxePowerUnit == null) return;
         currentUnit = _ui_pickaxePowerUnit;
         currentPoints = _currentPoints;
+
+        obj_locked.SetActive(!currentUnit.isEnoughPlayerLevel);
+        if (!currentUnit.isEnoughPlayerLevel)
+        {
+            tmp_lockedDescription.SetText($"Lv.: {so_base.unlockLevel}");
+            return;
+        }
+
 
         // データ設定   
         image_icon.sprite = so_base.icon;
@@ -96,6 +109,7 @@ public class UI_PickaxePowerInfo : MonoBehaviour
     }
     public void SetData_Equiped(bool _isEquiped)
     {
+        if (currentUnit == null) return;
         var isEquipable = currentLevel > 0;
         isEquiped = _isEquiped;
         obj_equipedMark.SetActive(isEquiped && isEquipable);
@@ -235,7 +249,7 @@ public class UI_PickaxePowerInfo : MonoBehaviour
 
 
 
-    public void CallBack_Enhanced()
+    public void CallBack_Enhanced(int _newLevel)
     {
         for (int i = 0; i < ui_StarLevels.Length; i++)
         {
@@ -243,6 +257,11 @@ public class UI_PickaxePowerInfo : MonoBehaviour
         }
         SetData_Param(currentLevel);
         SetData_RequiredCost();
+
+        if (_newLevel == 1)
+        {
+            btn_equip.SetActive(true);
+        }
     }
 
     private void SetData_RequiredCost()

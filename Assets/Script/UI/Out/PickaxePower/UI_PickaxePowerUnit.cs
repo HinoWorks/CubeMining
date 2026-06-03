@@ -8,6 +8,7 @@ public class UI_PickaxePowerUnit : MonoBehaviour
 {
     [SerializeField] Image image_icon;
     [SerializeField] UI_StarLevel[] ui_starLevelUnits;
+    [SerializeField] GameObject obj_locked;
     [SerializeField] GameObject obj_equip;
     [SerializeField] GameObject obj_enhanceReady;
     [SerializeField] GameObject obj_enhanceComplete;
@@ -18,6 +19,7 @@ public class UI_PickaxePowerUnit : MonoBehaviour
     public PickaxePowerLevel so_level { get; private set; }
     public int currentLevel { get; private set; } = 0;
     public bool isEnhanceReady { get; private set; } = false;
+    public bool isEnoughPlayerLevel { get; private set; } = false;
     private Action<UI_PickaxePowerUnit> onClick_Select;
 
 
@@ -37,18 +39,28 @@ public class UI_PickaxePowerUnit : MonoBehaviour
     /// <summary>
     /// 初期化(アウトゲーム移行時に毎回呼ばれる)
     /// </summary>
-    public async void Init(int _currentPoints)
+    public async void Init(int _currentPoints, int _currentPlayerLevel)
     {
+        isEnoughPlayerLevel = _currentPlayerLevel >= so_base.unlockLevel;
+        obj_locked.SetActive(!isEnoughPlayerLevel);
+        if (!isEnoughPlayerLevel)
+        {
+            isEnhanceReady = false;
+            obj_enhanceReady.SetActive(isEnhanceReady);
+            return;
+        }
+
         var pickaxePowerData = await SaveLoader.Inst.Get_PickaxePowerData(so_base.index);
         currentLevel = pickaxePowerData == null ? 0 : pickaxePowerData.level;
         so_level = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel);
-
-        var count = 1;
-        foreach (var star in ui_starLevelUnits)
-        {
-            star.Set_StarLevel(count >= currentLevel);
-            count++;
-        }
+        /*
+                var count = 1;
+                foreach (var star in ui_starLevelUnits)
+                {
+                    star.Set_StarLevel(count >= currentLevel);
+                    count++;
+                }
+        */
 
         // level max?
         if (currentLevel >= so_base.maxLevel)
@@ -100,11 +112,13 @@ public class UI_PickaxePowerUnit : MonoBehaviour
     public void Callback_Enhanced(int _currentLevel, int _currentPoints)
     {
         currentLevel = _currentLevel;
+        /*
         var count = 1;
         foreach (var star in ui_starLevelUnits)
         {
             star.Set_StarLevel(count >= currentLevel);
-        }
+        }*/
+
         // リソース見て、強化可能か確認
         so_level = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel);
         ResourceCheck(_currentPoints);
