@@ -13,35 +13,12 @@ MonoBehaviour:
   m_Name: SO_UnlockData
   m_EditorClassIdentifier: Assembly-CSharp::SO_GameEventData
   unlockDatas:
-  - eventIndex: 1
-    unlockCheckType: 1
-    checkCount: 2
-    unlockTargetType: 0
-  - eventIndex: 2
-    unlockCheckType: 1
-    checkCount: 3
-    unlockTargetType: 0
-  - eventIndex: 3
-    unlockCheckType: 3
-    checkCount: 10
-    unlockTargetType: 0
-  - eventIndex: 4
-    unlockCheckType: 2
-    checkCount: 3
-    unlockTargetType: 0
-  - eventIndex: 5
-    unlockCheckType: 0
-    checkCount: 0
-    unlockTargetType: 0
-  - eventIndex: 6
-    unlockCheckType: 0
-    checkCount: 0
-    unlockTargetType: 0
-  - eventIndex: 7
-    unlockCheckType: 0
-    checkCount: 0
-    unlockTargetType: 0
-  - eventIndex: 8
-    unlockCheckType: 0
-    checkCount: 0
-    unlockTargetType: 0
+  - index: 1
+    unlockLevel: 0
+    unlockTargetType: 1
+  - index: 2
+    unlockLevel: 2
+    unlockTargetType: 4
+  - index: 3
+    unlockLevel: 5
+    unlockTargetType: 3

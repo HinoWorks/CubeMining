@@ -23,8 +23,6 @@ public class UIManager_OutGame : MonoBehaviour
     [SerializeField] GameObject parent_resourceCounter;
     [SerializeField] UI_ResourceCounter[] ui_resourceCounters;
 
-    private float currentCoinFloat;
-
     [Space(10)]
     [Header(" -- Main --")]
     [SerializeField] GameObject main;
@@ -83,6 +81,20 @@ public class UIManager_OutGame : MonoBehaviour
         ui_pickaxePowerManager.Start_OnceInit();
     }
 
+    /// <summary>
+    /// ヘッダーボタンのアクティブ状態とチェックマークの状態を設定
+    /// </summary>
+    public void Set_HeaderButtonActiveState(OutGame_MenuType _outGameMenuType, bool _isCheckMarkActive = false)
+    {
+        foreach (var headerButton in headerButtons)
+        {
+            if (_outGameMenuType != headerButton.outGameMenuType) continue;
+            if (headerButton.gameObject.activeSelf == true) continue;
+            headerButton.Set_Activate(_isCheckMarkActive);
+            break;
+        }
+    }
+
     private void ChangeGateState(GameStateType _state)
     {
         if (_state == GameStateType.OutGame)
@@ -107,6 +119,17 @@ public class UIManager_OutGame : MonoBehaviour
             ui_artifactManager.ToInGame_ResetLoadFlag();
             ui_pickaxeManager.ToInGame_ResetLoadFlag();
             ui_pickaxePowerManager.ToInGame_ResetLoadFlag();
+        }
+    }
+
+
+    public void Set_CheckMarkActive(OutGame_MenuType _outGameMenuType, bool _active = true)
+    {
+        foreach (var headerButton in headerButtons)
+        {
+            if (_outGameMenuType != headerButton.outGameMenuType) continue;
+            headerButton.Set_CheckMarkActive(_active);
+            break;
         }
     }
 

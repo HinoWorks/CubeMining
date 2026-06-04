@@ -36,23 +36,8 @@ public class UI_PickaxeManager : UI_OutGameTabBase
         SelectPickaxeUnit(equipedPickaxeIndexes.First());
     }
 
-    /*
-        public async void Init(OutGame_MenuType _outGameMenuType)
-        {
-            var isActive = _outGameMenuType == OutGame_MenuType.Pickaxe;
-            if (isActive)
-            {
-                isDoingAction = true;
 
-                await Set_PickaxeEquip();
-                Set_PickaxeLibrary();
-                Set_PickaxeLibraryEquipState();
-                SelectPickaxeUnit(equipedPickaxeIndexes.First());
-                isDoingAction = false;
-            }
-            this.gameObject.SetActive(isActive);
-        }
-        */
+
     public override async void ToOutGame_InitData()
     {
         isDoingAction = true;
@@ -104,6 +89,14 @@ public class UI_PickaxeManager : UI_OutGameTabBase
             pickaxeLibraryUnit.Set_EquipState(equipedPickaxeIndexes.Contains(pickaxeLibraryUnit.pickaxeIndex));
         }
     }
+
+
+
+    private void Check_NextPickaxeReady()
+    {
+        // TODO here ==
+    }
+
 
 
     #region -- callBack --

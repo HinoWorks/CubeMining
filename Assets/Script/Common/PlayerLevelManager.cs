@@ -16,6 +16,7 @@ public class PlayerLevelManager : MonoBehaviour
 {
     public static PlayerLevelManager Inst;
     public PlayerLevelData currentLevelData { get; private set; }
+    public int currentLevel => currentLevelData.level;
 
     private BigInteger requestExp = 0;
 

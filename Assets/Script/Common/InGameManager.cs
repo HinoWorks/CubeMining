@@ -215,6 +215,8 @@ public class InGameManager : MonoBehaviour
         // アーティファクトはここでセーブする
         SaveLoader.Inst.Request_SaveArtifactData(_artifactIndex, 1);
         SaveLoader.Inst.Request_ArtifactCurrentBlockCount(0, true);
+
+        UIManager_OutGame.Inst.UI_ArtifactManager.Set_IngameGetArtifactIndexes(_artifactIndex);
     }
 
 

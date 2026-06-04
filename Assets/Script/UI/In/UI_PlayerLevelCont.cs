@@ -31,6 +31,19 @@ public class UI_PlayerLevelCont : MonoBehaviour
 
     private void Set_PlayerLevelUp(int newLevel, int pointsGained)
     {
+        anim.Rewind();
+        anim.Play("LevelUp");
+        eff_levelUp.Play();
+    }
+
+
+
+
+
+    [ContextMenu("DEBUG_LevelUpAnim")]
+    public void DEBUG_LevelUpAnim()
+    {
+        anim.Rewind();
         anim.Play("LevelUp");
         eff_levelUp.Play();
     }

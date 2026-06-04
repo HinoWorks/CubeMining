@@ -8,6 +8,7 @@ public class UI_ArtifactLibraryUnit : MonoBehaviour
     [SerializeField] GameObject obj_locked;
     [SerializeField] GameObject obj_equip;
     [SerializeField] HButton btn;
+    [SerializeField] GameObject obj_checkMark;
 
     public int artifactIndex { get; private set; }
     public ArtifactUnitData so { get; private set; }
@@ -34,6 +35,7 @@ public class UI_ArtifactLibraryUnit : MonoBehaviour
         btn.onMouseOver += OnMouseOver_LibraryUnit;
         icon.sprite = so.icon;
         this.gameObject.SetActive(true);
+        Set_CheckMarkActive(false);
     }
     public async void Init()
     {
@@ -52,11 +54,18 @@ public class UI_ArtifactLibraryUnit : MonoBehaviour
     }
 
 
+    public void Set_CheckMarkActive(bool _active)
+    {
+        obj_checkMark.SetActive(_active);
+    }
+
+
     #region -- マウスアクション --
     private void OnMouseOver_LibraryUnit(bool _isEnter)
     {
         if (!isOpen) return;
         onMouseOver?.Invoke(_isEnter, so, transform.position);
+        Set_CheckMarkActive(false);
     }
 
     public void OnClick_Equip()

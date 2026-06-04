@@ -2,32 +2,25 @@ using UnityEngine;
 using System;
 
 
-public enum UnlockCheckType
-{
-    None,
-    GamePlayCount,
-    PlayerLevel,
-    BlockBreakCount,
-    AttackUnitUnlock,
-}
 
 public enum UnlockTargetType
 {
     None,
+    SkillTree,
     Artifact,
-
+    PickaxeCraft,
+    PickaxePower
 }
 
 
 [System.Serializable]
 public class UnlockData
 {
-    public int eventIndex;
-    public UnlockCheckType unlockCheckType;
-    public int checkCount;
+    public int index;
+    public int unlockLevel;
     public UnlockTargetType unlockTargetType;
-
 }
+
 
 
 
@@ -37,13 +30,32 @@ public class SO_UnlockData : ScriptableObject
 {
     public UnlockData[] unlockDatas;
 
-    public UnlockData Get_UnlockData(int _eventIndex)
+    public UnlockData Get_UnlockData(int _index)
     {
-        var data = Array.Find(unlockDatas, x => x.eventIndex == _eventIndex);
+        var data = Array.Find(unlockDatas, x => x.index == _index);
         if (data == null)
         {
-            Debug.LogError($"UnlockData is not found: {_eventIndex}");
+            Debug.LogError($"UnlockData is not found: {_index}");
         }
+        return data;
+    }
+
+
+    /// <summary>
+    /// 現在のレベルより下の全てのUnlockDataを取得
+    /// </summary>
+    public UnlockData[] Get_UnlockData_UnderLevel(int _currentLevel)
+    {
+        var data = Array.FindAll(unlockDatas, x => x.unlockLevel <= _currentLevel);
+        return data;
+    }
+
+    /// <summary>
+    /// 現在のレベルのUnlockDataを取得
+    /// </summary>
+    public UnlockData Get_UnlockData_NowLevel(int _currentLevel)
+    {
+        var data = Array.Find(unlockDatas, x => x.unlockLevel == _currentLevel);
         return data;
     }
 }

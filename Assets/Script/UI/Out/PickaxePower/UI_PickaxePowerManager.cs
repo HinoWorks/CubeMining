@@ -140,6 +140,18 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
         ui_selectInfo.CallBack_Enhanced(newLevel);
         tmp_points.SetText($"{currentPoints}");
 
+        if (currentSelectUnit.so_base.index == 1 && newLevel == 1)
+        {
+            // 初めてパワーをアンロックした時は自動で装備する
+            SaveLoader.Inst.Request_SavePickaxePowerData_EquipedIndex(currentSelectUnit.so_base.index);
+            currentEquipedIndex = currentSelectUnit.so_base.index;
+            foreach (var ui_pickaxePowerUnit in ui_pickaxePowerUnits)
+            {
+                ui_pickaxePowerUnit.EquipMark_Update(currentSelectUnit.so_base.index);
+            }
+            ui_selectInfo.SetData_Equiped(true);
+        }
+
         // 他のUnitのリソースチェック
         foreach (var ui_pickaxePowerUnit in ui_pickaxePowerUnits)
         {

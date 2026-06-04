@@ -1,82 +1,109 @@
 using UnityEngine;
 using UniRx;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+
 
 public class UnlockStateManager : MonoBehaviour
 {
     public static UnlockStateManager Inst;
-    public UnlockData targetEventData { get; private set; }
+    private int currentPlayerLevel;
 
-    [Header("確認用 -- のちに削除 --")]
-    [SerializeField] private List<UnlockTargetType> list_unlockTargetType = new List<UnlockTargetType>();
+    void Awake()
+    {
+        if (Inst == null) { Inst = this; }
+        else { Destroy(this); }
+    }
+
+    void Start()
+    {
+        GameEvent.GameState.SetGameState.Subscribe(ChangeGameState).AddTo(this);
+    }
+
+    private void ChangeGameState(GameStateType _state)
+    {
+        switch (_state)
+        {
+            case GameStateType.Title:
+                Init_UnlockCheck().Forget();
+                break;
+            case GameStateType.OutGame:
+                Update_UnlockCheck().Forget();
+                break;
+        }
+    }
+
+
+
+    private async UniTask Init_UnlockCheck()
+    {
+        var currentLevelData = await SaveLoader.Inst.Get_PlayerLevelData();
+        currentPlayerLevel = currentLevelData == null ? 1 : currentLevelData.level;
+        var unlockedDatas = SOLoader.UnlockData.Get_UnlockData_UnderLevel(currentPlayerLevel);
+        foreach (var unlockData in unlockedDatas)
+        {
+            Set_Unlock(unlockData.unlockTargetType, false);
+        }
+    }
+
+    private async UniTask Update_UnlockCheck()
+    {
+        var currentLevelData = await SaveLoader.Inst.Get_PlayerLevelData();
+        var isChangeState = currentPlayerLevel != (currentLevelData == null ? 1 : currentLevelData.level);
+        if (!isChangeState) return;
+
+        currentPlayerLevel = currentLevelData == null ? 1 : currentLevelData.level;
+        var unlockedDatas = SOLoader.UnlockData.Get_UnlockData_UnderLevel(currentPlayerLevel);
+        foreach (var unlockData in unlockedDatas)
+        {
+            Set_Unlock(unlockData.unlockTargetType, true);
+        }
+    }
+
+    private void Set_Unlock(UnlockTargetType _targetType, bool _isFirstUnlockEvent)
+    {
+        switch (_targetType)
+        {
+            case UnlockTargetType.SkillTree:
+                UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.SkillTree, _isFirstUnlockEvent);
+                break;
+            case UnlockTargetType.Artifact:
+                break;
+            case UnlockTargetType.PickaxeCraft:
+                UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.Pickaxe, _isFirstUnlockEvent);
+                break;
+            case UnlockTargetType.PickaxePower:
+                UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.PickaxePower, _isFirstUnlockEvent);
+                break;
+        }
+    }
+
+
+
+
+
 
     /*
-        void Awake()
+    private void CheckUnlockState()
+    {
+        targetEventData = SOLoader.UnlockData.Get_UnlockData(SaveLoader.Inst.UnlockEventIndex);
+        if (targetEventData == null)
         {
-            if (Inst == null) { Inst = this; }
-            else { Destroy(this); }
+            Debug.LogError($"UnlockData is not found: {SaveLoader.Inst.UnlockEventIndex}");
+            return;
         }
+        var isUnlock = Check_UnlockState(targetEventData.unlockCheckType, targetEventData.checkCount);
+        if (isUnlock)
+        {
+            list_unlockTargetType.Add(targetEventData.unlockTargetType);
+            SaveLoader.Inst.Request_SaveUnlockEventIndex(SaveLoader.Inst.UnlockEventIndex + 1);
+        }
+    }
 
-        void Start()
-        {
-            GameEvent.GameState.SetGameState.Subscribe(ChangeGameState).AddTo(this);
+    public void UnlockCheck(UnlockTargetType _targetType)
+    {
+        if (list_unlockTargetType.Contains(_targetType)) return;
+    }
+    */
 
-            list_unlockTargetType.Clear();
-            foreach (var unlockData in SOLoader.UnlockData.unlockDatas)
-            {
-                if (SaveLoader.Inst.UnlockEventIndex <= unlockData.eventIndex) continue;
-                var isUnlock = Check_UnlockState(unlockData.unlockCheckType, unlockData.checkCount);
-                if (isUnlock)
-                {
-                    list_unlockTargetType.Add(unlockData.unlockTargetType);
-                }
-            }
-        }
-
-        private bool Check_UnlockState(UnlockCheckType _targetType, int _checkCount)
-        {
-            switch (_targetType)
-            {
-                case UnlockCheckType.GamePlayCount:
-                    return SaveLoader.Inst.IngameCount >= _checkCount;
-                case UnlockCheckType.PlayerLevel:
-                    return SaveLoader.Inst.PlayerLevel >= _checkCount;
-                case UnlockCheckType.BlockBreakCount:
-                    return SaveLoader.Inst.BlockCount >= _checkCount;
-                default:
-                    return false;
-            }
-        }
-
-        private void ChangeGameState(GameStateType _state)
-        {
-            switch (_state)
-            {
-                case GameStateType.InGame_Ready:
-                case GameStateType.OutGame:
-                    CheckUnlockState();
-                    break;
-            }
-        }
-        private void CheckUnlockState()
-        {
-            targetEventData = SOLoader.UnlockData.Get_UnlockData(SaveLoader.Inst.UnlockEventIndex);
-            if (targetEventData == null)
-            {
-                Debug.LogError($"UnlockData is not found: {SaveLoader.Inst.UnlockEventIndex}");
-                return;
-            }
-            var isUnlock = Check_UnlockState(targetEventData.unlockCheckType, targetEventData.checkCount);
-            if (isUnlock)
-            {
-                list_unlockTargetType.Add(targetEventData.unlockTargetType);
-                SaveLoader.Inst.Request_SaveUnlockEventIndex(SaveLoader.Inst.UnlockEventIndex + 1);
-            }
-        }
-
-        public void UnlockCheck(UnlockTargetType _targetType)
-        {
-            if (list_unlockTargetType.Contains(_targetType)) return;
-        }
-        */
 }
