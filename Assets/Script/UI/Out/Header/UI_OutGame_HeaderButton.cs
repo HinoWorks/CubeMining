@@ -6,7 +6,9 @@ using System;
 public class UI_OutGame_HeaderButton : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI tmp_title;
-    [SerializeField] GameObject obj_checkMark;
+    [SerializeField] GameObject obj_checkMark_unlocked;
+    [SerializeField] GameObject obj_checkMark_EnhanceReady;
+
     public OutGame_MenuType outGameMenuType { get; private set; }
     private HButton hButton;
 
@@ -22,17 +24,18 @@ public class UI_OutGame_HeaderButton : MonoBehaviour
         hButton = this.GetComponent<HButton>();
         onSelect = _onSelect;
 
-        obj_checkMark.SetActive(false);
+        obj_checkMark_unlocked.SetActive(false);
+        obj_checkMark_EnhanceReady.SetActive(false);
         this.gameObject.SetActive(false);
     }
 
     /// <summary>
     /// アクティブ状態とチェックマークの状態を設定
     /// </summary>
-    public void Set_Activate(bool _isCheckMarkActive = false)
+    public void Set_ButtonUnlock(bool _isFirstUnlock)
     {
         this.gameObject.SetActive(true);
-        obj_checkMark.SetActive(_isCheckMarkActive);
+        obj_checkMark_unlocked.SetActive(_isFirstUnlock);
     }
 
     /// <summary>
@@ -40,12 +43,12 @@ public class UI_OutGame_HeaderButton : MonoBehaviour
     /// </summary>
     public void Set_CheckMarkActive(bool _active)
     {
-        obj_checkMark.SetActive(_active);
+        obj_checkMark_EnhanceReady.SetActive(_active);
     }
 
     public void OnClick_HeaderButton()
     {
-        obj_checkMark.SetActive(false);
+        obj_checkMark_unlocked.SetActive(false);
         onSelect?.Invoke(outGameMenuType);
     }
     public void Set_Select(OutGame_MenuType _currentType)

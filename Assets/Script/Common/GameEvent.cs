@@ -120,12 +120,15 @@ public static class GameEvent
             timeLimit.OnNext(time);
         }
 
-        private static readonly Subject<System.Numerics.BigInteger> coinMod = new();
-        public static IObservable<System.Numerics.BigInteger> CoinMod => coinMod.AsObservable();
-        public static void PublishCoinMod(System.Numerics.BigInteger mod)
+
+        // アウトゲームでリソースが変化した時発火、主に強化のフラグ管理
+        private static readonly Subject<uint> resourceMod_OutGame = new();
+        public static IObservable<uint> ResourceMod_OutGame => resourceMod_OutGame.AsObservable();
+        public static void PublishResourceMod_OutGame()
         {
-            coinMod.OnNext(mod);
+            resourceMod_OutGame.OnNext(0);
         }
+
 
 
         // インゲームリザルト, アウトゲームでリソースが変化した時のイベント

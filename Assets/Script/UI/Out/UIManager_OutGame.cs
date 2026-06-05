@@ -84,13 +84,25 @@ public class UIManager_OutGame : MonoBehaviour
     /// <summary>
     /// ヘッダーボタンのアクティブ状態とチェックマークの状態を設定
     /// </summary>
-    public void Set_HeaderButtonActiveState(OutGame_MenuType _outGameMenuType, bool _isCheckMarkActive = false)
+    public void Set_HeaderButtonActiveState(OutGame_MenuType _outGameMenuType, bool _isFirstUnlock = false)
     {
         foreach (var headerButton in headerButtons)
         {
             if (_outGameMenuType != headerButton.outGameMenuType) continue;
             if (headerButton.gameObject.activeSelf == true) continue;
-            headerButton.Set_Activate(_isCheckMarkActive);
+            headerButton.Set_ButtonUnlock(_isFirstUnlock);
+            break;
+        }
+    }
+    /// <summary>
+    /// ヘッダーボタンチェックマークの状態を設定
+    /// </summary>
+    public void Set_HeaderCheckMarkActiveState(OutGame_MenuType _outGameMenuType, bool _isCheckMarkActive = false)
+    {
+        foreach (var headerButton in headerButtons)
+        {
+            if (_outGameMenuType != headerButton.outGameMenuType) continue;
+            headerButton.Set_CheckMarkActive(_isCheckMarkActive);
             break;
         }
     }

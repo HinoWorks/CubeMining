@@ -476,14 +476,23 @@ public class SaveLoader : MonoBehaviour
 
 
     #region -- SkillTree --
+    private readonly Dictionary<int, SkillTreeData?> skillTreeDataCache = new();
+
     public async UniTask<SkillTreeData> Get_SkillTreeData(int _skillIndex)
     {
+        if (skillTreeDataCache.TryGetValue(_skillIndex, out var cached))
+        {
+            return cached;
+        }
+
         string saveKey = GetSkillTreeDataKey(_skillIndex);
         var loadData = await LoadAsync<SkillTreeData>(saveKey);
         if (loadData.success)
         {
+            skillTreeDataCache[_skillIndex] = loadData.data;
             return loadData.data;
         }
+        skillTreeDataCache[_skillIndex] = null;
         return null;
     }
     public void Request_SaveSkillTreeData(int _skillIndex, int _level)
@@ -499,6 +508,7 @@ public class SaveLoader : MonoBehaviour
             level = _level
         };
         ES3.Save(saveKey, newData);
+        skillTreeDataCache[_skillIndex] = newData;
     }
     private string GetSkillTreeDataKey(int _skillIndex)
     {

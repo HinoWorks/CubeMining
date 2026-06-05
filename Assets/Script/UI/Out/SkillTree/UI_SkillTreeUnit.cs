@@ -11,6 +11,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
     public SkillTreeBase skillTree;
     public SkillTreeUnit skillTreeUnit;
     public int level { get; private set; } = 0;
+    public bool isEnhanceReady { get; private set; } = false;
     public SkillTreeUnlockState unlockState;// { get; private set; }
 
 
@@ -165,14 +166,16 @@ public class UI_SkillTreeUnit : MonoBehaviour
         Set_UpgradeVector();
     }
     // アップグレード可能を示す矢印を表示
-    public void Set_UpgradeVector()
+    public bool Set_UpgradeVector()
     {
         if (unlockState != SkillTreeUnlockState.EnhanceReady)
         {
             obj_upgradeable.SetActive(false);
-            return;
+            return false;
         }
-        obj_upgradeable.SetActive(UIManager_OutGame.Inst.UI_SkillTreeManager.IsResourceEnough(skillTreeUnit));
+        isEnhanceReady = UIManager_OutGame.Inst.UI_SkillTreeManager.IsResourceEnough(skillTreeUnit);
+        obj_upgradeable.SetActive(isEnhanceReady);
+        return isEnhanceReady;
     }
 
 

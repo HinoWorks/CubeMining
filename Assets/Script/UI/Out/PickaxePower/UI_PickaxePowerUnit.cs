@@ -53,14 +53,6 @@ public class UI_PickaxePowerUnit : MonoBehaviour
         var pickaxePowerData = await SaveLoader.Inst.Get_PickaxePowerData(so_base.index);
         currentLevel = pickaxePowerData == null ? 0 : pickaxePowerData.level;
         so_level = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel);
-        /*
-                var count = 1;
-                foreach (var star in ui_starLevelUnits)
-                {
-                    star.Set_StarLevel(count >= currentLevel);
-                    count++;
-                }
-        */
 
         // level max?
         if (currentLevel >= so_base.maxLevel)
@@ -74,13 +66,13 @@ public class UI_PickaxePowerUnit : MonoBehaviour
         ResourceCheck(_currentPoints);
     }
 
-    public void ResourceCheck(int _currentPoints)
+    public bool ResourceCheck(int _currentPoints)
     {
-        if (_currentPoints < so_level.req_point)
+        if (!isEnoughPlayerLevel || _currentPoints < so_level.req_point)
         {
             isEnhanceReady = false;
             obj_enhanceReady.SetActive(isEnhanceReady);
-            return;
+            return isEnhanceReady;
         }
 
         var requredResources = new ResourceCount[7];
@@ -93,6 +85,7 @@ public class UI_PickaxePowerUnit : MonoBehaviour
         requredResources[6] = new ResourceCount() { resourceType = ResourceType.Diamond, requiredCount = so_level.req_diamond };
         isEnhanceReady = StaticManager.IsResourceEnough(requredResources);
         obj_enhanceReady.SetActive(isEnhanceReady);
+        return isEnhanceReady;
     }
 
 

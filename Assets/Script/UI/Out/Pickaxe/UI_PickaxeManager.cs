@@ -1,10 +1,11 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using DG.Tweening;
 using System.Collections.Generic;
 using System;
 using Cysharp.Threading.Tasks;
 using System.Linq;
+using UniRx;
+
+
 public class UI_PickaxeManager : UI_OutGameTabBase
 {
     [SerializeField] UI_PickaxeEquipCont[] pickaxeEquipConts;
@@ -15,6 +16,9 @@ public class UI_PickaxeManager : UI_OutGameTabBase
     private HashSet<int> equipedPickaxeIndexes = new HashSet<int>();
     private bool isDoingAction = false;
     private int pickaxeAnimWaitTime = 1000;
+
+    private bool haveEnhanceReadyUnit = false;
+
 
 
     public override async void Start_OnceInit()//主にコールバックを設定
@@ -34,6 +38,8 @@ public class UI_PickaxeManager : UI_OutGameTabBase
         Set_PickaxeLibrary();
         Set_PickaxeLibraryEquipState();
         SelectPickaxeUnit(equipedPickaxeIndexes.First());
+
+        GameEvent.UI.ResourceMod_OutGame.Subscribe(_ => Check_HaveEnhanceReadyUnit()).AddTo(this);
     }
 
 
@@ -45,7 +51,10 @@ public class UI_PickaxeManager : UI_OutGameTabBase
         Set_PickaxeLibrary();
         Set_PickaxeLibraryEquipState();
         SelectPickaxeUnit(equipedPickaxeIndexes.First());
+
+        Check_HaveEnhanceReadyUnit();
         base.isReloadFin = true;
+
         isDoingAction = false;
     }
 
@@ -71,7 +80,19 @@ public class UI_PickaxeManager : UI_OutGameTabBase
         }
     }
 
-
+    private void Check_HaveEnhanceReadyUnit()
+    {
+        haveEnhanceReadyUnit = false;
+        foreach (var unit in pickaxeLibraryUnits)
+        {
+            if (unit.isOpen && !unit.alreadyCrafted)
+            {
+                haveEnhanceReadyUnit = unit.Check_Resource();
+                break;
+            }
+        }
+        UIManager_OutGame.Inst.Set_HeaderCheckMarkActiveState(OutGame_MenuType.Pickaxe, haveEnhanceReadyUnit);
+    }
     /// <summary>
     /// ピッケルライブラリUnitの初期化
     /// </summary>
@@ -88,13 +109,6 @@ public class UI_PickaxeManager : UI_OutGameTabBase
         {
             pickaxeLibraryUnit.Set_EquipState(equipedPickaxeIndexes.Contains(pickaxeLibraryUnit.pickaxeIndex));
         }
-    }
-
-
-
-    private void Check_NextPickaxeReady()
-    {
-        // TODO here ==
     }
 
 

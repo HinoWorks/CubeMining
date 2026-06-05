@@ -1,12 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using DG.Tweening;
 using System.Collections.Generic;
 using System;
 using Cysharp.Threading.Tasks;
-using System.Linq;
 using TMPro;
-
+using UniRx;
 
 public class UI_PickaxePowerManager : UI_OutGameTabBase
 {
@@ -15,7 +13,7 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
     [SerializeField] UI_PickaxePowerInfo ui_selectInfo;
 
     private bool isDoingAction = false;
-
+    private bool haveEnhanceReadyUnit = false;
     private int currentPoints = 0;
     private int currentEquipedIndex = 0;
     private UI_PickaxePowerUnit currentSelectUnit = null;
@@ -35,6 +33,7 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
             index++;
         }
         ui_selectInfo.Init_Once(OnClick_Equip, OnClick_Unlock, OnClick_Enhance);
+        GameEvent.UI.ResourceMod_OutGame.Subscribe(_ => Check_HaveEnhanceReadyUnit()).AddTo(this);
     }
 
     public override async void ToOutGame_InitData()
@@ -49,6 +48,7 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
         {
             ui_pickaxePowerUnit.Init(currentPoints, currentPlayerLevel);
         }
+        Check_HaveEnhanceReadyUnit();
 
         // 装備状態更新
         currentEquipedIndex = SaveLoader.Inst.PickaxePowerEquipedIndex;
@@ -64,6 +64,18 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
         ui_selectInfo.SetData_Equiped(isEquiped);
 
         base.isReloadFin = true;
+    }
+
+    private void Check_HaveEnhanceReadyUnit()
+    {
+        haveEnhanceReadyUnit = false;
+        // 他のUnitのリソースチェック
+        foreach (var ui_pickaxePowerUnit in ui_pickaxePowerUnits)
+        {
+            var unitReady = ui_pickaxePowerUnit.ResourceCheck(currentPoints);
+            haveEnhanceReadyUnit = haveEnhanceReadyUnit || unitReady;
+        }
+        UIManager_OutGame.Inst.Set_HeaderCheckMarkActiveState(OutGame_MenuType.PickaxePower, haveEnhanceReadyUnit);
     }
 
 
@@ -152,12 +164,9 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
             ui_selectInfo.SetData_Equiped(true);
         }
 
-        // 他のUnitのリソースチェック
-        foreach (var ui_pickaxePowerUnit in ui_pickaxePowerUnits)
-        {
-            if (ui_pickaxePowerUnit.so_base.index == currentSelectUnit.so_base.index) continue;
-            ui_pickaxePowerUnit.ResourceCheck(currentPoints);
-        }
+        // 他のUnitのリソースチェック + 他の管理クラスにもリソースチェックcall
+        GameEvent.UI.PublishResourceMod_OutGame();
+
         isDoingAction = false;
     }
 

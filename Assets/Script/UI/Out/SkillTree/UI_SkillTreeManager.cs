@@ -5,6 +5,7 @@ using UnityEditor;
 using System.Collections.Generic;
 using System;
 using Cysharp.Threading.Tasks;
+using UniRx;
 
 
 public enum SkillTreeUnlockState
@@ -38,6 +39,9 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
 
     [Header("Pan")]
     [SerializeField] private float panSpeed = 1.0f;
+
+
+    private bool haveEnhanceReadyUnit = false;
 
     private Vector2 lastMousePos;
     private float duration_zoom = 0.05f;
@@ -113,6 +117,9 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
 #endif
 
 
+
+
+
     public override void Start_OnceInit()
     {
         foreach (var skillTreeUnit in skillTreeUnits)
@@ -126,6 +133,7 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
             skillTreeUnit.Init();
         }
         base.thisMenuType = OutGame_MenuType.SkillTree;
+        GameEvent.UI.ResourceMod_OutGame.Subscribe(_ => Check_HaveEnhanceReadyUnit()).AddTo(this);
     }
 
     public override async void ToOutGame_InitData()
@@ -135,8 +143,39 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
         {
             skillTreeUnit.Init();
         }
+
+        // リソース確認して、headerButtonのチェックマーク更新
+        haveEnhanceReadyUnit = false;
+        foreach (var unit in skillTreeUnits)
+        {
+            if (unit.unlockState == SkillTreeUnlockState.EnhanceReady && unit.isEnhanceReady)
+            {
+                haveEnhanceReadyUnit = true;
+                break;
+            }
+        }
+        UIManager_OutGame.Inst.Set_HeaderCheckMarkActiveState(OutGame_MenuType.SkillTree, haveEnhanceReadyUnit);
+
         base.isReloadFin = true;
     }
+
+
+    private void Check_HaveEnhanceReadyUnit()
+    {
+        haveEnhanceReadyUnit = false;
+        // 全てのunitにたいし、リソースチェックのみ行い、アップグレード可能を示す矢印を更新
+        foreach (var unit in skillTreeUnits)
+        {
+            var isReady = unit.Set_UpgradeVector();
+            if (isReady)
+            {
+                haveEnhanceReadyUnit = true;
+                break;
+            }
+        }
+        UIManager_OutGame.Inst.Set_HeaderCheckMarkActiveState(OutGame_MenuType.SkillTree, haveEnhanceReadyUnit);
+    }
+
 
 
     public bool IsResourceEnough(SkillTreeUnit _skillTreeUnit)
@@ -151,6 +190,11 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
         requredResources[6] = new ResourceCount() { resourceType = ResourceType.Diamond, requiredCount = _skillTreeUnit.req_diamond };
         return StaticManager.IsResourceEnough(requredResources);
     }
+
+
+
+
+
 
     #region -- update 主にズームと画面スクロール用 --
     void Update()
@@ -205,8 +249,6 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
         }
     }
     #endregion
-
-
 
     /// <summary>
     /// unit にマウスオーバーした時の処理
@@ -280,6 +322,7 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
         {
             unit.Set_UpgradeVector();
         }
+        GameEvent.UI.PublishResourceMod_OutGame();
 
         // 線の更新
         UpdateNodeState(_skillTreeUnit.skillIndex, _skillTreeUnit.unlockState, _skillTreeUnit.level + 1);

@@ -50,7 +50,6 @@ public class InGameManager : MonoBehaviour
     private float timer = 0;
     private float timeLimit => GameParamManager.gameBaseParam.ingameTime + exTime;
     private float exTime = 0f;
-    private BigInteger getCoin;
     private List<ResourceData_Result> resourceDataList = new List<ResourceData_Result>();
     public List<ResourceData_Result> Get_ResourceDataList() => resourceDataList;
 
@@ -121,7 +120,6 @@ public class InGameManager : MonoBehaviour
         resourceDataList.Clear();
         artifactIndexList.Clear();
         exTime = 0f;
-        GameEvent.UI.PublishCoinMod(getCoin);
         GameEvent.UI.PublishTimeLimit(timeLimit);
 
 
