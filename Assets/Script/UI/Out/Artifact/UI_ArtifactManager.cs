@@ -14,7 +14,7 @@ public class UI_ArtifactManager : UI_OutGameTabBase
     private List<int> equipedArtifactIndexes = new List<int>(10);
     private int artifact_activeSlotCount => 1 + GameParamManager.gameBaseParam.artifact_slotCount; //現在のアクティブスロット数
     private int artifact_totalSlotCountMax = 4; //最大スロット数
-
+    private int currentArtifactTotalCount = 0;
     private List<int> ingameGetArtifactIndexes = new List<int>(3); //インゲームで取得したアーティファクトのインデックスリスト
 
 
@@ -36,6 +36,11 @@ public class UI_ArtifactManager : UI_OutGameTabBase
         }
         Set_ArtifactEquip().Forget();
         Set_ArtifactLibrary();
+
+        // アーティファクトの所持数が１以上なら、headerButtonをアクティブに
+        currentArtifactTotalCount = SaveLoader.Inst.Get_ArtifactTotalCount();
+        if (currentArtifactTotalCount <= 0) return;
+        UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.Artifact, false);
     }
 
     /// <summary>
@@ -58,7 +63,15 @@ public class UI_ArtifactManager : UI_OutGameTabBase
 
         // インゲームで取得したアーティファクトのインデックスリストがある場合、チェックマークを表示
         if (ingameGetArtifactIndexes.Count <= 0) return;
-        UIManager_OutGame.Inst.Set_CheckMarkActive(OutGame_MenuType.Artifact, true);
+        if (currentArtifactTotalCount <= 0)
+        {
+            UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.Artifact, true);
+        }
+        else
+        {
+            UIManager_OutGame.Inst.Set_HeaderCheckMarkActiveState_Once(OutGame_MenuType.Artifact, true);
+        }
+        currentArtifactTotalCount = ingameGetArtifactIndexes.Count;
         foreach (var artifactIndex in ingameGetArtifactIndexes)
         {
             var artifactLibraryUnit = Array.Find(artifactLibraryUnits, x => x.artifactIndex == artifactIndex);

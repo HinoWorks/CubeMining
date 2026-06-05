@@ -9,6 +9,7 @@ public class UI_PickaxeLibraryUnit : MonoBehaviour
     [SerializeField] GameObject obj_equip;
     [SerializeField] GameObject obj_enhanceReady;
     [SerializeField] HButton btn;
+    [SerializeField] HButtonConnect hButtonConnect;
 
     public int pickaxeIndex { get; private set; }
     public PickaxeUnitData so { get; private set; }
@@ -77,12 +78,18 @@ public class UI_PickaxeLibraryUnit : MonoBehaviour
         isEquiped = _isEquiped;
         obj_equip.SetActive(isEquiped);
     }
+    public void Set_SelectState(bool _isSelect)
+    {
+        hButtonConnect.Set_SelectActive(_isSelect);
+    }
 
 
     #region -- マウスアクション --
     public void OnClick_Select()
     {
+        if (!isOpen) return;
         onClick_Select?.Invoke(so);
+
     }
     #endregion
 

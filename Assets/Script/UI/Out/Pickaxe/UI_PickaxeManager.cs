@@ -120,6 +120,10 @@ public class UI_PickaxeManager : UI_OutGameTabBase
     private void SelectPickaxeUnit(PickaxeUnitData _so)
     {
         selectInfoUnit.SetData(_so);
+        foreach (var pickaxeLibraryUnit in pickaxeLibraryUnits)
+        {
+            pickaxeLibraryUnit.Set_SelectState(pickaxeLibraryUnit.pickaxeIndex == _so.pickaxeIndex);
+        }
     }
     private void SelectPickaxeUnit(int _index)
     {

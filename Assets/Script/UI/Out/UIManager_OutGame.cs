@@ -106,6 +106,18 @@ public class UIManager_OutGame : MonoBehaviour
             break;
         }
     }
+    /// <summary>
+    /// ヘッダーボタンチェックマークの状態を設定 == 一度見ると消えるチェックマーク
+    /// </summary>
+    public void Set_HeaderCheckMarkActiveState_Once(OutGame_MenuType _outGameMenuType, bool _isCheckMarkActive = false)
+    {
+        foreach (var headerButton in headerButtons)
+        {
+            if (_outGameMenuType != headerButton.outGameMenuType) continue;
+            headerButton.Set_CheckMarkActive_Once(_isCheckMarkActive);
+            break;
+        }
+    }
 
     private void ChangeGateState(GameStateType _state)
     {
@@ -134,16 +146,6 @@ public class UIManager_OutGame : MonoBehaviour
         }
     }
 
-
-    public void Set_CheckMarkActive(OutGame_MenuType _outGameMenuType, bool _active = true)
-    {
-        foreach (var headerButton in headerButtons)
-        {
-            if (_outGameMenuType != headerButton.outGameMenuType) continue;
-            headerButton.Set_CheckMarkActive(_active);
-            break;
-        }
-    }
 
 
     #region -- on Click --

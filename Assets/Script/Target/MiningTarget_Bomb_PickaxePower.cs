@@ -4,6 +4,7 @@ public class MiningTarget_Bomb_PickaxePower : MiningTarget_Object
 {
     [SerializeField] private GameObject pf_bomb;
 
+    private int breakCount = 3; //  3回ダメージを受けると爆発
     private int index_SE_Damage => 24;
     private int index_SE_Break => 25;
 
@@ -20,6 +21,14 @@ public class MiningTarget_Bomb_PickaxePower : MiningTarget_Object
         base.Init(bombParam, null, 0);
         base.Init_MiningTargetBase(_hp, 0, bombParam?.so.objectIndex ?? 0, 0);
         Set_ActiveGravity();
+    }
+
+    public override bool Damage(int damage, float _resourceUpRate = 1f)
+    {
+        var damageFixed = base.hp_max / breakCount;
+        var isBreak = base.Damage(damageFixed, _resourceUpRate);
+        Set_BlockMesh();
+        return isBreak;
     }
 
     public override void BreakFromDamage(float _resourceUpRate = 1f)

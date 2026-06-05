@@ -40,7 +40,7 @@ public class UI_ArtifactLibraryUnit : MonoBehaviour
     public async void Init()
     {
         var saveData = await SaveLoader.Inst.Get_ArtifactData(artifactIndex);
-        isOpen = artifactIndex == 1 || saveData != null;
+        isOpen = saveData != null;
 
         obj_locked.SetActive(!isOpen);
         btn.enabled = isOpen;
