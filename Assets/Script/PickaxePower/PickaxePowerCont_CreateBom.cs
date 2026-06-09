@@ -1,12 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class PickaxePowerCont_CreateBom : PickaxePowerCont_Base
 {
     [SerializeField] GameObject pf_Bom;
-    private Vector3 offsetPosition = new Vector3(0, 5.5f, 0); // 発射位置オフセット
+    private Vector3 offsetPositionBase = new Vector3(0, 3f, 0); // 発射位置オフセット
+    private float offsetPositionY_delta = 0.5f;
 
-    private int hp_Bom => 15;
+    private int delayGenerate = 150;
+    private int hp_Bom = 15; // ダミー、MiningTarget_Bomb_PickaxePowerで攻撃回数で破壊するよう設定中
     private float damageRate => EquippedLevelData.value_1;
     private float sizeRate => EquippedLevelData.value_2;
     private int bomCount => (int)EquippedLevelData.value_3;
@@ -15,19 +19,23 @@ public class PickaxePowerCont_CreateBom : PickaxePowerCont_Base
     private List<MiningTarget_Bomb_PickaxePower> list_bomBlocks = new List<MiningTarget_Bomb_PickaxePower>();
 
 
-    public override void Activate()
+    public override async void Activate()
     {
         Debug.Log("Power == CreateBom");
         for (int i = 0; i < bomCount; i++)
         {
-            CreateBom();
+            CreateBom(i);
+            await UniTask.Delay(delayGenerate);
         }
     }
 
-    private void CreateBom()
+    private void CreateBom(int _index)
     {
         var createTargetPosition = BlockGenerateManager.Inst.Get_RandomTargetArea();
-        var createPosition = createTargetPosition + offsetPosition;
+        var createPosition = createTargetPosition // xz位置のみ
+                                - new Vector3(0, BlockGenerateManager.Inst.currentLayerIndex, 0)
+                                + offsetPositionBase
+                                + new Vector3(0, _index * offsetPositionY_delta, 0);
         var newBomBlock = Get_FreeBomBlock();
         newBomBlock.transform.position = createPosition;
 

@@ -95,5 +95,40 @@ public class PlayerLevelManager : MonoBehaviour
     }
 
 
+    public void DEBUG_ForceLevelUp()
+    {
+        DEBUG_ForceLevelUpAsync().Forget();
+    }
+
+    private async UniTaskVoid DEBUG_ForceLevelUpAsync()
+    {
+        if (currentLevelData == null)
+        {
+            currentLevelData = await SaveLoader.Inst.Get_PlayerLevelData();
+            if (currentLevelData == null)
+            {
+                currentLevelData = new PlayerLevelData()
+                {
+                    level = 1,
+                    totalExp = 0,
+                    expInCurrentLevel = 0,
+                    points = 0
+                };
+            }
+            requestExp = SOLoader.PlayerLevelData.GetPlayerLevel(currentLevelData.level).exp;
+        }
+
+        if (currentLevelData.level >= SOLoader.PlayerLevelData.maxLevel)
+        {
+            Debug.LogWarning("DEBUG_ForceLevelUp: max level reached");
+            return;
+        }
+
+        var expToAdd = requestExp - currentLevelData.expInCurrentLevel;
+        if (expToAdd <= 0) expToAdd = 1;
+        AddExp(expToAdd);
+        SavePlayerLevelData();
+    }
+
 
 }

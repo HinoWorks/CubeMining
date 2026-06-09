@@ -158,6 +158,63 @@ public partial class SROptions
     }
 
 
+    private int debugArtifactIndex;
+    [Category("デバッグ")]
+    [DisplayName("アーティファクト index")]
+    [Sort(0)]
+    public int DebugArtifactIndex
+    {
+        get { return debugArtifactIndex; }
+        set { debugArtifactIndex = value; }
+    }
+    [Category("デバッグ")]
+    [DisplayName("アーティファクト獲得")]
+    [Sort(1)]
+    public void Debug_GetArtifact()
+    {
+        var artifactData = SOLoader.ArtifactData.Get_ArtifactData(debugArtifactIndex);
+        if (artifactData == null)
+        {
+            Debug.LogWarning($"Debug_GetArtifact: artifact not found (index={debugArtifactIndex})");
+            return;
+        }
+
+        if (InGameManager.Inst != null)
+        {
+            InGameManager.Inst.AddGetArtifact(debugArtifactIndex);
+        }
+        else
+        {
+            SaveLoader.Inst.Request_SaveArtifactData(debugArtifactIndex, 1);
+        }
+        Debug.Log($"Debug_GetArtifact: acquired index={debugArtifactIndex} ({artifactData.artifactName})");
+    }
+    [Category("デバッグ")]
+    [DisplayName("アーティファクト全解放")]
+    [Sort(2)]
+    public void Debug_UnlockAllArtifacts()
+    {
+        var count = 0;
+        foreach (var artifactData in SOLoader.ArtifactData.artifactDatas)
+        {
+            SaveLoader.Inst.Request_SaveArtifactData(artifactData.artifactIndex, 1);
+            count++;
+        }
+        Debug.Log($"Debug_UnlockAllArtifacts: unlocked {count} artifacts");
+    }
+    [Category("デバッグ")]
+    [DisplayName("レベル強制アップ")]
+    [Sort(3)]
+    public void Debug_ForceLevelUp()
+    {
+        if (PlayerLevelManager.Inst == null)
+        {
+            Debug.LogWarning("Debug_ForceLevelUp: PlayerLevelManager not found");
+            return;
+        }
+        PlayerLevelManager.Inst.DEBUG_ForceLevelUp();
+    }
+
 
     [Category("例外 / クラッシュ")]
     [DisplayName("例外スロー")]
