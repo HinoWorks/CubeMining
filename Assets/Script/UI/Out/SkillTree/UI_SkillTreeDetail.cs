@@ -60,6 +60,7 @@ public class UI_SkillTreeDetail : MonoBehaviour
     private void SetData_Base(int _currentLevel)
     {
         if (currentUnit == null) return;
+        Debug.Log("Unit Detail Update Method -- current level: " + _currentLevel);
 
         var so = currentUnit.skillTree;
         tmp_skillName.SetText(so.skillName);
@@ -127,6 +128,7 @@ public class UI_SkillTreeDetail : MonoBehaviour
 
     public void SetData_Enhanced(int _currentLevel)
     {
+        Debug.Log("Unit Detail -- enhanced level: " + _currentLevel);
         SetData_Base(_currentLevel);
     }
 

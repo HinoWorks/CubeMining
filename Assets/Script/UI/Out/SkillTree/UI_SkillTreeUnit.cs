@@ -95,7 +95,6 @@ public class UI_SkillTreeUnit : MonoBehaviour
         }
         else //データありの場合、レベルを確認
         {
-            //obj_level0.SetActive(skillTreeData.level == 0);
             level = skillTreeData.level;
             unlockState = skillTreeData.level >= skillTree.maxLevel ?
                  SkillTreeUnlockState.EnhanceComplete : SkillTreeUnlockState.EnhanceReady;
@@ -182,6 +181,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
     public void CallBack_Enhance()
     {
         eff_enhance.Play();
+        Init();
     }
     private void OnPointerEnter(bool _isEnter)
     {

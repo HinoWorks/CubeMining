@@ -261,12 +261,6 @@ public class SaveLoader : MonoBehaviour
         Request_SavePickaxeData(1, 1); // 初期つるはしゲット
         Request_SavePickaxeSlotData(0, 1); // 初期スロット0番目に装備
 
-
-
-        // == DEBUG ==
-        //Request_SavePickaxeData(2, 1); // 初期スパイダーゲット
-        //Request_SavePickaxeSlotData(1, 2); // 初期スロット1番目に装備
-        // == DEBUG ==
     }
 
 
@@ -497,18 +491,19 @@ public class SaveLoader : MonoBehaviour
     }
     public void Request_SaveSkillTreeData(int _skillIndex, int _level)
     {
-        EnqueueMethod(() => { SaveSkillTreeData(_skillIndex, _level); });
-    }
-    private void SaveSkillTreeData(int _skillIndex, int _level)
-    {
         var saveKey = GetSkillTreeDataKey(_skillIndex);
         var newData = new SkillTreeData()
         {
             key = saveKey,
             level = _level
         };
-        ES3.Save(saveKey, newData);
         skillTreeDataCache[_skillIndex] = newData;
+
+        EnqueueMethod(() => { SaveSkillTreeData(newData); });
+    }
+    private void SaveSkillTreeData(SkillTreeData _newData)
+    {
+        ES3.Save(_newData.key, _newData);
     }
     private string GetSkillTreeDataKey(int _skillIndex)
     {

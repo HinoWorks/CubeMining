@@ -303,8 +303,7 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
         SaveLoader.Inst.Request_SaveSkillTreeData(_skillTreeUnit.skillIndex, newLevel);
         SoundManager.Inst.PlaySE(120);
 
-        await UniTask.DelayFrame(2);
-        _skillTreeUnit.Init();
+        await UniTask.DelayFrame(3);
         _skillTreeUnit.CallBack_Enhance();
         ui_skillTreeDetail.SetData_Enhanced(newLevel);
 
