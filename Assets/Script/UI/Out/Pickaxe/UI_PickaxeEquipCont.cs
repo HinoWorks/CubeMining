@@ -12,7 +12,7 @@ public class UI_PickaxeEquipCont : UI_PickaxeParamCont
     public override void SetData(PickaxeUnitData _so)
     {
         //obj_notEquip.SetActive(_so == null);
-        obj_main.SetActive(_so != null);
+        //obj_main.SetActive(_so != null);
         if (_so == null) return;
         base.SetData(_so);
     }

@@ -613,7 +613,7 @@ MonoBehaviour:
   m_fontSizeMax: 22
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -873,7 +873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6457164145937179954
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1131,7 +1131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.24029905, g: 0.44514063, b: 0.6792453, a: 1}
+  m_Color: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1746,7 +1746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6149894719902202830
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1828,8 +1828,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_ArtifactDetailUnit
   tmp_skillName: {fileID: 3221476034522898796}
   tmp_description: {fileID: 6704713957832775781}
-  tmp_paramNow: {fileID: 2052051933567557003}
-  tmp_paramNext: {fileID: 1952184689782486056}
+  colorParamA: {r: 0.03586687, g: 0.5849056, b: 0.03586687, a: 1}
+  colorParamB: {r: 0.509434, g: 0, b: 0, a: 1}
   hoverYOffset: 120
 --- !u!1 &8804945314037706340
 GameObject:
@@ -1866,7 +1866,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 20, y: -63.5}
-  m_SizeDelta: {x: -40, y: 60}
+  m_SizeDelta: {x: -40, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8817099919223897372
 GameObject:
@@ -3697,11 +3697,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4525137125141964034, guid: 2cf960ea8862d4ef59af26860762707f, type: 3}
       propertyPath: m_Size
-      value: 0.07795699
+      value: 0.15705521
       objectReference: {fileID: 0}
     - target: {fileID: 4525137125141964034, guid: 2cf960ea8862d4ef59af26860762707f, type: 3}
       propertyPath: m_Value
-      value: 1.0000002
+      value: 1.0000004
       objectReference: {fileID: 0}
     - target: {fileID: 7227909478116946852, guid: 2cf960ea8862d4ef59af26860762707f, type: 3}
       propertyPath: m_Color.a

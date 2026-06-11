@@ -13,7 +13,7 @@ public class UI_PickaxeParamCont : MonoBehaviour
 
     public virtual void SetData(PickaxeUnitData _so)
     {
-        obj_main.SetActive(_so != null);
+        //obj_main.SetActive(_so != null);
         so = _so;
         icon.sprite = so.icon;
         Set_Param();
@@ -28,23 +28,32 @@ public class UI_PickaxeParamCont : MonoBehaviour
             if (i >= ui_paramUnits.Length) break;
             var paramType = (PickaxeParamType)i;
             var setText = "";
+            var setText_title = "";
             switch (paramType)
             {
                 case PickaxeParamType.Damage:
                     setText = $"{so.damage}";
+                    setText_title = "Mine Power";
                     break;
                 case PickaxeParamType.AttackInterval:
                     setText = $"{so.attackInterval} <size=75%>sec</size>";
+                    setText_title = "Mine Time";
                     break;
                 case PickaxeParamType.CriticalRate:
-                    setText = $"{(so.criticalRate * 100).ToString("F1")} <size=75%>%</size>";
+                    setText = $"{(so.criticalRate * 100).ToString("F0")} <size=75%>%</size>";
+                    setText_title = "2X Power Chance";
                     break;
                 case PickaxeParamType.ResourceRate:
-                    setText = $"+{(so.resourceUpRate * 100).ToString("F1")} <size=75%>%</size>";
+                    setText = $"+{(so.resourceUpRate * 100).ToString("F0")} <size=75%>%</size>";
+                    setText_title = "Resource Up";
+                    break;
+                case PickaxeParamType.AreaSize:
+                    setText = $"{(so.size * 100).ToString("F0")} <size=75%>%</size>";
+                    setText_title = "Mining Area Size";
                     break;
             }
             var paramBase = SOLoader.AttackUnitData.GetPickaxeParamBase(paramType);
-            ui_paramUnits[i].SetData(paramBase.icon, paramBase.paramName, setText);
+            ui_paramUnits[i].SetData(paramBase.icon, setText_title, setText);
         }
     }
 

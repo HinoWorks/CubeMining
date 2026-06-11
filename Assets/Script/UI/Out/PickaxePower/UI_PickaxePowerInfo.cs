@@ -39,6 +39,7 @@ public class UI_PickaxePowerInfo : MonoBehaviour
     [SerializeField] UI_StarLevel[] ui_StarLevels;
     [SerializeField] TextMeshProUGUI tmp_blockCount;
     [SerializeField] TextMeshProUGUI tmp_CD;
+    [SerializeField] ParticleSystem eff_enhance;
 
     [Space(5)]
     [Header("Equip Info")]
@@ -119,13 +120,21 @@ public class UI_PickaxePowerInfo : MonoBehaviour
 
     private void SetData_Param(int _currentLevel)
     {
+        Debug.Log("SetData_Param -- currentLevel: " + _currentLevel);
+        if (_currentLevel <= 0)
+        {
+            parent_levelUp.SetActive(false);
+            return;
+        }
+
+        parent_levelUp.SetActive(true);
         paramDatas.Clear();
         switch (so_base.index)
         {
-            case 1: SetData_Param_1_PickaxeAreaEnchant(); break;
+            case 1: SetData_Param_1_BigPickaxe(); break;
             case 2: SetData_Param_2_CreateBom(); break;
             case 3: SetData_Param_3_Laser(); break;
-            case 4: SetData_Param_4_BigPickaxe(); break;
+            case 4: SetData_Param_4_PickaxeAreaEnchant(); break;
             case 5: SetData_Param_5_ArrowShots(); break;
         }
 
@@ -136,40 +145,36 @@ public class UI_PickaxePowerInfo : MonoBehaviour
         var count = 0;
         foreach (var paramData in paramDatas)
         {
-            ui_paramUnits[count].SetData(paramData.paramName, paramData.paramNow, paramData.paramNext);
+            if (isMaxLevel)
+            {
+                ui_paramUnits[count].SetData_OnlyNow(paramData.paramName, paramData.paramNow);
+            }
+            else
+            {
+                ui_paramUnits[count].SetData(paramData.paramName, paramData.paramNow, paramData.paramNext);
+            }
             count++;
         }
     }
 
-    private void SetData_Param_1_PickaxeAreaEnchant()
+
+    private void SetData_Param_1_BigPickaxe()
     {
         var so_nextLevel = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel + 1);
         paramDatas.Add(new ParamData()
         {
-            paramName = "Pickaxe Damage",
-            paramNow = $"+{so_level.value_1 * 100}%",
-            paramNext = so_nextLevel != null ? $"+{so_nextLevel.value_1 * 100}%" : ""
-        });
-
-        paramDatas.Add(new ParamData()
-        {
-            paramName = "Attack Interval",
-            paramNow = $"-{so_level.value_1 * 100}%",
-            paramNext = so_nextLevel != null ? $"-{so_nextLevel.value_1 * 100}%" : ""
+            paramName = "Damage Rate",
+            paramNow = $"{so_level.value_1 * 100}%",
+            paramNext = so_nextLevel != null ? $"{so_nextLevel.value_1 * 100}%" : ""
         });
         paramDatas.Add(new ParamData()
         {
             paramName = "Area Size",
-            paramNow = $"+{so_level.value_1 * 100}%",
-            paramNext = so_nextLevel != null ? $"+{so_nextLevel.value_1 * 100}%" : ""
-        });
-        paramDatas.Add(new ParamData()
-        {
-            paramName = "Enhance Time",
-            paramNow = $"{so_level.value_1} sec",
-            paramNext = so_nextLevel != null ? $"{so_nextLevel.value_1} sec" : ""
+            paramNow = $"{so_level.value_2}",
+            paramNext = so_nextLevel != null ? $"{so_nextLevel.value_2}" : ""
         });
     }
+
     private void SetData_Param_2_CreateBom()
     {
         var so_nextLevel = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel + 1);
@@ -208,22 +213,36 @@ public class UI_PickaxePowerInfo : MonoBehaviour
             paramNext = so_nextLevel != null ? $"{so_nextLevel.value_2}" : ""
         });
     }
-    private void SetData_Param_4_BigPickaxe()
+    private void SetData_Param_4_PickaxeAreaEnchant()
     {
         var so_nextLevel = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel + 1);
         paramDatas.Add(new ParamData()
         {
-            paramName = "Damage Rate",
-            paramNow = $"{so_level.value_1 * 100}%",
-            paramNext = so_nextLevel != null ? $"{so_nextLevel.value_1 * 100}%" : ""
+            paramName = "Pickaxe Damage",
+            paramNow = $"+{so_level.value_1 * 100}%",
+            paramNext = so_nextLevel != null ? $"+{so_nextLevel.value_1 * 100}%" : ""
+        });
+
+        paramDatas.Add(new ParamData()
+        {
+            paramName = "Attack Interval",
+            paramNow = $"-{so_level.value_1 * 100}%",
+            paramNext = so_nextLevel != null ? $"-{so_nextLevel.value_1 * 100}%" : ""
         });
         paramDatas.Add(new ParamData()
         {
             paramName = "Area Size",
-            paramNow = $"{so_level.value_2}",
-            paramNext = so_nextLevel != null ? $"{so_nextLevel.value_2}" : ""
+            paramNow = $"+{so_level.value_1 * 100}%",
+            paramNext = so_nextLevel != null ? $"+{so_nextLevel.value_1 * 100}%" : ""
+        });
+        paramDatas.Add(new ParamData()
+        {
+            paramName = "Enhance Time",
+            paramNow = $"{so_level.value_1} sec",
+            paramNext = so_nextLevel != null ? $"{so_nextLevel.value_1} sec" : ""
         });
     }
+
     private void SetData_Param_5_ArrowShots()
     {
         var so_nextLevel = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel + 1);
@@ -257,6 +276,7 @@ public class UI_PickaxePowerInfo : MonoBehaviour
         }
         SetData_Param(currentLevel);
         SetData_RequiredCost();
+        eff_enhance.Play();
 
         if (_newLevel == 1)
         {
@@ -266,13 +286,8 @@ public class UI_PickaxePowerInfo : MonoBehaviour
 
     private void SetData_RequiredCost()
     {
-        if (isMaxLevel)
-        {
-            parent_levelUp.SetActive(false);
-            return;
-        }
-
-        parent_levelUp.SetActive(true);
+        parent_enhance.SetActive(!isMaxLevel);
+        if (isMaxLevel) return;
         resourceReady = true;
 
         // power Point を確認

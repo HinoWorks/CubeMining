@@ -69,6 +69,7 @@ public enum PickaxeParamType
     AttackInterval,
     CriticalRate,
     ResourceRate,
+    AreaSize,
 }
 
 [System.Serializable]

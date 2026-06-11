@@ -113,7 +113,7 @@ public class MiningTarget_Cube : MiningTargetBase
         SoundManager.Inst.PlaySE(index_SE);
     }
 
-    public override void BreakFromDamage(float _resourceUpRate = 1f)
+    public override void BreakFromDamage(float _resourceUpRate = 0f)
     {
         breakCallback?.Invoke();
 
@@ -132,7 +132,7 @@ public class MiningTarget_Cube : MiningTargetBase
         NotActivate();
     }
 
-    private void AddGetResource(float _resourceUpRate = 1f)
+    private void AddGetResource(float _resourceUpRate = 0f)
     {
         var baseResourceValue = base.value + GameParamManager.gameBaseParam.resourceBaseUpCount;
         var getCount = (int)(baseResourceValue

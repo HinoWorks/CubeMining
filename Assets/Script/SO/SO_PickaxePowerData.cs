@@ -55,7 +55,7 @@ public class SO_PickaxePowerData : ScriptableObject
         var data = Array.Find(pickaxePowerBases, data => data.index == _index);
         if (data == null)
         {
-            Debug.LogError($"PickaxePowerBase not found: {_index}");
+            //Debug.LogError($"PickaxePowerBase not found: {_index}");
             return null;
         }
         return data;
@@ -66,7 +66,7 @@ public class SO_PickaxePowerData : ScriptableObject
         var data = Array.Find(pickaxePowerLevels, data => data.index == _index && data.level == _level);
         if (data == null)
         {
-            Debug.LogError($"PickaxePowerLevel not found: {_index}");
+            //Debug.LogError($"PickaxePowerLevel not found: {_index}");
             return null;
         }
         return data;

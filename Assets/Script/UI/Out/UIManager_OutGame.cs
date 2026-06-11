@@ -2,8 +2,8 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 using DG.Tweening;
-using TMPro;
 using Cysharp.Threading.Tasks;
+using System;
 
 public enum OutGame_MenuType
 {

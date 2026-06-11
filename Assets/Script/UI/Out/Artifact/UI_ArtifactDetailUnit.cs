@@ -6,8 +6,10 @@ public class UI_ArtifactDetailUnit : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI tmp_skillName;
     [SerializeField] TextMeshProUGUI tmp_description;
-    [SerializeField] TextMeshProUGUI tmp_paramNow;
-    [SerializeField] TextMeshProUGUI tmp_paramNext;
+    //[SerializeField] TextMeshProUGUI tmp_paramNow;
+    //[SerializeField] TextMeshProUGUI tmp_paramNext;
+    [SerializeField] Color colorParamA = Color.green;
+    [SerializeField] Color colorParamB = Color.red;
     [SerializeField] float hoverYOffset = 200f;
     private ArtifactUnitData so;
     private RectTransform rectTr;
@@ -42,11 +44,30 @@ public class UI_ArtifactDetailUnit : MonoBehaviour
     private void SetData_Base()
     {
         tmp_skillName.SetText(so.artifactName);
-        tmp_description.SetText(so.description);
 
-        var paramNow = so.value;
-        tmp_paramNow.SetText(paramNow.ToString("F2"));
-        tmp_paramNext.SetText("xxxx");
+        var setText = so.description;
+        var setParam = "";
+        var setParam2 = "";
+        switch (so.unit)
+        {
+            case "%":
+                setParam = $"+{(so.value * 100).ToString("F0")}%";
+                setParam2 = $"-{(so.value_2 * 100).ToString("F0")}%";
+                break;
+            default:
+                setParam = $"+{so.value.ToString("F0")} {so.unit}";
+                setParam2 = $"-{so.value_2.ToString("F0")} {so.unit}";
+                break;
+        }
+        var colorA = ColorUtility.ToHtmlStringRGBA(colorParamA);
+        var colorB = ColorUtility.ToHtmlStringRGBA(colorParamB);
+        setText = setText.Replace("[A]", $"<color=#{colorA}>{setParam}</color>");
+        setText = setText.Replace("[B]", $"<color=#{colorB}>{setParam2}</color>");
+        tmp_description.SetText(setText);
+
+        // var paramNow = so.value;
+        //tmp_paramNow.SetText(paramNow.ToString("F2"));
+        //tmp_paramNext.SetText("xxxx");
 
         this.gameObject.SetActive(true);
     }

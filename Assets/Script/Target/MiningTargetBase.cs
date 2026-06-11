@@ -64,7 +64,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
 
 
 
-    public virtual void BreakFromDamage(float _resourceUpRate = 1f)
+    public virtual void BreakFromDamage(float _resourceUpRate = 0f)
     {
         gameObject.SetActive(false);
     }

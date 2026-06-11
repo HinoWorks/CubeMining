@@ -18,8 +18,9 @@ public class UI_ParamUnit : MonoBehaviour
         tmp_paramName.SetText(_paramName);
         tmp_paramNow.SetText(_paramNow);
         tmp_paramNext.SetText(_paramNext);
+
+        tmp_paramNow.gameObject.SetActive(true);
         obj_vec.SetActive(true);
-        tmp_paramNext.gameObject.SetActive(true);
     }
 
     public void SetData_OnlyNow(string _paramName, string _paramNow)
@@ -27,9 +28,10 @@ public class UI_ParamUnit : MonoBehaviour
         this.gameObject.SetActive(true);
 
         tmp_paramName.SetText(_paramName);
-        tmp_paramNow.SetText(_paramNow);
+        tmp_paramNext.SetText(_paramNow);
+
+        tmp_paramNow.gameObject.SetActive(false);
         obj_vec.SetActive(false);
-        tmp_paramNext.gameObject.SetActive(false);
     }
 
 

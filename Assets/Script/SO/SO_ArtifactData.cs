@@ -67,6 +67,7 @@ public class ArtifactUnitData
     public float value;
     public ArtifactEffectType effectType_2;
     public float value_2;
+    public string unit;
 }
 
 

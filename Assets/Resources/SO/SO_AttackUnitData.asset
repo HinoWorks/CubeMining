@@ -105,7 +105,7 @@ MonoBehaviour:
     criticalRate: 0.01
     resourceUpRate: 0.1
     areaIcon: {fileID: 0}
-    size: 1
+    size: 1.2
   - pickaxeIndex: 3
     pickaxeName: pickaxe 3
     icon: {fileID: 21300000, guid: eb07ef2c35804f645aa3f1d1c76e5b28, type: 3}
@@ -115,7 +115,7 @@ MonoBehaviour:
     criticalRate: 0.01
     resourceUpRate: 0.1
     areaIcon: {fileID: 0}
-    size: 1
+    size: 1.4
   - pickaxeIndex: 4
     pickaxeName: pickaxe 4
     icon: {fileID: 21300000, guid: a1c2f8b4ec4354948a77ce5ac8b6cbf7, type: 3}
@@ -125,7 +125,7 @@ MonoBehaviour:
     criticalRate: 0.01
     resourceUpRate: 0.2
     areaIcon: {fileID: 0}
-    size: 1
+    size: 1.5
   - pickaxeIndex: 5
     pickaxeName: pickaxe 5
     icon: {fileID: 21300000, guid: ebe94485927eba24b951084a637a8403, type: 3}
@@ -135,7 +135,7 @@ MonoBehaviour:
     criticalRate: 0.02
     resourceUpRate: 0.2
     areaIcon: {fileID: 0}
-    size: 1
+    size: 1.7
   - pickaxeIndex: 6
     pickaxeName: pickaxe 6
     icon: {fileID: 21300000, guid: 47a978f25447392449578a7119ff4851, type: 3}
@@ -145,7 +145,7 @@ MonoBehaviour:
     criticalRate: 0.02
     resourceUpRate: 0.2
     areaIcon: {fileID: 0}
-    size: 1
+    size: 1.85
   - pickaxeIndex: 7
     pickaxeName: pickaxe 7
     icon: {fileID: 21300000, guid: aa24e487592e10542bf6a1a4ccc06354, type: 3}
@@ -155,7 +155,7 @@ MonoBehaviour:
     criticalRate: 0.02
     resourceUpRate: 0.2
     areaIcon: {fileID: 0}
-    size: 1
+    size: 2
   - pickaxeIndex: 8
     pickaxeName: pickaxe 8
     icon: {fileID: 21300000, guid: 8a182023b6e26bf429ad2d1d57b8cfc8, type: 3}
@@ -165,7 +165,7 @@ MonoBehaviour:
     criticalRate: 0.03
     resourceUpRate: 0.2
     areaIcon: {fileID: 0}
-    size: 1
+    size: 2.2
   - pickaxeIndex: 9
     pickaxeName: pickaxe 9
     icon: {fileID: 21300000, guid: 1170899cf7162134f823d147fa40786e, type: 3}
@@ -175,7 +175,7 @@ MonoBehaviour:
     criticalRate: 0.03
     resourceUpRate: 0.2
     areaIcon: {fileID: 0}
-    size: 1
+    size: 2.5
   pickaxeResourceDatas:
   - pickaxeIndex: 1
     req_stone: -1
@@ -260,14 +260,17 @@ MonoBehaviour:
     createTime: 200
   pickaxeParamBases:
   - paramType: 0
-    icon: {fileID: 21300000, guid: df3a92f350db147f3aaa78ff31f68418, type: 3}
+    icon: {fileID: 21300000, guid: c42706a40aedf4b9fb84a0c76537bac9, type: 3}
     paramName: Damage
   - paramType: 1
-    icon: {fileID: 21300000, guid: 7bdc0e4dc5cac47cd97b9602ede22a78, type: 3}
+    icon: {fileID: 21300000, guid: 12587ace6b5eb42009b2bcd194ee4ab2, type: 3}
     paramName: Interval
   - paramType: 2
     icon: {fileID: 21300000, guid: f6edc2d761313461a8f37a746ed6341b, type: 3}
     paramName: Critical
   - paramType: 3
-    icon: {fileID: 21300000, guid: bccf6142895be4069adb0b892fec6941, type: 3}
+    icon: {fileID: 21300000, guid: 73df59fdaeae6450398209ad7fafa44e, type: 3}
     paramName: Yield
+  - paramType: 4
+    icon: {fileID: 21300000, guid: c9070b4669a6b42f9b18f70a94bfb070, type: 3}
+    paramName: AreaSize
