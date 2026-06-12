@@ -2,12 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UniRx;
 
-public enum BlockSize
-{
-    Normal,
-    Big,
-}
-
 
 
 [System.Serializable]
