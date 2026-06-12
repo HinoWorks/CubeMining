@@ -2,142 +2,149 @@ using UnityEngine;
 using System.Collections.Generic;
 using UniRx;
 using DG.Tweening;
+using Unity.Mathematics;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-public class AroundLayerManager : MonoBehaviour
+
+namespace HoleGameSystem
 {
-    public static AroundLayerManager Inst;
-    [SerializeField] Transform parent_layerConts;
-    [SerializeField] GameObject pf_layerCont;
-    [SerializeField] SO_BlockLayerData so_blockLayerData;
-    [SerializeField] List<AroundLayerCont> list_layerConts = new List<AroundLayerCont>();
-    [SerializeField] int initialLayerCount = 10;
-
-
-    [Space(10)]
-    [Header(" -- side unit setting --")]
-    [SerializeField] Transform parent_startAnim;
-    private Vector3 startAnim_basePosition = new Vector3(1, 0, -1);
-
-
-
-    void Awake()
+    public class AroundLayerManager : MonoBehaviour
     {
-        if (Inst == null) { Inst = this; }
-        else { Destroy(this); }
-    }
+        /*
+        public static AroundLayerManager Inst;
+        [SerializeField] Transform parent_layerConts;
+        [SerializeField] GameObject pf_layerCont;
+        [SerializeField] SO_BlockLayerData so_blockLayerData;
+        [SerializeField] List<AroundLayerCont> list_layerConts = new List<AroundLayerCont>();
+        [SerializeField] int initialLayerCount = 10;
+
+
+        [Space(10)]
+        [Header(" -- side unit setting --")]
+        [SerializeField] Transform parent_startAnim;
+        private Vector3 startAnim_basePosition = new Vector3(1, 0, -1);
+
+
+
+        void Awake()
+        {
+            if (Inst == null) { Inst = this; }
+            else { Destroy(this); }
+        }
 
 #if UNITY_EDITOR
-    [ContextMenu("=== Create - LayerConts ===")]
-    private void OnValidate_CreateLayerConts()
-    {
-        if (initialLayerCount <= list_layerConts.Count) return;
-
-        NotActivate_AllLayers();
-        for (int i = 0; i < initialLayerCount; i++)
+        [ContextMenu("=== Create - LayerConts ===")]
+        private void OnValidate_CreateLayerConts()
         {
-            var newLayerCont = CreateLayerCont();
-            newLayerCont.Init(i, so_blockLayerData.GetBlockLayerData(i).layerSize);
+            if (initialLayerCount <= list_layerConts.Count) return;
+
+            NotActivate_AllLayers();
+            for (int i = 0; i < initialLayerCount; i++)
+            {
+                var newLayerCont = CreateLayerCont();
+                newLayerCont.Init(i, so_blockLayerData.GetBlockLayerData(i).layerSize);
+            }
         }
-    }
 #endif
 
 
-    void Start()
-    {
-        GameEvent.GameState.SetGameState.Subscribe(SetGameState).AddTo(this);
-    }
-
-    private void Init_AllLayers()
-    {
-        for (int i = 0; i < initialLayerCount; i++)
+        void Start()
         {
-            var targetLayer = list_layerConts[i];
-            targetLayer.Init(i, GameParamManager.Get_BlockGenerateParam_Layer(i).layerSize);
+            GameEvent.GameState.SetGameState.Subscribe(SetGameState).AddTo(this);
         }
-    }
 
-
-    private void SetGameState(GameStateType state)
-    {
-        switch (state)
+        private void Init_AllLayers()
         {
-            case GameStateType.Title:
-                break;
-            case GameStateType.InGame_Ready:
-                Set_GroundInitialPosition();
-                Set_GroundAnimation();
-                Init_AllLayers();
-                break;
-            case GameStateType.InGame:
-            case GameStateType.InGame_End:
-            case GameStateType.Result:
-                break;
-            case GameStateType.OutGame:
-                NotActivate_AllLayers();
-                Set_GroundInitialPosition();
-                break;
+            for (int i = 0; i < initialLayerCount; i++)
+            {
+                var targetLayer = list_layerConts[i];
+                targetLayer.Init(i, GameParamManager.Get_BlockGenerateParam_Layer(i).layerSize);
+            }
         }
-    }
-
-    public void CreateNewLayerCont(int _layerIndex)
-    {
-        var newLayerCont = CreateLayerCont();
-        newLayerCont.Init(_layerIndex, so_blockLayerData.GetBlockLayerData(_layerIndex).layerSize);
-    }
 
 
-    private AroundLayerCont CreateLayerCont()
-    {
-        var freeLayer = list_layerConts.Find(x => x.gameObject.activeSelf == false);
-        if (freeLayer == null)
+        private void SetGameState(GameStateType state)
         {
-            GameObject newLayerCont;
+            switch (state)
+            {
+                case GameStateType.Title:
+                    break;
+                case GameStateType.InGame_Ready:
+                    Set_GroundInitialPosition();
+                    Set_GroundAnimation();
+                    Init_AllLayers();
+                    break;
+                case GameStateType.InGame:
+                case GameStateType.InGame_End:
+                case GameStateType.Result:
+                    break;
+                case GameStateType.OutGame:
+                    NotActivate_AllLayers();
+                    Set_GroundInitialPosition();
+                    break;
+            }
+        }
+
+        public void CreateNewLayerCont(int _layerIndex)
+        {
+            var newLayerCont = CreateLayerCont();
+            newLayerCont.Init(_layerIndex, so_blockLayerData.GetBlockLayerData(_layerIndex).layerSize);
+        }
+
+
+        private AroundLayerCont CreateLayerCont()
+        {
+            var freeLayer = list_layerConts.Find(x => x.gameObject.activeSelf == false);
+            if (freeLayer == null)
+            {
+                GameObject newLayerCont;
 #if UNITY_EDITOR
-            if (!Application.isPlaying)
-            {
-                // エディタ内でプレハブ接続を保持したまま生成
-                newLayerCont = PrefabUtility.InstantiatePrefab(pf_layerCont, parent_layerConts) as GameObject;
-            }
-            else
-            {
-                newLayerCont = Instantiate(pf_layerCont, parent_layerConts);
-            }
+                if (!Application.isPlaying)
+                {
+                    // エディタ内でプレハブ接続を保持したまま生成
+                    newLayerCont = PrefabUtility.InstantiatePrefab(pf_layerCont, parent_layerConts) as GameObject;
+                }
+                else
+                {
+                    newLayerCont = Instantiate(pf_layerCont, parent_layerConts);
+                }
 #else
             newLayerCont = Instantiate(pf_layerCont, parent_layerConts);
 #endif
-            freeLayer = newLayerCont.GetComponent<AroundLayerCont>();
-            list_layerConts.Add(freeLayer);
+                freeLayer = newLayerCont.GetComponent<AroundLayerCont>();
+                list_layerConts.Add(freeLayer);
+            }
+            return freeLayer;
         }
-        return freeLayer;
-    }
 
-    private void NotActivate_AllLayers()
-    {
-        foreach (var layerCont in list_layerConts)
+        private void NotActivate_AllLayers()
         {
-            layerCont.NotActivate();
-        }
-    }
-
-
-    private void Set_GroundInitialPosition()
-    {
-        parent_startAnim.gameObject.SetActive(true);
-        parent_startAnim.localPosition = startAnim_basePosition;
-    }
-    private void Set_GroundAnimation()
-    {
-        parent_startAnim.DOLocalMoveY(-10, 1.5f).SetEase(Ease.InBack).SetDelay(0.25f)
-            .OnComplete(() =>
+            foreach (var layerCont in list_layerConts)
             {
-                parent_startAnim.gameObject.SetActive(false);
-            });
+                layerCont.NotActivate();
+            }
+        }
 
+
+        private void Set_GroundInitialPosition()
+        {
+            parent_startAnim.gameObject.SetActive(true);
+            parent_startAnim.localPosition = startAnim_basePosition;
+        }
+        private void Set_GroundAnimation()
+        {
+            parent_startAnim.DOLocalMoveY(-10, 1.5f).SetEase(Ease.InBack).SetDelay(0.25f)
+                .OnComplete(() =>
+                {
+                    parent_startAnim.gameObject.SetActive(false);
+                });
+
+        }
+
+        */
     }
-
-
 }

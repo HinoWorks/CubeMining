@@ -26,19 +26,12 @@ public class PickaxePowerCont_ArrowShots : PickaxePowerCont_Base
     // awwrowPosiiton
     private float offsetPosition_Y => UnityEngine.Random.Range(3.5f, 4f);
     private float offsetPosition_XZ => UnityEngine.Random.Range(1f, 2.5f);
-    //private float arrowPosition_overArea => currentLayerSize + offsetPosition_XZ;
-    private float arrowPosition_underArea => UnityEngine.Random.Range(1, currentLayerSize);
-    private float arrowPosition_Y => -BlockGenerateManager.Inst.currentLayerIndex + offsetPosition_Y;
+    private float arrowPosition_Y => offsetPosition_Y;
+
+    private Vector3 arrowPosition_base => new Vector3(0, arrowPosition_Y, 0);
 
 
-    private Vector3 arrowPosition_base => new Vector3(currentLayerSize / 2f, arrowPosition_Y, -currentLayerSize / 2f);
 
-    /*
-        private Vector3 arrowPosition_base_ => UnityEngine.Random.Range(0, 2) % 2 == 0 ?
-            new Vector3(arrowPosition_overArea, arrowPosition_Y, -arrowPosition_underArea)
-            : new Vector3(arrowPosition_underArea, arrowPosition_Y, -arrowPosition_overArea);
-    */
-    private int currentLayerSize => BlockGenerateManager.Inst.currentLayerSize;
 
 
 

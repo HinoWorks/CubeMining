@@ -23,7 +23,7 @@ public class MiningTarget_Tresure : MiningTarget_Object
         base.Init_MiningTargetBase(hp, getTreasureValue, _objectGenerateParam.so.objectIndex, _layerIndex);
 
         //現在のブロックタイプの鉱石への変化率から、タイプを設定
-        resourceType = GameParamManager.Get_RandamBlockType(_blockData.blockIndex);
+        resourceType = GameParamManager.Get_RandamBlockIndex().resourceType;
     }
 
     public override void BreakFromDamage(float _resourceUpRate = 1f)

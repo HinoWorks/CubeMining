@@ -3,10 +3,8 @@ using System;
 public class MiningTarget_Cube : MiningTargetBase
 {
     [SerializeField] GameObject[] obj_blockMeshes;
-    [SerializeField] BlockTypeSetter[] blockTypeSetters;
     private Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
     private BlockSize blockSize;
-    protected BaseBlockType baseBlockType;
     protected ResourceType resourceType;
     private Action breakCallback;
 
@@ -20,8 +18,8 @@ public class MiningTarget_Cube : MiningTargetBase
 
 
     // -- se
-    private int index_SE_Damage => (int)baseBlockType;
-    private int index_SE_Break => (int)baseBlockType + 10;
+    private int index_SE_Damage => (int)resourceType;
+    private int index_SE_Break => (int)resourceType + 10;
 
 
     // -- resource unit --
@@ -30,11 +28,9 @@ public class MiningTarget_Cube : MiningTargetBase
     private int resourceMid = 5;
 
 
-    public override void Init(int _hp, int _value, int _index, int _layerIndex)
+    public override void Init(int _hp, int _value, float _sizeRate)
     {
-        base.Init(_hp, _value, _index, _layerIndex);
-        transform.localScale = Vector3.one;
-        base.animScale_rate = 1f;
+        base.Init(_hp, _value, _sizeRate);
         //hitFlash.Init_Crack();
         Set_BlockMesh();
     }
@@ -42,14 +38,10 @@ public class MiningTarget_Cube : MiningTargetBase
     {
         breakCallback = _callback;
     }
-    public virtual void Set_BlockType(BaseBlockType _baseBlockType, ResourceType _resourceType)
+    public virtual void Set_BlockType(ResourceType _resourceType)
     {
-        baseBlockType = _baseBlockType;
         resourceType = _resourceType;
-        foreach (var blockTypeSetter in blockTypeSetters)
-        {
-            blockTypeSetter.Set_BlockTypeObject(resourceType);
-        }
+
     }
     /*
     public void Set_BlockSize(BlockSize _blockSize, float _size)

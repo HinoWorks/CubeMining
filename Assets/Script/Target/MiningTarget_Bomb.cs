@@ -22,7 +22,7 @@ public class MiningTarget_Bomb : MiningTarget_Object
         var bombParam = GameParamManager.list_objectGenerateParam.Find(x => x.so.objectIndex == ObjectIndex_Bomb);
         base.Init(bombParam, null, 0);
         base.Init_MiningTargetBase(_hp, 0, bombParam?.so.objectIndex ?? 0, 0);
-        Set_ActiveGravity();
+        //Set_ActiveGravity();
     }
 
     public override void BreakFromDamage(float _resourceUpRate = 1f)

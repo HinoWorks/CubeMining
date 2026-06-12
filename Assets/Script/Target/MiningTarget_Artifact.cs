@@ -22,7 +22,7 @@ public class MiningTarget_Artifact : MiningTarget_Object
         var hp = 100;
         breakAttackCount = UnityEngine.Random.Range(breakAttackCount_min, breakAttackCount_max);
 
-        base.Init(hp, 0, -1, 0);
+        base.Init(hp, 0, 1f);
         Set_BlockMesh();
         base.animScale_rate = this.transform.localScale.x;
 

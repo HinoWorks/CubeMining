@@ -81,7 +81,7 @@ public class AttackCont_Thunder : AttackContBase
     #region thunderType = top
     private void CreateBullet_Top()
     {
-        targetBlock = BlockGenerateManager.Inst.Get_TopTarget();
+        targetBlock = BlockGenerateManager.Inst.Get_RandomTargetCube();
         if (targetBlock == null) return;
 
         SetThunder_Top_Level1();
@@ -131,7 +131,7 @@ public class AttackCont_Thunder : AttackContBase
     #region thunderType = random
     private void CreateBullet_Random()
     {
-        targetBlock = BlockGenerateManager.Inst.Get_TopTarget();
+        targetBlock = BlockGenerateManager.Inst.Get_RandomTargetCube();
         if (targetBlock == null) return;
 
         SetThunder_Random_Level1();

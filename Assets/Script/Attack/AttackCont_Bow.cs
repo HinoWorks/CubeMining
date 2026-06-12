@@ -78,7 +78,7 @@ public class AttackCont_Bow : AttackContBase
         var shotDirection = Vector3.forward;
         if (isVertical)
         {
-            var targetBlock = BlockGenerateManager.Inst.Get_TopTarget();
+            var targetBlock = BlockGenerateManager.Inst.Get_RandomTargetBlock();
             if (targetBlock == null) return;
             setPosition = targetBlock.transform.position + offsetPosition_vertical;
             shotDirection = (targetBlock.transform.position - setPosition).normalized;
@@ -86,11 +86,14 @@ public class AttackCont_Bow : AttackContBase
         }
         else
         {
-            var (isShotLine_z, targetPosition) = BlockGenerateManager.Inst.Get_RandomTargetArea_Around(deltaLayer);
+            return;
+            /*
+            var (isShotLine_z, targetPosition) = BlockGenerateManager.Inst.Get_RandomTargetBlock();
             setPosition = targetPosition + (isShotLine_z ?
                 new Vector3(0, 0, -offsetPosition_horizontal) : new Vector3(offsetPosition_horizontal, 0, 0));
             shotDirection = (targetPosition - setPosition).normalized;
             freeBowUnit.transform.rotation = Quaternion.LookRotation(shotDirection, Vector3.up);
+        */
         }
         freeBowUnit.transform.position = setPosition;
         freeBowUnit.Init(damage, aliveTime, speed, shotDirection, IsAddArrow);

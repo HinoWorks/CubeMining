@@ -20,28 +20,28 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     private Sequence seq_anim;
 
     private Collider col;
-    private Rigidbody rb;
+    protected Rigidbody rb;
 
     void Awake()
     {
-        col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
     }
 
 
-    public virtual void Init(int _hp, int _value, int _index, int _layerIndex)
+    public virtual void Init(int _hp, int _value, float _sizeRate)
     {
         hp_max = _hp;
-        index = _index;
         value = _value;
         hp = hp_max;
-        layerIndex = _layerIndex;
+        animScale_rate = _sizeRate;
 
-        if (col == null)
+        if (rb == null)
         {
-            col = GetComponent<Collider>();
             rb = GetComponent<Rigidbody>();
+            col = GetComponent<Collider>();
         }
+        transform.localScale = Vector3.one * animScale_rate;
         col.enabled = true;
         gameObject.SetActive(true);
     }

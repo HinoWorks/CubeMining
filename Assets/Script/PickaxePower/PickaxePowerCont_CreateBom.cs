@@ -31,9 +31,8 @@ public class PickaxePowerCont_CreateBom : PickaxePowerCont_Base
 
     private void CreateBom(int _index)
     {
-        var createTargetPosition = BlockGenerateManager.Inst.Get_RandomTargetArea();
+        var createTargetPosition = BlockGenerateManager.Inst.Get_RandomTargetCube().transform.position;
         var createPosition = createTargetPosition // xz位置のみ
-                                - new Vector3(0, BlockGenerateManager.Inst.currentLayerIndex, 0)
                                 + offsetPositionBase
                                 + new Vector3(0, _index * offsetPositionY_delta, 0);
         var newBomBlock = Get_FreeBomBlock();

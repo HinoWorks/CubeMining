@@ -54,7 +54,7 @@ public class AttackCont_RandomPickaxe : AttackContBase
         for (int i = 0; i < count; i++)
         {
             if (CTS.IsCancellationRequested) return;
-            var targetBlock = BlockGenerateManager.Inst.Get_RandomTargetArea();
+            var targetBlock = BlockGenerateManager.Inst.Get_RandomTargetCube();
             if (targetBlock == null) continue;
 
             var freeBullet = bullets.Find(x => !x.gameObject.activeSelf);
@@ -64,7 +64,7 @@ public class AttackCont_RandomPickaxe : AttackContBase
                 freeBullet = newBullet.GetComponent<BulletCont_IceBlock>();
                 bullets.Add(freeBullet);
             }
-            freeBullet.transform.position = targetBlock + offsetPosition;
+            freeBullet.transform.position = targetBlock.transform.position + offsetPosition;
 
             var selectLevel = 1;
             if (base.exLevel >= 2)

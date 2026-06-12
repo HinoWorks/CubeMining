@@ -179,11 +179,8 @@ public class BlockBaseParam
 {
     public BlockData so;
     public int blockIndex => so.blockIndex;
-    //public int hp => so.hp + hp_enhanced;
-    //private int hp_enhanced = 0;
     public int baseValue => baseValue_enhanced;
     private int baseValue_enhanced = 0;
-
     public void Init(BlockData _blockData)
     {
         so = _blockData;
@@ -202,9 +199,12 @@ public class BlockBaseParam
     }
 }
 
+
+
 /// <summary>
 /// ブロックの生成パラメータ == レイヤー毎にブロックの抽選率を設定
 /// </summary>
+/*
 public class BlockGenerateParam_Layer
 {
     public BlockLayerData so;
@@ -240,6 +240,7 @@ public class BlockGenerateParam_Layer
         }
     }
 }
+*/
 
 /// <summary>
 /// 共通　 = ブロックの変化率パラメータ == 土、岩などのブロックタイプ毎に鉱石の抽選率を設定
@@ -263,13 +264,12 @@ public class BlockChangeRateParam
     public int rate_ruby_enhanced { get; private set; } = 0;
     public int rate_sapphire_enhanced { get; private set; } = 0;
     public int rate_diamond_enhanced { get; private set; } = 0;
-    private BlockChangeRateData blockChangeData; // 各ブロックにおける基本の変化率
-    private int rate_iron_total => rate_iron_enhanced + blockChangeData.rate_iron;
-    private int rate_gold_total => isActive_gold ? rate_gold_enhanced + blockChangeData.rate_gold : 0;
-    private int rate_emerald_total => isActive_emerald ? rate_emerald_enhanced + blockChangeData.rate_emerald : 0;
-    private int rate_ruby_total => isActive_ruby ? rate_ruby_enhanced + blockChangeData.rate_ruby : 0;
-    private int rate_sapphire_total => isActive_sapphire ? rate_sapphire_enhanced + blockChangeData.rate_sapphire : 0;
-    private int rate_diamond_total => isActive_diamond ? rate_diamond_enhanced + blockChangeData.rate_diamond : 0;
+    private int rate_iron_total => rate_iron_enhanced;
+    private int rate_gold_total => isActive_gold ? rate_gold_enhanced : 0;
+    private int rate_emerald_total => isActive_emerald ? rate_emerald_enhanced : 0;
+    private int rate_ruby_total => isActive_ruby ? rate_ruby_enhanced : 0;
+    private int rate_sapphire_total => isActive_sapphire ? rate_sapphire_enhanced : 0;
+    private int rate_diamond_total => isActive_diamond ? rate_diamond_enhanced : 0;
 
 
     //ミニ鉱石からfull鉱石に変化する確率
@@ -353,31 +353,37 @@ public class BlockChangeRateParam
     /// <summary>
     /// ブロックのリソースタイプを抽選
     /// </summary>
-    public ResourceType SelectBlockType(BlockChangeRateData _blockChangeData)
+    public BlockGenerateParam SelectBlockType()
     {
-        blockChangeData = _blockChangeData;
+        //blockChangeData = _blockChangeData;
         var total = baseRate
                     - (int)(ArtifactManager.Inst.changeBlockRate * 100) // アーティファクトによる確率上昇分
                     + rate_iron_total + rate_gold_total + rate_emerald_total
                     + rate_ruby_total + rate_sapphire_total + rate_diamond_total;
         var random = Random.Range(0, total);
+        var targetIndex = 1;
         switch (random)
         {
             case var _ when random < rate_iron_total:
-                return ResourceType.Iron;
+                targetIndex = 2;
+                break;
             case var _ when random < rate_iron_total + rate_gold_total:
-                return ResourceType.Gold;
+                targetIndex = 3;
+                break;
             case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total:
-                return ResourceType.Emerald;
+                targetIndex = 4;
+                break;
             case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total:
-                return ResourceType.Ruby;
+                targetIndex = 5;
+                break;
             case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total + rate_sapphire_total:
-                return ResourceType.Sapphire;
+                targetIndex = 6;
+                break;
             case var _ when random < rate_iron_total + rate_gold_total + rate_emerald_total + rate_ruby_total + rate_sapphire_total + rate_diamond_total:
-                return ResourceType.Diamond;
-            default:
-                return ResourceType.Stone;
+                targetIndex = 7;
+                break;
         }
+        return SOLoader.BlockGenerateData.GetBlockGenerateParam(targetIndex);
     }
 
     /// <summary>
@@ -557,7 +563,7 @@ public static class GameParamManager
 
     public readonly static List<ObjectGenerateParam> list_objectGenerateParam = new List<ObjectGenerateParam>();
     public readonly static List<BlockBaseParam> list_blockGenerateParam = new List<BlockBaseParam>();
-    public readonly static List<BlockGenerateParam_Layer> list_blockGenerateParam_Layer = new List<BlockGenerateParam_Layer>();
+    //public readonly static List<BlockGenerateParam_Layer> list_blockGenerateParam_Layer = new List<BlockGenerateParam_Layer>();
     public readonly static List<AttackParam> list_attackParam = new List<AttackParam>();
     public readonly static List<PickaxeParam> list_pickaxeParam = new List<PickaxeParam>();
     public static float artifactGenerateRate => artifactGenerateRateParam.generateRate;
@@ -580,13 +586,11 @@ public static class GameParamManager
     }
 
     /// <summary>
-    /// リソースタイプを抽選
+    /// ランダムにブロックデータをタイプを抽選
     /// </summary>
-    public static ResourceType Get_RandamBlockType(int _blockIndex)
+    public static BlockGenerateParam Get_RandamBlockIndex()
     {
-        var blockChangeBaseParam = SOLoader.BlockData.GetBlockChangeRateData(_blockIndex);
-        var selectType = blockChangeRateParam.SelectBlockType(blockChangeBaseParam);
-        return selectType;
+        return blockChangeRateParam.SelectBlockType();
     }
     /// <summary>
     /// リソースがmax鉱石に変化するかチェック
@@ -634,6 +638,7 @@ public static class GameParamManager
         }
         return targetPickaxe;
     }
+    /*
     public static BlockGenerateParam_Layer Get_BlockGenerateParam_Layer(int _layerIndex)
     {
         var targetLayer = list_blockGenerateParam_Layer.Find(x => x.layerMin <= _layerIndex && x.layerMax > _layerIndex);
@@ -643,6 +648,7 @@ public static class GameParamManager
         }
         return targetLayer;
     }
+    */
     #endregion
 
     #region -- other object generate param --
@@ -718,6 +724,7 @@ public static class GameParamManager
             list_blockGenerateParam.Add(blockParam);
         }
 
+        /*
         // block generate param layer init
         list_blockGenerateParam_Layer.Clear();
         foreach (var blockLayerData in SOLoader.BlockLayerData.blockLayerDatas)
@@ -726,6 +733,7 @@ public static class GameParamManager
             blockGenerateParam_Layer.Init(blockLayerData);
             list_blockGenerateParam_Layer.Add(blockGenerateParam_Layer);
         }
+        */
 
         // block change rate param init
         blockChangeRateParam.Init();

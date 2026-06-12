@@ -181,6 +181,18 @@ public static class SOLoader
         }
     }
 
+    private static SO_BlockGenerateData so_blockGenerateData;
+    public static SO_BlockGenerateData BlockGenerateData
+    {
+        get
+        {
+            if (so_blockGenerateData == null)
+            {
+                so_blockGenerateData = LoadSO<SO_BlockGenerateData>(pathBase + nameof(SO_BlockGenerateData));
+            }
+            return so_blockGenerateData;
+        }
+    }
 
 
     // ========= loc =============
