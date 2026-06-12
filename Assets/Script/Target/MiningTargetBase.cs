@@ -20,10 +20,12 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
     private Sequence seq_anim;
 
     private Collider col;
+    private Rigidbody rb;
 
     void Awake()
     {
         col = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
     }
 
 
@@ -38,6 +40,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         if (col == null)
         {
             col = GetComponent<Collider>();
+            rb = GetComponent<Rigidbody>();
         }
         col.enabled = true;
         gameObject.SetActive(true);
@@ -64,14 +67,52 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
 
 
 
-    public virtual void BreakFromDamage(float _resourceUpRate = 0f)
-    {
-        gameObject.SetActive(false);
-    }
+    public virtual void BreakFromDamage(float _resourceUpRate = 0f) { }
     public virtual void NotActivate()
     {
         gameObject.SetActive(false);
     }
+
+    [SerializeField] private Vector3 boxHalfExtents = new Vector3(0.5f, 5.0f, 0.5f); // 💡柱の「半分のサイズ」
+    [SerializeField] private LayerMask blockLayer;
+
+    protected virtual void WakeUpNeighborBlocks()
+    {
+        Collider[] hitColliders = new Collider[8];
+
+        // 柱の中心点を「自分の少し上」にずらす計算
+        Vector3 boxCenter = transform.position + Vector3.up * boxHalfExtents.y;
+        // 四角い柱の傾き（自分の回転と合わせる、あるいは Quaternion.identity で世界軸に固定）
+        Quaternion boxRotation = Quaternion.identity;
+
+        int numColliders = Physics.OverlapBoxNonAlloc(
+            boxCenter,
+            boxHalfExtents,
+            hitColliders,
+            boxRotation,
+            blockLayer
+        );
+
+        for (int i = 0; i < numColliders; i++)
+        {
+            if (hitColliders[i].gameObject == gameObject) continue;
+            Rigidbody neighborRb = hitColliders[i].attachedRigidbody;
+            if (neighborRb != null)
+            {
+                neighborRb.WakeUp();
+            }
+        }
+    }
+
+    // 💡 インスペクターで範囲を確認しやすくするためのデバッグ表示
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Vector3 boxCenter = transform.position + Vector3.up * boxHalfExtents.y;
+        Gizmos.DrawWireCube(boxCenter, boxHalfExtents * 2);
+    }
+
+
 
     private void DamageAction()
     {
@@ -85,12 +126,5 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         }
         seq_anim.Restart();
     }
-    private void Set_DamageText(int _damage)
-    {
-        /*
-        var ui_damageText = UI_PoolManager.Inst.Get_TextDamage();
-        ui_damageText.SetPosition(transform.position);
-        ui_damageText.SetText(_damage.ToString());
-        */
-    }
+
 }

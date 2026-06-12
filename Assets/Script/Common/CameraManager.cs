@@ -46,6 +46,8 @@ public class CameraManager : MonoBehaviour
                 break;
 
             case GameStateType.InGame_Ready:
+                return;
+
                 vcam.transform.localPosition = initialPosition;
                 vcam.Lens.OrthographicSize = initialZoom;
                 parent_camera.position = initialPosition_parent;
@@ -60,6 +62,9 @@ public class CameraManager : MonoBehaviour
 
     public void SetCameraPosition(int _layerIndex, int _areaSize)
     {
+        return;
+
+
         var deltaPosition_XZ = cameraMoveDelta_XZ * (_areaSize - initialAreaSize);
         var deltaPosition = new Vector3(deltaPosition_XZ, -_layerIndex, -deltaPosition_XZ);
         parent_camera.DOMove(initialPosition_parent + deltaPosition, 0.2f).SetEase(Ease.InOutSine);

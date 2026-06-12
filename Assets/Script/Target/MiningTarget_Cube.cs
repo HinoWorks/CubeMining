@@ -123,6 +123,7 @@ public class MiningTarget_Cube : MiningTargetBase
             effect.transform.position = transform.position + EffectOffset;
             effect.SetActive(true);
         }
+        base.WakeUpNeighborBlocks();
         //CameraManager.Inst?.ShakeBlockBreak();
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.BlockBreakCount, 1);
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.PlayerExp, 1);

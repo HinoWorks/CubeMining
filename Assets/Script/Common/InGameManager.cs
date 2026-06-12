@@ -3,8 +3,7 @@ using UniRx;
 using System.Numerics;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using System.Threading.Tasks;
-
+using PhysicsGameSystem;
 
 /// <summary>
 /// リザルト時のリソースデータ
@@ -116,7 +115,7 @@ public class InGameManager : MonoBehaviour
         gameRecordData_thisGame = new GameRecordData_thisGame();
         GameParamManager.Init_IngameStart();
         AttackManager.Inst.Set_Ready();
-        BlockGenerateManager.Inst.Init();
+        PhysicsGameSystem.BlockGenerateManager.Inst.Init();
         resourceDataList.Clear();
         artifactIndexList.Clear();
         exTime = 0f;
@@ -141,12 +140,12 @@ public class InGameManager : MonoBehaviour
     {
         timer = 0;
         AttackManager.Inst.Set_AttackState(true);
-        BlockGenerateManager.Inst.Set_GenerateState(true);
+        PhysicsGameSystem.BlockGenerateManager.Inst.Set_GenerateState(true);
     }
     private void SetState_InGameEnd()
     {
         AttackManager.Inst.Set_AttackState(false);
-        BlockGenerateManager.Inst.Set_GenerateState(false);
+        PhysicsGameSystem.BlockGenerateManager.Inst.Set_GenerateState(false);
         ResultSave_IngameResult();
         ResultSave_ArtifactCurrentBlockCount();
         ResultSave_Status();
@@ -162,13 +161,13 @@ public class InGameManager : MonoBehaviour
         SoundManager.Inst.PlaySE(102);
         UIManager_Title.Inst.Set_OverScreen().Forget();
         await UniTask.Delay(250);
-        BlockGenerateManager.Inst.ResetAllBlocks();
+        PhysicsGameSystem.BlockGenerateManager.Inst.ResetAllBlocks();
 
         GameWatcher.Inst.SetGameState(GameStateType.OutGame);
     }
     private void SetState_ResultEnd_ToIngameReady()
     {
-        BlockGenerateManager.Inst.ResetAllBlocks();
+        PhysicsGameSystem.BlockGenerateManager.Inst.ResetAllBlocks();
         GameWatcher.Inst.SetGameState(GameStateType.InGame_Ready);
     }
     #endregion
