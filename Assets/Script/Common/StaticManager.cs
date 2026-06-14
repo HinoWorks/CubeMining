@@ -7,6 +7,11 @@ using DG.Tweening;
 
 public class StaticManager : MonoBehaviour
 {
+    public static string tag_AroundWall = "AroundWall";
+    public static string tag_WorldBase = "WorldBase";
+
+
+
     public static int artifactSlotCount = 4;
 
 

@@ -19,6 +19,7 @@ public class BlockGenerateManager : MonoBehaviour
     private List<MiningTarget_Object> list_targetObjects = new List<MiningTarget_Object>(); // 生成されたオブジェクトのリスト
     private List<MiningTarget_Artifact> list_targetArtifacts = new List<MiningTarget_Artifact>(); // 生成されたアーティファクトのリスト
     public bool isGenerateArtifact { get; private set; } = false; // アーティファクト生成フラグ　（ingame中一度しか生成しない）
+    private bool isArtifactAllGet = false; // アーティファクトが全て所持されたかどうか
 
     private float timer = 0f;
     private float checkInterval = 1f;
@@ -48,6 +49,8 @@ public class BlockGenerateManager : MonoBehaviour
     public void Init()
     {
         isGenerateArtifact = false;
+        isArtifactAllGet = SaveLoader.Inst.Get_ArtifactIndex_NotGet().Length == 0 ? true : false;
+
         GameEvent.UI.PublishDepthCount(0);
         InitialBlockCreate();
     }
@@ -78,6 +81,18 @@ public class BlockGenerateManager : MonoBehaviour
             GenerateBlock();
         }
     }
+
+
+    void Update()
+    {
+        if (!isGenerate) return;
+        timer += Time.deltaTime;
+        if (timer >= checkInterval)
+        {
+            Check_BlockCreate();
+            timer = 0f;
+        }
+    }
     private void Check_BlockCreate()
     {
         var randomCount = Random.Range(1, createCount_delta + 1);
@@ -88,8 +103,68 @@ public class BlockGenerateManager : MonoBehaviour
     }
     private void GenerateBlock()
     {
-        var blockGenerateParam = GameParamManager.Get_RandamBlockIndex();
+        if (GameParamManager.IsOtherObjectGenerate())
+        {
+            GenerateOtherObject();
+        }
+        else if (!isArtifactAllGet && !isGenerateArtifact && GameParamManager.IsArtifactGenerate())
+        {
+            GenerateArtifact();
+        }
+        else
+        {
+            GenerateStoneBlock();
+        }
+    }
 
+    #region == Other Object Generate ==
+    public MiningTarget_Object GenerateOtherObject()
+    {
+        var objectData = GameParamManager.SelectOtherObject();
+        var blockData = SOLoader.BlockData.GetBlockData(objectData.so.objectIndex);
+
+        var targetObject = list_targetObjects.Find(x => x.isActiveAndEnabled == false && x.index == objectData.so.objectIndex);
+        if (targetObject == null)
+        {
+            var newObject = Instantiate(objectData.so.pf, InGameManager.Inst.ParentPool) as GameObject;
+            targetObject = newObject.GetComponent<MiningTarget_Object>();
+            list_targetObjects.Add(targetObject);
+        }
+        targetObject.Init(objectData, blockData);
+        targetObject.transform.localPosition = generatePosition;
+        targetObject.transform.localRotation = Quaternion.Euler(generateRotation);
+        return targetObject;
+    }
+    #endregion
+
+
+    #region == Artifact Generate ==
+    public MiningTarget_Artifact GenerateArtifact()
+    {
+        var artifactIndexes = SaveLoader.Inst.Get_ArtifactIndex_NotGet();
+        if (artifactIndexes.Length == 0) return null;
+
+        var targetArtifact = list_targetArtifacts.Find(x => x.isActiveAndEnabled == false);
+        if (targetArtifact == null)
+        {
+            var newArtifact = Instantiate(SOLoader.BlockData.pf_Artifact, InGameManager.Inst.ParentPool) as GameObject;
+            targetArtifact = newArtifact.GetComponent<MiningTarget_Artifact>();
+            list_targetArtifacts.Add(targetArtifact);
+        }
+
+        // 未所持のアーティファクトをランダムで選択
+        var artifactIndex = artifactIndexes[Random.Range(0, artifactIndexes.Length)];
+        targetArtifact.Init(artifactIndex);
+        targetArtifact.transform.localPosition = generatePosition;
+        targetArtifact.transform.localRotation = Quaternion.Euler(generateRotation);
+        isGenerateArtifact = true;
+        return targetArtifact;
+    }
+    #endregion
+
+    private void GenerateStoneBlock()
+    {
+        var blockGenerateParam = GameParamManager.Get_RandamBlockIndex();
         var targetBlock = list_targetBlocks.Find(x => x.isActiveAndEnabled == false && x.index == blockGenerateParam.blockIndex);
         if (targetBlock == null)
         {
@@ -103,132 +178,74 @@ public class BlockGenerateManager : MonoBehaviour
         targetBlock.transform.localPosition = generatePosition;
         targetBlock.transform.localRotation = Quaternion.Euler(generateRotation);
     }
-    void Update()
-    {
-        if (!isGenerate) return;
-        timer += Time.deltaTime;
-        if (timer >= checkInterval)
-        {
-            Check_BlockCreate();
-            timer = 0f;
-        }
-    }
 
-
-    private GameObject Get_RandomBlockPrefab()
-    {
-        return array_blockPrefabs[Random.Range(0, array_blockPrefabs.Length)];
-    }
 
 
 
     /*
+        #region == Block Generate ==
+        public MiningTarget_Cube GenerateBlock(BlockData _blockData, int _layerIndex)
+        {
+            // リソースタイプ抽選
+            var resourceType = GameParamManager.Get_RandamBlockType(_blockData.blockIndex);
+            MiningTarget_Cube targetBlock = null;
 
-            #region == Block Generate ==
-            public MiningTarget_Cube GenerateBlock(BlockData _blockData, int _layerIndex)
+            // リソースなし
+            if (resourceType == ResourceType.Stone)
             {
-                // リソースタイプ抽選
-                var resourceType = GameParamManager.Get_RandamBlockType(_blockData.blockIndex);
-                MiningTarget_Cube targetBlock = null;
-
-                // リソースなし
-                if (resourceType == ResourceType.Stone)
+                targetBlock = list_targetBlocks.Find(x => x.isActiveAndEnabled == false && x.index == _blockData.blockIndex);
+                if (targetBlock == null)
                 {
-                    targetBlock = list_targetBlocks.Find(x => x.isActiveAndEnabled == false && x.index == _blockData.blockIndex);
+                    var newBlock = Instantiate(_blockData.pf, InGameManager.Inst.ParentPool) as GameObject;
+                    targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
+                    list_targetBlocks.Add(targetBlock);
+                }
+                targetBlock.Init(_blockData.hp, _blockData.baseValue, _blockData.blockIndex, _layerIndex);
+                targetBlock.Set_BlockType(_blockData.baseBlockType, resourceType);
+                return targetBlock;
+            }
+
+            else //リソース入り
+            {
+                var resourceBlockIndex = 100 + (int)resourceType;
+                var resourceBlockData = SOLoader.BlockData.GetBlockData(resourceBlockIndex);
+
+                var isResourceMax = GameParamManager.IsMaxResource(resourceType);
+                if (isResourceMax)//リソース最大サイズかチェック
+                {
+                    targetBlock = list_targetBlocks_Max.Find(x => x.isActiveAndEnabled == false);
                     if (targetBlock == null)
                     {
-                        var newBlock = Instantiate(_blockData.pf, InGameManager.Inst.ParentPool) as GameObject;
+                        var newBlock = Instantiate(SOLoader.BlockData.pf_Block_ResourceMax, InGameManager.Inst.ParentPool) as GameObject;
                         targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
-                        list_targetBlocks.Add(targetBlock);
+                        list_targetBlocks_Max.Add(targetBlock);
                     }
-                    targetBlock.Init(_blockData.hp, _blockData.baseValue, _blockData.blockIndex, _layerIndex);
-                    targetBlock.Set_BlockType(_blockData.baseBlockType, resourceType);
-                    return targetBlock;
                 }
-
-                else //リソース入り
+                else
                 {
-                    var resourceBlockIndex = 100 + (int)resourceType;
-                    var resourceBlockData = SOLoader.BlockData.GetBlockData(resourceBlockIndex);
-
-                    var isResourceMax = GameParamManager.IsMaxResource(resourceType);
-                    if (isResourceMax)//リソース最大サイズかチェック
+                    targetBlock = list_targetBlocks_Min.Find(x => x.isActiveAndEnabled == false);
+                    if (targetBlock == null)
                     {
-                        targetBlock = list_targetBlocks_Max.Find(x => x.isActiveAndEnabled == false);
-                        if (targetBlock == null)
-                        {
-                            var newBlock = Instantiate(SOLoader.BlockData.pf_Block_ResourceMax, InGameManager.Inst.ParentPool) as GameObject;
-                            targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
-                            list_targetBlocks_Max.Add(targetBlock);
-                        }
+                        var newBlock = Instantiate(SOLoader.BlockData.pf_Block_ResourceMin, InGameManager.Inst.ParentPool) as GameObject;
+                        targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
+                        list_targetBlocks_Min.Add(targetBlock);
                     }
-                    else
-                    {
-                        targetBlock = list_targetBlocks_Min.Find(x => x.isActiveAndEnabled == false);
-                        if (targetBlock == null)
-                        {
-                            var newBlock = Instantiate(SOLoader.BlockData.pf_Block_ResourceMin, InGameManager.Inst.ParentPool) as GameObject;
-                            targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
-                            list_targetBlocks_Min.Add(targetBlock);
-                        }
-                    }
-                    var fixedResourceValue = (int)(resourceBlockData.baseValue
-                                                * (isResourceMax ? 2f : 1f)
-                                                + GameParamManager.Get_ResourceUpCount(resourceType) //個別の増加量
-                                                + GameParamManager.Get_ResourceBaseUpCount() //共通の増加量
-                                                );
-                    //Debug.Log($"{resourceType} => hp: {resourceBlockData.hp}, value: {fixedResourceValue}");
-                    targetBlock.Init(resourceBlockData.hp, fixedResourceValue, resourceBlockIndex, _layerIndex);
-                    targetBlock.Set_BlockType(_blockData.baseBlockType, resourceType);
-                    return targetBlock;
                 }
+                var fixedResourceValue = (int)(resourceBlockData.baseValue
+                                            * (isResourceMax ? 2f : 1f)
+                                            + GameParamManager.Get_ResourceUpCount(resourceType) //個別の増加量
+                                            + GameParamManager.Get_ResourceBaseUpCount() //共通の増加量
+                                            );
+                //Debug.Log($"{resourceType} => hp: {resourceBlockData.hp}, value: {fixedResourceValue}");
+                targetBlock.Init(resourceBlockData.hp, fixedResourceValue, resourceBlockIndex, _layerIndex);
+                targetBlock.Set_BlockType(_blockData.baseBlockType, resourceType);
+                return targetBlock;
             }
-            #endregion
+        }
+        #endregion
     */
 
-    #region == Other Object Generate ==
-    public MiningTarget_Object GenerateOtherObject(ObjectGenerateParam _objectData, BlockData _blockData, int _layerIndex)
-    {
-        var targetObject = list_targetObjects.Find(x => x.isActiveAndEnabled == false && x.index == _objectData.so.objectIndex);
-        if (targetObject == null)
-        {
-            var newObject = Instantiate(_objectData.so.pf, InGameManager.Inst.ParentPool) as GameObject;
-            targetObject = newObject.GetComponent<MiningTarget_Object>();
-            list_targetObjects.Add(targetObject);
-        }
-        targetObject.Init(_objectData, _blockData, _layerIndex);
-        targetObject.transform.localPosition = Vector3.zero;
-        return targetObject;
-    }
 
-    #endregion
-
-
-    #region == Artifact Generate ==
-    public MiningTarget_Artifact GenerateArtifact(int _layerIndex)
-    {
-        var artifactIndexes = SaveLoader.Inst.Get_ArtifactIndex_NotGet();
-        if (artifactIndexes.Length == 0)
-        {
-            //Debug.Log(" ===**** アーティファクトは全て所持 => 通常ブロック生成");
-            return null;
-        }
-
-        var targetArtifact = list_targetArtifacts.Find(x => x.isActiveAndEnabled == false);
-        if (targetArtifact == null)
-        {
-            var newArtifact = Instantiate(SOLoader.BlockData.pf_Artifact, InGameManager.Inst.ParentPool) as GameObject;
-            targetArtifact = newArtifact.GetComponent<MiningTarget_Artifact>();
-            list_targetArtifacts.Add(targetArtifact);
-        }
-
-        // 未所持のアーティファクトをランダムで選択
-        var artifactIndex = artifactIndexes[Random.Range(0, artifactIndexes.Length)];
-        targetArtifact.Init(artifactIndex, _layerIndex);
-        isGenerateArtifact = true;
-        return targetArtifact;
-    }
-    #endregion
 
 
 
@@ -250,5 +267,13 @@ public class BlockGenerateManager : MonoBehaviour
         return activeBlocks[Random.Range(0, activeBlocks.Count)];
     }
 
+
+    /// <summary>
+    /// ランダムなポイントを取得
+    /// </summary>
+    public Vector3 Get_RandomTargetPoint()
+    {
+        return generatePosition;
+    }
     #endregion
 }

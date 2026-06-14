@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 public class BulletCont_IceBlock : BulletBase
@@ -12,10 +13,15 @@ public class BulletCont_IceBlock : BulletBase
     private int attackableCount = 1;
     private int attackableCount_level2 = 3;
 
+    private int level = 1;
+    private Action<Vector3, int> onGenerateIceCircle;
 
 
-    public void Init_IceBlock(int _damage, Vector3 _direction, int _setLevel)
+
+    public void Init_IceBlock(int _damage, Vector3 _direction, int _setLevel, Action<Vector3, int> _onGenerateIceCircle)
     {
+        onGenerateIceCircle = _onGenerateIceCircle;
+        level = _setLevel;
         if (trailRenderer == null)
         {
             trailRenderer = GetComponent<TrailRenderer>();
@@ -42,6 +48,11 @@ public class BulletCont_IceBlock : BulletBase
 
     protected override void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag(StaticManager.tag_WorldBase))
+        {
+            GenerateIceCircle();
+        }
+
         if (other.TryGetComponent(out IDamagable target))
         {
             target.Damage(damage);
@@ -49,12 +60,18 @@ public class BulletCont_IceBlock : BulletBase
         }
     }
 
+    private void GenerateIceCircle()
+    {
+        onGenerateIceCircle?.Invoke(transform.position, level);
+        base.ReturnToPool();
+    }
+
     private void ColCheck()
     {
         colCount++;
         if (colCount >= attackableCount)
         {
-            base.ReturnToPool();
+            GenerateIceCircle();
         }
     }
 

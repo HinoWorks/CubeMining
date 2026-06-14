@@ -26,14 +26,13 @@ public class MiningTarget_Object : MiningTargetBase
     }
 
 
-    public virtual void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData, int _layerIndex)
+    public virtual void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData)
     {
         objectGenerateParam = _objectGenerateParam;
-        layerIndex = _layerIndex;
         transform.localRotation = Quaternion.identity;
     }
 
-    protected void Init_MiningTargetBase(int _hp, int _value, int _index, int _layerIndex)
+    protected void Init_MiningTargetBase(int _hp, int _value, int _index)
     {
         base.Init(_hp, _value, 1f);
         base.animScale_rate = this.transform.localScale.x;

@@ -16,6 +16,7 @@ public class AttackCont_Thunder : AttackContBase
     private List<BulletCont_ThunderStrike> bullets = new List<BulletCont_ThunderStrike>();
     private MiningTarget_Cube targetBlock;
     private Vector3 velocity = new Vector3(0, -0.1f, 0);
+    private Vector3 effectPosition => new Vector3(targetBlock.transform.position.x, 0, targetBlock.transform.position.z);
 
 
     // thunderType = top
@@ -98,7 +99,7 @@ public class AttackCont_Thunder : AttackContBase
         //SoundManager.Inst.PlaySE(201);
         // 基本のエフェクトを再生
         var effUnit = EffectManager.Inst.Get_Effect(effectType_base);
-        effUnit.transform.position = targetBlock.transform.position;
+        effUnit.transform.position = effectPosition;
         effUnit.SetActive(true);
 
         ActivateThunderBullet(targetBlock.transform.position);
@@ -114,7 +115,7 @@ public class AttackCont_Thunder : AttackContBase
 
         // クロス用のエフェクト再生
         var effUnit = EffectManager.Inst.Get_Effect(effectType_cross);
-        effUnit.transform.position = targetBlock.transform.position;
+        effUnit.transform.position = effectPosition;
         effUnit.SetActive(true);
 
         // クロス用の弾を生成
@@ -143,10 +144,10 @@ public class AttackCont_Thunder : AttackContBase
     private void SetThunder_Random_Level1()
     {
         var effUnit = EffectManager.Inst.Get_Effect(effectType_red);
-        effUnit.transform.position = targetBlock.transform.position;
+        effUnit.transform.position = effectPosition;
         effUnit.SetActive(true);
 
-        ActivateThunderBullet(targetBlock.transform.position);
+        ActivateThunderBullet(effectPosition);
     }
 
     private async void SetThunder_Random_Level2()
@@ -154,12 +155,12 @@ public class AttackCont_Thunder : AttackContBase
         await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
 
         var effUnit = EffectManager.Inst.Get_Effect(effectType_red_circle);
-        effUnit.transform.position = targetBlock.transform.position;
+        effUnit.transform.position = effectPosition;
         effUnit.SetActive(true);
 
         for (int i = 0; i < offsetPosition_red_circle.Length; i++)
         {
-            ActivateThunderBullet(targetBlock.transform.position + offsetPosition_red_circle[i], damageRate_red_circle);
+            ActivateThunderBullet(effectPosition + offsetPosition_red_circle[i], damageRate_red_circle);
         }
     }
     #endregion

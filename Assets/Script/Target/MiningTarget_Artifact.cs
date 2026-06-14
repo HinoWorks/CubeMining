@@ -14,10 +14,9 @@ public class MiningTarget_Artifact : MiningTarget_Object
     private int index_SE_Damage => 26;
     private int index_SE_Break => 27;
 
-    public virtual void Init(int _artifactIndex, int _layerIndex)
+    public virtual void Init(int _artifactIndex)
     {
         artifactIndex = _artifactIndex;
-        layerIndex = _layerIndex;
 
         var hp = 100;
         breakAttackCount = UnityEngine.Random.Range(breakAttackCount_min, breakAttackCount_max);
@@ -26,7 +25,7 @@ public class MiningTarget_Artifact : MiningTarget_Object
         Set_BlockMesh();
         base.animScale_rate = this.transform.localScale.x;
 
-        Debug.Log($"<color=green>== artifact Set: artifactIndex: {artifactIndex} / layerIndex: {layerIndex} ===</color>");
+        Debug.Log($"<color=green>== artifact Set: artifactIndex: {artifactIndex} ===</color>");
     }
 
     public override bool Damage(int damage, float _resourceUpRate = 1f)

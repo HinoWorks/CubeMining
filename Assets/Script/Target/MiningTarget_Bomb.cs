@@ -3,26 +3,27 @@ using UnityEngine;
 public class MiningTarget_Bomb : MiningTarget_Object
 {
     [SerializeField] private GameObject pf_bomb;
-
+    private int breakCount = 3; //  3回ダメージを受けると爆発
     private int index_SE_Damage => 24;
     private int index_SE_Break => 25;
 
-    public override void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData, int _layerIndex)
+    public override void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData)
     {
-        base.Init(_objectGenerateParam, _blockData, _layerIndex);
+        base.Init(_objectGenerateParam, _blockData);
 
         var hp = (int)(_blockData.hp * _objectGenerateParam.so.hpRate);
-        base.Init_MiningTargetBase(hp, 0, _objectGenerateParam.so.objectIndex, _layerIndex);
+        base.Init_MiningTargetBase(hp, 0, _objectGenerateParam.so.objectIndex);
     }
-
     private const int ObjectIndex_Bomb = 3;
 
-    public void Init_SkillBom(int _hp)
+
+
+    public override bool Damage(int damage, float _resourceUpRate = 1f)
     {
-        var bombParam = GameParamManager.list_objectGenerateParam.Find(x => x.so.objectIndex == ObjectIndex_Bomb);
-        base.Init(bombParam, null, 0);
-        base.Init_MiningTargetBase(_hp, 0, bombParam?.so.objectIndex ?? 0, 0);
-        //Set_ActiveGravity();
+        var damageFixed = base.hp_max / breakCount;
+        var isBreak = base.Damage(damageFixed, _resourceUpRate);
+        Set_BlockMesh();
+        return isBreak;
     }
 
     public override void BreakFromDamage(float _resourceUpRate = 1f)

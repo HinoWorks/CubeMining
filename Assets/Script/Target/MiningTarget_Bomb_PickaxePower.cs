@@ -18,8 +18,8 @@ public class MiningTarget_Bomb_PickaxePower : MiningTarget_Object
         damage = _damage;
         sizeRate = _sizeRate;
         var bombParam = GameParamManager.list_objectGenerateParam.Find(x => x.so.objectIndex == ObjectIndex_Bomb);
-        base.Init(bombParam, null, 0);
-        base.Init_MiningTargetBase(_hp, 0, bombParam?.so.objectIndex ?? 0, 0);
+        base.Init(bombParam, null);
+        base.Init_MiningTargetBase(_hp, 0, bombParam?.so.objectIndex ?? 0);
         //Set_ActiveGravity();
     }
 

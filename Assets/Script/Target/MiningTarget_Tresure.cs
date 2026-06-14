@@ -11,16 +11,16 @@ public class MiningTarget_Tresure : MiningTarget_Object
     private int index_SE_Break => 21;
 
 
-    public override void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData, int _layerIndex)
+    public override void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData)
     {
-        base.Init(_objectGenerateParam, _blockData, _layerIndex);
+        base.Init(_objectGenerateParam, _blockData);
         var hp = (int)(_blockData.hp * _objectGenerateParam.so.hpRate);
         treasureValueRate = UnityEngine.Random.Range(rate_min, rate_max);
         var getTreasureValue = (int)(_blockData.baseValue * _objectGenerateParam.so.valueRate * treasureValueRate);
         if (getTreasureValue <= 0) getTreasureValue = 1;
 
         //Debug.Log($"Set_Tresure - hp: {hp}, getTreasureValue: {getTreasureValue}");
-        base.Init_MiningTargetBase(hp, getTreasureValue, _objectGenerateParam.so.objectIndex, _layerIndex);
+        base.Init_MiningTargetBase(hp, getTreasureValue, _objectGenerateParam.so.objectIndex);
 
         //現在のブロックタイプの鉱石への変化率から、タイプを設定
         resourceType = GameParamManager.Get_RandamBlockIndex().resourceType;
