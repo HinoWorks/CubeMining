@@ -1,4 +1,4 @@
-Shader "Universal Render Pipeline/Custom/OreSparkleLit"
+Shader "Universal Render Pipeline/Custom/OreSparkleLitTransparent"
 {
     Properties
     {
@@ -14,14 +14,19 @@ Shader "Universal Render Pipeline/Custom/OreSparkleLit"
         _SparkleWidth ("Sparkle Width", Range(0.01,0.7)) = 0.12
         _SparkleSharpness ("Sparkle Sharpness", Range(0.5,8)) = 2.5
         _SparkleDirection ("Sparkle Direction (XY)", Vector) = (1, 1, 0, 0)
+
+        [Header(Transparency)]
+        _Alpha ("Alpha", Range(0, 1)) = 1
+        _Cutoff ("Alpha Cutoff", Range(0, 1)) = 0.5
     }
 
     SubShader
     {
         Tags
         {
-            "RenderType" = "Opaque"
+            "RenderType" = "Transparent"
             "RenderPipeline" = "UniversalPipeline"
+            "Queue" = "Transparent"
         }
         LOD 300
 
@@ -29,6 +34,10 @@ Shader "Universal Render Pipeline/Custom/OreSparkleLit"
         {
             Name "ForwardLit"
             Tags { "LightMode" = "UniversalForward" }
+
+            Blend SrcAlpha OneMinusSrcAlpha
+            ZWrite Off
+            Cull Back
 
             HLSLPROGRAM
             #pragma vertex vert
@@ -44,7 +53,7 @@ Shader "Universal Render Pipeline/Custom/OreSparkleLit"
 
             half4 frag(OreSparkleVaryings input) : SV_Target
             {
-                return OreSparkleLitFragment(input, 1.0h, 1.0h);
+                return OreSparkleLitFragment(input, _Alpha, 0.0h);
             }
             ENDHLSL
         }
@@ -66,19 +75,22 @@ Shader "Universal Render Pipeline/Custom/OreSparkleLit"
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
+            #include "OreSparkleLitCore.hlsl"
 
-            struct Attributes
+            struct ShadowAttributes
             {
                 float4 positionOS : POSITION;
                 float3 normalOS : NORMAL;
+                float2 uv : TEXCOORD0;
             };
 
-            struct Varyings
+            struct ShadowVaryings
             {
                 float4 positionCS : SV_POSITION;
+                float2 uv : TEXCOORD0;
             };
 
-            float4 GetShadowPositionHClip(Attributes input)
+            float4 GetShadowPositionHClip(ShadowAttributes input)
             {
                 float3 positionWS = TransformObjectToWorld(input.positionOS.xyz);
                 float3 normalWS = TransformObjectToWorldNormal(input.normalOS);
@@ -94,15 +106,18 @@ Shader "Universal Render Pipeline/Custom/OreSparkleLit"
                 return positionCS;
             }
 
-            Varyings ShadowPassVertex(Attributes input)
+            ShadowVaryings ShadowPassVertex(ShadowAttributes input)
             {
-                Varyings output;
+                ShadowVaryings output;
                 output.positionCS = GetShadowPositionHClip(input);
+                output.uv = TRANSFORM_TEX(input.uv, _MainTex);
                 return output;
             }
 
-            half4 ShadowPassFragment(Varyings input) : SV_TARGET
+            half4 ShadowPassFragment(ShadowVaryings input) : SV_TARGET
             {
+                half alpha = OreSparkleSampleAlpha(input.uv) * _Alpha;
+                clip(alpha - _Cutoff);
                 return 0;
             }
             ENDHLSL
@@ -123,26 +138,32 @@ Shader "Universal Render Pipeline/Custom/OreSparkleLit"
             #pragma target 2.0
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "OreSparkleLitCore.hlsl"
 
-            struct Attributes
+            struct DepthAttributes
             {
                 float4 positionOS : POSITION;
+                float2 uv : TEXCOORD0;
             };
 
-            struct Varyings
+            struct DepthVaryings
             {
                 float4 positionCS : SV_POSITION;
+                float2 uv : TEXCOORD0;
             };
 
-            Varyings DepthOnlyVertex(Attributes input)
+            DepthVaryings DepthOnlyVertex(DepthAttributes input)
             {
-                Varyings output = (Varyings)0;
+                DepthVaryings output = (DepthVaryings)0;
                 output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
+                output.uv = TRANSFORM_TEX(input.uv, _MainTex);
                 return output;
             }
 
-            half4 DepthOnlyFragment(Varyings input) : SV_TARGET
+            half4 DepthOnlyFragment(DepthVaryings input) : SV_TARGET
             {
+                half alpha = OreSparkleSampleAlpha(input.uv) * _Alpha;
+                clip(alpha - _Cutoff);
                 return 0;
             }
             ENDHLSL

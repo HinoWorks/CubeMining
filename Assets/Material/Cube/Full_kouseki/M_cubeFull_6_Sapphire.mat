@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_cubeFull_6_Sapphire
-  m_Shader: {fileID: 4800000, guid: ca1150a7978844bd4baf1e59491e65f8, type: 3}
+  m_Shader: {fileID: 4800000, guid: 13a2dd0771d1848c5a0573db7b1f335a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -97,6 +97,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AddPrecomputedVelocity: 0
+    - _Alpha: 0.85
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -105,7 +106,7 @@ Material:
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
-    - _Cutoff: 0.5
+    - _Cutoff: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -114,14 +115,14 @@ Material:
     - _GlossMapScale: 0.5
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _Metallic: 0.729
+    - _Metallic: 1
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0
+    - _Smoothness: 0.444
     - _SmoothnessTextureChannel: 0
     - _SparkleDuration: 2
     - _SparkleIntensity: 2.75
@@ -144,9 +145,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 0.8297088, b: 0, a: 1}
-    - _Color: {r: 0, g: 0.30938816, b: 1, a: 1}
+    - _Color: {r: 0.15566039, g: 0.41724014, b: 1, a: 1}
     - _EmissionColor: {r: 0.23584908, g: 0.21770686, b: 0, a: 1}
-    - _SparkleColor: {r: 0.4292453, g: 0.56202567, b: 1, a: 1}
+    - _SparkleColor: {r: 0.22414559, g: 0.26097047, b: 0.6509434, a: 1}
     - _SparkleDirection: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _UvOffset: {r: 0, g: 0, b: 0, a: 0}
