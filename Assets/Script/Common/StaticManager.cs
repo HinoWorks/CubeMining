@@ -7,9 +7,14 @@ using DG.Tweening;
 
 public class StaticManager : MonoBehaviour
 {
+    // == tag ==
     public static string tag_AroundWall = "AroundWall";
     public static string tag_WorldBase = "WorldBase";
 
+    // == UI リソースアイコンをまとめる際の閾値 ==
+    public const int resourceMax2 = 30;
+    public const int resourceMax = 10;
+    public const int resourceMid = 5;
 
 
     public static int artifactSlotCount = 4;

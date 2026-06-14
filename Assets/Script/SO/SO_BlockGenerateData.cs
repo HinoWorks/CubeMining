@@ -9,6 +9,7 @@ public class BlockGenerateParam
     public string unitName;
     public string unitDescription;
     public GameObject pf;
+    public GameObject pf_max;
     public int hp;
     public int baseValue;
     public ResourceType resourceType;

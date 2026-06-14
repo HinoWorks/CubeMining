@@ -4,17 +4,16 @@ public class MiningTarget_Cube : MiningTargetBase
 {
     [SerializeField] GameObject[] obj_blockMeshes;
     private Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
-    private BlockSize blockSize;
+    //private BlockSize blockSize;
     protected ResourceType resourceType;
     private Action breakCallback;
 
     // -- resource up rate --
     private float resourceUpRate = 1f;
 
-
     // -- mesh --
-    private float meshThreshold_1 = 0.7f;
-    private float meshThreshold_2 = 0.35f;
+    private const float meshThreshold_1 = 0.7f;
+    private const float meshThreshold_2 = 0.35f;
 
 
     // -- se
@@ -22,16 +21,11 @@ public class MiningTarget_Cube : MiningTargetBase
     private int index_SE_Break => (int)resourceType + 10;
 
 
-    // -- resource unit --
-    private int resourceMax2 = 30;
-    private int resourceMax = 10;
-    private int resourceMid = 5;
 
 
     public override void Init(int _hp, int _value, float _sizeRate)
     {
         base.Init(_hp, _value, _sizeRate);
-        //hitFlash.Init_Crack();
         Set_BlockMesh();
     }
     public void Set_BreakCallback(Action _callback)
@@ -43,15 +37,6 @@ public class MiningTarget_Cube : MiningTargetBase
         resourceType = _resourceType;
 
     }
-    /*
-    public void Set_BlockSize(BlockSize _blockSize, float _size)
-    {
-        blockSize = _blockSize;
-
-        transform.localScale = _size * Vector3.one;
-        base.animScale_rate = _size;
-    }
-    */
 
     private void Set_BlockMesh()
     {
@@ -73,7 +58,6 @@ public class MiningTarget_Cube : MiningTargetBase
 
     public override bool Damage(int damage, float _resourceUpRate = 1f)
     {
-        //hitFlash.Flash();
         var effect = EffectManager.Inst?.Get_Effect(EffectType.BlockDamage);
         if (effect != null)
         {
@@ -127,8 +111,7 @@ public class MiningTarget_Cube : MiningTargetBase
 
     private void AddGetResource(float _resourceUpRate = 0f)
     {
-        var baseResourceValue = base.value + GameParamManager.gameBaseParam.resourceBaseUpCount;
-        var getCount = (int)(baseResourceValue
+        var getCount = (int)(base.value
                                     * (1f + _resourceUpRate));
         if (getCount <= 0) getCount = 1;
         InGameManager.Inst.AddGetResource(resourceType, getCount);
@@ -143,18 +126,18 @@ public class MiningTarget_Cube : MiningTargetBase
     /// </summary>
     private void Set_ResourceUnit(int _getCount)
     {
-        var count_Max2 = _getCount / resourceMax2;
-        var remainingCount = _getCount % resourceMax2;
+        var count_Max2 = _getCount / StaticManager.resourceMax2;
+        var remainingCount = _getCount % StaticManager.resourceMax2;
 
-        var count_Max = remainingCount / resourceMax;
-        remainingCount = remainingCount % resourceMax;
-        var count_Mid = remainingCount / resourceMid;
-        remainingCount = remainingCount % resourceMid;
+        var count_Max = remainingCount / StaticManager.resourceMax;
+        remainingCount = remainingCount % StaticManager.resourceMax;
+        var count_Mid = remainingCount / StaticManager.resourceMid;
+        remainingCount = remainingCount % StaticManager.resourceMid;
 
         SetResource(remainingCount, 1, UI_ResourceUnitSize.Min);
-        SetResource(count_Mid, resourceMid, UI_ResourceUnitSize.Mid);
-        SetResource(count_Max, resourceMax, UI_ResourceUnitSize.Max);
-        SetResource(count_Max2, resourceMax2, UI_ResourceUnitSize.Max2);
+        SetResource(count_Mid, StaticManager.resourceMid, UI_ResourceUnitSize.Mid);
+        SetResource(count_Max, StaticManager.resourceMax, UI_ResourceUnitSize.Max);
+        SetResource(count_Max2, StaticManager.resourceMax2, UI_ResourceUnitSize.Max2);
     }
     private void SetResource(int _repeatCount, int _setCount, UI_ResourceUnitSize _unitSize)
     {

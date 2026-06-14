@@ -20,14 +20,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_cubeIn_2_Iron
+  m_Name: M_cubeFull_3_Gold
   m_Shader: {fileID: 4800000, guid: ca1150a7978844bd4baf1e59491e65f8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _EMISSION
   m_InvalidKeywords: []
-  m_LightmapFlags: 6
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -114,20 +114,20 @@ Material:
     - _GlossMapScale: 0.5
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _Metallic: 0.592
+    - _Metallic: 0.571
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 1
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _SparkleDuration: 1.25
-    - _SparkleIntensity: 2.2
-    - _SparkleInterval: 3
-    - _SparkleSharpness: 2.5
-    - _SparkleWidth: 0.12
+    - _SparkleDuration: 2
+    - _SparkleIntensity: 2.75
+    - _SparkleInterval: 1.58
+    - _SparkleSharpness: 6.83
+    - _SparkleWidth: 0.154
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
@@ -143,10 +143,10 @@ Material:
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SparkleColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 0.8297088, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.8304348, b: 0, a: 1}
+    - _EmissionColor: {r: 0.23584908, g: 0.21770686, b: 0, a: 1}
+    - _SparkleColor: {r: 0.8584906, g: 0.61906767, b: 0.20652366, a: 1}
     - _SparkleDirection: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _UvOffset: {r: 0, g: 0, b: 0, a: 0}

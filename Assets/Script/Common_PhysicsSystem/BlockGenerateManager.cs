@@ -16,6 +16,7 @@ public class BlockGenerateManager : MonoBehaviour
     [SerializeField] GameObject[] array_blockPrefabs;
     // -- loc
     private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>();
+    private List<MiningTarget_Cube> list_targetBlocks_Max = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト（資源ブロック 大）
     private List<MiningTarget_Object> list_targetObjects = new List<MiningTarget_Object>(); // 生成されたオブジェクトのリスト
     private List<MiningTarget_Artifact> list_targetArtifacts = new List<MiningTarget_Artifact>(); // 生成されたアーティファクトのリスト
     public bool isGenerateArtifact { get; private set; } = false; // アーティファクト生成フラグ　（ingame中一度しか生成しない）
@@ -113,7 +114,7 @@ public class BlockGenerateManager : MonoBehaviour
         }
         else
         {
-            GenerateStoneBlock();
+            GenerateRockBlock();
         }
     }
 
@@ -162,89 +163,50 @@ public class BlockGenerateManager : MonoBehaviour
     }
     #endregion
 
-    private void GenerateStoneBlock()
+
+    #region == Block Generate ==
+    private void GenerateRockBlock()
     {
         var blockGenerateParam = GameParamManager.Get_RandamBlockIndex();
-        var targetBlock = list_targetBlocks.Find(x => x.isActiveAndEnabled == false && x.index == blockGenerateParam.blockIndex);
-        if (targetBlock == null)
+        var isMaxResource = GameParamManager.IsMaxResource(blockGenerateParam.resourceType);
+
+        MiningTarget_Cube targetBlock = null;
+        if (isMaxResource) // フル鉱石
         {
-            var newBlock = Instantiate(blockGenerateParam.pf, InGameManager.Inst.ParentPool) as GameObject;
-            targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
-            list_targetBlocks.Add(targetBlock);
+            targetBlock = list_targetBlocks_Max.Find(x => x.isActiveAndEnabled == false && x.index == blockGenerateParam.blockIndex);
+            if (targetBlock == null)
+            {
+                var newBlock = Instantiate(blockGenerateParam.pf_max, InGameManager.Inst.ParentPool) as GameObject;
+                targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
+                list_targetBlocks_Max.Add(targetBlock);
+            }
         }
+        else
+        {
+            targetBlock = list_targetBlocks.Find(x => x.isActiveAndEnabled == false && x.index == blockGenerateParam.blockIndex);
+            if (targetBlock == null)
+            {
+                var newBlock = Instantiate(blockGenerateParam.pf, InGameManager.Inst.ParentPool) as GameObject;
+                targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
+                list_targetBlocks.Add(targetBlock);
+            }
+        }
+
+        var fixedResourceValue = (int)(blockGenerateParam.baseValue
+                                  * (isMaxResource ? 2f : 1f)
+                                  + GameParamManager.Get_ResourceUpCount(blockGenerateParam.resourceType) //個別の増加量
+                                  + GameParamManager.Get_ResourceBaseUpCount() //共通の増加量
+                                  );
 
         targetBlock.Init(blockGenerateParam.hp, blockGenerateParam.baseValue, randomBlockSizeRate);
         targetBlock.Set_BlockType(blockGenerateParam.resourceType);
         targetBlock.transform.localPosition = generatePosition;
         targetBlock.transform.localRotation = Quaternion.Euler(generateRotation);
+
+
+
     }
-
-
-
-
-    /*
-        #region == Block Generate ==
-        public MiningTarget_Cube GenerateBlock(BlockData _blockData, int _layerIndex)
-        {
-            // リソースタイプ抽選
-            var resourceType = GameParamManager.Get_RandamBlockType(_blockData.blockIndex);
-            MiningTarget_Cube targetBlock = null;
-
-            // リソースなし
-            if (resourceType == ResourceType.Stone)
-            {
-                targetBlock = list_targetBlocks.Find(x => x.isActiveAndEnabled == false && x.index == _blockData.blockIndex);
-                if (targetBlock == null)
-                {
-                    var newBlock = Instantiate(_blockData.pf, InGameManager.Inst.ParentPool) as GameObject;
-                    targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
-                    list_targetBlocks.Add(targetBlock);
-                }
-                targetBlock.Init(_blockData.hp, _blockData.baseValue, _blockData.blockIndex, _layerIndex);
-                targetBlock.Set_BlockType(_blockData.baseBlockType, resourceType);
-                return targetBlock;
-            }
-
-            else //リソース入り
-            {
-                var resourceBlockIndex = 100 + (int)resourceType;
-                var resourceBlockData = SOLoader.BlockData.GetBlockData(resourceBlockIndex);
-
-                var isResourceMax = GameParamManager.IsMaxResource(resourceType);
-                if (isResourceMax)//リソース最大サイズかチェック
-                {
-                    targetBlock = list_targetBlocks_Max.Find(x => x.isActiveAndEnabled == false);
-                    if (targetBlock == null)
-                    {
-                        var newBlock = Instantiate(SOLoader.BlockData.pf_Block_ResourceMax, InGameManager.Inst.ParentPool) as GameObject;
-                        targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
-                        list_targetBlocks_Max.Add(targetBlock);
-                    }
-                }
-                else
-                {
-                    targetBlock = list_targetBlocks_Min.Find(x => x.isActiveAndEnabled == false);
-                    if (targetBlock == null)
-                    {
-                        var newBlock = Instantiate(SOLoader.BlockData.pf_Block_ResourceMin, InGameManager.Inst.ParentPool) as GameObject;
-                        targetBlock = newBlock.GetComponent<MiningTarget_Cube>();
-                        list_targetBlocks_Min.Add(targetBlock);
-                    }
-                }
-                var fixedResourceValue = (int)(resourceBlockData.baseValue
-                                            * (isResourceMax ? 2f : 1f)
-                                            + GameParamManager.Get_ResourceUpCount(resourceType) //個別の増加量
-                                            + GameParamManager.Get_ResourceBaseUpCount() //共通の増加量
-                                            );
-                //Debug.Log($"{resourceType} => hp: {resourceBlockData.hp}, value: {fixedResourceValue}");
-                targetBlock.Init(resourceBlockData.hp, fixedResourceValue, resourceBlockIndex, _layerIndex);
-                targetBlock.Set_BlockType(_blockData.baseBlockType, resourceType);
-                return targetBlock;
-            }
-        }
-        #endregion
-    */
-
+    #endregion
 
 
 
