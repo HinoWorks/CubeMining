@@ -67,7 +67,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.15
+  m_Radius: 0.36
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!96 &4559854973407252735
 TrailRenderer:
@@ -121,7 +121,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.25
+    widthMultiplier: 0.4
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -233,15 +233,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5236827954872588126, guid: 0819edb7a5c7141f9af7207825c628d6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5236827954872588126, guid: 0819edb7a5c7141f9af7207825c628d6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5236827954872588126, guid: 0819edb7a5c7141f9af7207825c628d6, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5236827954872588126, guid: 0819edb7a5c7141f9af7207825c628d6, type: 3}
       propertyPath: m_LocalPosition.x

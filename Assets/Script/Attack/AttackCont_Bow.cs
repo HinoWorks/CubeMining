@@ -10,18 +10,22 @@ public class AttackCont_Bow : AttackContBase
     [SerializeField] bool isVertical = false;
     private List<BulletCont_Bow> bullets = new List<BulletCont_Bow>();
     private List<AttackCont_BowUnit> bowUnits = new List<AttackCont_BowUnit>();
-    private int deltaLayer = 3;
 
-    private Vector3 offsetPosition_vertical = new Vector3(0, 3f, 0); // 発射位置オフセット
-    private float offsetPosition_horizontal = 3.5f; // 発射位置オフセット
+
+    // bow position
+    private float offsetPosition_tate = 9f;
+    private float offsetPosition_yoko = 11f;
+    private float offsetPosition_y = 0.75f;
+
     public int ExLevel => base.exLevel;
 
     [Space(5)]
     [Header("Level2 checkRate")]
     [SerializeField] float rate_addArrow = 0.5f;
     private bool IsAddArrow => ExLevel >= 2 && UnityEngine.Random.Range(0f, 1f) < rate_addArrow;
-
     public bool IsVertical => isVertical;
+
+
 
     protected override void AwakeCall() { }
     public override void Init(AttackParam _attackParam)
@@ -80,20 +84,23 @@ public class AttackCont_Bow : AttackContBase
         {
             var targetBlock = BlockGenerateManager.Inst.Get_RandomTargetBlock();
             if (targetBlock == null) return;
-            setPosition = targetBlock.transform.position + offsetPosition_vertical;
+
+            var isTargetTop = targetBlock.transform.position.z > 0f;
+            setPosition = new Vector3(targetBlock.transform.position.x, offsetPosition_y, isTargetTop ? -offsetPosition_tate : offsetPosition_tate);
             shotDirection = (targetBlock.transform.position - setPosition).normalized;
+            shotDirection.y = 0f;
             freeBowUnit.transform.rotation = Quaternion.LookRotation(shotDirection, Vector3.forward);
         }
         else
         {
-            return;
-            /*
-            var (isShotLine_z, targetPosition) = BlockGenerateManager.Inst.Get_RandomTargetBlock();
-            setPosition = targetPosition + (isShotLine_z ?
-                new Vector3(0, 0, -offsetPosition_horizontal) : new Vector3(offsetPosition_horizontal, 0, 0));
-            shotDirection = (targetPosition - setPosition).normalized;
-            freeBowUnit.transform.rotation = Quaternion.LookRotation(shotDirection, Vector3.up);
-        */
+            var targetBlock = BlockGenerateManager.Inst.Get_RandomTargetBlock();
+            if (targetBlock == null) return;
+
+            var isTargetRight = targetBlock.transform.position.x > 0f;
+            setPosition = new Vector3(isTargetRight ? -offsetPosition_yoko : offsetPosition_yoko, offsetPosition_y, targetBlock.transform.position.z);
+            shotDirection = (targetBlock.transform.position - setPosition).normalized;
+            shotDirection.y = 0f;
+            freeBowUnit.transform.rotation = Quaternion.LookRotation(shotDirection, Vector3.forward);
         }
         freeBowUnit.transform.position = setPosition;
         freeBowUnit.Init(damage, aliveTime, speed, shotDirection, IsAddArrow);

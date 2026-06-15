@@ -80,7 +80,8 @@ public class AttackCont_BowUnit : MonoBehaviour
             {
                 var plusMinus = i == 0 ? 1 : -1; // 扇状にうつ
                 lineRenderers[i + 1].gameObject.SetActive(true);
-                endPosition = new Vector3(Mathf.Sin(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad), -Mathf.Cos(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad), 0f);
+                endPosition = new Vector3(Mathf.Cos(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad), 0f,
+                                            Mathf.Sin(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad));
                 SetLineRenderer(i + 1, startPosition, startPosition + endPosition * lineLength);
                 shotDirections_level2[i] = endPosition;
             }
@@ -93,7 +94,8 @@ public class AttackCont_BowUnit : MonoBehaviour
             {
                 var plusMinus = i == 0 ? 1 : -1; // 扇状にうつ
                 lineRenderers[i + 1].gameObject.SetActive(true);
-                endPosition = new Vector3(Mathf.Cos(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad), 0f, Mathf.Sin(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad));
+                endPosition = new Vector3(Mathf.Cos(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad), 0f,
+                                                 Mathf.Sin(offsetAngle + shotDirection * plusMinus * Mathf.Deg2Rad));
                 SetLineRenderer(i + 1, startPosition, startPosition + endPosition * lineLength);
                 shotDirections_level2[i] = endPosition;
             }
