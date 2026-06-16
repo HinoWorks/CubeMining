@@ -10,44 +10,55 @@ public enum EffectType
     BlockBreak = 2,
 
     ThunderStrike = 100,
-    ThunderStrike_Cross = 101,
+
+    ThunderStrike_Chain = 101,
 
     ThunderStrike_Red = 110,
-    ThunderStrike_Red_Circle = 111,
-
+    ThunderStrike_Red_Chain = 111,
 
 
     ArrowHit = 200,
     LasaerHit = 201,
 }
 
+
+
 public class EffectManager : MonoBehaviour
 {
     public static EffectManager Inst;
 
+
     [SerializeField] GameObject pf_eff_blockDamage;
     [SerializeField] GameObject pf_eff_blockBreak;
     [SerializeField] GameObject pf_eff_thunderStrike;
-    [SerializeField] GameObject pf_eff_thunderStrike_cross;
+    [SerializeField] GameObject pf_eff_thunderStrike_chain;
     [SerializeField] GameObject pf_eff_thunderStrike_red;
-    [SerializeField] GameObject pf_eff_thunderStrike_red_circle;
+    [SerializeField] GameObject pf_eff_thunderStrike_chain_red;
     [SerializeField] GameObject pf_eff_arrowHit;
     [SerializeField] GameObject pf_eff_lasaerHit;
     private List<GameObject> pool_eff_blockDamage = new List<GameObject>();
     private List<GameObject> pool_eff_blockBreak = new List<GameObject>();
     private List<GameObject> pool_eff_thunderStrike = new List<GameObject>();
-    private List<GameObject> pool_eff_thunderStrike_cross = new List<GameObject>();
+    private List<EffectCont> pool_eff_thunderStrike_chain = new List<EffectCont>();
     private List<GameObject> pool_eff_thunderStrike_red = new List<GameObject>();
-    private List<GameObject> pool_eff_thunderStrike_red_circle = new List<GameObject>();
+    private List<EffectCont> pool_eff_thunderStrike_chain_red = new List<EffectCont>();
     private List<GameObject> pool_eff_arrowHit = new List<GameObject>();
     private List<GameObject> pool_eff_lasaerHit = new List<GameObject>();
     private int createCountInit = 20;
     private int createCountInit_thunderStrike = 10;
 
+
     void Awake()
     {
-        if (Inst == null) Inst = this;
-        else { Destroy(this); }
+        if (Inst == null)
+        {
+            Inst = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
     void Start()
@@ -101,12 +112,8 @@ public class EffectManager : MonoBehaviour
                 return (pf_eff_blockBreak, pool_eff_blockBreak);
             case EffectType.ThunderStrike:
                 return (pf_eff_thunderStrike, pool_eff_thunderStrike);
-            case EffectType.ThunderStrike_Cross:
-                return (pf_eff_thunderStrike_cross, pool_eff_thunderStrike_cross);
             case EffectType.ThunderStrike_Red:
                 return (pf_eff_thunderStrike_red, pool_eff_thunderStrike_red);
-            case EffectType.ThunderStrike_Red_Circle:
-                return (pf_eff_thunderStrike_red_circle, pool_eff_thunderStrike_red_circle);
             case EffectType.ArrowHit:
                 return (pf_eff_arrowHit, pool_eff_arrowHit);
             case EffectType.LasaerHit:
@@ -116,6 +123,32 @@ public class EffectManager : MonoBehaviour
         }
     }
 
+
+    public EffectCont Get_EffectCont(EffectType _effectType)
+    {
+        var (pf, pool) = Get_EffectDataCont(_effectType);
+        var selectUnit = pool.Find(d => d.gameObject.activeSelf == false);
+        if (selectUnit == null)
+        {
+            var newUnit = Instantiate(pf, InGameManager.Inst.ParentPool) as GameObject;
+            selectUnit = newUnit.GetComponent<EffectCont>();
+            pool.Add(selectUnit);
+        }
+        return selectUnit;
+    }
+
+    private (GameObject, List<EffectCont>) Get_EffectDataCont(EffectType _effectType)
+    {
+        switch (_effectType)
+        {
+            case EffectType.ThunderStrike_Chain:
+                return (pf_eff_thunderStrike_chain, pool_eff_thunderStrike_chain);
+            case EffectType.ThunderStrike_Red_Chain:
+                return (pf_eff_thunderStrike_chain_red, pool_eff_thunderStrike_chain_red);
+            default:
+                return (null, new List<EffectCont>());
+        }
+    }
 
 
 

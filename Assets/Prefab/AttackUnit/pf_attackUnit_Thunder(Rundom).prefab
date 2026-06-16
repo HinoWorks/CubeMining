@@ -44,5 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094faf4a5cf4046c1a16cecbd29657c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackCont_Thunder
-  thunderType: 1
+  thunderType: 0
   bulletPrefab: {fileID: 7706929385890813557, guid: 7e2c7773579384760b23e539ea3bc5fd, type: 3}
+  searchRadius: 5
+  searchLayer:
+    serializedVersion: 2
+    m_Bits: 128
