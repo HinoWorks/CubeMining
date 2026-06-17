@@ -1624,6 +1624,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1319541156741826578, guid: 32208ad11c7064fd28426e9ad3482184, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9209848193431869852}
+    - targetCorrespondingSourceObject: {fileID: 1319541156741826578, guid: 32208ad11c7064fd28426e9ad3482184, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2643504723305407299}
   m_SourcePrefab: {fileID: 100100000, guid: 32208ad11c7064fd28426e9ad3482184, type: 3}
 --- !u!4 &1965341811137122579 stripped
 Transform:
@@ -1647,8 +1650,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a44c581bf9c7453989fbf81a6324e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiningTarget_Bomb
+  boxHalfExtents: {x: 0.5, y: 5, z: 0.5}
+  blockLayer:
+    serializedVersion: 2
+    m_Bits: 128
   obj_blockMeshes:
   - {fileID: 2092215141571369044}
   - {fileID: 1882765570392776332}
   - {fileID: 4547884440018497201}
   pf_bomb: {fileID: 2390671457647449684, guid: dd224f67ba67e4ce3b1294e23f40ff19, type: 3}
+  forceFieldArea: {fileID: 2643504723305407299}
+--- !u!114 &2643504723305407299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5774114967898896256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d05d973889d48fbb076be4f3d1e71f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceFieldArea
+  radius: 5
+  force: 10
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 128

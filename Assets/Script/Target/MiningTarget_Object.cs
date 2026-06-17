@@ -35,7 +35,6 @@ public class MiningTarget_Object : MiningTargetBase
     protected void Init_MiningTargetBase(int _hp, int _value, int _index)
     {
         base.Init(_hp, _value, 1f);
-        base.animScale_rate = this.transform.localScale.x;
         Set_BlockMesh();
     }
 
@@ -73,5 +72,6 @@ public class MiningTarget_Object : MiningTargetBase
 
         base.BreakFromDamage();
         breakCallback?.Invoke();
+        NotActivate();
     }
 }

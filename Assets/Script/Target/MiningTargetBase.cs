@@ -1,7 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class MiningTargetBase : MonoBehaviour, IDamagable
+public class MiningTargetBase : MonoBehaviour, IDamagable, IForce
 {
     public int index { get; private set; }
     protected virtual int hp { get; set; } = 10;
@@ -13,7 +13,14 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
 
     public Transform GetTransform() => transform;
 
-    protected float animScale_rate;
+    public virtual void ApplyForce(Vector3 _force)
+    {
+        if (rb == null || !isAlive) return;
+        rb.WakeUp();
+        rb.AddForce(_force, ForceMode.Impulse);
+    }
+
+    protected float animScale_rate = 1f;
     private Vector3 animScale_1 => animScale_rate * new Vector3(1.05f, 0.95f, 1.05f);
     private Vector3 animScale_2 => animScale_rate * new Vector3(0.95f, 1.05f, 0.95f);
     private float animDuration = 0.05f;
@@ -43,7 +50,10 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         }
         transform.localScale = Vector3.one * animScale_rate;
         col.enabled = true;
+
+        this.transform.localScale = Vector3.zero;
         gameObject.SetActive(true);
+        this.transform.DOScale(Vector3.one * animScale_rate, 0.15f).SetEase(Ease.OutBack).Play();
     }
 
     public virtual bool Damage(int damage, float _resourceUpRate = 1f)
@@ -73,7 +83,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         gameObject.SetActive(false);
     }
 
-    [SerializeField] private Vector3 boxHalfExtents = new Vector3(0.5f, 5.0f, 0.5f); // 💡柱の「半分のサイズ」
+    [SerializeField] private Vector3 boxHalfExtents = new Vector3(0.5f, 5.0f, 0.5f); // 柱の「半分のサイズ」
     [SerializeField] private LayerMask blockLayer;
 
     protected virtual void WakeUpNeighborBlocks()
@@ -104,7 +114,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable
         }
     }
 
-    // 💡 インスペクターで範囲を確認しやすくするためのデバッグ表示
+    // インスペクターで範囲を確認しやすくするためのデバッグ表示
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
