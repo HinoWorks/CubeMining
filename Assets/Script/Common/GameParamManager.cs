@@ -9,12 +9,18 @@ using Cysharp.Threading.Tasks;
 public class GameBaseParam
 {
     // インゲーム時間の初期値
-    public float ingameTime => ingameTime_Base + ingameTime_enhanced;
-    private float ingameTime_Base = 15f;
+    public float ingameTime => StaticManager.ingameTime_base + ingameTime_enhanced;
     private float ingameTime_enhanced = 0f;
 
-    //再生成確率xアップ(上から降ってくる)
-    // TODO here
+
+    // ==== block 生成まわり ====
+    public int blockGenerate_initialCount => StaticManager.blockGenerate_initialCount + blockGenerate_initialCount_enhanced;
+    private int blockGenerate_initialCount_enhanced = 0;
+    public float blockGenerate_createCount_deltaTime => StaticManager.blockGenerate_count_deltaTime + blockGenerate_createCount_deltaTime_enhanced;
+    private float blockGenerate_createCount_deltaTime_enhanced = 0f;
+    public float blockGenerate_duration => StaticManager.blockGenerate_duration - blockGenerate_duration_enhanced;
+    private float blockGenerate_duration_enhanced = 0f;
+
 
 
     //ラッキーマイン - 採掘量が1.5倍になる確率x
@@ -122,6 +128,19 @@ public class GameBaseParam
                 break;
             case ParamType.Size:
                 pickaxeBase_Size_enhanced += _setParam;
+                break;
+
+
+            // -- Block Generate Param --
+
+            case ParamType.BlockGenerate_InitialCount:
+                blockGenerate_initialCount_enhanced += (int)_setParam;
+                break;
+            case ParamType.BlockGenerate_Count_DeltaTime:
+                blockGenerate_createCount_deltaTime_enhanced += _setParam;
+                break;
+            case ParamType.BlockGenerate_Duration:
+                blockGenerate_duration_enhanced += _setParam;
                 break;
         }
     }
@@ -250,26 +269,27 @@ public class BlockChangeRateParam
 {
     private int baseRate = 100;
 
-    private bool isActive_gold = false;
-    private bool isActive_emerald = false;
-    private bool isActive_ruby = false;
-    private bool isActive_sapphire = false;
-    private bool isActive_diamond = false;
-
 
     //ミニ鉱石への変化率
+    private int rate_iron_base = 0;
+    private int rate_gold_base = 0;
+    private int rate_emerald_base = 0;
+    private int rate_ruby_base = 0;
+    private int rate_sapphire_base = 0;
+    private int rate_diamond_base = 0;
+
     public int rate_iron_enhanced { get; private set; } = 0;
     public int rate_gold_enhanced { get; private set; } = 0;
     public int rate_emerald_enhanced { get; private set; } = 0;
     public int rate_ruby_enhanced { get; private set; } = 0;
     public int rate_sapphire_enhanced { get; private set; } = 0;
     public int rate_diamond_enhanced { get; private set; } = 0;
-    private int rate_iron_total => rate_iron_enhanced;
-    private int rate_gold_total => isActive_gold ? rate_gold_enhanced : 0;
-    private int rate_emerald_total => isActive_emerald ? rate_emerald_enhanced : 0;
-    private int rate_ruby_total => isActive_ruby ? rate_ruby_enhanced : 0;
-    private int rate_sapphire_total => isActive_sapphire ? rate_sapphire_enhanced : 0;
-    private int rate_diamond_total => isActive_diamond ? rate_diamond_enhanced : 0;
+    private int rate_iron_total => rate_iron_base + rate_iron_enhanced;
+    private int rate_gold_total => rate_gold_base + rate_gold_enhanced;
+    private int rate_emerald_total => rate_emerald_base + rate_emerald_enhanced;
+    private int rate_ruby_total => rate_ruby_base + rate_ruby_enhanced;
+    private int rate_sapphire_total => rate_sapphire_base + rate_sapphire_enhanced;
+    private int rate_diamond_total => rate_diamond_base + rate_diamond_enhanced;
 
 
     //ミニ鉱石からfull鉱石に変化する確率
@@ -297,9 +317,8 @@ public class BlockChangeRateParam
     public int diamond_resourceUpCount_enhanced { get; private set; } = 0;
 
 
-    public void Init()
-    {
-    }
+    public void Init() { }
+
     public void Set_Param(ParamType _paramType, int _targetBlockIndex, float _setParam)
     {
         switch (_paramType)
@@ -307,11 +326,12 @@ public class BlockChangeRateParam
             case ParamType.Unlock:
                 switch (_targetBlockIndex)
                 {
-                    case 2: isActive_gold = true; break;
-                    case 3: isActive_emerald = true; break;
-                    case 4: isActive_ruby = true; break;
-                    case 5: isActive_sapphire = true; break;
-                    case 6: isActive_diamond = true; break;
+                    case 1: rate_iron_base += (int)_setParam; break;
+                    case 2: rate_gold_base += (int)_setParam; break;
+                    case 3: rate_emerald_base += (int)_setParam; break;
+                    case 4: rate_ruby_base += (int)_setParam; break;
+                    case 5: rate_sapphire_base += (int)_setParam; break;
+                    case 6: rate_diamond_base += (int)_setParam; break;
                 }
                 break;
             case ParamType.Rate_Generate:
@@ -410,11 +430,12 @@ public class BlockChangeRateParam
     {
         switch (_resourceType)
         {
-            case ResourceType.Gold: return isActive_gold;
-            case ResourceType.Emerald: return isActive_emerald;
-            case ResourceType.Ruby: return isActive_ruby;
-            case ResourceType.Sapphire: return isActive_sapphire;
-            case ResourceType.Diamond: return isActive_diamond;
+            case ResourceType.Iron: return rate_iron_base > 0;
+            case ResourceType.Gold: return rate_gold_base > 0;
+            case ResourceType.Emerald: return rate_emerald_base > 0;
+            case ResourceType.Ruby: return rate_ruby_base > 0;
+            case ResourceType.Sapphire: return rate_sapphire_base > 0;
+            case ResourceType.Diamond: return rate_diamond_base > 0;
             default: return true;
         }
     }
@@ -495,7 +516,7 @@ public class AttackParam
     public float attackInterval => (1f - attackInterval_enhanced) * so.attackInterval;
     public float criticalRate => criticalRate_enhanced + so.criticalRate;
     public float size => size_enhanced + so.size;
-    public float aliveTime => so.aliveTime;
+    public float aliveTime => aliveTime_enhanced + so.aliveTime;
     public float speed => so.speed + speed_enhanced;
     public int count => count_enhanced + so.count;
     public int exLevel => 1 + exLevel_enhanced;
@@ -509,7 +530,7 @@ public class AttackParam
     private float criticalRate_enhanced = 0f;
     private float size_enhanced = 0f;
     private int exLevel_enhanced = 0;
-
+    private float aliveTime_enhanced = 0f;
 
     public void Init(AttackUnitData _attackUnitData)
     {
@@ -540,6 +561,9 @@ public class AttackParam
                 break;
             case ParamType.CriticalRate:
                 criticalRate_enhanced += _setParam;
+                break;
+            case ParamType.AliveTime:
+                aliveTime_enhanced += _setParam;
                 break;
             case ParamType.ExLevel:
                 exLevel_enhanced += (int)_setParam;

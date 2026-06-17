@@ -40,11 +40,18 @@ public enum ParamType
     Size,
     CriticalRate,
     ResourceRate,
+    AliveTime,
     ExLevel,
 
 
     // ==== artifact param ====
     ArtifactSlotCount,
+
+
+    // ==== block generate param ====
+    BlockGenerate_InitialCount,
+    BlockGenerate_Count_DeltaTime,
+    BlockGenerate_Duration,
 }
 
 

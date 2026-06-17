@@ -96,7 +96,7 @@ MonoBehaviour:
     deltaValue: 0.01
   - baseIndex: 106
     paramCategory: 4
-    paramType: 19
+    paramType: 20
     targetIndex: 1
     skillName: Ex Power
     description: xxx
@@ -137,7 +137,7 @@ MonoBehaviour:
     skillName: Multi-Bolt
     description: Increases the number of icicles generated simultaneously.
     icon: {fileID: 21300000, guid: 585985363abdc4d01b715feaf61081d0, type: 3}
-    maxLevel: 3
+    maxLevel: 2
     deltaValue: 1
   - baseIndex: 205
     paramCategory: 4
@@ -150,7 +150,7 @@ MonoBehaviour:
     deltaValue: 0.01
   - baseIndex: 206
     paramCategory: 4
-    paramType: 19
+    paramType: 20
     targetIndex: 2
     skillName: Ex Power
     description: xxx
@@ -161,8 +161,8 @@ MonoBehaviour:
     paramCategory: 4
     paramType: 0
     targetIndex: 3
-    skillName: Chaos Bolt
-    description: Strikes random blocks with [x] chaotic lightning bolts.
+    skillName: Bound Shot (dammy)
+    description: xxx
     icon: {fileID: 21300000, guid: 9f9f790c11fdc4c739dc156bcc4d5545, type: 3}
     maxLevel: 1
     deltaValue: 1
@@ -170,8 +170,8 @@ MonoBehaviour:
     paramCategory: 4
     paramType: 12
     targetIndex: 3
-    skillName: Surge Power
-    description: Increases the damage of random lightning strikes.
+    skillName: Power (dammy)
+    description: xxx
     icon: {fileID: 21300000, guid: 7129f8f085a7a413785daf690382057d, type: 3}
     maxLevel: 5
     deltaValue: 0.1
@@ -179,8 +179,8 @@ MonoBehaviour:
     paramCategory: 4
     paramType: 15
     targetIndex: 3
-    skillName: Surge Interval
-    description: Reduces the time between random lightning strikes.
+    skillName: Interval (dammy)
+    description: xxx
     icon: {fileID: 21300000, guid: a691ebbd049284fbb817bdae91f1c7da, type: 3}
     maxLevel: 3
     deltaValue: 0.03
@@ -188,23 +188,23 @@ MonoBehaviour:
     paramCategory: 4
     paramType: 13
     targetIndex: 3
-    skillName: Multi-Surge
-    description: Strikes more random blocks simultaneously.
+    skillName: Multi- (dammy)
+    description: xxx
     icon: {fileID: 21300000, guid: 14cc648311ff6476c98725a0a0e7b62f, type: 3}
-    maxLevel: 3
+    maxLevel: 2
     deltaValue: 1
   - baseIndex: 305
     paramCategory: 4
-    paramType: 11
+    paramType: 19
     targetIndex: 3
-    skillName: Precision Hitting
-    description: Boosts the chance of landing a critical hit for massive damage.
+    skillName: Alive Time (dammy)
+    description: xxx
     icon: {fileID: 21300000, guid: c0505c970bd5b4fed948ab5e5ed37ddd, type: 3}
     maxLevel: 5
     deltaValue: 0.01
   - baseIndex: 306
     paramCategory: 4
-    paramType: 19
+    paramType: 20
     targetIndex: 3
     skillName: Ex Power
     description: xxx
@@ -258,7 +258,7 @@ MonoBehaviour:
     deltaValue: 0.01
   - baseIndex: 406
     paramCategory: 4
-    paramType: 19
+    paramType: 20
     targetIndex: 4
     skillName: Ex Power
     description: xxx
@@ -299,7 +299,7 @@ MonoBehaviour:
     skillName: Volley Shot
     description: Increases the number of arrows fired simultaneously.
     icon: {fileID: 21300000, guid: e7c05e67b6d2442febcaabbb5642d57e, type: 3}
-    maxLevel: 3
+    maxLevel: 2
     deltaValue: 1
   - baseIndex: 505
     paramCategory: 4
@@ -312,7 +312,7 @@ MonoBehaviour:
     deltaValue: 0.01
   - baseIndex: 506
     paramCategory: 4
-    paramType: 19
+    paramType: 20
     targetIndex: 5
     skillName: Ex Power
     description: xxx
@@ -353,7 +353,7 @@ MonoBehaviour:
     skillName: Volley Shot
     description: Increases the number of arrows fired simultaneously.
     icon: {fileID: 21300000, guid: c3ead6b32f14f42a8bf3121afa1e5c3a, type: 3}
-    maxLevel: 3
+    maxLevel: 2
     deltaValue: 1
   - baseIndex: 605
     paramCategory: 4
@@ -366,7 +366,7 @@ MonoBehaviour:
     deltaValue: 0.01
   - baseIndex: 606
     paramCategory: 4
-    paramType: 19
+    paramType: 20
     targetIndex: 6
     skillName: Ex Power
     description: xxx
@@ -375,6 +375,15 @@ MonoBehaviour:
     deltaValue: 1
   - baseIndex: 1011
     paramCategory: 2
+    paramType: 0
+    targetIndex: 1
+    skillName: Unlock Iron
+    description: Unlocks the appearance of Iron ore in mining layers.
+    icon: {fileID: 21300000, guid: 7da30704fefc94772a296ec099cdd708, type: 3}
+    maxLevel: 1
+    deltaValue: 3
+  - baseIndex: 1012
+    paramCategory: 2
     paramType: 9
     targetIndex: 1
     skillName: Ore Vein Finder
@@ -382,7 +391,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 56b9dbfe46085443aa6f33ed7d9f4183, type: 3}
     maxLevel: 10
     deltaValue: 1
-  - baseIndex: 1012
+  - baseIndex: 1013
     paramCategory: 2
     paramType: 11
     targetIndex: 1
@@ -391,7 +400,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 921423544533d4826bb0c0931b358e3a, type: 3}
     maxLevel: 3
     deltaValue: 1
-  - baseIndex: 1013
+  - baseIndex: 1014
     paramCategory: 2
     paramType: 10
     targetIndex: 1
@@ -408,7 +417,7 @@ MonoBehaviour:
     description: Unlocks the appearance of Gold ore in mining layers.
     icon: {fileID: 21300000, guid: a82ad83c87e784ac0b0fdd5cd67d27ac, type: 3}
     maxLevel: 1
-    deltaValue: 1
+    deltaValue: 3
   - baseIndex: 1022
     paramCategory: 2
     paramType: 9
@@ -444,7 +453,7 @@ MonoBehaviour:
     description: Unlocks the appearance of Emerald ore in mining layers.
     icon: {fileID: 21300000, guid: d7301c1ef512c4f4f845e5022110af56, type: 3}
     maxLevel: 1
-    deltaValue: 1
+    deltaValue: 3
   - baseIndex: 1032
     paramCategory: 2
     paramType: 9
@@ -480,7 +489,7 @@ MonoBehaviour:
     description: Unlocks the appearance of Ruby ore in mining layers.
     icon: {fileID: 21300000, guid: 408790db9a97d4c699c46417d75ea7b6, type: 3}
     maxLevel: 1
-    deltaValue: 1
+    deltaValue: 2
   - baseIndex: 1042
     paramCategory: 2
     paramType: 9
@@ -516,7 +525,7 @@ MonoBehaviour:
     description: Unlocks the appearance of Sapphire ore in mining layers
     icon: {fileID: 21300000, guid: fc0a2efde0faa4eae9c8464ffe63a7fa, type: 3}
     maxLevel: 1
-    deltaValue: 1
+    deltaValue: 2
   - baseIndex: 1052
     paramCategory: 2
     paramType: 9
@@ -552,7 +561,7 @@ MonoBehaviour:
     description: Unlocks the appearance of Diamond ore in mining layers.
     icon: {fileID: 21300000, guid: 9f982c2bfaf3041f691308c92759495e, type: 3}
     maxLevel: 1
-    deltaValue: 1
+    deltaValue: 2
   - baseIndex: 1062
     paramCategory: 2
     paramType: 9
@@ -727,7 +736,7 @@ MonoBehaviour:
     deltaValue: 0.01
   - baseIndex: 3007
     paramCategory: 0
-    paramType: 20
+    paramType: 21
     targetIndex: -1
     skillName: More Artifact
     description: artifact slot +1
@@ -752,33 +761,33 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 3829715a594f44221b2c656a7a180eec, type: 3}
     maxLevel: 1
     deltaValue: 1
-  - baseIndex: 3010
+  - baseIndex: 3100
     paramCategory: 0
-    paramType: 0
-    targetIndex: 0
-    skillName: 
+    paramType: 22
+    targetIndex: -1
+    skillName: Initial Block
     description: 
     icon: {fileID: 0}
-    maxLevel: 0
-    deltaValue: 0
-  - baseIndex: 3011
+    maxLevel: 2
+    deltaValue: 1
+  - baseIndex: 3101
     paramCategory: 0
-    paramType: 0
-    targetIndex: 0
-    skillName: 
+    paramType: 23
+    targetIndex: -1
+    skillName: Generate Block
     description: 
     icon: {fileID: 0}
-    maxLevel: 0
-    deltaValue: 0
-  - baseIndex: 3012
+    maxLevel: 2
+    deltaValue: 1
+  - baseIndex: 3102
     paramCategory: 0
-    paramType: 0
-    targetIndex: 0
-    skillName: 
+    paramType: 24
+    targetIndex: -1
+    skillName: Generate Time
     description: 
     icon: {fileID: 0}
-    maxLevel: 0
-    deltaValue: 0
+    maxLevel: 2
+    deltaValue: 0.1
   skillTreeUnits:
   - skillTreeIndex: 100
     refIndex: 1
@@ -834,7 +843,7 @@ MonoBehaviour:
     refIndex: 1011
     unlockCheckIndexes: 6600000067000000c8000000c9000000
     req_stone: 30
-    req_iron: 5
+    req_iron: 0
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1314,7 +1323,7 @@ MonoBehaviour:
     refIndex: 1012
     unlockCheckIndexes: 69000000cb000000
     req_stone: 50
-    req_iron: 15
+    req_iron: 10
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1323,6 +1332,16 @@ MonoBehaviour:
   - skillTreeIndex: 201
     refIndex: 1013
     unlockCheckIndexes: 69000000ca000000
+    req_stone: 50
+    req_iron: 10
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: -1
+  - skillTreeIndex: 230
+    refIndex: 1014
+    unlockCheckIndexes: c9000000
     req_stone: 50
     req_iron: 20
     req_gold: 0
@@ -1841,7 +1860,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 3002
-    refIndex: 3002
+    refIndex: 3001
     unlockCheckIndexes: ffffffff
     req_stone: 0
     req_iron: 0
@@ -1851,7 +1870,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 3003
-    refIndex: 3003
+    refIndex: 3002
     unlockCheckIndexes: ffffffff
     req_stone: 0
     req_iron: 0
@@ -1861,7 +1880,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 3004
-    refIndex: 3004
+    refIndex: 3003
     unlockCheckIndexes: ffffffff
     req_stone: 0
     req_iron: 0
@@ -1871,7 +1890,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 3005
-    refIndex: 3005
+    refIndex: 3004
     unlockCheckIndexes: ffffffff
     req_stone: 0
     req_iron: 0
@@ -1881,7 +1900,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 3006
-    refIndex: 3006
+    refIndex: 3005
     unlockCheckIndexes: ffffffff
     req_stone: 0
     req_iron: 0
@@ -1891,7 +1910,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 3007
-    refIndex: 3007
+    refIndex: 3006
     unlockCheckIndexes: ffffffff
     req_stone: 0
     req_iron: 0
@@ -1901,7 +1920,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 3008
-    refIndex: 3008
+    refIndex: 3007
     unlockCheckIndexes: ffffffff
     req_stone: 0
     req_iron: 0
@@ -1911,7 +1930,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 3009
-    refIndex: 3009
+    refIndex: 3008
     unlockCheckIndexes: ffffffff
     req_stone: 0
     req_iron: 0
@@ -1921,8 +1940,38 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 3010
-    refIndex: 3010
+    refIndex: 3009
     unlockCheckIndexes: ffffffff
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 3100
+    refIndex: 3100
+    unlockCheckIndexes: 
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 3101
+    refIndex: 3101
+    unlockCheckIndexes: 
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 3102
+    refIndex: 3102
+    unlockCheckIndexes: 
     req_stone: 0
     req_iron: 0
     req_gold: 0

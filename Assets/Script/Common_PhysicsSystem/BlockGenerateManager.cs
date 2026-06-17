@@ -23,15 +23,15 @@ public class BlockGenerateManager : MonoBehaviour
     private bool isArtifactAllGet = false; // アーティファクトが全て所持されたかどうか
 
     private float timer = 0f;
-    private float checkInterval = 1f;
+    private float checkInterval => GameParamManager.gameBaseParam.blockGenerate_duration;
+    private int initialCreateCount = GameParamManager.gameBaseParam.blockGenerate_initialCount;
+    private float createCount_delta = GameParamManager.gameBaseParam.blockGenerate_createCount_deltaTime;
 
-    private int initialCreateCount = 20;
-    private int createCount_delta = 5;
 
     private bool isGenerate = false;
     private float randomBlockSizeRate => Random.Range(0.75f, 1.25f);
 
-    private Vector3 generatePosition => new Vector3(Random.Range(-10, 10), Random.Range(7, 12), Random.Range(-10, 10));
+    private Vector3 generatePosition => new Vector3(Random.Range(-10, 10), Random.Range(3, 5), Random.Range(-10, 10));
     private Vector3 generateRotation => new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
 
 

@@ -31,22 +31,22 @@ MonoBehaviour:
     icon: {fileID: 0}
     pf: {fileID: 601605801108607667, guid: 32963baef2720410fa437525ec84df92, type: 3}
     damageRate: 2
-    attackInterval: 3
+    attackInterval: 4
     criticalRate: 0
-    speed: 10
-    aliveTime: 2
+    speed: -1
+    aliveTime: -1
     count: 1
     size: 1
   - attackIndex: 3
-    unitName: Thunder(Random)
+    unitName: BoundShot
     unitDescription: 
     icon: {fileID: 0}
-    pf: {fileID: 601605801108607667, guid: 40e597900830a4a30aab97aeb5c73f51, type: 3}
-    damageRate: 2
+    pf: {fileID: 6284990426269352918, guid: 632ffa412ba1e46a5a5c7010dc874875, type: 3}
+    damageRate: 0.5
     attackInterval: 3
     criticalRate: 0
     speed: 10
-    aliveTime: 2
+    aliveTime: 5
     count: 1
     size: 1
   - attackIndex: 4
@@ -85,18 +85,18 @@ MonoBehaviour:
     aliveTime: 2
     count: 1
     size: 1
-  - attackIndex: 7
-    unitName: xxxx
+  - attackIndex: 0
+    unitName: 
     unitDescription: 
     icon: {fileID: 0}
-    pf: {fileID: 6284990426269352918, guid: 632ffa412ba1e46a5a5c7010dc874875, type: 3}
-    damageRate: 1
-    attackInterval: 2
+    pf: {fileID: 0}
+    damageRate: 0
+    attackInterval: 0
     criticalRate: 0
-    speed: 15
-    aliveTime: 5
-    count: 1
-    size: 1
+    speed: 0
+    aliveTime: 0
+    count: 0
+    size: 0
   pickaxeUnitDatas:
   - pickaxeIndex: 1
     pickaxeName: normal pickaxe

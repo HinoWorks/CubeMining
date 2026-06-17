@@ -17,7 +17,15 @@ public class StaticManager : MonoBehaviour
     public const int resourceMid = 5;
 
 
-    public static int artifactSlotCount = 4;
+
+    /// Initial Param
+    public static float ingameTime_base = 15f; //インゲーム時間の初期値
+    public static int artifactSlotCount = 4; //アーティファクトスロット数
+    public static int blockGenerate_initialCount = 25; //ブロック生成初期数
+    public static float blockGenerate_count_deltaTime = 10f; // ブロック生成時の初期個数
+    public static float blockGenerate_duration = 3f; // ブロック生成時間
+
+
 
 
     // 時間調整用
