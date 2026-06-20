@@ -13,7 +13,6 @@ public class BlockGenerateManager : MonoBehaviour
 {
     public static BlockGenerateManager Inst;
 
-    [SerializeField] GameObject[] array_blockPrefabs;
     // -- loc
     private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>();
     private List<MiningTarget_Cube> list_targetBlocks_Max = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト（資源ブロック 大）
@@ -22,10 +21,22 @@ public class BlockGenerateManager : MonoBehaviour
     public bool isGenerateArtifact { get; private set; } = false; // アーティファクト生成フラグ　（ingame中一度しか生成しない）
     private bool isArtifactAllGet = false; // アーティファクトが全て所持されたかどうか
 
+
+    // ブロック生成周りのパラ
     private float timer = 0f;
     private float checkInterval => GameParamManager.gameBaseParam.blockGenerate_duration;
     private int initialCreateCount = GameParamManager.gameBaseParam.blockGenerate_initialCount;
     private float createCount_delta = GameParamManager.gameBaseParam.blockGenerate_createCount_deltaTime;
+
+
+    // tower generate param
+    private int towerGenerateCount = 2;
+    private int towerCount_vertical = 4;
+    private float timer_towerGenerate = 0f;
+    private float checkInterval_towerGenerate = 3f; // タワー生成間隔
+    private int towerGenerateRate = 30; // タワー発生確率
+    private bool isTowerGenerate => UnityEngine.Random.Range(0, 100) < towerGenerateRate ? true : false;
+    private Vector3 generatePosition_tower => new Vector3(Random.Range(-10, 10), Random.Range(3, 5), Random.Range(-10, 10));
 
 
     private bool isGenerate = false;
@@ -93,7 +104,16 @@ public class BlockGenerateManager : MonoBehaviour
             Check_BlockCreate();
             timer = 0f;
         }
+
+        timer_towerGenerate += Time.deltaTime;
+        if (timer_towerGenerate >= checkInterval_towerGenerate)
+        {
+            Check_TowerGenerate();
+            timer_towerGenerate = 0f;
+        }
     }
+
+    #region == Block Create Base ==
     private void Check_BlockCreate()
     {
         var randomCount = Random.Range(1, createCount_delta + 1);
@@ -114,9 +134,14 @@ public class BlockGenerateManager : MonoBehaviour
         }
         else
         {
-            GenerateRockBlock();
+            var targetBlock = GenerateRockBlock();
+            targetBlock.transform.localPosition = generatePosition;
+            targetBlock.transform.localRotation = Quaternion.Euler(generateRotation);
         }
     }
+    #endregion
+
+
 
     #region == Other Object Generate ==
     public MiningTarget_Object GenerateOtherObject()
@@ -165,9 +190,10 @@ public class BlockGenerateManager : MonoBehaviour
 
 
     #region == Block Generate ==
-    private void GenerateRockBlock()
+    private GameObject GenerateRockBlock(bool isNormalRate = true)
     {
-        var blockGenerateParam = GameParamManager.Get_RandamBlockIndex();
+        var blockGenerateParam = isNormalRate ? GameParamManager.Get_RandamBlockIndex()
+                                            : GameParamManager.Get_RandamBlockIndex_OverIronUp();
         var isMaxResource = GameParamManager.IsMaxResource(blockGenerateParam.resourceType);
 
         MiningTarget_Cube targetBlock = null;
@@ -200,16 +226,35 @@ public class BlockGenerateManager : MonoBehaviour
 
         targetBlock.Init(blockGenerateParam.hp, blockGenerateParam.baseValue, randomBlockSizeRate);
         targetBlock.Set_BlockType(blockGenerateParam.resourceType);
-        targetBlock.transform.localPosition = generatePosition;
-        targetBlock.transform.localRotation = Quaternion.Euler(generateRotation);
 
-
-
+        return targetBlock.gameObject;
     }
     #endregion
 
 
 
+
+    #region == Tower Generate ==
+    private void Check_TowerGenerate()
+    {
+        if (!isTowerGenerate) return;
+        for (int i = 0; i < towerGenerateCount; i++)
+        {
+            GenerateTower();
+        }
+    }
+    private void GenerateTower()
+    {
+        Debug.Log("GenerateTower");
+        var generatePosition = generatePosition_tower;
+        for (int i = 0; i < towerCount_vertical; i++)
+        {
+            var targetBlock = GenerateRockBlock(false);
+            targetBlock.transform.localPosition = new Vector3(generatePosition.x, 1 + i * 1f, generatePosition.z);
+            targetBlock.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        }
+    }
+    #endregion
 
 
     #region == Random Target ==
