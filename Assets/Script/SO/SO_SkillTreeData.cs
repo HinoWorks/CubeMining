@@ -52,6 +52,13 @@ public enum ParamType
     BlockGenerate_InitialCount,
     BlockGenerate_Count_DeltaTime,
     BlockGenerate_Duration,
+
+
+    // ==== block tower generate param ====
+    TowerGenerate_Unlock,
+    TowerGenerate_Count,
+    TowerGenerate_Duration,
+    TowerGenerate_Height
 }
 
 

@@ -766,8 +766,8 @@ MonoBehaviour:
     paramType: 22
     targetIndex: -1
     skillName: Initial Block
-    description: 
-    icon: {fileID: 0}
+    description: "\u30B9\u30BF\u30FC\u30C8\u6642\u306E\u9271\u77F3\u306E\u6570"
+    icon: {fileID: 21300000, guid: 31815ca4bbe544539a8f484df20a1f84, type: 3}
     maxLevel: 2
     deltaValue: 1
   - baseIndex: 3101
@@ -775,8 +775,8 @@ MonoBehaviour:
     paramType: 23
     targetIndex: -1
     skillName: Generate Block
-    description: 
-    icon: {fileID: 0}
+    description: "\u6642\u9593\u7D4C\u904E\u6642\u306B\u751F\u6210\u3055\u308C\u308B\u9271\u77F3\u306E\u6570"
+    icon: {fileID: 21300000, guid: da59c595326e44433a5f808a991f71b5, type: 3}
     maxLevel: 2
     deltaValue: 1
   - baseIndex: 3102
@@ -784,10 +784,46 @@ MonoBehaviour:
     paramType: 24
     targetIndex: -1
     skillName: Generate Time
-    description: 
-    icon: {fileID: 0}
+    description: "\u9271\u77F3\u306E\u751F\u6210\u9593\u9694"
+    icon: {fileID: 21300000, guid: 328ca58b19852416cad3399fcf9d5cb6, type: 3}
     maxLevel: 2
     deltaValue: 0.1
+  - baseIndex: 3110
+    paramCategory: 0
+    paramType: 25
+    targetIndex: -1
+    skillName: Unlock Rock Tower
+    description: "\u9271\u77F3\u30BF\u30EF\u30FC\u30A2\u30F3\u30ED\u30C3\u30AF"
+    icon: {fileID: 21300000, guid: 465867959c4804fbe87aa6fa07424b1b, type: 3}
+    maxLevel: 1
+    deltaValue: 1
+  - baseIndex: 3111
+    paramCategory: 0
+    paramType: 26
+    targetIndex: -1
+    skillName: More Tower
+    description: "\u9271\u77F3\u30BF\u30EF\u30FC\u306E\u672C\u6570\u3092\u5897\u3084\u3059"
+    icon: {fileID: 21300000, guid: 1a9163c2eddd9454c87c21fd35a42b23, type: 3}
+    maxLevel: 1
+    deltaValue: 1
+  - baseIndex: 3112
+    paramCategory: 0
+    paramType: 27
+    targetIndex: -1
+    skillName: More Speed
+    description: "\u9271\u77F3\u30BF\u30EF\u30FC\u306E\u751F\u6210\u9593\u9694\u3092\u77ED\u304F\u3059\u308B"
+    icon: {fileID: 21300000, guid: c527edf49fa6c4b23ac28f9f2a394ca6, type: 3}
+    maxLevel: 3
+    deltaValue: 0.1
+  - baseIndex: 3113
+    paramCategory: 0
+    paramType: 28
+    targetIndex: -1
+    skillName: More Hight
+    description: "\u9271\u77F3\u30BF\u30EF\u30FC\u306E\u9AD8\u3055\u3092\u5897\u3084\u3059"
+    icon: {fileID: 21300000, guid: a7607e21792564e35a980563532e3f87, type: 3}
+    maxLevel: 1
+    deltaValue: 1
   skillTreeUnits:
   - skillTreeIndex: 100
     refIndex: 1

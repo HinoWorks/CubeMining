@@ -30,14 +30,12 @@ public class BlockGenerateManager : MonoBehaviour
 
 
     // tower generate param
-    private int towerGenerateCount = 2;
-    private int towerCount_vertical = 4;
+    private bool isTowerGenerate => GameParamManager.gameBaseParam.isTowerUnlock;
     private float timer_towerGenerate = 0f;
-    private float checkInterval_towerGenerate = 3f; // タワー生成間隔
-    private int towerGenerateRate = 30; // タワー発生確率
-    private bool isTowerGenerate => UnityEngine.Random.Range(0, 100) < towerGenerateRate ? true : false;
+    private int towerGenerateCount => GameParamManager.gameBaseParam.towerGenerate_count;
+    private int towerCount_vertical => GameParamManager.gameBaseParam.towerGenerate_height;
+    private float checkInterval_towerGenerate => GameParamManager.gameBaseParam.towerGenerate_duration;
     private Vector3 generatePosition_tower => new Vector3(Random.Range(-10, 10), Random.Range(3, 5), Random.Range(-10, 10));
-
 
     private bool isGenerate = false;
     private float randomBlockSizeRate => Random.Range(0.75f, 1.25f);
@@ -98,6 +96,8 @@ public class BlockGenerateManager : MonoBehaviour
     void Update()
     {
         if (!isGenerate) return;
+
+        // -- block generate --
         timer += Time.deltaTime;
         if (timer >= checkInterval)
         {
@@ -105,11 +105,15 @@ public class BlockGenerateManager : MonoBehaviour
             timer = 0f;
         }
 
-        timer_towerGenerate += Time.deltaTime;
-        if (timer_towerGenerate >= checkInterval_towerGenerate)
+        // -- tower generate --
+        if (isTowerGenerate)
         {
-            Check_TowerGenerate();
-            timer_towerGenerate = 0f;
+            timer_towerGenerate += Time.deltaTime;
+            if (timer_towerGenerate >= checkInterval_towerGenerate)
+            {
+                Check_TowerGenerate();
+                timer_towerGenerate = 0f;
+            }
         }
     }
 
@@ -237,7 +241,8 @@ public class BlockGenerateManager : MonoBehaviour
     #region == Tower Generate ==
     private void Check_TowerGenerate()
     {
-        if (!isTowerGenerate) return;
+        Debug.Log("GenerateTower");
+        //if (!isTowerGenerate) return;
         for (int i = 0; i < towerGenerateCount; i++)
         {
             GenerateTower();
@@ -245,7 +250,6 @@ public class BlockGenerateManager : MonoBehaviour
     }
     private void GenerateTower()
     {
-        Debug.Log("GenerateTower");
         var generatePosition = generatePosition_tower;
         for (int i = 0; i < towerCount_vertical; i++)
         {

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 
 
 /// <summary>
@@ -20,6 +21,16 @@ public class GameBaseParam
     private float blockGenerate_createCount_deltaTime_enhanced = 0f;
     public float blockGenerate_duration => StaticManager.blockGenerate_duration - blockGenerate_duration_enhanced;
     private float blockGenerate_duration_enhanced = 0f;
+
+
+    // == block tower 生成まわり ==
+    public bool isTowerUnlock { get; private set; } = false;
+    public int towerGenerate_count => 1 + towerGenerate_count_enhanced;
+    private int towerGenerate_count_enhanced = 0;
+    public float towerGenerate_duration => StaticManager.blockGenerate_towerDuration - towerGenerate_duration_enhanced;
+    private float towerGenerate_duration_enhanced = 0f;
+    public int towerGenerate_height => StaticManager.towerGenerate_height + towerGenerate_height_enhanced;
+    private int towerGenerate_height_enhanced = 0;
 
 
 
@@ -132,7 +143,6 @@ public class GameBaseParam
 
 
             // -- Block Generate Param --
-
             case ParamType.BlockGenerate_InitialCount:
                 blockGenerate_initialCount_enhanced += (int)_setParam;
                 break;
@@ -141,6 +151,21 @@ public class GameBaseParam
                 break;
             case ParamType.BlockGenerate_Duration:
                 blockGenerate_duration_enhanced += _setParam;
+                break;
+
+
+            // -- Block Tower Generate Param --
+            case ParamType.TowerGenerate_Unlock:
+                isTowerUnlock = true;
+                break;
+            case ParamType.TowerGenerate_Count:
+                towerGenerate_count_enhanced += (int)_setParam;
+                break;
+            case ParamType.TowerGenerate_Duration:
+                towerGenerate_duration_enhanced += _setParam;
+                break;
+            case ParamType.TowerGenerate_Height:
+                towerGenerate_height_enhanced += (int)_setParam;
                 break;
         }
     }

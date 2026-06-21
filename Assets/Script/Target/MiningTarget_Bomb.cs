@@ -4,7 +4,7 @@ public class MiningTarget_Bomb : MiningTarget_Object
 {
     [SerializeField] private GameObject pf_bomb;
     [SerializeField] private ForceFieldArea forceFieldArea;
-    private int breakCount = 3; //  3回ダメージを受けると爆発
+    private int breakCount = 2; //  2回ダメージを受けると爆発
     private int index_SE_Damage => 24;
     private int index_SE_Break => 25;
 
