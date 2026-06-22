@@ -161,7 +161,7 @@ public class UI_SkillTreeDetail : MonoBehaviour
             {
                 cont.SetLock();
                 resourceReady = false;
-                Debug.Log($"Required Resource is not unlock: {resource.resourceType}");
+                //Debug.Log($"Required Resource is not unlock: {resource.resourceType}");
             }
             else
             {
