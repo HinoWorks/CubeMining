@@ -5,6 +5,10 @@ public class BulletCont_BoundShot : BulletBase
     private TrailRenderer trailRenderer;
     private const float ViewportMargin = 0.02f;
 
+
+
+
+
     public override void Init(int _damage, float _lifetime, Vector3 _direction)
     {
         if (trailRenderer == null)
@@ -45,6 +49,9 @@ public class BulletCont_BoundShot : BulletBase
             base.ReturnToPool();
         }
     }
+
+
+
 
     void ReflectIfOutOfCamera()
     {

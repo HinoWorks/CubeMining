@@ -18,6 +18,7 @@ public class AttackCont_RandomPickaxe : AttackContBase
     [Header("Level2 checkRate")]
     [SerializeField] private float changeRate_level2 = 0.5f; // レベル2になる確率
     private bool isLevel2 => UnityEngine.Random.Range(0f, 1f) < changeRate_level2;
+    private float radiusRate_level2 = 1.5f;
 
 
     [Space(10)]
@@ -91,7 +92,8 @@ public class AttackCont_RandomPickaxe : AttackContBase
             bullets_IceCircle.Add(freeBullet);
         }
         freeBullet.transform.position = _position;
-        freeBullet.Init(CalculateDamage(), 1f, _level);
+        var selectRadiusRate = _level == 1 ? 1f : radiusRate_level2;
+        freeBullet.Init(CalculateDamage(), selectRadiusRate, _level);
     }
 
 
