@@ -70,7 +70,39 @@ public class ItemData
     public int count = 0;
 }
 
-#region -- Sound Settings --
+#region -- User Settings --
+[System.Serializable]
+public class UserSettingsData
+{
+    public float volumeMaster = 100f;
+    public float volumeBGM = 80f;
+    public float volumeSE = 80f;
+    public bool muteMaster;
+    public bool muteBGM;
+    public bool muteSE;
+
+    public int resolutionWidth = 1920;
+    public int resolutionHeight = 1080;
+    public int fullScreenMode = (int)FullScreenMode.Windowed;
+
+    public UserSettingsData Copy()
+    {
+        return new UserSettingsData
+        {
+            volumeMaster = volumeMaster,
+            volumeBGM = volumeBGM,
+            volumeSE = volumeSE,
+            muteMaster = muteMaster,
+            muteBGM = muteBGM,
+            muteSE = muteSE,
+            resolutionWidth = resolutionWidth,
+            resolutionHeight = resolutionHeight,
+            fullScreenMode = fullScreenMode,
+        };
+    }
+}
+
+/// <summary>旧フォーマット（key_soundSettings からの移行用）</summary>
 [System.Serializable]
 public class SoundSettingsData
 {
@@ -205,7 +237,7 @@ public class SaveLoader : MonoBehaviour
     public int PickaxePowerEquipedIndex { get => pickaxePowerEquipedIndex; }
 
 
-    private const string KEY_SOUND_SETTINGS = "key_soundSettings";
+    private const string KEY_USER_SETTINGS = "key_userSettings";
 
 
     private Queue<Action> allQueue = new();
@@ -846,21 +878,10 @@ public class SaveLoader : MonoBehaviour
 
 
 
-    #region -- Sound Settings --
-    public void Request_SaveSoundSettings(float volumeBGM, float volumeSE, bool muteBGM, bool muteSE)
+    #region -- User Settings --
+    public void Request_SaveUserSettings(UserSettingsData data)
     {
-        EnqueueMethod(() => SaveSoundSettings(volumeBGM, volumeSE, muteBGM, muteSE));
-    }
-    private void SaveSoundSettings(float volumeBGM, float volumeSE, bool muteBGM, bool muteSE)
-    {
-        var data = new SoundSettingsData
-        {
-            volumeBGM = volumeBGM,
-            volumeSE = volumeSE,
-            muteBGM = muteBGM,
-            muteSE = muteSE
-        };
-        ES3.Save(KEY_SOUND_SETTINGS, data);
+        EnqueueMethod(() => ES3.Save(KEY_USER_SETTINGS, data));
     }
     #endregion
 

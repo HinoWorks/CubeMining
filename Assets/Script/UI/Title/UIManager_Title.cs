@@ -58,7 +58,7 @@ public class UIManager_Title : MonoBehaviour
     }
     public void OnClick_Option()
     {
-        //GameWatcher.Inst.SetGameState(GameStateType.InGame_Ready);
+        UI_UserSettingManager.Inst.Open();
     }
     public void OnClick_Exit()
     {

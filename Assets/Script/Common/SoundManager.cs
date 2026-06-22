@@ -8,13 +8,15 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Inst;
 
     [Range(0, 100)]
+    public float Volume_Master = 100f;
+    [Range(0, 100)]
     public float Volume_BGM = 80f;
     [Range(0, 100)]
     public float Volume_Sound = 80f;
+    public bool Mute_Master;
     public bool Mute_BGM;
     public bool Mute_SE;
 
-    private const string KEY_SOUND_SETTINGS = "key_soundSettings";
     private const int MAX_SIMULTANEOUS_SE = 8;
     private const float BGM_FADE_DURATION = 0.5f;
     [Tooltip("SE再生時のピッチランダム範囲（連続再生の違和感軽減）")]
@@ -32,7 +34,6 @@ public class SoundManager : MonoBehaviour
     private bool isSEPlayed = false;
 
     private bool isPaused;
-    private bool isLoadingSettings;
 
     void Awake()
     {
@@ -40,14 +41,13 @@ public class SoundManager : MonoBehaviour
         {
             Inst = this;
             DontDestroyOnLoad(this.gameObject);
+            EnsureUserSettingsManager();
         }
         else
         {
             Destroy(this);
             return;
         }
-
-        LoadSettings();
 
         // BGM AudioSource
         BGMsource = gameObject.AddComponent<AudioSource>();
@@ -80,79 +80,94 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    #region -- Settings Persistence --
-    private void LoadSettings()
+    #region -- Settings --
+    private static void EnsureUserSettingsManager()
     {
-        isLoadingSettings = true;
-        if (ES3.KeyExists(KEY_SOUND_SETTINGS))
-        {
-            var data = ES3.Load<SoundSettingsData>(KEY_SOUND_SETTINGS);
-            Volume_BGM = data.volumeBGM;
-            Volume_Sound = data.volumeSE;
-            Mute_BGM = data.muteBGM;
-            Mute_SE = data.muteSE;
-        }
-        isLoadingSettings = false;
+        if (UserSettingsManager.Inst != null) return;
+        if (FindFirstObjectByType<UserSettingsManager>() != null) return;
+        var go = new GameObject("===UserSettingsManager");
+        go.AddComponent<UserSettingsManager>();
     }
 
-    private void SaveSettings()
+    /// <summary>UserSettingsManager から設定を反映する</summary>
+    public void ApplySoundSettings(
+        float volumeMaster, float volumeBGM, float volumeSE,
+        bool muteMaster, bool muteBGM, bool muteSE)
     {
-        if (isLoadingSettings) return;
-        if (SaveLoader.Inst != null)
-        {
-            SaveLoader.Inst.Request_SaveSoundSettings(Volume_BGM, Volume_Sound, Mute_BGM, Mute_SE);
-        }
+        Volume_Master = volumeMaster;
+        Volume_BGM = volumeBGM;
+        Volume_Sound = volumeSE;
+        Mute_Master = muteMaster;
+        Mute_BGM = muteBGM;
+        Mute_SE = muteSE;
+        ApplyVolumeAndMute();
+    }
+
+    private float GetBGMVolumeMultiplier()
+    {
+        if (Mute_Master || Mute_BGM) return 0f;
+        return (Volume_Master / 100f) * (Volume_BGM / 100f);
+    }
+
+    private float GetSEVolumeMultiplier()
+    {
+        if (Mute_Master || Mute_SE) return 0f;
+        return (Volume_Master / 100f) * (Volume_Sound / 100f);
     }
 
     private void ApplyVolumeAndMute()
     {
         if (BGMsource == null) return;
 
-        BGMsource.mute = Mute_BGM || isPaused;
+        BGMsource.mute = Mute_Master || Mute_BGM || isPaused;
         float bgmBaseVolume = (soundData_BGM != null) ? soundData_BGM.Volume : 1f;
-        BGMsource.volume = (Mute_BGM || isPaused) ? 0f : bgmBaseVolume * (Volume_BGM / 100f);
+        BGMsource.volume = (Mute_Master || Mute_BGM || isPaused) ? 0f : bgmBaseVolume * GetBGMVolumeMultiplier();
 
         for (int i = 0; i < SEsources.Length; i++)
         {
             if (SEsources[i] != null)
             {
-                SEsources[i].mute = Mute_SE;
+                SEsources[i].mute = Mute_Master || Mute_SE;
             }
         }
     }
 
-    /// <summary>音量・ミュート変更時に呼ぶ（設定UIから）</summary>
+    /// <summary>音量・ミュート変更時に呼ぶ（設定UIからは UserSettingsManager 経由を推奨）</summary>
+    public void SetVolumeMaster(float value)
+    {
+        if (UserSettingsManager.Inst != null) UserSettingsManager.Inst.SetVolumeMaster(value);
+    }
+
     public void SetVolumeBGM(float value)
     {
-        Volume_BGM = Mathf.Clamp(value, 0, 100);
-        ChangeVolume_ForBGM();
-        SaveSettings();
+        if (UserSettingsManager.Inst != null) UserSettingsManager.Inst.SetVolumeBGM(value);
     }
 
     public void SetVolumeSE(float value)
     {
-        Volume_Sound = Mathf.Clamp(value, 0, 100);
-        SaveSettings();
+        if (UserSettingsManager.Inst != null) UserSettingsManager.Inst.SetVolumeSE(value);
+    }
+
+    public void SetMuteMaster(bool mute)
+    {
+        if (UserSettingsManager.Inst != null) UserSettingsManager.Inst.SetMuteMaster(mute);
     }
 
     public void SetMuteBGM(bool mute)
     {
-        Mute_BGM = mute;
-        ApplyVolumeAndMute();
-        SaveSettings();
+        if (UserSettingsManager.Inst != null) UserSettingsManager.Inst.SetMuteBGM(mute);
     }
 
     public void SetMuteSE(bool mute)
     {
-        Mute_SE = mute;
-        ApplyVolumeAndMute();
-        SaveSettings();
+        if (UserSettingsManager.Inst != null) UserSettingsManager.Inst.SetMuteSE(mute);
     }
 
     /// <summary>一時停止時に呼ぶ（ポーズ画面など）</summary>
     public void SetPaused(bool paused)
     {
         isPaused = paused;
+        ApplyVolumeAndMute();
         if (BGMsource == null) return;
         if (paused)
             BGMsource.Pause();
@@ -188,7 +203,7 @@ public class SoundManager : MonoBehaviour
         BGMsource.clip = soundData_BGM.clip;
         BGMsource.volume = 0f;
         BGMsource.Play();
-        var targetVol = Mute_BGM ? 0f : soundData_BGM.Volume * (Volume_BGM / 100f);
+        var targetVol = GetBGMVolumeMultiplier() == 0f ? 0f : soundData_BGM.Volume * GetBGMVolumeMultiplier();
         BGMsource.DOFade(targetVol, d).SetUpdate(true);
     }
 
@@ -217,9 +232,9 @@ public class SoundManager : MonoBehaviour
     public void ChangeVolume_ForBGM()
     {
         if (BGMsource == null) return;
-        BGMsource.mute = Mute_BGM || isPaused;
+        BGMsource.mute = Mute_Master || Mute_BGM || isPaused;
         float bgmBaseVolume = (soundData_BGM != null) ? soundData_BGM.Volume : 1f;
-        BGMsource.volume = (Mute_BGM || isPaused) ? 0f : bgmBaseVolume * (Volume_BGM / 100f);
+        BGMsource.volume = (Mute_Master || Mute_BGM || isPaused) ? 0f : bgmBaseVolume * GetBGMVolumeMultiplier();
     }
     #endregion
 
@@ -252,7 +267,7 @@ public class SoundManager : MonoBehaviour
             if (!source.isPlaying)
             {
                 source.clip = getData.clip;
-                source.volume = getData.Volume * Volume_Sound / 100f;
+                source.volume = getData.Volume * GetSEVolumeMultiplier();
                 source.pitch = UnityEngine.Random.Range(sePitchMin, sePitchMax);
                 source.Play();
                 return;
