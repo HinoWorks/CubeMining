@@ -77,6 +77,13 @@ public class DataBase : MonoBehaviour
     }
 
 
+    // スキルツリーのみ更新
+    public async UniTask SkillTreeData_Update()
+    {
+        await DataLoad_SkillTreeData();
+        EditorUtility.SetDirty(mSO_SkillTreeData);
+    }
+
 
     private async UniTask DataLoad_SkillTreeData()
     {
