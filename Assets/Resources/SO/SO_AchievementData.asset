@@ -1,0 +1,177 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f3c2e18d4b4f0a9c6e1d5b8a2f4c3e, type: 3}
+  m_Name: SO_AchievementData
+  m_EditorClassIdentifier: Assembly-CSharp::SO_AchievementData
+  achievementDatas:
+  - achievementKey: BREAK_BLOCKS_100
+    steamApiName: ACH_BREAK_BLOCKS_100
+    conditionType: 1
+    recordField: 2
+    threshold: 100
+    useProgress: 0
+  - achievementKey: BREAK_BLOCKS_500
+    steamApiName: ACH_BREAK_BLOCKS_500
+    conditionType: 1
+    recordField: 2
+    threshold: 500
+    useProgress: 0
+  - achievementKey: BREAK_BLOCKS_2000
+    steamApiName: ACH_BREAK_BLOCKS_2000
+    conditionType: 1
+    recordField: 2
+    threshold: 2000
+    useProgress: 0
+  - achievementKey: BREAK_BLOCKS_5000
+    steamApiName: ACH_BREAK_BLOCKS_5000
+    conditionType: 1
+    recordField: 2
+    threshold: 5000
+    useProgress: 0
+  - achievementKey: BREAK_BLOCKS_10000
+    steamApiName: ACH_BREAK_BLOCKS_10000
+    conditionType: 1
+    recordField: 2
+    threshold: 10000
+    useProgress: 0
+  - achievementKey: INGAMEPLAY_1
+    steamApiName: ACH_INGAMEPLAY_1
+    conditionType: 1
+    recordField: 1
+    threshold: 1
+    useProgress: 0
+  - achievementKey: INGAMEPLAY_100
+    steamApiName: ACH_INGAMEPLAY_100
+    conditionType: 1
+    recordField: 1
+    threshold: 100
+    useProgress: 0
+  - achievementKey: INGAMEPLAY_250
+    steamApiName: ACH_INGAMEPLAY_250
+    conditionType: 1
+    recordField: 1
+    threshold: 250
+    useProgress: 0
+  - achievementKey: INGAMEPLAY_500
+    steamApiName: ACH_INGAMEPLAY_500
+    conditionType: 1
+    recordField: 1
+    threshold: 500
+    useProgress: 0
+  - achievementKey: INGAMEPLAY_1000
+    steamApiName: ACH_INGAMEPLAY_1000
+    conditionType: 1
+    recordField: 1
+    threshold: 1000
+    useProgress: 0
+  - achievementKey: PLAYERLEVEL_5
+    steamApiName: ACH_PLAYERLEVEL_5
+    conditionType: 3
+    recordField: 0
+    threshold: 5
+    useProgress: 0
+  - achievementKey: PLAYERLEVEL_10
+    steamApiName: ACH_PLAYERLEVEL_10
+    conditionType: 3
+    recordField: 0
+    threshold: 10
+    useProgress: 0
+  - achievementKey: PLAYERLEVEL_20
+    steamApiName: ACH_PLAYERLEVEL_20
+    conditionType: 3
+    recordField: 0
+    threshold: 20
+    useProgress: 0
+  - achievementKey: PLAYERLEVEL_40
+    steamApiName: ACH_PLAYERLEVEL_40
+    conditionType: 3
+    recordField: 0
+    threshold: 40
+    useProgress: 0
+  - achievementKey: ARTIFACT_1
+    steamApiName: ACH_ARTIFACT_1
+    conditionType: 4
+    recordField: 0
+    threshold: 1
+    useProgress: 0
+  - achievementKey: ARTIFACT_5
+    steamApiName: ACH_ARTIFACT_5
+    conditionType: 4
+    recordField: 0
+    threshold: 5
+    useProgress: 0
+  - achievementKey: ARTIFACT_10
+    steamApiName: ACH_ARTIFACT_10
+    conditionType: 4
+    recordField: 0
+    threshold: 10
+    useProgress: 0
+  - achievementKey: ARTIFACT_20
+    steamApiName: ACH_ARTIFACT_20
+    conditionType: 4
+    recordField: 0
+    threshold: 20
+    useProgress: 0
+  - achievementKey: ARTIFACT_35
+    steamApiName: ACH_ARTIFACT_35
+    conditionType: 4
+    recordField: 0
+    threshold: 35
+    useProgress: 0
+  - achievementKey: PICKAXECRAFT_2
+    steamApiName: ACH_PICKAXECRAFT_2
+    conditionType: 5
+    recordField: 0
+    threshold: 2
+    useProgress: 0
+  - achievementKey: PICKAXECRAFT_5
+    steamApiName: ACH_PICKAXECRAFT_5
+    conditionType: 5
+    recordField: 0
+    threshold: 5
+    useProgress: 0
+  - achievementKey: PICKAXECRAFT_10
+    steamApiName: ACH_PICKAXECRAFT_10
+    conditionType: 5
+    recordField: 0
+    threshold: 10
+    useProgress: 0
+  - achievementKey: SKILLTREE_1
+    steamApiName: ACH_SKILLTREE_1
+    conditionType: 6
+    recordField: 0
+    threshold: 1
+    useProgress: 0
+  - achievementKey: SKILLTREE_10
+    steamApiName: ACH_SKILLTREE_10
+    conditionType: 6
+    recordField: 0
+    threshold: 10
+    useProgress: 0
+  - achievementKey: SKILLTREE_30
+    steamApiName: ACH_SKILLTREE_30
+    conditionType: 6
+    recordField: 0
+    threshold: 30
+    useProgress: 0
+  - achievementKey: SKILLTREE_50
+    steamApiName: ACH_SKILLTREE_50
+    conditionType: 6
+    recordField: 0
+    threshold: 50
+    useProgress: 0
+  - achievementKey: SKILLTREE_100
+    steamApiName: ACH_SKILLTREE_100
+    conditionType: 6
+    recordField: 0
+    threshold: 100
+    useProgress: 0

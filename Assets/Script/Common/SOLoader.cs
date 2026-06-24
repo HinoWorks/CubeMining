@@ -194,6 +194,23 @@ public static class SOLoader
         }
     }
 
+    private static SO_AchievementData so_achievementData;
+    public static SO_AchievementData AchievementData
+    {
+        get
+        {
+            if (so_achievementData == null)
+            {
+                so_achievementData = LoadSO<SO_AchievementData>(pathBase + nameof(SO_AchievementData));
+                if (so_achievementData == null)
+                {
+                    so_achievementData = ScriptableObject.CreateInstance<SO_AchievementData>();
+                }
+            }
+            return so_achievementData;
+        }
+    }
+
 
     // ========= loc =============
     private static T LoadSO<T>(string path) where T : ScriptableObject

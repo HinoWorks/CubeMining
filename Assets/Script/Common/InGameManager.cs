@@ -212,6 +212,7 @@ public class InGameManager : MonoBehaviour
         SaveLoader.Inst.Request_ArtifactCurrentBlockCount(0, true);
 
         UIManager_OutGame.Inst.UI_ArtifactManager.Set_IngameGetArtifactIndexes(_artifactIndex);
+        SteamAchievementManager.Inst?.NotifySaveDataUpdated();
     }
 
 
@@ -244,7 +245,6 @@ public class InGameManager : MonoBehaviour
         gameRecordData_Now.total_ingameCount++;
         gameRecordData_Now.total_blockBreakCount += gameRecordData_thisGame.blockBreakCount;
         gameRecordData_Now.total_totalDamage += gameRecordData_thisGame.totalDamage;
-        gameRecordData_Now.total_depth += gameRecordData_thisGame.Depth;
         gameRecordData_Now.total_treasureCount += gameRecordData_thisGame.treasureCount;
         // one game data -> 今回のゲーム結果が最高値ならそれを更新
         if (gameRecordData_thisGame.blockBreakCount > gameRecordData_Now.oneGame_blockBreakCount)
@@ -260,7 +260,7 @@ public class InGameManager : MonoBehaviour
             gameRecordData_Now.oneGame_totalDamage = gameRecordData_thisGame.totalDamage;
         }
         SaveLoader.Inst.Request_SaveGameRecordData(gameRecordData_Now);
-
+        SteamAchievementManager.Inst?.NotifySaveDataUpdated();
     }
 
     private void Fix_GameRecordData((GameRecordData_Type type, BigInteger delta) _gameRecordData)

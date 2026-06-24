@@ -14,13 +14,13 @@ public class GameRecordData
     // -- total record --
     public BigInteger total_ingameCount = 0;
     public BigInteger total_blockBreakCount = 0;
+    public BigInteger total_playerLevel = 1;
     public BigInteger total_treasureCount = 0;
     public BigInteger total_playerExp = 0;
     public BigInteger total_totalDamage = 0;
-    public BigInteger total_depth = 0;
     public BigInteger total_skillTreeCount = 0;
     public BigInteger total_artifactCount = 0;
-
+    public BigInteger total_pickaxeCount = 0;
     // -- one game record --
     public BigInteger oneGame_blockBreakCount = 0;
     public BigInteger oneGame_treasureCount = 0;
@@ -40,10 +40,9 @@ public class GameRecordDataSave
     public string total_treasureCount;
     public string total_playerExp;
     public string total_totalDamage;
-    public string total_depth;
     public string total_skillTreeCount;
     public string total_artifactCount;
-
+    public string total_pickaxeCount;
 
     public string oneGame_blockBreakCount;
     public string oneGame_treasureCount;
@@ -541,6 +540,19 @@ public class SaveLoader : MonoBehaviour
     {
         return $"SkillTreeData-{_skillIndex}";
     }
+    public int Get_SkillTreeTotalCount()
+    {
+        var skillTreeTotalCount = 0;
+        foreach (var skillTreeData in SOLoader.SkillTreeData.skillTreeUnits)
+        {
+            var key = GetSkillTreeDataKey(skillTreeData.skillTreeIndex);
+            if (ES3.KeyExists(key))
+            {
+                skillTreeTotalCount++;
+            }
+        }
+        return skillTreeTotalCount;
+    }
     #endregion
 
 
@@ -759,6 +771,19 @@ public class SaveLoader : MonoBehaviour
     {
         return $"PickaxeSlotData-{_slotIndex}";
     }
+    public int Get_PickaxeTotalCount()
+    {
+        var pickaxeTotalCount = 0;
+        foreach (var pickaxeData in SOLoader.PickaxePowerData.pickaxePowerBases)
+        {
+            var key = GetPickaxeDataKey(pickaxeData.index);
+            if (ES3.KeyExists(key))
+            {
+                pickaxeTotalCount++;
+            }
+        }
+        return pickaxeTotalCount;
+    }
     #endregion
 
 
@@ -836,9 +861,10 @@ public class SaveLoader : MonoBehaviour
             total_treasureCount = _gameRecordData.total_treasureCount.ToString(),
             total_playerExp = _gameRecordData.total_playerExp.ToString(),
             total_totalDamage = _gameRecordData.total_totalDamage.ToString(),
-            total_depth = _gameRecordData.total_depth.ToString(),
             total_skillTreeCount = _gameRecordData.total_skillTreeCount.ToString(),
             total_artifactCount = _gameRecordData.total_artifactCount.ToString(),
+            total_pickaxeCount = _gameRecordData.total_pickaxeCount.ToString(),
+
 
             oneGame_blockBreakCount = _gameRecordData.oneGame_blockBreakCount.ToString(),
             oneGame_treasureCount = _gameRecordData.oneGame_treasureCount.ToString(),
@@ -863,9 +889,9 @@ public class SaveLoader : MonoBehaviour
             total_treasureCount = ParseBigInteger(save.total_treasureCount),
             total_playerExp = ParseBigInteger(save.total_playerExp),
             total_totalDamage = ParseBigInteger(save.total_totalDamage),
-            total_depth = ParseBigInteger(save.total_depth),
             total_skillTreeCount = ParseBigInteger(save.total_skillTreeCount),
             total_artifactCount = ParseBigInteger(save.total_artifactCount),
+            total_pickaxeCount = ParseBigInteger(save.total_pickaxeCount),
 
             oneGame_blockBreakCount = ParseBigInteger(save.oneGame_blockBreakCount),
             oneGame_treasureCount = ParseBigInteger(save.oneGame_treasureCount),

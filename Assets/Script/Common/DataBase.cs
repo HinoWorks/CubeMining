@@ -37,6 +37,8 @@ public class DataBase : MonoBehaviour
     [SerializeField] SO_PlayerLevelData mSO_PlayerLevelData;
     [SerializeField] SO_PickaxePowerData mSO_PickaxePowerData;
     [SerializeField] SO_BlockGenerateData mSO_BlockGenerateData;
+
+    [SerializeField] SO_AchievementData mSO_AchievementData;
     [SerializeField] SO_SoundData mSO_SoundData;
 
     public async UniTask LoadData()
@@ -53,7 +55,7 @@ public class DataBase : MonoBehaviour
         await DataLoad_PickaxePowerData();
         await DataLoad_BlockGenerateData();
         await DataLoad_SoundData();
-
+        await DataLoad_AchievementData();
 #if UNITY_EDITOR
         Debug.Log($"<color=yellow>End Master Data update!</color>");
         await UniTask.Delay(200, true);
@@ -70,7 +72,7 @@ public class DataBase : MonoBehaviour
         EditorUtility.SetDirty(mSO_PickaxePowerData);
         EditorUtility.SetDirty(mSO_BlockGenerateData);
         EditorUtility.SetDirty(mSO_SoundData);
-
+        EditorUtility.SetDirty(mSO_AchievementData);
         // -- save --
         AssetDatabase.SaveAssets();
 #endif
@@ -189,6 +191,13 @@ public class DataBase : MonoBehaviour
         var loadData = await DataLoad("BlockGenerateParam");
         var convData = CSVSerializer.Deserialize<BlockGenerateParam>(loadData);
         mSO_BlockGenerateData.blockGenerateParams = convData;
+    }
+
+    private async UniTask DataLoad_AchievementData()
+    {
+        var loadData = await DataLoad("Achievement");
+        var convData = CSVSerializer.Deserialize<AchievementUnitData>(loadData);
+        mSO_AchievementData.achievementDatas = convData;
     }
 
     private async UniTask<string> DataLoad(string _sheetName)
