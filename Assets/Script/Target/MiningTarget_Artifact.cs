@@ -8,8 +8,8 @@ public class MiningTarget_Artifact : MiningTarget_Object
 
     protected int artifactIndex;
     private int breakAttackCount; // ブロックを破壊するために必要な攻撃回数
-    private int breakAttackCount_max = 8;
-    private int breakAttackCount_min = 5;
+    private int breakAttackCount_max = 4;
+    private int breakAttackCount_min = 2;
 
     private int index_SE_Damage => 26;
     private int index_SE_Break => 27;
@@ -32,7 +32,7 @@ public class MiningTarget_Artifact : MiningTarget_Object
     {
         // ダメージを受けた回数で判定する
         var fixDamage = base.hp_max / breakAttackCount;
-        Debug.Log($"<color=green>== artifact Damage: damage: {damage} / fixDamage: {fixDamage} => remain hp: {hp - fixDamage} ===</color>");
+        //Debug.Log($"<color=green>== artifact Damage: damage: {damage} / fixDamage: {fixDamage} => remain hp: {hp - fixDamage} ===</color>");
 
         return base.Damage(fixDamage);
     }

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UniRx;
+using System;
 
 public class MiningTarget_Bomb_PickaxePower : MiningTarget_Object
 {
@@ -7,7 +9,7 @@ public class MiningTarget_Bomb_PickaxePower : MiningTarget_Object
     private int breakCount = 3; //  3回ダメージを受けると爆発
     private int index_SE_Damage => 24;
     private int index_SE_Break => 25;
-
+    private float explodeTime = 1.5f;
     private int damage;
     private float sizeRate;
 
@@ -21,6 +23,16 @@ public class MiningTarget_Bomb_PickaxePower : MiningTarget_Object
         base.Init(bombParam, null);
         base.Init_MiningTargetBase(_hp, 0, bombParam?.so.objectIndex ?? 0);
         //Set_ActiveGravity();
+        StartTimer();
+    }
+
+
+    private void StartTimer()
+    {
+        Observable.Timer(TimeSpan.FromSeconds(explodeTime)).Subscribe(_ =>
+        {
+            BreakFromDamage();
+        }).AddTo(this);
     }
 
     public override bool Damage(int damage, float _resourceUpRate = 1f)
