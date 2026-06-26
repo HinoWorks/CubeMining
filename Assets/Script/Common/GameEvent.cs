@@ -175,4 +175,24 @@ public static class GameEvent
     }
 
 
+
+    public static class AchieveEvent
+    {
+        private static readonly Subject<Unit> skillTreeUnlock = new();
+        public static IObservable<Unit> SkillTreeUnlock => skillTreeUnlock.AsObservable();
+        public static void PublishSkillTreeUnlock()
+        {
+            skillTreeUnlock.OnNext(Unit.Default);
+        }
+
+
+        private static readonly Subject<Unit> pickaxeCraft = new();
+        public static IObservable<Unit> PickaxeCraft => pickaxeCraft.AsObservable();
+        public static void PublishPickaxeCraft()
+        {
+            pickaxeCraft.OnNext(Unit.Default);
+        }
+    }
+
+
 }

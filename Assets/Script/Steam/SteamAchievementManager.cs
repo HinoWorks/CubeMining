@@ -6,13 +6,16 @@ using UnityEngine;
 
 /// <summary>
 /// SO_AchievementData に基づき実績条件を判定し、Steam に反映する。
+/// 「Unlocked」ログはゲーム条件達成時。Steam への反映結果は別ログで出す。
 /// </summary>
 [DefaultExecutionOrder(-199)]
 public class SteamAchievementManager : MonoBehaviour
 {
     public static SteamAchievementManager Inst { get; private set; }
 
-    private readonly HashSet<string> unlockedKeyCache = new();
+    private readonly HashSet<string> earnedInGameKeys = new();
+    private readonly HashSet<string> steamSyncedKeys = new();
+    private bool isEvaluating;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void Bootstrap()
@@ -38,6 +41,9 @@ public class SteamAchievementManager : MonoBehaviour
     {
         GameEvent.GameState.SetGameState.Subscribe(OnGameStateChanged).AddTo(this);
         GameEvent.PlayerLevel.LevelUp.Subscribe(_ => EvaluateAllAsync().Forget()).AddTo(this);
+        GameEvent.AchieveEvent.SkillTreeUnlock.Subscribe(_ => EvaluateAllAsync().Forget()).AddTo(this);
+        GameEvent.AchieveEvent.PickaxeCraft.Subscribe(_ => EvaluateAllAsync().Forget()).AddTo(this);
+        EvaluateAllAsync().Forget();
     }
 
     void OnDestroy()
@@ -56,13 +62,11 @@ public class SteamAchievementManager : MonoBehaviour
         }
     }
 
-    /// <summary>リザルト保存後など、セーブデータを再評価する。</summary>
-    public void NotifySaveDataUpdated()
+    public void NotifySaveDataUpdated(GameRecordData gameRecordOverride = null)
     {
-        EvaluateAllAsync().Forget();
+        EvaluateAllAsync(gameRecordOverride).Forget();
     }
 
-    /// <summary>Manual 定義の実績をコードから付与する。</summary>
     public bool TryUnlock(string achievementKey)
     {
         var data = SOLoader.AchievementData.GetByKey(achievementKey);
@@ -72,35 +76,88 @@ public class SteamAchievementManager : MonoBehaviour
             return false;
         }
 
-        return UnlockAchievement(data, data.threshold, data.threshold);
+        MarkEarnedInGame(data);
+        return SyncToSteam(data);
     }
 
-    public async UniTask EvaluateAllAsync()
+    public async UniTask EvaluateAllAsync(GameRecordData gameRecordOverride = null)
     {
-        if (SaveLoader.Inst == null) return;
+        if (isEvaluating) return;
+        isEvaluating = true;
 
-        var service = SteamManager.Inst?.Achievements;
-        if (service == null || !service.IsAvailable) return;
-
-        var achievementDatas = SOLoader.AchievementData.GetAutoEvaluateDatas();
-        if (achievementDatas.Length == 0) return;
-
-        var gameRecord = await SaveLoader.Inst.Get_GameRecordData();
-        var playerLevelData = await SaveLoader.Inst.Get_PlayerLevelData();
-        var playerLevel = playerLevelData?.level ?? 1;
-        var artifactOwnedCount = SaveLoader.Inst.Get_ArtifactTotalCount();
-        var pickaxeOwnedCount = SaveLoader.Inst.Get_PickaxeTotalCount();
-        var skillTreeOwnedCount = SaveLoader.Inst.Get_SkillTreeTotalCount();
-
-        foreach (var data in achievementDatas)
+        try
         {
-            if (!TryGetProgress(data, gameRecord, playerLevel, artifactOwnedCount, pickaxeOwnedCount, skillTreeOwnedCount, out var current, out var target))
+            if (SaveLoader.Inst == null)
             {
-                continue;
+                Debug.Log("[SteamAchievement] Skip: SaveLoader.Inst is null");
+                return;
             }
 
-            ApplyAchievement(data, service, current, target);
+            if (!await WaitForSteamAsync())
+            {
+                Debug.Log("[SteamAchievement] Skip: Steam is not available");
+                return;
+            }
+
+            var service = SteamManager.Inst.Achievements;
+            var achievementDatas = SOLoader.AchievementData.GetAutoEvaluateDatas();
+            if (achievementDatas.Length == 0)
+            {
+                Debug.LogWarning("[SteamAchievement] Skip: SO_AchievementData has no entries");
+                return;
+            }
+
+            var gameRecord = gameRecordOverride ?? await SaveLoader.Inst.Get_GameRecordData();
+            var playerLevelData = await SaveLoader.Inst.Get_PlayerLevelData();
+            var playerLevel = playerLevelData?.level ?? 1;
+            var artifactOwnedCount = SaveLoader.Inst.Get_ArtifactTotalCount();
+            var pickaxeOwnedCount = SaveLoader.Inst.Get_PickaxeTotalCount();
+            var skillTreeOwnedCount = SaveLoader.Inst.Get_SkillTreeTotalCount();
+
+            foreach (var data in achievementDatas)
+            {
+                if (!TryGetProgress(
+                        data,
+                        gameRecord,
+                        playerLevel,
+                        artifactOwnedCount,
+                        pickaxeOwnedCount,
+                        skillTreeOwnedCount,
+                        out var current,
+                        out var target))
+                {
+                    continue;
+                }
+
+                ApplyAchievement(data, service, current, target);
+            }
         }
+        finally
+        {
+            isEvaluating = false;
+        }
+    }
+
+    private static async UniTask<bool> WaitForSteamAsync()
+    {
+        const int maxAttempts = 30;
+        const int retryDelayMs = 200;
+
+        for (var attempt = 1; attempt <= maxAttempts; attempt++)
+        {
+            var steam = SteamManager.Inst;
+            if (steam != null && steam.IsSteamAvailable && steam.Achievements != null && steam.Achievements.IsAvailable)
+            {
+                return true;
+            }
+
+            if (attempt < maxAttempts)
+            {
+                await UniTask.Delay(retryDelayMs);
+            }
+        }
+
+        return false;
     }
 
     private static bool TryGetProgress(
@@ -142,7 +199,6 @@ public class SteamAchievementManager : MonoBehaviour
                 current = skillTreeOwnedCount;
                 return true;
 
-
             default:
                 return false;
         }
@@ -154,8 +210,6 @@ public class SteamAchievementManager : MonoBehaviour
         int current,
         int target)
     {
-        if (IsAlreadyUnlocked(data, service)) return;
-
         if (data.useProgress && current < target)
         {
             service.SetProgress(data.steamApiName, current, target);
@@ -164,10 +218,19 @@ public class SteamAchievementManager : MonoBehaviour
 
         if (current < target) return;
 
-        UnlockAchievement(data, current, target);
+        MarkEarnedInGame(data);
+        SyncToSteam(data, service);
     }
 
-    private bool UnlockAchievement(AchievementUnitData data, int current, int target)
+    private void MarkEarnedInGame(AchievementUnitData data)
+    {
+        if (earnedInGameKeys.Contains(data.achievementKey)) return;
+
+        earnedInGameKeys.Add(data.achievementKey);
+        Debug.Log($"[SteamAchievement] Unlocked: {data.achievementKey} ({data.steamApiName})");
+    }
+
+    private bool SyncToSteam(AchievementUnitData data, ISteamAchievementService service = null)
     {
         if (string.IsNullOrEmpty(data.steamApiName))
         {
@@ -175,37 +238,32 @@ public class SteamAchievementManager : MonoBehaviour
             return false;
         }
 
-        var service = SteamManager.Inst?.Achievements;
-        if (service == null || !service.IsAvailable) return false;
+        if (steamSyncedKeys.Contains(data.achievementKey)) return true;
 
-        if (IsAlreadyUnlocked(data, service)) return true;
-
-        if (data.useProgress && current < target)
+        service ??= SteamManager.Inst?.Achievements;
+        if (service == null || !service.IsAvailable)
         {
-            service.SetProgress(data.steamApiName, current, target);
+            Debug.LogWarning($"[SteamAchievement] Steam sync skipped: {data.achievementKey}");
             return false;
         }
 
-        var unlocked = service.Unlock(data.steamApiName);
-        if (unlocked)
-        {
-            unlockedKeyCache.Add(data.achievementKey);
-            Debug.Log($"[SteamAchievement] Unlocked: {data.achievementKey} ({data.steamApiName})");
-        }
-
-        return unlocked;
-    }
-
-    private bool IsAlreadyUnlocked(AchievementUnitData data, ISteamAchievementService service)
-    {
-        if (unlockedKeyCache.Contains(data.achievementKey)) return true;
         if (service.IsUnlocked(data.steamApiName))
         {
-            unlockedKeyCache.Add(data.achievementKey);
+            steamSyncedKeys.Add(data.achievementKey);
             return true;
         }
 
-        return false;
+        if (!service.Unlock(data.steamApiName))
+        {
+            Debug.LogWarning(
+                $"[SteamAchievement] Steam sync failed: {data.achievementKey} ({data.steamApiName}). " +
+                "Steam パートナーに API Name が登録されているか、App ID を確認してください。");
+            return false;
+        }
+
+        steamSyncedKeys.Add(data.achievementKey);
+        Debug.Log($"[SteamAchievement] Steam synced: {data.achievementKey} ({data.steamApiName})");
+        return true;
     }
 
     private static int ToClampedInt(BigInteger value)

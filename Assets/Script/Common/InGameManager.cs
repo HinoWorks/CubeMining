@@ -260,7 +260,7 @@ public class InGameManager : MonoBehaviour
             gameRecordData_Now.oneGame_totalDamage = gameRecordData_thisGame.totalDamage;
         }
         SaveLoader.Inst.Request_SaveGameRecordData(gameRecordData_Now);
-        SteamAchievementManager.Inst?.NotifySaveDataUpdated();
+        SteamAchievementManager.Inst?.NotifySaveDataUpdated(gameRecordData_Now);
     }
 
     private void Fix_GameRecordData((GameRecordData_Type type, BigInteger delta) _gameRecordData)

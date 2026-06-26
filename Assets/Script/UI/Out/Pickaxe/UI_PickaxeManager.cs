@@ -194,6 +194,7 @@ public class UI_PickaxeManager : UI_OutGameTabBase
         ui_getNewPickaxe.SetIcon(_so.icon);
         await UniTask.Delay(pickaxeAnimWaitTime);
 
+        GameEvent.AchieveEvent.PublishPickaxeCraft();
         Set_PickaxeLibrary();
         selectInfoUnit.Set_EquipState(-1);
 

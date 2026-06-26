@@ -20,7 +20,6 @@ public sealed class SteamAchievementService : ISteamAchievementService
 
         if (!SteamUserStats.GetAchievement(apiName, out var achieved))
         {
-            Debug.LogWarning($"[Steam] GetAchievement failed: {apiName}");
             return false;
         }
 

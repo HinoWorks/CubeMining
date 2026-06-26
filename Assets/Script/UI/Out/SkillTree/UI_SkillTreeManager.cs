@@ -306,6 +306,10 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
         await UniTask.DelayFrame(3);
         _skillTreeUnit.CallBack_Enhance();
         ui_skillTreeDetail.SetData_Enhanced(newLevel);
+        if (newLevel == 1)
+        {
+            GameEvent.AchieveEvent.PublishSkillTreeUnlock();
+        }
 
         // ベーススキルの更新（baseSkillIndex 配列の中にこのスキルを含む全てのユニットを更新）
         var checkTargetUnit = Array.FindAll(skillTreeUnits,
