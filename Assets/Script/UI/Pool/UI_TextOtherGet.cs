@@ -18,13 +18,18 @@ public class UI_TextOtherGet : UI_Gauge
         tmp_getCoin.SetText($"{_setText}");
     }
 
-    public void SetText(string _setText, Color _setColor)
+    public void SetText(string _setText, Color _setColor, bool _isRandomPosition = true)
     {
-        tmp_getCoin.transform.localPosition = new Vector3(Random.Range(-posiRange, posiRange), Random.Range(-posiRange, posiRange), 0f);
+        var setPosition = _isRandomPosition ? new Vector3(Random.Range(-posiRange, posiRange), Random.Range(-posiRange, posiRange), 0f) : initialPosition;
+        tmp_getCoin.transform.localPosition = setPosition;
         tmp_getCoin.SetText($"{_setText}");
         tmp_getCoin.color = _setColor;
     }
 
+    public void SetNotActive_FromAnim()
+    {
+        Return();
+    }
     public override void Return()
     {
         target = null;

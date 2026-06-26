@@ -104,6 +104,7 @@ public class MiningTarget_Cube : MiningTargetBase
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.BlockBreakCount, 1);
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.PlayerExp, 1);
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.Damage, hp_max);
+        BlockGenerateManager.Inst.Check_BlockRegen();
 
         AddGetResource(_resourceUpRate);
         NotActivate();

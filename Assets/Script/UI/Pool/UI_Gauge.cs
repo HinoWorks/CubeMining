@@ -76,6 +76,11 @@ public class UI_Gauge : MonoBehaviour
     {
         transform.position = Camera.main.WorldToScreenPoint(target.position) + offset;// * CameraManager.Inst.zoomRate;
     }
+    public virtual void SetPosition_OneShot(Vector3 _worldPosition)
+    {
+        transform.position = Camera.main.WorldToScreenPoint(_worldPosition);
+        this.gameObject.SetActive(true);
+    }
 
     protected virtual void OffScreenCheck()
     {

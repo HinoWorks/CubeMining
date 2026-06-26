@@ -23,6 +23,11 @@ public class GameBaseParam
     private float blockGenerate_duration_enhanced = 0f;
 
 
+    // ブロック再生成確率
+    public float blockRegenRate => 0.5f + blockRegenRate_enhanced;
+    private float blockRegenRate_enhanced = 0f;
+
+
     // == block tower 生成まわり ==
     public bool isTowerUnlock { get; private set; } = false;
     public int towerGenerate_count => 1 + towerGenerate_count_enhanced;
@@ -42,10 +47,6 @@ public class GameBaseParam
     //ラッキーマイン時のリソース増加量
     public float luckyMineRate_ResourceUpRate => luckyMineRate_ResourceUpRate_enhanced;
     private float luckyMineRate_ResourceUpRate_enhanced = 0f;
-
-    //下層ボーナスxx
-    public float deepLayer_Bonus => 0 + deepLayer_Bonus_enhanced;
-    private float deepLayer_Bonus_enhanced = 0f;
 
 
     // インスタントシャッター(即破壊する確率)
@@ -71,8 +72,6 @@ public class GameBaseParam
     //アーティファクト周りのパラメタ
     public int artifact_slotCount => artifact_slotCount_enhanced;
     private int artifact_slotCount_enhanced = 0;
-
-
 
 
 
@@ -107,9 +106,6 @@ public class GameBaseParam
                 break;
             case ParamType.LuckyMineRate_Resource:
                 luckyMineRate_ResourceUpRate_enhanced += _setParam;
-                break;
-            case ParamType.DeepLayerBonus:
-                deepLayer_Bonus_enhanced += _setParam;
                 break;
             case ParamType.InstantShatterRate:
                 instantShatterRate_enhanced += _setParam;
@@ -153,6 +149,10 @@ public class GameBaseParam
                 blockGenerate_duration_enhanced += _setParam;
                 break;
 
+            // -- Block Regen Rate --
+            case ParamType.BlockRegenRate:
+                blockRegenRate_enhanced += _setParam;
+                break;
 
             // -- Block Tower Generate Param --
             case ParamType.TowerGenerate_Unlock:

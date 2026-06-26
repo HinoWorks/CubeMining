@@ -261,6 +261,24 @@ public class BlockGenerateManager : MonoBehaviour
     #endregion
 
 
+
+    #region == Block Regen ==
+    public void Check_BlockRegen()
+    {
+        var isRegain = UnityEngine.Random.Range(0f, 1f) < GameParamManager.gameBaseParam.blockRegenRate;
+        if (!isRegain) return;
+
+        var targetBlock = GenerateRockBlock();
+        targetBlock.transform.localPosition = generatePosition;
+        targetBlock.transform.localRotation = Quaternion.Euler(generateRotation);
+
+        var commonText = UI_PoolManager.Inst.Set_CommonText(UI_CommonTextType.BlockRegen);
+        commonText.SetPosition_OneShot(targetBlock.transform.position);
+    }
+    #endregion
+
+
+
     #region == Random Target ==
     /// <summary>
     /// ランダムに生成されたブロックを取得

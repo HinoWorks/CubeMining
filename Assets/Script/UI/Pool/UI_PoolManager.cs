@@ -9,6 +9,21 @@ public enum UI_ResourceUnitSize
     Max2, Max, Mid, Min,
 }
 
+public enum UI_CommonTextType
+{
+    None, Critical, BlockRegen,
+}
+
+
+[System.Serializable]
+public class UI_CommonText
+{
+    public UI_CommonTextType type;
+    public Color color;
+    public string text;
+}
+
+
 public class UI_PoolManager : MonoBehaviour
 {
 
@@ -23,8 +38,13 @@ public class UI_PoolManager : MonoBehaviour
     [SerializeField] GameObject pf_getResourceCont;
     [SerializeField] GameObject pf_getArtifactCont;
     [SerializeField] GameObject pf_getTime;
-    [SerializeField] GameObject pf_criticalText;
+    [SerializeField] GameObject pf_commonText;
     [SerializeField] GameObject pf_luckText;
+
+
+    [Space(10)]
+    [Header(" -- Common text setting --")]
+    [SerializeField] List<UI_CommonText> list_commonText = new List<UI_CommonText>();
 
 
     [Space(10)]
@@ -41,7 +61,7 @@ public class UI_PoolManager : MonoBehaviour
     private List<UI_GetArtifactCont> pool_getArtifactCont = new List<UI_GetArtifactCont>();
     private List<UI_TextCont> pool_getTime = new List<UI_TextCont>();
     private List<UI_TextOtherGet> pool_luckText = new List<UI_TextOtherGet>();
-    private List<UI_TextOtherGet> pool_criticalText = new List<UI_TextOtherGet>();
+    private List<UI_TextOtherGet> pool_commonText = new List<UI_TextOtherGet>();
     //  -- screen out limit setting --
     public float screenOut_min_w { get; private set; }
     public float screenOut_max_w { get; private set; }
@@ -90,9 +110,9 @@ public class UI_PoolManager : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            var newUnit = Instantiate(pf_criticalText, parent_base) as GameObject;
+            var newUnit = Instantiate(pf_commonText, parent_base) as GameObject;
             var selectUnit = newUnit.GetComponent<UI_TextOtherGet>();
-            pool_criticalText.Add(selectUnit);
+            pool_commonText.Add(selectUnit);
             selectUnit.gameObject.SetActive(false);
         }
         for (int i = 0; i < 10; i++)
@@ -250,16 +270,19 @@ public class UI_PoolManager : MonoBehaviour
         return selectUnit;
     }
 
-    public UI_TextOtherGet Set_CriticalText()
+
+    public UI_TextOtherGet Set_CommonText(UI_CommonTextType _type)
     {
         UI_TextOtherGet selectUnit = null;
-        selectUnit = pool_criticalText.Find(d => d.gameObject.activeSelf == false);
+        selectUnit = pool_commonText.Find(d => d.gameObject.activeSelf == false);
         if (selectUnit == null)
         {
-            var newUnit = Instantiate(pf_criticalText, parent_base) as GameObject;
+            var newUnit = Instantiate(pf_commonText, parent_base) as GameObject;
             selectUnit = newUnit.GetComponent<UI_TextOtherGet>();
-            pool_criticalText.Add(selectUnit);
+            pool_commonText.Add(selectUnit);
         }
+        var commonTextData = list_commonText.Find(d => d.type == _type);
+        selectUnit.SetText(commonTextData.text, commonTextData.color, false);
         return selectUnit;
     }
     #endregion --

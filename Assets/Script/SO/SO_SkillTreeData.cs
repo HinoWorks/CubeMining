@@ -19,7 +19,6 @@ public enum ParamType
     IngameTime,
     LuckyMineRate,
     LuckyMineRate_Resource,
-    DeepLayerBonus,
     BlockRegenRate,
     InstantShatterRate,
     PickaxeAttack_AddIngameTimeRate,
@@ -73,19 +72,7 @@ public class SkillTreeBase
     public string description;
     public Sprite icon;
     public int maxLevel;
-    //public int[] baseSkillIndex;
-    //public float baseValue;
     public float deltaValue;
-
-    /*
-        public int req_stone;
-        public int req_iron;
-        public int req_gold;
-        public int req_emerald;
-        public int req_ruby;
-        public int req_sapphire;
-        public int req_diamond;
-        */
 }
 
 [System.Serializable]
@@ -94,8 +81,6 @@ public class SkillTreeUnit
     public int skillTreeIndex;
     public int refIndex;
     public int[] unlockCheckIndexes;
-    //public int  deltaValue;
-    //public int  maxLevel;
     public int req_stone;
     public int req_iron;
     public int req_gold;
