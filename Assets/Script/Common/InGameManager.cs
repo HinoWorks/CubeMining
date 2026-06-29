@@ -113,6 +113,7 @@ public class InGameManager : MonoBehaviour
         gameRecordData_thisGame = new GameRecordData_thisGame();
         GameParamManager.Init_IngameStart();
         AttackManager.Inst.Set_Ready();
+        SubSkillManager.Inst.Set_Ready();
         BlockGenerateManager.Inst.Init();
         resourceDataList.Clear();
         artifactIndexList.Clear();
@@ -138,11 +139,13 @@ public class InGameManager : MonoBehaviour
     {
         timer = 0;
         AttackManager.Inst.Set_AttackState(true);
+        SubSkillManager.Inst.Set_SubSkillState(true);
         BlockGenerateManager.Inst.Set_GenerateState(true);
     }
     private void SetState_InGameEnd()
     {
         AttackManager.Inst.Set_AttackState(false);
+        SubSkillManager.Inst.Set_SubSkillState(false);
         BlockGenerateManager.Inst.Set_GenerateState(false);
         ResultSave_IngameResult();
         ResultSave_ArtifactCurrentBlockCount();

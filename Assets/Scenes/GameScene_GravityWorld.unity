@@ -1847,6 +1847,7 @@ GameObject:
   - component: {fileID: 206919995}
   - component: {fileID: 206919994}
   - component: {fileID: 206919996}
+  - component: {fileID: 206919997}
   m_Layer: 0
   m_Name: ===Manager(Attack)
   m_TagString: Untagged
@@ -1911,6 +1912,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e3a21b4c5d647e9a0b1c2d3e4f5678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickaxePowerManager
+--- !u!114 &206919997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206919991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c64087a08d14042e8b293b4c18daa76b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SubSkillManager
+  subSkillConts: []
 --- !u!1 &213892051
 GameObject:
   m_ObjectHideFlags: 0
@@ -14465,8 +14479,8 @@ MonoBehaviour:
   targetIsSelf: 1
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
-  delay: 3
-  duration: 1
+  delay: 0
+  duration: 3
   easeType: 4
   easeCurve:
     serializedVersion: 2

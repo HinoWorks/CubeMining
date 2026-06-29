@@ -18,6 +18,19 @@ public static class SOLoader
             return so_attackUnitData;
         }
     }
+    private static SO_SubSkillUnitData so_subSkillUnitData;
+    public static SO_SubSkillUnitData SubSkillUnitData
+    {
+        get
+        {
+            if (so_subSkillUnitData == null)
+            {
+                so_subSkillUnitData = LoadSO<SO_SubSkillUnitData>(pathBase + nameof(SO_SubSkillUnitData));
+            }
+            return so_subSkillUnitData;
+        }
+    }
+
 
 
     private static SO_ObjectUnit so_objectUnit;

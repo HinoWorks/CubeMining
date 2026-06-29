@@ -9,6 +9,8 @@ public class MiningTargetBase : MonoBehaviour, IDamagable, IForce
     //public int layerIndex { get; protected set; }
     protected float hp_rate => (float)hp / hp_max;
     public int value { get; private set; }
+
+    protected float areaBonusRate;//ボーナスエリアの上昇分
     public bool isAlive => hp > 0;
 
     public Transform GetTransform() => transform;
@@ -39,6 +41,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable, IForce
     public virtual void Init(int _hp, int _value, float _sizeRate)
     {
         hp_max = _hp;
+        areaBonusRate = 0f;
         value = _value;
         hp = hp_max;
         animScale_rate = _sizeRate;
@@ -78,6 +81,24 @@ public class MiningTargetBase : MonoBehaviour, IDamagable, IForce
 
 
     public virtual void BreakFromDamage(float _resourceUpRate = 0f) { }
+
+    /// <summary>
+    /// ボーナスエリアの上昇分を追加
+    /// </summary>
+    public void AddValueBonusRate(float _bonusRate)
+    {
+        if (areaBonusRate > 0f) return;
+        areaBonusRate += _bonusRate;
+    }
+    /// <summary>
+    /// ボーナスエリアの上昇分を削除
+    /// </summary>
+    public void RemoveValueBonusRate()
+    {
+        areaBonusRate = 0f;
+    }
+
+
     public virtual void NotActivate()
     {
         gameObject.SetActive(false);

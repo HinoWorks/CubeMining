@@ -41,6 +41,7 @@ public enum ParamType
     ResourceRate,
     AliveTime,
     ExLevel,
+    Rate,
 
 
     // ==== artifact param ====

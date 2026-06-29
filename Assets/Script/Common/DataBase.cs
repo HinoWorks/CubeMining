@@ -28,6 +28,7 @@ public class DataBase : MonoBehaviour
     [Header("GSS Load data")]
     [SerializeField] SO_SkillTreeData mSO_SkillTreeData;
     [SerializeField] SO_AttackUnitData mSO_AttackUnitData;
+    [SerializeField] SO_SubSkillUnitData mSO_SubSkillUnitData;
     [SerializeField] SO_BlockData mSO_BlockData;
     [SerializeField] SO_ObjectUnit mSO_ObjectUnitData;
     [SerializeField] SO_ArtifactData mSO_ArtifactData;
@@ -45,6 +46,7 @@ public class DataBase : MonoBehaviour
     {
         await DataLoad_SkillTreeData();
         await DataLoad_AttackUnitData();
+        await DataLoad_SubSkillUnitData();
         await DataLoad_BlockData();
         await DataLoad_ObjectUnitData();
         await DataLoad_ArtifactData();
@@ -62,6 +64,7 @@ public class DataBase : MonoBehaviour
 
         EditorUtility.SetDirty(mSO_SkillTreeData);
         EditorUtility.SetDirty(mSO_AttackUnitData);
+        EditorUtility.SetDirty(mSO_SubSkillUnitData);
         EditorUtility.SetDirty(mSO_BlockData);
         EditorUtility.SetDirty(mSO_ObjectUnitData);
         EditorUtility.SetDirty(mSO_ArtifactData);
@@ -111,6 +114,13 @@ public class DataBase : MonoBehaviour
         var loadData3 = await DataLoad("PickaxeResource");
         var convData3 = CSVSerializer.Deserialize<PickaxeResourceData>(loadData3);
         mSO_AttackUnitData.pickaxeResourceDatas = convData3;
+    }
+
+    private async UniTask DataLoad_SubSkillUnitData()
+    {
+        var loadData = await DataLoad("SubSkillUnit");
+        var convData = CSVSerializer.Deserialize<SubSkillUnitData>(loadData);
+        mSO_SubSkillUnitData.subSkillUnitDatas = convData;
     }
 
     private async UniTask DataLoad_BlockData()

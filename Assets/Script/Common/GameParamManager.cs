@@ -597,7 +597,58 @@ public class AttackParam
     }
 }
 
+/// <summary>
+/// サブスキルのパラメータ
+/// </summary>
+public class SubSkillParam
+{
+    public SubSkillUnitData so;
+    public bool isActive { get; private set; } = false;
 
+    public float rate => rate_enhanced + so.rate;
+    public float interval => (1f - interval_enhanced) * so.interval;
+    public float size => size_enhanced + so.size;
+    public float aliveTime => aliveTime_enhanced + so.aliveTime;
+    public int count => count_enhanced + so.count;
+
+
+    // -- local enhanced --
+    private float rate_enhanced = 0f;
+    private float interval_enhanced = 0f;
+    private float size_enhanced = 0f;
+    private float aliveTime_enhanced = 0f;
+    private int count_enhanced = 0;
+
+
+    public void Init(SubSkillUnitData _subSkillUnitData)
+    {
+        so = _subSkillUnitData;
+    }
+    public void Set_Param(ParamType _paramType, float _setParam)
+    {
+        switch (_paramType)
+        {
+            case ParamType.Unlock:
+                isActive = true;
+                break;
+            case ParamType.Damage:
+                rate_enhanced += _setParam;
+                break;
+            case ParamType.Interval:
+                interval_enhanced += _setParam;
+                break;
+            case ParamType.Size:
+                size_enhanced += _setParam;
+                break;
+            case ParamType.AliveTime:
+                aliveTime_enhanced += _setParam;
+                break;
+            case ParamType.Count:
+                count_enhanced += (int)_setParam;
+                break;
+        }
+    }
+}
 
 
 /// <summary>
@@ -612,9 +663,9 @@ public static class GameParamManager
 
     public readonly static List<ObjectGenerateParam> list_objectGenerateParam = new List<ObjectGenerateParam>();
     public readonly static List<BlockBaseParam> list_blockGenerateParam = new List<BlockBaseParam>();
-    //public readonly static List<BlockGenerateParam_Layer> list_blockGenerateParam_Layer = new List<BlockGenerateParam_Layer>();
     public readonly static List<AttackParam> list_attackParam = new List<AttackParam>();
     public readonly static List<PickaxeParam> list_pickaxeParam = new List<PickaxeParam>();
+    public readonly static List<SubSkillParam> list_subSkillParam = new List<SubSkillParam>();
     public static float artifactGenerateRate => artifactGenerateRateParam.generateRate;
     public static int otherObjectRate { get; private set; } = 0;
     public static int otherObjectBaseRate { get; private set; } = 100;
@@ -739,8 +790,6 @@ public static class GameParamManager
     }
     #endregion
 
-
-
     #region -- other object generate param --
     public static bool IsArtifactGenerate()
     {
@@ -749,6 +798,9 @@ public static class GameParamManager
         return random < artifactGenerateRate;
     }
     #endregion
+
+
+
 
 
     public static async void Init()
@@ -811,6 +863,15 @@ public static class GameParamManager
             var attackParam = new AttackParam();
             attackParam.Init(attackData);
             list_attackParam.Add(attackParam);
+        }
+
+        // sub skill param init
+        list_subSkillParam.Clear();
+        foreach (var subSkillData in SOLoader.SubSkillUnitData.subSkillUnitDatas)
+        {
+            var subSkillParam = new SubSkillParam();
+            subSkillParam.Init(subSkillData);
+            list_subSkillParam.Add(subSkillParam);
         }
 
         // pickaxe param init

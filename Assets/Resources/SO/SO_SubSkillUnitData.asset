@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb372682e8e5424788d93f54e7f2c1c, type: 3}
+  m_Name: SO_SubSkillUnitData
+  m_EditorClassIdentifier: Assembly-CSharp::SO_SubSkillUnitData
+  subSkillUnitDatas:
+  - subSkillIndex: 1
+    unitName: BonusArea
+    icon: {fileID: 0}
+    pf: {fileID: 9035847093669055411, guid: f591f543833fc400c8a3e661ddf510fc, type: 3}
+    rate: 2
+    interval: -1
+    speed: 0
+    aliveTime: -1
+    count: 1
+    size: 1

@@ -113,7 +113,10 @@ public class MiningTarget_Cube : MiningTargetBase
     private void AddGetResource(float _resourceUpRate = 0f)
     {
         var getCount = (int)(base.value
-                                    * (1f + _resourceUpRate));
+                                    * (1f
+                                    + _resourceUpRate
+                                    + base.areaBonusRate)); //ボーナスエリアの上昇分
+        //Debug.Log($"value: {base.value} / _resourceUpRate: {_resourceUpRate} / base.areaBonusRate: {base.areaBonusRate} => getCount: {getCount}");
         if (getCount <= 0) getCount = 1;
         InGameManager.Inst.AddGetResource(resourceType, getCount);
 
