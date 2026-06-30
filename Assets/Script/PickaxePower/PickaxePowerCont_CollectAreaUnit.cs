@@ -1,10 +1,13 @@
 using UnityEngine;
 using UniRx;
 using System;
+using UnityEngine.Animations;
+
 
 public class PickaxePowerCont_CollectAreaUnit : MonoBehaviour
 {
     [SerializeField] ForceFieldArea forceFieldArea;
+    [SerializeField] SimpleAnimation anim;
     private float sizeRate;
     private float aliveTime;
     private float collectPower;
@@ -17,6 +20,7 @@ public class PickaxePowerCont_CollectAreaUnit : MonoBehaviour
         collectPower = _collectPower;
 
         CreateRoop();
+        anim.Play("Default");
 
         Observable.Timer(TimeSpan.FromSeconds(aliveTime))
             .Subscribe(_ => Destroy(gameObject))

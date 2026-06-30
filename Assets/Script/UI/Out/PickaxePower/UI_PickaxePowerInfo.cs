@@ -134,7 +134,7 @@ public class UI_PickaxePowerInfo : MonoBehaviour
             case 1: SetData_Param_1_BigPickaxe(); break;
             case 2: SetData_Param_2_CreateBom(); break;
             case 3: SetData_Param_3_Laser(); break;
-            case 4: SetData_Param_4_PickaxeAreaEnchant(); break;
+            case 4: SetData_Param_4_CollectFlower(); break;
             case 5: SetData_Param_5_ArrowShots(); break;
         }
 
@@ -242,6 +242,31 @@ public class UI_PickaxePowerInfo : MonoBehaviour
             paramNext = so_nextLevel != null ? $"{so_nextLevel.value_1} sec" : ""
         });
     }
+
+    private void SetData_Param_4_CollectFlower()
+    {
+        var so_nextLevel = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel + 1);
+        paramDatas.Add(new ParamData()
+        {
+            paramName = "Area Size",
+            paramNow = $"{so_level.value_1 * 100}%",
+            paramNext = so_nextLevel != null ? $"{so_nextLevel.value_1 * 100}%" : ""
+        });
+
+        paramDatas.Add(new ParamData()
+        {
+            paramName = "Alive Time",
+            paramNow = $"{so_level.value_2} sec",
+            paramNext = so_nextLevel != null ? $"{so_nextLevel.value_2} sec" : ""
+        });
+        paramDatas.Add(new ParamData()
+        {
+            paramName = "Collect Power",
+            paramNow = $"{so_level.value_3 * 100}%",
+            paramNext = so_nextLevel != null ? $"{so_nextLevel.value_3 * 100}%" : ""
+        });
+    }
+
 
     private void SetData_Param_5_ArrowShots()
     {
