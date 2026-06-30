@@ -686,7 +686,7 @@ MonoBehaviour:
     skillName: Block Regen
     description: Increases the chance of blocks falling from above to refill the
       area.
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: a6ba703ea260a4ead97cedce053ded73, type: 3}
     maxLevel: 1
     deltaValue: 0.01
   - baseIndex: 3002
@@ -752,15 +752,6 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 3829715a594f44221b2c656a7a180eec, type: 3}
     maxLevel: 1
     deltaValue: 1
-  - baseIndex: 3010
-    paramCategory: 0
-    paramType: 4
-    targetIndex: -1
-    skillName: Stone Regain
-    description: "\u9271\u77F3\u30EA\u30B2\u30A4\u30F3"
-    icon: {fileID: 21300000, guid: a6ba703ea260a4ead97cedce053ded73, type: 3}
-    maxLevel: 1
-    deltaValue: 0.01
   - baseIndex: 3100
     paramCategory: 0
     paramType: 22
@@ -768,8 +759,8 @@ MonoBehaviour:
     skillName: Initial Block
     description: "\u30B9\u30BF\u30FC\u30C8\u6642\u306E\u9271\u77F3\u306E\u6570"
     icon: {fileID: 21300000, guid: 31815ca4bbe544539a8f484df20a1f84, type: 3}
-    maxLevel: 2
-    deltaValue: 3
+    maxLevel: 5
+    deltaValue: 2
   - baseIndex: 3101
     paramCategory: 0
     paramType: 23
@@ -824,6 +815,33 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: a7607e21792564e35a980563532e3f87, type: 3}
     maxLevel: 1
     deltaValue: 1
+  - baseIndex: 4001
+    paramCategory: 5
+    paramType: 0
+    targetIndex: 1
+    skillName: Bonus Area
+    description: "\u30DC\u30FC\u30CA\u30B9\u30A8\u30EA\u30A2\u3092\u751F\u6210\u3059\u308B"
+    icon: {fileID: 0}
+    maxLevel: 1
+    deltaValue: 1
+  - baseIndex: 4002
+    paramCategory: 5
+    paramType: 20
+    targetIndex: 1
+    skillName: Bonus Up
+    description: "\u30DC\u30FC\u30CA\u30B9\u30A8\u30EA\u30A2\u306E\u4E0A\u6607\u91CF\u309210%\u5897\u52A0\u3055\u305B\u308B"
+    icon: {fileID: 0}
+    maxLevel: 2
+    deltaValue: 0.1
+  - baseIndex: 4003
+    paramCategory: 5
+    paramType: 15
+    targetIndex: 1
+    skillName: Bonus Area Size
+    description: "\u30DC\u30FC\u30CA\u30B9\u30A8\u30EA\u30A2\u306E\u30B5\u30A4\u30BA\u309210%\u30A2\u30C3\u30D7\u3059\u308B"
+    icon: {fileID: 0}
+    maxLevel: 2
+    deltaValue: 0.1
   skillTreeUnits:
   - skillTreeIndex: 100
     refIndex: 1
@@ -899,7 +917,7 @@ MonoBehaviour:
     refIndex: 3100
     unlockCheckIndexes: 660000006800000030010000
     req_stone: 30
-    req_iron: 5
+    req_iron: 0
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -1796,7 +1814,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 310
-    refIndex: 3010
+    refIndex: 3001
     unlockCheckIndexes: 350100002f0100003701000039010000
     req_stone: 150
     req_iron: 30

@@ -674,7 +674,7 @@ public static class GameParamManager
 
 
 
-    #region get param reference
+    #region ======= get param reference =======
     public static BlockBaseParam Get_BlockGenerateParam(int _blockIndex)
     {
         var targetBlock = list_blockGenerateParam.Find(x => x.blockIndex == _blockIndex);
@@ -736,6 +736,15 @@ public static class GameParamManager
         }
         return targetAttack;
     }
+    public static SubSkillParam Get_SubSkillParam(int _subSkillIndex)
+    {
+        var targetSubSkill = list_subSkillParam.Find(x => x.so.subSkillIndex == _subSkillIndex);
+        if (targetSubSkill == null)
+        {
+            Debug.LogError($"SubSkillUnitData is not found: {_subSkillIndex} // ==> 初期ロードで読み込み失敗");
+        }
+        return targetSubSkill;
+    }
     public static PickaxeParam Get_PickaxeParam(int _pickaxeIndex)
     {
         var targetPickaxe = list_pickaxeParam.Find(x => x.so.pickaxeIndex == _pickaxeIndex);
@@ -757,6 +766,7 @@ public static class GameParamManager
     }
     */
     #endregion
+
 
     #region -- other object generate param --
     private static void Set_OtherObjectRate()
@@ -802,7 +812,7 @@ public static class GameParamManager
 
 
 
-
+    #region ======== MAIN ========
     public static async void Init()
     {
         // ゲームの基本的なパラメタを読み込む
@@ -922,6 +932,9 @@ public static class GameParamManager
             case ParamCategory.Attack:
                 Set_AttackParam(_targetIndex, _paramType, _setParam);
                 break;
+            case ParamCategory.SubSkill:
+                Set_SubSkillParam(_targetIndex, _paramType, _setParam);
+                break;
         }
     }
 
@@ -961,9 +974,16 @@ public static class GameParamManager
         }
         targetAttack.Set_Param(_paramType, _setParam);
     }
-
-
-
+    private static void Set_SubSkillParam(int _subSkillIndex, ParamType _paramType, float _setParam)
+    {
+        var targetSubSkill = list_subSkillParam.Find(x => x.so.subSkillIndex == _subSkillIndex);
+        if (targetSubSkill == null)
+        {
+            Debug.LogError($"SubSkillUnitData is not found: {_subSkillIndex} // ==> 初期ロードで読み込み失敗");
+        }
+        targetSubSkill.Set_Param(_paramType, _setParam);
+    }
+    #endregion
 
 
 

@@ -12,6 +12,7 @@ public class PickaxePowerCont_Base : MonoBehaviour
     public virtual void Activate() { }
 
 
+    public virtual void GameEndCall() { }
     public virtual void OnDestroyCall()
     {
         Destroy(this.gameObject);

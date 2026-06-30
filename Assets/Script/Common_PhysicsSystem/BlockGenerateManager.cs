@@ -25,8 +25,8 @@ public class BlockGenerateManager : MonoBehaviour
     // ブロック生成周りのパラ
     private float timer = 0f;
     private float checkInterval => GameParamManager.gameBaseParam.blockGenerate_duration;
-    private int initialCreateCount = GameParamManager.gameBaseParam.blockGenerate_initialCount;
-    private float createCount_delta = GameParamManager.gameBaseParam.blockGenerate_createCount_deltaTime;
+    private int initialCreateCount => GameParamManager.gameBaseParam.blockGenerate_initialCount;
+    private float createCount_delta => GameParamManager.gameBaseParam.blockGenerate_createCount_deltaTime;
 
 
     // tower generate param

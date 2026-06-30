@@ -31,6 +31,9 @@ public class PickaxePowerManager : MonoBehaviour
     public bool CanActivate => IsGaugeReady && !IsOnCooldown;
     private bool canAccumulateGauge;
 
+    [Space(10)]
+    [Header("-- DEBUG --")]
+    [SerializeField] bool DEBUG_InitialPowerReady = false;
 
 
     // ゲージ変更イベント
@@ -160,6 +163,12 @@ public class PickaxePowerManager : MonoBehaviour
         {
             canAccumulateGauge = true;
         }
+
+        if (DEBUG_InitialPowerReady)
+        {
+            Debug.Log(" <green>================== DEBUG_InitialPowerReady </green> ");
+            CurrentGauge = MaxGauge;
+        }
     }
 
     private void SetState_InGame()
@@ -171,6 +180,7 @@ public class PickaxePowerManager : MonoBehaviour
     {
         canAccumulateGauge = false;
         CooldownRemaining = 0f;
+        pickaxePowerCont?.GameEndCall();
     }
 
 

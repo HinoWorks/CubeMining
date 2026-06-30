@@ -10,6 +10,7 @@ public enum ParamCategory
     BlockChangeRate,
     OtherBlock,
     Attack,
+    SubSkill
 }
 public enum ParamType
 {

@@ -8,7 +8,7 @@ public class ForceFieldArea : MonoBehaviour
         Attract,  // 吸引: 中心へ
     }
 
-    [SerializeField] private float radius = 3f;
+    [SerializeField] private float baseRadius = 3f;
     [SerializeField] private float force = 10f;
     [SerializeField] private LayerMask targetLayerMask;
 
@@ -17,7 +17,7 @@ public class ForceFieldArea : MonoBehaviour
     /// </summary>
     public void Activate(ForceType _forceType, float _radiusRate = 1f, float _forceRate = 1f)
     {
-        ApplyForceInRadius(_forceType, radius * _radiusRate, force * _forceRate);
+        ApplyForceInRadius(_forceType, baseRadius * _radiusRate, force * _forceRate);
     }
 
     /// <summary>
@@ -26,7 +26,7 @@ public class ForceFieldArea : MonoBehaviour
     public void Activate(ForceType _forceType, Vector3 _position, float _radiusRate = 1f, float _forceRate = 1f)
     {
         transform.position = _position;
-        ApplyForceInRadius(_forceType, radius * _radiusRate, force * _forceRate);
+        ApplyForceInRadius(_forceType, baseRadius * _radiusRate, force * _forceRate);
     }
 
     private void ApplyForceInRadius(ForceType _forceType, float _searchRadius, float _baseForce)
@@ -58,7 +58,7 @@ public class ForceFieldArea : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(0.5f, 0.8f, 1f, 0.3f);
-        Gizmos.DrawSphere(transform.position, radius);
+        Gizmos.DrawSphere(transform.position, baseRadius);
     }
 #endif
 }
