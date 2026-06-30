@@ -821,7 +821,7 @@ MonoBehaviour:
     targetIndex: 1
     skillName: Bonus Area
     description: "\u30DC\u30FC\u30CA\u30B9\u30A8\u30EA\u30A2\u3092\u751F\u6210\u3059\u308B"
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: 6eefe0d5ab3d3427daad3bb3d308da30, type: 3}
     maxLevel: 1
     deltaValue: 1
   - baseIndex: 4002
@@ -830,7 +830,7 @@ MonoBehaviour:
     targetIndex: 1
     skillName: Bonus Up
     description: "\u30DC\u30FC\u30CA\u30B9\u30A8\u30EA\u30A2\u306E\u4E0A\u6607\u91CF\u309210%\u5897\u52A0\u3055\u305B\u308B"
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: c60e3b0fd26014ded8004ecc3c7c7924, type: 3}
     maxLevel: 2
     deltaValue: 0.1
   - baseIndex: 4003
@@ -839,7 +839,7 @@ MonoBehaviour:
     targetIndex: 1
     skillName: Bonus Area Size
     description: "\u30DC\u30FC\u30CA\u30B9\u30A8\u30EA\u30A2\u306E\u30B5\u30A4\u30BA\u309210%\u30A2\u30C3\u30D7\u3059\u308B"
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: ef2dcfce7178f4557bf757c3abdfed05, type: 3}
     maxLevel: 2
     deltaValue: 0.1
   skillTreeUnits:
@@ -1954,7 +1954,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 326
-    refIndex: 1
+    refIndex: 4001
     unlockCheckIndexes: 450100003f010000
     req_stone: 1
     req_iron: 0
@@ -1964,7 +1964,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 327
-    refIndex: 1
+    refIndex: 4002
     unlockCheckIndexes: 46010000
     req_stone: 1
     req_iron: 0
@@ -1974,7 +1974,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 328
-    refIndex: 1
+    refIndex: 4003
     unlockCheckIndexes: 3f010000
     req_stone: 1
     req_iron: 0

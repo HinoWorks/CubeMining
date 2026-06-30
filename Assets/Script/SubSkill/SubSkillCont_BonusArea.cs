@@ -32,10 +32,6 @@ public class SubSkillCont_BonusArea : SubSkillCont_Base
         {
             CreateBullet();
         }
-        else
-        {
-            Destroy(activeBullet.gameObject);
-        }
     }
 
     private void CreateBullet()
@@ -53,7 +49,11 @@ public class SubSkillCont_BonusArea : SubSkillCont_Base
 
     public override void OnDestroy()
     {
-        Destroy(activeBullet.gameObject);
+        if (activeBullet != null)
+        {
+            Destroy(activeBullet.gameObject);
+            activeBullet = null;
+        }
         base.OnDestroy();
     }
 

@@ -156,6 +156,7 @@ public class InGameManager : MonoBehaviour
     private void SetState_Result()
     {
         AttackManager.Inst.AttackUnitDelete();
+        SubSkillManager.Inst.SubSkillUnitDeleteAll();
     }
     private async void SetState_ResultEnd_ToOutGame()
     {

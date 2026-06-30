@@ -26,7 +26,6 @@ public class SubSkillManager : MonoBehaviour
 
             SubSkillUnitGenerate(subSkillParam);
         }
-
     }
 
     private void SubSkillUnitGenerate(SubSkillParam _subSkillParam)
@@ -49,6 +48,16 @@ public class SubSkillManager : MonoBehaviour
         {
             subSkillCont.Set_AttackTrigger(isStart);
         }
+    }
+
+
+    public void SubSkillUnitDeleteAll()
+    {
+        foreach (var subSkillCont in subSkillConts)
+        {
+            subSkillCont.OnDestroy();
+        }
+        subSkillConts.Clear();
     }
 
 }
