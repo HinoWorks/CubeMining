@@ -18,6 +18,8 @@ public class AttackCont_RotateStarUnit : MonoBehaviour
 
     private const float initialRadius = 1f;
     private const float expandRadius = 3f;
+    private float expandRadiusRate_Level2 = 1f;
+    private bool isLevel2 => expandRadiusRate_Level2 > 1f;
     [SerializeField] BulletCont_RotateStar[] bulletCont_RotateStars;
 
 
@@ -27,16 +29,17 @@ public class AttackCont_RotateStarUnit : MonoBehaviour
     //private Vector3 baseRotate_vertical_2 = new Vector3(0f, 180, 90f);
 
 
-    public void Init(int _damage, float _lifetime, float _speed, int _starCount, float _size)
+    public void Init(int _damage, float _lifetime, float _speed, int _starCount, float _expandRadiusRate)
     {
         this.damage = _damage;
         this.lifetime = _lifetime;
         this.speed = _speed;
+        this.expandRadiusRate_Level2 = _expandRadiusRate;
 
         rotateStarUnitType = RotateStarUnitType.Normal;
         transform.localRotation = Quaternion.Euler(baseRotate_normal);
 
-        CreateBullet(_starCount, _size);
+        CreateBullet(_starCount);
 
         Observable.Timer(TimeSpan.FromSeconds(lifetime)).Subscribe(_ => ReturnToPool()).AddTo(this);
         this.gameObject.SetActive(true);
@@ -60,7 +63,7 @@ public class AttackCont_RotateStarUnit : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void CreateBullet(int _count, float _size)
+    private void CreateBullet(int _count)
     {
         foreach (var bulletCont in bulletCont_RotateStars)
         {
@@ -73,8 +76,8 @@ public class AttackCont_RotateStarUnit : MonoBehaviour
 
             var setDirection = new Vector3(Mathf.Cos(i * deltaAngle), 0f, Mathf.Sin(i * deltaAngle));
             bulletCont.transform.localPosition = setDirection * initialRadius;
-            bulletCont.SetSize(_size);
-            bulletCont.Init(damage, lifetime, setDirection * expandRadius);
+            bulletCont.SetLevelUnit_Level2(isLevel2);
+            bulletCont.Init(damage, lifetime, setDirection * expandRadius * expandRadiusRate_Level2);
         }
     }
 

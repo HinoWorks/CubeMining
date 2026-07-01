@@ -32,6 +32,7 @@ public class SubSkillCont_Base : MonoBehaviour
     public virtual void Set_AttackTrigger(bool isTrigger)
     {
         isActive = isTrigger;
+
     }
 
     public virtual void OnDestroy()

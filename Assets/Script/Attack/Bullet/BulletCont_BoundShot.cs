@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class BulletCont_BoundShot : BulletBase
 {
+    [SerializeField] GameObject obj_level1;
+    [SerializeField] GameObject obj_level2;
+
+
     private TrailRenderer trailRenderer;
     private const float ViewportMargin = 0.02f;
 
@@ -11,6 +15,7 @@ public class BulletCont_BoundShot : BulletBase
 
     public override void Init(int _damage, float _lifetime, Vector3 _direction)
     {
+        /*
         if (trailRenderer == null)
         {
             trailRenderer = GetComponent<TrailRenderer>();
@@ -19,10 +24,18 @@ public class BulletCont_BoundShot : BulletBase
         {
             trailRenderer.Clear();
         }
+        */
 
         base.SetBulletType(BulletType.Piercing);
         base.Init(_damage, _lifetime, _direction);
     }
+
+    public void SetLevelUnit_Level2(bool _isLevel2)
+    {
+        obj_level1.SetActive(!_isLevel2);
+        obj_level2.SetActive(_isLevel2);
+    }
+
 
     public override void ReturnToPool()
     {

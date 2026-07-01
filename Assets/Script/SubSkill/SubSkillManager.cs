@@ -20,10 +20,8 @@ public class SubSkillManager : MonoBehaviour
         // 攻撃ユニット生成 == スキルツリー分のパラメータを読み込む
         foreach (var subSkillParam in GameParamManager.list_subSkillParam)
         {
-            Debug.Log("<color=purple>DEBUG ---- サブスキル全開放 ----</color>");
-            //if (!subSkillParam.isActive) continue;
-
-
+            //Debug.Log("<color=purple>DEBUG ---- サブスキル全開放 ----</color>");
+            if (!subSkillParam.isActive) continue;
             SubSkillUnitGenerate(subSkillParam);
         }
     }

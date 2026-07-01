@@ -17,11 +17,7 @@ public class AttackCont_RotateStar : AttackContBase
     [Header("Level2 checkRate")]
     [SerializeField] private float rate_Level2Unit = 0.3f;
     private bool isLevel2Unit => UnityEngine.Random.Range(0f, 1f) < rate_Level2Unit;
-
-    private float size_Level2Unit = 1.5f;
-    private float size_NormalUnit = 1f;
-
-
+    private float expandRadiusRate_Level2Unit = 1.5f; // level2 回転する半径をxx倍にする
 
 
     protected override void AwakeCall()
@@ -69,14 +65,14 @@ public class AttackCont_RotateStar : AttackContBase
             // -- level2
             var freeRotateStarUnit = Get_FreeRotateStarUnit();
             freeRotateStarUnit.transform.position = pointerPosition + offsetPosition;
-            freeRotateStarUnit.Init(base.damage, base.aliveTime, base.speed, base.count, size_Level2Unit);
+            freeRotateStarUnit.Init(base.damage, base.aliveTime, base.speed, base.count, expandRadiusRate_Level2Unit);
         }
         else
         {
             // -- level1
             var freeRotateStarUnit = Get_FreeRotateStarUnit();
             freeRotateStarUnit.transform.position = pointerPosition + offsetPosition;
-            freeRotateStarUnit.Init(base.damage, base.aliveTime, base.speed, base.count, size_NormalUnit);
+            freeRotateStarUnit.Init(base.damage, base.aliveTime, base.speed, base.count, 1);
         }
 
         /*
