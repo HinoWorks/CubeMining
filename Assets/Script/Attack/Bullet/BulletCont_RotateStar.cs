@@ -3,8 +3,11 @@ using DG.Tweening;
 
 public class BulletCont_RotateStar : BulletBase
 {
+    [SerializeField] TrailRenderer trail;
     [SerializeField] GameObject obj_level1;
+    [SerializeField] Gradient gradient_level1;
     [SerializeField] GameObject obj_level2;
+    [SerializeField] Gradient gradient_level2;
     private float size = 1f;
 
 
@@ -12,6 +15,10 @@ public class BulletCont_RotateStar : BulletBase
     public override void Init(int _damage, float _lifetime, Vector3 _direction)
     {
         this.gameObject.transform.localScale = Vector3.zero;
+        if (trail != null)
+        {
+            trail.Clear();
+        }
 
         base.SetBulletType(BulletType.Piercing);
         base.Init(_damage);
@@ -24,6 +31,11 @@ public class BulletCont_RotateStar : BulletBase
     {
         obj_level1.SetActive(!_isLevel2);
         obj_level2.SetActive(_isLevel2);
+
+        if (trail != null)
+        {
+            trail.colorGradient = _isLevel2 ? gradient_level2 : gradient_level1;
+        }
     }
 
     public override void ReturnToPool()

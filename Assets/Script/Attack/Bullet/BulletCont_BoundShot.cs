@@ -1,31 +1,25 @@
 using UnityEngine;
+using DG.Tweening;
+
 
 public class BulletCont_BoundShot : BulletBase
 {
+    [SerializeField] TrailRenderer trail;
+    [Space(5)]
     [SerializeField] GameObject obj_level1;
+    [SerializeField] Gradient gradient_level1;
     [SerializeField] GameObject obj_level2;
-
-
-    private TrailRenderer trailRenderer;
+    [SerializeField] Gradient gradient_level2;
     private const float ViewportMargin = 0.02f;
-
-
-
 
 
     public override void Init(int _damage, float _lifetime, Vector3 _direction)
     {
-        /*
-        if (trailRenderer == null)
+        if (trail != null)
         {
-            trailRenderer = GetComponent<TrailRenderer>();
+            trail.Clear();
         }
-        if (trailRenderer != null)
-        {
-            trailRenderer.Clear();
-        }
-        */
-
+        transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack).Play();
         base.SetBulletType(BulletType.Piercing);
         base.Init(_damage, _lifetime, _direction);
     }
@@ -34,12 +28,22 @@ public class BulletCont_BoundShot : BulletBase
     {
         obj_level1.SetActive(!_isLevel2);
         obj_level2.SetActive(_isLevel2);
+        if (trail != null)
+        {
+            trail.colorGradient = _isLevel2 ? gradient_level2 : gradient_level1;
+        }
     }
 
 
     public override void ReturnToPool()
     {
-        base.ReturnToPool();
+        transform.DOKill();
+        this.gameObject.transform.DOScale(Vector3.zero, 0.1f).SetEase(Ease.OutBack)
+            .OnComplete(() =>
+            {
+                base.ReturnToPool();
+                transform.DOKill();
+            });
     }
 
     public override void OnDestroy()

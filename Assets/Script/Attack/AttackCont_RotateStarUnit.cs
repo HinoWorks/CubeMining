@@ -18,8 +18,8 @@ public class AttackCont_RotateStarUnit : MonoBehaviour
 
     private const float initialRadius = 1f;
     private const float expandRadius = 3f;
-    private float expandRadiusRate_Level2 = 1f;
-    private bool isLevel2 => expandRadiusRate_Level2 > 1f;
+    private float expandRadiusRate = 1f;
+    private bool isLevel2 => expandRadiusRate > 1f;
     [SerializeField] BulletCont_RotateStar[] bulletCont_RotateStars;
 
 
@@ -34,7 +34,7 @@ public class AttackCont_RotateStarUnit : MonoBehaviour
         this.damage = _damage;
         this.lifetime = _lifetime;
         this.speed = _speed;
-        this.expandRadiusRate_Level2 = _expandRadiusRate;
+        this.expandRadiusRate = _expandRadiusRate;
 
         rotateStarUnitType = RotateStarUnitType.Normal;
         transform.localRotation = Quaternion.Euler(baseRotate_normal);
@@ -77,7 +77,7 @@ public class AttackCont_RotateStarUnit : MonoBehaviour
             var setDirection = new Vector3(Mathf.Cos(i * deltaAngle), 0f, Mathf.Sin(i * deltaAngle));
             bulletCont.transform.localPosition = setDirection * initialRadius;
             bulletCont.SetLevelUnit_Level2(isLevel2);
-            bulletCont.Init(damage, lifetime, setDirection * expandRadius * expandRadiusRate_Level2);
+            bulletCont.Init(damage, lifetime, setDirection * expandRadius * expandRadiusRate);
         }
     }
 
