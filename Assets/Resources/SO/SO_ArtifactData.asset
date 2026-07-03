@@ -105,7 +105,7 @@ MonoBehaviour:
     activeCheckTiming: 0
     activeCheckRate: -1
     effectType: 21
-    value: 0.15
+    value: 0.3
     effectType_2: 0
     value_2: 0
     unit: '%'
@@ -135,9 +135,33 @@ MonoBehaviour:
     unit: '%'
   - artifactIndex: 11
     artifactName: Artifact -- 11
-    description: ' [A] Ore Conversion Rate'
+    description: ' xx'
     rarity: 0
     icon: {fileID: 21300000, guid: 039ccaf8a40c8f649afbebf7de402072, type: 3}
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 0
+    value: 0.1
+    effectType_2: 0
+    value_2: 0
+    unit: '%'
+  - artifactIndex: 12
+    artifactName: Artifact -- 12
+    description: ' xx'
+    rarity: 0
+    icon: {fileID: 21300000, guid: 0d2613e7ae509b0419be98f388f98755, type: 3}
+    activeCheckTiming: 0
+    activeCheckRate: -1
+    effectType: 0
+    value: 0.1
+    effectType_2: 0
+    value_2: 0
+    unit: '%'
+  - artifactIndex: 13
+    artifactName: Artifact -- 13
+    description: ' [A] Ore Conversion Rate'
+    rarity: 0
+    icon: {fileID: 21300000, guid: 00b64a0f78bd2f74ba1f9ef40ae96ae6, type: 3}
     activeCheckTiming: 0
     activeCheckRate: -1
     effectType: 40
@@ -145,11 +169,11 @@ MonoBehaviour:
     effectType_2: 0
     value_2: 0
     unit: '%'
-  - artifactIndex: 12
-    artifactName: Artifact -- 12
+  - artifactIndex: 14
+    artifactName: Artifact -- 14
     description: 'Every 5s: 50% chance for a Bomb Block to drop'
     rarity: 0
-    icon: {fileID: 21300000, guid: 0d2613e7ae509b0419be98f388f98755, type: 3}
+    icon: {fileID: 21300000, guid: b4df8d4043f884b46b5e4867d0d6c48b, type: 3}
     activeCheckTiming: 20
     activeCheckRate: 0
     effectType: 30
@@ -157,11 +181,11 @@ MonoBehaviour:
     effectType_2: 0
     value_2: 0
     unit: '%'
-  - artifactIndex: 13
-    artifactName: Artifact -- 13
+  - artifactIndex: 15
+    artifactName: Artifact -- 15
     description: 'Every 5s: 50% chance for a Bonus Chest to drop'
     rarity: 0
-    icon: {fileID: 21300000, guid: 00b64a0f78bd2f74ba1f9ef40ae96ae6, type: 3}
+    icon: {fileID: 21300000, guid: 921a898435817dc4db16f800ce4b03f6, type: 3}
     activeCheckTiming: 20
     activeCheckRate: 0
     effectType: 32
@@ -169,23 +193,35 @@ MonoBehaviour:
     effectType_2: 0
     value_2: 0
     unit: '%'
-  - artifactIndex: 14
-    artifactName: Artifact -- 14
-    description: '1% chance on hit: Drop a Mini-Pickaxe (deals 50% Pickaxe Damage)'
+  - artifactIndex: 16
+    artifactName: Artifact -- 16
+    description: xxxx
     rarity: 0
-    icon: {fileID: 21300000, guid: b4df8d4043f884b46b5e4867d0d6c48b, type: 3}
-    activeCheckTiming: 30
+    icon: {fileID: 21300000, guid: adc2852cf3ac89b4ab9425aba2e10fdc, type: 3}
+    activeCheckTiming: 20
     activeCheckRate: 0
-    effectType: 31
+    effectType: 32
     value: 0
     effectType_2: 0
     value_2: 0
     unit: '%'
-  - artifactIndex: 15
-    artifactName: Artifact -- 15
+  - artifactIndex: 17
+    artifactName: Artifact -- 17
+    description: '1% chance on hit: Drop a Mini-Pickaxe (deals 50% Pickaxe Damage)'
+    rarity: 0
+    icon: {fileID: 21300000, guid: cf6b8380df0739141a89462cb4e8c257, type: 3}
+    activeCheckTiming: 30
+    activeCheckRate: 0
+    effectType: 32
+    value: 0
+    effectType_2: 0
+    value_2: 0
+    unit: '%'
+  - artifactIndex: 18
+    artifactName: Artifact -- 18
     description: '1% chance on hit: Spawn a Bomb Block'
     rarity: 0
-    icon: {fileID: 21300000, guid: 921a898435817dc4db16f800ce4b03f6, type: 3}
+    icon: {fileID: 21300000, guid: 655a524668ec24343bd2e0e01eb4b245, type: 3}
     activeCheckTiming: 30
     activeCheckRate: 0
     effectType: 30
@@ -193,11 +229,11 @@ MonoBehaviour:
     effectType_2: 0
     value_2: 0
     unit: '%'
-  - artifactIndex: 16
-    artifactName: Artifact -- 16
+  - artifactIndex: 19
+    artifactName: Artifact -- 19
     description: '1% chance on hit: [A] In-game Time'
     rarity: 0
-    icon: {fileID: 21300000, guid: adc2852cf3ac89b4ab9425aba2e10fdc, type: 3}
+    icon: {fileID: 21300000, guid: b9713354316be864196732b2d63313a8, type: 3}
     activeCheckTiming: 30
     activeCheckRate: 0
     effectType: 50
@@ -205,11 +241,11 @@ MonoBehaviour:
     effectType_2: 0
     value_2: 0
     unit: sec
-  - artifactIndex: 17
-    artifactName: Artifact -- 17
+  - artifactIndex: 20
+    artifactName: Artifact -- 20
     description: 'Last 5 Seconds: [A] Attack Power'
     rarity: 0
-    icon: {fileID: 21300000, guid: cf6b8380df0739141a89462cb4e8c257, type: 3}
+    icon: {fileID: 21300000, guid: 7383f21d25939184a93296c8b5499423, type: 3}
     activeCheckTiming: 50
     activeCheckRate: -1
     effectType: 2
@@ -217,11 +253,11 @@ MonoBehaviour:
     effectType_2: 0
     value_2: 0
     unit: '%'
-  - artifactIndex: 18
-    artifactName: Artifact -- 18
+  - artifactIndex: 21
+    artifactName: Artifact -- 21
     description: 'Last 5 Seconds: [A] Attack Speed'
     rarity: 0
-    icon: {fileID: 21300000, guid: 655a524668ec24343bd2e0e01eb4b245, type: 3}
+    icon: {fileID: 21300000, guid: ec70d9632115d764780f5ab14737f4ca, type: 3}
     activeCheckTiming: 50
     activeCheckRate: -1
     effectType: 2
@@ -229,11 +265,11 @@ MonoBehaviour:
     effectType_2: 0
     value_2: 0
     unit: '%'
-  - artifactIndex: 19
-    artifactName: Artifact -- 19
+  - artifactIndex: 22
+    artifactName: Artifact -- 22
     description: 'Last 5 Seconds: [A] Instant Mine Chance'
     rarity: 0
-    icon: {fileID: 21300000, guid: b9713354316be864196732b2d63313a8, type: 3}
+    icon: {fileID: 21300000, guid: f13e73dec895c1e4e81c08cfdd3bd119, type: 3}
     activeCheckTiming: 50
     activeCheckRate: -1
     effectType: 42
@@ -241,63 +277,15 @@ MonoBehaviour:
     effectType_2: 0
     value_2: 0
     unit: '%'
-  - artifactIndex: 20
-    artifactName: Artifact -- 20
+  - artifactIndex: 23
+    artifactName: Artifact -- 23
     description: 'Last 5 Seconds: [A] Ore Yield'
     rarity: 0
-    icon: {fileID: 21300000, guid: 7383f21d25939184a93296c8b5499423, type: 3}
+    icon: {fileID: 21300000, guid: 1341e7d469bb5214981cce33e3b4cb03, type: 3}
     activeCheckTiming: 50
     activeCheckRate: -1
     effectType: 41
     value: 0.3
-    effectType_2: 0
-    value_2: 0
-    unit: '%'
-  - artifactIndex: 21
-    artifactName: Artifact -- 21
-    description: 'Every 5 Layers: Spawn a Bomb Block'
-    rarity: 0
-    icon: {fileID: 21300000, guid: ec70d9632115d764780f5ab14737f4ca, type: 3}
-    activeCheckTiming: 1
-    activeCheckRate: -1
-    effectType: 30
-    value: 0
-    effectType_2: 0
-    value_2: 0
-    unit: '%'
-  - artifactIndex: 22
-    artifactName: Artifact -- 22
-    description: 'Every 5 Layers: [A] Attack Power'
-    rarity: 0
-    icon: {fileID: 21300000, guid: f13e73dec895c1e4e81c08cfdd3bd119, type: 3}
-    activeCheckTiming: 1
-    activeCheckRate: -1
-    effectType: 1
-    value: 0.1
-    effectType_2: 0
-    value_2: 0
-    unit: '%'
-  - artifactIndex: 23
-    artifactName: Artifact -- 23
-    description: 'Every 5 Layers: [A] Attack Speed'
-    rarity: 0
-    icon: {fileID: 21300000, guid: 1341e7d469bb5214981cce33e3b4cb03, type: 3}
-    activeCheckTiming: 1
-    activeCheckRate: -1
-    effectType: 1
-    value: 0.1
-    effectType_2: 0
-    value_2: 0
-    unit: '%'
-  - artifactIndex: 24
-    artifactName: Artifact -- 24
-    description: 'Every 5 Layers: [A] In-game Time'
-    rarity: 0
-    icon: {fileID: 21300000, guid: f6295dfb0b792f04a85bd2469b573afe, type: 3}
-    activeCheckTiming: 1
-    activeCheckRate: -1
-    effectType: 1
-    value: 0.1
     effectType_2: 0
     value_2: 0
     unit: '%'

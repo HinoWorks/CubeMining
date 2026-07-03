@@ -35,8 +35,8 @@ public class MiningTarget_Timer : MiningTarget_Object
 
         // ===========
         var getExTime = exTimeBase + objectGenerateParam.valueRate_total;
-
         InGameManager.Inst.AddGetExTime(getExTime);
+        GameEvent.InGame.PublishIngameTimeAdd(getExTime);
 
         // ブロック付近のUI
         var ui_textCoinGet = UI_PoolManager.Inst.Get_OtherText(transform, Vector3.zero);

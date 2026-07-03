@@ -60,11 +60,25 @@ public static class GameEvent
             onNewGroundLayer.OnNext(layer);
         }
 
+        /// <summary>
+        /// アーティファクト効果発火時のイベント
+        /// </summary>
         private static readonly Subject<int> artifactActiveEffect = new();
         public static IObservable<int> ArtifactActiveEffect => artifactActiveEffect.AsObservable();
         public static void PublishArtifactActiveEffect(int artifactIndex)
         {
             artifactActiveEffect.OnNext(artifactIndex);
+        }
+
+
+        /// <summary>
+        /// インゲーム時間追加時のイベント
+        /// </summary>
+        private static readonly Subject<float> ingameTimeAdd = new();
+        public static IObservable<float> IngameTimeAdd => ingameTimeAdd.AsObservable();
+        public static void PublishIngameTimeAdd(float time)
+        {
+            ingameTimeAdd.OnNext(time);
         }
     }
 

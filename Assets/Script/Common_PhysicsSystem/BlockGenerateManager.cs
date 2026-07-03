@@ -120,8 +120,7 @@ public class BlockGenerateManager : MonoBehaviour
     #region == Block Create Base ==
     private void Check_BlockCreate()
     {
-        var randomCount = Random.Range(1, createCount_delta + 1);
-        for (int i = 0; i < randomCount; i++)
+        for (int i = 0; i < createCount_delta; i++)
         {
             GenerateBlock();
         }
@@ -141,6 +140,13 @@ public class BlockGenerateManager : MonoBehaviour
             var targetBlock = GenerateRockBlock();
             targetBlock.transform.localPosition = generatePosition;
             targetBlock.transform.localRotation = Quaternion.Euler(generateRotation);
+        }
+    }
+    public void CreateBlock(int _count)
+    {
+        for (int i = 0; i < _count; i++)
+        {
+            GenerateBlock();
         }
     }
     #endregion
@@ -177,9 +183,6 @@ public class BlockGenerateManager : MonoBehaviour
     {
         GenerateOtherObject(3);  //1:tresure, 2:timer, 3:bomb
     }
-
-
-
     #endregion
 
 

@@ -48,7 +48,7 @@ public class ArtifactControllUnit
     }
     private void ActiveCheck()
     {
-        if (so.activeCheckRate >= 0f && Random.Range(0f, 1f) > so.activeCheckRate) return;
+        if (so.activeCheckRate >= 0f && Random.Range(0f, 1f) >= so.activeCheckRate) return;
         Set_ArtifactEffect(so.effectType, so.value);
         Set_ArtifactEffect(so.effectType_2, so.value_2);
         GameEvent.InGame.PublishArtifactActiveEffect(so.artifactIndex);
@@ -109,7 +109,14 @@ public class ArtifactControllUnit
             case ArtifactEffectType.create_bonusChest:
                 ArtifactManager.Inst.Create_BonusChest();
                 break;
-            case ArtifactEffectType.create_miniPickaxe:
+            case ArtifactEffectType.create_timeBlock:
+                ArtifactManager.Inst.Create_TimeBlock();
+                break;
+            case ArtifactEffectType.createOre_atGetTime:
+                ArtifactManager.Inst.CreateOre_atGetTime();
+                break;
+            case ArtifactEffectType.bonusTimeAdd_atBreakChest:
+                ArtifactManager.Inst.BonusTimeAdd_atBreakChest();
                 break;
 
             // -- インゲーム時間追加 --
@@ -137,15 +144,26 @@ public class ArtifactManager : MonoBehaviour
     public float pickaxe_resourceUpRate = 0f;
     public float pickaxe_sizeRate = 0f;
 
+    [Space(5)]
     public float all_damageRate = 0;
     public float all_attackInterval = 0f;
 
+    [Space(5)]
     public float bomb_damageRate = 0;
     public float bomb_sizeRate = 0f;
 
+    [Space(5)]
     public float changeBlockRate = 0f;
     public float resourceUpRate = 0f;
     public float instantShatterRate = 0f;
+
+    [Space(5)]
+    public bool isIngameTimeAdd_atBreakChest = false;
+    public float ingameTimeAdd_atBreakChest_value = 0.5f;
+    public bool isCreateOre_atGetTime = false;
+    private int createOre_count = 3;
+
+
     // =================
 
 
@@ -168,9 +186,9 @@ public class ArtifactManager : MonoBehaviour
     {
         GameEvent.GameState.SetGameState.Subscribe(SetGameState).AddTo(this);
         GameEvent.InGame.OnPickaxeAttack.Subscribe(_ => Check_PickaxeAttackTiming()).AddTo(this);
-        //GameEvent.InGame.OnNewGroundLayer.Subscribe(layer => Check_NewGroundLayer(layer)).AddTo(this);
+        GameEvent.InGame.IngameTimeAdd.Subscribe(IngameEvent_IngameTimeAdd).AddTo(this);
+        GameEvent.InGame.GameRecordDataMod_Ingame.Subscribe(data => IngameEvent_IngameTimeAdd_atBreakChest(data.Item1, (int)data.Item2)).AddTo(this);
     }
-
 
     private void SetGameState(GameStateType state)
     {
@@ -235,6 +253,9 @@ public class ArtifactManager : MonoBehaviour
         resourceUpRate = 0f;
         instantShatterRate = 0f;
 
+        isIngameTimeAdd_atBreakChest = false;
+        isCreateOre_atGetTime = false;
+
         isLastBoosterCheckFin = false;
         timer_for5secInterval = 0f;
 
@@ -285,7 +306,6 @@ public class ArtifactManager : MonoBehaviour
     /// </summary>
     private void Check_5secInterval()
     {
-        Debug.Log("=ArtifactManager=   Check_5secInterval");
         foreach (var artifactCont in artifactControllUnitList)
         {
             artifactCont.Set_5secIntervalCheck();
@@ -303,6 +323,7 @@ public class ArtifactManager : MonoBehaviour
         }
     }
 
+    /// <summary>
     /// 最後のブースター効果
     /// </summary>
     private void Check_LastBooster()
@@ -322,8 +343,44 @@ public class ArtifactManager : MonoBehaviour
     {
         BlockGenerateManager.Inst.Create_BonusChest();
     }
-    public void Create_MiniPickaxe()
+    public void Create_TimeBlock()
     {
+        BlockGenerateManager.Inst.Create_Timer();
+    }
+
+    /// <summary>
+    /// チェスト破壊時にインゲーム時間を追加するフラグON
+    /// </summary>
+    public void BonusTimeAdd_atBreakChest()
+    {
+        isIngameTimeAdd_atBreakChest = true;
+    }
+    /// <summary>
+    /// チェスト破壊時にインゲーム時間を追加する
+    /// </summary>
+    private void IngameEvent_IngameTimeAdd_atBreakChest(GameRecordData_Type gameRecordData_Type, int _count)
+    {
+        if (gameRecordData_Type != GameRecordData_Type.TreasureCount) return;
+        if (!isIngameTimeAdd_atBreakChest) return;
+        InGameManager.Inst.AddGetExTime(ingameTimeAdd_atBreakChest_value);
+    }
+
+    /// <summary>
+    /// インゲーム時間取得時に鉱石を生成するフラグON
+    /// </summary>
+    public void CreateOre_atGetTime()
+    {
+        isCreateOre_atGetTime = true;
+    }
+
+    /// <summary>
+    /// インゲーム時間追加時のイベント = フラグ確認して、鉱石を生成する
+    /// </summary>
+    /// <param name="time"></param>
+    private void IngameEvent_IngameTimeAdd(float time)
+    {
+        if (!isCreateOre_atGetTime) return;
+        BlockGenerateManager.Inst.CreateBlock(createOre_count);
     }
 
 }

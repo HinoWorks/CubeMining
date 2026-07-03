@@ -41,14 +41,18 @@ public enum ArtifactEffectType
 
 
     create_bomb = 30,
-    create_miniPickaxe = 31,
+    create_timeBlock = 31,
     create_bonusChest = 32,
+
 
     changeBlockRate = 40,
     resourceUpRate = 41,
     blockBreakRate = 42,
 
     get_ingameTime = 50,
+
+    createOre_atGetTime = 60,
+    bonusTimeAdd_atBreakChest = 61,
 }
 
 
