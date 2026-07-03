@@ -798,6 +798,11 @@ public static class GameParamManager
         }
         return null;
     }
+    public static ObjectGenerateParam SelectOtherObject(int _index)
+    {
+        if (_index == -1) return null;
+        return list_objectGenerateParam.Find(x => x.so.objectIndex == _index);
+    }
     #endregion
 
     #region -- other object generate param --

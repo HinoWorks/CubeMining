@@ -19,6 +19,11 @@ public class ArtifactControllUnit
         if (so.activeCheckTiming != ActiveCheckTiming.Passive) return;
         ActiveCheck();
     }
+    public void Set_InGameStart()
+    {
+        if (so.activeCheckTiming != ActiveCheckTiming.StartIngame) return;
+        ActiveCheck();
+    }
 
     public void Set_5secIntervalCheck()
     {
@@ -30,11 +35,7 @@ public class ArtifactControllUnit
         if (so.activeCheckTiming != ActiveCheckTiming.Interval_attackPickaxe) return;
         ActiveCheck();
     }
-    public void Set_underGround_5TimingCheck()
-    {
-        if (so.activeCheckTiming != ActiveCheckTiming.Interval_underGround_5) return;
-        ActiveCheck();
-    }
+
     public void Set_BlockBreak_25TimingCheck()
     {
         if (so.activeCheckTiming != ActiveCheckTiming.Interval_breakBlock_25) return;
@@ -50,6 +51,7 @@ public class ArtifactControllUnit
         if (so.activeCheckRate >= 0f && Random.Range(0f, 1f) > so.activeCheckRate) return;
         Set_ArtifactEffect(so.effectType, so.value);
         Set_ArtifactEffect(so.effectType_2, so.value_2);
+        GameEvent.InGame.PublishArtifactActiveEffect(so.artifactIndex);
     }
 
     private void Set_ArtifactEffect(ArtifactEffectType _effectType, float _value)
@@ -102,8 +104,10 @@ public class ArtifactControllUnit
 
             // -- 生成 --
             case ArtifactEffectType.create_bomb:
+                ArtifactManager.Inst.Create_Bomb();
                 break;
             case ArtifactEffectType.create_bonusChest:
+                ArtifactManager.Inst.Create_BonusChest();
                 break;
             case ArtifactEffectType.create_miniPickaxe:
                 break;
@@ -126,7 +130,7 @@ public class ArtifactManager : MonoBehaviour
     private List<ArtifactControllUnit> artifactControllUnitList = new List<ArtifactControllUnit>();
 
 
-    // fix parameter
+    // ==== fix parameter ====
     public float pickaxe_damageRate = 0;
     public float pickaxe_attackInterval = 0f;
     public float pickaxe_criticalRate = 0f;
@@ -142,6 +146,7 @@ public class ArtifactManager : MonoBehaviour
     public float changeBlockRate = 0f;
     public float resourceUpRate = 0f;
     public float instantShatterRate = 0f;
+    // =================
 
 
     // 最後の5秒間のチェック
@@ -151,10 +156,6 @@ public class ArtifactManager : MonoBehaviour
     // 5秒間隔のチェック
     private float timer_for5secInterval = 0f;
 
-    // 新しい地面レイヤーに到達
-    private int groundLayerIndex = 0;
-    private int groundLayerInterval = 5;
-    private int groundLayerTarget = 0;
 
 
     void Awake()
@@ -167,7 +168,7 @@ public class ArtifactManager : MonoBehaviour
     {
         GameEvent.GameState.SetGameState.Subscribe(SetGameState).AddTo(this);
         GameEvent.InGame.OnPickaxeAttack.Subscribe(_ => Check_PickaxeAttackTiming()).AddTo(this);
-        GameEvent.InGame.OnNewGroundLayer.Subscribe(layer => Check_NewGroundLayer(layer)).AddTo(this);
+        //GameEvent.InGame.OnNewGroundLayer.Subscribe(layer => Check_NewGroundLayer(layer)).AddTo(this);
     }
 
 
@@ -237,10 +238,6 @@ public class ArtifactManager : MonoBehaviour
         isLastBoosterCheckFin = false;
         timer_for5secInterval = 0f;
 
-        // レイヤーチェック用
-        groundLayerIndex = 1;
-        groundLayerTarget = groundLayerIndex + groundLayerInterval;
-
         // 装備中のアーティファクトセット、
         artifactControllUnitList.Clear();
         for (int i = 1; i < StaticManager.artifactSlotCount + 1; i++)
@@ -259,7 +256,12 @@ public class ArtifactManager : MonoBehaviour
     }
     private void SetState_InGame()
     {
+        foreach (var artifactCont in artifactControllUnitList)
+        {
+            artifactCont.Set_InGameStart();
+        }
     }
+
     private void SetState_InGameEnd()
     {
 
@@ -301,21 +303,6 @@ public class ArtifactManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 地下5層ごとのチェック
-    /// </summary>
-    private void Check_NewGroundLayer(int layer)
-    {
-        if (layer < groundLayerTarget) return;
-
-        Debug.Log("=ArtifactManager=   Check_NewGroundLayer: " + layer);
-        groundLayerIndex++;
-        groundLayerTarget = groundLayerIndex * groundLayerInterval;
-        foreach (var artifactCont in artifactControllUnitList)
-        {
-            artifactCont.Set_underGround_5TimingCheck();
-        }
-    }
     /// 最後のブースター効果
     /// </summary>
     private void Check_LastBooster()
@@ -325,7 +312,18 @@ public class ArtifactManager : MonoBehaviour
         {
             artifactCont.Set_LastBoosterCheck();
         }
+    }
 
+    public void Create_Bomb()
+    {
+        BlockGenerateManager.Inst.Create_Bomb();
+    }
+    public void Create_BonusChest()
+    {
+        BlockGenerateManager.Inst.Create_BonusChest();
+    }
+    public void Create_MiniPickaxe()
+    {
     }
 
 }

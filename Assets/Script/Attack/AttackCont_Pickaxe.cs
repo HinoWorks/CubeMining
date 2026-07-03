@@ -3,6 +3,7 @@ using UniRx;
 using System.Collections.Generic;
 using System;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 public class AttackCont_Pickaxe : MonoBehaviour
 {
@@ -35,6 +36,9 @@ public class AttackCont_Pickaxe : MonoBehaviour
 
     private readonly SerialDisposable attackLoopDisposable = new SerialDisposable();
 
+    private float timer = 0;
+
+
 
 
     protected void Awake()
@@ -55,8 +59,9 @@ public class AttackCont_Pickaxe : MonoBehaviour
         obj_pointerArea.transform.localScale = size * Vector3.one;
         targets.Clear();
         targetOverlapRefCount.Clear();
-        CreateAttackRoop();
+        //CreateAttackRoop();
         this.gameObject.SetActive(false);
+        timer = 0;
 
 #if UNITY_EDITOR
         DebugLog();
@@ -73,12 +78,14 @@ public class AttackCont_Pickaxe : MonoBehaviour
         isActive = isTrigger;
     }
 
-    public void RefreshAttackLoop()
-    {
-        CreateAttackRoop();
-        if (obj_pointerArea != null)
-            obj_pointerArea.transform.localScale = size * Vector3.one;
-    }
+    /*
+        public void RefreshAttackLoop()
+        {
+            CreateAttackRoop();
+            if (obj_pointerArea != null)
+                obj_pointerArea.transform.localScale = size * Vector3.one;
+        }
+    */
 
     public void OnDestroy()
     {
@@ -90,61 +97,76 @@ public class AttackCont_Pickaxe : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    void Update()
+    {
+        if (!isActive || !isSelectPickaxe) return;
+        timer += Time.deltaTime;
+        if (timer >= attackInterval)
+        {
+            timer = 0;
+            Attack();
+        }
+    }
+    private void Attack()
+    {
+        removeBuffer.Clear();
+        obj_pointerArea.transform.DOScale(1.1f * size * Vector3.one, 0.075f).SetEase(Ease.OutBack);
+        obj_pointerArea.transform.DOScale(size * Vector3.one, 0.075f).SetEase(Ease.OutBack).SetDelay(0.075f);
+
+        foreach (var t in targets)
+        {
+            if (!t.isAlive)
+            {
+                removeBuffer.Add(t);
+                continue;
+            }
+
+            // instant shatter check
+            var selectedDamageRate = UnityEngine.Random.Range(0f, 1f) < criticalRate ? criticalDamageRate : 1f;
+            var damage_calc = GameParamManager.gameBaseParam.isInstantShatter ?
+                                    instantShatterDamage : (int)(damage * selectedDamageRate);
+
+            // lucky mine check
+            var isLuckyMine = GameParamManager.gameBaseParam.isLuckyMine;
+            //isLuckyMine = UnityEngine.Random.Range(0, 100) % 2 == 0;
+            //Debug.Log($"DEBUG ===> isLuckyMine: {isLuckyMine}");
+            var resourceUpRate_LuckyMine = isLuckyMine ? GameParamManager.gameBaseParam.luckyMineRate_ResourceUpRate : 0f;
+
+            if (t.Damage(damage_calc, resourceUpRate_pickaxe
+                                + resourceUpRate_LuckyMine
+                                + GameParamManager.gameBaseParam.resourceUpRate))
+            {
+                // 破壊されていた場合
+                removeBuffer.Add(t);
+                if (isLuckyMine)
+                {
+                    var textCont = UI_PoolManager.Inst.Set_LuckText();
+                    textCont.Initialize(t.GetTransform(), new Vector3(0, 25f, 0));
+                    textCont.SetText($"+{(int)(resourceUpRate_LuckyMine * 100)}%");
+                }
+            }
+        }
+        if (targets.Count > 0)
+        {
+            GameEvent.InGame.PublishOnPickaxeAttack();
+            // add ingame time check
+            if (GameParamManager.gameBaseParam.isPickaxeAttack_AddIngameTime)
+            {
+                InGameManager.Inst.AddGetExTime(1f);
+                var ui_timeText = UI_PoolManager.Inst.Set_TimeText();
+                ui_timeText.SetText($"+1 <size=75%>sec</size>");
+            }
+        }
+        foreach (var t in removeBuffer) targets.Remove(t);
+    }
+
     private void CreateAttackRoop()
     {
         attackLoopDisposable.Disposable = Observable.Interval(TimeSpan.FromSeconds(attackInterval))
             .Where(_ => isActive && isSelectPickaxe)
             .Subscribe(_ =>
             {
-                removeBuffer.Clear();
-                obj_pointerArea.transform.DOScale(1.1f * size * Vector3.one, 0.075f).SetEase(Ease.OutBack);
-                obj_pointerArea.transform.DOScale(size * Vector3.one, 0.075f).SetEase(Ease.OutBack).SetDelay(0.075f);
-
-                foreach (var t in targets)
-                {
-                    if (!t.isAlive)
-                    {
-                        removeBuffer.Add(t);
-                        continue;
-                    }
-
-                    // instant shatter check
-                    var selectedDamageRate = UnityEngine.Random.Range(0f, 1f) < criticalRate ? criticalDamageRate : 1f;
-                    var damage_calc = GameParamManager.gameBaseParam.isInstantShatter ?
-                                            instantShatterDamage : (int)(damage * selectedDamageRate);
-
-                    // lucky mine check
-                    var isLuckyMine = GameParamManager.gameBaseParam.isLuckyMine;
-                    //isLuckyMine = UnityEngine.Random.Range(0, 100) % 2 == 0;
-                    //Debug.Log($"DEBUG ===> isLuckyMine: {isLuckyMine}");
-                    var resourceUpRate_LuckyMine = isLuckyMine ? GameParamManager.gameBaseParam.luckyMineRate_ResourceUpRate : 0f;
-
-                    if (t.Damage(damage_calc, resourceUpRate_pickaxe
-                                        + resourceUpRate_LuckyMine
-                                        + GameParamManager.gameBaseParam.resourceUpRate))
-                    {
-                        // 破壊されていた場合
-                        removeBuffer.Add(t);
-                        if (isLuckyMine)
-                        {
-                            var textCont = UI_PoolManager.Inst.Set_LuckText();
-                            textCont.Initialize(t.GetTransform(), new Vector3(0, 25f, 0));
-                            textCont.SetText($"+{(int)(resourceUpRate_LuckyMine * 100)}%");
-                        }
-                    }
-                }
-                if (targets.Count > 0)
-                {
-                    GameEvent.InGame.PublishOnPickaxeAttack();
-                    // add ingame time check
-                    if (GameParamManager.gameBaseParam.isPickaxeAttack_AddIngameTime)
-                    {
-                        InGameManager.Inst.AddGetExTime(1f);
-                        var ui_timeText = UI_PoolManager.Inst.Set_TimeText();
-                        ui_timeText.SetText($"+1 <size=75%>sec</size>");
-                    }
-                }
-                foreach (var t in removeBuffer) targets.Remove(t);
+                Attack();
             });
     }
 

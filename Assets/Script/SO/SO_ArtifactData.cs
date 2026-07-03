@@ -19,7 +19,6 @@ public enum ActiveCheckTiming
     Interval_breakBlock_25 = 10, // ブロックを25破壊ごとに
     Interval_5sec = 20, // 5秒間隔
     Interval_attackPickaxe = 30, // ピッケル攻撃時
-    Interval_underGround_5 = 40, // 地下5層ごとに
     LastBooster = 50, // 最後のブースター時
 }
 

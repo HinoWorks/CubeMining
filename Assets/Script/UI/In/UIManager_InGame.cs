@@ -32,6 +32,7 @@ public class UIManager_InGame : MonoBehaviour
         //GameEvent.UI.CoinMod.Subscribe(Set_CoinMod).AddTo(this);
         GameEvent.UI.DepthCount.Subscribe(Set_DepthCount).AddTo(this);
         GameEvent.GameState.SetGameState.Subscribe(ChangeGateState).AddTo(this);
+        GameEvent.InGame.ArtifactActiveEffect.Subscribe(Set_ArtifactActiveEffect).AddTo(this);
 
         foreach (var ui_resourceCounter in ui_resourceCounters)
         {
@@ -71,6 +72,14 @@ public class UIManager_InGame : MonoBehaviour
     private void Set_DepthCount(int depth)
     {
         tmp_depthCount.text = depth.ToString();
+    }
+
+    private void Set_ArtifactActiveEffect(int _artifactIndex)
+    {
+        foreach (var ui_equipArtifactCont in ui_equipArtifactConts)
+        {
+            ui_equipArtifactCont.Set_ActiveEffect(_artifactIndex);
+        }
     }
 
 

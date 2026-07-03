@@ -148,9 +148,9 @@ public class BlockGenerateManager : MonoBehaviour
 
 
     #region == Other Object Generate ==
-    public MiningTarget_Object GenerateOtherObject()
+    public MiningTarget_Object GenerateOtherObject(int _index = -1)
     {
-        var objectData = GameParamManager.SelectOtherObject();
+        var objectData = _index == -1 ? GameParamManager.SelectOtherObject() : GameParamManager.SelectOtherObject(_index);
         var blockData = SOLoader.BlockData.GetBlockData(objectData.so.objectIndex);
 
         var targetObject = list_targetObjects.Find(x => x.isActiveAndEnabled == false && x.index == objectData.so.objectIndex);
@@ -165,6 +165,21 @@ public class BlockGenerateManager : MonoBehaviour
         targetObject.transform.localRotation = Quaternion.Euler(generateRotation);
         return targetObject;
     }
+    public void Create_BonusChest()
+    {
+        GenerateOtherObject(1);
+    }
+    public void Create_Timer()
+    {
+        GenerateOtherObject(2);
+    }
+    public void Create_Bomb()
+    {
+        GenerateOtherObject(3);  //1:tresure, 2:timer, 3:bomb
+    }
+
+
+
     #endregion
 
 

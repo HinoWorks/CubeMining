@@ -25,20 +25,24 @@ public class AttackManager : MonoBehaviour
     {
         GameEvent.Input.PointerPrimaryDown.Subscribe(_ => Click_LeftButton()).AddTo(this);
         GameEvent.Input.PointerSecondaryDown.Subscribe(_ => Click_RightButton()).AddTo(this);
-        if (PickaxePowerManager.Inst != null)
+
+        /*
+         if (PickaxePowerManager.Inst != null)
+         {
+             PickaxePowerManager.Inst.PickaxePowerParamChanged
+                 .Subscribe(_ => RefreshPickaxeAttackLoops())
+                 .AddTo(this);
+         }
+         */
+    }
+
+    /*
+        private void RefreshPickaxeAttackLoops()
         {
-            PickaxePowerManager.Inst.PickaxePowerParamChanged
-                .Subscribe(_ => RefreshPickaxeAttackLoops())
-                .AddTo(this);
+            foreach (var pickaxeCont in pickaxeConts)
+                pickaxeCont.RefreshAttackLoop();
         }
-    }
-
-    private void RefreshPickaxeAttackLoops()
-    {
-        foreach (var pickaxeCont in pickaxeConts)
-            pickaxeCont.RefreshAttackLoop();
-    }
-
+    */
 
 
     public async void Set_Ready()

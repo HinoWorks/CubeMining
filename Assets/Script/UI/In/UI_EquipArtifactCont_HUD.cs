@@ -12,11 +12,16 @@ public class UI_EquipArtifactCont_HUD : MonoBehaviour, IPointerEnterHandler, IPo
 
     [Header("表示用UI")]
     [SerializeField] private Image icon;
+    [SerializeField] GameObject obj_activeEffect_always;
+    [SerializeField] ParticleSystem eff_activeEffect_oneShot;
+
 
     [Header("効果表示用UI")]
     [SerializeField] GameObject obj_selectUnit;
     [SerializeField] private GameObject effectInfoRoot;
     [SerializeField] private TextMeshProUGUI effectDescriptionText;
+    [SerializeField] private Color colorParamA;
+    [SerializeField] private Color colorParamB;
 
     private ArtifactUnitData currentArtifactData;
 
@@ -41,6 +46,8 @@ public class UI_EquipArtifactCont_HUD : MonoBehaviour, IPointerEnterHandler, IPo
                 icon.sprite = artifactData.icon;
             }
         }
+        obj_activeEffect_always.SetActive(false);
+        eff_activeEffect_oneShot.Stop();
 
         this.gameObject.SetActive(isActive);
         obj_selectUnit.SetActive(false);
@@ -48,13 +55,34 @@ public class UI_EquipArtifactCont_HUD : MonoBehaviour, IPointerEnterHandler, IPo
     }
 
 
+    public void Set_ActiveEffect(int _artifactIndex)
+    {
+        if (currentArtifactData == null) return;
+        if (currentArtifactData.artifactIndex != _artifactIndex) return;
+
+        switch (currentArtifactData.activeCheckTiming)
+        {
+            case ActiveCheckTiming.StartIngame:
+            case ActiveCheckTiming.Interval_breakBlock_25:
+            case ActiveCheckTiming.Interval_attackPickaxe:
+                eff_activeEffect_oneShot.Play();
+                break;
+            case ActiveCheckTiming.Passive:
+                obj_activeEffect_always.SetActive(true);
+                break;
+            case ActiveCheckTiming.LastBooster:
+                obj_activeEffect_always.SetActive(true);
+                eff_activeEffect_oneShot.Play();
+                break;
+        }
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log($"OnPointerEnter: {currentArtifactData.artifactName}");
         if (currentArtifactData == null) return;
 
         obj_selectUnit.SetActive(true);
-        effectDescriptionText.text = currentArtifactData.description;
+        SetText();
         effectInfoRoot.SetActive(true);
     }
 
@@ -63,4 +91,32 @@ public class UI_EquipArtifactCont_HUD : MonoBehaviour, IPointerEnterHandler, IPo
         obj_selectUnit.SetActive(false);
         effectInfoRoot.SetActive(false);
     }
+
+    private void SetText()
+    {
+        var setText = currentArtifactData.description;
+        var setParam = "";
+        var setParam2 = "";
+        switch (currentArtifactData.unit)
+        {
+            case "%":
+                setParam = $"+{(currentArtifactData.value * 100).ToString("F0")}%";
+                setParam2 = $"-{(currentArtifactData.value_2 * 100).ToString("F0")}%";
+                break;
+            default:
+                setParam = $"+{currentArtifactData.value.ToString("F0")} {currentArtifactData.unit}";
+                setParam2 = $"-{currentArtifactData.value_2.ToString("F0")} {currentArtifactData.unit}";
+                break;
+        }
+        var colorA = ColorUtility.ToHtmlStringRGBA(colorParamA);
+        var colorB = ColorUtility.ToHtmlStringRGBA(colorParamB);
+        setText = setText.Replace("[A]", $"<color=#{colorA}>{setParam}</color>");
+        setText = setText.Replace("[B]", $"<color=#{colorB}>{setParam2}</color>");
+        effectDescriptionText.SetText(setText);
+
+        this.gameObject.SetActive(true);
+    }
+
+
+
 }

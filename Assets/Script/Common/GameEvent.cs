@@ -59,6 +59,13 @@ public static class GameEvent
             //Debug.Log("===Event publish===  NewGroundLayer: " + layer);
             onNewGroundLayer.OnNext(layer);
         }
+
+        private static readonly Subject<int> artifactActiveEffect = new();
+        public static IObservable<int> ArtifactActiveEffect => artifactActiveEffect.AsObservable();
+        public static void PublishArtifactActiveEffect(int artifactIndex)
+        {
+            artifactActiveEffect.OnNext(artifactIndex);
+        }
     }
 
 
