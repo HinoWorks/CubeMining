@@ -1831,6 +1831,7 @@ MonoBehaviour:
   colorParamA: {r: 0.03586687, g: 0.5849056, b: 0.03586687, a: 1}
   colorParamB: {r: 0.509434, g: 0, b: 0, a: 1}
   hoverYOffset: 120
+  targetPositionThresholdY: 650
 --- !u!1 &8804945314037706340
 GameObject:
   m_ObjectHideFlags: 0
@@ -3697,11 +3698,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4525137125141964034, guid: 2cf960ea8862d4ef59af26860762707f, type: 3}
       propertyPath: m_Size
-      value: 0.15705521
+      value: 0.45299146
       objectReference: {fileID: 0}
     - target: {fileID: 4525137125141964034, guid: 2cf960ea8862d4ef59af26860762707f, type: 3}
       propertyPath: m_Value
-      value: 1.0000004
+      value: 1.0000007
       objectReference: {fileID: 0}
     - target: {fileID: 7227909478116946852, guid: 2cf960ea8862d4ef59af26860762707f, type: 3}
       propertyPath: m_Color.a

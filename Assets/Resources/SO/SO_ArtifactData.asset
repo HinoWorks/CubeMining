@@ -135,25 +135,25 @@ MonoBehaviour:
     unit: '%'
   - artifactIndex: 11
     artifactName: Artifact -- 11
-    description: ' xx'
+    description: ' [A] Time on Bonus Chest Destruction'
     rarity: 0
     icon: {fileID: 21300000, guid: 039ccaf8a40c8f649afbebf7de402072, type: 3}
     activeCheckTiming: 0
     activeCheckRate: -1
-    effectType: 0
-    value: 0.1
+    effectType: 61
+    value: 0.5
     effectType_2: 0
     value_2: 0
-    unit: '%'
+    unit: sec
   - artifactIndex: 12
     artifactName: Artifact -- 12
-    description: ' xx'
+    description: Spawn [A] Ores When Gaining Time
     rarity: 0
     icon: {fileID: 21300000, guid: 0d2613e7ae509b0419be98f388f98755, type: 3}
     activeCheckTiming: 0
     activeCheckRate: -1
-    effectType: 0
-    value: 0.1
+    effectType: 60
+    value: 3
     effectType_2: 0
     value_2: 0
     unit: '%'
@@ -175,7 +175,7 @@ MonoBehaviour:
     rarity: 0
     icon: {fileID: 21300000, guid: b4df8d4043f884b46b5e4867d0d6c48b, type: 3}
     activeCheckTiming: 20
-    activeCheckRate: 0
+    activeCheckRate: 0.5
     effectType: 30
     value: 0
     effectType_2: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
     rarity: 0
     icon: {fileID: 21300000, guid: 921a898435817dc4db16f800ce4b03f6, type: 3}
     activeCheckTiming: 20
-    activeCheckRate: 0
+    activeCheckRate: 0.5
     effectType: 32
     value: 0
     effectType_2: 0
@@ -195,12 +195,12 @@ MonoBehaviour:
     unit: '%'
   - artifactIndex: 16
     artifactName: Artifact -- 16
-    description: xxxx
+    description: 'Every 5s: 50% chance for a Time Block to drop'
     rarity: 0
     icon: {fileID: 21300000, guid: adc2852cf3ac89b4ab9425aba2e10fdc, type: 3}
     activeCheckTiming: 20
-    activeCheckRate: 0
-    effectType: 32
+    activeCheckRate: 0.5
+    effectType: 31
     value: 0
     effectType_2: 0
     value_2: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
     rarity: 0
     icon: {fileID: 21300000, guid: cf6b8380df0739141a89462cb4e8c257, type: 3}
     activeCheckTiming: 30
-    activeCheckRate: 0
+    activeCheckRate: 0.2
     effectType: 32
     value: 0
     effectType_2: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
     rarity: 0
     icon: {fileID: 21300000, guid: 655a524668ec24343bd2e0e01eb4b245, type: 3}
     activeCheckTiming: 30
-    activeCheckRate: 0
+    activeCheckRate: 0.2
     effectType: 30
     value: 0
     effectType_2: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
     rarity: 0
     icon: {fileID: 21300000, guid: b9713354316be864196732b2d63313a8, type: 3}
     activeCheckTiming: 30
-    activeCheckRate: 0
+    activeCheckRate: 0.2
     effectType: 50
     value: 1
     effectType_2: 0

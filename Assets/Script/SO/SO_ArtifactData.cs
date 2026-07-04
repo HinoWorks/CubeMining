@@ -65,7 +65,7 @@ public class ArtifactUnitData
     public Rarity rarity;
     public Sprite icon;
     public ActiveCheckTiming activeCheckTiming;
-    public int activeCheckRate;
+    public float activeCheckRate;
     public ArtifactEffectType effectType;
     public float value;
     public ArtifactEffectType effectType_2;

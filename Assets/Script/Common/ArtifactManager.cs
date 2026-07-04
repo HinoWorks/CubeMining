@@ -48,7 +48,9 @@ public class ArtifactControllUnit
     }
     private void ActiveCheck()
     {
-        if (so.activeCheckRate >= 0f && Random.Range(0f, 1f) >= so.activeCheckRate) return;
+        var randomValue = Random.Range(0f, 1f);
+        Debug.Log("=ArtifactManager=   ActiveCheck / randomValue:" + randomValue + " / so.activeCheckRate:" + so.activeCheckRate);
+        if (so.activeCheckRate >= 0f && randomValue >= so.activeCheckRate) return;
         Set_ArtifactEffect(so.effectType, so.value);
         Set_ArtifactEffect(so.effectType_2, so.value_2);
         GameEvent.InGame.PublishArtifactActiveEffect(so.artifactIndex);
@@ -113,10 +115,10 @@ public class ArtifactControllUnit
                 ArtifactManager.Inst.Create_TimeBlock();
                 break;
             case ArtifactEffectType.createOre_atGetTime:
-                ArtifactManager.Inst.CreateOre_atGetTime();
+                ArtifactManager.Inst.CreateOre_atGetTime((int)_value);
                 break;
             case ArtifactEffectType.bonusTimeAdd_atBreakChest:
-                ArtifactManager.Inst.BonusTimeAdd_atBreakChest();
+                ArtifactManager.Inst.BonusTimeAdd_atBreakChest(_value);
                 break;
 
             // -- インゲーム時間追加 --
@@ -351,9 +353,10 @@ public class ArtifactManager : MonoBehaviour
     /// <summary>
     /// チェスト破壊時にインゲーム時間を追加するフラグON
     /// </summary>
-    public void BonusTimeAdd_atBreakChest()
+    public void BonusTimeAdd_atBreakChest(float _addTime)
     {
         isIngameTimeAdd_atBreakChest = true;
+        ingameTimeAdd_atBreakChest_value = _addTime;
     }
     /// <summary>
     /// チェスト破壊時にインゲーム時間を追加する
@@ -368,9 +371,10 @@ public class ArtifactManager : MonoBehaviour
     /// <summary>
     /// インゲーム時間取得時に鉱石を生成するフラグON
     /// </summary>
-    public void CreateOre_atGetTime()
+    public void CreateOre_atGetTime(int _count)
     {
         isCreateOre_atGetTime = true;
+        createOre_count = _count;
     }
 
     /// <summary>

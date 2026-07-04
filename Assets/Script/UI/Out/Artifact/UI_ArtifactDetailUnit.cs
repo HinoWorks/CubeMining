@@ -11,6 +11,7 @@ public class UI_ArtifactDetailUnit : MonoBehaviour
     [SerializeField] Color colorParamA = Color.green;
     [SerializeField] Color colorParamB = Color.red;
     [SerializeField] float hoverYOffset = 200f;
+    [SerializeField] float targetPositionThresholdY = 300f;
     private ArtifactUnitData so;
     private RectTransform rectTr;
     private Canvas rootCanvas;
@@ -32,12 +33,13 @@ public class UI_ArtifactDetailUnit : MonoBehaviour
     {
         EnsureCachedRefs();
         anchorWorldPosition = _worldPosition;
-        ApplyVerticalOffset(hoverYOffset);
+        var offsetY = GetVerticalOffsetForTargetPosition();
+        ApplyVerticalOffset(offsetY);
 
         Canvas.ForceUpdateCanvases();
         if (IsAnyCornerOutOfScreen())
         {
-            ApplyVerticalOffset(-hoverYOffset);
+            ApplyVerticalOffset(-offsetY);
         }
     }
 
@@ -55,8 +57,8 @@ public class UI_ArtifactDetailUnit : MonoBehaviour
                 setParam2 = $"-{(so.value_2 * 100).ToString("F0")}%";
                 break;
             default:
-                setParam = $"+{so.value.ToString("F0")} {so.unit}";
-                setParam2 = $"-{so.value_2.ToString("F0")} {so.unit}";
+                setParam = $"+{so.value.ToString("F1")} {so.unit}";
+                setParam2 = $"-{so.value_2.ToString("F1")} {so.unit}";
                 break;
         }
         var colorA = ColorUtility.ToHtmlStringRGBA(colorParamA);
@@ -96,6 +98,18 @@ public class UI_ArtifactDetailUnit : MonoBehaviour
     {
         if (rootCanvas == null) return null;
         return rootCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : rootCanvas.worldCamera;
+    }
+
+    private float GetVerticalOffsetForTargetPosition()
+    {
+        return IsTargetYAboveThreshold() ? -hoverYOffset : hoverYOffset;
+    }
+
+    private bool IsTargetYAboveThreshold()
+    {
+        EnsureCachedRefs();
+        var screenPoint = RectTransformUtility.WorldToScreenPoint(GetCanvasCamera(), anchorWorldPosition);
+        return screenPoint.y >= targetPositionThresholdY;
     }
 
     private bool IsAnyCornerOutOfScreen()
