@@ -24,7 +24,7 @@ public class GameBaseParam
 
 
     // ブロック再生成確率
-    public float blockRegenRate => 0.5f + blockRegenRate_enhanced;
+    public float blockRegenRate => 0f + blockRegenRate_enhanced;
     private float blockRegenRate_enhanced = 0f;
 
 

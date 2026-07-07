@@ -52,7 +52,7 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
 
 #if UNITY_EDITOR
     [ContextMenu("SkillTreeData_Update")]
-    public void SkillTreeData_Update()
+    public async void SkillTreeData_Update()
     {
         foreach (var nodeCont in nodeConts)
         {
@@ -84,7 +84,10 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
             //Debug.Log($"NodeCreate: {skillTreeUnit.skillIndex}");
             NodeCreate(skillTreeUnit);
         }
+
         EditorUtility.SetDirty(this);
+        await UniTask.DelayFrame(1);
+        Debug.Log("<color=green>=== SkillTreeData_Update end ===</color>");
     }
 
     private void NodeCreate(UI_SkillTreeUnit _unit)
