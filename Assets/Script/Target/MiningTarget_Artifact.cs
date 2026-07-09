@@ -23,7 +23,7 @@ public class MiningTarget_Artifact : MiningTarget_Object
 
         base.Init(hp, 0, 1f);
         Set_BlockMesh();
-        base.animScale_rate = this.transform.localScale.x;
+        base.animScale_rate = 1f;
 
         Debug.Log($"<color=green>== artifact Set: artifactIndex: {artifactIndex} ===</color>");
     }

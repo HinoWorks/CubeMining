@@ -21,6 +21,7 @@ public class MiningTarget_Tresure : MiningTarget_Object
 
         //Debug.Log($"Set_Tresure - hp: {hp}, getTreasureValue: {getTreasureValue}");
         base.Init_MiningTargetBase(hp, getTreasureValue, _objectGenerateParam.so.objectIndex);
+        base.animScale_rate = 1f;
 
         //現在のブロックタイプの鉱石への変化率から、タイプを設定
         resourceType = GameParamManager.Get_RandamBlockIndex().resourceType;

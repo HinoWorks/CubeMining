@@ -27,6 +27,7 @@ public class MiningTarget_BombAttackArea : MonoBehaviour
                     damagable.Damage((int)_damage);
                 }
             }
+            CameraManager.Inst?.ShakeCamera_BlockBreak();
         }).AddTo(this);
 
         Observable.Timer(TimeSpan.FromSeconds(5f)).Subscribe(_ =>

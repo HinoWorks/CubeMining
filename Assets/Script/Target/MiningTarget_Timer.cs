@@ -34,7 +34,7 @@ public class MiningTarget_Timer : MiningTarget_Object
         CameraManager.Inst?.ShakeCamera_BlockBreak();
 
         // ===========
-        var getExTime = exTimeBase + objectGenerateParam.valueRate_total;
+        var getExTime = exTimeBase * objectGenerateParam.valueRate_total;
         InGameManager.Inst.AddGetExTime(getExTime);
         GameEvent.InGame.PublishIngameTimeAdd(getExTime);
 

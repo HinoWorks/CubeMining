@@ -184,7 +184,7 @@ public class ObjectGenerateParam
     public float damageRate_total => 1f + damageRate_enhanced;
 
     private int generateRate_base = 0;
-    private float valueRate_base = 0;
+    private float valueRate_base = 0; //　SOで規定。基本は１.0
     private int generateRate_enhanced = 0;
     private float valueRate_enhanced = 0;
     private float damageRate_enhanced = 0;
