@@ -17,9 +17,6 @@ public class BlockGenerateManager : MonoBehaviour
     private List<MiningTarget_Cube> list_targetBlocks = new List<MiningTarget_Cube>();
     private List<MiningTarget_Cube> list_targetBlocks_Max = new List<MiningTarget_Cube>(); // 生成されたブロックのリスト（資源ブロック 大）
     private List<MiningTarget_Object> list_targetObjects = new List<MiningTarget_Object>(); // 生成されたオブジェクトのリスト
-    private List<MiningTarget_Artifact> list_targetArtifacts = new List<MiningTarget_Artifact>(); // 生成されたアーティファクトのリスト
-    public bool isGenerateArtifact { get; private set; } = false; // アーティファクト生成フラグ　（ingame中一度しか生成しない）
-    private bool isArtifactAllGet = false; // アーティファクトが全て所持されたかどうか
 
 
     // ブロック生成周りのパラ
@@ -40,8 +37,8 @@ public class BlockGenerateManager : MonoBehaviour
     private bool isGenerate = false;
     private float randomBlockSizeRate => Random.Range(0.75f, 1.25f);
 
-    private Vector3 generatePosition => new Vector3(Random.Range(-10, 10), Random.Range(3, 5), Random.Range(-10, 10));
-    private Vector3 generateRotation => new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
+    public Vector3 generatePosition => new Vector3(Random.Range(-10, 10), Random.Range(3, 5), Random.Range(-10, 10));
+    public Vector3 generateRotation => new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
 
 
 
@@ -49,7 +46,18 @@ public class BlockGenerateManager : MonoBehaviour
     void Awake()
     {
         if (Inst == null) { Inst = this; }
-        else { Destroy(this); }
+        else { Destroy(this); return; }
+
+        // EnsureGenerateManager<ArtifactGenerateManager>();
+        // EnsureGenerateManager<EnhanceCoinGenerateManager>();
+    }
+
+    private void EnsureGenerateManager<T>() where T : MonoBehaviour
+    {
+        if (GetComponent<T>() == null)
+        {
+            gameObject.AddComponent<T>();
+        }
     }
 
 
@@ -58,8 +66,8 @@ public class BlockGenerateManager : MonoBehaviour
     /// </summary>
     public void Init()
     {
-        isGenerateArtifact = false;
-        isArtifactAllGet = SaveLoader.Inst.Get_ArtifactIndex_NotGet().Length == 0 ? true : false;
+        ArtifactGenerateManager.Inst.Init();
+        EnhanceCoinGenerateManager.Inst.Init();
 
         GameEvent.UI.PublishDepthCount(0);
         InitialBlockCreate();
@@ -78,10 +86,8 @@ public class BlockGenerateManager : MonoBehaviour
         {
             targetObject.NotActivate();
         }
-        foreach (var targetArtifact in list_targetArtifacts)
-        {
-            targetArtifact.NotActivate();
-        }
+        ArtifactGenerateManager.Inst.ResetAll();
+        EnhanceCoinGenerateManager.Inst.ResetAll();
     }
 
     private void InitialBlockCreate()
@@ -124,16 +130,14 @@ public class BlockGenerateManager : MonoBehaviour
         {
             GenerateBlock();
         }
+        ArtifactGenerateManager.Inst.Check_ArtifactGenerate();
+        EnhanceCoinGenerateManager.Inst.Check_EnhanceCoinGenerate();
     }
     private void GenerateBlock()
     {
         if (GameParamManager.IsOtherObjectGenerate())
         {
             GenerateOtherObject();
-        }
-        else if (!isArtifactAllGet && !isGenerateArtifact && GameParamManager.IsArtifactGenerate())
-        {
-            GenerateArtifact();
         }
         else
         {
@@ -182,31 +186,6 @@ public class BlockGenerateManager : MonoBehaviour
     public void Create_Bomb()
     {
         GenerateOtherObject(3);  //1:tresure, 2:timer, 3:bomb
-    }
-    #endregion
-
-
-    #region == Artifact Generate ==
-    public MiningTarget_Artifact GenerateArtifact()
-    {
-        var artifactIndexes = SaveLoader.Inst.Get_ArtifactIndex_NotGet();
-        if (artifactIndexes.Length == 0) return null;
-
-        var targetArtifact = list_targetArtifacts.Find(x => x.isActiveAndEnabled == false);
-        if (targetArtifact == null)
-        {
-            var newArtifact = Instantiate(SOLoader.BlockData.pf_Artifact, InGameManager.Inst.ParentPool) as GameObject;
-            targetArtifact = newArtifact.GetComponent<MiningTarget_Artifact>();
-            list_targetArtifacts.Add(targetArtifact);
-        }
-
-        // 未所持のアーティファクトをランダムで選択
-        var artifactIndex = artifactIndexes[Random.Range(0, artifactIndexes.Length)];
-        targetArtifact.Init(artifactIndex);
-        targetArtifact.transform.localPosition = generatePosition;
-        targetArtifact.transform.localRotation = Quaternion.Euler(generateRotation);
-        isGenerateArtifact = true;
-        return targetArtifact;
     }
     #endregion
 

@@ -4,6 +4,8 @@ using System;
 
 public class MiningTarget_Bomb_PickaxePower : MiningTarget_Object
 {
+
+    [SerializeField] float baseExplosionSize = 3f;
     [SerializeField] private GameObject pf_bomb;
 
     private int breakCount = 3; //  3回ダメージを受けると爆発
@@ -52,7 +54,8 @@ public class MiningTarget_Bomb_PickaxePower : MiningTarget_Object
         var bomb = newBomb.GetComponent<MiningTarget_BombAttackArea>();
         bomb.transform.position = transform.position;
 
-        bomb.Explode(damage, sizeRate);
+        var sizeRate = 1f + ArtifactManager.Inst.bomb_sizeRate;
+        bomb.Explode(damage, baseExplosionSize * sizeRate);
         base.BreakFromDamage(_resourceUpRate);
     }
 

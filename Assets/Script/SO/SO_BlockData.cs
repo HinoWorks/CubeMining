@@ -66,6 +66,7 @@ public class SO_BlockData : ScriptableObject
     public GameObject pf_Block_ResourceMin;
     public GameObject pf_Block_ResourceMax;
     public GameObject pf_Artifact;
+    public GameObject pf_EnhanceCoin;
 
 
 

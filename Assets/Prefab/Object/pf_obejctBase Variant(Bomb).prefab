@@ -2524,6 +2524,7 @@ MonoBehaviour:
   - {fileID: 5708704122917262603}
   - {fileID: 4244181417947458871}
   - {fileID: 6217157126825494011}
+  baseExplosionSize: 5
   pf_bomb: {fileID: 2390671457647449684, guid: dd224f67ba67e4ce3b1294e23f40ff19, type: 3}
   forceFieldArea: {fileID: 2643504723305407299}
 --- !u!114 &2643504723305407299
@@ -2538,7 +2539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d05d973889d48fbb076be4f3d1e71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForceFieldArea
-  baseRadius: 3
+  baseRadius: 5
   force: 10
   targetLayerMask:
     serializedVersion: 2

@@ -157,7 +157,11 @@ public class AttackCont_Pickaxe : MonoBehaviour
                 ui_timeText.SetText($"+1 <size=75%>sec</size>");
             }
         }
-        foreach (var t in removeBuffer) targets.Remove(t);
+        foreach (var t in removeBuffer)
+        {
+            targets.Remove(t);
+            targetOverlapRefCount.Remove(t);
+        }
     }
 
     private void CreateAttackRoop()

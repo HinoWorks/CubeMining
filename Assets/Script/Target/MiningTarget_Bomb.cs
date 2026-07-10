@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MiningTarget_Bomb : MiningTarget_Object
 {
+    [SerializeField] float baseExplosionSize = 3f;
     [SerializeField] private GameObject pf_bomb;
     [SerializeField] private ForceFieldArea forceFieldArea;
     private int breakCount = 2; //  2回ダメージを受けると爆発
@@ -35,14 +36,15 @@ public class MiningTarget_Bomb : MiningTarget_Object
         bomb.transform.position = transform.position;
 
         var damageRate = objectGenerateParam != null ? objectGenerateParam.damageRate_total : 1f;
-        var valueRate = objectGenerateParam != null ? objectGenerateParam.valueRate_total : 0f;
+        var valueRate = objectGenerateParam != null ? objectGenerateParam.valueRate_total : 1f;
         var damage = AttackManager.Inst.currentPickaxeDamage
                         * damageRate
                         * (1f + ArtifactManager.Inst.bomb_damageRate);
-        var size = valueRate + ArtifactManager.Inst.bomb_sizeRate;
+        var sizeRate = valueRate + ArtifactManager.Inst.bomb_sizeRate;
         Debug.Log($"bomb damage => base:{AttackManager.Inst.currentPickaxeDamage} DamageUpRate:{damageRate} => damage:{damage}");
-        bomb.Explode(damage, size);
-        forceFieldArea.Activate(ForceFieldArea.ForceType.Blast, transform.position);
+        Debug.Log($"bomb size => base:{baseExplosionSize} SizeUpRate:{sizeRate} => size:{baseExplosionSize * sizeRate}");
+        bomb.Explode(damage, baseExplosionSize * sizeRate);
+        forceFieldArea.Activate(ForceFieldArea.ForceType.Blast, transform.position, sizeRate);
 
         GameEvent.InGame.PublishGameRecordDataMod_Ingame(GameRecordData_Type.Damage, hp_max);
 
