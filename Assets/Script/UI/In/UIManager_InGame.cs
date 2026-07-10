@@ -13,12 +13,17 @@ public class UIManager_InGame : MonoBehaviour
     [SerializeField] TextMeshProUGUI tmp_depthCount;
     [SerializeField] UI_EquipArtifactCont_HUD[] ui_equipArtifactConts;
     [SerializeField] Transform[] target_artifact;
+    [SerializeField] Transform[] target_getItem;
     public UI_ResultManager ui_ResultManager;
     public UI_EventManager ui_EventManager;
 
     public Transform Get_ArtifactTargetPosition(int _artifactIndex)
     {
         return target_artifact[_artifactIndex];
+    }
+    public Transform Get_EnhanceCoinTargetPosition(int _count)
+    {
+        return target_getItem[_count];
     }
     //private float currentCoinFloat;
 

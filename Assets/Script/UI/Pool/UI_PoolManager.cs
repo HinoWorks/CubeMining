@@ -37,6 +37,7 @@ public class UI_PoolManager : MonoBehaviour
     [SerializeField] GameObject pf_otherText;
     [SerializeField] GameObject pf_getResourceCont;
     [SerializeField] GameObject pf_getArtifactCont;
+    [SerializeField] GameObject pf_getItemCont;
     [SerializeField] GameObject pf_getTime;
     [SerializeField] GameObject pf_commonText;
     [SerializeField] GameObject pf_luckText;
@@ -59,6 +60,7 @@ public class UI_PoolManager : MonoBehaviour
     private List<UI_TextOtherGet> pool_otherText = new List<UI_TextOtherGet>();
     private List<UI_GetResourceCont> pool_getResourceCont = new List<UI_GetResourceCont>();
     private List<UI_GetArtifactCont> pool_getArtifactCont = new List<UI_GetArtifactCont>();
+    private List<UI_GetItemCont> pool_getItemCont = new List<UI_GetItemCont>();
     private List<UI_TextCont> pool_getTime = new List<UI_TextCont>();
     private List<UI_TextOtherGet> pool_luckText = new List<UI_TextOtherGet>();
     private List<UI_TextOtherGet> pool_commonText = new List<UI_TextOtherGet>();
@@ -123,6 +125,13 @@ public class UI_PoolManager : MonoBehaviour
             selectUnit.gameObject.SetActive(false);
         }
 
+        for (int i = 0; i < 10; i++)
+        {
+            var newUnit = Instantiate(pf_getItemCont, parent_base) as GameObject;
+            var selectUnit = newUnit.GetComponent<UI_GetItemCont>();
+            pool_getItemCont.Add(selectUnit);
+            selectUnit.gameObject.SetActive(false);
+        }
         GameEvent.GameState.SetGameState.Subscribe(Init_GameStateChange).AddTo(this);
     }
 
@@ -132,6 +141,10 @@ public class UI_PoolManager : MonoBehaviour
         {
             case GameStateType.InGame_Ready:
                 foreach (var unit in pool_getArtifactCont)
+                {
+                    unit.gameObject.SetActive(false);
+                }
+                foreach (var unit in pool_getItemCont)
                 {
                     unit.gameObject.SetActive(false);
                 }
@@ -236,6 +249,19 @@ public class UI_PoolManager : MonoBehaviour
             var newUnit = Instantiate(pf_getArtifactCont, parent_over) as GameObject;
             selectUnit = newUnit.GetComponent<UI_GetArtifactCont>();
             pool_getArtifactCont.Add(selectUnit);
+        }
+        return selectUnit;
+    }
+
+    public UI_GetItemCont Set_GetItemCont()
+    {
+        UI_GetItemCont selectUnit = null;
+        selectUnit = pool_getItemCont.Find(d => d.gameObject.activeSelf == false);
+        if (selectUnit == null)
+        {
+            var newUnit = Instantiate(pf_getItemCont, parent_over) as GameObject;
+            selectUnit = newUnit.GetComponent<UI_GetItemCont>();
+            pool_getItemCont.Add(selectUnit);
         }
         return selectUnit;
     }

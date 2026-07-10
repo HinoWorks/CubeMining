@@ -54,6 +54,10 @@ public class InGameManager : MonoBehaviour
     public int Get_ArtifactCount() => artifactIndexList.Count;
     public List<int> Get_ArtifactIndexList() => artifactIndexList;
 
+    private int enhanceCoinCount = 0;
+    public int Get_EnhanceCoinCount() => enhanceCoinCount;
+
+
 
     void Awake()
     {

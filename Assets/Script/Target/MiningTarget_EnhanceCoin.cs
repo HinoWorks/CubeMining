@@ -34,6 +34,9 @@ public class MiningTarget_EnhanceCoin : MiningTarget_Object
         effect.SetActive(true);
         CameraManager.Inst?.ShakeCamera_BlockBreak();
 
+        var ui_getItemCont = UI_PoolManager.Inst.Set_GetItemCont();
+        ui_getItemCont.SetInit_EnhanceCoin(transform.position);
+
         Debug.Log("<color=yellow>== enhanceCoin BreakFromDamage ===</color>");
 
         base.BreakFromDamage();

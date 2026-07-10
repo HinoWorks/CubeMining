@@ -187,10 +187,17 @@ public class SaveLoader : MonoBehaviour
     private string KEY_CREATE_INITIAL_DATA = "key_createInitialData"; // 初期データ作成フラグ
     private string KEY_GAME_RECORD_DATA = "key_gameRecordData"; // ゲーム記録データ
 
-    private const string KEY_COIN = "key_coin";
-    private BigInteger coin;
-    public BigInteger Coin { get => coin; }
+    /*
+        private const string KEY_COIN = "key_coin";
+        private BigInteger coin;
+        public BigInteger Coin { get => coin; }
+    */
 
+
+
+    private const string KEY_ENHANCE_COIN_COUNT = "key_enhanceCoinCount";
+    private int enhanceCoinCount;
+    public int EnhanceCoinCount { get => enhanceCoinCount; }
 
     #region -- resource data --
     private const string KEY_RESOURCE_STONE = "key_resource_stone";
@@ -269,7 +276,7 @@ public class SaveLoader : MonoBehaviour
         }
 
         // === Initial Load Data
-        coin = ES3.KeyExists(KEY_COIN) ? BigInteger.Parse(ES3.Load<string>(KEY_COIN)) : 0;
+        //coin = ES3.KeyExists(KEY_COIN) ? BigInteger.Parse(ES3.Load<string>(KEY_COIN)) : 0;
         resourceStone = ES3.KeyExists(KEY_RESOURCE_STONE) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_STONE)) : 0;
         resourceIron = ES3.KeyExists(KEY_RESOURCE_IRON) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_IRON)) : 0;
         resourceGold = ES3.KeyExists(KEY_RESOURCE_GOLD) ? BigInteger.Parse(ES3.Load<string>(KEY_RESOURCE_GOLD)) : 0;
@@ -442,6 +449,21 @@ public class SaveLoader : MonoBehaviour
     {
         //unlockEventIndex = _index;
         // ES3.Save(KEY_UNLOCK_EVENTINDEX, unlockEventIndex);
+    }
+    #endregion
+
+
+
+
+    #region -- EnhanceCoin --
+    public void Request_SaveEnhanceCoinCount(int _deltaCount)
+    {
+        EnqueueMethod(() => { SaveEnhanceCoinCount(_deltaCount); });
+    }
+    private void SaveEnhanceCoinCount(int _deltaCount)
+    {
+        enhanceCoinCount += _deltaCount;
+        ES3.Save(KEY_ENHANCE_COIN_COUNT, enhanceCoinCount);
     }
     #endregion
 
