@@ -10,6 +10,8 @@ public class ArtifactGenerateManager : MonoBehaviour
     private bool isArtifactAllGet = false;
 
 
+    private float timer = 0f;
+    private float checkInterval = 3f;
 
     void Awake()
     {
@@ -30,13 +32,22 @@ public class ArtifactGenerateManager : MonoBehaviour
             targetArtifact.NotActivate();
         }
     }
+    public void UnityUpDate()
+    {
+        timer += Time.deltaTime;
+        if (timer < checkInterval) return;
+
+        timer = 0f;
+        Check_ArtifactGenerate();
+    }
 
     public void Check_ArtifactGenerate()
     {
-        if (ShouldGenerate())
-        {
-            Generate(BlockGenerateManager.Inst.generatePosition, Quaternion.Euler(BlockGenerateManager.Inst.generateRotation));
-        }
+        if (isArtifactAllGet) return; // アーティファクト全て取得済み？
+        if (isGenerateArtifact) return; // アーティファクト生成中？
+        if (!GameParamManager.IsArtifactGenerate()) return; // アーティファクト生成条件を満たしている？
+
+        Generate(BlockGenerateManager.Inst.generatePosition, Quaternion.Euler(BlockGenerateManager.Inst.generateRotation));
     }
 
     private bool ShouldGenerate()

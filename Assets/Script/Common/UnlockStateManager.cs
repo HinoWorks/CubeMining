@@ -9,6 +9,13 @@ public class UnlockStateManager : MonoBehaviour
     public static UnlockStateManager Inst;
     private int currentPlayerLevel;
 
+    public bool isUnlock_SkillTree { get; private set; } = false;
+    public bool isUnlock_Artifact { get; private set; } = false;
+    public bool isUnlock_PickaxeCraft { get; private set; } = false;
+    public bool isUnlock_PickaxePower { get; private set; } = false;
+
+
+
     void Awake()
     {
         if (Inst == null) { Inst = this; }
@@ -66,14 +73,18 @@ public class UnlockStateManager : MonoBehaviour
         {
             case UnlockTargetType.SkillTree:
                 UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.SkillTree, _isFirstUnlockEvent);
+                isUnlock_SkillTree = true;
                 break;
             case UnlockTargetType.Artifact:
+                isUnlock_Artifact = SaveLoader.Inst.Get_ArtifactTotalCount() > 0;
                 break;
             case UnlockTargetType.PickaxeCraft:
                 UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.Pickaxe, _isFirstUnlockEvent);
+                isUnlock_PickaxeCraft = true;
                 break;
             case UnlockTargetType.PickaxePower:
                 UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.PickaxePower, _isFirstUnlockEvent);
+                isUnlock_PickaxePower = true;
                 break;
         }
     }

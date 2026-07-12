@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MiningTarget_EnhanceCoin : MiningTarget_Object
 {
+    private int getCoin = 1;
     private int breakAttackCount;
     private int breakAttackCount_max = 4;
     private int breakAttackCount_min = 2;
@@ -17,8 +18,6 @@ public class MiningTarget_EnhanceCoin : MiningTarget_Object
         base.Init(hp, 0, 1f);
         Set_BlockMesh();
         base.animScale_rate = 1f;
-
-        Debug.Log("<color=yellow>== enhanceCoin Set ===</color>");
     }
 
     public override bool Damage(int damage, float _resourceUpRate = 1f)
@@ -36,8 +35,8 @@ public class MiningTarget_EnhanceCoin : MiningTarget_Object
 
         var ui_getItemCont = UI_PoolManager.Inst.Set_GetItemCont();
         ui_getItemCont.SetInit_EnhanceCoin(transform.position);
+        SaveLoader.Inst.Request_SaveEnhanceCoinCount(getCoin);
 
-        Debug.Log("<color=yellow>== enhanceCoin BreakFromDamage ===</color>");
 
         base.BreakFromDamage();
         breakCallback?.Invoke();

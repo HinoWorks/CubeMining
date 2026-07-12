@@ -1,7 +1,6 @@
 using System.Numerics;
 using UnityEngine;
 using UniRx;
-using System.Numerics;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;

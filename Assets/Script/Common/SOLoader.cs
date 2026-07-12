@@ -207,6 +207,20 @@ public static class SOLoader
         }
     }
 
+    private static SO_EnhanceCoinData so_enhanceCoinData;
+    public static SO_EnhanceCoinData EnhanceCoinData
+    {
+        get
+        {
+            if (so_enhanceCoinData == null)
+            {
+                so_enhanceCoinData = LoadSO<SO_EnhanceCoinData>(pathBase + nameof(SO_EnhanceCoinData));
+            }
+            return so_enhanceCoinData;
+        }
+    }
+
+
     private static SO_AchievementData so_achievementData;
     public static SO_AchievementData AchievementData
     {

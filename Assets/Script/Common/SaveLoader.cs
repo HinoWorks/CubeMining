@@ -198,6 +198,10 @@ public class SaveLoader : MonoBehaviour
     private const string KEY_ENHANCE_COIN_COUNT = "key_enhanceCoinCount";
     private int enhanceCoinCount;
     public int EnhanceCoinCount { get => enhanceCoinCount; }
+    private const string KEY_ENHANCE_COIN_COUNT_TOTAL = "key_enhanceCoinCountTotal";
+    public int EnhanceCoinCount_Total { get => enhanceCoinCount_Total; }
+    private int enhanceCoinCount_Total = 0;
+
 
     #region -- resource data --
     private const string KEY_RESOURCE_STONE = "key_resource_stone";
@@ -464,6 +468,12 @@ public class SaveLoader : MonoBehaviour
     {
         enhanceCoinCount += _deltaCount;
         ES3.Save(KEY_ENHANCE_COIN_COUNT, enhanceCoinCount);
+
+        if (_deltaCount > 0)
+        {
+            enhanceCoinCount_Total += _deltaCount;
+            ES3.Save(KEY_ENHANCE_COIN_COUNT_TOTAL, enhanceCoinCount_Total);
+        }
     }
     #endregion
 

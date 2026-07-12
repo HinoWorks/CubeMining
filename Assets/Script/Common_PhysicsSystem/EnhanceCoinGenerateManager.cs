@@ -7,7 +7,21 @@ public class EnhanceCoinGenerateManager : MonoBehaviour
 
     private List<MiningTarget_EnhanceCoin> list_targetEnhanceCoins = new List<MiningTarget_EnhanceCoin>();
     public bool isGenerateEnhanceCoin { get; private set; } = false;
-    private float enhanceCoinGenerateRate = 0.25f;
+    private float enhanceCoinGenerateRate = 0f;
+
+
+
+    // GameCounter - ゲーム終了時、にリセットされる
+    private int gameCounter_inGame = 0; // ゲーム起動中にインゲームを開始した回数、
+    private int gameCounter_inGame_noCoin = 0; // ゲーム起動中にインゲームを開始した回数、コインを獲得していない回数
+
+
+    // １ゲーム中の最大の生成数
+    private float timer = 0f;
+    private float createTime;
+    private float Set_CreateTime => Random.Range(GameParamManager.gameBaseParam.ingameTime * 0.3f, GameParamManager.gameBaseParam.ingameTime * 0.7f);
+    private int createCount_thisGame = 0;
+    private bool isGenerateFin = true;
 
 
 
@@ -18,10 +32,32 @@ public class EnhanceCoinGenerateManager : MonoBehaviour
     }
 
 
-
     public void Init()
     {
-        isGenerateEnhanceCoin = false;
+        createCount_thisGame = 0;
+        isGenerateFin = true;
+
+        Set_GenerateCheck();
+    }
+
+    private void Set_GenerateCheck()
+    {
+        gameCounter_inGame++;
+        gameCounter_inGame_noCoin++;
+
+        var currentTotalCoin = SaveLoader.Inst.EnhanceCoinCount_Total;
+        var so = SOLoader.EnhanceCoinData.Get_EnhanceCoinRateData(currentTotalCoin);
+        enhanceCoinGenerateRate = so.baseRate + so.deltaRate * (gameCounter_inGame_noCoin - 1);
+
+        var random = UnityEngine.Random.Range(0f, 1f);
+        Debug.Log($"<color=green> == EnhanceCoin ==   inGameCount-NoCoin:{gameCounter_inGame_noCoin} / so.base:{so.baseRate} / so.delta:{so.deltaRate} => GenerateRate: {enhanceCoinGenerateRate} => isGenerate???: {random < enhanceCoinGenerateRate}</color>");
+        if (random >= enhanceCoinGenerateRate) return;
+
+        // set Generate Parameter
+        createCount_thisGame = Random.Range(1, so.createMax + 1);
+        createTime = Set_CreateTime;
+        isGenerateFin = false;
+        Debug.Log($"<color=green> == EnhanceCoin ==   createCount_thisGame:{createCount_thisGame} / createTime:{createTime}</color>");
     }
 
     public void ResetAll()
@@ -32,21 +68,28 @@ public class EnhanceCoinGenerateManager : MonoBehaviour
         }
     }
 
-    public void Check_EnhanceCoinGenerate()
+    public void UnityUpDate()
     {
-        if (ShouldGenerate())
+        if (isGenerateFin) return;
+        if (createCount_thisGame <= 0) return;
+
+        timer += Time.deltaTime;
+        if (timer < createTime) return;
+
+        timer = 0f;
+        EnhanceCoinGenerate();
+    }
+
+    private void EnhanceCoinGenerate()
+    {
+        for (int i = 0; i < createCount_thisGame; i++)
         {
             Generate(BlockGenerateManager.Inst.generatePosition, Quaternion.Euler(BlockGenerateManager.Inst.generateRotation));
         }
+        gameCounter_inGame_noCoin = 0;
+        isGenerateFin = true;
     }
 
-    private bool ShouldGenerate()
-    {
-        //return !isGenerateEnhanceCoin && GameParamManager.IsEnhanceCoinGenerate();
-
-        var random = UnityEngine.Random.Range(0f, 1f);
-        return random < enhanceCoinGenerateRate;
-    }
 
     private MiningTarget_EnhanceCoin Generate(Vector3 position, Quaternion rotation)
     {

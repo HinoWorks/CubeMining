@@ -39,7 +39,8 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
     public override async void ToOutGame_InitData()
     {
         var saveData_playerLevel = await SaveLoader.Inst.Get_PlayerLevelData();
-        currentPoints = saveData_playerLevel == null ? 0 : saveData_playerLevel.points;
+        currentPoints = SaveLoader.Inst.EnhanceCoinCount;
+        //currentPoints = saveData_playerLevel == null ? 0 : saveData_playerLevel.points;
         tmp_points.SetText($"{currentPoints}");
         var currentPlayerLevel = saveData_playerLevel == null ? 0 : saveData_playerLevel.level;
 
@@ -139,7 +140,8 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
             SaveLoader.Inst.Request_SaveResource(resourceCount.resourceType, -resourceCount.requiredCount);
         }
         var pointCost = ui_selectInfo.requiredPoints;
-        SaveLoader.Inst.Request_SavePlayerLevelData(-pointCost);
+        //SaveLoader.Inst.Request_SavePlayerLevelData(-pointCost);
+        SaveLoader.Inst.Request_SaveEnhanceCoinCount(-pointCost);
         currentPoints -= pointCost;
 
         // 強化

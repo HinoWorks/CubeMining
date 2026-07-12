@@ -121,6 +121,12 @@ public class BlockGenerateManager : MonoBehaviour
                 timer_towerGenerate = 0f;
             }
         }
+
+        // -- enhance coin generate check --
+        EnhanceCoinGenerateManager.Inst.UnityUpDate();
+
+        // -- artifact generate check --
+        ArtifactGenerateManager.Inst.UnityUpDate();
     }
 
     #region == Block Create Base ==
@@ -130,8 +136,8 @@ public class BlockGenerateManager : MonoBehaviour
         {
             GenerateBlock();
         }
-        ArtifactGenerateManager.Inst.Check_ArtifactGenerate();
-        EnhanceCoinGenerateManager.Inst.Check_EnhanceCoinGenerate();
+        //ArtifactGenerateManager.Inst.Check_ArtifactGenerate();
+        //EnhanceCoinGenerateManager.Inst.Check_EnhanceCoinGenerate();
     }
     private void GenerateBlock()
     {

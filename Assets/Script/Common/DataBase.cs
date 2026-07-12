@@ -38,6 +38,7 @@ public class DataBase : MonoBehaviour
     [SerializeField] SO_PlayerLevelData mSO_PlayerLevelData;
     [SerializeField] SO_PickaxePowerData mSO_PickaxePowerData;
     [SerializeField] SO_BlockGenerateData mSO_BlockGenerateData;
+    [SerializeField] SO_EnhanceCoinData mSO_EnhanceCoinData;
 
     [SerializeField] SO_AchievementData mSO_AchievementData;
     [SerializeField] SO_SoundData mSO_SoundData;
@@ -58,6 +59,7 @@ public class DataBase : MonoBehaviour
         await DataLoad_BlockGenerateData();
         await DataLoad_SoundData();
         await DataLoad_AchievementData();
+        await DataLoad_EnhanceCoinData();
 #if UNITY_EDITOR
         Debug.Log($"<color=yellow>End Master Data update!</color>");
         await UniTask.Delay(200, true);
@@ -76,6 +78,7 @@ public class DataBase : MonoBehaviour
         EditorUtility.SetDirty(mSO_BlockGenerateData);
         EditorUtility.SetDirty(mSO_SoundData);
         EditorUtility.SetDirty(mSO_AchievementData);
+        EditorUtility.SetDirty(mSO_EnhanceCoinData);
         // -- save --
         AssetDatabase.SaveAssets();
 #endif
@@ -201,6 +204,12 @@ public class DataBase : MonoBehaviour
         var loadData = await DataLoad("BlockGenerateParam");
         var convData = CSVSerializer.Deserialize<BlockGenerateParam>(loadData);
         mSO_BlockGenerateData.blockGenerateParams = convData;
+    }
+    private async UniTask DataLoad_EnhanceCoinData()
+    {
+        var loadData = await DataLoad("EnhanceCoin");
+        var convData = CSVSerializer.Deserialize<EnhanceCoinRateData>(loadData);
+        mSO_EnhanceCoinData.enhanceCoinRates = convData;
     }
 
     private async UniTask DataLoad_AchievementData()
