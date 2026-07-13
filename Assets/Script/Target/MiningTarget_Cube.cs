@@ -6,6 +6,7 @@ public class MiningTarget_Cube : MiningTargetBase
     private Vector3 EffectOffset = new Vector3(0, 0.25f, 0);
     //private BlockSize blockSize;
     protected ResourceType resourceType;
+    public ResourceType ResourceType => resourceType;
     private Action breakCallback;
 
     // -- resource up rate --

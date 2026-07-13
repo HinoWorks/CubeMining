@@ -201,6 +201,11 @@ public class BlockGenerateManager : MonoBehaviour
     {
         var blockGenerateParam = isNormalRate ? GameParamManager.Get_RandamBlockIndex()
                                             : GameParamManager.Get_RandamBlockIndex_OverIronUp();
+        return GenerateRockBlock(blockGenerateParam);
+    }
+
+    private GameObject GenerateRockBlock(BlockGenerateParam blockGenerateParam)
+    {
         var isMaxResource = GameParamManager.IsMaxResource(blockGenerateParam.resourceType);
 
         MiningTarget_Cube targetBlock = null;
@@ -236,6 +241,88 @@ public class BlockGenerateManager : MonoBehaviour
         targetBlock.Set_BlockType(blockGenerateParam.resourceType);
 
         return targetBlock.gameObject;
+    }
+
+    /// <summary>
+    /// 土ブロック（鉱石なし）を、現在の鉱石変化パラで抽選した鉱石へ変換する
+    /// </summary>
+    public int ConvertDirtToOre(int count)
+    {
+        if (count <= 0) return 0;
+
+        var dirtBlocks = Get_DirtCubes();
+        if (dirtBlocks.Count == 0) return 0;
+
+        // ランダム順に変換候補を並べ替え
+        for (int i = dirtBlocks.Count - 1; i > 0; i--)
+        {
+            var j = Random.Range(0, i + 1);
+            (dirtBlocks[i], dirtBlocks[j]) = (dirtBlocks[j], dirtBlocks[i]);
+        }
+
+        var convertLimit = Mathf.Min(count, dirtBlocks.Count);
+        var converted = 0;
+        for (int i = 0; i < convertLimit; i++)
+        {
+            if (TryConvertDirtToOre(dirtBlocks[i]))
+            {
+                converted++;
+            }
+        }
+        return converted;
+    }
+
+    private List<MiningTarget_Cube> Get_DirtCubes()
+    {
+        var result = new List<MiningTarget_Cube>();
+        foreach (var cube in list_targetBlocks)
+        {
+            if (cube == null || !cube.isActiveAndEnabled || !cube.isAlive) continue;
+            if (cube.ResourceType != ResourceType.Stone) continue;
+            result.Add(cube);
+        }
+        return result;
+    }
+
+    private bool TryConvertDirtToOre(MiningTarget_Cube dirtCube)
+    {
+        if (dirtCube == null || !dirtCube.isActiveAndEnabled) return false;
+        if (dirtCube.ResourceType != ResourceType.Stone) return false;
+
+        var oreParam = LotteryOreBlockParam();
+        if (oreParam == null || oreParam.resourceType == ResourceType.Stone) return false;
+
+        var position = dirtCube.transform.position;
+        var rotation = dirtCube.transform.rotation;
+        dirtCube.NotActivate();
+
+        var oreBlock = GenerateRockBlock(oreParam);
+        oreBlock.transform.position = position;
+        oreBlock.transform.rotation = rotation;
+
+        var effect = EffectManager.Inst?.Get_Effect(EffectType.BlockConvert);
+        if (effect != null)
+        {
+            effect.transform.position = position;
+            effect.SetActive(true);
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// 現在の鉱石変化パラで抽選し、土以外（鉱石）になるまで再抽選する
+    /// </summary>
+    private static BlockGenerateParam LotteryOreBlockParam(int maxRetry = 32)
+    {
+        for (int i = 0; i < maxRetry; i++)
+        {
+            var param = GameParamManager.Get_RandamBlockIndex();
+            if (param != null && param.resourceType != ResourceType.Stone)
+            {
+                return param;
+            }
+        }
+        return null;
     }
     #endregion
 

@@ -26,8 +26,14 @@ public class UI_PickaxePowerUnit : MonoBehaviour
 
     public async void Init_Once(int _index, Action<UI_PickaxePowerUnit> _onClick_Select)
     {
-        this.onClick_Select = _onClick_Select;
         so_base = SOLoader.PickaxePowerData.GetPickaxePowerBase(_index);
+        if (so_base == null)
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
+
+        this.onClick_Select = _onClick_Select;
         image_icon.sprite = so_base.icon;
 
         var pickaxePowerData = await SaveLoader.Inst.Get_PickaxePowerData(so_base.index);
@@ -41,6 +47,8 @@ public class UI_PickaxePowerUnit : MonoBehaviour
     /// </summary>
     public async void Init(int _currentPoints, int _currentPlayerLevel)
     {
+        if (so_base == null) return;
+
         isEnoughPlayerLevel = _currentPlayerLevel >= so_base.unlockLevel;
         obj_locked.SetActive(!isEnoughPlayerLevel);
         if (!isEnoughPlayerLevel)
@@ -92,6 +100,8 @@ public class UI_PickaxePowerUnit : MonoBehaviour
 
     public void EquipMark_Update(int _equipedIndex)
     {
+        if (so_base == null) return;
+
         var isEquiped = _equipedIndex == so_base.index;
         obj_equip.SetActive(isEquiped);
         SelectMark_Update(isEquiped);

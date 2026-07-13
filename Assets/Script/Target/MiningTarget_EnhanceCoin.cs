@@ -35,6 +35,8 @@ public class MiningTarget_EnhanceCoin : MiningTarget_Object
 
         var ui_getItemCont = UI_PoolManager.Inst.Set_GetItemCont();
         ui_getItemCont.SetInit_EnhanceCoin(transform.position);
+
+        // 獲得した瞬間にsaveリクエスト
         SaveLoader.Inst.Request_SaveEnhanceCoinCount(getCoin);
 
 
