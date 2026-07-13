@@ -292,6 +292,9 @@ public class SaveLoader : MonoBehaviour
         artifactCurrentBlockCount = ES3.KeyExists(KEY_ARTIFACT_CURRENTBLOCKCOUNT) ? ES3.Load<int>(KEY_ARTIFACT_CURRENTBLOCKCOUNT) : 0;
         pickaxePowerEquipedIndex = ES3.KeyExists(KEY_PICKAXEPOWER_EQUIPEDINDEX) ? ES3.Load<int>(KEY_PICKAXEPOWER_EQUIPEDINDEX) : 0;
 
+        enhanceCoinCount = ES3.KeyExists(KEY_ENHANCE_COIN_COUNT) ? ES3.Load<int>(KEY_ENHANCE_COIN_COUNT) : 0;
+        enhanceCoinCount_Total = ES3.KeyExists(KEY_ENHANCE_COIN_COUNT_TOTAL) ? ES3.Load<int>(KEY_ENHANCE_COIN_COUNT_TOTAL) : 0;
+
         currentState = state.Idling;
         Debug.Log($" == SaveData_InitialLoad: End == ");
     }

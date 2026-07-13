@@ -38,9 +38,15 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
 
     public override async void ToOutGame_InitData()
     {
+        var totalCoin = SaveLoader.Inst.EnhanceCoinCount_Total;
+        //Debug.Log($"<color=green> == PickaxePower ==  {UnlockStateManager.Inst.isUnlock_PickaxePower} / totalCoin:{totalCoin}</color>");
+        if (!UnlockStateManager.Inst.isUnlock_PickaxePower) return;
+        if (totalCoin <= 0) return;
+        UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.PickaxePower, false);
+
         var saveData_playerLevel = await SaveLoader.Inst.Get_PlayerLevelData();
         currentPoints = SaveLoader.Inst.EnhanceCoinCount;
-        //currentPoints = saveData_playerLevel == null ? 0 : saveData_playerLevel.points;
+
         tmp_points.SetText($"{currentPoints}");
         var currentPlayerLevel = saveData_playerLevel == null ? 0 : saveData_playerLevel.level;
 

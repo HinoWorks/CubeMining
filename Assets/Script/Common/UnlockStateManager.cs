@@ -20,11 +20,12 @@ public class UnlockStateManager : MonoBehaviour
     {
         if (Inst == null) { Inst = this; }
         else { Destroy(this); }
+        GameEvent.GameState.SetGameState.Subscribe(ChangeGameState).AddTo(this);
     }
 
     void Start()
     {
-        GameEvent.GameState.SetGameState.Subscribe(ChangeGameState).AddTo(this);
+
     }
 
     private void ChangeGameState(GameStateType _state)
@@ -63,6 +64,7 @@ public class UnlockStateManager : MonoBehaviour
         var unlockedDatas = SOLoader.UnlockData.Get_UnlockData_UnderLevel(currentPlayerLevel);
         foreach (var unlockData in unlockedDatas)
         {
+            Debug.Log($"<color=green> == UnlockStateManager ==  Update_UnlockCheck: {unlockData.unlockTargetType} / {unlockData.unlockLevel}</color>");
             Set_Unlock(unlockData.unlockTargetType, true);
         }
     }
@@ -83,7 +85,7 @@ public class UnlockStateManager : MonoBehaviour
                 isUnlock_PickaxeCraft = true;
                 break;
             case UnlockTargetType.PickaxePower:
-                UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.PickaxePower, _isFirstUnlockEvent);
+                //UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.PickaxePower, _isFirstUnlockEvent);
                 isUnlock_PickaxePower = true;
                 break;
         }

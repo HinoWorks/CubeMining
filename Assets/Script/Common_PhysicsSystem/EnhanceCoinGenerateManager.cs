@@ -37,6 +37,8 @@ public class EnhanceCoinGenerateManager : MonoBehaviour
         createCount_thisGame = 0;
         isGenerateFin = true;
 
+        if (!UnlockStateManager.Inst.isUnlock_PickaxePower) return;
+
         Set_GenerateCheck();
     }
 
@@ -50,7 +52,7 @@ public class EnhanceCoinGenerateManager : MonoBehaviour
         enhanceCoinGenerateRate = so.baseRate + so.deltaRate * (gameCounter_inGame_noCoin - 1);
 
         var random = UnityEngine.Random.Range(0f, 1f);
-        Debug.Log($"<color=green> == EnhanceCoin ==   inGameCount-NoCoin:{gameCounter_inGame_noCoin} / so.base:{so.baseRate} / so.delta:{so.deltaRate} => GenerateRate: {enhanceCoinGenerateRate} => isGenerate???: {random < enhanceCoinGenerateRate}</color>");
+        Debug.Log($"<color=green> == EnhanceCoin ==  totalGetCoin:{currentTotalCoin} / inGameCount-NoCoin:{gameCounter_inGame_noCoin} / so.base:{so.baseRate} / so.delta:{so.deltaRate} => GenerateRate: {enhanceCoinGenerateRate} => isGenerate???: {random < enhanceCoinGenerateRate}</color>");
         if (random >= enhanceCoinGenerateRate) return;
 
         // set Generate Parameter
