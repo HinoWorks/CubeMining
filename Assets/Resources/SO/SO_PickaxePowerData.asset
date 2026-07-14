@@ -64,7 +64,7 @@ MonoBehaviour:
     pf: {fileID: 4866347856038464369, guid: 8afe324a251e54584bdff968cd5bce8d, type: 3}
   - index: 6
     skillName: Chain Lightning
-    description: 'xxx '
+    description: "\u753B\u9762\u306E4\u9685\u304B\u3089\u73FE\u5728\u306E\u30AB\u30FC\u30BD\u30EB\u4F4D\u7F6E\u306B\u5411\u304B\u3063\u3066\u96F7\u3092\u653E\u3061\u3001\u305D\u306E\u76F4\u7DDA\u4E0A\u306B\u3042\u308B\u30D6\u30ED\u30C3\u30AF\u306B\u30C0\u30E1\u30FC\u30B8"
     icon: {fileID: 0}
     unlockLevel: 1
     blockCount: 5
@@ -73,13 +73,22 @@ MonoBehaviour:
     pf: {fileID: 1214965774706709456, guid: 07aae9ee3359e44f383c381555ae8de7, type: 3}
   - index: 7
     skillName: Geo Dowsing
-    description: 'xxx '
+    description: "\u753B\u9762\u5185\u306B\u3042\u308B\u571F\u30D6\u30ED\u30C3\u30AF\u3092\u6307\u5B9A\u6570\uFF08x\u500B\u5206\uFF09\u3001\u9271\u77F3\u30D6\u30ED\u30C3\u30AF\u306B\u5909\u5316\u3055\u305B\u308B"
     icon: {fileID: 0}
     unlockLevel: 1
     blockCount: 5
     CD: 5
     maxLevel: 3
     pf: {fileID: 8235290486800529160, guid: 59342e19ef9714670804572a3556a06b, type: 3}
+  - index: 8
+    skillName: Triple Quake
+    description: "\u30AB\u30FC\u30BD\u30EB\u4F4D\u7F6E\u3092\u4E2D\u5FC3\u306B\u5730\u9707\u3092\u767A\u751F\u3055\u305B\u30B5\u30FC\u30AF\u30EB\u72B6\u306B\uFF13\u56DE\u653B\u6483\u3059\u308B"
+    icon: {fileID: 0}
+    unlockLevel: 1
+    blockCount: 5
+    CD: 5
+    maxLevel: 3
+    pf: {fileID: 2383101912220292839, guid: 67cdeca9feb7e40a381994916737df5b, type: 3}
   - index: 999
     skillName: Overdrive
     description: Temporarily boosts all pickaxe stats.
@@ -472,6 +481,62 @@ MonoBehaviour:
     level: 3
     value_1: 20
     value_2: -1
+    value_3: -1
+    value_4: -1
+    req_point: 4
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 8
+    level: 0
+    value_1: -1
+    value_2: -1
+    value_3: -1
+    value_4: -1
+    req_point: 1
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 8
+    level: 1
+    value_1: 1
+    value_2: 1
+    value_3: -1
+    value_4: -1
+    req_point: 2
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 8
+    level: 2
+    value_1: 2
+    value_2: 1.5
+    value_3: -1
+    value_4: -1
+    req_point: 3
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - index: 8
+    level: 3
+    value_1: 2.5
+    value_2: 2
     value_3: -1
     value_4: -1
     req_point: 4

@@ -88,6 +88,18 @@ public class CameraManager : MonoBehaviour
     /// <summary>
     /// カメラ振動:大きめ
     /// </summary>
+    public void ShakeCamera_Small()
+    {
+        if (vcam == null) return;
+
+        shakeTween?.Kill();
+        shakeTween = vcam.transform
+            .DOShakePosition(0.15f, 0.08f, 15, 60, false, true);
+    }
+
+    /// <summary>
+    /// カメラ振動:大きめ
+    /// </summary>
     public void ShakeCamera_Large()
     {
         if (vcam == null) return;

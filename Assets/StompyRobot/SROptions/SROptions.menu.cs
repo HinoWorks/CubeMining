@@ -215,6 +215,15 @@ public partial class SROptions
         PlayerLevelManager.Inst.DEBUG_ForceLevelUp();
     }
 
+    [Category("デバッグ")]
+    [DisplayName("強化コイン取得")]
+    [Sort(4)]
+    public void Debug_GetEnhanceCoin()
+    {
+        SaveLoader.Inst.Request_SaveEnhanceCoinCount(1);
+
+    }
+
 
     [Category("例外 / クラッシュ")]
     [DisplayName("例外スロー")]
