@@ -7,7 +7,10 @@ using DG.Tweening;
 
 public class UI_PickaxePower : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI text_counter;
     [SerializeField] Image icon_power;
+
+    [SerializeField] GameObject gaugeParent;
     [SerializeField] Image gauge;
     [SerializeField] Image gauge_forCT;
     [SerializeField] GameObject obj_powerReady;
@@ -46,6 +49,8 @@ public class UI_PickaxePower : MonoBehaviour
         var equippedBase = SOLoader.PickaxePowerData.GetPickaxePowerBase(equippedIndex);
         icon_power.sprite = equippedBase.icon;
 
+        text_counter.SetText("0");
+        gaugeParent.SetActive(false);
         obj_powerReady.SetActive(false);
         eff_powerActive.Stop();
         gauge.fillAmount = 0f;
@@ -59,21 +64,25 @@ public class UI_PickaxePower : MonoBehaviour
     // Event:ゲージ変更
     private void Set_PowerGaugeRate(float rate)
     {
+        text_counter.SetText(PickaxePowerManager.Inst.CurrentGauge.ToString());
         gauge.fillAmount = rate;
-        if (rate >= 1f)
-        {
-            obj_powerReady.SetActive(true);
-        }
+        obj_powerReady.SetActive(rate >= 1f);
     }
 
     // Event:スキル発動
     private void Set_PowerActivate(int index, int CT)
     {
+        text_counter.SetText(PickaxePowerManager.Inst.CurrentGauge.ToString());
         eff_powerActive.Play();
         obj_powerReady.SetActive(false);
         gauge.fillAmount = 0f;
+        gaugeParent.SetActive(true);
         gauge_forCT.fillAmount = 1f;
-        DOTween.To(() => gauge_forCT.fillAmount, x => gauge_forCT.fillAmount = x, 0f, CT).SetEase(Ease.Linear).Play();
+        gauge_forCT.DOKill();
+        DOTween.To(() => gauge_forCT.fillAmount, x => gauge_forCT.fillAmount = x, 0f, CT)
+            .SetEase(Ease.Linear)
+            .OnComplete(() => gaugeParent.SetActive(false))
+            .Play();
     }
 
 }

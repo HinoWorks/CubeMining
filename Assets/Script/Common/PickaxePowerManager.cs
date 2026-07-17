@@ -9,6 +9,12 @@ public class PickaxePowerManager : MonoBehaviour
 {
     public static PickaxePowerManager Inst;
 
+    /// <summary>
+    /// true: ブロック破壊数でチャージ（旧仕様）
+    /// false: PickaxePowerLevel.useCount 分だけインゲーム中に使用可能（現行）
+    /// </summary>
+    private static readonly bool UseBlockChargeMode = false;
+
     public int EquippedIndex { get; private set; }
     public int EquippedLevel { get; private set; }
     public PickaxePowerBase EquippedBase { get; private set; }
@@ -20,8 +26,19 @@ public class PickaxePowerManager : MonoBehaviour
 
     public int CurrentGauge { get; private set; }
     public int MaxGauge { get; private set; }
-    public bool IsGaugeReady => IsActive && MaxGauge > 0 && CurrentGauge >= MaxGauge;
-    public float GaugeRate => MaxGauge > 0 ? (float)CurrentGauge / MaxGauge : 0f;
+    public bool IsGaugeReady => UseBlockChargeMode
+        ? (IsActive && MaxGauge > 0 && CurrentGauge >= MaxGauge)
+        : (IsActive && CurrentGauge > 0);
+    public float GaugeRate
+    {
+        get
+        {
+            if (UseBlockChargeMode)
+                return MaxGauge > 0 ? (float)CurrentGauge / MaxGauge : 0f;
+            // useCountモード: 残回数があればUI上は満タン扱い
+            return CurrentGauge > 0 ? 1f : 0f;
+        }
+    }
     public bool IsActive { get; private set; }
 
     public float CooldownDuration { get; private set; }
@@ -154,14 +171,24 @@ public class PickaxePowerManager : MonoBehaviour
         pickaxePowerCont = newPowerUnit.GetComponent<PickaxePowerCont_Base>();
         pickaxePowerCont.Init(EquippedLevelData);
 
-        MaxGauge = blockCountNeeded;
+        if (UseBlockChargeMode)
+        {
+            MaxGauge = blockCountNeeded;
+            CurrentGauge = 0;
+        }
+        else
+        {
+            // useCount分だけインゲーム中に使用可能。開始時に残回数をセット
+            MaxGauge = Mathf.Max(0, (int)EquippedLevelData.value_4);
+            CurrentGauge = MaxGauge;
+        }
 
         IsActive = true;
         CooldownDuration = CT;
 
         if (GameWatcher.Inst != null && GameWatcher.Inst.isInGameNow)
         {
-            canAccumulateGauge = true;
+            canAccumulateGauge = UseBlockChargeMode;
         }
 
         if (DEBUG_InitialPowerReady)
@@ -169,11 +196,13 @@ public class PickaxePowerManager : MonoBehaviour
             Debug.Log(" <green>================== DEBUG_InitialPowerReady </green> ");
             CurrentGauge = MaxGauge;
         }
+
+        PublishPowerGaugeRateChanged(GaugeRate);
     }
 
     private void SetState_InGame()
     {
-        canAccumulateGauge = IsActive;
+        canAccumulateGauge = UseBlockChargeMode && IsActive;
     }
 
     private void SetState_InGameEnd()
@@ -194,12 +223,21 @@ public class PickaxePowerManager : MonoBehaviour
         {
             CooldownRemaining = 0f;
             Debug.Log(" ================== PickaxePower cooldown end ");
+
+            // useCountモード: CD終了後に残回数があれば再度Ready表示
+            if (!UseBlockChargeMode && CurrentGauge > 0)
+            {
+                PublishPowerGaugeRateChanged(GaugeRate);
+            }
         }
     }
 
 
     private void OnBlockBreakCount((GameRecordData_Type type, BigInteger delta) record)
     {
+        // useCountモード時はブロック破壊チャージの動線を塞ぐ（旧仕様復帰時は UseBlockChargeMode = true）
+        if (!UseBlockChargeMode) return;
+
         if (!canAccumulateGauge) return;
         if (!IsActive || MaxGauge <= 0) return;
         if (IsOnCooldown) return;
@@ -213,7 +251,7 @@ public class PickaxePowerManager : MonoBehaviour
 
 
     /// <summary>
-    /// ゲージ満タン時に右クリックから呼ぶ。成功時はゲージを0に戻す。
+    /// ゲージ満タン時（または残useCountあり）に右クリックから呼ぶ。
     /// </summary>
     public bool TryActivate()
     {
@@ -221,9 +259,20 @@ public class PickaxePowerManager : MonoBehaviour
         if (!CanActivate) return false;
 
         pickaxePowerCont.Activate();
-        PublishPowerActivate(EquippedIndex, CT);
         ExecuteEffect();
-        CurrentGauge = 0;
+
+        if (UseBlockChargeMode)
+        {
+            CurrentGauge = 0;
+            PublishPowerGaugeRateChanged(GaugeRate);
+        }
+        else
+        {
+            CurrentGauge = Mathf.Max(0, CurrentGauge - 1);
+            // UIは Set_PowerActivate 側でゲージをリセット。CD終了時に残回数があれば再通知
+        }
+
+        PublishPowerActivate(EquippedIndex, CT);
         StartCooldown();
         return true;
     }

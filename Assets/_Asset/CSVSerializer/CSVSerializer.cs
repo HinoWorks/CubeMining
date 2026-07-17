@@ -37,18 +37,12 @@ public class CSVSerializer
 
         for (int i = 0; i < rows[0].Length; i++)
         {
-            string id = rows[0][i];
-            string id2 = "";
-            for (int j = 0; j < id.Length; j++)
-            {
-                if ((id[j] >= 'a' && id[j] <= 'z') || (id[j] >= '0' && id[j] <= '9'))
-                    id2 += ((char)id[j]).ToString();
-                else if (id[j] >= 'A' && id[j] <= 'Z')
-                    id2 += ((char)(id[j] - 'A' + 'a')).ToString();
-            }
+            string id = rows[0][i] != null ? rows[0][i].Trim().Trim('\uFEFF') : "";
+            string id2 = NormalizeHeaderKey(id);
 
-            table.Add(id, i);
-            if (!table.ContainsKey(id2))
+            if (!string.IsNullOrEmpty(id) && !table.ContainsKey(id))
+                table.Add(id, i);
+            if (!string.IsNullOrEmpty(id2) && !table.ContainsKey(id2))
                 table.Add(id2, i);
         }
 
@@ -67,14 +61,29 @@ public class CSVSerializer
         FieldInfo[] fieldinfo = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
         foreach (FieldInfo tmp in fieldinfo)
         {
-            if (table.ContainsKey(tmp.Name))
+            int idx;
+            if (table.TryGetValue(tmp.Name, out idx) || table.TryGetValue(NormalizeHeaderKey(tmp.Name), out idx))
             {
-                int idx = table[tmp.Name];
                 if (idx < cols.Length)
                     SetValue(v, tmp, cols[idx]);
             }
         }
         return v;
+    }
+
+    static string NormalizeHeaderKey(string id)
+    {
+        if (string.IsNullOrEmpty(id))
+            return "";
+        string id2 = "";
+        for (int j = 0; j < id.Length; j++)
+        {
+            if ((id[j] >= 'a' && id[j] <= 'z') || (id[j] >= '0' && id[j] <= '9'))
+                id2 += ((char)id[j]).ToString();
+            else if (id[j] >= 'A' && id[j] <= 'Z')
+                id2 += ((char)(id[j] - 'A' + 'a')).ToString();
+        }
+        return id2;
     }
 
     static void SetValue(object v, FieldInfo fieldinfo, string value)

@@ -197,6 +197,10 @@ public class DataBase : MonoBehaviour
         var loadData2 = await DataLoad("PickaxePowerLevel");
         var convData2 = CSVSerializer.Deserialize<PickaxePowerLevel>(loadData2);
         mSO_PickaxePowerData.pickaxePowerLevels = convData2;
+
+        var loadData3 = await DataLoad("PickaxePowerParamDisplay");
+        var convData3 = CSVSerializer.Deserialize<PickaxePowerParamDisplay>(loadData3);
+        mSO_PickaxePowerData.pickaxePowerParamDisplays = convData3;
     }
 
     private async UniTask DataLoad_BlockGenerateData()
