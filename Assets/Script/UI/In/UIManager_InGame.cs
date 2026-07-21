@@ -16,7 +16,8 @@ public class UIManager_InGame : MonoBehaviour
     [SerializeField] Transform[] target_getItem;
     public UI_ResultManager ui_ResultManager;
     public UI_EventManager ui_EventManager;
-
+    [SerializeField] UI_PauseMenu ui_PauseMenu;
+    public UI_PauseMenu UI_PauseMenu => ui_PauseMenu;
     public Transform Get_ArtifactTargetPosition(int _artifactIndex)
     {
         return target_artifact[_artifactIndex];
@@ -43,6 +44,7 @@ public class UIManager_InGame : MonoBehaviour
         {
             ui_resourceCounter.AwakeCall(true);
         }
+
     }
 
     private void ChangeGateState(GameStateType _state)
@@ -61,9 +63,11 @@ public class UIManager_InGame : MonoBehaviour
                 }
                 break;
             case GameStateType.InGame_End:
+                PauseManager.Inst?.ForceResumeIfPaused();
                 ui_EventManager.EndGame();
                 break;
             case GameStateType.Result:
+                PauseManager.Inst?.ForceResumeIfPaused();
                 ui_ResultManager.Open();
                 break;
         }

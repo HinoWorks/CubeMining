@@ -3,6 +3,7 @@ using UniRx;
 using System.Numerics;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using System.Threading;
 
 
 
@@ -181,6 +182,13 @@ public class InGameManager : MonoBehaviour
     }
     #endregion
 
+    public void SessionEnd()
+    {
+        if (!GameWatcher.Inst.isInGameNow) return;
+        timer += RemainingTime;
+        GameEvent.UI.PublishTimeLimit(0f);
+        GameWatcher.Inst.SetGameState(GameStateType.InGame_End);
+    }
 
     /// <summary>
     /// リソース取得

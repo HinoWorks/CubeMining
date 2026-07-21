@@ -10,7 +10,7 @@ public class UI_UserSettingManager : MonoBehaviour
 {
     public static UI_UserSettingManager Inst;
 
-
+    public bool IsOpen => obj_main != null && obj_main.activeSelf;
 
     [SerializeField] GameObject obj_main;
 

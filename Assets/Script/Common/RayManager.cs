@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class RayManager : MonoBehaviour
 {
+    public static RayManager Inst;
+
     [SerializeField] private Camera mainCamera;
     [SerializeField] private LayerMask raycastLayer;
 
@@ -13,10 +15,25 @@ public class RayManager : MonoBehaviour
     private Vector3 raycastPosition;
     private IDamagable currentTarget;
 
+    void Awake()
+    {
+        if (Inst == null) { Inst = this; }
+        else { Destroy(this); }
+    }
+
     void Start()
     {
         isRaycast = true;
         currentTarget = null;
+    }
+
+    public void SetRaycastEnabled(bool enabled)
+    {
+        isRaycast = enabled;
+        if (!enabled)
+        {
+            currentTarget = null;
+        }
     }
 
 

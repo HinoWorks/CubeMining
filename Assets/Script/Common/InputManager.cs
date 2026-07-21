@@ -33,7 +33,7 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         if (Inst == null) { Inst = this; }
-        else { Destroy(this); }
+        else { Destroy(this); return; }
         SwitchToPlayer();
     }
 
@@ -56,7 +56,7 @@ public class InputManager : MonoBehaviour
 
     public void SwitchToPlayer()
     {
-        Set_Map("Default");
+        Set_Map("Player");
     }
 
 

@@ -111,15 +111,15 @@ public class HButton : Button
 
     private void Anim_ScaleChange_PointerOn()
     {
-        this.gameObject.transform.DOScale(scale_over * Vector3.one, duration_scaleChange).Play();
+        this.gameObject.transform.DOScale(scale_over * Vector3.one, duration_scaleChange).SetUpdate(true).Play();
     }
     private void Anim_ScaleChange_ToSmall()
     {
-        this.gameObject.transform.DOScale(scale_push * Vector3.one, duration_scaleChange).Play();
+        this.gameObject.transform.DOScale(scale_push * Vector3.one, duration_scaleChange).SetUpdate(true).Play();
     }
     private void Anim_ScaleChange_ToNormal()
     {
-        this.gameObject.transform.DOScale(1f * Vector3.one, duration_scaleChange).Play();
+        this.gameObject.transform.DOScale(1f * Vector3.one, duration_scaleChange).SetUpdate(true).Play();
     }
 }
 
