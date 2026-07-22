@@ -842,6 +842,33 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: ef2dcfce7178f4557bf757c3abdfed05, type: 3}
     maxLevel: 2
     deltaValue: 0.1
+  - baseIndex: 9991
+    paramCategory: 0
+    paramType: 29
+    targetIndex: 1
+    skillName: Stone King
+    description: "\u30B9\u30C8\u30FC\u30F3\u30AD\u30F3\u30B0"
+    icon: {fileID: 0}
+    maxLevel: 1
+    deltaValue: 0.2
+  - baseIndex: 9992
+    paramCategory: 0
+    paramType: 30
+    targetIndex: 1
+    skillName: Game King
+    description: "\u30B2\u30FC\u30E0\u30AD\u30F3\u30B0"
+    icon: {fileID: 0}
+    maxLevel: 1
+    deltaValue: 0.2
+  - baseIndex: 9993
+    paramCategory: 0
+    paramType: 31
+    targetIndex: 1
+    skillName: Game Attack
+    description: "\u30A2\u30BF\u30C3\u30AF\u30AD\u30F3\u30B0"
+    icon: {fileID: 0}
+    maxLevel: 1
+    deltaValue: 0.2
   skillTreeUnits:
   - skillTreeIndex: 100
     refIndex: 1
@@ -1383,6 +1410,16 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 300
     req_diamond: 50
+  - skillTreeIndex: 199
+    refIndex: 9993
+    unlockCheckIndexes: 92000000
+    req_stone: 7500
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 2000
+    req_sapphire: 750
+    req_diamond: 300
   - skillTreeIndex: 200
     refIndex: 1012
     unlockCheckIndexes: 69000000cb000000
@@ -1693,6 +1730,16 @@ MonoBehaviour:
     req_ruby: 900
     req_sapphire: 100
     req_diamond: -1
+  - skillTreeIndex: 299
+    refIndex: 9991
+    unlockCheckIndexes: e1000000
+    req_stone: 0
+    req_iron: 4500
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 900
+    req_sapphire: 800
+    req_diamond: 350
   - skillTreeIndex: 300
     refIndex: 2012
     unlockCheckIndexes: 6c0000002d010000
@@ -2193,13 +2240,13 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 75
-  - skillTreeIndex: 0
-    refIndex: 0
-    unlockCheckIndexes: 
+  - skillTreeIndex: 399
+    refIndex: 9992
+    unlockCheckIndexes: 5c010000
     req_stone: 0
     req_iron: 0
-    req_gold: 0
+    req_gold: 2500
     req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
+    req_ruby: 1000
+    req_sapphire: 750
+    req_diamond: 350

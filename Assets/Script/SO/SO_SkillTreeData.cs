@@ -59,7 +59,13 @@ public enum ParamType
     TowerGenerate_Unlock,
     TowerGenerate_Count,
     TowerGenerate_Duration,
-    TowerGenerate_Height
+    TowerGenerate_Height,
+
+
+    // == end game param ====
+    King_Stone,
+    King_Game,
+    King_Attack
 }
 
 

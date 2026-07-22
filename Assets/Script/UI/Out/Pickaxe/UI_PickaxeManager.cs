@@ -4,6 +4,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using System.Linq;
 using UniRx;
+using UnityEngine.Analytics;
 
 
 public class UI_PickaxeManager : UI_OutGameTabBase
@@ -100,6 +101,7 @@ public class UI_PickaxeManager : UI_OutGameTabBase
     {
         foreach (var pickaxeLibraryUnit in pickaxeLibraryUnits)
         {
+            if (!pickaxeLibraryUnit.gameObject.activeSelf) continue;
             pickaxeLibraryUnit.Init();
         }
     }

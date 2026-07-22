@@ -94,6 +94,13 @@ public class GameBaseParam
     private float pickaxeBase_Size_enhanced = 0f;
 
 
+
+    // === end game param ====
+    public bool isStoneKing { get; private set; } = false;
+    public bool isGameKing { get; private set; } = false;
+    public bool isAttackKing { get; private set; } = false;
+
+
     public void Set_Param(ParamType _paramType, float _setParam)
     {
         switch (_paramType)
@@ -166,6 +173,19 @@ public class GameBaseParam
                 break;
             case ParamType.TowerGenerate_Height:
                 towerGenerate_height_enhanced += (int)_setParam;
+                break;
+
+
+
+            // -- end game param --
+            case ParamType.King_Stone:
+                isStoneKing = true;
+                break;
+            case ParamType.King_Game:
+                isGameKing = true;
+                break;
+            case ParamType.King_Attack:
+                isAttackKing = true;
                 break;
         }
     }
@@ -754,6 +774,14 @@ public static class GameParamManager
         }
         return targetPickaxe;
     }
+
+    // スキルツリーで全ての王冠を獲得しているかチェック
+    public static bool IsAllKingGot()
+    {
+        return gameBaseParam.isStoneKing && gameBaseParam.isGameKing && gameBaseParam.isAttackKing;
+    }
+
+
     /*
     public static BlockGenerateParam_Layer Get_BlockGenerateParam_Layer(int _layerIndex)
     {
@@ -766,6 +794,8 @@ public static class GameParamManager
     }
     */
     #endregion
+
+
 
 
     #region -- other object generate param --
@@ -817,7 +847,7 @@ public static class GameParamManager
 
 
 
-    #region ======== MAIN ========
+    #region ======== MAIN Method========
     public static async void Init()
     {
         // ゲームの基本的なパラメタを読み込む

@@ -6,6 +6,7 @@ public class UI_PickaxeLibraryUnit : MonoBehaviour
 {
     [SerializeField] Image icon;
     [SerializeField] GameObject obj_locked;
+    [SerializeField] GameObject obj_locked_line; // 特別なロックがある場合、ラインを表示する
     [SerializeField] GameObject obj_equip;
     [SerializeField] GameObject obj_enhanceReady;
     [SerializeField] HButton btn;
@@ -33,6 +34,7 @@ public class UI_PickaxeLibraryUnit : MonoBehaviour
         }
         this.onClick_Select = _onClick_Select;
         icon.sprite = so.icon;
+        obj_locked_line.SetActive(so.isLocked);
     }
     public async void Init()
     {
@@ -43,9 +45,16 @@ public class UI_PickaxeLibraryUnit : MonoBehaviour
         // 解放済みでない場合、一つ前のインデックスを確認
         if (!isOpen)
         {
-            var prevIndex = pickaxeIndex - 1;
-            var prevSaveData = await SaveLoader.Inst.Get_PickaxeData(prevIndex);
-            isOpen = prevSaveData != null;
+            if (!so.isLocked)
+            {
+                var prevIndex = pickaxeIndex - 1;
+                var prevSaveData = await SaveLoader.Inst.Get_PickaxeData(prevIndex);
+                isOpen = prevSaveData != null;
+            }
+            else // 主に最後のピッケル
+            {
+                isOpen = GameParamManager.IsAllKingGot();
+            }
         }
         obj_locked.SetActive(!isOpen);
         btn.enabled = isOpen;

@@ -48,7 +48,7 @@ public class PickaxePowerLevel
     public float value_3;
     public float value_4;
 
-    public int useCount;
+    //public int useCount;
 
     public int req_point;
     public int req_stone;
