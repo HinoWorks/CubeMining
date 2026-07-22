@@ -175,6 +175,30 @@ public class UI_PickaxeManager : UI_OutGameTabBase
         if (isDoingAction) return;
         isDoingAction = true;
 
+#if UNITY_EDITOR
+        if (SROptions.isPickaxeCraftNoMaterial)
+        {
+            Debug.Log("PickaxeCraftNoMaterial");
+        }
+        else
+        {
+            // 一応チェック
+            foreach (var resourceCount in selectInfoUnit.RequredResources)
+            {
+                if (SaveLoader.Inst.Get_ResourceCount(resourceCount.resourceType) < resourceCount.requiredCount)
+                {
+                    isDoingAction = false;
+                    Debug.Log($"クラフト不可 --> リソース不足: {resourceCount.resourceType} => {resourceCount.requiredCount}");
+                    return;
+                }
+            }
+            // クラフト処理 
+            foreach (var resourceCount in selectInfoUnit.RequredResources)
+            {
+                SaveLoader.Inst.Request_SaveResource(resourceCount.resourceType, -resourceCount.requiredCount);
+            }
+        }
+#else
         // 一応チェック
         foreach (var resourceCount in selectInfoUnit.RequredResources)
         {
@@ -190,6 +214,7 @@ public class UI_PickaxeManager : UI_OutGameTabBase
         {
             SaveLoader.Inst.Request_SaveResource(resourceCount.resourceType, -resourceCount.requiredCount);
         }
+#endif
         SaveLoader.Inst.Request_SavePickaxeData(_so.pickaxeIndex, 1);
 
         // 新しいピッケルを表示

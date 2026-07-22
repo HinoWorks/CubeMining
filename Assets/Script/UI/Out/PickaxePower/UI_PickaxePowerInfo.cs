@@ -236,6 +236,12 @@ public class UI_PickaxePowerInfo : MonoBehaviour
             count++;
         }
 
+#if UNITY_EDITOR
+        if (SROptions.isPickaxePowerUpgradeNoMaterial)
+        {
+            resourceReady = true;
+        }
+#endif
         btn_enhance.Set_Interactable(resourceReady);
         btn_unlock.Set_Interactable(resourceReady);
         btn_unlock.gameObject.SetActive(currentLevel <= 0);
@@ -256,14 +262,22 @@ public class UI_PickaxePowerInfo : MonoBehaviour
     public void OnClick_Enhance()
     {
         if (isMaxLevel) return;
+#if UNITY_EDITOR
+        if (!SROptions.isPickaxePowerUpgradeNoMaterial && !resourceReady) return;
+#else
         if (!resourceReady) return;
+#endif
 
         onClick_Enhance?.Invoke();
     }
     public void OnClick_Unlock()
     {
         if (isMaxLevel) return;
+#if UNITY_EDITOR
+        if (!SROptions.isPickaxePowerUpgradeNoMaterial && !resourceReady) return;
+#else
         if (!resourceReady) return;
+#endif
 
         onClick_Unlock?.Invoke();
     }

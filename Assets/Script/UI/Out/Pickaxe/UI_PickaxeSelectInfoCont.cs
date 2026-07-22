@@ -130,12 +130,18 @@ public class UI_PickaxeSelectInfoCont : UI_PickaxeParamCont
             Set_ResourceCount(requredResources.Count, ResourceType.Diamond, so_requiredResources.req_diamond);
             requredResources.Add(new ResourceCount { resourceType = ResourceType.Diamond, requiredCount = so_requiredResources.req_diamond });
         }
+#if UNITY_EDITOR
+        if (SROptions.isPickaxeCraftNoMaterial)
+        {
+            isCraftReady = true;
+        }
+#endif
         btn_craft.Set_Interactable(isCraftReady);
     }
 
     private void Set_ResourceCount(int _index, ResourceType _resourceType, int _requiredCount)
     {
-        var modCount = StaticManager.Get_BigintegerToUnit(_requiredCount);
+        //var modCount = StaticManager.Get_BigintegerToUnit(_requiredCount);
 
         if (!GameParamManager.blockChangeRateParam.IsBlockTypeUnlock(_resourceType))
         {
@@ -145,7 +151,7 @@ public class UI_PickaxeSelectInfoCont : UI_PickaxeParamCont
         else
         {
             var overResource = _requiredCount <= SaveLoader.Inst.Get_ResourceCount(_resourceType);
-            ui_resourceCounts[_index].SetData(SOLoader.ItemData.GetItemUnitData((int)_resourceType).icon, modCount.num.ToString(), overResource ? Color.white : Color.red);
+            ui_resourceCounts[_index].SetData(SOLoader.ItemData.GetItemUnitData((int)_resourceType).icon, _requiredCount.ToString(), overResource ? Color.white : Color.red);
             isCraftReady = isCraftReady && overResource;
         }
         btn_craft.Set_Interactable(isCraftReady);
@@ -166,7 +172,11 @@ public class UI_PickaxeSelectInfoCont : UI_PickaxeParamCont
     #region -- OnClick --
     public void OnClick_Craft()
     {
+#if UNITY_EDITOR
+        if (!SROptions.isPickaxeCraftNoMaterial && !isCraftReady) return;
+#else
         if (!isCraftReady) return;
+#endif
         onClick_Craft?.Invoke(so);
     }
     public void OnClick_Equip(int _equipedSlotIndex)

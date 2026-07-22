@@ -139,6 +139,25 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
         if (isDoingAction) return;
         isDoingAction = true;
 
+#if UNITY_EDITOR
+        if (SROptions.isPickaxePowerUpgradeNoMaterial)
+        {
+            Debug.Log("PickaxePowerUpgradeNoMaterial");
+        }
+        else
+        {
+            // リソース消費
+            foreach (var resourceCount in ui_selectInfo.RequredResources)
+            {
+                if (resourceCount.requiredCount <= 0) continue;
+                SaveLoader.Inst.Request_SaveResource(resourceCount.resourceType, -resourceCount.requiredCount);
+            }
+            var pointCost = ui_selectInfo.requiredPoints;
+            //SaveLoader.Inst.Request_SavePlayerLevelData(-pointCost);
+            SaveLoader.Inst.Request_SaveEnhanceCoinCount(-pointCost);
+            currentPoints -= pointCost;
+        }
+#else
         // リソース消費
         foreach (var resourceCount in ui_selectInfo.RequredResources)
         {
@@ -149,6 +168,7 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
         //SaveLoader.Inst.Request_SavePlayerLevelData(-pointCost);
         SaveLoader.Inst.Request_SaveEnhanceCoinCount(-pointCost);
         currentPoints -= pointCost;
+#endif
 
         // 強化
         var newLevel = currentSelectUnit.currentLevel + 1;

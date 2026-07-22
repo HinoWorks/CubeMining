@@ -104,6 +104,45 @@ public partial class SROptions
         set { isSkillTreeUpgradeNoMaterial = value; }
     }
 
+    public static bool isPickaxeCraftNoMaterial = false;
+    [Category("Pickaxe")]
+    [DisplayName("ピッケル作成 素材なし")]
+    [Sort(0)]
+    public bool IsPickaxeCraftNoMaterial
+    {
+        get { return isPickaxeCraftNoMaterial; }
+        set { isPickaxeCraftNoMaterial = value; }
+    }
+
+    public static bool isPickaxePowerUpgradeNoMaterial = false;
+    [Category("Pickaxe")]
+    [DisplayName("ピッケルパワー 素材なし")]
+    [Sort(1)]
+    public bool IsPickaxePowerUpgradeNoMaterial
+    {
+        get { return isPickaxePowerUpgradeNoMaterial; }
+        set { isPickaxePowerUpgradeNoMaterial = value; }
+    }
+
+    [Category("Pickaxe")]
+    [DisplayName("ピッケル獲得状況リセット(初期以外)")]
+    [Sort(2)]
+    public void Debug_ResetPickaxeExceptInitial()
+    {
+        if (SaveLoader.Inst == null)
+        {
+            Debug.LogWarning("Debug_ResetPickaxeExceptInitial: SaveLoader not found");
+            return;
+        }
+
+        SaveLoader.Inst.Debug_ResetPickaxeExceptInitial();
+
+        if (UIManager_OutGame.Inst != null && UIManager_OutGame.Inst.UI_PickaxeManager != null)
+        {
+            UIManager_OutGame.Inst.UI_PickaxeManager.ToOutGame_InitData();
+        }
+    }
+
 
     private int targetIndex;
     [Category("要素アンロックAttack")]

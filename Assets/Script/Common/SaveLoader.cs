@@ -819,6 +819,7 @@ public class SaveLoader : MonoBehaviour
         }
         return pickaxeTotalCount;
     }
+
     #endregion
 
 
@@ -943,6 +944,35 @@ public class SaveLoader : MonoBehaviour
     public void Request_SaveUserSettings(UserSettingsData data)
     {
         EnqueueMethod(() => ES3.Save(KEY_USER_SETTINGS, data));
+    }
+    #endregion
+
+
+
+
+
+    #region -- Debug --
+    /// <summary>
+    /// デバッグ用: 初期ピッケル(index=1)以外の獲得状況をリセットし、装備も初期状態に戻す
+    /// </summary>
+    public void Debug_ResetPickaxeExceptInitial()
+    {
+#if UNITY_EDITOR
+        const int initialPickaxeIndex = 1;
+        var deletedCount = 0;
+        foreach (var pickaxeUnitData in SOLoader.AttackUnitData.pickaxeUnitDatas)
+        {
+            if (pickaxeUnitData.pickaxeIndex == initialPickaxeIndex) continue;
+            var key = GetPickaxeDataKey(pickaxeUnitData.pickaxeIndex);
+            if (!ES3.KeyExists(key)) continue;
+            ES3.DeleteKey(key);
+            deletedCount++;
+        }
+
+        SavePickaxeData(initialPickaxeIndex, 1);
+        SavePickaxeSlotData(0, initialPickaxeIndex);
+        Debug.Log($"Debug_ResetPickaxeExceptInitial: deleted={deletedCount}, equip reset to pickaxeIndex={initialPickaxeIndex}");
+#endif
     }
     #endregion
 
