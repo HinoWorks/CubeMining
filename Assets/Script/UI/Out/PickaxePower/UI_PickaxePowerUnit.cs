@@ -20,12 +20,15 @@ public class UI_PickaxePowerUnit : MonoBehaviour
     public int currentLevel { get; private set; } = 0;
     public bool isEnhanceReady { get; private set; } = false;
     public bool isEnoughPlayerLevel { get; private set; } = false;
+
+    private SimpleAnimation anim;
     private Action<UI_PickaxePowerUnit> onClick_Select;
 
 
 
     public async void Init_Once(int _index, Action<UI_PickaxePowerUnit> _onClick_Select)
     {
+        anim = GetComponent<SimpleAnimation>();
         so_base = SOLoader.PickaxePowerData.GetPickaxePowerBase(_index);
         if (so_base == null)
         {
@@ -39,6 +42,7 @@ public class UI_PickaxePowerUnit : MonoBehaviour
         var pickaxePowerData = await SaveLoader.Inst.Get_PickaxePowerData(so_base.index);
         currentLevel = pickaxePowerData == null ? 0 : pickaxePowerData.level;
         so_level = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel);
+
     }
 
 
@@ -62,16 +66,25 @@ public class UI_PickaxePowerUnit : MonoBehaviour
         currentLevel = pickaxePowerData == null ? 0 : pickaxePowerData.level;
         so_level = SOLoader.PickaxePowerData.GetPickaxePowerLevel(so_base.index, currentLevel);
 
+
         // level max?
         if (currentLevel >= so_base.maxLevel)
         {
             isEnhanceReady = false;
             obj_enhanceReady.SetActive(isEnhanceReady);
-            return;
         }
+        else
+        {
+            // リソース見て、強化可能か確認
+            ResourceCheck(_currentPoints);
+        }
+    }
 
-        // リソース見て、強化可能か確認
-        ResourceCheck(_currentPoints);
+    public void StartIdleAnim()
+    {
+        anim.Rewind();
+        anim.Play("Default");
+        anim["Default"].normalizedTime = UnityEngine.Random.Range(0f, 1f);
     }
 
     public bool ResourceCheck(int _currentPoints)

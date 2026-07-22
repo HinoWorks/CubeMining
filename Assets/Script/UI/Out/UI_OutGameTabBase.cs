@@ -24,6 +24,7 @@ public class UI_OutGameTabBase : MonoBehaviour
         if (isActive)
         {
             await UniTask.WaitUntil(() => isReloadFin);
+            Init_ActiveTab();
         }
         this.gameObject.SetActive(isActive);
     }
@@ -41,5 +42,10 @@ public class UI_OutGameTabBase : MonoBehaviour
     {
         isReloadFin = false;
     }
+
+    /// <summary>
+    /// 自身のタブメニューがアクティブになった時、毎回呼ばれる
+    /// </summary>
+    protected virtual void Init_ActiveTab() { }
 
 }

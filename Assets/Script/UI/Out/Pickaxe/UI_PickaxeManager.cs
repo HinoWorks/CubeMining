@@ -59,6 +59,13 @@ public class UI_PickaxeManager : UI_OutGameTabBase
         isDoingAction = false;
     }
 
+    protected override void Init_ActiveTab()
+    {
+        Set_PickaxeLibrary();
+        base.Init_ActiveTab();
+    }
+
+
     /// <summary>
     /// ピッケル装備Unitの初期化
     /// </summary>

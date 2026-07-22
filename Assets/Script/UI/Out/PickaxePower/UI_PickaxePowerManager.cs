@@ -72,6 +72,14 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
 
         base.isReloadFin = true;
     }
+    protected override void Init_ActiveTab()
+    {
+        foreach (var unit in ui_pickaxePowerUnits)
+        {
+            unit.StartIdleAnim();
+        }
+        base.Init_ActiveTab();
+    }
 
     private void Check_HaveEnhanceReadyUnit()
     {

@@ -45,15 +45,14 @@ public class UI_PickaxeLibraryUnit : MonoBehaviour
         // 解放済みでない場合、一つ前のインデックスを確認
         if (!isOpen)
         {
-            if (!so.isLast)
+            var prevIndex = pickaxeIndex - 1;
+            var prevSaveData = await SaveLoader.Inst.Get_PickaxeData(prevIndex);
+            isOpen = prevSaveData != null;
+
+            if (so.isLast)
             {
-                var prevIndex = pickaxeIndex - 1;
-                var prevSaveData = await SaveLoader.Inst.Get_PickaxeData(prevIndex);
-                isOpen = prevSaveData != null;
-            }
-            else // 主に最後のピッケル
-            {
-                isOpen = GameParamManager.IsAllKingGot();
+                // 最後のピッケルは全ての王冠を獲得している必要がある
+                isOpen = isOpen && GameParamManager.IsAllKingGot();
             }
         }
         obj_locked.SetActive(!isOpen);
