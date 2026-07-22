@@ -30,12 +30,16 @@ public class UIManager_OutGame : MonoBehaviour
     [SerializeField] UI_ArtifactManager ui_artifactManager;
     [SerializeField] UI_PickaxeManager ui_pickaxeManager;
     [SerializeField] UI_PickaxePowerManager ui_pickaxePowerManager;
+    [SerializeField] UI_ClearManager ui_clearManager;
 
 
 
     public UI_SkillTreeMaanger UI_SkillTreeManager => ui_skillTreeMaanger;
     public UI_ArtifactManager UI_ArtifactManager => ui_artifactManager;
     public UI_PickaxeManager UI_PickaxeManager => ui_pickaxeManager;
+    public UI_PickaxePowerManager UI_PickaxePowerManager => ui_pickaxePowerManager;
+    public UI_ClearManager UI_ClearManager => ui_clearManager;
+
 
 
 

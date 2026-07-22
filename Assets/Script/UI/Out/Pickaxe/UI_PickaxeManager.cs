@@ -194,7 +194,18 @@ public class UI_PickaxeManager : UI_OutGameTabBase
 
         // 新しいピッケルを表示
         ui_getNewPickaxe.SetIcon(_so.icon);
-        await UniTask.Delay(pickaxeAnimWaitTime);
+        if (!_so.isLast)
+        {
+            await UniTask.Delay(pickaxeAnimWaitTime);
+        }
+        else
+        {
+            await UniTask.DelayFrame(1);
+            await UniTask.WaitUntil(() => !ui_getNewPickaxe.gameObject.activeSelf);
+            UIManager_OutGame.Inst.UI_ClearManager.Open();
+
+            await UniTask.WaitUntil(() => !UIManager_OutGame.Inst.UI_ClearManager.gameObject.activeSelf);
+        }
 
         GameEvent.AchieveEvent.PublishPickaxeCraft();
         Set_PickaxeLibrary();

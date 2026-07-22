@@ -107,7 +107,7 @@ MonoBehaviour:
     criticalRate: 0
     resourceUpRate: 0
     size: 1
-    isLocked: 0
+    isLast: 0
   - pickaxeIndex: 2
     pickaxeName: pickaxe 2
     icon: {fileID: 21300000, guid: 4e8ed808b77f5f3459dbb4d392048fd7, type: 3}
@@ -117,7 +117,7 @@ MonoBehaviour:
     criticalRate: 0.01
     resourceUpRate: 0.1
     size: 1.2
-    isLocked: 0
+    isLast: 0
   - pickaxeIndex: 3
     pickaxeName: pickaxe 3
     icon: {fileID: 21300000, guid: eb07ef2c35804f645aa3f1d1c76e5b28, type: 3}
@@ -127,7 +127,7 @@ MonoBehaviour:
     criticalRate: 0.01
     resourceUpRate: 0.1
     size: 1.4
-    isLocked: 0
+    isLast: 0
   - pickaxeIndex: 4
     pickaxeName: pickaxe 4
     icon: {fileID: 21300000, guid: a1c2f8b4ec4354948a77ce5ac8b6cbf7, type: 3}
@@ -137,7 +137,7 @@ MonoBehaviour:
     criticalRate: 0.01
     resourceUpRate: 0.2
     size: 1.5
-    isLocked: 0
+    isLast: 0
   - pickaxeIndex: 5
     pickaxeName: pickaxe 5
     icon: {fileID: 21300000, guid: ebe94485927eba24b951084a637a8403, type: 3}
@@ -147,7 +147,7 @@ MonoBehaviour:
     criticalRate: 0.02
     resourceUpRate: 0.2
     size: 1.7
-    isLocked: 0
+    isLast: 0
   - pickaxeIndex: 6
     pickaxeName: pickaxe 6
     icon: {fileID: 21300000, guid: 47a978f25447392449578a7119ff4851, type: 3}
@@ -157,7 +157,7 @@ MonoBehaviour:
     criticalRate: 0.02
     resourceUpRate: 0.2
     size: 1.85
-    isLocked: 0
+    isLast: 0
   - pickaxeIndex: 7
     pickaxeName: pickaxe 7
     icon: {fileID: 21300000, guid: aa24e487592e10542bf6a1a4ccc06354, type: 3}
@@ -167,7 +167,7 @@ MonoBehaviour:
     criticalRate: 0.02
     resourceUpRate: 0.2
     size: 2
-    isLocked: 0
+    isLast: 0
   - pickaxeIndex: 8
     pickaxeName: pickaxe 8
     icon: {fileID: 21300000, guid: 8a182023b6e26bf429ad2d1d57b8cfc8, type: 3}
@@ -177,7 +177,7 @@ MonoBehaviour:
     criticalRate: 0.03
     resourceUpRate: 0.2
     size: 2.2
-    isLocked: 0
+    isLast: 0
   - pickaxeIndex: 9
     pickaxeName: pickaxe 9
     icon: {fileID: 21300000, guid: 1170899cf7162134f823d147fa40786e, type: 3}
@@ -187,7 +187,7 @@ MonoBehaviour:
     criticalRate: 0.03
     resourceUpRate: 0.2
     size: 2.5
-    isLocked: 1
+    isLast: 1
   pickaxeResourceDatas:
   - pickaxeIndex: 1
     req_stone: -1

@@ -43,7 +43,7 @@ public class PickaxeUnitData
     public float resourceUpRate;
     //public Sprite areaIcon;
     public float size;
-    public bool isLocked; // 主に最後のピッケル用
+    public bool isLast; // 主に最後のピッケル用
 }
 
 /// <summary>

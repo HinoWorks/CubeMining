@@ -34,7 +34,7 @@ public class UI_PickaxeLibraryUnit : MonoBehaviour
         }
         this.onClick_Select = _onClick_Select;
         icon.sprite = so.icon;
-        obj_locked_line.SetActive(so.isLocked);
+        obj_locked_line.SetActive(so.isLast);
     }
     public async void Init()
     {
@@ -45,7 +45,7 @@ public class UI_PickaxeLibraryUnit : MonoBehaviour
         // 解放済みでない場合、一つ前のインデックスを確認
         if (!isOpen)
         {
-            if (!so.isLocked)
+            if (!so.isLast)
             {
                 var prevIndex = pickaxeIndex - 1;
                 var prevSaveData = await SaveLoader.Inst.Get_PickaxeData(prevIndex);
