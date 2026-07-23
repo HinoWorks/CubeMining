@@ -760,7 +760,7 @@ MonoBehaviour:
     description: "\u30B9\u30BF\u30FC\u30C8\u6642\u306E\u9271\u77F3\u306E\u6570"
     icon: {fileID: 21300000, guid: 31815ca4bbe544539a8f484df20a1f84, type: 3}
     maxLevel: 5
-    deltaValue: 2
+    deltaValue: 10
   - baseIndex: 3101
     paramCategory: 0
     paramType: 23
@@ -769,7 +769,7 @@ MonoBehaviour:
     description: "\u6642\u9593\u7D4C\u904E\u6642\u306B\u751F\u6210\u3055\u308C\u308B\u9271\u77F3\u306E\u6570"
     icon: {fileID: 21300000, guid: da59c595326e44433a5f808a991f71b5, type: 3}
     maxLevel: 3
-    deltaValue: 1
+    deltaValue: 3
   - baseIndex: 3102
     paramCategory: 0
     paramType: 24
@@ -777,6 +777,33 @@ MonoBehaviour:
     skillName: Generate Time
     description: "\u9271\u77F3\u306E\u751F\u6210\u9593\u9694"
     icon: {fileID: 21300000, guid: 328ca58b19852416cad3399fcf9d5cb6, type: 3}
+    maxLevel: 3
+    deltaValue: 0.15
+  - baseIndex: 3103
+    paramCategory: 0
+    paramType: 22
+    targetIndex: -1
+    skillName: Initial Block
+    description: "\u30B9\u30BF\u30FC\u30C8\u6642\u306E\u9271\u77F3\u306E\u6570"
+    icon: {fileID: 0}
+    maxLevel: 5
+    deltaValue: 2
+  - baseIndex: 3104
+    paramCategory: 0
+    paramType: 23
+    targetIndex: -1
+    skillName: Generate Block
+    description: "\u6642\u9593\u7D4C\u904E\u6642\u306B\u751F\u6210\u3055\u308C\u308B\u9271\u77F3\u306E\u6570"
+    icon: {fileID: 0}
+    maxLevel: 3
+    deltaValue: 1
+  - baseIndex: 3105
+    paramCategory: 0
+    paramType: 24
+    targetIndex: -1
+    skillName: Generate Time
+    description: "\u9271\u77F3\u306E\u751F\u6210\u9593\u9694"
+    icon: {fileID: 0}
     maxLevel: 3
     deltaValue: 0.1
   - baseIndex: 3110
@@ -941,7 +968,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 107
-    refIndex: 3100
+    refIndex: 3103
     unlockCheckIndexes: 660000006800000030010000
     req_stone: 30
     req_iron: 0
@@ -1001,7 +1028,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 153
-    refIndex: 3100
+    refIndex: 3103
     unlockCheckIndexes: 65000000
     req_stone: 100
     req_iron: 35
@@ -1761,7 +1788,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 323
-    refIndex: 3100
+    refIndex: 3103
     unlockCheckIndexes: 2c01000044010000
     req_stone: 100
     req_iron: 25
@@ -1801,7 +1828,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 304
-    refIndex: 3101
+    refIndex: 3104
     unlockCheckIndexes: 6b0000002f0100003501000031010000
     req_stone: 50
     req_iron: 10
@@ -1901,7 +1928,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 325
-    refIndex: 3102
+    refIndex: 3105
     unlockCheckIndexes: 3d0100003b010000
     req_stone: 200
     req_iron: 75
@@ -1931,7 +1958,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 313
-    refIndex: 3100
+    refIndex: 3103
     unlockCheckIndexes: 360100003a0100003c010000
     req_stone: 200
     req_iron: 125
@@ -2041,7 +2068,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 329
-    refIndex: 3101
+    refIndex: 3104
     unlockCheckIndexes: 4801000046010000
     req_stone: 0
     req_iron: 350
@@ -2091,7 +2118,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 332
-    refIndex: 3101
+    refIndex: 3104
     unlockCheckIndexes: 4b01000041010000
     req_stone: 0
     req_iron: 0
@@ -2111,7 +2138,7 @@ MonoBehaviour:
     req_sapphire: 25
     req_diamond: 0
   - skillTreeIndex: 335
-    refIndex: 3102
+    refIndex: 3105
     unlockCheckIndexes: 4e0100004c010000
     req_stone: 0
     req_iron: 0
@@ -2151,7 +2178,7 @@ MonoBehaviour:
     req_sapphire: 30
     req_diamond: 0
   - skillTreeIndex: 330
-    refIndex: 3102
+    refIndex: 3105
     unlockCheckIndexes: 49010000
     req_stone: 1250
     req_iron: 0
@@ -2201,7 +2228,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 30
   - skillTreeIndex: 343
-    refIndex: 3101
+    refIndex: 3104
     unlockCheckIndexes: 56010000
     req_stone: 0
     req_iron: 0
