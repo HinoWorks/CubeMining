@@ -23,6 +23,12 @@ public class AttackCont_Pickaxe : MonoBehaviour
 
     [SerializeField] GameObject obj_pointerArea;
     [SerializeField] TriggerSender[] triggerSender;
+    [SerializeField] Material mat_critical;
+    [SerializeField] ParticleSystem eff_critical;
+
+    private MeshRenderer[] attackMeshes;
+    private Material originalMaterial;
+
 
     // 複数 TriggerSender で同一対象と重なるとき、片方の Exit だけでは対象を外さない
     private readonly Dictionary<IDamagable, int> targetOverlapRefCount = new Dictionary<IDamagable, int>();
@@ -31,6 +37,7 @@ public class AttackCont_Pickaxe : MonoBehaviour
 
     public Vector3 pickaxePosition => obj_pointerArea.transform.position;
     private Vector3 offsetPosition = new Vector3(0, 0.1f, 0);
+    private float calc_criticalDamageRate = 1f;
     private float criticalDamageRate = 2f;
     private int instantShatterDamage = 9999;
 
@@ -43,6 +50,12 @@ public class AttackCont_Pickaxe : MonoBehaviour
 
     protected void Awake()
     {
+        attackMeshes = new MeshRenderer[triggerSender.Length];
+        for (int i = 0; i < triggerSender.Length; i++)
+        {
+            attackMeshes[i] = triggerSender[i].GetComponent<MeshRenderer>();
+        }
+        originalMaterial = attackMeshes[0].material;
         attackLoopDisposable.AddTo(this);
         GameEvent.Input.PointerAreaIn.Subscribe(isAreaIn => PointerAreaIn(isAreaIn)).AddTo(this);
         GameEvent.Input.PointerMove.Subscribe(pos => PointerMove(pos)).AddTo(this);
@@ -78,14 +91,6 @@ public class AttackCont_Pickaxe : MonoBehaviour
         isActive = isTrigger;
     }
 
-    /*
-        public void RefreshAttackLoop()
-        {
-            CreateAttackRoop();
-            if (obj_pointerArea != null)
-                obj_pointerArea.transform.localScale = size * Vector3.one;
-        }
-    */
 
     public void OnDestroy()
     {
@@ -110,8 +115,33 @@ public class AttackCont_Pickaxe : MonoBehaviour
     private void Attack()
     {
         removeBuffer.Clear();
+
+        // critical check
+        var isCritical = UnityEngine.Random.Range(0f, 1f) < criticalRate;
+        //isCritical = UnityEngine.Random.Range(0f, 1f) < 0.35f; // for DEBUG
+        calc_criticalDamageRate = isCritical ? criticalDamageRate : 1f;
+
+        if (isCritical)
+        {
+            eff_critical.Play();
+            foreach (var mesh in attackMeshes)
+            {
+                mesh.material = mat_critical;
+            }
+        }
+
         obj_pointerArea.transform.DOScale(1.1f * size * Vector3.one, 0.075f).SetEase(Ease.OutBack);
-        obj_pointerArea.transform.DOScale(size * Vector3.one, 0.075f).SetEase(Ease.OutBack).SetDelay(0.075f);
+        obj_pointerArea.transform.DOScale(size * Vector3.one, 0.075f).SetEase(Ease.OutBack).SetDelay(0.075f)
+            .OnComplete(() =>
+            {
+                if (isCritical)
+                {
+                    foreach (var mesh in attackMeshes)
+                    {
+                        mesh.material = originalMaterial;
+                    }
+                }
+            });
 
         foreach (var t in targets)
         {
@@ -122,14 +152,11 @@ public class AttackCont_Pickaxe : MonoBehaviour
             }
 
             // instant shatter check
-            var selectedDamageRate = UnityEngine.Random.Range(0f, 1f) < criticalRate ? criticalDamageRate : 1f;
             var damage_calc = GameParamManager.gameBaseParam.isInstantShatter ?
-                                    instantShatterDamage : (int)(damage * selectedDamageRate);
+                                    instantShatterDamage : (int)(damage * calc_criticalDamageRate);
 
             // lucky mine check
             var isLuckyMine = GameParamManager.gameBaseParam.isLuckyMine;
-            //isLuckyMine = UnityEngine.Random.Range(0, 100) % 2 == 0;
-            //Debug.Log($"DEBUG ===> isLuckyMine: {isLuckyMine}");
             var resourceUpRate_LuckyMine = isLuckyMine ? GameParamManager.gameBaseParam.luckyMineRate_ResourceUpRate : 0f;
 
             if (t.Damage(damage_calc, resourceUpRate_pickaxe
@@ -149,13 +176,7 @@ public class AttackCont_Pickaxe : MonoBehaviour
         if (targets.Count > 0)
         {
             GameEvent.InGame.PublishOnPickaxeAttack();
-            // add ingame time check
-            if (GameParamManager.gameBaseParam.isPickaxeAttack_AddIngameTime)
-            {
-                InGameManager.Inst.AddGetExTime(1f);
-                var ui_timeText = UI_PoolManager.Inst.Set_TimeText();
-                ui_timeText.SetText($"+1 <size=75%>sec</size>");
-            }
+            Check_AttackAddTime();
         }
         foreach (var t in removeBuffer)
         {
@@ -164,14 +185,14 @@ public class AttackCont_Pickaxe : MonoBehaviour
         }
     }
 
-    private void CreateAttackRoop()
+    private void Check_AttackAddTime()
     {
-        attackLoopDisposable.Disposable = Observable.Interval(TimeSpan.FromSeconds(attackInterval))
-            .Where(_ => isActive && isSelectPickaxe)
-            .Subscribe(_ =>
-            {
-                Attack();
-            });
+        if (GameParamManager.gameBaseParam.isPickaxeAttack_AddIngameTime)
+        {
+            InGameManager.Inst.AddGetExTime(1f);
+            var ui_timeText = UI_PoolManager.Inst.Set_TimeText();
+            ui_timeText.SetText($"+1 <size=75%>sec</size>");
+        }
     }
 
 
