@@ -64,6 +64,10 @@ public class GameBaseParam
     public int resourceBaseUpCount => resourceBaseUpCount_enhanced;
     private int resourceBaseUpCount_enhanced = 0;
 
+    // 鉱石の耐久値増加量
+    public float resourceHPUpRate => resourceHPUpRate_enhanced; // 獲得量を増やすたび、鉱石の耐久値が増加する。差分で管理
+    private float resourceHPUpRate_enhanced = 0f;
+
 
     // 共通の獲得鉱石量増加 (倍率増加)
     public float resourceUpRate => ArtifactManager.Inst.resourceUpRate;
@@ -101,7 +105,7 @@ public class GameBaseParam
     public bool isAttackKing { get; private set; } = false;
 
 
-    public void Set_Param(ParamType _paramType, float _setParam)
+    public void Set_Param(ParamType _paramType, float _setParam, float _setParam2 = 0f)
     {
         switch (_paramType)
         {
@@ -122,6 +126,7 @@ public class GameBaseParam
                 break;
             case ParamType.ResourceBaseUpCount:
                 resourceBaseUpCount_enhanced += (int)_setParam;
+                resourceHPUpRate_enhanced += _setParam2;
                 break;
 
             // -- アーティファクトのスロット数向上 --
@@ -734,6 +739,13 @@ public static class GameParamManager
         return gameBaseParam.resourceBaseUpCount;
     }
     /// <summary>
+    /// 鉱石の耐久値増加量を取得
+    /// </summary>
+    public static float Get_ResourceHPUpRate()
+    {
+        return gameBaseParam.resourceHPUpRate;
+    }
+    /// <summary>
     /// 鉱石の個別の基本増加量を取得
     /// </summary>
     public static int Get_ResourceUpCount(ResourceType _resourceType)
@@ -939,7 +951,8 @@ public static class GameParamManager
             var baseSkillData = SOLoader.SkillTreeData.GetSkillTreeBaseData(skillData.refIndex);
             if (baseSkillData == null) continue;
             var setParam = baseSkillData.deltaValue * saveData.level;
-            Set_DeltaParam(baseSkillData.paramCategory, baseSkillData.targetIndex, baseSkillData.paramType, setParam);
+            var setParam2 = baseSkillData.deltaValue2 * saveData.level;
+            Set_DeltaParam(baseSkillData.paramCategory, baseSkillData.targetIndex, baseSkillData.paramType, setParam, setParam2);
         }
         Debug.Log("========== Init_SkillTreeParam End ==========");
     }
@@ -947,12 +960,12 @@ public static class GameParamManager
     /// <summary>
     /// パラメータの差分fix
     /// </summary>
-    public static void Set_DeltaParam(ParamCategory _paramCategory, int _targetIndex, ParamType _paramType, float _setParam)
+    public static void Set_DeltaParam(ParamCategory _paramCategory, int _targetIndex, ParamType _paramType, float _setParam, float _setParam2)
     {
         switch (_paramCategory)
         {
             case ParamCategory.GameSystem:
-                Set_GamesystemParam(_paramType, _setParam);
+                Set_GamesystemParam(_paramType, _setParam, _setParam2);
                 break;
             case ParamCategory.Block:
                 Set_BlockParam(_targetIndex, _paramType, _setParam);
@@ -973,9 +986,9 @@ public static class GameParamManager
         }
     }
 
-    private static void Set_GamesystemParam(ParamType _paramType, float _setParam)
+    private static void Set_GamesystemParam(ParamType _paramType, float _setParam, float _setParam2)
     {
-        gameBaseParam.Set_Param(_paramType, _setParam);
+        gameBaseParam.Set_Param(_paramType, _setParam, _setParam2);
     }
     private static void Set_BlockParam(int _blockIndex, ParamType _paramType, float _setParam)
     {

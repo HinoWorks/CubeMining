@@ -335,7 +335,8 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
 
         // gameParamManager の更新
         GameParamManager.Set_DeltaParam(_skillTreeUnit.skillTree.paramCategory,
-            _skillTreeUnit.skillTree.targetIndex, _skillTreeUnit.skillTree.paramType, _skillTreeUnit.skillTree.deltaValue);
+            _skillTreeUnit.skillTree.targetIndex, _skillTreeUnit.skillTree.paramType,
+            _skillTreeUnit.skillTree.deltaValue, _skillTreeUnit.skillTree.deltaValue2);
 
         await UniTask.DelayFrame(2);
         currentState = state.Idling;

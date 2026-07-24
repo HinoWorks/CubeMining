@@ -9,8 +9,6 @@ public class MiningTarget_Cube : MiningTargetBase
     public ResourceType ResourceType => resourceType;
     private Action breakCallback;
 
-    // -- resource up rate --
-    private float resourceUpRate = 1f;
 
     // -- mesh --
     private const float meshThreshold_1 = 0.7f;

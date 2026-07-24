@@ -81,6 +81,7 @@ public class SkillTreeBase
     public Sprite icon;
     public int maxLevel;
     public float deltaValue;
+    public float deltaValue2;
 }
 
 [System.Serializable]

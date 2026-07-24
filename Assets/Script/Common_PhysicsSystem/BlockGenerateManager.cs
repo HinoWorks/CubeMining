@@ -236,8 +236,8 @@ public class BlockGenerateManager : MonoBehaviour
                                   + GameParamManager.Get_ResourceBaseUpCount() //共通の増加量
                                   );
         //Debug.Log($"baseValue: {blockGenerateParam.baseValue}, isMaxResource: {isMaxResource}, resourceUpCount: {GameParamManager.Get_ResourceUpCount(blockGenerateParam.resourceType)}, resourceBaseUpCount: {GameParamManager.Get_ResourceBaseUpCount()}, fixedResourceValue: {fixedResourceValue}");
-
-        targetBlock.Init(blockGenerateParam.hp, fixedResourceValue, randomBlockSizeRate);
+        var fixedHP = blockGenerateParam.hp * (1f + GameParamManager.Get_ResourceHPUpRate());
+        targetBlock.Init((int)fixedHP, fixedResourceValue, randomBlockSizeRate);
         targetBlock.Set_BlockType(blockGenerateParam.resourceType);
 
         return targetBlock.gameObject;
