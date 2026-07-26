@@ -181,6 +181,23 @@ public static class SOLoader
         }
     }
 
+    private static SO_IngameStageLevelData so_ingameStageLevelData;
+    public static SO_IngameStageLevelData IngameStageLevelData
+    {
+        get
+        {
+            if (so_ingameStageLevelData == null)
+            {
+                so_ingameStageLevelData = LoadSO<SO_IngameStageLevelData>(pathBase + nameof(SO_IngameStageLevelData));
+                if (so_ingameStageLevelData == null)
+                {
+                    so_ingameStageLevelData = ScriptableObject.CreateInstance<SO_IngameStageLevelData>();
+                }
+            }
+            return so_ingameStageLevelData;
+        }
+    }
+
     private static SO_PickaxePowerData so_pickaxePowerData;
     public static SO_PickaxePowerData PickaxePowerData
     {

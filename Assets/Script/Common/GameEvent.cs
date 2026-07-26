@@ -195,6 +195,24 @@ public static class GameEvent
         }
     }
 
+    /// <summary>インゲーム中のステージレベル（ラン内リセット）</summary>
+    public static class IngameStageLevel
+    {
+        private static readonly Subject<(int breakCountInLevel, int level, int breaksToNext)> changed = new();
+        public static IObservable<(int breakCountInLevel, int level, int breaksToNext)> Changed => changed.AsObservable();
+        public static void PublishChanged(int breakCountInLevel, int level, int breaksToNext)
+        {
+            changed.OnNext((breakCountInLevel, level, breaksToNext));
+        }
+
+        private static readonly Subject<int> levelUp = new();
+        public static IObservable<int> LevelUp => levelUp.AsObservable();
+        public static void PublishLevelUp(int newLevel)
+        {
+            levelUp.OnNext(newLevel);
+        }
+    }
+
 
 
     public static class AchieveEvent
