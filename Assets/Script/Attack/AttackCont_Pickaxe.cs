@@ -190,8 +190,6 @@ public class AttackCont_Pickaxe : MonoBehaviour
         if (GameParamManager.gameBaseParam.isPickaxeAttack_AddIngameTime)
         {
             InGameManager.Inst.AddGetExTime(1f);
-            var ui_timeText = UI_PoolManager.Inst.Set_TimeText();
-            ui_timeText.SetText($"+1 <size=75%>sec</size>");
         }
     }
 

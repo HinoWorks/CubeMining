@@ -213,11 +213,17 @@ public class InGameManager : MonoBehaviour
     /// <summary>
     /// 時間取得
     /// </summary>
-    public void AddGetExTime(float _deltaExTime)
+    public void AddGetExTime(float _deltaExTime, bool _isSetText = true)
     {
         exTime += _deltaExTime;
         GameEvent.UI.PublishTimeLimit(timeLimit);
         GameEvent.UI.PublishTimeLimit(timeLimit - timer);
+
+        CameraManager.Inst?.ShakeCamera_Large();
+
+        //時間付近のUI
+        if (!_isSetText) return;
+        UI_PoolManager.Inst.Set_TimeText(_deltaExTime);
     }
 
     /// <summary>

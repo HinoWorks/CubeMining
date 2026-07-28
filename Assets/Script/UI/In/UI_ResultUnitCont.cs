@@ -7,12 +7,12 @@ using Cysharp.Threading.Tasks;
 
 public class UI_ResultUnitCont : MonoBehaviour
 {
-    [SerializeField] GameObject obj_resourceCount;
+    //[SerializeField] GameObject obj_resourceCount;
     [SerializeField] TextMeshProUGUI tmp_resourceCount;
     [SerializeField] Image icon;
 
     [Space(5)]
-    [SerializeField] GameObject obj_resourceTotal;
+    //[SerializeField] GameObject obj_resourceTotal;
     [SerializeField] TextMeshProUGUI tmp_resourceTotal;
     [SerializeField] Image icon_total;
 
@@ -33,7 +33,7 @@ public class UI_ResultUnitCont : MonoBehaviour
         Set_ResourceCount(tmp_resourceTotal, _currentTotal - _getCount);
         this.gameObject.SetActive(true);
 
-        await UniTask.Delay(200);
+        await UniTask.Delay(100);
         var modCoin_total = StaticManager.Get_BigintegerToUnit(_currentTotal);
         tmp_resourceTotal.transform.DOScale(1.05f, 0.05f).SetEase(Ease.OutSine);
 
@@ -54,7 +54,7 @@ public class UI_ResultUnitCont : MonoBehaviour
             tmp_resourceCount.transform.DOScale(1f, 0.05f).SetEase(Ease.OutSine);
         });
 
-        await UniTask.Delay(100);
+        await UniTask.Delay(50);
     }
 
 

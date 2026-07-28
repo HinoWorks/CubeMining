@@ -17,6 +17,15 @@ public class IngameStageLevelManager : MonoBehaviour
     private bool canCount;
 
 
+
+    private int createBlockCount => 10 + GameParamManager.StageLevelup_GenerateBlockCount();
+    private float addTime => 5 + GameParamManager.StageLevelup_AddTime();
+    private int changeResource => 10 + GameParamManager.StageLevelup_ChangeResource();
+
+
+
+
+
     void Awake()
     {
         if (Inst == null) { Inst = this; }
@@ -117,18 +126,17 @@ public class IngameStageLevelManager : MonoBehaviour
     /// </summary>
     private void OnStageLevelUp(int newLevel)
     {
-        ApplyStageLevelEffects(newLevel);
+        if (createBlockCount > 0) BlockGenerateManager.Inst.CreateBlock(createBlockCount);
+        if (changeResource > 0) BlockGenerateManager.Inst.ConvertDirtToOre(changeResource);
+        if (addTime > 0) InGameManager.Inst.AddGetExTime(addTime);
+
     }
 
-    /// <summary>
-    /// レベルアップ時に各種効果を付与する入口。現状はフックのみ。
-    /// </summary>
-    protected virtual void ApplyStageLevelEffects(int newLevel)
-    {
-        // TODO: 攻撃力・獲得量・時間加算などの一時効果をここに追加
-        Debug.Log($"[IngameStageLevel] Level Up -> {newLevel}");
-    }
 
+
+
+
+    #region DEBUG
     public void DEBUG_ForceLevelUp()
     {
         if (currentLevel >= SOLoader.IngameStageLevelData.maxLevel)
@@ -141,4 +149,7 @@ public class IngameStageLevelManager : MonoBehaviour
         if (need <= 0) need = 1;
         AddBreakCount(need);
     }
+    #endregion
+
+
 }

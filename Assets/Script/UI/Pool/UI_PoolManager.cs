@@ -269,7 +269,7 @@ public class UI_PoolManager : MonoBehaviour
     /// <summary>
     /// インゲーム時間増加通知用, 右上のHUD付近に表示される
     /// </summary>
-    public UI_TextCont Set_TimeText()
+    public UI_TextCont Set_TimeText(float _deltaTime)
     {
         UI_TextCont selectUnit = null;
         selectUnit = pool_getTime.Find(d => d.gameObject.activeSelf == false);
@@ -280,6 +280,7 @@ public class UI_PoolManager : MonoBehaviour
             pool_getTime.Add(selectUnit);
         }
         selectUnit.transform.position = target_time.position;
+        selectUnit.SetText($"+{_deltaTime.ToString("F1")} <size=75%>sec</size>");
         return selectUnit;
     }
 

@@ -99,6 +99,19 @@ public class GameBaseParam
 
 
 
+    /// === ingameのsteageLevel上昇時にかかる能力 ===
+    private int stageLevelup_generateBlockCount_enhanced = 0; // レベルアップ時に生成するブロック数
+    public int stageLevelup_generateBlockCount => 0 + stageLevelup_generateBlockCount_enhanced;
+
+    private float stageLevelup_addTime_enhanced = 0; // レベルアップ時に増加する時間
+    public float stageLevelup_addTime => 0 + stageLevelup_addTime_enhanced;
+
+    private int stageLevelup_changeResource_enhanced = 0; // レベルアップ時にリソースを変更個数
+    public int stageLevelup_changeResource => (int)(0 + stageLevelup_changeResource_enhanced);
+
+
+
+
     // === end game param ====
     public bool isStoneKing { get; private set; } = false;
     public bool isGameKing { get; private set; } = false;
@@ -268,48 +281,6 @@ public class BlockBaseParam
     }
 }
 
-
-
-/// <summary>
-/// ブロックの生成パラメータ == レイヤー毎にブロックの抽選率を設定
-/// </summary>
-/*
-public class BlockGenerateParam_Layer
-{
-    public BlockLayerData so;
-    public int layerMin => so.layerMin;
-    public int layerMax => so.layerMax;
-    public int layerSize => so.layerSize;
-    public void Init(BlockLayerData _blockLayerData)
-    {
-        so = _blockLayerData;
-    }
-    /// <summary>
-    /// ブロックのインデックスをランダムで選択
-    /// </summary>
-    public int SelectBlockIndex()
-    {
-        var random = UnityEngine.Random.Range(0f, 1f);
-        switch (random)
-        {
-            case var _ when random < so.rate_block1:
-                return 1;
-            case var _ when random < so.rate_block1 + so.rate_block2:
-                return 2;
-            case var _ when random < so.rate_block1 + so.rate_block2 + so.rate_block3:
-                return 3;
-            case var _ when random < so.rate_block1 + so.rate_block2 + so.rate_block3 + so.rate_block4:
-                return 4;
-            case var _ when random < so.rate_block1 + so.rate_block2 + so.rate_block3 + so.rate_block4 + so.rate_block5:
-                return 5;
-            case var _ when random < so.rate_block1 + so.rate_block2 + so.rate_block3 + so.rate_block4 + so.rate_block5 + so.rate_block6:
-                return 6;
-            default:
-                return 0;
-        }
-    }
-}
-*/
 
 /// <summary>
 /// 共通　 = ブロックの変化率パラメータ == 土、岩などのブロックタイプ毎に鉱石の抽選率を設定
@@ -713,52 +684,32 @@ public static class GameParamManager
     /// <summary>
     /// ランダムにブロックデータをタイプを抽選
     /// </summary>
-    public static BlockGenerateParam Get_RandamBlockIndex()
-    {
-        return blockChangeRateParam.SelectBlockType();
-    }
+    public static BlockGenerateParam Get_RandamBlockIndex() => blockChangeRateParam.SelectBlockType();
     /// <summary>
     /// ランダムな鉱石タイプを抽選(必ず鉄以上になる)
     /// </summary>
-    public static BlockGenerateParam Get_RandamBlockIndex_OverIronUp()
-    {
-        return blockChangeRateParam.SelectBlockType(false);
-    }
+    public static BlockGenerateParam Get_RandamBlockIndex_OverIronUp() => blockChangeRateParam.SelectBlockType(false);
+
     /// <summary>
     /// リソースがmax鉱石に変化するかチェック
     /// </summary>
-    public static bool IsMaxResource(ResourceType _resourceType)
-    {
-        return blockChangeRateParam.IsMaxResource(_resourceType);
-    }
+    public static bool IsMaxResource(ResourceType _resourceType) => blockChangeRateParam.IsMaxResource(_resourceType);
     /// <summary>
     /// 鉱石の共通の基本増加量を取得
     /// </summary>
-    public static int Get_ResourceBaseUpCount()
-    {
-        return gameBaseParam.resourceBaseUpCount;
-    }
+    public static int Get_ResourceBaseUpCount() => gameBaseParam.resourceBaseUpCount;
     /// <summary>
     /// 鉱石の耐久値増加量を取得
     /// </summary>
-    public static float Get_ResourceHPUpRate()
-    {
-        return gameBaseParam.resourceHPUpRate;
-    }
+    public static float Get_ResourceHPUpRate() => gameBaseParam.resourceHPUpRate;
     /// <summary>
     /// 鉱石の個別の基本増加量を取得
     /// </summary>
-    public static int Get_ResourceUpCount(ResourceType _resourceType)
-    {
-        return blockChangeRateParam.Get_ResourceUpCount(_resourceType);
-    }
+    public static int Get_ResourceUpCount(ResourceType _resourceType) => blockChangeRateParam.Get_ResourceUpCount(_resourceType);
     /// <summary>
     /// ピッケルで攻撃するたび、インゲーム時間が増加するかチェック
     /// </summary>  
-    public static bool IsPickaxeAttack_AddIngameTime()
-    {
-        return gameBaseParam.isPickaxeAttack_AddIngameTime;
-    }
+    public static bool IsPickaxeAttack_AddIngameTime() => gameBaseParam.isPickaxeAttack_AddIngameTime;
     public static AttackParam Get_AttackParam(int _attackIndex)
     {
         var targetAttack = list_attackParam.Find(x => x.attackUnitIndex == _attackIndex);
@@ -788,11 +739,12 @@ public static class GameParamManager
     }
 
     // スキルツリーで全ての王冠を獲得しているかチェック
-    public static bool IsAllKingGot()
-    {
-        return gameBaseParam.isStoneKing && gameBaseParam.isGameKing && gameBaseParam.isAttackKing;
-    }
+    public static bool IsAllKingGot() => gameBaseParam.isStoneKing && gameBaseParam.isGameKing && gameBaseParam.isAttackKing;
 
+    // ステージレベルアップ時にかかる能力
+    public static int StageLevelup_GenerateBlockCount() => gameBaseParam.stageLevelup_generateBlockCount;
+    public static float StageLevelup_AddTime() => gameBaseParam.stageLevelup_addTime;
+    public static int StageLevelup_ChangeResource() => gameBaseParam.stageLevelup_changeResource;
 
     /*
     public static BlockGenerateParam_Layer Get_BlockGenerateParam_Layer(int _layerIndex)
