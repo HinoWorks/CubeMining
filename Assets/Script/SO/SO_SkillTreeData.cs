@@ -62,6 +62,12 @@ public enum ParamType
     TowerGenerate_Height,
 
 
+    // ==== stage levelup param ====
+    StageLevelup_GenerateBlockCount,
+    StageLevelup_AddTime,
+    StageLevelup_ChangeResourceCount,
+
+
     // == end game param ====
     King_Stone,
     King_Game,

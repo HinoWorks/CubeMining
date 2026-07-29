@@ -841,7 +841,7 @@ MonoBehaviour:
     skillName: Initial Block
     description: "\u30B9\u30BF\u30FC\u30C8\u6642\u306E\u9271\u77F3\u306E\u6570"
     icon: {fileID: 21300000, guid: 31815ca4bbe544539a8f484df20a1f84, type: 3}
-    maxLevel: 5
+    maxLevel: 3
     deltaValue: 10
     deltaValue2: 0
   - baseIndex: 3101
@@ -934,6 +934,36 @@ MonoBehaviour:
     maxLevel: 1
     deltaValue: 1
     deltaValue2: 0
+  - baseIndex: 3120
+    paramCategory: 0
+    paramType: 29
+    targetIndex: -1
+    skillName: 'Break Bonus : More Block'
+    description: "\u9271\u77F3\u3092\u4E00\u5B9A\u6570\u58CA\u3059\u3068\u3001\u8FFD\u52A0\u306E\u30D6\u30ED\u30C3\u30AF\u3092\u751F\u6210\u3059\u308B"
+    icon: {fileID: 21300000, guid: 46236c5f534df4fd384adfc42abf10e6, type: 3}
+    maxLevel: 2
+    deltaValue: 5
+    deltaValue2: 0
+  - baseIndex: 3121
+    paramCategory: 0
+    paramType: 30
+    targetIndex: -1
+    skillName: 'Break Bonus : Add Time'
+    description: "\u9271\u77F3\u3092\u4E00\u5B9A\u6570\u58CA\u3059\u3068\u3001\u30A4\u30F3\u30B2\u30FC\u30E0\u6642\u9593\u3092\u5F97\u308B"
+    icon: {fileID: 21300000, guid: 3c2fd4b81d6cc46909627d457ddc4ae8, type: 3}
+    maxLevel: 2
+    deltaValue: 0.5
+    deltaValue2: 0
+  - baseIndex: 3122
+    paramCategory: 0
+    paramType: 31
+    targetIndex: -1
+    skillName: 'Break Bonus : Resource Change'
+    description: "\u9271\u77F3\u3092\u4E00\u5B9A\u6570\u58CA\u3059\u3068\u3001\u9271\u77F3\u30D6\u30ED\u30C3\u30AF\u306B\u5165\u308C\u66FF\u3048\u308B"
+    icon: {fileID: 21300000, guid: 29689e73a5a6347e0a9fef22360a6173, type: 3}
+    maxLevel: 2
+    deltaValue: 3
+    deltaValue2: 0
   - baseIndex: 4001
     paramCategory: 5
     paramType: 0
@@ -966,7 +996,7 @@ MonoBehaviour:
     deltaValue2: 0
   - baseIndex: 9991
     paramCategory: 0
-    paramType: 29
+    paramType: 32
     targetIndex: 1
     skillName: Stone King
     description: "\u30B9\u30C8\u30FC\u30F3\u30AD\u30F3\u30B0"
@@ -976,7 +1006,7 @@ MonoBehaviour:
     deltaValue2: 0
   - baseIndex: 9992
     paramCategory: 0
-    paramType: 30
+    paramType: 33
     targetIndex: 1
     skillName: Game King
     description: "\u30B2\u30FC\u30E0\u30AD\u30F3\u30B0"
@@ -986,7 +1016,7 @@ MonoBehaviour:
     deltaValue2: 0
   - baseIndex: 9993
     paramCategory: 0
-    paramType: 31
+    paramType: 34
     targetIndex: 1
     skillName: Game Attack
     description: "\u30A2\u30BF\u30C3\u30AF\u30AD\u30F3\u30B0"
@@ -996,7 +1026,7 @@ MonoBehaviour:
     deltaValue2: 0
   skillTreeUnits:
   - skillTreeIndex: 100
-    refIndex: 1
+    refIndex: 3100
     unlockCheckIndexes: ffffffff
     req_stone: 10
     req_iron: 0
@@ -1006,7 +1036,7 @@ MonoBehaviour:
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 101
-    refIndex: 3100
+    refIndex: 1
     unlockCheckIndexes: 640000006a0000006c000000
     req_stone: 10
     req_iron: 0
@@ -1087,7 +1117,7 @@ MonoBehaviour:
     req_diamond: 0
   - skillTreeIndex: 109
     refIndex: 2
-    unlockCheckIndexes: 65000000
+    unlockCheckIndexes: 650000002c0100006e000000
     req_stone: 50
     req_iron: 10
     req_gold: 0
@@ -1935,6 +1965,26 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
+  - skillTreeIndex: 350
+    refIndex: 3120
+    unlockCheckIndexes: 6b00000031010000
+    req_stone: 75
+    req_iron: 25
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 351
+    refIndex: 3121
+    unlockCheckIndexes: 5e01000066000000c8000000
+    req_stone: 50
+    req_iron: 20
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
   - skillTreeIndex: 305
     refIndex: 3102
     unlockCheckIndexes: 300100003201000033010000
@@ -2035,6 +2085,26 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
+  - skillTreeIndex: 352
+    refIndex: 3122
+    unlockCheckIndexes: 5e010000
+    req_stone: 250
+    req_iron: 75
+    req_gold: 25
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 353
+    refIndex: 3120
+    unlockCheckIndexes: 3e010000450100004701000062010000
+    req_stone: 200
+    req_iron: 75
+    req_gold: 30
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
   - skillTreeIndex: 306
     refIndex: 1
     unlockCheckIndexes: 3101000034010000
@@ -2087,7 +2157,7 @@ MonoBehaviour:
     req_diamond: 0
   - skillTreeIndex: 316
     refIndex: 3003
-    unlockCheckIndexes: 350100003901000040010000
+    unlockCheckIndexes: 35010000390100004001000063010000
     req_stone: 350
     req_iron: 165
     req_gold: 75
@@ -2125,6 +2195,16 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
+  - skillTreeIndex: 354
+    refIndex: 3121
+    unlockCheckIndexes: 5d01000061010000
+    req_stone: 350
+    req_iron: 135
+    req_gold: 100
+    req_emerald: 60
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
   - skillTreeIndex: 334
     refIndex: 2034
     unlockCheckIndexes: 41010000
@@ -2147,7 +2227,7 @@ MonoBehaviour:
     req_diamond: 0
   - skillTreeIndex: 327
     refIndex: 4002
-    unlockCheckIndexes: 46010000
+    unlockCheckIndexes: 460100006101000059010000
     req_stone: 0
     req_iron: 300
     req_gold: 150
@@ -2197,7 +2277,7 @@ MonoBehaviour:
     req_diamond: 0
   - skillTreeIndex: 331
     refIndex: 3112
-    unlockCheckIndexes: 40010000
+    unlockCheckIndexes: 400100004c01000063010000
     req_stone: 0
     req_iron: 300
     req_gold: 150
@@ -2215,6 +2295,16 @@ MonoBehaviour:
     req_ruby: 25
     req_sapphire: 0
     req_diamond: 0
+  - skillTreeIndex: 355
+    refIndex: 3122
+    unlockCheckIndexes: 4b0100003c01000054010000
+    req_stone: 0
+    req_iron: 400
+    req_gold: 180
+    req_emerald: 110
+    req_ruby: 35
+    req_sapphire: 0
+    req_diamond: 0
   - skillTreeIndex: 332
     refIndex: 3104
     unlockCheckIndexes: 4b01000041010000
@@ -2227,7 +2317,7 @@ MonoBehaviour:
     req_diamond: 0
   - skillTreeIndex: 349
     refIndex: 3004
-    unlockCheckIndexes: 3e010000
+    unlockCheckIndexes: 3e01000062010000
     req_stone: 0
     req_iron: 0
     req_gold: 400

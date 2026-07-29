@@ -194,6 +194,17 @@ public class GameBaseParam
                 break;
 
 
+            // -- stage levelup param --
+            case ParamType.StageLevelup_GenerateBlockCount:
+                stageLevelup_generateBlockCount_enhanced += (int)_setParam;
+                break;
+            case ParamType.StageLevelup_AddTime:
+                stageLevelup_addTime_enhanced += _setParam;
+                break;
+            case ParamType.StageLevelup_ChangeResourceCount:
+                stageLevelup_changeResource_enhanced += (int)_setParam;
+                break;
+
 
             // -- end game param --
             case ParamType.King_Stone:
