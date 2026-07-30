@@ -78,7 +78,9 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
         {
             unit.StartIdleAnim();
         }
+        TutorialManager.Inst.Check_Tutorial(TutorialType.SpecialSkill);
         base.Init_ActiveTab();
+
     }
 
     private void Check_HaveEnhanceReadyUnit()

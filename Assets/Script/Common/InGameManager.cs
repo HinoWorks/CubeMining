@@ -130,7 +130,7 @@ public class InGameManager : MonoBehaviour
         exTime = 0f;
         GameEvent.UI.PublishTimeLimit(timeLimit);
 
-        await TutorialManager.Inst.Check_Tutorial(1);
+        await TutorialManager.Inst.Check_Tutorial(TutorialType.Welcome);
         SoundManager.Inst.PlaySE(100);
 
         UIManager_InGame.Inst.ui_EventManager.StartInGame(activeTime_startEndGame); // UI表示

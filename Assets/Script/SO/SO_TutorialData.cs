@@ -3,6 +3,17 @@ using System;
 
 
 
+public enum TutorialType
+{
+    None,
+    Welcome = 1,
+    CraftPickaxe = 2,
+    SpecialSkill = 3,
+    Artifact = 4,
+}
+
+
+
 [System.Serializable]
 public class TutorialUnitData
 {
@@ -27,4 +38,11 @@ public class SO_TutorialData : ScriptableObject
         }
         return data;
     }
+
+    public int Get_TutorialIndex(TutorialType _tutorialType)
+    {
+        var index = (int)_tutorialType;
+        return index;
+    }
+
 }

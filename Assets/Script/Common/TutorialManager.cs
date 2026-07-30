@@ -54,8 +54,9 @@ public class TutorialManager : MonoBehaviour
     /// 未表示ならチュートリアルを出し、閉じるまで待機する。
     /// 既に表示済みなら即座に完了する。
     /// </summary>
-    public UniTask Check_Tutorial(int _index)
+    public UniTask Check_Tutorial(TutorialType _tutorialType)
     {
+        var _index = SOLoader.TutorialData?.Get_TutorialIndex(_tutorialType) ?? -1;
         if (SaveLoader.Inst != null && SaveLoader.Inst.IsTutorialShown(_index))
         {
             return UniTask.CompletedTask;

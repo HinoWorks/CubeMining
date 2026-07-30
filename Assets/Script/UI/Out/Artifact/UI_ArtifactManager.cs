@@ -83,6 +83,11 @@ public class UI_ArtifactManager : UI_OutGameTabBase
 
         ingameGetArtifactIndexes.Clear();
     }
+    protected override async void Init_ActiveTab()
+    {
+        await TutorialManager.Inst.Check_Tutorial(TutorialType.Artifact);
+    }
+
 
     /// <summary>
     /// アーティファクト装備Unitの初期化
