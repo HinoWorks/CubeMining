@@ -24,7 +24,7 @@ public class UI_PopUpBase : MonoBehaviour
     private Vector3 posi_ini;
     private Sequence seq_open;
 
-    void Awake()
+    protected virtual void Awake()
     {
         hButtons = this.GetComponentsInChildren<HButton>();
         AllButtonSet_StateInit();

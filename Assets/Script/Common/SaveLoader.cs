@@ -249,6 +249,9 @@ public class SaveLoader : MonoBehaviour
 
     private const string KEY_USER_SETTINGS = "key_userSettings";
 
+    private const string KEY_TUTORIAL_SHOWN = "key_tutorialShown";
+    private List<int> tutorialShownIndices = new();
+
 
     private Queue<Action> allQueue = new();
     private bool isProcessingQueue = false;
@@ -294,6 +297,10 @@ public class SaveLoader : MonoBehaviour
 
         enhanceCoinCount = ES3.KeyExists(KEY_ENHANCE_COIN_COUNT) ? ES3.Load<int>(KEY_ENHANCE_COIN_COUNT) : 0;
         enhanceCoinCount_Total = ES3.KeyExists(KEY_ENHANCE_COIN_COUNT_TOTAL) ? ES3.Load<int>(KEY_ENHANCE_COIN_COUNT_TOTAL) : 0;
+
+        tutorialShownIndices = ES3.KeyExists(KEY_TUTORIAL_SHOWN)
+            ? ES3.Load<List<int>>(KEY_TUTORIAL_SHOWN)
+            : new List<int>();
 
         currentState = state.Idling;
         Debug.Log($" == SaveData_InitialLoad: End == ");
@@ -456,6 +463,28 @@ public class SaveLoader : MonoBehaviour
     {
         //unlockEventIndex = _index;
         // ES3.Save(KEY_UNLOCK_EVENTINDEX, unlockEventIndex);
+    }
+    #endregion
+
+
+    #region -- Tutorial --
+    public bool IsTutorialShown(int _index)
+    {
+        return tutorialShownIndices != null && tutorialShownIndices.Contains(_index);
+    }
+
+    public void Request_SaveTutorialShown(int _index)
+    {
+        EnqueueMethod(() => { SaveTutorialShown(_index); });
+    }
+
+    private void SaveTutorialShown(int _index)
+    {
+        if (tutorialShownIndices == null) tutorialShownIndices = new List<int>();
+        if (tutorialShownIndices.Contains(_index)) return;
+
+        tutorialShownIndices.Add(_index);
+        ES3.Save(KEY_TUTORIAL_SHOWN, tutorialShownIndices);
     }
     #endregion
 

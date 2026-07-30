@@ -4,6 +4,7 @@ using SRF.Service;
 using SRDebugger.Services;
 using System.Runtime.CompilerServices;
 using System;
+using Cysharp.Threading.Tasks;
 
 
 public partial class SROptions
@@ -261,6 +262,37 @@ public partial class SROptions
     {
         SaveLoader.Inst.Request_SaveEnhanceCoinCount(1);
 
+    }
+
+    private int debugTutorialIndex;
+    [Category("デバッグ")]
+    [DisplayName("チュートリアル index")]
+    [Sort(5)]
+    public int DebugTutorialIndex
+    {
+        get { return debugTutorialIndex; }
+        set { debugTutorialIndex = value; }
+    }
+    [Category("デバッグ")]
+    [DisplayName("チュートリアル表示(セーブなし)")]
+    [Sort(6)]
+    public void Debug_ShowTutorial()
+    {
+        if (TutorialManager.Inst == null)
+        {
+            Debug.LogWarning("Debug_ShowTutorial: TutorialManager not found");
+            return;
+        }
+
+        var data = SOLoader.TutorialData?.Get_TutorialUnitData(debugTutorialIndex);
+        if (data == null)
+        {
+            Debug.LogWarning($"Debug_ShowTutorial: tutorial not found (index={debugTutorialIndex})");
+            return;
+        }
+
+        TutorialManager.Inst.Debug_ShowTutorial(debugTutorialIndex).Forget();
+        Debug.Log($"Debug_ShowTutorial: show index={debugTutorialIndex} (no save)");
     }
 
 

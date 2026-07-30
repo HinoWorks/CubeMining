@@ -26,7 +26,6 @@ public class UIManager_InGame : MonoBehaviour
     {
         return target_getItem[_count];
     }
-    //private float currentCoinFloat;
 
 
     void Awake()
@@ -52,7 +51,6 @@ public class UIManager_InGame : MonoBehaviour
         switch (_state)
         {
             case GameStateType.InGame_Ready:
-                ui_EventManager.StartInGame();
                 foreach (var ui_resourceCounter in ui_resourceCounters)
                 {
                     ui_resourceCounter.Set_Init();
@@ -64,7 +62,6 @@ public class UIManager_InGame : MonoBehaviour
                 break;
             case GameStateType.InGame_End:
                 PauseManager.Inst?.ForceResumeIfPaused();
-                ui_EventManager.EndGame();
                 break;
             case GameStateType.Result:
                 PauseManager.Inst?.ForceResumeIfPaused();

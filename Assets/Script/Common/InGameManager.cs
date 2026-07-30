@@ -61,6 +61,8 @@ public class InGameManager : MonoBehaviour
     private int enhanceCoinCount = 0;
     public int Get_EnhanceCoinCount() => enhanceCoinCount;
 
+    private int activeTime_startEndGame = 2;
+
 
 
     void Awake()
@@ -128,19 +130,12 @@ public class InGameManager : MonoBehaviour
         exTime = 0f;
         GameEvent.UI.PublishTimeLimit(timeLimit);
 
-
-        // TODO HERE
-        /*
-        var grd = await SaveLoader.Inst.Get_GameRecordData();
-        PlayerProgressRuntime.ApplyFromGameRecord(grd);
-        var levelTable = SOLoader.PlayerLevelData;
-        GameEvent.PlayerProgress.PublishMetaChanged(
-            PlayerProgressRuntime.TotalExp,
-            PlayerProgressRuntime.ExpInCurrentLevel,
-            PlayerProgressRuntime.Level,
-            levelTable.GetExpToNext(PlayerProgressRuntime.Level));
-*/
+        await TutorialManager.Inst.Check_Tutorial(1);
         SoundManager.Inst.PlaySE(100);
+
+        UIManager_InGame.Inst.ui_EventManager.StartInGame(activeTime_startEndGame); // UI表示
+        await UniTask.Delay(activeTime_startEndGame * 1000); // 待機
+        GameWatcher.Inst.SetGameState(GameStateType.InGame);
     }
 
     private void SetState_InGame()
@@ -150,7 +145,7 @@ public class InGameManager : MonoBehaviour
         SubSkillManager.Inst.Set_SubSkillState(true);
         BlockGenerateManager.Inst.Set_GenerateState(true);
     }
-    private void SetState_InGameEnd()
+    private async void SetState_InGameEnd()
     {
         AttackManager.Inst.Set_AttackState(false);
         SubSkillManager.Inst.Set_SubSkillState(false);
@@ -160,6 +155,10 @@ public class InGameManager : MonoBehaviour
         ResultSave_Status();
 
         SoundManager.Inst.PlaySE(101);
+
+        UIManager_InGame.Inst.ui_EventManager.EndGame(activeTime_startEndGame); // UI表示
+        await UniTask.Delay(activeTime_startEndGame * 1000); // 待機
+        GameWatcher.Inst.SetGameState(GameStateType.Result);
     }
     private void SetState_Result()
     {

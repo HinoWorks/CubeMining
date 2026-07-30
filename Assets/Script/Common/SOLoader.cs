@@ -255,6 +255,19 @@ public static class SOLoader
         }
     }
 
+    private static SO_TutorialData so_tutorialData;
+    public static SO_TutorialData TutorialData
+    {
+        get
+        {
+            if (so_tutorialData == null)
+            {
+                so_tutorialData = LoadSO<SO_TutorialData>(pathBase + nameof(SO_TutorialData));
+            }
+            return so_tutorialData;
+        }
+    }
+
 
     // ========= loc =============
     private static T LoadSO<T>(string path) where T : ScriptableObject

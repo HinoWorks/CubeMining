@@ -58,6 +58,8 @@ public class PauseManager : MonoBehaviour
             return;
         }
 
+        if (TutorialManager.Inst != null && TutorialManager.Inst.IsShowing) return;
+
         if (!CanTogglePause()) return;
 
         if (IsPaused) Resume();

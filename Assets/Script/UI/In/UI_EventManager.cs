@@ -10,20 +10,17 @@ public class UI_EventManager : MonoBehaviour
 
 
 
-    public async void StartInGame()
+    public async void StartInGame(int _waitTime)
     {
         obj_StartCall.SetActive(true);
-        await UniTask.Delay(2000);
-        GameWatcher.Inst.SetGameState(GameStateType.InGame);
-
+        await UniTask.Delay(_waitTime * 1000);
         obj_StartCall.SetActive(false);
     }
 
-    public async void EndGame()
+    public async void EndGame(int _waitTime)
     {
         obj_EndCall.SetActive(true);
-        await UniTask.Delay(2000);
-        GameWatcher.Inst.SetGameState(GameStateType.Result);
+        await UniTask.Delay(_waitTime * 1000);
         obj_EndCall.SetActive(false);
     }
 
