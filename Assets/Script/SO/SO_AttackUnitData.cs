@@ -9,8 +9,6 @@ using System;
 public class AttackUnitData
 {
     public int attackIndex;
-    public string unitName;
-    public string unitDescription;
     public Sprite icon;
     public GameObject pf;
 

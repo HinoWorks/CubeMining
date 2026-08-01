@@ -6,8 +6,7 @@ public class UI_ArtifactDetailUnit : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI tmp_skillName;
     [SerializeField] TextMeshProUGUI tmp_description;
-    //[SerializeField] TextMeshProUGUI tmp_paramNow;
-    //[SerializeField] TextMeshProUGUI tmp_paramNext;
+    [SerializeField] Image icon;
     [SerializeField] Color colorParamA = Color.green;
     [SerializeField] Color colorParamB = Color.red;
     [SerializeField] float hoverYOffset = 200f;
@@ -46,30 +45,47 @@ public class UI_ArtifactDetailUnit : MonoBehaviour
     private void SetData_Base()
     {
         tmp_skillName.SetText(so.artifactName);
+        icon.sprite = so.icon;
 
         var setText = so.description;
         var setParam = "";
         var setParam2 = "";
-        switch (so.unit)
+
+        string colorA = "";
+        string colorB = "";
+
+        switch (so.activeCheckTiming)
         {
-            case "%":
-                setParam = $"+{(so.value * 100).ToString("F0")}%";
-                setParam2 = $"-{(so.value_2 * 100).ToString("F0")}%";
+            case ActiveCheckTiming.Passive:
+            case ActiveCheckTiming.LastBooster:
+                switch (so.unit)
+                {
+                    case "%":
+                        setParam = $"+{(so.value * 100).ToString("F0")}%";
+                        setParam2 = $"{(so.value_2 * 100).ToString("F0")}%";
+                        break;
+                    default:
+                        setParam = $"+{so.value.ToString("F1")} {so.unit}";
+                        setParam2 = $"{so.value_2.ToString("F1")} {so.unit}";
+                        break;
+                }
+                colorA = ColorUtility.ToHtmlStringRGBA(colorParamA);
+                colorB = ColorUtility.ToHtmlStringRGBA(colorParamB);
+
                 break;
-            default:
-                setParam = $"+{so.value.ToString("F1")} {so.unit}";
-                setParam2 = $"-{so.value_2.ToString("F1")} {so.unit}";
+            case ActiveCheckTiming.Interval_5sec:
+            case ActiveCheckTiming.Interval_attackPickaxe:
+                setParam = $"{(so.activeCheckRate * 100).ToString("F0")}%";
+                setParam2 = $"+{(so.value).ToString("F0")}sec";
+
+                colorA = ColorUtility.ToHtmlStringRGBA(colorParamA);
+                colorB = ColorUtility.ToHtmlStringRGBA(colorParamA);
                 break;
         }
-        var colorA = ColorUtility.ToHtmlStringRGBA(colorParamA);
-        var colorB = ColorUtility.ToHtmlStringRGBA(colorParamB);
+
         setText = setText.Replace("[A]", $"<color=#{colorA}>{setParam}</color>");
         setText = setText.Replace("[B]", $"<color=#{colorB}>{setParam2}</color>");
         tmp_description.SetText(setText);
-
-        // var paramNow = so.value;
-        //tmp_paramNow.SetText(paramNow.ToString("F2"));
-        //tmp_paramNext.SetText("xxxx");
 
         this.gameObject.SetActive(true);
     }

@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_AttackUnitData
   attackUnitDatas:
   - attackIndex: 1
-    unitName: Icicles
-    unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 601605801108607667, guid: 22601e14ec2664fe7adeacaac4628aae, type: 3}
     damageRate: 0.5
@@ -26,8 +24,6 @@ MonoBehaviour:
     count: 1
     size: 0.35
   - attackIndex: 2
-    unitName: Thunder(Top)
-    unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 601605801108607667, guid: 32963baef2720410fa437525ec84df92, type: 3}
     damageRate: 1
@@ -38,8 +34,6 @@ MonoBehaviour:
     count: 1
     size: 1
   - attackIndex: 3
-    unitName: BoundShot
-    unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 6284990426269352918, guid: 632ffa412ba1e46a5a5c7010dc874875, type: 3}
     damageRate: 0.5
@@ -50,8 +44,6 @@ MonoBehaviour:
     count: 1
     size: 1
   - attackIndex: 4
-    unitName: AroundStar
-    unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 9024363205940861645, guid: 1ddcb013f6ff94e4e934fd22d66ff482, type: 3}
     damageRate: 0.25
@@ -62,8 +54,6 @@ MonoBehaviour:
     count: 1
     size: 1
   - attackIndex: 5
-    unitName: Bow(yoko)
-    unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 601605801108607667, guid: e610f91cd533e4f088e7899d9be67211, type: 3}
     damageRate: 0.5
@@ -74,8 +64,6 @@ MonoBehaviour:
     count: 1
     size: 1
   - attackIndex: 6
-    unitName: Bow(tate)
-    unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 601605801108607667, guid: e40010afbff43460fac551280c1074de, type: 3}
     damageRate: 0.5
@@ -86,8 +74,6 @@ MonoBehaviour:
     count: 1
     size: 1
   - attackIndex: 0
-    unitName: 
-    unitDescription: 
     icon: {fileID: 0}
     pf: {fileID: 0}
     damageRate: 0
@@ -99,7 +85,7 @@ MonoBehaviour:
     size: 0
   pickaxeUnitDatas:
   - pickaxeIndex: 1
-    pickaxeName: normal pickaxe
+    pickaxeName: Wood Pickaxe
     icon: {fileID: 21300000, guid: 529464d505747e24e9f2c51d9d37a0b9, type: 3}
     pf: {fileID: 6150116085842143346, guid: 1f161d31724c043c5a4b58798a37e1e4, type: 3}
     damage: 2
@@ -109,7 +95,7 @@ MonoBehaviour:
     size: 1
     isLast: 0
   - pickaxeIndex: 2
-    pickaxeName: pickaxe 2
+    pickaxeName: Stone Pickaxe
     icon: {fileID: 21300000, guid: 4e8ed808b77f5f3459dbb4d392048fd7, type: 3}
     pf: {fileID: 6150116085842143346, guid: 5f620ebfe64a8473ca8cbdeef0061eda, type: 3}
     damage: 3
@@ -119,7 +105,7 @@ MonoBehaviour:
     size: 1.5
     isLast: 0
   - pickaxeIndex: 3
-    pickaxeName: pickaxe 3
+    pickaxeName: Black Stone Pickaxe
     icon: {fileID: 21300000, guid: eb07ef2c35804f645aa3f1d1c76e5b28, type: 3}
     pf: {fileID: 6150116085842143346, guid: 8deef441d712d43acbe313fb092dbf4c, type: 3}
     damage: 3
@@ -129,7 +115,7 @@ MonoBehaviour:
     size: 1.8
     isLast: 0
   - pickaxeIndex: 4
-    pickaxeName: pickaxe 4
+    pickaxeName: Iron Pickaxe
     icon: {fileID: 21300000, guid: a1c2f8b4ec4354948a77ce5ac8b6cbf7, type: 3}
     pf: {fileID: 6150116085842143346, guid: 7fae9ef957e7f40e3917ef1b1685436e, type: 3}
     damage: 4
@@ -139,8 +125,8 @@ MonoBehaviour:
     size: 2.1
     isLast: 0
   - pickaxeIndex: 5
-    pickaxeName: pickaxe 5
-    icon: {fileID: 21300000, guid: ebe94485927eba24b951084a637a8403, type: 3}
+    pickaxeName: Golden Pickaxe
+    icon: {fileID: 21300000, guid: aa24e487592e10542bf6a1a4ccc06354, type: 3}
     pf: {fileID: 6150116085842143346, guid: 1c0e35539e4d84c18bfcad3beb16ba6c, type: 3}
     damage: 4
     attackInterval: 0.7
@@ -149,8 +135,8 @@ MonoBehaviour:
     size: 2.3
     isLast: 0
   - pickaxeIndex: 6
-    pickaxeName: pickaxe 6
-    icon: {fileID: 21300000, guid: 47a978f25447392449578a7119ff4851, type: 3}
+    pickaxeName: Emerald Pickaxe
+    icon: {fileID: 21300000, guid: ebe94485927eba24b951084a637a8403, type: 3}
     pf: {fileID: 6150116085842143346, guid: 965a8e353a8994aac80c4c2522d9f388, type: 3}
     damage: 4
     attackInterval: 0.65
@@ -159,8 +145,8 @@ MonoBehaviour:
     size: 2.5
     isLast: 0
   - pickaxeIndex: 7
-    pickaxeName: pickaxe 7
-    icon: {fileID: 21300000, guid: aa24e487592e10542bf6a1a4ccc06354, type: 3}
+    pickaxeName: Ruby Pickaxe
+    icon: {fileID: 21300000, guid: 47a978f25447392449578a7119ff4851, type: 3}
     pf: {fileID: 6150116085842143346, guid: 6bc8c82dcad844cfab33cf783e33cb3d, type: 3}
     damage: 4
     attackInterval: 0.6
@@ -169,7 +155,7 @@ MonoBehaviour:
     size: 2.7
     isLast: 0
   - pickaxeIndex: 8
-    pickaxeName: pickaxe 8
+    pickaxeName: Meteorite Pickaxe
     icon: {fileID: 21300000, guid: 8a182023b6e26bf429ad2d1d57b8cfc8, type: 3}
     pf: {fileID: 6150116085842143346, guid: 9c878e0b0be2345dc9103533900bd0ee, type: 3}
     damage: 4
@@ -179,7 +165,7 @@ MonoBehaviour:
     size: 2.8
     isLast: 0
   - pickaxeIndex: 9
-    pickaxeName: pickaxe 9
+    pickaxeName: Diamond Pickaxe
     icon: {fileID: 21300000, guid: 1170899cf7162134f823d147fa40786e, type: 3}
     pf: {fileID: 6150116085842143346, guid: a3418298f58f744acbda391c0d10ac06, type: 3}
     damage: 5
@@ -235,8 +221,8 @@ MonoBehaviour:
     req_diamond: -1
     createTime: 150
   - pickaxeIndex: 6
-    req_stone: -1
-    req_iron: 750
+    req_stone: 1000
+    req_iron: 0
     req_gold: 500
     req_emerald: 250
     req_ruby: 150
@@ -245,9 +231,9 @@ MonoBehaviour:
     createTime: 150
   - pickaxeIndex: 7
     req_stone: -1
-    req_iron: -1
-    req_gold: 350
-    req_emerald: 250
+    req_iron: 800
+    req_gold: -1
+    req_emerald: 300
     req_ruby: 100
     req_sapphire: 50
     req_diamond: -1
@@ -255,9 +241,9 @@ MonoBehaviour:
   - pickaxeIndex: 8
     req_stone: -1
     req_iron: -1
-    req_gold: -1
+    req_gold: 1000
     req_emerald: 500
-    req_ruby: 350
+    req_ruby: -1
     req_sapphire: 150
     req_diamond: 50
     createTime: 200
@@ -266,8 +252,8 @@ MonoBehaviour:
     req_iron: -1
     req_gold: -1
     req_emerald: 1250
-    req_ruby: 500
-    req_sapphire: 350
+    req_ruby: 750
+    req_sapphire: 500
     req_diamond: 300
     createTime: 200
   pickaxeParamBases:

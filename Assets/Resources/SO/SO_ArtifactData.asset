@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SO_ArtifactData
   artifactDatas:
   - artifactIndex: 1
-    artifactName: Artifact -- 1
-    description: ' [A] Pickaxe Power'
+    artifactName: Preserved Flora Jar
+    description: '[A] Pickaxe Attack Power'
     rarity: 0
     icon: {fileID: 21300000, guid: 3a18427a908cd45348dfa8b74294789b, type: 3}
     activeCheckTiming: 0
@@ -26,8 +26,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 2
-    artifactName: Artifact -- 2
-    description: ' [A] Pickaxe Attack Speed'
+    artifactName: Magma Core
+    description: '[A] Pickaxe Attack Speed'
     rarity: 0
     icon: {fileID: 21300000, guid: 718224dc2cfbd09468e8fc34331c7e6e, type: 3}
     activeCheckTiming: 0
@@ -38,8 +38,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 3
-    artifactName: Artifact -- 3
-    description: ' [A] Pickaxe Size '
+    artifactName: Runic Band
+    description: '[A] Pickaxe Size'
     rarity: 0
     icon: {fileID: 21300000, guid: 786f7d800aaa51a48b8dbe9ff85e2335, type: 3}
     activeCheckTiming: 0
@@ -50,8 +50,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 4
-    artifactName: Artifact -- 4
-    description: ' [A] Ore Yield from Pickaxe'
+    artifactName: Emerald Lamp
+    description: '[A] Ore Yield from Pickaxe'
     rarity: 0
     icon: {fileID: 21300000, guid: 5fb8adcc21ae0e54c8181a5104f3cbef, type: 3}
     activeCheckTiming: 0
@@ -62,8 +62,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 5
-    artifactName: Artifact -- 5
-    description: ' [A] Attack Speed / -[B]% Attack Power'
+    artifactName: Miner's Lantern
+    description: '[A] Pickaxe Attack Speed / [B] Pickaxe Attack Power'
     rarity: 0
     icon: {fileID: 21300000, guid: e6777b276db31364bbaf606003c689a8, type: 3}
     activeCheckTiming: 0
@@ -71,11 +71,11 @@ MonoBehaviour:
     effectType: 5
     value: 0.1
     effectType_2: 1
-    value_2: 0.15
+    value_2: -0.15
     unit: '%'
   - artifactIndex: 6
-    artifactName: Artifact -- 6
-    description: ' [A] Attack Power / -[B]% Size'
+    artifactName: Fortune Pouch
+    description: '[A] Pickaxe Attack Power / [B] Pickaxe Size'
     rarity: 0
     icon: {fileID: 21300000, guid: c9b43a32131007543864ae4e0ffdff22, type: 3}
     activeCheckTiming: 0
@@ -86,8 +86,8 @@ MonoBehaviour:
     value_2: -0.25
     unit: '%'
   - artifactIndex: 7
-    artifactName: Artifact -- 7
-    description: ' [A] Bomb Damage'
+    artifactName: Gargoyle Idol
+    description: '[A] Bomb Attack Power'
     rarity: 0
     icon: {fileID: 21300000, guid: 10c45b7d3e7cc734e971237fedbdeaf3, type: 3}
     activeCheckTiming: 0
@@ -98,8 +98,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 8
-    artifactName: Artifact -- 8
-    description: ' [A] Bomb Blast Radius'
+    artifactName: Petrified Coral
+    description: '[A] Bomb Blast Radius'
     rarity: 0
     icon: {fileID: 21300000, guid: e76d4d7fd5d8e794abdde1f410aab0c8, type: 3}
     activeCheckTiming: 0
@@ -110,8 +110,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 9
-    artifactName: Artifact -- 9
-    description: ' [A] Non-Pickaxe Damage'
+    artifactName: Crystal Scepter
+    description: '[A] Non-Pickaxe Damage'
     rarity: 0
     icon: {fileID: 21300000, guid: 0be99094f72bc094d9aaa72fac7845b0, type: 3}
     activeCheckTiming: 0
@@ -122,8 +122,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 10
-    artifactName: Artifact -- 10
-    description: ' [A] Non-Pickaxe Attack Speed'
+    artifactName: Engraved Ring
+    description: '[A] Non-Pickaxe Attack Speed'
     rarity: 0
     icon: {fileID: 21300000, guid: 22e88760ad22c3f40a052007fe9311dd, type: 3}
     activeCheckTiming: 0
@@ -134,8 +134,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 11
-    artifactName: Artifact -- 11
-    description: ' [A] Time on Bonus Chest Destruction'
+    artifactName: Eldritch Grimoire
+    description: '[A] In-game Time on Bonus Chest Destruction'
     rarity: 0
     icon: {fileID: 21300000, guid: 039ccaf8a40c8f649afbebf7de402072, type: 3}
     activeCheckTiming: 0
@@ -146,8 +146,8 @@ MonoBehaviour:
     value_2: 0
     unit: sec
   - artifactIndex: 12
-    artifactName: Artifact -- 12
-    description: Spawn [A] Ores When Gaining Time
+    artifactName: Explorer's Journal
+    description: Spawns [A] Ore Blocks When Gaining Time
     rarity: 0
     icon: {fileID: 21300000, guid: 0d2613e7ae509b0419be98f388f98755, type: 3}
     activeCheckTiming: 0
@@ -156,10 +156,10 @@ MonoBehaviour:
     value: 3
     effectType_2: 0
     value_2: 0
-    unit: '%'
+    unit: 
   - artifactIndex: 13
-    artifactName: Artifact -- 13
-    description: ' [A] Ore Conversion Rate'
+    artifactName: Wooden Talisman
+    description: '[A] Ore Block Conversion Rate'
     rarity: 0
     icon: {fileID: 21300000, guid: 00b64a0f78bd2f74ba1f9ef40ae96ae6, type: 3}
     activeCheckTiming: 0
@@ -170,8 +170,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 14
-    artifactName: Artifact -- 14
-    description: 'Every 5s: 50% chance for a Bomb Block to drop'
+    artifactName: Lunar Pendant
+    description: 'Every 5s: [A] Chance to Spawn a Bomb Block'
     rarity: 0
     icon: {fileID: 21300000, guid: b4df8d4043f884b46b5e4867d0d6c48b, type: 3}
     activeCheckTiming: 20
@@ -182,8 +182,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 15
-    artifactName: Artifact -- 15
-    description: 'Every 5s: 50% chance for a Bonus Chest to drop'
+    artifactName: Ruby Amulet
+    description: 'Every 5s: [A] Chance to Spawn a Bonus Chest'
     rarity: 0
     icon: {fileID: 21300000, guid: 921a898435817dc4db16f800ce4b03f6, type: 3}
     activeCheckTiming: 20
@@ -194,8 +194,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 16
-    artifactName: Artifact -- 16
-    description: 'Every 5s: 50% chance for a Time Block to drop'
+    artifactName: Ancient Amphora
+    description: 'Every 5s: [A] Chance to Spawn a Time Block'
     rarity: 0
     icon: {fileID: 21300000, guid: adc2852cf3ac89b4ab9425aba2e10fdc, type: 3}
     activeCheckTiming: 20
@@ -206,8 +206,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 17
-    artifactName: Artifact -- 17
-    description: '1% chance on hit: Drop a Mini-Pickaxe (deals 50% Pickaxe Damage)'
+    artifactName: Crimson Chalice
+    description: 'On Hit: [A] Chance to Spawn a Bonus Chest'
     rarity: 0
     icon: {fileID: 21300000, guid: cf6b8380df0739141a89462cb4e8c257, type: 3}
     activeCheckTiming: 30
@@ -218,8 +218,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 18
-    artifactName: Artifact -- 18
-    description: '1% chance on hit: Spawn a Bomb Block'
+    artifactName: Scales of Balance
+    description: 'On Hit: [A] Chance to Spawn a Bomb Block'
     rarity: 0
     icon: {fileID: 21300000, guid: 655a524668ec24343bd2e0e01eb4b245, type: 3}
     activeCheckTiming: 30
@@ -230,8 +230,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 19
-    artifactName: Artifact -- 19
-    description: '1% chance on hit: [A] In-game Time'
+    artifactName: Elixir of Wealth
+    description: 'On Hit: [A] Chance to Gain [B] In-game Time'
     rarity: 0
     icon: {fileID: 21300000, guid: b9713354316be864196732b2d63313a8, type: 3}
     activeCheckTiming: 30
@@ -242,8 +242,8 @@ MonoBehaviour:
     value_2: 0
     unit: sec
   - artifactIndex: 20
-    artifactName: Artifact -- 20
-    description: 'Last 5 Seconds: [A] Attack Power'
+    artifactName: Toxic Ooze
+    description: Final 5 Seconds:[A] Attack Power
     rarity: 0
     icon: {fileID: 21300000, guid: 7383f21d25939184a93296c8b5499423, type: 3}
     activeCheckTiming: 50
@@ -254,8 +254,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 21
-    artifactName: Artifact -- 21
-    description: 'Last 5 Seconds: [A] Attack Speed'
+    artifactName: Crescent Shard
+    description: Final 5 Seconds:[A] Attack Speed
     rarity: 0
     icon: {fileID: 21300000, guid: ec70d9632115d764780f5ab14737f4ca, type: 3}
     activeCheckTiming: 50
@@ -266,8 +266,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 22
-    artifactName: Artifact -- 22
-    description: 'Last 5 Seconds: [A] Instant Mine Chance'
+    artifactName: Solar Crest
+    description: Final 5 Seconds:[A] Instant Mine Chance
     rarity: 0
     icon: {fileID: 21300000, guid: f13e73dec895c1e4e81c08cfdd3bd119, type: 3}
     activeCheckTiming: 50
@@ -278,8 +278,8 @@ MonoBehaviour:
     value_2: 0
     unit: '%'
   - artifactIndex: 23
-    artifactName: Artifact -- 23
-    description: 'Last 5 Seconds: [A] Ore Yield'
+    artifactName: Starlight Badge
+    description: Final 5 Seconds:[A] Ore Yield
     rarity: 0
     icon: {fileID: 21300000, guid: 1341e7d469bb5214981cce33e3b4cb03, type: 3}
     activeCheckTiming: 50
@@ -289,6 +289,54 @@ MonoBehaviour:
     effectType_2: 0
     value_2: 0
     unit: '%'
+  - artifactIndex: 0
+    artifactName: Phoenix Feather
+    description: 
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 0
+    activeCheckRate: 0
+    effectType: 0
+    value: 0
+    effectType_2: 0
+    value_2: 0
+    unit: 
+  - artifactIndex: 0
+    artifactName: Wreath of Seasons
+    description: 
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 0
+    activeCheckRate: 0
+    effectType: 0
+    value: 0
+    effectType_2: 0
+    value_2: 0
+    unit: 
+  - artifactIndex: 0
+    artifactName: Mana Orb
+    description: 
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 0
+    activeCheckRate: 0
+    effectType: 0
+    value: 0
+    effectType_2: 0
+    value_2: 0
+    unit: 
+  - artifactIndex: 0
+    artifactName: Cosmic Sphere
+    description: 
+    rarity: 0
+    icon: {fileID: 0}
+    activeCheckTiming: 0
+    activeCheckRate: 0
+    effectType: 0
+    value: 0
+    effectType_2: 0
+    value_2: 0
+    unit: 
   - artifactIndex: 0
     artifactName: 
     description: "\u5B9D\u7BB1\u306E\u4FA1\u5024\u304C1.5\u500D"

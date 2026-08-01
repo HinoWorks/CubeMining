@@ -25,8 +25,8 @@ MonoBehaviour:
     pf: {fileID: 1552349253804401439, guid: 0e9b67a3e0aa34316a2e2bbb0c9b810f, type: 3}
   - index: 2
     skillName: Meteor Bomber
-    description: Spawns and drops a powerful Bomb Block from above. (Damage scales
-      with Pickaxe Power)
+    description: Drops a powerful Bomb Block from above. (Damage scales with Pickaxe
+      Power)
     icon: {fileID: 21300000, guid: 16bd12464a9aa402db810694dd188923, type: 3}
     unlockLevel: 5
     blockCount: 15
@@ -45,46 +45,48 @@ MonoBehaviour:
     pf: {fileID: 400877379012588226, guid: 029c19b5888864504b74e6abe7d82252, type: 3}
   - index: 4
     skillName: Collect Flower
-    description: "\u9271\u77F3\u3092\u96C6\u3081\u308B\u82B1\u3092\u751F\u6210\u3059\u308B"
+    description: Spawns a flower that attracts and gathers nearby ores.
     icon: {fileID: 21300000, guid: 3e4c49bb0a89e4b21831fd5cf1ddcfad, type: 3}
-    unlockLevel: 2
+    unlockLevel: 13
     blockCount: 15
     CD: 5
     maxLevel: 3
     pf: {fileID: 5558064007501070093, guid: 97e40551d1b064b76a6f0012f47a26e5, type: 3}
   - index: 5
     skillName: Arrow Volley
-    description: Fires a volley of arrows to strike random blocks. (Damage scales
-      with Pickaxe Power)
+    description: Fires a volley of arrows at random blocks. (Damage scales with Pickaxe
+      Power)
     icon: {fileID: 21300000, guid: 4accd5296491b4e64b7cab752feaf001, type: 3}
-    unlockLevel: 15
+    unlockLevel: 16
     blockCount: 15
     CD: 5
     maxLevel: 3
     pf: {fileID: 4866347856038464369, guid: 8afe324a251e54584bdff968cd5bce8d, type: 3}
   - index: 6
     skillName: Chain Lightning
-    description: "\u753B\u9762\u306E4\u9685\u304B\u3089\u73FE\u5728\u306E\u30AB\u30FC\u30BD\u30EB\u4F4D\u7F6E\u306B\u5411\u304B\u3063\u3066\u96F7\u3092\u653E\u3061\u3001\u305D\u306E\u76F4\u7DDA\u4E0A\u306B\u3042\u308B\u30D6\u30ED\u30C3\u30AF\u306B\u30C0\u30E1\u30FC\u30B8"
+    description: Fires lightning from the 4 corners toward the cursor, damaging blocks
+      in its path. (Damage scales with Pickaxe Power)
     icon: {fileID: 21300000, guid: 128462cd193904c918b9d7a082820ead, type: 3}
-    unlockLevel: 1
+    unlockLevel: 20
     blockCount: 5
     CD: 5
     maxLevel: 3
     pf: {fileID: 1214965774706709456, guid: 07aae9ee3359e44f383c381555ae8de7, type: 3}
   - index: 7
     skillName: Geo Dowsing
-    description: "\u753B\u9762\u5185\u306B\u3042\u308B\u571F\u30D6\u30ED\u30C3\u30AF\u3092\u6307\u5B9A\u6570\uFF08x\u500B\u5206\uFF09\u3001\u9271\u77F3\u30D6\u30ED\u30C3\u30AF\u306B\u5909\u5316\u3055\u305B\u308B"
+    description: Converts dirt blocks on screen into ore blocks.
     icon: {fileID: 21300000, guid: 364c3ccc9fe8c40e09296355fe6aeac6, type: 3}
-    unlockLevel: 1
+    unlockLevel: 25
     blockCount: 5
     CD: 5
     maxLevel: 3
     pf: {fileID: 8235290486800529160, guid: 59342e19ef9714670804572a3556a06b, type: 3}
   - index: 8
     skillName: Triple Quake
-    description: "\u30AB\u30FC\u30BD\u30EB\u4F4D\u7F6E\u3092\u4E2D\u5FC3\u306B\u5730\u9707\u3092\u767A\u751F\u3055\u305B\u30B5\u30FC\u30AF\u30EB\u72B6\u306B\uFF13\u56DE\u653B\u6483\u3059\u308B"
+    description: Triggers a shockwave around the cursor, striking in a circular area
+      3 times. (Damage scales with Pickaxe Power)
     icon: {fileID: 21300000, guid: ec04bd256232443549698d518a28f426, type: 3}
-    unlockLevel: 1
+    unlockLevel: 30
     blockCount: 5
     CD: 5
     maxLevel: 3
@@ -93,7 +95,7 @@ MonoBehaviour:
     skillName: Overdrive
     description: Temporarily boosts all pickaxe stats.
     icon: {fileID: 0}
-    unlockLevel: 12
+    unlockLevel: 999999
     blockCount: 15
     CD: 5
     maxLevel: 3
@@ -120,8 +122,8 @@ MonoBehaviour:
     value_3: -1
     value_4: 1
     req_point: 2
-    req_stone: 0
-    req_iron: 0
+    req_stone: 50
+    req_iron: 20
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -134,9 +136,9 @@ MonoBehaviour:
     value_3: -1
     value_4: 1
     req_point: 3
-    req_stone: 0
-    req_iron: 0
-    req_gold: 0
+    req_stone: 200
+    req_iron: 50
+    req_gold: 30
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -148,10 +150,10 @@ MonoBehaviour:
     value_3: -1
     value_4: 1
     req_point: 4
-    req_stone: 0
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 500
+    req_iron: 300
+    req_gold: 100
+    req_emerald: 50
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
@@ -218,9 +220,9 @@ MonoBehaviour:
     value_3: -1
     value_4: -1
     req_point: 1
-    req_stone: 500
-    req_iron: 250
-    req_gold: 0
+    req_stone: 100
+    req_iron: 50
+    req_gold: 20
     req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
@@ -232,10 +234,10 @@ MonoBehaviour:
     value_3: -1
     value_4: 1
     req_point: 2
-    req_stone: 0
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 300
+    req_iron: 150
+    req_gold: 100
+    req_emerald: 50
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
@@ -247,10 +249,10 @@ MonoBehaviour:
     value_4: 1
     req_point: 3
     req_stone: 0
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_iron: 350
+    req_gold: 200
+    req_emerald: 100
+    req_ruby: 50
     req_sapphire: 0
     req_diamond: 0
   - index: 3
@@ -260,12 +262,12 @@ MonoBehaviour:
     value_3: -1
     value_4: 1
     req_point: 4
-    req_stone: 0
+    req_stone: 1000
     req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_gold: 500
+    req_emerald: 250
     req_ruby: 0
-    req_sapphire: 0
+    req_sapphire: 50
     req_diamond: 0
   - index: 4
     level: 0
@@ -274,10 +276,10 @@ MonoBehaviour:
     value_3: -1
     value_4: -1
     req_point: 1
-    req_stone: 10
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 300
+    req_iron: 100
+    req_gold: 50
+    req_emerald: 10
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
@@ -288,11 +290,11 @@ MonoBehaviour:
     value_3: 1
     value_4: 1
     req_point: 2
-    req_stone: 0
+    req_stone: 500
     req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_gold: 200
+    req_emerald: 50
+    req_ruby: 20
     req_sapphire: 0
     req_diamond: 0
   - index: 4
@@ -302,11 +304,11 @@ MonoBehaviour:
     value_3: 1.5
     value_4: 1
     req_point: 3
-    req_stone: 0
-    req_iron: 0
+    req_stone: 650
+    req_iron: 400
     req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_emerald: 100
+    req_ruby: 75
     req_sapphire: 0
     req_diamond: 0
   - index: 4
@@ -316,12 +318,12 @@ MonoBehaviour:
     value_3: 2
     value_4: 1
     req_point: 4
-    req_stone: 0
+    req_stone: 1200
     req_iron: 0
-    req_gold: 0
+    req_gold: 500
     req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
+    req_ruby: 200
+    req_sapphire: 100
     req_diamond: 0
   - index: 5
     level: 0
@@ -330,11 +332,11 @@ MonoBehaviour:
     value_3: -1
     value_4: -1
     req_point: 1
-    req_stone: 0
-    req_iron: 0
-    req_gold: 0
+    req_stone: 300
+    req_iron: 150
+    req_gold: 75
     req_emerald: 0
-    req_ruby: 0
+    req_ruby: 50
     req_sapphire: 0
     req_diamond: 0
   - index: 5
@@ -344,11 +346,11 @@ MonoBehaviour:
     value_3: 10
     value_4: 1
     req_point: 2
-    req_stone: 0
-    req_iron: 0
+    req_stone: 600
+    req_iron: 200
     req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_emerald: 75
+    req_ruby: 20
     req_sapphire: 0
     req_diamond: 0
   - index: 5
@@ -358,12 +360,12 @@ MonoBehaviour:
     value_3: 15
     value_4: 1
     req_point: 3
-    req_stone: 0
-    req_iron: 0
-    req_gold: 0
+    req_stone: 750
+    req_iron: 500
+    req_gold: 350
     req_emerald: 0
     req_ruby: 0
-    req_sapphire: 0
+    req_sapphire: 150
     req_diamond: 0
   - index: 5
     level: 3
@@ -373,12 +375,12 @@ MonoBehaviour:
     value_4: 1
     req_point: 4
     req_stone: 0
-    req_iron: 0
+    req_iron: 750
     req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_emerald: 300
+    req_ruby: 150
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: 50
   - index: 6
     level: 0
     value_1: -1
@@ -386,10 +388,10 @@ MonoBehaviour:
     value_3: -1
     value_4: -1
     req_point: 1
-    req_stone: 0
-    req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_stone: 500
+    req_iron: 400
+    req_gold: 250
+    req_emerald: 100
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
@@ -400,12 +402,12 @@ MonoBehaviour:
     value_3: 1
     value_4: 1
     req_point: 2
-    req_stone: 0
-    req_iron: 0
+    req_stone: 750
+    req_iron: 500
     req_gold: 0
-    req_emerald: 0
+    req_emerald: 250
     req_ruby: 0
-    req_sapphire: 0
+    req_sapphire: 150
     req_diamond: 0
   - index: 6
     level: 2
@@ -415,11 +417,11 @@ MonoBehaviour:
     value_4: 1
     req_point: 3
     req_stone: 0
-    req_iron: 0
-    req_gold: 0
+    req_iron: 600
+    req_gold: 400
     req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
+    req_ruby: 300
+    req_sapphire: 200
     req_diamond: 0
   - index: 6
     level: 3
@@ -428,13 +430,13 @@ MonoBehaviour:
     value_3: 1
     value_4: 1
     req_point: 4
-    req_stone: 0
+    req_stone: 1500
     req_iron: 0
-    req_gold: 0
+    req_gold: 750
     req_emerald: 0
-    req_ruby: 0
+    req_ruby: 500
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: 150
   - index: 7
     level: 0
     value_1: -1
@@ -442,11 +444,11 @@ MonoBehaviour:
     value_3: -1
     value_4: -1
     req_point: 1
-    req_stone: 0
-    req_iron: 0
+    req_stone: 750
+    req_iron: 500
     req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_emerald: 250
+    req_ruby: 100
     req_sapphire: 0
     req_diamond: 0
   - index: 7
@@ -457,11 +459,11 @@ MonoBehaviour:
     value_4: 1
     req_point: 2
     req_stone: 0
-    req_iron: 0
-    req_gold: 0
+    req_iron: 750
+    req_gold: 500
     req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
+    req_ruby: 300
+    req_sapphire: 150
     req_diamond: 0
   - index: 7
     level: 2
@@ -470,13 +472,13 @@ MonoBehaviour:
     value_3: -1
     value_4: 1
     req_point: 3
-    req_stone: 0
+    req_stone: 1500
     req_iron: 0
-    req_gold: 0
-    req_emerald: 0
+    req_gold: 750
+    req_emerald: 500
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: 50
   - index: 7
     level: 3
     value_1: 20
@@ -485,12 +487,12 @@ MonoBehaviour:
     value_4: 1
     req_point: 4
     req_stone: 0
-    req_iron: 0
+    req_iron: 1200
     req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_emerald: 750
+    req_ruby: 350
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: 200
   - index: 8
     level: 0
     value_1: -1
@@ -498,12 +500,12 @@ MonoBehaviour:
     value_3: -1
     value_4: -1
     req_point: 1
-    req_stone: 0
-    req_iron: 0
+    req_stone: 1200
+    req_iron: 750
     req_gold: 0
-    req_emerald: 0
+    req_emerald: 500
     req_ruby: 0
-    req_sapphire: 0
+    req_sapphire: 150
     req_diamond: 0
   - index: 8
     level: 1
@@ -512,12 +514,12 @@ MonoBehaviour:
     value_3: -1
     value_4: 1
     req_point: 2
-    req_stone: 0
+    req_stone: 1500
     req_iron: 0
-    req_gold: 0
+    req_gold: 1000
     req_emerald: 0
-    req_ruby: 0
-    req_sapphire: 0
+    req_ruby: 500
+    req_sapphire: 300
     req_diamond: 0
   - index: 8
     level: 2
@@ -527,12 +529,12 @@ MonoBehaviour:
     value_4: 1
     req_point: 3
     req_stone: 0
-    req_iron: 0
+    req_iron: 1250
     req_gold: 0
-    req_emerald: 0
+    req_emerald: 800
     req_ruby: 0
-    req_sapphire: 0
-    req_diamond: 0
+    req_sapphire: 500
+    req_diamond: 150
   - index: 8
     level: 3
     value_1: 2.5
@@ -542,11 +544,11 @@ MonoBehaviour:
     req_point: 4
     req_stone: 0
     req_iron: 0
-    req_gold: 0
-    req_emerald: 0
-    req_ruby: 0
+    req_gold: 1500
+    req_emerald: 1250
+    req_ruby: 750
     req_sapphire: 0
-    req_diamond: 0
+    req_diamond: 350
   - index: 999
     level: 0
     value_1: -1
@@ -554,7 +556,7 @@ MonoBehaviour:
     value_3: -1
     value_4: -1
     req_point: 1
-    req_stone: 10
+    req_stone: 0
     req_iron: 0
     req_gold: 0
     req_emerald: 0
@@ -568,8 +570,8 @@ MonoBehaviour:
     value_3: 0.75
     value_4: 3
     req_point: 2
-    req_stone: 100
-    req_iron: 30
+    req_stone: 0
+    req_iron: 0
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -582,10 +584,10 @@ MonoBehaviour:
     value_3: 1
     value_4: 3
     req_point: 3
-    req_stone: 250
-    req_iron: 150
-    req_gold: 50
-    req_emerald: 10
+    req_stone: 0
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
@@ -597,10 +599,10 @@ MonoBehaviour:
     value_4: 3
     req_point: 4
     req_stone: 0
-    req_iron: 500
-    req_gold: 300
-    req_emerald: 150
-    req_ruby: 100
+    req_iron: 0
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
   pickaxePowerParamDisplays:
