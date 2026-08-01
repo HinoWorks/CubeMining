@@ -57,6 +57,8 @@ public class TutorialManager : MonoBehaviour
     public UniTask Check_Tutorial(TutorialType _tutorialType)
     {
         var _index = SOLoader.TutorialData?.Get_TutorialIndex(_tutorialType) ?? -1;
+        if (_index < 0) return UniTask.CompletedTask;
+
         if (SaveLoader.Inst != null && SaveLoader.Inst.IsTutorialShown(_index))
         {
             return UniTask.CompletedTask;
@@ -84,12 +86,50 @@ public class TutorialManager : MonoBehaviour
     }
 
     /// <summary>
-    /// デバッグ用。既読状態を無視して強制表示し、閉じてもセーブしない。
+    /// ヘルプ用。既読フラグを無視して強制表示し、閉じてもセーブしない。
     /// 閉じるまで待機する。
+    /// </summary>
+    public UniTask Show_Tutorial(TutorialType _tutorialType)
+    {
+        var index = SOLoader.TutorialData?.Get_TutorialIndex(_tutorialType) ?? -1;
+        return ForceShow(index);
+    }
+
+    /// <summary>
+    /// デバッグ用。既読状態を無視して強制表示し、閉じてもセーブしない。
     /// </summary>
     public UniTask Debug_ShowTutorial(int _index)
     {
+        return ForceShow(_index);
+    }
+
+    UniTask ForceShow(int _index)
+    {
+        if (_index < 0) return UniTask.CompletedTask;
+
+        if (IsShowing && currentIndex == _index && currentCloseTcs != null)
+        {
+            return currentCloseTcs.Task;
+        }
+
+        foreach (var pending in pendingQueue)
+        {
+            if (pending.index == _index) return pending.tcs.Task;
+        }
+
         var tcs = new UniTaskCompletionSource();
+
+        if (IsShowing)
+        {
+            pendingQueue.Enqueue(new PendingTutorial
+            {
+                index = _index,
+                skipSave = true,
+                tcs = tcs,
+            });
+            return tcs.Task;
+        }
+
         ShowInternal(_index, true, tcs);
         return tcs.Task;
     }

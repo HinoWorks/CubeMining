@@ -211,7 +211,12 @@ public class UI_ArtifactManager : UI_OutGameTabBase
                 Debug.Log($"指定したスロット:{_equipSlotIndex} が見つかりません");
             }
         }
+    }
 
+
+    public void OnClick_Help()
+    {
+        TutorialManager.Inst.Show_Tutorial(TutorialType.Artifact);
     }
     #endregion
 

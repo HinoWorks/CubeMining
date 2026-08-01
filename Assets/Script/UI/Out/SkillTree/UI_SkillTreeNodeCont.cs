@@ -118,7 +118,7 @@ public class UI_SkillTreeNodeCont : MonoBehaviour
         var isUnlock_1 = _unlockState != SkillTreeUnlockState.Hide && _level > 0;
         var isUnlock_2 = _unlockState2 != SkillTreeUnlockState.Hide && _level2 > 0;
         lineImage.gameObject.SetActive(isUnlock_1 || isUnlock_2);
-        lineImage.color = isUnlock_1 && isUnlock_2 ? Color.green : Color.gray;
+        lineImage.color = isUnlock_1 && isUnlock_2 ? Color.yellow : Color.gray;
     }
 
 

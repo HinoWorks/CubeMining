@@ -216,6 +216,12 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
     {
         OnClick_Unlock();
     }
+
+
+    public void OnClick_Help()
+    {
+        TutorialManager.Inst.Show_Tutorial(TutorialType.SpecialSkill);
+    }
     #endregion
 
 }

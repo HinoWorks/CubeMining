@@ -195,6 +195,11 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
     }
 
 
+    protected override void Init_ActiveTab()
+    {
+        // 初期位置をリセット
+        scrollContent.anchoredPosition = Vector2.zero;
+    }
 
 
 
@@ -204,6 +209,7 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
     {
         HandleZoom();
         HandlePan();
+        Check_PositionReset();
     }
 
     // ---------- Zoom ----------
@@ -249,6 +255,15 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
             //scrollContent.anchoredPosition += delta * panSpeed;
             DOTween.To(() => scrollContent.anchoredPosition, x => scrollContent.anchoredPosition = x, scrollContent.anchoredPosition + delta * panSpeed, duration_zoom);
             lastMousePos = current;
+        }
+    }
+
+
+    void Check_PositionReset()
+    {
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            DOTween.To(() => scrollContent.anchoredPosition, x => scrollContent.anchoredPosition = x, Vector2.zero, 0.2f);
         }
     }
     #endregion
