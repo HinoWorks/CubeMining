@@ -26,7 +26,7 @@ public class UIManager_OutGame : MonoBehaviour
     [Space(10)]
     [Header(" -- Main --")]
     [SerializeField] GameObject main;
-    [SerializeField] UI_SkillTreeMaanger ui_skillTreeMaanger;
+    [SerializeField] UI_SkillTreeManager ui_skillTreeManager;
     [SerializeField] UI_ArtifactManager ui_artifactManager;
     [SerializeField] UI_PickaxeManager ui_pickaxeManager;
     [SerializeField] UI_PickaxePowerManager ui_pickaxePowerManager;
@@ -34,7 +34,7 @@ public class UIManager_OutGame : MonoBehaviour
 
 
 
-    public UI_SkillTreeMaanger UI_SkillTreeManager => ui_skillTreeMaanger;
+    public UI_SkillTreeManager UI_SkillTreeManager => ui_skillTreeManager;
     public UI_ArtifactManager UI_ArtifactManager => ui_artifactManager;
     public UI_PickaxeManager UI_PickaxeManager => ui_pickaxeManager;
     public UI_PickaxePowerManager UI_PickaxePowerManager => ui_pickaxePowerManager;
@@ -81,7 +81,7 @@ public class UIManager_OutGame : MonoBehaviour
             ui_resourceCounter.AwakeCall(false);
         }
 
-        ui_skillTreeMaanger.Start_OnceInit();
+        ui_skillTreeManager.Start_OnceInit();
         ui_artifactManager.Start_OnceInit();
         ui_pickaxeManager.Start_OnceInit();
         ui_pickaxePowerManager.Start_OnceInit();
@@ -138,14 +138,14 @@ public class UIManager_OutGame : MonoBehaviour
                 ui_resourceCounter.CounterUpdateCheck();
             }
 
-            ui_skillTreeMaanger.ToOutGame_InitData();
+            ui_skillTreeManager.ToOutGame_InitData();
             ui_artifactManager.ToOutGame_InitData();
             ui_pickaxeManager.ToOutGame_InitData();
             ui_pickaxePowerManager.ToOutGame_InitData();
         }
         else if (_state == GameStateType.InGame_Ready)
         {
-            ui_skillTreeMaanger.ToInGame_ResetLoadFlag();
+            ui_skillTreeManager.ToInGame_ResetLoadFlag();
             ui_artifactManager.ToInGame_ResetLoadFlag();
             ui_pickaxeManager.ToInGame_ResetLoadFlag();
             ui_pickaxePowerManager.ToInGame_ResetLoadFlag();
@@ -160,7 +160,7 @@ public class UIManager_OutGame : MonoBehaviour
         if (currentMenuType == _outGameMenuType) return;
         currentMenuType = _outGameMenuType;
 
-        ui_skillTreeMaanger.Init(_outGameMenuType);
+        ui_skillTreeManager.Init(_outGameMenuType);
         ui_artifactManager.Init(_outGameMenuType);
         ui_pickaxeManager.Init(_outGameMenuType);
         ui_pickaxePowerManager.Init(_outGameMenuType);

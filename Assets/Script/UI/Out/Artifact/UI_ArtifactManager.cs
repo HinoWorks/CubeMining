@@ -187,11 +187,13 @@ public class UI_ArtifactManager : UI_OutGameTabBase
                 SaveLoader.Inst.Request_SaveArtifactSlotData(freeSlot.slotIndex, true, _so.artifactIndex);
                 await UniTask.DelayFrame(1);
                 freeSlot.Init();
-                Debug.Log($"空きスロット:{freeSlot.slotIndex} / アーティファクト:{_so.artifactIndex} set");
+
+                SoundManager.Inst.PlaySE(121); // SE: アーティファクト装備
+                //Debug.Log($"空きスロット:{freeSlot.slotIndex} / アーティファクト:{_so.artifactIndex} set");
             }
             else
             {
-                Debug.Log("空きスロットが見つかりません");
+                //Debug.Log("空きスロットが見つかりません");
             }
         }
         else // 指定したスロットから削除
@@ -204,11 +206,13 @@ public class UI_ArtifactManager : UI_OutGameTabBase
                 SaveLoader.Inst.Request_SaveArtifactSlotData(_equipSlotIndex, true, -1);
                 await UniTask.DelayFrame(1);
                 targetSlot.Init();
-                Debug.Log($"指定したスロット:{_equipSlotIndex} のアーティファクトを削除");
+
+                SoundManager.Inst.PlaySE(122); // SE: アーティファクト装備解除
+                //Debug.Log($"指定したスロット:{_equipSlotIndex} のアーティファクトを削除");
             }
             else
             {
-                Debug.Log($"指定したスロット:{_equipSlotIndex} が見つかりません");
+                //Debug.Log($"指定したスロット:{_equipSlotIndex} が見つかりません");
             }
         }
     }

@@ -26,6 +26,7 @@ public class UI_PickaxePowerInfo : MonoBehaviour
     public List<ResourceCount> RequredResources => requredResources;
     private int currentPoints = 0;
     public int requiredPoints => so_level.req_point;
+    private SimpleAnimation anim;
 
     private Action onClick_Equip;
     private Action onClick_Unlock;
@@ -74,6 +75,8 @@ public class UI_PickaxePowerInfo : MonoBehaviour
         onClick_Equip = _onClick_Equip;
         onClick_Unlock = _onClick_Unlock;
         onClick_Enhance = _onClick_Enhance;
+
+        anim = GetComponent<SimpleAnimation>();
     }
 
 
@@ -88,6 +91,7 @@ public class UI_PickaxePowerInfo : MonoBehaviour
         if (!currentUnit.isEnoughPlayerLevel)
         {
             tmp_lockedDescription.SetText($"Lv. {so_base.unlockLevel}");
+            Play_Anim();
             return;
         }
 
@@ -108,6 +112,8 @@ public class UI_PickaxePowerInfo : MonoBehaviour
 
         SetData_Param(currentLevel);
         SetData_RequiredCost();
+
+        Play_Anim();
     }
     public void SetData_Equiped(bool _isEquiped)
     {
@@ -118,6 +124,11 @@ public class UI_PickaxePowerInfo : MonoBehaviour
         btn_equip.SetActive(!isEquiped && isEquipable);
     }
 
+    private void Play_Anim()
+    {
+        anim.Rewind();
+        anim.Play("Default");
+    }
 
     private void SetData_Param(int _currentLevel)
     {

@@ -666,6 +666,8 @@ GameObject:
   - component: {fileID: 2652132900939104558}
   - component: {fileID: 4077530325051703414}
   - component: {fileID: 4300981132481207636}
+  - component: {fileID: 6060022837592037960}
+  - component: {fileID: 5111952544828726450}
   m_Layer: 5
   m_Name: pf_ui_pickaxePower_selectInfo
   m_TagString: Untagged
@@ -696,7 +698,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 488, y: 358}
+  m_AnchoredPosition: {x: 488, y: 185.50003}
   m_SizeDelta: {x: 800, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2652132900939104558
@@ -785,6 +787,49 @@ MonoBehaviour:
   btn_enhance: {fileID: 4289414477465867580}
   obj_locked: {fileID: 6694875569525577862}
   tmp_lockedDescription: {fileID: 580116055910388333}
+--- !u!95 &6060022837592037960
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704002632190730074}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5111952544828726450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704002632190730074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3759e2aae0f7b9a47bb98fc64bf3c543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SimpleAnimationComponent::SimpleAnimation
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingMode: 0
+  m_WrapMode: 0
+  m_Clip: {fileID: 7400000, guid: 0fe65f7c45e5c4a8ca3097c829dd1b7a, type: 2}
+  m_States:
+  - clip: {fileID: 7400000, guid: 0fe65f7c45e5c4a8ca3097c829dd1b7a, type: 2}
+    name: Default
+    defaultState: 1
 --- !u!1 &1291094629596894639
 GameObject:
   m_ObjectHideFlags: 0
@@ -27498,7 +27543,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -659.7}
+  m_AnchoredPosition: {x: 400, y: -627.2}
   m_SizeDelta: {x: 850, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4617102294030847804

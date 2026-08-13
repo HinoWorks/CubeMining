@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using Cysharp.Threading.Tasks;
 
-[CustomEditor(typeof(UI_SkillTreeMaanger))]
+[CustomEditor(typeof(UI_SkillTreeManager))]
 public class SkillTreeEditor : Editor
 {
     const string DataBasePrefabPath = "Assets/Prefab/z_SO Loader.prefab";
@@ -11,7 +11,7 @@ public class SkillTreeEditor : Editor
     {
         base.OnInspectorGUI();
 
-        var ui = target as UI_SkillTreeMaanger;
+        var ui = target as UI_SkillTreeManager;
         var t = "SkillTree SO更新 & UI再生成";
 
         EditorGUI.BeginDisabledGroup(false);

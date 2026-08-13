@@ -16,7 +16,7 @@ public enum SkillTreeUnlockState
     EnhanceComplete
 }
 
-public class UI_SkillTreeMaanger : UI_OutGameTabBase
+public class UI_SkillTreeManager : UI_OutGameTabBase
 {
     public UI_SkillTreeUnit[] skillTreeUnits;
     [SerializeField] UI_SkillTreeDetail ui_skillTreeDetail;
@@ -39,6 +39,7 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
 
     [Header("Pan")]
     [SerializeField] private float panSpeed = 1.0f;
+    [SerializeField] private float panPadding = 0f;
 
 
     private bool haveEnhanceReadyUnit = false;
@@ -232,12 +233,13 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
 
         // マウス位置を固定したままズーム: コンテンツ上の点 localMousePos が画面で動かないように position を補正
         Vector2 posDelta = localMousePos * (oldScale - newScale);
-        Vector2 targetPos = scrollContent.anchoredPosition + posDelta;
+        Vector2 targetPos = ClampPanPosition(scrollContent.anchoredPosition + posDelta, newScale);
 
+        DOTween.Kill(scrollContent);
         scrollContent.localScale = Vector3.one * newScale;
         scrollContent.anchoredPosition = targetPos;
-        DOTween.To(() => scrollContent.localScale, x => scrollContent.localScale = x, Vector3.one * newScale, duration_zoom);
-        DOTween.To(() => scrollContent.anchoredPosition, x => scrollContent.anchoredPosition = x, targetPos, duration_zoom);
+        DOTween.To(() => scrollContent.localScale, x => scrollContent.localScale = x, Vector3.one * newScale, duration_zoom).SetTarget(scrollContent);
+        DOTween.To(() => scrollContent.anchoredPosition, x => scrollContent.anchoredPosition = x, targetPos, duration_zoom).SetTarget(scrollContent);
     }
 
     // ---------- Pan ----------
@@ -252,8 +254,9 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
         {
             Vector2 current = Mouse.current.position.ReadValue();
             Vector2 delta = current - lastMousePos;
-            //scrollContent.anchoredPosition += delta * panSpeed;
-            DOTween.To(() => scrollContent.anchoredPosition, x => scrollContent.anchoredPosition = x, scrollContent.anchoredPosition + delta * panSpeed, duration_zoom);
+            Vector2 targetPos = ClampPanPosition(scrollContent.anchoredPosition + delta * panSpeed);
+            DOTween.Kill(scrollContent);
+            DOTween.To(() => scrollContent.anchoredPosition, x => scrollContent.anchoredPosition = x, targetPos, duration_zoom).SetTarget(scrollContent);
             lastMousePos = current;
         }
     }
@@ -263,8 +266,28 @@ public class UI_SkillTreeMaanger : UI_OutGameTabBase
     {
         if (Keyboard.current.rKey.wasPressedThisFrame)
         {
-            DOTween.To(() => scrollContent.anchoredPosition, x => scrollContent.anchoredPosition = x, Vector2.zero, 0.2f);
+            DOTween.Kill(scrollContent);
+            DOTween.To(() => scrollContent.anchoredPosition, x => scrollContent.anchoredPosition = x, Vector2.zero, 0.2f).SetTarget(scrollContent);
         }
+    }
+
+    Vector2 ClampPanPosition(Vector2 pos, float? scaleOverride = null)
+    {
+        var view = (RectTransform)scrollContent.parent;
+        float scale = scaleOverride ?? scrollContent.localScale.x;
+
+        float overflowX = (scrollContent.rect.width * scale - view.rect.width) * 0.5f + panPadding;
+        float overflowY = (scrollContent.rect.height * scale - view.rect.height) * 0.5f + panPadding;
+
+        float minX = overflowX > 0f ? -overflowX : 0f;
+        float maxX = overflowX > 0f ? overflowX : 0f;
+        float minY = overflowY > 0f ? -overflowY : 0f;
+        float maxY = overflowY > 0f ? overflowY : 0f;
+
+        return new Vector2(
+            Mathf.Clamp(pos.x, minX, maxX),
+            Mathf.Clamp(pos.y, minY, maxY)
+        );
     }
     #endregion
 

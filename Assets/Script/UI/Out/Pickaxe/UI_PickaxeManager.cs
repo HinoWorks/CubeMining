@@ -166,6 +166,8 @@ public class UI_PickaxeManager : UI_OutGameTabBase
             SaveLoader.Inst.Request_SavePickaxeSlotData(_equipSlotIndex, _so.pickaxeIndex);
             await UniTask.DelayFrame(1);
         }
+
+        SoundManager.Inst.PlaySE(123); // SE: ピッケル装備
         selectInfoUnit.Set_EquipState(_equipSlotIndex);
         await Set_PickaxeEquip();
         Set_PickaxeLibraryEquipState();
@@ -226,6 +228,7 @@ public class UI_PickaxeManager : UI_OutGameTabBase
 
         // 新しいピッケルを表示
         ui_getNewPickaxe.SetIcon(_so.icon);
+        SoundManager.Inst.PlaySE(124); // SE: ピッケルクラフト
         if (!_so.isLast)
         {
             await UniTask.Delay(pickaxeAnimWaitTime);

@@ -137,6 +137,8 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
         }
         ui_selectInfo.SetData_Equiped(true);
 
+        SoundManager.Inst.PlaySE(126); // SE: 装備
+
         await UniTask.DelayFrame(2);
         isDoingAction = false;
     }
@@ -186,6 +188,8 @@ public class UI_PickaxePowerManager : UI_OutGameTabBase
 
         //UIに反映
         currentSelectUnit.Callback_Enhanced(newLevel, currentPoints);
+        SoundManager.Inst.PlaySE(125); // SE: パワースキル強化
+
         await UniTask.DelayFrame(2);
         ui_selectInfo.CallBack_Enhanced(newLevel);
         tmp_points.SetText($"{currentPoints}");
