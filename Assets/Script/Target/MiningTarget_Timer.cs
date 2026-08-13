@@ -2,14 +2,12 @@ using UnityEngine;
 
 public class MiningTarget_Timer : MiningTarget_Object
 {
-    private float exTimeBase = 1f;
     private int index_SE_Damage => 22;
     private int index_SE_Break => 23;
 
     public override void Init(ObjectGenerateParam _objectGenerateParam, BlockData _blockData)
     {
-        base.Init(_objectGenerateParam, _blockData);
-        exTimeBase = _objectGenerateParam.so.valueRate;
+        base.Init(_objectGenerateParam, _blockData); ;
         var hp = (int)(_blockData.hp * _objectGenerateParam.so.hpRate);
         if (hp <= 0) hp = 1;
         base.Init_MiningTargetBase(hp, 0, _objectGenerateParam.so.objectIndex);
@@ -34,7 +32,8 @@ public class MiningTarget_Timer : MiningTarget_Object
         CameraManager.Inst?.ShakeCamera_BlockBreak();
 
         // ===========
-        var getExTime = exTimeBase * objectGenerateParam.valueRate_total;
+        var getExTime = objectGenerateParam.valueRate_total;
+        Debug.Log($"getExTime => {getExTime}");
         InGameManager.Inst.AddGetExTime(getExTime);
         //GameEvent.InGame.PublishIngameTimeAdd(getExTime);
 

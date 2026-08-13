@@ -16,7 +16,7 @@ public class MiningTarget_Tresure : MiningTarget_Object
         base.Init(_objectGenerateParam, _blockData);
         var hp = (int)(_blockData.hp * _objectGenerateParam.so.hpRate);
         treasureValueRate = UnityEngine.Random.Range(rate_min, rate_max);
-        var getTreasureValue = (int)(_blockData.baseValue * _objectGenerateParam.so.valueRate * treasureValueRate);
+        var getTreasureValue = (int)(_blockData.baseValue * _objectGenerateParam.valueRate_total * treasureValueRate);
         if (getTreasureValue <= 0) getTreasureValue = 1;
 
         //Debug.Log($"Set_Tresure - hp: {hp}, getTreasureValue: {getTreasureValue}");

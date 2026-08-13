@@ -88,6 +88,8 @@ public class SkillTreeBase
     public int maxLevel;
     public float deltaValue;
     public float deltaValue2;
+    public string unit;
+    public string unit2;
 }
 
 [System.Serializable]

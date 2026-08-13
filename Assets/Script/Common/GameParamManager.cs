@@ -252,7 +252,7 @@ public class ObjectGenerateParam
                 isActive = true;
                 break;
             case ParamType.Rate_Generate:
-                generateRate_enhanced += (int)_setParam;
+                generateRate_enhanced += (int)(_setParam * 100);
                 break;
             case ParamType.Rate_Value:
                 valueRate_enhanced += _setParam;
@@ -369,23 +369,23 @@ public class BlockChangeRateParam
             case ParamType.Rate_Generate:
                 switch (_targetBlockIndex)
                 {
-                    case 1: rate_iron_enhanced += (int)_setParam; break;
-                    case 2: rate_gold_enhanced += (int)_setParam; break;
-                    case 3: rate_emerald_enhanced += (int)_setParam; break;
-                    case 4: rate_ruby_enhanced += (int)_setParam; break;
-                    case 5: rate_sapphire_enhanced += (int)_setParam; break;
-                    case 6: rate_diamond_enhanced += (int)_setParam; break;
+                    case 1: rate_iron_enhanced += (int)(_setParam * 100); break;
+                    case 2: rate_gold_enhanced += (int)(_setParam * 100); break;
+                    case 3: rate_emerald_enhanced += (int)(_setParam * 100); break;
+                    case 4: rate_ruby_enhanced += (int)(_setParam * 100); break;
+                    case 5: rate_sapphire_enhanced += (int)(_setParam * 100); break;
+                    case 6: rate_diamond_enhanced += (int)(_setParam * 100); break;
                 }
                 break;
             case ParamType.Rate_Value:
                 switch (_targetBlockIndex)
                 {
-                    case 1: rate_changeMax_iron_enhanced += (int)_setParam; break;
-                    case 2: rate_changeMax_gold_enhanced += (int)_setParam; break;
-                    case 3: rate_changeMax_emerald_enhanced += (int)_setParam; break;
-                    case 4: rate_changeMax_ruby_enhanced += (int)_setParam; break;
-                    case 5: rate_changeMax_sapphire_enhanced += (int)_setParam; break;
-                    case 6: rate_changeMax_diamond_enhanced += (int)_setParam; break;
+                    case 1: rate_changeMax_iron_enhanced += (int)(_setParam * 100); break;
+                    case 2: rate_changeMax_gold_enhanced += (int)(_setParam * 100); break;
+                    case 3: rate_changeMax_emerald_enhanced += (int)(_setParam * 100); break;
+                    case 4: rate_changeMax_ruby_enhanced += (int)(_setParam * 100); break;
+                    case 5: rate_changeMax_sapphire_enhanced += (int)(_setParam * 100); break;
+                    case 6: rate_changeMax_diamond_enhanced += (int)(_setParam * 100); break;
                 }
                 break;
             case ParamType.Value:

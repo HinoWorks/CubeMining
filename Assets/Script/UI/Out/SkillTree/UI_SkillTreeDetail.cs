@@ -67,11 +67,22 @@ public class UI_SkillTreeDetail : MonoBehaviour
         tmp_level.SetText($"<size=75%>Lv.</size>{_currentLevel} <size=75%> / {so.maxLevel}</size>");
         tmp_description.SetText(so.description);
 
-        obj_param.SetActive(so.paramType != ParamType.Unlock);
-        var paramNow = so.deltaValue * _currentLevel;
-        var paramNext = so.deltaValue * (_currentLevel + 1);
-        tmp_paramNow.SetText(paramNow.ToString("F2"));
-        tmp_paramNext.SetText(paramNext.ToString("F2"));
+        var isParamON = so.unit != "NA";
+        obj_param.SetActive(so.unit != "NA");
+
+        if (isParamON)
+        {
+            //var setParam_1 = "";
+            //var setParam_2 = "";
+
+            var paramNow = so.deltaValue * _currentLevel;
+            var paramNext = so.deltaValue * (_currentLevel + 1);
+            tmp_paramNow.SetText(SetParamText(so.unit, paramNow));
+            tmp_paramNext.SetText(SetParamText(so.unit, paramNext));
+        }
+
+        //tmp_paramNow.SetText(paramNow.ToString("F2"));
+        ///tmp_paramNext.SetText(paramNext.ToString("F2"));
 
         SetData_RequiredCost(_currentLevel);
         isMaxLevel = _currentLevel >= so.maxLevel;
@@ -81,6 +92,27 @@ public class UI_SkillTreeDetail : MonoBehaviour
         obj_complete.SetActive(isMaxLevel);
         obj_resourceRoot.SetActive(!isMaxLevel);
         this.gameObject.SetActive(true);
+    }
+
+    private string SetParamText(string _unit, float _value)
+    {
+        string setParam = "";
+        switch (_unit)
+        {
+            case "%":
+                setParam = $"+{(_value * 100).ToString("F1")}%";
+                break;
+            case "Sec":
+                setParam = $"+{_value.ToString("F0")}Sec";
+                break;
+            case "Count":
+                setParam = $"+{_value.ToString("F0")}";
+                break;
+            case "NA":
+                // 非表示　ここには来ない
+                break;
+        }
+        return setParam;
     }
 
     private void EnsureCachedRefs()

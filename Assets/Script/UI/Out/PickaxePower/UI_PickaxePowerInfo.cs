@@ -87,7 +87,7 @@ public class UI_PickaxePowerInfo : MonoBehaviour
         obj_locked.SetActive(!currentUnit.isEnoughPlayerLevel);
         if (!currentUnit.isEnoughPlayerLevel)
         {
-            tmp_lockedDescription.SetText($"Lv.: {so_base.unlockLevel}");
+            tmp_lockedDescription.SetText($"Lv. {so_base.unlockLevel}");
             return;
         }
 
