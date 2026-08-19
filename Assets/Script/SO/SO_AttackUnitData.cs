@@ -35,6 +35,7 @@ public class PickaxeUnitData
     public string pickaxeName;
     public Sprite icon;
     public GameObject pf;
+    public GameObject pf_model; // インゲーム追従用の3Dモデル
     public int damage;
     public float attackInterval;
     public float criticalRate;

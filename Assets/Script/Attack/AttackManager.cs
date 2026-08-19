@@ -1,5 +1,6 @@
 using UnityEngine;
 using UniRx;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,17 +9,24 @@ public class AttackManager : MonoBehaviour
     public static AttackManager Inst;
     [SerializeField] List<AttackCont_Pickaxe> pickaxeConts = new List<AttackCont_Pickaxe>();
     [SerializeField] List<AttackContBase> attackConts = new List<AttackContBase>();
+    [SerializeField] PickaxeAnimCont pickaxeAnimCont;
     private bool isAttacking = false;
     private int currentPickaxeIndex = 0;
     public int currentPickaxeDamage => pickaxeConts[currentPickaxeIndex].baseDamage;
     public Vector3 currentPickaxePosition => pickaxeConts[currentPickaxeIndex].pickaxePosition;
     private int[] slotIndexes = { 0 };
 
+    private readonly Subject<Unit> onPickaxeAttackTiming = new();
+    public IObservable<Unit> OnPickaxeAttackTiming => onPickaxeAttackTiming.AsObservable();
+
 
     void Awake()
     {
         if (Inst == null) { Inst = this; }
-        else { Destroy(this); }
+        else { Destroy(this); return; }
+        onPickaxeAttackTiming.AddTo(this);
+        if (pickaxeAnimCont == null)
+            pickaxeAnimCont = GetComponentInChildren<PickaxeAnimCont>(true);
     }
 
     void Start()
@@ -84,6 +92,25 @@ public class AttackManager : MonoBehaviour
         pickaxeConts.Add(pickaxeCont);
         pickaxeCont.Init(_slotIndex, _pickaxeParam);
         pickaxeCont.Set_AttackTrigger(isAttacking);
+
+        EnsurePickaxeAnimCont();
+        pickaxeAnimCont.SetModel(_pickaxeParam.so.pf_model);
+    }
+
+    public void NotifyPickaxeAttackTiming()
+    {
+        onPickaxeAttackTiming.OnNext(Unit.Default);
+    }
+
+    private void EnsurePickaxeAnimCont()
+    {
+        if (pickaxeAnimCont != null) return;
+        pickaxeAnimCont = GetComponentInChildren<PickaxeAnimCont>(true);
+        if (pickaxeAnimCont != null) return;
+
+        var go = new GameObject("PickaxeAnim");
+        go.transform.SetParent(transform);
+        pickaxeAnimCont = go.AddComponent<PickaxeAnimCont>();
     }
 
 
@@ -127,6 +154,7 @@ public class AttackManager : MonoBehaviour
             pickaxeCont.OnDestroy();
         }
         pickaxeConts.Clear();
+        pickaxeAnimCont?.ClearModel();
     }
 
     private void Click_LeftButton()

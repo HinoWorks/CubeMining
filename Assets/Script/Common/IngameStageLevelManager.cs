@@ -126,6 +126,8 @@ public class IngameStageLevelManager : MonoBehaviour
     /// </summary>
     private void OnStageLevelUp(int newLevel)
     {
+        SoundManager.Inst.PlaySE(150, true); // SE: ボーナス獲得
+
         if (createBlockCount > 0) BlockGenerateManager.Inst.CreateBlock(createBlockCount);
         if (changeResource > 0) BlockGenerateManager.Inst.ConvertDirtToOre(changeResource);
         if (addTime > 0) InGameManager.Inst.AddGetExTime(addTime);

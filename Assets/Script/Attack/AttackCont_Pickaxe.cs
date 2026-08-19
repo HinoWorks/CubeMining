@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System;
 using DG.Tweening;
 using Unity.VisualScripting;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 
 public class AttackCont_Pickaxe : MonoBehaviour
 {
@@ -44,7 +46,7 @@ public class AttackCont_Pickaxe : MonoBehaviour
     private readonly SerialDisposable attackLoopDisposable = new SerialDisposable();
 
     private float timer = 0;
-
+    private CancellationTokenSource CTS;
 
 
 
@@ -75,6 +77,7 @@ public class AttackCont_Pickaxe : MonoBehaviour
         //CreateAttackRoop();
         this.gameObject.SetActive(false);
         timer = 0;
+        CTS = new CancellationTokenSource();
 
 #if UNITY_EDITOR
         DebugLog();
@@ -99,6 +102,7 @@ public class AttackCont_Pickaxe : MonoBehaviour
             sender.OnEnter -= OnEnter;
             sender.OnExit -= OnExit;
         }
+        CTS.Cancel();
         Destroy(this.gameObject);
     }
 
@@ -112,8 +116,9 @@ public class AttackCont_Pickaxe : MonoBehaviour
             Attack();
         }
     }
-    private void Attack()
+    private async void Attack()
     {
+        AttackManager.Inst.NotifyPickaxeAttackTiming();
         removeBuffer.Clear();
 
         // critical check
@@ -129,6 +134,8 @@ public class AttackCont_Pickaxe : MonoBehaviour
                 mesh.material = mat_critical;
             }
         }
+
+        await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: CTS.Token);
 
         obj_pointerArea.transform.DOScale(1.1f * size * Vector3.one, 0.075f).SetEase(Ease.OutBack);
         obj_pointerArea.transform.DOScale(size * Vector3.one, 0.075f).SetEase(Ease.OutBack).SetDelay(0.075f)

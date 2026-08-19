@@ -241,39 +241,64 @@ public class SoundManager : MonoBehaviour
 
 
     #region -- SE --
-    /// <summary>インデックス指定でSE再生（汎用）</summary>
-    public void PlaySE(int index)
+    /// <summary>インデックス指定でSE再生（汎用）。forcePlay なら空きがなくても既存SEを中断して鳴らす</summary>
+    public void PlaySE(int index, bool forcePlay = false)
     {
         var getData = SOLoader.SoundData.Get_SoundData_SE(index);
         if (getData == null) return;
-        PlaySE(getData);
+        PlaySE(getData, forcePlay);
     }
-    /// <summary>主にボタンクリックなどのUI再生用</summary>
-    public void PlaySE_UI(int index)
+    /// <summary>主にボタンクリックなどのUI再生用。forcePlay なら空きがなくても既存SEを中断して鳴らす</summary>
+    public void PlaySE_UI(int index, bool forcePlay = false)
     {
         var getData = SOLoader.SoundData.Get_SoundData_SE_UI(index);
         if (getData == null) return;
-        PlaySE(getData);
+        PlaySE(getData, forcePlay);
     }
 
-    public void PlaySE(SO_SoundElement getData)
+    public void PlaySE(SO_SoundElement getData, bool forcePlay = false)
     {
         if (getData == null || getData.clip == null) return;
 
+        AudioSource target = FindSESource(forcePlay);
+        if (target == null) return;
+
+        target.clip = getData.clip;
+        target.volume = getData.Volume * GetSEVolumeMultiplier();
+        target.pitch = UnityEngine.Random.Range(sePitchMin, sePitchMax);
+        target.Play();
+    }
+
+    /// <summary>
+    /// 空きソースを探す。forcePlay 時は同時再生上限内に空きがなければ、残り時間が最も短い再生中ソースを奪う。
+    /// </summary>
+    private AudioSource FindSESource(bool forcePlay)
+    {
+        AudioSource stealCandidate = null;
+        float stealRemaining = float.MaxValue;
         int count = 0;
+
         foreach (AudioSource source in SEsources)
         {
             if (count >= MAX_SIMULTANEOUS_SE) break;
+            if (source == null) continue;
+
             if (!source.isPlaying)
+                return source;
+
+            if (forcePlay)
             {
-                source.clip = getData.clip;
-                source.volume = getData.Volume * GetSEVolumeMultiplier();
-                source.pitch = UnityEngine.Random.Range(sePitchMin, sePitchMax);
-                source.Play();
-                return;
+                float remaining = (source.clip != null) ? source.clip.length - source.time : 0f;
+                if (remaining < stealRemaining)
+                {
+                    stealRemaining = remaining;
+                    stealCandidate = source;
+                }
             }
             count++;
         }
+
+        return forcePlay ? stealCandidate : null;
     }
 
     public void StopSE()

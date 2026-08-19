@@ -131,7 +131,7 @@ public class InGameManager : MonoBehaviour
         GameEvent.UI.PublishTimeLimit(timeLimit);
 
         await TutorialManager.Inst.Check_Tutorial(TutorialType.Welcome);
-        SoundManager.Inst.PlaySE(100);
+        SoundManager.Inst.PlaySE(100, true);
 
         UIManager_InGame.Inst.ui_EventManager.StartInGame(activeTime_startEndGame); // UI表示
         await UniTask.Delay(activeTime_startEndGame * 1000); // 待機
@@ -154,7 +154,7 @@ public class InGameManager : MonoBehaviour
         ResultSave_ArtifactCurrentBlockCount();
         ResultSave_Status();
 
-        SoundManager.Inst.PlaySE(101);
+        SoundManager.Inst.PlaySE(101, true);
 
         UIManager_InGame.Inst.ui_EventManager.EndGame(activeTime_startEndGame); // UI表示
         await UniTask.Delay(activeTime_startEndGame * 1000); // 待機
@@ -167,7 +167,7 @@ public class InGameManager : MonoBehaviour
     }
     private async void SetState_ResultEnd_ToOutGame()
     {
-        SoundManager.Inst.PlaySE(102);
+        SoundManager.Inst.PlaySE(102, true);
         UIManager_Title.Inst.Set_OverScreen().Forget();
         await UniTask.Delay(250);
         BlockGenerateManager.Inst.ResetAllBlocks();
