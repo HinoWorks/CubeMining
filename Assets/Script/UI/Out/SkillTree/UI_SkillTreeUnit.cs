@@ -68,6 +68,7 @@ public class UI_SkillTreeUnit : MonoBehaviour
         this.onClick_Enhance = _onClick_Enhance;
         this.onUpdateNodeState = _onUpdateNodeState;
         obj_debug.SetActive(false);
+        eff_enhance.gameObject.SetActive(false);
     }
 
     public async void Init()
@@ -180,8 +181,23 @@ public class UI_SkillTreeUnit : MonoBehaviour
 
     public void CallBack_Enhance()
     {
-        eff_enhance.Play();
+        PlayEnhanceEffect().Forget();
         Init();
+    }
+
+    private async UniTaskVoid PlayEnhanceEffect()
+    {
+        var effectObj = eff_enhance.gameObject;
+        effectObj.SetActive(true);
+        eff_enhance.Play(true);
+
+        var canceled = await UniTask.WaitUntil(
+            () => effectObj == null || !effectObj.activeInHierarchy || !eff_enhance.IsAlive(true),
+            cancellationToken: this.GetCancellationTokenOnDestroy()
+        ).SuppressCancellationThrow();
+
+        if (canceled || effectObj == null) return;
+        effectObj.SetActive(false);
     }
     private void OnPointerEnter(bool _isEnter)
     {

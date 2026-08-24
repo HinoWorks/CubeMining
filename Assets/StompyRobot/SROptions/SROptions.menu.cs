@@ -94,6 +94,56 @@ public partial class SROptions
         SaveLoader.Inst.Request_SaveResource(ResourceType.Diamond, 10);
     }
 
+    [Category("アイテム取得")]
+    [DisplayName("石 +100")]
+    [Sort(9)]
+    public void ItemGet_Stone_100()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Stone, 100);
+    }
+    [Category("アイテム取得")]
+    [DisplayName("鉄 +100")]
+    [Sort(10)]
+    public void ItemGet_Iron_100()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Iron, 100);
+    }
+    [Category("アイテム取得")]
+    [DisplayName("金 +100")]
+    [Sort(11)]
+    public void ItemGet_Gold_100()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Gold, 100);
+    }
+    [Category("アイテム取得")]
+    [DisplayName("エメラルド +100")]
+    [Sort(12)]
+    public void ItemGet_Emerald_100()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Emerald, 100);
+    }
+    [Category("アイテム取得")]
+    [DisplayName("ルビー +100")]
+    [Sort(13)]
+    public void ItemGet_Ruby_100()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Ruby, 100);
+    }
+    [Category("アイテム取得")]
+    [DisplayName("サファイア +100")]
+    [Sort(14)]
+    public void ItemGet_Sapphire_100()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Sapphire, 100);
+    }
+    [Category("アイテム取得")]
+    [DisplayName("ダイアモンド +100")]
+    [Sort(15)]
+    public void ItemGet_Diamond_100()
+    {
+        SaveLoader.Inst.Request_SaveResource(ResourceType.Diamond, 100);
+    }
+
 
     public static bool isSkillTreeUpgradeNoMaterial = false;
     [Category("Skill")]

@@ -44,14 +44,6 @@ public class AttackManager : MonoBehaviour
          */
     }
 
-    /*
-        private void RefreshPickaxeAttackLoops()
-        {
-            foreach (var pickaxeCont in pickaxeConts)
-                pickaxeCont.RefreshAttackLoop();
-        }
-    */
-
 
     public async void Set_Ready()
     {

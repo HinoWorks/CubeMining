@@ -868,6 +868,9 @@ MonoBehaviour:
     icon: {fileID: 0}
     maxLevel: 0
     deltaValue: 0
+    deltaValue2: 0
+    unit: 
+    unit2: 
   skillTreeUnit:
     skillTreeIndex: 0
     refIndex: 0
@@ -2413,9 +2416,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1174368946258752943, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
+      propertyPath: m_MeshSharing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174368946258752943, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174368946258752943, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
+      propertyPath: m_RaycastTargetCache
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1187720805819682221, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1187720805819682221, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
       propertyPath: m_SortingLayer
@@ -2506,6 +2521,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2969069882925479138, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969069882925479138, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
       value: 3
       objectReference: {fileID: 0}
@@ -2547,11 +2566,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6007082254149066773, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6007082254149066773, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
       propertyPath: m_SortingLayer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378885412927444635, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6392168944890995019, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
       propertyPath: m_IsActive
@@ -2620,6 +2643,10 @@ PrefabInstance:
     - target: {fileID: 8505826277017298020, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842097599575529749, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8842097599575529749, guid: 2a532198e2b234699bb47fe80d1c4533, type: 3}
       propertyPath: InitialModule.startSize.scalar

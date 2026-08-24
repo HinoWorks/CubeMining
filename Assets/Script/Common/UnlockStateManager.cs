@@ -85,7 +85,7 @@ public class UnlockStateManager : MonoBehaviour
                 isUnlock_PickaxeCraft = true;
                 break;
             case UnlockTargetType.PickaxePower:
-                //UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.PickaxePower, _isFirstUnlockEvent);
+                UIManager_OutGame.Inst.Set_HeaderButtonActiveState(OutGame_MenuType.PickaxePower, _isFirstUnlockEvent);
                 isUnlock_PickaxePower = true;
                 break;
         }
