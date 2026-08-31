@@ -1162,7 +1162,7 @@ MonoBehaviour:
     targetIndex: -1
     skillName: Unlock Break Bonus
     description: xxxxx
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: a8088b1e4783d45919c72bcb46d01ebf, type: 3}
     maxLevel: 1
     deltaValue: 1
     deltaValue2: 0
@@ -1303,7 +1303,7 @@ MonoBehaviour:
     req_diamond: 0
   - skillTreeIndex: 106
     refIndex: 101
-    unlockCheckIndexes: 670000006e000000
+    unlockCheckIndexes: 65000000670000006e000000
     req_stone: 50
     req_iron: 10
     req_gold: 0
@@ -1353,7 +1353,7 @@ MonoBehaviour:
     req_diamond: 0
   - skillTreeIndex: 111
     refIndex: 104
-    unlockCheckIndexes: 6e00000071000000
+    unlockCheckIndexes: 6e0000007100000099000000
     req_stone: 65
     req_iron: 20
     req_gold: 0
@@ -2181,6 +2181,16 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
+  - skillTreeIndex: 351
+    refIndex: 3123
+    unlockCheckIndexes: 5e01000066000000c8000000
+    req_stone: 50
+    req_iron: 10
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
   - skillTreeIndex: 350
     refIndex: 3120
     unlockCheckIndexes: 6b00000031010000
@@ -2191,11 +2201,11 @@ MonoBehaviour:
     req_ruby: 0
     req_sapphire: 0
     req_diamond: 0
-  - skillTreeIndex: 351
+  - skillTreeIndex: 356
     refIndex: 3121
-    unlockCheckIndexes: 5e01000066000000c8000000
-    req_stone: 50
-    req_iron: 20
+    unlockCheckIndexes: 5f01000060010000
+    req_stone: 100
+    req_iron: 30
     req_gold: 0
     req_emerald: 0
     req_ruby: 0
@@ -2323,7 +2333,7 @@ MonoBehaviour:
     req_diamond: 0
   - skillTreeIndex: 306
     refIndex: 1
-    unlockCheckIndexes: 3101000034010000
+    unlockCheckIndexes: 310100003401000060010000
     req_stone: 200
     req_iron: 150
     req_gold: 65
