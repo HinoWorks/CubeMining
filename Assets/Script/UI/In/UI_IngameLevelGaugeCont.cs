@@ -23,8 +23,14 @@ public class UI_IngameLevelGaugeCont : MonoBehaviour
 
     private void Awake()
     {
+        GameEvent.IngameStageLevel.IsActive.Subscribe(Set_IsActive).AddTo(this);
         GameEvent.IngameStageLevel.Changed.Subscribe(x => Set_IngameLevelChanged(x.level, x.breakCountInLevel, x.breaksToNext)).AddTo(this);
         GameEvent.IngameStageLevel.LevelUp.Subscribe(_ => Set_IngameBlockCountUp()).AddTo(this);
+    }
+
+    private void Set_IsActive(bool isActive)
+    {
+        gameObject.SetActive(isActive);
     }
 
     private void Set_IngameLevelChanged(int level, int blockCount, int blockCountToNext)

@@ -211,6 +211,12 @@ public static class GameEvent
         {
             levelUp.OnNext(newLevel);
         }
+        private static readonly Subject<bool> isActive = new();
+        public static IObservable<bool> IsActive => isActive.AsObservable();
+        public static void PublishIsActive(bool _isActive)
+        {
+            isActive.OnNext(_isActive);
+        }
     }
 
 

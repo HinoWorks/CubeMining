@@ -85,6 +85,8 @@ public class PlayerLevelManager : MonoBehaviour
             currentLevelData.expInCurrentLevel -= requestExp;
             requestExp = SOLoader.PlayerLevelData.GetPlayerLevel(currentLevelData.level).exp;
             GameEvent.PlayerLevel.PublishPlayerLevelUp(currentLevelData.level, currentLevelData.level);
+
+            SoundManager.Inst.PlaySE(151, true); // レベルアップSE
         }
         GameEvent.PlayerLevel.PublishPlayerLevelChanged(currentLevelData.expInCurrentLevel, currentLevelData.level, requestExp);
     }

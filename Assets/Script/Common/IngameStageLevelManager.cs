@@ -14,13 +14,17 @@ public class IngameStageLevelManager : MonoBehaviour
     public int breakCountInLevel { get; private set; }
     public int breaksToNext { get; private set; }
 
-    private bool canCount;
+    private bool canCount => isIngameNow && isBreakBonusUnlock;
+    private bool isIngameNow = false;
+    private bool isBreakBonusUnlock = false;
 
 
 
-    private int createBlockCount => 10 + GameParamManager.StageLevelup_GenerateBlockCount();
-    private float addTime => 5 + GameParamManager.StageLevelup_AddTime();
-    private int changeResource => 10 + GameParamManager.StageLevelup_ChangeResource();
+
+    private int createBlockCount => StaticManager.breakBonus_createBlockCount + GameParamManager.StageLevelup_GenerateBlockCount();
+    private float addTime => StaticManager.breakBonus_addTime + GameParamManager.StageLevelup_AddTime();
+    private int changeResource => StaticManager.breakBonus_changeResource + GameParamManager.StageLevelup_ChangeResource();
+
 
 
 
@@ -46,18 +50,22 @@ public class IngameStageLevelManager : MonoBehaviour
         switch (state)
         {
             case GameStateType.InGame_Ready:
+                isBreakBonusUnlock = GameParamManager.StageLevelup_BreakBonusUnlock();
+                GameEvent.IngameStageLevel.PublishIsActive(isBreakBonusUnlock);
+                if (!isBreakBonusUnlock) return;
+
                 ResetStageLevel();
-                canCount = false;
+                isIngameNow = false;
                 break;
             case GameStateType.InGame:
-                canCount = true;
+                isIngameNow = true;
                 break;
             case GameStateType.InGame_End:
             case GameStateType.Result:
             case GameStateType.ResultEnd_ToOutGame:
             case GameStateType.ResultEnd_ToIngameReady:
             case GameStateType.OutGame:
-                canCount = false;
+                isIngameNow = false;
                 break;
         }
     }
@@ -81,7 +89,7 @@ public class IngameStageLevelManager : MonoBehaviour
         AddBreakCount(add);
     }
 
-    public void AddBreakCount(int delta)
+    private void AddBreakCount(int delta)
     {
         if (delta <= 0) return;
         if (currentLevel >= SOLoader.IngameStageLevelData.maxLevel) return;

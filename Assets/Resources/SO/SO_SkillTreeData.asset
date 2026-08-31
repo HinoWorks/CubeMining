@@ -1121,7 +1121,7 @@ MonoBehaviour:
     unit2: 
   - baseIndex: 3120
     paramCategory: 0
-    paramType: 29
+    paramType: 30
     targetIndex: -1
     skillName: 'Break Bonus : More Block'
     description: Spawns extra blocks after breaking a certain number of ores.
@@ -1133,7 +1133,7 @@ MonoBehaviour:
     unit2: 
   - baseIndex: 3121
     paramCategory: 0
-    paramType: 30
+    paramType: 31
     targetIndex: -1
     skillName: 'Break Bonus : Add Time'
     description: Grants bonus time after breaking a certain number of ores.
@@ -1145,7 +1145,7 @@ MonoBehaviour:
     unit2: 
   - baseIndex: 3122
     paramCategory: 0
-    paramType: 31
+    paramType: 32
     targetIndex: -1
     skillName: 'Break Bonus : Resource Change'
     description: Transforms blocks into rare ores after breaking a certain number
@@ -1155,6 +1155,18 @@ MonoBehaviour:
     deltaValue: 3
     deltaValue2: 0
     unit: Count
+    unit2: 
+  - baseIndex: 3123
+    paramCategory: 0
+    paramType: 29
+    targetIndex: -1
+    skillName: Unlock Break Bonus
+    description: xxxxx
+    icon: {fileID: 0}
+    maxLevel: 1
+    deltaValue: 1
+    deltaValue2: 0
+    unit: NA
     unit2: 
   - baseIndex: 4001
     paramCategory: 5
@@ -1194,7 +1206,7 @@ MonoBehaviour:
     unit2: 
   - baseIndex: 9991
     paramCategory: 0
-    paramType: 32
+    paramType: 33
     targetIndex: 1
     skillName: Stone King
     description: An honorary title awarded to the true master of stone.
@@ -1206,7 +1218,7 @@ MonoBehaviour:
     unit2: 
   - baseIndex: 9992
     paramCategory: 0
-    paramType: 33
+    paramType: 34
     targetIndex: 1
     skillName: Game King
     description: An honorary title celebrating the completion of your journey.
@@ -1218,7 +1230,7 @@ MonoBehaviour:
     unit2: 
   - baseIndex: 9993
     paramCategory: 0
-    paramType: 34
+    paramType: 35
     targetIndex: 1
     skillName: Attack King
     description: An honorary title recognizing ultimate mining power.
@@ -1232,7 +1244,7 @@ MonoBehaviour:
   - skillTreeIndex: 100
     refIndex: 3100
     unlockCheckIndexes: ffffffff
-    req_stone: 10
+    req_stone: 5
     req_iron: 0
     req_gold: 0
     req_emerald: 0

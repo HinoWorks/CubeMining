@@ -30,6 +30,12 @@ public class StaticManager : MonoBehaviour
     public static float blockGenerate_towerDuration = 5f; // タワー生成間隔
 
 
+    // BreakCount 初期値
+    public static int breakBonus_createBlockCount = 5; //ブロック破壊ボーナス : ブロック生成数加算
+    public static int breakBonus_addTime = 1; // ブロック破壊ボーナス : 時間加算
+    public static int breakBonus_changeResource = 2; // ブロック破壊ボーナス : リソース変更数加算
+
+
 
 
     // 時間調整用

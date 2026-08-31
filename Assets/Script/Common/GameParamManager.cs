@@ -100,6 +100,10 @@ public class GameBaseParam
 
 
     /// === ingameのsteageLevel上昇時にかかる能力 ===
+
+    private bool stageLevelup_isUnlocked = false; // レベルアップ時のブロック破壊ボーナスが解除されているか
+    public bool stageLevelup_breakBonusUnlock => stageLevelup_isUnlocked;
+
     private int stageLevelup_generateBlockCount_enhanced = 0; // レベルアップ時に生成するブロック数
     public int stageLevelup_generateBlockCount => 0 + stageLevelup_generateBlockCount_enhanced;
 
@@ -195,6 +199,9 @@ public class GameBaseParam
 
 
             // -- stage levelup param --
+            case ParamType.StageLevelup_BreakBonusUnlock:
+                stageLevelup_isUnlocked = true;
+                break;
             case ParamType.StageLevelup_GenerateBlockCount:
                 stageLevelup_generateBlockCount_enhanced += (int)_setParam;
                 break;
@@ -753,6 +760,7 @@ public static class GameParamManager
     public static bool IsAllKingGot() => gameBaseParam.isStoneKing && gameBaseParam.isGameKing && gameBaseParam.isAttackKing;
 
     // ステージレベルアップ時にかかる能力
+    public static bool StageLevelup_BreakBonusUnlock() => gameBaseParam.stageLevelup_breakBonusUnlock;
     public static int StageLevelup_GenerateBlockCount() => gameBaseParam.stageLevelup_generateBlockCount;
     public static float StageLevelup_AddTime() => gameBaseParam.stageLevelup_addTime;
     public static int StageLevelup_ChangeResource() => gameBaseParam.stageLevelup_changeResource;

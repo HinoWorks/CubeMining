@@ -34,6 +34,8 @@ public class UI_PlayerLevelCont : MonoBehaviour
         anim.Rewind();
         anim.Play("LevelUp");
         eff_levelUp.Play();
+
+
     }
 
 

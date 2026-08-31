@@ -63,6 +63,7 @@ public enum ParamType
 
 
     // ==== stage levelup param ====
+    StageLevelup_BreakBonusUnlock,
     StageLevelup_GenerateBlockCount,
     StageLevelup_AddTime,
     StageLevelup_ChangeResourceCount,
