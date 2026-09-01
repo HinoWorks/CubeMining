@@ -48,6 +48,7 @@ public class AttackCont_BoundShot : AttackContBase
 
     private void CreateBullet()
     {
+        PlayAttackSound();
         for (int i = 0; i < count; i++)
         {
             var freeBullet = bullets.Find(x => !x.gameObject.activeSelf);

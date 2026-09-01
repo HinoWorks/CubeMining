@@ -68,6 +68,7 @@ public class AttackCont_Bow : AttackContBase
 
     private void CreateBullet()
     {
+        PlayAttackSound();
         var freeBowUnit = bowUnits.Find(x => !x.gameObject.activeSelf);
         if (freeBowUnit == null)
         {

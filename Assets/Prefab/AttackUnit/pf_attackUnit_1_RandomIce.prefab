@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2681107374962745633}
-  - component: {fileID: -7279725027511946074}
+  - component: {fileID: 1802586126250456461}
   m_Layer: 0
-  m_Name: pf_attackUnit_LaserBow(virtical)
+  m_Name: pf_attackUnit_1_RandomIce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7279725027511946074
+--- !u!114 &1802586126250456461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 601605801108607667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9b2546b618864bb4973aa2dd2e2b404, type: 3}
+  m_Script: {fileID: 11500000, guid: aa86067202e6748169e914888d589957, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackCont_Bow
-  bowUnit: {fileID: 961592702634231622, guid: a1ca41db6038b4d468512f7c0740996f, type: 3}
-  bulletPrefab: {fileID: 5271756849590050944, guid: f5d1b8334efd446758a6f465487312af, type: 3}
-  isVertical: 1
+  m_EditorClassIdentifier: Assembly-CSharp::AttackCont_RandomPickaxe
+  soundNum: 201
+  bulletPrefab: {fileID: 5271756849590050944, guid: 6c205727dcc6a40709277185c0eab106, type: 3}
+  changeRate_level2: 0.5
+  obj_IceCircle: {fileID: 936914080970385818, guid: afbd32cc5aa0944da8ecc843ce20c7f4, type: 3}

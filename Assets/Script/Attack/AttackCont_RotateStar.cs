@@ -60,6 +60,7 @@ public class AttackCont_RotateStar : AttackContBase
 
     private void CreateBullet()
     {
+        PlayAttackSound();
         if (base.exLevel >= 2 && isLevel2Unit)
         {
             // -- level2

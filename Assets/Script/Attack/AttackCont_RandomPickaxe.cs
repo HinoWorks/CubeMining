@@ -57,7 +57,7 @@ public class AttackCont_RandomPickaxe : AttackContBase
     }
     private async void CreateBullet()
     {
-        SoundManager.Inst.PlaySE(201);
+        PlayAttackSound();
         for (int i = 0; i < count; i++)
         {
             if (CTS.IsCancellationRequested) return;

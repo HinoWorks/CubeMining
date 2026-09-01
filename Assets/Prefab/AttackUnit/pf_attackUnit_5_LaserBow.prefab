@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2681107374962745633}
-  - component: {fileID: -1456729380425263539}
+  - component: {fileID: -7279725027511946074}
   m_Layer: 0
-  m_Name: pf_attackUnit_Thunder(Top)
+  m_Name: pf_attackUnit_5_LaserBow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1456729380425263539
+--- !u!114 &-7279725027511946074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,12 +41,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 601605801108607667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 094faf4a5cf4046c1a16cecbd29657c1, type: 3}
+  m_Script: {fileID: 11500000, guid: c9b2546b618864bb4973aa2dd2e2b404, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackCont_Thunder
-  thunderType: 0
-  bulletPrefab: {fileID: 7706929385890813557, guid: 2b91e2c1d2fb642e4893487be92c2bf1, type: 3}
-  searchRadius: 5
-  searchLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  m_EditorClassIdentifier: Assembly-CSharp::AttackCont_Bow
+  soundNum: 205
+  bowUnit: {fileID: 961592702634231622, guid: 0a469c6e5c9a94782aceb3ee28152f34, type: 3}
+  bulletPrefab: {fileID: 5271756849590050944, guid: 8b80f998fbce54a05a7de90051152432, type: 3}
+  isVertical: 0
+  rate_addArrow: 0.5

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6284990426269352918
+--- !u!1 &601605801108607667
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6058908802465361360}
-  - component: {fileID: 4678467840768569550}
+  - component: {fileID: 2681107374962745633}
+  - component: {fileID: -7279725027511946074}
   m_Layer: 0
-  m_Name: pf_attackUnit_BoundShot
+  m_Name: pf_attackUnit_6_LaserBow(virtical)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6058908802465361360
+--- !u!4 &2681107374962745633
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6284990426269352918}
+  m_GameObject: {fileID: 601605801108607667}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,16 +32,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4678467840768569550
+--- !u!114 &-7279725027511946074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6284990426269352918}
+  m_GameObject: {fileID: 601605801108607667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35d36d57476cf412b9b217398ba37b66, type: 3}
+  m_Script: {fileID: 11500000, guid: c9b2546b618864bb4973aa2dd2e2b404, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackCont_BoundShot
-  bulletPrefab: {fileID: 2009035086339364990, guid: 08c31d503d85f40f7961e8fa75f270d4, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::AttackCont_Bow
+  soundNum: 206
+  bowUnit: {fileID: 961592702634231622, guid: a1ca41db6038b4d468512f7c0740996f, type: 3}
+  bulletPrefab: {fileID: 5271756849590050944, guid: f5d1b8334efd446758a6f465487312af, type: 3}
+  isVertical: 1
+  rate_addArrow: 0.5

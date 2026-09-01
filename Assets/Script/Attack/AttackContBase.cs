@@ -24,6 +24,9 @@ public class AttackContBase : MonoBehaviour
     protected float criticalDamageRate => 2f;
     protected int exLevel => attackParam.exLevel;
 
+    [SerializeField] protected int soundNum = 0;
+
+
 
     void Awake()
     {
@@ -54,5 +57,11 @@ public class AttackContBase : MonoBehaviour
     {
         var selectedDamageRate = UnityEngine.Random.Range(0f, 1f) < criticalRate ? criticalDamageRate : 1f;
         return (int)(damage * selectedDamageRate);
+    }
+
+    protected virtual void PlayAttackSound()
+    {
+        if (soundNum == 0) return;
+        SoundManager.Inst.PlaySE(soundNum);
     }
 }

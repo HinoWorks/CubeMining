@@ -16,7 +16,6 @@ public class AttackCont_Thunder : AttackContBase
     private Vector3 effectPosition => new Vector3(targetBlock.transform.position.x, 0, targetBlock.transform.position.z);
 
     private float damageRate_chain = 0.5f;
-    private float damageRate_red_circle = 0.5f;
 
 
     [Space]
@@ -63,6 +62,7 @@ public class AttackCont_Thunder : AttackContBase
 
     private async void CreateThunder_Random()
     {
+        PlayAttackSound();
         for (int i = 0; i < base.count; i++)
         {
             targetBlock = BlockGenerateManager.Inst.Get_RandomTargetCube();
