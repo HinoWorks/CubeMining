@@ -39,10 +39,20 @@ public class BulletCont_IceBlock : BulletBase
 
     public override void ReturnToPool()
     {
+        onGenerateIceCircle = null;
+        if (trailRenderer != null)
+        {
+            trailRenderer.Clear();
+        }
         base.ReturnToPool();
     }
     public override void OnDestroy()
     {
+        onGenerateIceCircle = null;
+        if (trailRenderer != null)
+        {
+            trailRenderer.Clear();
+        }
         base.OnDestroy();
     }
 

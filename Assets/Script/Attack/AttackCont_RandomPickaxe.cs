@@ -36,13 +36,22 @@ public class AttackCont_RandomPickaxe : AttackContBase
 
     public override void OnDestroy()
     {
-        foreach (var bullet in bullets)
-        {
-            bullet.OnDestroy();
-        }
-        bullets.Clear();
-        CTS.Cancel();
+        CTS?.Cancel();
+        DestroyPooled(bullets);
+        DestroyPooled(bullets_IceCircle);
+        CTS?.Dispose();
+        CTS = null;
         base.OnDestroy();
+    }
+
+    private static void DestroyPooled<T>(List<T> list) where T : MonoBehaviour
+    {
+        foreach (var item in list)
+        {
+            if (item == null) continue;
+            Destroy(item.gameObject);
+        }
+        list.Clear();
     }
 
     private void CreateAttackRoop()
@@ -58,33 +67,38 @@ public class AttackCont_RandomPickaxe : AttackContBase
     private async void CreateBullet()
     {
         PlayAttackSound();
-        for (int i = 0; i < count; i++)
+        try
         {
-            if (CTS.IsCancellationRequested) return;
-
-            var freeBullet = bullets.Find(x => !x.gameObject.activeSelf);
-            if (freeBullet == null)
+            for (int i = 0; i < count; i++)
             {
-                var newBullet = Instantiate(bulletPrefab, InGameManager.Inst.ParentPool) as GameObject;
-                freeBullet = newBullet.GetComponent<BulletCont_IceBlock>();
-                bullets.Add(freeBullet);
-            }
-            var targetPosition = BlockGenerateManager.Inst.Get_RandomTargetPoint();
-            freeBullet.transform.position = new Vector3(targetPosition.x, 0, targetPosition.z) + offsetPosition;
+                if (CTS == null || CTS.IsCancellationRequested) return;
 
-            var selectLevel = 1;
-            if (base.exLevel >= 2)
-            {
-                selectLevel = isLevel2 ? 2 : 1;
+                var freeBullet = bullets.Find(x => x != null && !x.gameObject.activeSelf);
+                if (freeBullet == null)
+                {
+                    var newBullet = Instantiate(bulletPrefab, InGameManager.Inst.ParentPool) as GameObject;
+                    freeBullet = newBullet.GetComponent<BulletCont_IceBlock>();
+                    bullets.Add(freeBullet);
+                }
+                var targetPosition = BlockGenerateManager.Inst.Get_RandomTargetPoint();
+                freeBullet.transform.position = new Vector3(targetPosition.x, 0, targetPosition.z) + offsetPosition;
+
+                var selectLevel = 1;
+                if (base.exLevel >= 2)
+                {
+                    selectLevel = isLevel2 ? 2 : 1;
+                }
+                freeBullet.Init_IceBlock(CalculateDamage(), initialSpeed, selectLevel, CreateIceCircle);
+                await UniTask.Delay(TimeSpan.FromSeconds(createDelay), cancellationToken: CTS.Token);
             }
-            freeBullet.Init_IceBlock(CalculateDamage(), initialSpeed, selectLevel, CreateIceCircle);
-            await UniTask.Delay(TimeSpan.FromSeconds(createDelay), cancellationToken: CTS.Token);
         }
+        catch (OperationCanceledException) { }
+        catch (ObjectDisposedException) { }
     }
 
     private void CreateIceCircle(Vector3 _position, int _level)
     {
-        var freeBullet = bullets_IceCircle.Find(x => !x.gameObject.activeSelf);
+        var freeBullet = bullets_IceCircle.Find(x => x != null && !x.gameObject.activeSelf);
         if (freeBullet == null)
         {
             var newBullet = Instantiate(obj_IceCircle, InGameManager.Inst.ParentPool) as GameObject;
