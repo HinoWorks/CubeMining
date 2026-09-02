@@ -142,6 +142,8 @@ public class PickaxePowerManager : MonoBehaviour
 
     private async UniTaskVoid SetState_InGameReady()
     {
+        DestroyEquippedPower();
+
         CurrentGauge = 0;
         CooldownDuration = 0f;
         CooldownRemaining = 0f;
@@ -164,9 +166,12 @@ public class PickaxePowerManager : MonoBehaviour
         EquippedLevel = saveData == null ? 0 : saveData.level;
         if (EquippedLevel <= 0) return;
 
+        // await中にステートが変わっていたら生成しない
+        if (GameWatcher.Inst == null || GameWatcher.Inst.currentGameState != GameStateType.InGame_Ready) return;
 
         EquippedBase = SOLoader.PickaxePowerData.GetPickaxePowerBase(EquippedIndex);
         EquippedLevelData = SOLoader.PickaxePowerData.GetPickaxePowerLevel(EquippedIndex, EquippedLevel);
+        DestroyEquippedPower();
         var newPowerUnit = Instantiate(EquippedBase.pf, transform) as GameObject;
         pickaxePowerCont = newPowerUnit.GetComponent<PickaxePowerCont_Base>();
         pickaxePowerCont.Init(EquippedLevelData);
@@ -209,7 +214,16 @@ public class PickaxePowerManager : MonoBehaviour
     {
         canAccumulateGauge = false;
         CooldownRemaining = 0f;
-        pickaxePowerCont?.GameEndCall();
+        DestroyEquippedPower();
+    }
+
+    private void DestroyEquippedPower()
+    {
+        if (pickaxePowerCont == null) return;
+        pickaxePowerCont.GameEndCall();
+        pickaxePowerCont.OnDestroyCall();
+        pickaxePowerCont = null;
+        IsActive = false;
     }
 
 

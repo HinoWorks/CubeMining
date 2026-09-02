@@ -62,6 +62,11 @@ public class PickaxePowerCont_PowerUp : PickaxePowerCont_Base
             EndPowerUp();
     }
 
+    public override void GameEndCall()
+    {
+        EndPowerUp();
+    }
+
     public override void OnDestroyCall()
     {
         EndPowerUp();

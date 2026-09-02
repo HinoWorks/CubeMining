@@ -82,6 +82,10 @@ public class BlockGenerateManager : MonoBehaviour
         {
             targetBlock.NotActivate();
         }
+        foreach (var targetBlock in list_targetBlocks_Max)
+        {
+            targetBlock.NotActivate();
+        }
         foreach (var targetObject in list_targetObjects)
         {
             targetObject.NotActivate();
@@ -237,7 +241,7 @@ public class BlockGenerateManager : MonoBehaviour
                                   );
         //Debug.Log($"baseValue: {blockGenerateParam.baseValue}, isMaxResource: {isMaxResource}, resourceUpCount: {GameParamManager.Get_ResourceUpCount(blockGenerateParam.resourceType)}, resourceBaseUpCount: {GameParamManager.Get_ResourceBaseUpCount()}, fixedResourceValue: {fixedResourceValue}");
         var fixedHP = blockGenerateParam.hp * (1f + GameParamManager.Get_ResourceHPUpRate());
-        targetBlock.Init((int)fixedHP, fixedResourceValue, randomBlockSizeRate);
+        targetBlock.Init((int)fixedHP, fixedResourceValue, randomBlockSizeRate, blockGenerateParam.blockIndex);
         targetBlock.Set_BlockType(blockGenerateParam.resourceType);
 
         return targetBlock.gameObject;
@@ -377,12 +381,20 @@ public class BlockGenerateManager : MonoBehaviour
     public MiningTargetBase Get_RandomTargetBlock()
     {
         var activeBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled);
+        if (activeBlocks.Count == 0)
+        {
+            activeBlocks = list_targetBlocks_Max.FindAll(x => x.isActiveAndEnabled);
+        }
         if (activeBlocks.Count == 0) return null;
         return activeBlocks[Random.Range(0, activeBlocks.Count)];
     }
     public MiningTarget_Cube Get_RandomTargetCube()
     {
         var activeBlocks = list_targetBlocks.FindAll(x => x.isActiveAndEnabled);
+        if (activeBlocks.Count == 0)
+        {
+            activeBlocks = list_targetBlocks_Max.FindAll(x => x.isActiveAndEnabled);
+        }
         if (activeBlocks.Count == 0) return null;
         return activeBlocks[Random.Range(0, activeBlocks.Count)];
     }

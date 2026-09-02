@@ -22,9 +22,9 @@ public class MiningTarget_Cube : MiningTargetBase
 
 
 
-    public override void Init(int _hp, int _value, float _sizeRate)
+    public override void Init(int _hp, int _value, float _sizeRate, int _index = 0)
     {
-        base.Init(_hp, _value, _sizeRate);
+        base.Init(_hp, _value, _sizeRate, _index);
         Set_BlockMesh();
     }
     public void Set_BreakCallback(Action _callback)

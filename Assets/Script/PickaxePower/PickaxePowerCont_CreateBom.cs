@@ -22,11 +22,36 @@ public class PickaxePowerCont_CreateBom : PickaxePowerCont_Base
     public override async void Activate()
     {
         Debug.Log("Power == CreateBom");
-        for (int i = 0; i < bomCount; i++)
+        try
         {
-            CreateBom(i);
-            await UniTask.Delay(delayGenerate);
+            for (int i = 0; i < bomCount; i++)
+            {
+                CreateBom(i);
+                await UniTask.Delay(delayGenerate, cancellationToken: destroyCancellationToken);
+            }
         }
+        catch (OperationCanceledException) { }
+    }
+
+    public override void GameEndCall()
+    {
+        DestroyBomBlocks();
+    }
+
+    public override void OnDestroyCall()
+    {
+        DestroyBomBlocks();
+        base.OnDestroyCall();
+    }
+
+    private void DestroyBomBlocks()
+    {
+        foreach (var bom in list_bomBlocks)
+        {
+            if (bom != null)
+                Destroy(bom.gameObject);
+        }
+        list_bomBlocks.Clear();
     }
 
     private void CreateBom(int _index)

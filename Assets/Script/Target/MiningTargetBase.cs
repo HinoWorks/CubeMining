@@ -38,12 +38,13 @@ public class MiningTargetBase : MonoBehaviour, IDamagable, IForce
     }
 
 
-    public virtual void Init(int _hp, int _value, float _sizeRate)
+    public virtual void Init(int _hp, int _value, float _sizeRate, int _index = 0)
     {
         hp_max = _hp;
         areaBonusRate = 0f;
         value = _value;
         hp = hp_max;
+        index = _index;
         animScale_rate = _sizeRate;
 
         if (rb == null)

@@ -34,7 +34,7 @@ public class MiningTarget_Object : MiningTargetBase
 
     protected void Init_MiningTargetBase(int _hp, int _value, int _index)
     {
-        base.Init(_hp, _value, 1f);
+        base.Init(_hp, _value, 1f, _index);
         Set_BlockMesh();
     }
 

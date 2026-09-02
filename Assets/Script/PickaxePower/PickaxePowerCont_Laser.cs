@@ -19,6 +19,19 @@ public class PickaxePowerCont_Laser : PickaxePowerCont_Base
 
     private void CreateLaser()
     {
+        var laserPosition = AttackManager.Inst.currentPickaxePosition;
+
+        var newLaser = Instantiate(pf_Laser, transform) as GameObject;
+        var newLaserUnit = newLaser.GetComponent<PickaxePowerCont_LaserUnit>();
+        newLaserUnit.transform.position = laserPosition;
+
+        var damage = (int)(AttackManager.Inst.currentPickaxeDamage * damageRate);
+        newLaserUnit.Init(damage, maxCount);
+    }
+
+
+    private void CreateLaser_Old()
+    {
         var targetLayerIndex = Mathf.Abs(Mathf.FloorToInt(AttackManager.Inst.currentPickaxePosition.y));
         var so_layer = SOLoader.BlockLayerData.GetBlockLayerData(targetLayerIndex);
         var blockSize = so_layer.layerSize;

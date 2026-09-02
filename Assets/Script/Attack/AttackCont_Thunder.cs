@@ -66,12 +66,13 @@ public class AttackCont_Thunder : AttackContBase
         for (int i = 0; i < base.count; i++)
         {
             targetBlock = BlockGenerateManager.Inst.Get_RandomTargetCube();
-            if (targetBlock == null) return;
+            if (targetBlock == null) break;
             ActivateBaseThunder(EffectType.ThunderStrike);
 
-            if (base.exLevel < 2) return;
-            ActivateChainThunder();
-
+            if (base.exLevel >= 2)
+            {
+                ActivateChainThunder();
+            }
             await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
         }
     }
