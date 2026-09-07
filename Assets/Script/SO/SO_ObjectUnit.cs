@@ -13,7 +13,7 @@ public class ObjectUnitData
 
     // -- param --
     public float hpRate;
-    public int generateRate;
+    public float generateRate;
     public float valueRate;
 }
 

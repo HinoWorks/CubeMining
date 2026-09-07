@@ -2,6 +2,8 @@ using UnityEngine;
 using UniRx;
 using System;
 
+
+
 public class BulletCont_IceCircle : MonoBehaviour
 {
     [SerializeField] GameObject eff_IceCircle_1;

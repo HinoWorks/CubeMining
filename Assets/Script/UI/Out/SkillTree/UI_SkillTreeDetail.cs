@@ -100,10 +100,10 @@ public class UI_SkillTreeDetail : MonoBehaviour
         switch (_unit)
         {
             case "%":
-                setParam = $"+{(_value * 100).ToString("F1")}%";
+                setParam = $"+{(_value * 100).ToString("F1")} %";
                 break;
             case "Sec":
-                setParam = $"+{_value.ToString("F0")}Sec";
+                setParam = $"+{_value.ToString("F1")} sec";
                 break;
             case "Count":
                 setParam = $"+{_value.ToString("F0")}";

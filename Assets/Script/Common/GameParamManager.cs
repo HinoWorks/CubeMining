@@ -239,9 +239,9 @@ public class ObjectGenerateParam
     public float valueRate_total => valueRate_base + valueRate_enhanced;
     public float damageRate_total => 1f + damageRate_enhanced;
 
-    private int generateRate_base = 0;
+    private float generateRate_base = 0;
     private float valueRate_base = 0; //　SOで規定。基本は１.0
-    private int generateRate_enhanced = 0;
+    private float generateRate_enhanced = 0;
     private float valueRate_enhanced = 0;
     private float damageRate_enhanced = 0;
 
@@ -259,7 +259,7 @@ public class ObjectGenerateParam
                 isActive = true;
                 break;
             case ParamType.Rate_Generate:
-                generateRate_enhanced += (int)(_setParam * 100);
+                generateRate_enhanced += _setParam * 100;
                 break;
             case ParamType.Rate_Value:
                 valueRate_enhanced += _setParam;
@@ -681,7 +681,7 @@ public static class GameParamManager
     public readonly static List<PickaxeParam> list_pickaxeParam = new List<PickaxeParam>();
     public readonly static List<SubSkillParam> list_subSkillParam = new List<SubSkillParam>();
     public static float artifactGenerateRate => artifactGenerateRateParam.generateRate;
-    public static int otherObjectRate { get; private set; } = 0;
+    public static float otherObjectRate { get; private set; } = 0;
     public static int otherObjectBaseRate { get; private set; } = 100;
 
     public static bool isInitEnd { get; private set; } = false;
@@ -788,12 +788,14 @@ public static class GameParamManager
         foreach (var objectParam in list_objectGenerateParam)
         {
             if (!objectParam.isActive) continue;
-            otherObjectRate += (int)objectParam.generateRate_total;
+            otherObjectRate += objectParam.generateRate_total;
+            Debug.Log($"objectParam.so.objectIndex: {objectParam.so.objectIndex} / {objectParam.generateRate_total}");
         }
     }
     public static bool IsOtherObjectGenerate()
     {
         var random = UnityEngine.Random.Range(0, otherObjectBaseRate + otherObjectRate);
+        Debug.Log($"otherObjectRate: {otherObjectRate} / {otherObjectBaseRate + otherObjectRate} / {random} => {random < otherObjectRate}");
         return random < otherObjectRate;
     }
     public static ObjectGenerateParam SelectOtherObject()

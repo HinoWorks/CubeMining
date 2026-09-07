@@ -148,7 +148,7 @@ public class StaticManager : MonoBehaviour
 
     public static void SlowGameTime_PickaxePower()
     {
-        SlowGameTime(0.2f, 0.15f, 0.1f);
+        SlowGameTime(0.2f, 0.1f, 0.1f);
     }
     /// <summary>
     /// ゲーム内時間を指定時間だけ遅くし、同じ実時間をかけて徐々に通常速度に戻す。

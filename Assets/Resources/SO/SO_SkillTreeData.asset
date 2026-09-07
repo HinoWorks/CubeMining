@@ -789,7 +789,7 @@ MonoBehaviour:
     description: Unlocks the appearance of Wooden Crate blocks.
     icon: {fileID: 21300000, guid: a8e6d72d0144d43b4817c9d2710336ad, type: 3}
     maxLevel: 1
-    deltaValue: 1
+    deltaValue: 0
     deltaValue2: 0
     unit: NA
     unit2: 
@@ -801,7 +801,7 @@ MonoBehaviour:
     description: Increases the spawn rate of Wooden Crate blocks.
     icon: {fileID: 21300000, guid: d2f0a5470319942138c9256e5a7bbf34, type: 3}
     maxLevel: 3
-    deltaValue: 0.01
+    deltaValue: 0.0025
     deltaValue2: 0
     unit: '%'
     unit2: 
@@ -825,7 +825,7 @@ MonoBehaviour:
     description: Unlocks the appearance of Timer blocks.
     icon: {fileID: 21300000, guid: 9f2858d6dbaf04cca824d600d7703d13, type: 3}
     maxLevel: 1
-    deltaValue: 1
+    deltaValue: 0
     deltaValue2: 0
     unit: NA
     unit2: 
@@ -837,7 +837,7 @@ MonoBehaviour:
     description: Increases the spawn rate of Timer blocks.
     icon: {fileID: 21300000, guid: e201a72cf4a2c4007addc3fe6b9a9bb5, type: 3}
     maxLevel: 3
-    deltaValue: 0.01
+    deltaValue: 0.0025
     deltaValue2: 0
     unit: '%'
     unit2: 
@@ -849,7 +849,7 @@ MonoBehaviour:
     description: Enhances the time-extending effect of Timer blocks.
     icon: {fileID: 21300000, guid: bd6b17c5444e94455b7b512dbbcc6d38, type: 3}
     maxLevel: 3
-    deltaValue: 0.2
+    deltaValue: 0.1
     deltaValue2: 0
     unit: Sec
     unit2: 
@@ -861,7 +861,7 @@ MonoBehaviour:
     description: Unlocks the appearance of Bomb blocks.
     icon: {fileID: 21300000, guid: 51f741c111efc47858a57676bd988468, type: 3}
     maxLevel: 1
-    deltaValue: 1
+    deltaValue: 0
     deltaValue2: 0
     unit: NA
     unit2: 
@@ -872,8 +872,8 @@ MonoBehaviour:
     skillName: Bomb Frequency
     description: Increases the spawn rate of Bomb blocks.
     icon: {fileID: 21300000, guid: 6d5d2ba5312044ae78add0be88b5eb23, type: 3}
-    maxLevel: 1
-    deltaValue: 0.01
+    maxLevel: 3
+    deltaValue: 0.0025
     deltaValue2: 0
     unit: '%'
     unit2: 
@@ -885,7 +885,7 @@ MonoBehaviour:
     description: Expands the explosion radius of Bomb blocks.
     icon: {fileID: 21300000, guid: 9b601a818082348e6b0c65c53a451bd2, type: 3}
     maxLevel: 3
-    deltaValue: 0.25
+    deltaValue: 0.1
     deltaValue2: 0
     unit: '%'
     unit2: 
@@ -897,7 +897,7 @@ MonoBehaviour:
     description: Increases the damage of Bomb block explosions.
     icon: {fileID: 21300000, guid: af216b199581349c8abc39d933d7fff1, type: 3}
     maxLevel: 3
-    deltaValue: 0.33
+    deltaValue: 0.1
     deltaValue2: 0
     unit: '%'
     unit2: 
@@ -2438,7 +2438,7 @@ MonoBehaviour:
     req_iron: 650
     req_gold: 350
     req_emerald: 150
-    req_ruby: 25
+    req_ruby: 50
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 319
@@ -2448,7 +2448,7 @@ MonoBehaviour:
     req_iron: 0
     req_gold: 400
     req_emerald: 175
-    req_ruby: 25
+    req_ruby: 75
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 327
@@ -2458,7 +2458,7 @@ MonoBehaviour:
     req_iron: 700
     req_gold: 350
     req_emerald: 175
-    req_ruby: 25
+    req_ruby: 50
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 322
@@ -2468,7 +2468,7 @@ MonoBehaviour:
     req_iron: 0
     req_gold: 500
     req_emerald: 200
-    req_ruby: 50
+    req_ruby: 60
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 329
@@ -2478,7 +2478,7 @@ MonoBehaviour:
     req_iron: 750
     req_gold: 400
     req_emerald: 150
-    req_ruby: 25
+    req_ruby: 50
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 333
@@ -2488,7 +2488,7 @@ MonoBehaviour:
     req_iron: 800
     req_gold: 450
     req_emerald: 200
-    req_ruby: 50
+    req_ruby: 100
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 328
@@ -2498,7 +2498,7 @@ MonoBehaviour:
     req_iron: 0
     req_gold: 400
     req_emerald: 200
-    req_ruby: 30
+    req_ruby: 70
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 331
@@ -2508,7 +2508,7 @@ MonoBehaviour:
     req_iron: 750
     req_gold: 450
     req_emerald: 200
-    req_ruby: 35
+    req_ruby: 70
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 340
@@ -2518,7 +2518,7 @@ MonoBehaviour:
     req_iron: 0
     req_gold: 400
     req_emerald: 175
-    req_ruby: 35
+    req_ruby: 70
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 355
@@ -2528,7 +2528,7 @@ MonoBehaviour:
     req_iron: 800
     req_gold: 450
     req_emerald: 250
-    req_ruby: 50
+    req_ruby: 100
     req_sapphire: 0
     req_diamond: 0
   - skillTreeIndex: 332
@@ -2538,8 +2538,8 @@ MonoBehaviour:
     req_iron: 0
     req_gold: 750
     req_emerald: 0
-    req_ruby: 200
-    req_sapphire: 30
+    req_ruby: 250
+    req_sapphire: 100
     req_diamond: 0
   - skillTreeIndex: 349
     refIndex: 3004
@@ -2547,9 +2547,9 @@ MonoBehaviour:
     req_stone: 0
     req_iron: 1500
     req_gold: 0
-    req_emerald: 500
-    req_ruby: 250
-    req_sapphire: 35
+    req_emerald: 650
+    req_ruby: 300
+    req_sapphire: 110
     req_diamond: 0
   - skillTreeIndex: 335
     refIndex: 3105
@@ -2557,9 +2557,9 @@ MonoBehaviour:
     req_stone: 2000
     req_iron: 0
     req_gold: 800
-    req_emerald: 550
+    req_emerald: 600
     req_ruby: 0
-    req_sapphire: 25
+    req_sapphire: 100
     req_diamond: 0
   - skillTreeIndex: 336
     refIndex: 3006
@@ -2568,8 +2568,8 @@ MonoBehaviour:
     req_iron: 1750
     req_gold: 850
     req_emerald: 0
-    req_ruby: 125
-    req_sapphire: 50
+    req_ruby: 200
+    req_sapphire: 100
     req_diamond: 0
   - skillTreeIndex: 337
     refIndex: 4003
@@ -2578,8 +2578,8 @@ MonoBehaviour:
     req_iron: 0
     req_gold: 0
     req_emerald: 550
-    req_ruby: 150
-    req_sapphire: 35
+    req_ruby: 225
+    req_sapphire: 80
     req_diamond: 0
   - skillTreeIndex: 338
     refIndex: 3001
@@ -2588,8 +2588,8 @@ MonoBehaviour:
     req_iron: 2000
     req_gold: 0
     req_emerald: 600
-    req_ruby: 100
-    req_sapphire: 30
+    req_ruby: 250
+    req_sapphire: 100
     req_diamond: 0
   - skillTreeIndex: 330
     refIndex: 3105
@@ -2598,8 +2598,8 @@ MonoBehaviour:
     req_iron: 0
     req_gold: 800
     req_emerald: 0
-    req_ruby: 150
-    req_sapphire: 35
+    req_ruby: 300
+    req_sapphire: 150
     req_diamond: 0
   - skillTreeIndex: 341
     refIndex: 3006
@@ -2608,8 +2608,8 @@ MonoBehaviour:
     req_iron: 1750
     req_gold: 0
     req_emerald: 600
-    req_ruby: 125
-    req_sapphire: 30
+    req_ruby: 250
+    req_sapphire: 150
     req_diamond: 0
   - skillTreeIndex: 345
     refIndex: 2033
@@ -2618,8 +2618,8 @@ MonoBehaviour:
     req_iron: 0
     req_gold: 0
     req_emerald: 550
-    req_ruby: 100
-    req_sapphire: 35
+    req_ruby: 250
+    req_sapphire: 150
     req_diamond: 0
   - skillTreeIndex: 346
     refIndex: 3009
@@ -2627,9 +2627,9 @@ MonoBehaviour:
     req_stone: 0
     req_iron: 0
     req_gold: 1500
-    req_emerald: 900
-    req_ruby: 350
-    req_sapphire: 150
+    req_emerald: 1000
+    req_ruby: 750
+    req_sapphire: 250
     req_diamond: 0
   - skillTreeIndex: 342
     refIndex: 3004
@@ -2640,7 +2640,7 @@ MonoBehaviour:
     req_emerald: 0
     req_ruby: 650
     req_sapphire: 0
-    req_diamond: 30
+    req_diamond: 75
   - skillTreeIndex: 343
     refIndex: 3104
     unlockCheckIndexes: 56010000
@@ -2650,7 +2650,7 @@ MonoBehaviour:
     req_emerald: 1000
     req_ruby: 0
     req_sapphire: 250
-    req_diamond: 35
+    req_diamond: 100
   - skillTreeIndex: 344
     refIndex: 3002
     unlockCheckIndexes: 4a01000059010000
@@ -2659,8 +2659,8 @@ MonoBehaviour:
     req_gold: 0
     req_emerald: 1250
     req_ruby: 0
-    req_sapphire: 300
-    req_diamond: 30
+    req_sapphire: 350
+    req_diamond: 75
   - skillTreeIndex: 347
     refIndex: 3006
     unlockCheckIndexes: 58010000
@@ -2669,8 +2669,8 @@ MonoBehaviour:
     req_gold: 0
     req_emerald: 0
     req_ruby: 500
-    req_sapphire: 300
-    req_diamond: 50
+    req_sapphire: 350
+    req_diamond: 100
   - skillTreeIndex: 348
     refIndex: 3004
     unlockCheckIndexes: 5b010000
@@ -2680,7 +2680,7 @@ MonoBehaviour:
     req_emerald: 1000
     req_ruby: 0
     req_sapphire: 0
-    req_diamond: 100
+    req_diamond: 150
   - skillTreeIndex: 399
     refIndex: 9992
     unlockCheckIndexes: 5c010000

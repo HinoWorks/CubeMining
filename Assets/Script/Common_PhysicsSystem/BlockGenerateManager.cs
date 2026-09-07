@@ -37,6 +37,12 @@ public class BlockGenerateManager : MonoBehaviour
     private bool isGenerate = false;
     private float randomBlockSizeRate => Random.Range(0.75f, 1.25f);
 
+    private const int ObjectIndex_Timer = 2; // 1:treasure, 2:timer, 3:bomb
+    private const int ObjectIndex_Bomb = 3;
+    private const int MaxActiveTimerCount = 2; // タイマーの最大生成数
+    private const int MaxActiveBombCount = 2; // 爆弾の最大生成数
+
+
     public Vector3 generatePosition => new Vector3(Random.Range(-10, 10), Random.Range(3, 5), Random.Range(-10, 10));
     public Vector3 generateRotation => new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
 
@@ -147,14 +153,12 @@ public class BlockGenerateManager : MonoBehaviour
     {
         if (GameParamManager.IsOtherObjectGenerate())
         {
-            GenerateOtherObject();
+            if (GenerateOtherObject() != null) return;
         }
-        else
-        {
-            var targetBlock = GenerateRockBlock();
-            targetBlock.transform.localPosition = generatePosition;
-            targetBlock.transform.localRotation = Quaternion.Euler(generateRotation);
-        }
+
+        var targetBlock = GenerateRockBlock();
+        targetBlock.transform.localPosition = generatePosition;
+        targetBlock.transform.localRotation = Quaternion.Euler(generateRotation);
     }
     public void CreateBlock(int _count)
     {
@@ -171,6 +175,18 @@ public class BlockGenerateManager : MonoBehaviour
     public MiningTarget_Object GenerateOtherObject(int _index = -1)
     {
         var objectData = _index == -1 ? GameParamManager.SelectOtherObject() : GameParamManager.SelectOtherObject(_index);
+        if (objectData == null) return null;
+
+        // 画面内のtimerブロックが上限以上なら生成しない
+        if (objectData.so.objectIndex == ObjectIndex_Timer && !CanGenerateTimer())
+        {
+            return null;
+        }
+        if (objectData.so.objectIndex == ObjectIndex_Bomb && !CanGenerateBomb())
+        {
+            return null;
+        }
+
         var blockData = SOLoader.BlockData.GetBlockData(objectData.so.objectIndex);
 
         var targetObject = list_targetObjects.Find(x => x.isActiveAndEnabled == false && x.index == objectData.so.objectIndex);
@@ -195,7 +211,32 @@ public class BlockGenerateManager : MonoBehaviour
     }
     public void Create_Bomb()
     {
-        GenerateOtherObject(3);  //1:tresure, 2:timer, 3:bomb
+        GenerateOtherObject(3);  //1:treasure, 2:timer, 3:bomb
+    }
+
+    private bool CanGenerateTimer()
+    {
+        var activeTimerCount = 0;
+        foreach (var obj in list_targetObjects)
+        {
+            if (obj == null || !obj.isActiveAndEnabled) continue;
+            if (obj.index != ObjectIndex_Timer) continue;
+            activeTimerCount++;
+            if (activeTimerCount >= MaxActiveTimerCount) return false;
+        }
+        return true;
+    }
+    private bool CanGenerateBomb()
+    {
+        var activeBombCount = 0;
+        foreach (var obj in list_targetObjects)
+        {
+            if (obj == null || !obj.isActiveAndEnabled) continue;
+            if (obj.index != ObjectIndex_Bomb) continue;
+            activeBombCount++;
+            if (activeBombCount >= MaxActiveBombCount) return false;
+        }
+        return true;
     }
     #endregion
 
