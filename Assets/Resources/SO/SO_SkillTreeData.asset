@@ -1204,6 +1204,42 @@ MonoBehaviour:
     deltaValue2: 0
     unit: '%'
     unit2: 
+  - baseIndex: 4011
+    paramCategory: 5
+    paramType: 0
+    targetIndex: 2
+    skillName: Pusher
+    description: unlock
+    icon: {fileID: 0}
+    maxLevel: 1
+    deltaValue: 1
+    deltaValue2: 0
+    unit: NA
+    unit2: 
+  - baseIndex: 4012
+    paramCategory: 5
+    paramType: 12
+    targetIndex: 2
+    skillName: Pusher Count
+    description: aaa
+    icon: {fileID: 0}
+    maxLevel: 2
+    deltaValue: 1
+    deltaValue2: 0
+    unit: Count
+    unit2: 
+  - baseIndex: 4013
+    paramCategory: 5
+    paramType: 14
+    targetIndex: 2
+    skillName: Pusher Interval In Game
+    description: bbb
+    icon: {fileID: 0}
+    maxLevel: 2
+    deltaValue: 1
+    deltaValue2: 0
+    unit: Count
+    unit2: 
   - baseIndex: 9991
     paramCategory: 0
     paramType: 33
@@ -2691,3 +2727,33 @@ MonoBehaviour:
     req_ruby: 1500
     req_sapphire: 1000
     req_diamond: 350
+  - skillTreeIndex: 357
+    refIndex: 4011
+    unlockCheckIndexes: 44010000
+    req_stone: 20
+    req_iron: 20
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 358
+    refIndex: 4012
+    unlockCheckIndexes: 65010000
+    req_stone: 20
+    req_iron: 20
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 359
+    refIndex: 4013
+    unlockCheckIndexes: 66010000
+    req_stone: 20
+    req_iron: 20
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0

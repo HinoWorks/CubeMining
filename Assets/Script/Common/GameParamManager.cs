@@ -789,13 +789,13 @@ public static class GameParamManager
         {
             if (!objectParam.isActive) continue;
             otherObjectRate += objectParam.generateRate_total;
-            Debug.Log($"objectParam.so.objectIndex: {objectParam.so.objectIndex} / {objectParam.generateRate_total}");
+            //Debug.Log($"objectParam.so.objectIndex: {objectParam.so.objectIndex} / {objectParam.generateRate_total}");
         }
     }
     public static bool IsOtherObjectGenerate()
     {
         var random = UnityEngine.Random.Range(0, otherObjectBaseRate + otherObjectRate);
-        Debug.Log($"otherObjectRate: {otherObjectRate} / {otherObjectBaseRate + otherObjectRate} / {random} => {random < otherObjectRate}");
+        //Debug.Log($"otherObjectRate: {otherObjectRate} / {otherObjectBaseRate + otherObjectRate} / {random} => {random < otherObjectRate}");
         return random < otherObjectRate;
     }
     public static ObjectGenerateParam SelectOtherObject()

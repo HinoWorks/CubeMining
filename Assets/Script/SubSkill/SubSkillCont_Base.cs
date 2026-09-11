@@ -13,7 +13,7 @@ public class SubSkillCont_Base : MonoBehaviour
 {
     protected SubSkillParam param;
     protected virtual bool isActive { get; set; } = false; //　Init後、攻撃開始タイミング同期用。trueになったら攻撃開始
-    protected virtual int unlockCheckIndex { get; set; } = 0; // スキルロック解除チェック用インデックス
+    //protected virtual int unlockCheckIndex { get; set; } = 0; // スキルロック解除チェック用インデックス
 
 
 

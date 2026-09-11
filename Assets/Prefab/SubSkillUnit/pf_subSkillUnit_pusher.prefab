@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6129384750192837461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4129384750192837462}
+  - component: {fileID: 3129384750192837463}
+  m_Layer: 0
+  m_Name: pf_subSkillUnit_pusher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4129384750192837462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6129384750192837461}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3129384750192837463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6129384750192837461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 924e689d4b16b42fc906dc6ac0b7b492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SubSkillCont_Pusher
+  pf_pusher: {fileID: 2895615284388495377, guid: cb5cebd0194074c70ba8a91b0de4d137, type: 3}
+  spawnStartPosition: {x: 0, y: 0, z: -13}
+  spawnStartPosition_upper: {x: 0, y: 0, z: 12}
+  spawnInterval_min: 2.2
+  spawnCount: 5
+  excludeStartEndSeconds: 3
+  moveDistance: 5
+  activateStaggerSeconds: 0.1
