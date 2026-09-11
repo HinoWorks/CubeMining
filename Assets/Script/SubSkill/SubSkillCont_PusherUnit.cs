@@ -16,7 +16,7 @@ public class SubSkillCont_PusherUnit : MonoBehaviour
     private bool isMoving;
     private Vector3 lastRbPosition;
 
-    private float moveDuration = 0.5f;
+    private float moveDuration = 1f;
     private Vector3 moveDistance;
 
 

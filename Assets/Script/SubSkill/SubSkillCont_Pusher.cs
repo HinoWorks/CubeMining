@@ -8,15 +8,19 @@ using Cysharp.Threading.Tasks;
 /// </summary>
 public class SubSkillCont_Pusher : SubSkillCont_Base
 {
-    private int activateCount = 3; //activateCount => param.count;
+    private int activateCount => Mathf.Max(1, (int)(param.interval));
     private float ct => Random.Range(5f, 7.5f);
     [Header("Spawn")]
     [SerializeField] GameObject pf_pusher;
     [SerializeField] Vector3 spawnStartPosition = new Vector3(-11f, 0f, -9.5f);
     [SerializeField] Vector3 spawnStartPosition_upper = new Vector3(-11f, 0f, 9.5f);
     [SerializeField] float spawnInterval_min = 2.2f;
+    [SerializeField] float spawnInterval_max = 11f;
     private float setSpawnInterval = 2.5f;
-    [SerializeField] int spawnCount = 11;
+
+    private int spawnCount_base = 3;
+    private int spawnCount_max = 11;
+    private int spawnCount => GetSpawnCount();
 
     private readonly Vector3 spawnEulerAngles = new Vector3(0f, 180f, 0f);
 
@@ -79,10 +83,25 @@ public class SubSkillCont_Pusher : SubSkillCont_Base
             return;
         }
 
-        setSpawnInterval = spawnInterval_min;
-        CreateUnit(pusherUnits, spawnStartPosition, Vector3.zero, setSpawnInterval, spawnCount);
-        CreateUnit(pusherUnits_2, spawnStartPosition_upper, spawnEulerAngles, setSpawnInterval, spawnCount, true);
+        var count = spawnCount;
+        setSpawnInterval = GetSpawnInterval(count);
+        CreateUnit(pusherUnits, spawnStartPosition, Vector3.zero, setSpawnInterval, count);
+        CreateUnit(pusherUnits_2, spawnStartPosition_upper, spawnEulerAngles, setSpawnInterval, count, true);
+    }
 
+    private int GetSpawnCount()
+    {
+        var count = spawnCount_base + (int)param.count;
+        count = Mathf.Clamp(count, spawnCount_base, spawnCount_max);
+        if (count % 2 == 0) count--;
+        return Mathf.Max(1, count);
+    }
+
+    private float GetSpawnInterval(int count)
+    {
+        var sideCount = (count - 1) / 2;
+        if (sideCount <= 0) return spawnInterval_max;
+        return Mathf.Max(spawnInterval_min, spawnInterval_max / sideCount);
     }
 
 
