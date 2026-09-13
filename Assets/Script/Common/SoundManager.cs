@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour
     private AudioSource BGMsource;
     private AudioSource[] SEsources = new AudioSource[16];
     private SO_SoundElement soundData_BGM;
+    private int currentBGMIndex = -1;
 
     // -- SE同時になってしまう現状回避 --
     private float timer;
@@ -64,7 +65,8 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        PlayBGM(0);
+        int index = UserSettingsManager.Inst != null ? UserSettingsManager.Inst.BgmIndex : 0;
+        PlayBGM(index);
     }
 
     void Update()
@@ -92,7 +94,8 @@ public class SoundManager : MonoBehaviour
     /// <summary>UserSettingsManager から設定を反映する</summary>
     public void ApplySoundSettings(
         float volumeMaster, float volumeBGM, float volumeSE,
-        bool muteMaster, bool muteBGM, bool muteSE)
+        bool muteMaster, bool muteBGM, bool muteSE,
+        int bgmIndex)
     {
         Volume_Master = volumeMaster;
         Volume_BGM = volumeBGM;
@@ -101,6 +104,7 @@ public class SoundManager : MonoBehaviour
         Mute_BGM = muteBGM;
         Mute_SE = muteSE;
         ApplyVolumeAndMute();
+        PlayBGMWithFade(bgmIndex);
     }
 
     private float GetBGMVolumeMultiplier()
@@ -179,12 +183,18 @@ public class SoundManager : MonoBehaviour
     #region -- BGM --
     public void PlayBGM(int _index)
     {
-        var getData = SOLoader.SoundData.Get_SoundData_BGM(_index);
+        var getData = ResolveBGMData(_index);
         if (getData == null) return;
+        if (IsSameBGM(getData.index))
+        {
+            ChangeVolume_ForBGM();
+            return;
+        }
 
         BGMsource.DOKill();
         BGMsource.Stop();
         soundData_BGM = getData;
+        currentBGMIndex = getData.index;
         BGMsource.clip = soundData_BGM.clip;
         BGMsource.Play();
         ChangeVolume_ForBGM();
@@ -193,13 +203,19 @@ public class SoundManager : MonoBehaviour
     /// <summary>BGMをフェード付きで再生</summary>
     public void PlayBGMWithFade(int _index, float fadeDuration = -1f)
     {
-        var d = fadeDuration > 0 ? fadeDuration : BGM_FADE_DURATION;
-        var getData = SOLoader.SoundData.Get_SoundData_BGM(_index);
+        var getData = ResolveBGMData(_index);
         if (getData == null) return;
+        if (IsSameBGM(getData.index))
+        {
+            ChangeVolume_ForBGM();
+            return;
+        }
 
+        var d = fadeDuration > 0 ? fadeDuration : BGM_FADE_DURATION;
         BGMsource.DOKill();
         BGMsource.Stop();
         soundData_BGM = getData;
+        currentBGMIndex = getData.index;
         BGMsource.clip = soundData_BGM.clip;
         BGMsource.volume = 0f;
         BGMsource.Play();
@@ -213,6 +229,7 @@ public class SoundManager : MonoBehaviour
         BGMsource.Stop();
         BGMsource.clip = null;
         soundData_BGM = null;
+        currentBGMIndex = -1;
     }
 
     /// <summary>BGMをフェードアウトして停止</summary>
@@ -225,6 +242,7 @@ public class SoundManager : MonoBehaviour
             BGMsource.Stop();
             BGMsource.clip = null;
             soundData_BGM = null;
+            currentBGMIndex = -1;
             onComplete?.Invoke();
         });
     }
@@ -235,6 +253,21 @@ public class SoundManager : MonoBehaviour
         BGMsource.mute = Mute_Master || Mute_BGM || isPaused;
         float bgmBaseVolume = (soundData_BGM != null) ? soundData_BGM.Volume : 1f;
         BGMsource.volume = (Mute_Master || Mute_BGM || isPaused) ? 0f : bgmBaseVolume * GetBGMVolumeMultiplier();
+    }
+
+    private bool IsSameBGM(int index)
+    {
+        return currentBGMIndex == index && BGMsource != null && BGMsource.clip != null;
+    }
+
+    private static SO_SoundElement ResolveBGMData(int index)
+    {
+        if (SOLoader.SoundData == null) return null;
+        var data = SOLoader.SoundData.Get_SoundData_BGM(index);
+        if (data != null && data.clip != null) return data;
+
+        var options = SOLoader.SoundData.GetSelectableBGMs();
+        return (options != null && options.Length > 0) ? options[0] : null;
     }
     #endregion
 

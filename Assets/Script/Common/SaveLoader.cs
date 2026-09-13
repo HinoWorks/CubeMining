@@ -83,6 +83,7 @@ public class UserSettingsData
     public int resolutionWidth = 1920;
     public int resolutionHeight = 1080;
     public int fullScreenMode = (int)FullScreenMode.Windowed;
+    public int bgmIndex;
 
     public UserSettingsData Copy()
     {
@@ -97,6 +98,7 @@ public class UserSettingsData
             resolutionWidth = resolutionWidth,
             resolutionHeight = resolutionHeight,
             fullScreenMode = fullScreenMode,
+            bgmIndex = bgmIndex,
         };
     }
 }

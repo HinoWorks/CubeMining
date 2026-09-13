@@ -179,5 +179,14 @@ public class UIManager_OutGame : MonoBehaviour
         main.SetActive(false);
         GameWatcher.Inst.SetGameState(GameStateType.InGame_Ready);
     }
+
+
+    /// <summary>
+    /// 設定画面を開く outGameUIからも開けるように
+    /// </summary>
+    public void OnClick_SettingOpen()
+    {
+        UI_UserSettingManager.Inst.Open();
+    }
     #endregion
 }

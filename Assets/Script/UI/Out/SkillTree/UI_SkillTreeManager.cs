@@ -344,7 +344,7 @@ public class UI_SkillTreeManager : UI_OutGameTabBase
         SaveLoader.Inst.Request_SaveSkillTreeData(_skillTreeUnit.skillIndex, newLevel);
 
         var isLevelMax = newLevel >= _skillTreeUnit.skillTree.maxLevel;
-        SoundManager.Inst.PlaySE(isLevelMax ? 152 : 120); // レベルアップSE or レベルMAXSE
+        SoundManager.Inst.PlaySE(isLevelMax ? 127 : 120); // レベルアップSE or レベルMAXSE
 
         await UniTask.DelayFrame(3);
         _skillTreeUnit.CallBack_Enhance();

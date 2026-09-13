@@ -22,10 +22,16 @@ public class UI_UserSettingManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI tmp_volumeBGM;
     [SerializeField] TextMeshProUGUI tmp_volumeSE;
 
+    [Header("BGM Type")]
+    [SerializeField] Button btn_bgmPrev;
+    [SerializeField] Button btn_bgmNext;
+    [SerializeField] TextMeshProUGUI tmp_bgmType;
+
     [Header("Display")]
     [SerializeField] TMP_Dropdown dropdown_resolution;
 
     private readonly List<Vector2Int> resolutionOptions = new();
+    private readonly List<int> bgmOptions = new();
     private UserSettingsData savedSnapshot;
     private UserSettingsData pendingDraft;
     private bool isSyncingUI;
@@ -40,6 +46,7 @@ public class UI_UserSettingManager : MonoBehaviour
     {
         InitVolumeSliders();
         InitResolutionDropdown();
+        InitBGMTypeSelector();
         BindEvents();
         obj_main.SetActive(false);
     }
@@ -47,6 +54,7 @@ public class UI_UserSettingManager : MonoBehaviour
     public void Open()
     {
         EnsureResolutionDropdown();
+        if (bgmOptions.Count == 0) InitBGMTypeSelector();
 
         var settings = UserSettingsManager.Inst;
         if (settings != null)
@@ -106,6 +114,20 @@ public class UI_UserSettingManager : MonoBehaviour
         }
     }
 
+    private void InitBGMTypeSelector()
+    {
+        bgmOptions.Clear();
+        var options = UserSettingsManager.Inst != null
+            ? UserSettingsManager.Inst.GetBGMOptions()
+            : null;
+        if (options == null) return;
+
+        foreach (var option in options)
+        {
+            bgmOptions.Add(option.index);
+        }
+    }
+
     private void BindEvents()
     {
         if (slider_volumeMaster != null)
@@ -117,6 +139,11 @@ public class UI_UserSettingManager : MonoBehaviour
 
         if (dropdown_resolution != null)
             dropdown_resolution.onValueChanged.AddListener(OnResolutionChanged);
+
+        if (btn_bgmPrev != null)
+            btn_bgmPrev.onClick.AddListener(OnClick_BGMPrev);
+        if (btn_bgmNext != null)
+            btn_bgmNext.onClick.AddListener(OnClick_BGMNext);
     }
     #endregion
 
@@ -133,6 +160,7 @@ public class UI_UserSettingManager : MonoBehaviour
 
         SyncResolutionDropdown(pendingDraft.resolutionWidth, pendingDraft.resolutionHeight);
         UpdateVolumeLabels();
+        UpdateBGMTypeLabel();
 
         isSyncingUI = false;
     }
@@ -157,6 +185,16 @@ public class UI_UserSettingManager : MonoBehaviour
     {
         if (label == null || slider == null) return;
         label.text = $"{Mathf.RoundToInt(slider.value)}%";
+    }
+
+    private void UpdateBGMTypeLabel()
+    {
+        if (tmp_bgmType == null) return;
+        int index = pendingDraft != null ? pendingDraft.bgmIndex : 0;
+        var data = SOLoader.SoundData != null
+            ? SOLoader.SoundData.Get_SoundData_BGM(index)
+            : null;
+        tmp_bgmType.text = data != null ? data.GetDisplayName() : "-";
     }
 
     private void ApplyPreview()
@@ -199,6 +237,32 @@ public class UI_UserSettingManager : MonoBehaviour
         var resolution = resolutionOptions[index];
         pendingDraft.resolutionWidth = resolution.x;
         pendingDraft.resolutionHeight = resolution.y;
+        ApplyPreview();
+    }
+
+    /// <summary>前のBGMタイプへ（インスペクタの Button.onClick からも可）</summary>
+    public void OnClick_BGMPrev()
+    {
+        CycleBGMType(-1);
+    }
+
+    /// <summary>次のBGMタイプへ（インスペクタの Button.onClick からも可）</summary>
+    public void OnClick_BGMNext()
+    {
+        CycleBGMType(1);
+    }
+
+    private void CycleBGMType(int direction)
+    {
+        if (isSyncingUI || pendingDraft == null) return;
+        if (bgmOptions.Count == 0) InitBGMTypeSelector();
+        if (bgmOptions.Count == 0) return;
+
+        int current = bgmOptions.IndexOf(pendingDraft.bgmIndex);
+        if (current < 0) current = 0;
+        int next = (current + direction + bgmOptions.Count) % bgmOptions.Count;
+        pendingDraft.bgmIndex = bgmOptions[next];
+        UpdateBGMTypeLabel();
         ApplyPreview();
     }
     #endregion

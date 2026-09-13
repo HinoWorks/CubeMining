@@ -23,6 +23,7 @@ public class UserSettingsManager : MonoBehaviour
     public int ResolutionWidth => Data.resolutionWidth;
     public int ResolutionHeight => Data.resolutionHeight;
     public FullScreenMode ScreenMode => (FullScreenMode)Data.fullScreenMode;
+    public int BgmIndex => Data.bgmIndex;
 
     private bool isLoading;
 
@@ -101,6 +102,13 @@ public class UserSettingsManager : MonoBehaviour
         Data.fullScreenMode = (int)mode;
         ApplyDisplay(Data);
         SaveSettings();
+    }
+
+    /// <summary>設定画面で切り替え可能なBGM一覧</summary>
+    public SO_SoundElement[] GetBGMOptions()
+    {
+        if (SOLoader.SoundData == null) return System.Array.Empty<SO_SoundElement>();
+        return SOLoader.SoundData.GetSelectableBGMs();
     }
 
     /// <summary>ウィンドウモード時に選択可能な解像度一覧（重複なし）</summary>
@@ -220,7 +228,8 @@ public class UserSettingsManager : MonoBehaviour
             settings.volumeSE,
             settings.muteMaster,
             settings.muteBGM,
-            settings.muteSE
+            settings.muteSE,
+            settings.bgmIndex
         );
     }
 

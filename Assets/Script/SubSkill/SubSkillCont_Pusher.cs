@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using System.ComponentModel.Design.Serialization;
 
 /// <summary>
 /// Pusherスキル。取得時にユニットを生成し、インゲーム中に指定回数だけランダム発動する
@@ -9,7 +10,6 @@ using Cysharp.Threading.Tasks;
 public class SubSkillCont_Pusher : SubSkillCont_Base
 {
     private int activateCount => Mathf.Max(1, param.value);
-    private float ct => Random.Range(5f, 7.5f);
     [Header("Spawn")]
     [SerializeField] GameObject pf_pusher;
     [SerializeField] Vector3 spawnStartPosition = new Vector3(-11f, 0f, -9.5f);
@@ -18,16 +18,19 @@ public class SubSkillCont_Pusher : SubSkillCont_Base
     [SerializeField] float spawnInterval_max = 11f;
     private float setSpawnInterval = 2.5f;
 
-    private int spawnCount_base = 3;
+    private const int spawnCount_base = 3;
     private int spawnCount_max = 11;
     private int spawnCount => GetSpawnCount();
 
     private readonly Vector3 spawnEulerAngles = new Vector3(0f, 180f, 0f);
+    //private const int SE_PusherActive = 152; うるさいので現状なし
+
 
 
 
     [Header("Activate")]
     [SerializeField] float excludeStartEndSeconds = 2f;
+    [SerializeField][Range(0.5f, 1f)] float intervalRandomMin = 0.8f;
     [SerializeField] float moveDistance = 2.5f;
     [SerializeField] float activateStaggerSeconds = 0.08f;
 
@@ -158,8 +161,7 @@ public class SubSkillCont_Pusher : SubSkillCont_Base
     private List<float> BuildActivateTimes()
     {
         var times = new List<float>();
-        var count = Mathf.Max(0, activateCount);
-        if (count <= 0) return times;
+        var count = Mathf.Max(1, activateCount);
 
         var gameDuration = InGameManager.Inst != null ? InGameManager.Inst.RemainingTime : 0f;
         var exclude = Mathf.Max(0f, excludeStartEndSeconds);
@@ -169,17 +171,15 @@ public class SubSkillCont_Pusher : SubSkillCont_Base
         var windowEnd = gameDuration - exclude;
         if (windowEnd <= windowStart) return times;
 
-        var minGap = Mathf.Max(0f, ct);
-        var earliest = windowStart;
+        var window = windowEnd - windowStart;
+        var maxInterval = window / count;
+        var interval = maxInterval * Random.Range(Mathf.Clamp(intervalRandomMin, 0f, 1f), 1f);
+        var slack = Mathf.Max(0f, window - interval * count);
+        var start = windowStart + Random.Range(0f, slack);
+
         for (int i = 0; i < count; i++)
         {
-            var remain = count - i;
-            var latest = windowEnd - (remain - 1) * minGap;
-            if (latest < earliest) break;
-
-            var t = Random.Range(earliest, latest);
-            times.Add(t);
-            earliest = t + minGap;
+            times.Add(start + interval * (i + 1));
         }
 
         return times;
@@ -200,6 +200,8 @@ public class SubSkillCont_Pusher : SubSkillCont_Base
                 System.TimeSpan.FromSeconds(activateStaggerSeconds),
                 cancellationToken: token).SuppressCancellationThrow();
             if (canceled || !isActive) return;
+
+            // SoundManager.Inst.PlaySE(SE_PusherActive);
         }
     }
 

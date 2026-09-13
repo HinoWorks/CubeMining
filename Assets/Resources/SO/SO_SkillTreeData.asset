@@ -1161,7 +1161,11 @@ MonoBehaviour:
     paramType: 29
     targetIndex: -1
     skillName: Unlock Break Bonus
-    description: xxxxx
+    description: 'Destruction Bonus Unlocked:
+
+      Destroying a required number
+      of rocks grants bonus game time, spawns new rocks, and converts a set amount
+      of existing rocks into ores.'
     icon: {fileID: 21300000, guid: a8088b1e4783d45919c72bcb46d01ebf, type: 3}
     maxLevel: 1
     deltaValue: 1
@@ -1209,7 +1213,7 @@ MonoBehaviour:
     paramType: 0
     targetIndex: 2
     skillName: Pusher
-    description: unlock
+    description: Pushers spawn at the top and bottom to gather rocks in the center.
     icon: {fileID: 21300000, guid: 017157585a1ef43bc8d1dbc5dfc71421, type: 3}
     maxLevel: 1
     deltaValue: 1
@@ -1221,10 +1225,10 @@ MonoBehaviour:
     paramType: 12
     targetIndex: 2
     skillName: Pusher Count
-    description: aaa
+    description: Increases Pusher Count.
     icon: {fileID: 21300000, guid: 79db1260cec094df78f8db4486e80b4f, type: 3}
-    maxLevel: 2
-    deltaValue: 1
+    maxLevel: 1
+    deltaValue: 2
     deltaValue2: 0
     unit: Count
     unit2: 
@@ -1233,9 +1237,9 @@ MonoBehaviour:
     paramType: 10
     targetIndex: 2
     skillName: Pusher Interval In Game
-    description: bbb
+    description: Increases Pusher Event Frequency.
     icon: {fileID: 21300000, guid: 14b473c1774dd4bafa478ab53870ed10, type: 3}
-    maxLevel: 2
+    maxLevel: 1
     deltaValue: 1
     deltaValue2: 0
     unit: Count
@@ -2750,6 +2754,36 @@ MonoBehaviour:
   - skillTreeIndex: 359
     refIndex: 4013
     unlockCheckIndexes: 66010000
+    req_stone: 20
+    req_iron: 20
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 360
+    refIndex: 4012
+    unlockCheckIndexes: 67010000
+    req_stone: 20
+    req_iron: 20
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 361
+    refIndex: 4013
+    unlockCheckIndexes: 68010000
+    req_stone: 20
+    req_iron: 20
+    req_gold: 0
+    req_emerald: 0
+    req_ruby: 0
+    req_sapphire: 0
+    req_diamond: 0
+  - skillTreeIndex: 362
+    refIndex: 4012
+    unlockCheckIndexes: 69010000
     req_stone: 20
     req_iron: 20
     req_gold: 0
