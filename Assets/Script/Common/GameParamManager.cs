@@ -620,18 +620,18 @@ public class SubSkillParam
     public bool isActive { get; private set; } = false;
 
     public float rate => rate_enhanced + so.rate;
-    public float interval => (1f - interval_enhanced) * so.interval;
     public float size => size_enhanced + so.size;
-    public float aliveTime => aliveTime_enhanced + so.aliveTime;
     public int count => count_enhanced + so.count;
+    public int value => value_enhanced;
+
 
 
     // -- local enhanced --
     private float rate_enhanced = 0f;
-    private float interval_enhanced = 0f;
+
     private float size_enhanced = 0f;
-    private float aliveTime_enhanced = 0f;
     private int count_enhanced = 0;
+    private int value_enhanced = 0;
 
 
     public void Init(SubSkillUnitData _subSkillUnitData)
@@ -648,17 +648,14 @@ public class SubSkillParam
             case ParamType.Damage:
                 rate_enhanced += _setParam;
                 break;
-            case ParamType.Interval:
-                interval_enhanced += _setParam;
-                break;
             case ParamType.Size:
                 size_enhanced += _setParam;
                 break;
-            case ParamType.AliveTime:
-                aliveTime_enhanced += _setParam;
-                break;
             case ParamType.Count:
                 count_enhanced += (int)_setParam;
+                break;
+            case ParamType.Value:
+                value_enhanced += (int)_setParam;
                 break;
         }
     }

@@ -8,7 +8,7 @@ using Cysharp.Threading.Tasks;
 /// </summary>
 public class SubSkillCont_Pusher : SubSkillCont_Base
 {
-    private int activateCount => Mathf.Max(1, (int)(param.interval));
+    private int activateCount => Mathf.Max(1, param.value);
     private float ct => Random.Range(5f, 7.5f);
     [Header("Spawn")]
     [SerializeField] GameObject pf_pusher;
@@ -41,6 +41,8 @@ public class SubSkillCont_Pusher : SubSkillCont_Base
     {
         base.Init(_subSkilParam);
         CreateUnits();
+
+        Debug.Log($"SubSkillCont_Pusher: PusherCount: {spawnCount} / PusherEvent :{activateCount}");
     }
 
     public override void Set_AttackTrigger(bool isTrigger)
