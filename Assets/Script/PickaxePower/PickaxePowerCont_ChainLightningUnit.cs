@@ -20,6 +20,7 @@ public class PickaxePowerCont_ChainLightningUnit : MonoBehaviour
     private float delayDamageTime = 0.35f;
 
     private Vector3 baseScale = Vector3.one;
+    private Vector3 effectOffset = new Vector3(0f, 2f, 0f);
 
     void Awake()
     {
@@ -56,7 +57,7 @@ public class PickaxePowerCont_ChainLightningUnit : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         gameObject.SetActive(true);
 
-        PlayChainEffect(startPosition, targetPosition);
+        PlayChainEffect(startPosition + effectOffset, targetPosition + effectOffset);
         ShotAfterDelay().Forget();
     }
 
@@ -114,7 +115,7 @@ public class PickaxePowerCont_ChainLightningUnit : MonoBehaviour
 
     private void PlayChainEffect(Vector3 from, Vector3 to)
     {
-        var effChain = EffectManager.Inst?.Get_EffectCont(EffectType.ThunderStrike_Chain);
+        var effChain = EffectManager.Inst?.Get_EffectCont(EffectType.ThunderStrike_Red_Chain);
         if (effChain == null) return;
 
         // AttackCont_Thunder と同様: 終点に置き、起点方向へ伸ばす
@@ -132,11 +133,11 @@ public class PickaxePowerCont_ChainLightningUnit : MonoBehaviour
 
         // 弾の localScale（baseScale × sizeRate）に合わせてエフェクト太さを追従
         var boltScale = transform.localScale;
-        effChain.SetParticle3DSize(0.5f * boltScale.x, distance / 2f, 1f * boltScale.z);
+        effChain.SetParticle3DSize(2f * boltScale.x, distance / 2f, 2f * boltScale.z);
         effChain.gameObject.SetActive(true);
     }
 
-    private void Deactivate()
+    public void Deactivate()
     {
         CancelShotDelay();
         isLaunched = false;
