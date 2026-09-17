@@ -15,6 +15,7 @@ public class MiningTarget_BombAttackArea : MonoBehaviour
             var origin = transform.position;
             var colliders = Physics.OverlapSphere(origin, _bomSize, targetLayerMask);
 
+            Debug.Log($"bomb colliders => {colliders.Length} / Damage => {_damage}");
             foreach (var col in colliders)
             {
                 if (col == null) continue;

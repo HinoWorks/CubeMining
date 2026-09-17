@@ -10,7 +10,6 @@ public class PickaxePowerCont_CreateBom : PickaxePowerCont_Base
     private float offsetPositionY_delta = 0.5f;
 
     private int delayGenerate = 150;
-    private int hp_Bom = 15; // ダミー、MiningTarget_Bomb_PickaxePowerで攻撃回数で破壊するよう設定中
     private float damageRate => EquippedLevelData.value_1;
     private float sizeRate => EquippedLevelData.value_2;
     private int bomCount => (int)EquippedLevelData.value_3;
@@ -64,7 +63,7 @@ public class PickaxePowerCont_CreateBom : PickaxePowerCont_Base
         newBomBlock.transform.position = createPosition;
 
         var damage = (int)(AttackManager.Inst.currentPickaxeDamage * damageRate);
-        newBomBlock.Init_SkillBom(hp_Bom, damage, sizeRate);
+        newBomBlock.Init(damage, sizeRate);
     }
 
 

@@ -4,7 +4,9 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Networking;
 using System;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class DataBase : MonoBehaviour
 {
@@ -95,7 +97,9 @@ public class DataBase : MonoBehaviour
     public async UniTask SkillTreeData_Update()
     {
         await DataLoad_SkillTreeData();
+#if UNITY_EDITOR
         EditorUtility.SetDirty(mSO_SkillTreeData);
+#endif
     }
 
 

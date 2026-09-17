@@ -6,7 +6,11 @@ public class PickaxePowerCont_Laser : PickaxePowerCont_Base
 {
     [SerializeField] GameObject pf_Laser;
     private float damageRate => EquippedLevelData.value_1;
-    private int maxCount => (int)EquippedLevelData.value_2;
+    private float laserSize => EquippedLevelData.value_2;
+    private float rotateAngle => EquippedLevelData.value_3;
+
+
+    private int maxCount = 50;
 
 
 
@@ -26,7 +30,7 @@ public class PickaxePowerCont_Laser : PickaxePowerCont_Base
         newLaserUnit.transform.position = laserPosition;
 
         var damage = (int)(AttackManager.Inst.currentPickaxeDamage * damageRate);
-        newLaserUnit.Init(damage, maxCount);
+        newLaserUnit.Init(damage, maxCount, laserSize, rotateAngle);
     }
 
 
@@ -43,7 +47,7 @@ public class PickaxePowerCont_Laser : PickaxePowerCont_Base
         newLaserUnit.transform.position = laserPosition;
 
         var damage = (int)(AttackManager.Inst.currentPickaxeDamage * damageRate);
-        newLaserUnit.Init(damage, maxCount);
+        newLaserUnit.Init(damage, maxCount, laserSize, rotateAngle);
     }
 
 

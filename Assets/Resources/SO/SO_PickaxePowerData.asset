@@ -72,7 +72,7 @@ MonoBehaviour:
     CD: 5
     maxLevel: 3
     pf: {fileID: 1214965774706709456, guid: 07aae9ee3359e44f383c381555ae8de7, type: 3}
-  - index: 7
+  - index: 997
     skillName: Geo Dowsing
     description: Converts dirt blocks on screen into ore blocks.
     icon: {fileID: 21300000, guid: 364c3ccc9fe8c40e09296355fe6aeac6, type: 3}
@@ -81,7 +81,7 @@ MonoBehaviour:
     CD: 5
     maxLevel: 3
     pf: {fileID: 8235290486800529160, guid: 59342e19ef9714670804572a3556a06b, type: 3}
-  - index: 8
+  - index: 998
     skillName: Triple Quake
     description: Triggers a shockwave around the cursor, striking in a circular area
       3 times. (Damage scales with Pickaxe Power)
@@ -230,8 +230,8 @@ MonoBehaviour:
   - index: 3
     level: 1
     value_1: 2
-    value_2: 15
-    value_3: -1
+    value_2: 1.5
+    value_3: 45
     value_4: 1
     req_point: 2
     req_stone: 300
@@ -244,8 +244,8 @@ MonoBehaviour:
   - index: 3
     level: 2
     value_1: 2.5
-    value_2: 20
-    value_3: -1
+    value_2: 3
+    value_3: 60
     value_4: 1
     req_point: 3
     req_stone: 0
@@ -258,8 +258,8 @@ MonoBehaviour:
   - index: 3
     level: 3
     value_1: 3
-    value_2: 25
-    value_3: -1
+    value_2: 4.5
+    value_3: 70
     value_4: 1
     req_point: 4
     req_stone: 1000
@@ -656,12 +656,18 @@ MonoBehaviour:
     prefix: 
   - index: 3
     order: 2
-    paramName: Target Count
+    paramName: Laser Length
     valueSlot: 2
-    format: 0
+    format: 1
     prefix: 
   - index: 3
     order: 3
+    paramName: Rotate Angle
+    valueSlot: 3
+    format: 3
+    prefix: 
+  - index: 3
+    order: 4
     paramName: Useful Count
     valueSlot: 4
     format: 0

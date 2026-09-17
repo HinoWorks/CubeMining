@@ -182,6 +182,7 @@ public class UI_PickaxePowerInfo : MonoBehaviour
         {
             ParamFormat.Percent => $"{prefix}{value * 100}%",
             ParamFormat.Second => $"{prefix}{value} sec",
+            ParamFormat.Degree => $"{prefix}{value}°",
             _ => $"{prefix}{value}"
         };
     }

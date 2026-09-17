@@ -8,6 +8,7 @@ public enum ParamFormat
     Raw = 0,
     Percent = 1,
     Second = 2,
+    Degree = 3,
 }
 
 [System.Serializable]

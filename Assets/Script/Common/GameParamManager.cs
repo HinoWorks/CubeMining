@@ -409,6 +409,9 @@ public class BlockChangeRateParam
         }
     }
 
+    private int OreRateTotal => rate_iron_total + rate_gold_total + rate_emerald_total
+                                + rate_ruby_total + rate_sapphire_total + rate_diamond_total;
+
     /// <summary>
     /// ブロックのリソースタイプを抽選(通常確率 or 土の確率減少)
     /// </summary>
@@ -417,9 +420,23 @@ public class BlockChangeRateParam
         var selectRate = _isNormalRate ? baseRate : baseRate / 2;
         var total = selectRate
                     - (int)(ArtifactManager.Inst.changeBlockRate * 100) // アーティファクトによる確率上昇分
-                    + rate_iron_total + rate_gold_total + rate_emerald_total
-                    + rate_ruby_total + rate_sapphire_total + rate_diamond_total;
+                    + OreRateTotal;
         var random = Random.Range(0, total);
+        return LotteryBlockParam(random);
+    }
+
+    /// <summary>
+    /// 土を除き、現在の鉱石変化率だけで抽選。鉱石未解放なら null
+    /// </summary>
+    public BlockGenerateParam SelectOreBlockType()
+    {
+        var oreTotal = OreRateTotal;
+        if (oreTotal <= 0) return null;
+        return LotteryBlockParam(Random.Range(0, oreTotal));
+    }
+
+    private BlockGenerateParam LotteryBlockParam(int random)
+    {
         var targetIndex = 1;
         switch (random)
         {
@@ -704,6 +721,10 @@ public static class GameParamManager
     /// ランダムな鉱石タイプを抽選(必ず鉄以上になる)
     /// </summary>
     public static BlockGenerateParam Get_RandamBlockIndex_OverIronUp() => blockChangeRateParam.SelectBlockType(false);
+    /// <summary>
+    /// 土を除いた鉱石タイプだけを抽選。鉱石未解放なら null
+    /// </summary>
+    public static BlockGenerateParam Get_RandamOreBlockIndex() => blockChangeRateParam.SelectOreBlockType();
 
     /// <summary>
     /// リソースがmax鉱石に変化するかチェック

@@ -49,7 +49,7 @@ public class ArtifactControllUnit
     private void ActiveCheck()
     {
         var randomValue = Random.Range(0f, 1f);
-        Debug.Log("=ArtifactManager=   ActiveCheck / randomValue:" + randomValue + " / so.activeCheckRate:" + so.activeCheckRate);
+        //Debug.Log("=ArtifactManager=   ActiveCheck / randomValue:" + randomValue + " / so.activeCheckRate:" + so.activeCheckRate);
         if (so.activeCheckRate >= 0f && randomValue >= so.activeCheckRate) return;
         Set_ArtifactEffect(so.effectType, so.value);
         Set_ArtifactEffect(so.effectType_2, so.value_2);

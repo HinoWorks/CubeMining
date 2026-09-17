@@ -1,71 +1,149 @@
 using UnityEngine;
 using UniRx;
 using System;
+using DG.Tweening;
 
-public class MiningTarget_Bomb_PickaxePower : MiningTarget_Object
+public class MiningTarget_Bomb_PickaxePower : MonoBehaviour
 {
+    private static readonly int EmissionColorId = Shader.PropertyToID("_EmissionColor");
+    private const string EmissionKeyword = "_EMISSION";
 
     [SerializeField] float baseExplosionSize = 3f;
     [SerializeField] private GameObject pf_bomb;
+    [SerializeField] private Material emissionMaterial;
 
-    private int breakCount = 3; //  3回ダメージを受けると爆発
-    private int index_SE_Damage => 24;
     private int index_SE_Break => 25;
-    private float explodeTime = 1.5f;
+    private float explodeTimeMin = 1.5f;
+    private float explodeTimeMax = 2.5f;
+    private float blinkIntervalMax = 0.35f;
+    private float blinkIntervalMin = 0.06f;
     private int damage;
     private float sizeRate;
+    private IDisposable explodeTimer;
+    private Material emissionMatInstance;
+    private Color emissionColorOn = Color.black;
 
-    private const int ObjectIndex_Bomb = 3;
-
-    public void Init_SkillBom(int _hp, int _damage, float _sizeRate)
+    public void Init(int _damage, float _sizeRate)
     {
         damage = _damage;
         sizeRate = _sizeRate;
-        var bombParam = GameParamManager.list_objectGenerateParam.Find(x => x.so.objectIndex == ObjectIndex_Bomb);
-        base.Init(bombParam, null);
-        base.Init_MiningTargetBase(_hp, 0, bombParam?.so.objectIndex ?? 0);
-        //Set_ActiveGravity();
+        transform.localRotation = Quaternion.identity;
+        transform.DOKill();
+        transform.localScale = Vector3.zero;
+        gameObject.SetActive(true);
+        transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.OutBack).SetLink(gameObject).Play();
+        SetupEmissionMaterial();
         StartTimer();
     }
 
+    private void Awake()
+    {
+        SetupEmissionMaterial();
+    }
+
+    private void OnDestroy()
+    {
+        explodeTimer?.Dispose();
+        explodeTimer = null;
+        if (emissionMatInstance != null)
+            Destroy(emissionMatInstance);
+    }
 
     private void StartTimer()
     {
-        Observable.Timer(TimeSpan.FromSeconds(explodeTime)).Subscribe(_ =>
+        explodeTimer?.Dispose();
+        var explodeTime = UnityEngine.Random.Range(explodeTimeMin, explodeTimeMax);
+        var startTime = Time.time;
+        var nextToggleTime = startTime;
+        var emissionOn = false;
+
+        explodeTimer = Observable.EveryUpdate().Subscribe(_ =>
         {
-            BreakFromDamage();
+            var elapsed = Time.time - startTime;
+            if (elapsed >= explodeTime)
+            {
+                explodeTimer?.Dispose();
+                explodeTimer = null;
+                SetEmission(true);
+                Explode();
+                return;
+            }
+
+            if (Time.time < nextToggleTime) return;
+
+            emissionOn = !emissionOn;
+            SetEmission(emissionOn);
+            var t = Mathf.Clamp01(elapsed / explodeTime);
+            var interval = Mathf.Lerp(blinkIntervalMax, blinkIntervalMin, t * t);
+            nextToggleTime = Time.time + interval;
         }).AddTo(this);
     }
 
-    public override bool Damage(int damage, float _resourceUpRate = 1f)
+    private void Explode()
     {
-        var damageFixed = base.hp_max / breakCount;
-        var isBreak = base.Damage(damageFixed, _resourceUpRate);
-        Set_BlockMesh();
-        return isBreak;
-    }
+        explodeTimer?.Dispose();
+        explodeTimer = null;
 
-    public override void BreakFromDamage(float _resourceUpRate = 1f)
-    {
+        SoundManager.Inst.PlaySE(index_SE_Break);
         CameraManager.Inst?.ShakeCamera_BlockBreak();
 
-        // explosion damage to surrounding blocks
         var newBomb = Instantiate(pf_bomb, InGameManager.Inst.ParentPool) as GameObject;
         var bomb = newBomb.GetComponent<MiningTarget_BombAttackArea>();
         bomb.transform.position = transform.position;
 
-        var sizeRate = 1f + ArtifactManager.Inst.bomb_sizeRate;
-        bomb.Explode(damage, baseExplosionSize * sizeRate);
-        base.BreakFromDamage(_resourceUpRate);
+        var explodeSize = baseExplosionSize * sizeRate * (1f + ArtifactManager.Inst.bomb_sizeRate);
+        bomb.Explode(damage, explodeSize);
+        NotActivate();
     }
 
-    protected override void PlaySE_Damage()
+    private void NotActivate()
     {
-        SoundManager.Inst.PlaySE(index_SE_Damage);
+        explodeTimer?.Dispose();
+        explodeTimer = null;
+        SetEmission(false);
+        gameObject.SetActive(false);
     }
 
-    protected override void PlaySE_Break()
+    private void SetupEmissionMaterial()
     {
-        SoundManager.Inst.PlaySE(index_SE_Break);
+        if (emissionMatInstance != null || emissionMaterial == null) return;
+
+        emissionMatInstance = new Material(emissionMaterial);
+        emissionColorOn = emissionMatInstance.HasProperty(EmissionColorId)
+            ? emissionMatInstance.GetColor(EmissionColorId)
+            : Color.red;
+
+        var renderers = GetComponentsInChildren<Renderer>(true);
+        foreach (var renderer in renderers)
+        {
+            var shared = renderer.sharedMaterials;
+            var changed = false;
+            for (int i = 0; i < shared.Length; i++)
+            {
+                if (shared[i] != emissionMaterial) continue;
+                shared[i] = emissionMatInstance;
+                changed = true;
+            }
+            if (changed)
+                renderer.sharedMaterials = shared;
+        }
+
+        SetEmission(false);
+    }
+
+    private void SetEmission(bool on)
+    {
+        if (emissionMatInstance == null) return;
+
+        if (on)
+        {
+            emissionMatInstance.EnableKeyword(EmissionKeyword);
+            emissionMatInstance.SetColor(EmissionColorId, emissionColorOn);
+        }
+        else
+        {
+            emissionMatInstance.DisableKeyword(EmissionKeyword);
+            emissionMatInstance.SetColor(EmissionColorId, Color.black);
+        }
     }
 }

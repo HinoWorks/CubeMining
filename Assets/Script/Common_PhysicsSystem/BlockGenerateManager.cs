@@ -334,7 +334,7 @@ public class BlockGenerateManager : MonoBehaviour
         if (dirtCube == null || !dirtCube.isActiveAndEnabled) return false;
         if (dirtCube.ResourceType != ResourceType.Stone) return false;
 
-        var oreParam = LotteryOreBlockParam();
+        var oreParam = GameParamManager.Get_RandamOreBlockIndex();
         if (oreParam == null || oreParam.resourceType == ResourceType.Stone) return false;
 
         var position = dirtCube.transform.position;
@@ -354,21 +354,6 @@ public class BlockGenerateManager : MonoBehaviour
         return true;
     }
 
-    /// <summary>
-    /// 現在の鉱石変化パラで抽選し、土以外（鉱石）になるまで再抽選する
-    /// </summary>
-    private static BlockGenerateParam LotteryOreBlockParam(int maxRetry = 32)
-    {
-        for (int i = 0; i < maxRetry; i++)
-        {
-            var param = GameParamManager.Get_RandamBlockIndex();
-            if (param != null && param.resourceType != ResourceType.Stone)
-            {
-                return param;
-            }
-        }
-        return null;
-    }
     #endregion
 
 
