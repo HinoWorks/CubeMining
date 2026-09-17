@@ -29,12 +29,22 @@ public class UI_UserSettingManager : MonoBehaviour
 
     [Header("Display")]
     [SerializeField] TMP_Dropdown dropdown_resolution;
+    [SerializeField] Button btn_screenModePrev;
+    [SerializeField] Button btn_screenModeNext;
+    [SerializeField] TextMeshProUGUI tmp_screenMode;
+
+    private static readonly FullScreenMode[] ScreenModeOptions =
+    {
+        FullScreenMode.FullScreenWindow,
+        FullScreenMode.Windowed,
+    };
 
     private readonly List<Vector2Int> resolutionOptions = new();
     private readonly List<int> bgmOptions = new();
     private UserSettingsData savedSnapshot;
     private UserSettingsData pendingDraft;
     private bool isSyncingUI;
+    private bool screenModeEventsBound;
 
     void Awake()
     {
@@ -47,6 +57,7 @@ public class UI_UserSettingManager : MonoBehaviour
         InitVolumeSliders();
         InitResolutionDropdown();
         InitBGMTypeSelector();
+        InitScreenModeSelector();
         BindEvents();
         obj_main.SetActive(false);
     }
@@ -64,6 +75,7 @@ public class UI_UserSettingManager : MonoBehaviour
         }
 
         obj_main.SetActive(true);
+        InitScreenModeSelector();
         SyncUIFromDraft();
     }
 
@@ -128,6 +140,80 @@ public class UI_UserSettingManager : MonoBehaviour
         }
     }
 
+    private void InitScreenModeSelector()
+    {
+        if (tmp_screenMode != null && btn_screenModePrev != null && btn_screenModeNext != null) return;
+        if (btn_bgmPrev == null) return;
+
+        var sourceRow = FindLayoutRow(btn_bgmPrev);
+        if (sourceRow == null) return;
+
+        var clone = Instantiate(sourceRow.gameObject, sourceRow.parent);
+        clone.name = "pf_ui_setting(ScreenMode)";
+
+        var resolutionRow = FindLayoutRow(dropdown_resolution);
+        if (resolutionRow != null)
+        {
+            clone.transform.SetSiblingIndex(resolutionRow.GetSiblingIndex());
+        }
+        else
+        {
+            clone.transform.SetSiblingIndex(sourceRow.GetSiblingIndex() + 1);
+        }
+
+        var title = FindNamedText(clone.transform, "tmp_title");
+        if (title != null) title.text = "Screen Mode";
+
+        tmp_screenMode = FindNamedText(clone.transform, "tmp_value");
+
+        var buttons = clone.GetComponentsInChildren<HButton>(true);
+        System.Array.Sort(buttons, (a, b) => GetButtonSortX(a).CompareTo(GetButtonSortX(b)));
+        if (buttons.Length >= 2)
+        {
+            btn_screenModePrev = buttons[0];
+            btn_screenModeNext = buttons[1];
+            btn_screenModePrev.onClick.RemoveAllListeners();
+            btn_screenModeNext.onClick.RemoveAllListeners();
+        }
+
+        BindScreenModeEvents();
+    }
+
+    private static float GetButtonSortX(Component button)
+    {
+        var t = button.transform;
+        while (t != null)
+        {
+            if (t is RectTransform rt && Mathf.Abs(rt.anchoredPosition.x) > 1f)
+            {
+                return rt.anchoredPosition.x;
+            }
+            t = t.parent;
+        }
+        return 0f;
+    }
+
+    private static Transform FindLayoutRow(Component component)
+    {
+        if (component == null) return null;
+        var t = component.transform;
+        while (t.parent != null && t.parent.GetComponent<VerticalLayoutGroup>() == null)
+        {
+            t = t.parent;
+        }
+        return t;
+    }
+
+    private static TextMeshProUGUI FindNamedText(Transform root, string objectName)
+    {
+        var texts = root.GetComponentsInChildren<TextMeshProUGUI>(true);
+        foreach (var text in texts)
+        {
+            if (text.gameObject.name == objectName) return text;
+        }
+        return null;
+    }
+
     private void BindEvents()
     {
         if (slider_volumeMaster != null)
@@ -144,6 +230,18 @@ public class UI_UserSettingManager : MonoBehaviour
             btn_bgmPrev.onClick.AddListener(OnClick_BGMPrev);
         if (btn_bgmNext != null)
             btn_bgmNext.onClick.AddListener(OnClick_BGMNext);
+
+        BindScreenModeEvents();
+    }
+
+    private void BindScreenModeEvents()
+    {
+        if (screenModeEventsBound) return;
+        if (btn_screenModePrev == null || btn_screenModeNext == null) return;
+
+        btn_screenModePrev.onClick.AddListener(OnClick_ScreenModePrev);
+        btn_screenModeNext.onClick.AddListener(OnClick_ScreenModeNext);
+        screenModeEventsBound = true;
     }
     #endregion
 
@@ -161,6 +259,8 @@ public class UI_UserSettingManager : MonoBehaviour
         SyncResolutionDropdown(pendingDraft.resolutionWidth, pendingDraft.resolutionHeight);
         UpdateVolumeLabels();
         UpdateBGMTypeLabel();
+        UpdateScreenModeLabel();
+        UpdateResolutionInteractable();
 
         isSyncingUI = false;
     }
@@ -195,6 +295,20 @@ public class UI_UserSettingManager : MonoBehaviour
             ? SOLoader.SoundData.Get_SoundData_BGM(index)
             : null;
         tmp_bgmType.text = data != null ? data.GetDisplayName() : "-";
+    }
+
+    private void UpdateScreenModeLabel()
+    {
+        if (tmp_screenMode == null) return;
+        bool windowed = pendingDraft != null && UserSettingsManager.IsWindowed(pendingDraft.fullScreenMode);
+        tmp_screenMode.text = windowed ? "Windowed" : "Fullscreen";
+    }
+
+    private void UpdateResolutionInteractable()
+    {
+        if (dropdown_resolution == null) return;
+        bool windowed = pendingDraft == null || UserSettingsManager.IsWindowed(pendingDraft.fullScreenMode);
+        dropdown_resolution.interactable = windowed;
     }
 
     private void ApplyPreview()
@@ -250,6 +364,30 @@ public class UI_UserSettingManager : MonoBehaviour
     public void OnClick_BGMNext()
     {
         CycleBGMType(1);
+    }
+
+    public void OnClick_ScreenModePrev()
+    {
+        CycleScreenMode(-1);
+    }
+
+    public void OnClick_ScreenModeNext()
+    {
+        CycleScreenMode(1);
+    }
+
+    private void CycleScreenMode(int direction)
+    {
+        if (isSyncingUI || pendingDraft == null) return;
+
+        var current = UserSettingsManager.NormalizeScreenMode(pendingDraft.fullScreenMode);
+        int index = System.Array.IndexOf(ScreenModeOptions, current);
+        if (index < 0) index = 0;
+        int next = (index + direction + ScreenModeOptions.Length) % ScreenModeOptions.Length;
+        pendingDraft.fullScreenMode = (int)ScreenModeOptions[next];
+        UpdateScreenModeLabel();
+        UpdateResolutionInteractable();
+        ApplyPreview();
     }
 
     private void CycleBGMType(int direction)

@@ -11,6 +11,7 @@ public class UserSettingsManager : MonoBehaviour
 
     private const string KEY_USER_SETTINGS = "key_userSettings";
     private const string KEY_SOUND_SETTINGS_LEGACY = "key_soundSettings";
+    private const int CurrentSettingsVersion = 1;
 
     public UserSettingsData Data { get; private set; }
 
@@ -34,6 +35,7 @@ public class UserSettingsManager : MonoBehaviour
             Inst = this;
             DontDestroyOnLoad(gameObject);
             LoadSettings();
+            ApplyDisplay(Data);
         }
         else
         {
@@ -44,6 +46,16 @@ public class UserSettingsManager : MonoBehaviour
     void Start()
     {
         ApplyAll();
+    }
+
+    public static bool IsWindowed(int fullScreenMode)
+    {
+        return (FullScreenMode)fullScreenMode == FullScreenMode.Windowed;
+    }
+
+    public static FullScreenMode NormalizeScreenMode(int fullScreenMode)
+    {
+        return IsWindowed(fullScreenMode) ? FullScreenMode.Windowed : FullScreenMode.FullScreenWindow;
     }
 
     #region -- Public API (設定UIから呼ぶ) --
@@ -99,7 +111,7 @@ public class UserSettingsManager : MonoBehaviour
 
     public void SetScreenMode(FullScreenMode mode)
     {
-        Data.fullScreenMode = (int)mode;
+        Data.fullScreenMode = (int)NormalizeScreenMode((int)mode);
         ApplyDisplay(Data);
         SaveSettings();
     }
@@ -154,6 +166,8 @@ public class UserSettingsManager : MonoBehaviour
     public void CommitSettings(UserSettingsData settings)
     {
         Data = settings.Copy();
+        Data.fullScreenMode = (int)NormalizeScreenMode(Data.fullScreenMode);
+        Data.settingsVersion = CurrentSettingsVersion;
         ApplyAll();
         SaveSettings();
     }
@@ -183,7 +197,20 @@ public class UserSettingsManager : MonoBehaviour
         {
             Data = CreateDefault();
         }
+        if (Data == null) Data = CreateDefault();
         isLoading = false;
+        MigrateSettingsIfNeeded();
+    }
+
+    private void MigrateSettingsIfNeeded()
+    {
+        if (Data == null) return;
+        if (Data.settingsVersion >= CurrentSettingsVersion) return;
+
+        // 旧デフォルトは Windowed 固定だったため、初回バージョンアップ時は全画面へ揃える
+        Data.fullScreenMode = (int)FullScreenMode.FullScreenWindow;
+        Data.settingsVersion = CurrentSettingsVersion;
+        SaveSettings();
     }
 
     private static UserSettingsData CreateDefault()
@@ -196,7 +223,8 @@ public class UserSettingsManager : MonoBehaviour
             volumeSE = 80f,
             resolutionWidth = current.width,
             resolutionHeight = current.height,
-            fullScreenMode = (int)FullScreenMode.Windowed,
+            fullScreenMode = (int)FullScreenMode.FullScreenWindow,
+            settingsVersion = CurrentSettingsVersion,
         };
     }
 
@@ -235,15 +263,15 @@ public class UserSettingsManager : MonoBehaviour
 
     private void ApplyDisplay(UserSettingsData settings)
     {
-        var mode = (FullScreenMode)settings.fullScreenMode;
+        var mode = NormalizeScreenMode(settings.fullScreenMode);
         if (mode == FullScreenMode.Windowed)
         {
             Screen.SetResolution(settings.resolutionWidth, settings.resolutionHeight, FullScreenMode.Windowed);
+            return;
         }
-        else
-        {
-            Screen.SetResolution(settings.resolutionWidth, settings.resolutionHeight, mode);
-        }
+
+        var native = Screen.currentResolution;
+        Screen.SetResolution(native.width, native.height, FullScreenMode.FullScreenWindow);
     }
     #endregion
 }
