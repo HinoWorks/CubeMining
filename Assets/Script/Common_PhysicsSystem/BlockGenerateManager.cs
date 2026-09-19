@@ -249,7 +249,7 @@ public class BlockGenerateManager : MonoBehaviour
         return GenerateRockBlock(blockGenerateParam);
     }
 
-    private GameObject GenerateRockBlock(BlockGenerateParam blockGenerateParam)
+    private GameObject GenerateRockBlock(BlockGenerateParam blockGenerateParam, float? sizeRate = null, bool playAppearAnim = true)
     {
         var isMaxResource = GameParamManager.IsMaxResource(blockGenerateParam.resourceType);
 
@@ -282,7 +282,8 @@ public class BlockGenerateManager : MonoBehaviour
                                   );
         //Debug.Log($"baseValue: {blockGenerateParam.baseValue}, isMaxResource: {isMaxResource}, resourceUpCount: {GameParamManager.Get_ResourceUpCount(blockGenerateParam.resourceType)}, resourceBaseUpCount: {GameParamManager.Get_ResourceBaseUpCount()}, fixedResourceValue: {fixedResourceValue}");
         var fixedHP = blockGenerateParam.hp * (1f + GameParamManager.Get_ResourceHPUpRate());
-        targetBlock.Init((int)fixedHP, fixedResourceValue, randomBlockSizeRate, blockGenerateParam.blockIndex);
+        var appearSizeRate = sizeRate ?? randomBlockSizeRate;
+        targetBlock.Init((int)fixedHP, fixedResourceValue, appearSizeRate, blockGenerateParam.blockIndex, playAppearAnim);
         targetBlock.Set_BlockType(blockGenerateParam.resourceType);
 
         return targetBlock.gameObject;
@@ -339,9 +340,10 @@ public class BlockGenerateManager : MonoBehaviour
 
         var position = dirtCube.transform.position;
         var rotation = dirtCube.transform.rotation;
+        var sizeRate = dirtCube.SizeRate;
         dirtCube.NotActivate();
 
-        var oreBlock = GenerateRockBlock(oreParam);
+        var oreBlock = GenerateRockBlock(oreParam, sizeRate, playAppearAnim: false);
         oreBlock.transform.position = position;
         oreBlock.transform.rotation = rotation;
 

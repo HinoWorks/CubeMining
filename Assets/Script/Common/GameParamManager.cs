@@ -84,9 +84,9 @@ public class GameBaseParam
                                                 + ArtifactManager.Inst.pickaxe_damageRate
                                                 + PickaxePowerManager.Inst.pickaxeAttackDamageRate;
     private float pickaxeBase_AttackDamage_enhanced = 0f;
-    public float pickaxeBase_AttackInterval => pickaxeBase_AttackInterval_enhanced
+    public float pickaxeBase_AttackInterval => Mathf.Min(0.8f, pickaxeBase_AttackInterval_enhanced
                                                 + ArtifactManager.Inst.pickaxe_attackInterval
-                                                + PickaxePowerManager.Inst.pickaxeAttackIntervalRate;
+                                                + PickaxePowerManager.Inst.pickaxeAttackIntervalRate); // max80%の加速
     private float pickaxeBase_AttackInterval_enhanced = 0f;
     public float pickaxeBase_CriticalRate => pickaxeBase_CriticalRate_enhanced
                                                 + ArtifactManager.Inst.pickaxe_criticalRate;

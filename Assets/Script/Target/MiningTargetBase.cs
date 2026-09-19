@@ -23,10 +23,12 @@ public class MiningTargetBase : MonoBehaviour, IDamagable, IForce
     }
 
     protected float animScale_rate = 1f;
+    private Vector3 targetScale => Vector3.one * animScale_rate;
     private Vector3 animScale_1 => animScale_rate * new Vector3(1.05f, 0.95f, 1.05f);
     private Vector3 animScale_2 => animScale_rate * new Vector3(0.95f, 1.05f, 0.95f);
     private float animDuration = 0.05f;
     private Sequence seq_anim;
+    private Tween spawnTween;
 
     private Collider col;
     protected Rigidbody rb;
@@ -38,7 +40,9 @@ public class MiningTargetBase : MonoBehaviour, IDamagable, IForce
     }
 
 
-    public virtual void Init(int _hp, int _value, float _sizeRate, int _index = 0)
+    public float SizeRate => animScale_rate;
+
+    public virtual void Init(int _hp, int _value, float _sizeRate, int _index = 0, bool playAppearAnim = true)
     {
         hp_max = _hp;
         areaBonusRate = 0f;
@@ -52,12 +56,24 @@ public class MiningTargetBase : MonoBehaviour, IDamagable, IForce
             rb = GetComponent<Rigidbody>();
             col = GetComponent<Collider>();
         }
-        transform.localScale = Vector3.one * animScale_rate;
-        col.enabled = true;
 
-        this.transform.localScale = Vector3.zero;
+        KillScaleTweens();
+        col.enabled = true;
         gameObject.SetActive(true);
-        this.transform.DOScale(Vector3.one * animScale_rate, 0.15f).SetEase(Ease.OutBack).Play();
+
+        if (playAppearAnim)
+        {
+            transform.localScale = Vector3.zero;
+            spawnTween = transform.DOScale(targetScale, 0.15f)
+                .SetEase(Ease.OutBack)
+                .SetLink(gameObject)
+                .OnComplete(() => transform.localScale = targetScale)
+                .Play();
+        }
+        else
+        {
+            transform.localScale = targetScale;
+        }
     }
 
     public virtual bool Damage(int damage, float _resourceUpRate = 1f)
@@ -102,6 +118,7 @@ public class MiningTargetBase : MonoBehaviour, IDamagable, IForce
 
     public virtual void NotActivate()
     {
+        KillScaleTweens();
         gameObject.SetActive(false);
     }
 
@@ -146,17 +163,28 @@ public class MiningTargetBase : MonoBehaviour, IDamagable, IForce
 
 
 
+    private void KillScaleTweens()
+    {
+        spawnTween?.Kill();
+        spawnTween = null;
+        seq_anim?.Kill();
+        seq_anim = null;
+        transform.DOKill();
+    }
+
     private void DamageAction()
     {
-        if (seq_anim == null)
-        {
-            seq_anim = DOTween.Sequence();
-            seq_anim.Append(transform.DOScale(animScale_1, animDuration).SetEase(Ease.OutBack));
-            seq_anim.Append(transform.DOScale(animScale_2, animDuration).SetEase(Ease.OutBack));
-            seq_anim.Append(transform.DOScale(animScale_rate * Vector3.one, animDuration).SetEase(Ease.OutBack));
-            seq_anim.SetAutoKill(false).SetLink(this.gameObject).Pause();
-        }
-        seq_anim.Restart();
+        spawnTween?.Kill();
+        spawnTween = null;
+
+        seq_anim?.Kill();
+        seq_anim = DOTween.Sequence();
+        seq_anim.Append(transform.DOScale(animScale_1, animDuration).SetEase(Ease.OutBack));
+        seq_anim.Append(transform.DOScale(animScale_2, animDuration).SetEase(Ease.OutBack));
+        seq_anim.Append(transform.DOScale(targetScale, animDuration).SetEase(Ease.OutBack));
+        seq_anim.SetLink(gameObject)
+            .OnComplete(() => transform.localScale = targetScale)
+            .Play();
     }
 
 }
