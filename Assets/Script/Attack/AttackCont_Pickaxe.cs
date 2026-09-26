@@ -17,7 +17,8 @@ public class AttackCont_Pickaxe : MonoBehaviour
 
     public int baseDamage => pickaxeParam.damage;
     protected int damage => (int)(pickaxeParam.damage * (1f + GameParamManager.gameBaseParam.pickaxeBase_AttackDamage));
-    protected float attackInterval => pickaxeParam.attackInterval * (1f - GameParamManager.gameBaseParam.pickaxeBase_AttackInterval);
+    protected float attackInterval => pickaxeParam.attackInterval
+                                        * (1f - GameParamManager.gameBaseParam.pickaxeBase_AttackInterval);
     protected float criticalRate => pickaxeParam.criticalRate + GameParamManager.gameBaseParam.pickaxeBase_CriticalRate;
     protected float resourceUpRate_pickaxe => pickaxeParam.resourceUpRate + GameParamManager.gameBaseParam.pickaxeBase_ResourceUpRate;
     protected float size => pickaxeParam.size * (1f + GameParamManager.gameBaseParam.pickaxeBase_Size);

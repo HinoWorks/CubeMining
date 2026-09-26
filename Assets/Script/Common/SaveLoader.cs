@@ -259,6 +259,7 @@ public class SaveLoader : MonoBehaviour
 
     private Queue<Action> allQueue = new();
     private bool isProcessingQueue = false;
+    private bool blockProgressSave;
 
 
 
@@ -368,6 +369,7 @@ public class SaveLoader : MonoBehaviour
 
     private void EnqueueMethod(Action saveAction)
     {
+        if (blockProgressSave) return;
         allQueue.Enqueue(saveAction);
     }
     private void ProcessSaveQueue()
@@ -982,6 +984,60 @@ public class SaveLoader : MonoBehaviour
 
 
 
+
+
+    #region -- Delete progress --
+    /// <summary>
+    /// 進行データだけ消す。音量・画面設定は残す。Steam実績は触らない。
+    /// 終了時にメモリ上の古いセーブがファイルへ戻らないよう、キャッシュも捨てて読み直す。
+    /// </summary>
+    public void DeleteProgressData()
+    {
+        blockProgressSave = true;
+        allQueue.Clear();
+        isProcessingQueue = false;
+
+        if (ES3.FileExists())
+        {
+            foreach (var key in ES3.GetKeys())
+            {
+                if (key == KEY_USER_SETTINGS || key == "key_soundSettings") continue;
+                ES3.DeleteKey(key);
+            }
+        }
+
+        ResetProgressMemory();
+        SavePickaxeData(1, 1);
+        SavePickaxeSlotData(0, 1);
+        ES3.Save(KEY_CREATE_INITIAL_DATA, true);
+
+        if (UserSettingsManager.Inst != null)
+        {
+            ES3.Save(KEY_USER_SETTINGS, UserSettingsManager.Inst.Data);
+        }
+
+        ES3File.cachedFiles.Clear();
+        if (ES3.FileExists()) ES3.CacheFile();
+        Debug.Log("DeleteProgressData: progress cleared, user settings kept");
+    }
+
+    private void ResetProgressMemory()
+    {
+        resourceStone = 0;
+        resourceIron = 0;
+        resourceGold = 0;
+        resourceEmerald = 0;
+        resourceRuby = 0;
+        resourceSapphire = 0;
+        resourceDiamond = 0;
+        enhanceCoinCount = 0;
+        enhanceCoinCount_Total = 0;
+        artifactCurrentBlockCount = 0;
+        pickaxePowerEquipedIndex = 0;
+        tutorialShownIndices = new List<int>();
+        skillTreeDataCache.Clear();
+    }
+    #endregion
 
 
     #region -- Debug --

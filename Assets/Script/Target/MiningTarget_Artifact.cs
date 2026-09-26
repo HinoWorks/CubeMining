@@ -8,8 +8,8 @@ public class MiningTarget_Artifact : MiningTarget_Object
 
     protected int artifactIndex;
     private int breakAttackCount; // ブロックを破壊するために必要な攻撃回数
-    private int breakAttackCount_max = 4;
-    private int breakAttackCount_min = 2;
+    private int breakAttackCount_max = 6;
+    private int breakAttackCount_min = 4;
 
     private int index_SE_Damage => 26;
     private int index_SE_Break => 27;

@@ -85,6 +85,8 @@ public class UI_ArtifactManager : UI_OutGameTabBase
     }
     protected override async void Init_ActiveTab()
     {
+        // スキルツリーでスロットを開放した直後でも、タブ表示時に解放状態を反映する
+        await Set_ArtifactEquip();
         await TutorialManager.Inst.Check_Tutorial(TutorialType.Artifact);
     }
 

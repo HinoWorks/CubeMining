@@ -818,18 +818,19 @@ public static class GameParamManager
     }
     public static ObjectGenerateParam SelectOtherObject()
     {
-        var random = UnityEngine.Random.Range(0, otherObjectRate);
-        var currentRate = 0;
+        if (otherObjectRate <= 0f) return null;
+
+        var random = UnityEngine.Random.Range(0f, otherObjectRate);
+        var currentRate = 0f;
+        ObjectGenerateParam selected = null;
         foreach (var objectParam in list_objectGenerateParam)
         {
-            if (!objectParam.isActive) continue;
-            currentRate += (int)objectParam.generateRate_total;
-            if (random < currentRate)
-            {
-                return objectParam;
-            }
+            if (!objectParam.isActive || objectParam.generateRate_total <= 0f) continue;
+            currentRate += objectParam.generateRate_total;
+            selected = objectParam;
+            if (random < currentRate) return objectParam;
         }
-        return null;
+        return selected;
     }
     public static ObjectGenerateParam SelectOtherObject(int _index)
     {

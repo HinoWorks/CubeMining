@@ -12,6 +12,7 @@ public class UIManager_InGame : MonoBehaviour
     [SerializeField] TextMeshProUGUI tmp_timer;
     [SerializeField] TextMeshProUGUI tmp_depthCount;
     [SerializeField] UI_EquipArtifactCont_HUD[] ui_equipArtifactConts;
+    [SerializeField] GameObject obj_equipedArtifact;
     [SerializeField] Transform[] target_artifact;
     [SerializeField] Transform[] target_getItem;
     public UI_ResultManager ui_ResultManager;
@@ -55,10 +56,7 @@ public class UIManager_InGame : MonoBehaviour
                 {
                     ui_resourceCounter.Set_Init();
                 }
-                foreach (var ui_equipArtifactCont in ui_equipArtifactConts)
-                {
-                    ui_equipArtifactCont.Init_ArtifactData();
-                }
+                Refresh_EquipArtifactHUD();
                 break;
             case GameStateType.InGame_End:
                 PauseManager.Inst?.ForceResumeIfPaused();
@@ -67,6 +65,29 @@ public class UIManager_InGame : MonoBehaviour
                 PauseManager.Inst?.ForceResumeIfPaused();
                 ui_ResultManager.Open();
                 break;
+        }
+    }
+
+    private async void Refresh_EquipArtifactHUD()
+    {
+        int equippedCount = 0;
+        for (int i = 1; i < StaticManager.artifactSlotCount + 1; i++)
+        {
+            var slotData = await SaveLoader.Inst.Get_ArtifactSlotData(i);
+            if (slotData != null && slotData.equipedArtifactIndex != -1)
+                equippedCount++;
+        }
+
+        if (equippedCount == 0)
+        {
+            obj_equipedArtifact.SetActive(false);
+            return;
+        }
+
+        obj_equipedArtifact.SetActive(true);
+        foreach (var ui_equipArtifactCont in ui_equipArtifactConts)
+        {
+            ui_equipArtifactCont.Init_ArtifactData();
         }
     }
 

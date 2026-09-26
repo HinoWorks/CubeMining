@@ -246,6 +246,9 @@ public class UI_PickaxeManager : UI_OutGameTabBase
         Set_PickaxeLibrary();
         selectInfoUnit.Set_EquipState(-1);
 
+        // 他のUnitのリソースチェック + 他の管理クラスにもリソースチェックcall
+        GameEvent.UI.PublishResourceMod_OutGame();
+
         isDoingAction = false;
     }
 
