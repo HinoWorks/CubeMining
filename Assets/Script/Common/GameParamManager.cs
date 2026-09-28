@@ -225,6 +225,37 @@ public class GameBaseParam
                 break;
         }
     }
+
+    public void Reset()
+    {
+        ingameTime_enhanced = 0f;
+        blockGenerate_initialCount_enhanced = 0;
+        blockGenerate_createCount_deltaTime_enhanced = 0f;
+        blockGenerate_duration_enhanced = 0f;
+        blockRegenRate_enhanced = 0f;
+        isTowerUnlock = false;
+        towerGenerate_count_enhanced = 0;
+        towerGenerate_duration_enhanced = 0f;
+        towerGenerate_height_enhanced = 0;
+        luckyMineRate_enhanced = 0f;
+        luckyMineRate_ResourceUpRate_enhanced = 0f;
+        instantShatterRate_enhanced = 0f;
+        pickaxeAttack_AddIngameTimeRate_enhanced = 0f;
+        resourceBaseUpCount_enhanced = 0;
+        resourceHPUpRate_enhanced = 0f;
+        artifact_slotCount_enhanced = 0;
+        pickaxeBase_AttackDamage_enhanced = 0f;
+        pickaxeBase_AttackInterval_enhanced = 0f;
+        pickaxeBase_CriticalRate_enhanced = 0f;
+        pickaxeBase_Size_enhanced = 0f;
+        stageLevelup_isUnlocked = false;
+        stageLevelup_generateBlockCount_enhanced = 0;
+        stageLevelup_addTime_enhanced = 0f;
+        stageLevelup_changeResource_enhanced = 0;
+        isStoneKing = false;
+        isGameKing = false;
+        isAttackKing = false;
+    }
 }
 
 /// <summary>
@@ -310,25 +341,25 @@ public class BlockChangeRateParam
 
 
     //ミニ鉱石への変化率
-    private int rate_iron_base = 0;
-    private int rate_gold_base = 0;
-    private int rate_emerald_base = 0;
-    private int rate_ruby_base = 0;
-    private int rate_sapphire_base = 0;
-    private int rate_diamond_base = 0;
+    private float rate_iron_base = 0f;
+    private float rate_gold_base = 0f;
+    private float rate_emerald_base = 0f;
+    private float rate_ruby_base = 0f;
+    private float rate_sapphire_base = 0f;
+    private float rate_diamond_base = 0f;
 
-    public int rate_iron_enhanced { get; private set; } = 0;
-    public int rate_gold_enhanced { get; private set; } = 0;
-    public int rate_emerald_enhanced { get; private set; } = 0;
-    public int rate_ruby_enhanced { get; private set; } = 0;
-    public int rate_sapphire_enhanced { get; private set; } = 0;
-    public int rate_diamond_enhanced { get; private set; } = 0;
-    private int rate_iron_total => rate_iron_base + rate_iron_enhanced;
-    private int rate_gold_total => rate_gold_base + rate_gold_enhanced;
-    private int rate_emerald_total => rate_emerald_base + rate_emerald_enhanced;
-    private int rate_ruby_total => rate_ruby_base + rate_ruby_enhanced;
-    private int rate_sapphire_total => rate_sapphire_base + rate_sapphire_enhanced;
-    private int rate_diamond_total => rate_diamond_base + rate_diamond_enhanced;
+    public float rate_iron_enhanced { get; private set; } = 0f;
+    public float rate_gold_enhanced { get; private set; } = 0f;
+    public float rate_emerald_enhanced { get; private set; } = 0f;
+    public float rate_ruby_enhanced { get; private set; } = 0f;
+    public float rate_sapphire_enhanced { get; private set; } = 0f;
+    public float rate_diamond_enhanced { get; private set; } = 0f;
+    private float rate_iron_total => rate_iron_base + rate_iron_enhanced;
+    private float rate_gold_total => rate_gold_base + rate_gold_enhanced;
+    private float rate_emerald_total => rate_emerald_base + rate_emerald_enhanced;
+    private float rate_ruby_total => rate_ruby_base + rate_ruby_enhanced;
+    private float rate_sapphire_total => rate_sapphire_base + rate_sapphire_enhanced;
+    private float rate_diamond_total => rate_diamond_base + rate_diamond_enhanced;
 
 
     //ミニ鉱石からfull鉱石に変化する確率
@@ -358,6 +389,34 @@ public class BlockChangeRateParam
 
     public void Init() { }
 
+    public void Reset()
+    {
+        rate_iron_base = 0;
+        rate_gold_base = 0;
+        rate_emerald_base = 0;
+        rate_ruby_base = 0;
+        rate_sapphire_base = 0;
+        rate_diamond_base = 0;
+        rate_iron_enhanced = 0;
+        rate_gold_enhanced = 0;
+        rate_emerald_enhanced = 0;
+        rate_ruby_enhanced = 0;
+        rate_sapphire_enhanced = 0;
+        rate_diamond_enhanced = 0;
+        rate_changeMax_iron_enhanced = 0;
+        rate_changeMax_gold_enhanced = 0;
+        rate_changeMax_emerald_enhanced = 0;
+        rate_changeMax_ruby_enhanced = 0;
+        rate_changeMax_sapphire_enhanced = 0;
+        rate_changeMax_diamond_enhanced = 0;
+        iron_resourceUpCount_enhanced = 0;
+        gold_resourceUpCount_enhanced = 0;
+        emerald_resourceUpCount_enhanced = 0;
+        ruby_resourceUpCount_enhanced = 0;
+        sapphire_resourceUpCount_enhanced = 0;
+        diamond_resourceUpCount_enhanced = 0;
+    }
+
     public void Set_Param(ParamType _paramType, int _targetBlockIndex, float _setParam)
     {
         switch (_paramType)
@@ -365,23 +424,23 @@ public class BlockChangeRateParam
             case ParamType.Unlock:
                 switch (_targetBlockIndex)
                 {
-                    case 1: rate_iron_base += (int)_setParam; break;
-                    case 2: rate_gold_base += (int)_setParam; break;
-                    case 3: rate_emerald_base += (int)_setParam; break;
-                    case 4: rate_ruby_base += (int)_setParam; break;
-                    case 5: rate_sapphire_base += (int)_setParam; break;
-                    case 6: rate_diamond_base += (int)_setParam; break;
+                    case 1: rate_iron_base += _setParam; break;
+                    case 2: rate_gold_base += _setParam; break;
+                    case 3: rate_emerald_base += _setParam; break;
+                    case 4: rate_ruby_base += _setParam; break;
+                    case 5: rate_sapphire_base += _setParam; break;
+                    case 6: rate_diamond_base += _setParam; break;
                 }
                 break;
             case ParamType.Rate_Generate:
                 switch (_targetBlockIndex)
                 {
-                    case 1: rate_iron_enhanced += (int)(_setParam * 100); break;
-                    case 2: rate_gold_enhanced += (int)(_setParam * 100); break;
-                    case 3: rate_emerald_enhanced += (int)(_setParam * 100); break;
-                    case 4: rate_ruby_enhanced += (int)(_setParam * 100); break;
-                    case 5: rate_sapphire_enhanced += (int)(_setParam * 100); break;
-                    case 6: rate_diamond_enhanced += (int)(_setParam * 100); break;
+                    case 1: rate_iron_enhanced += _setParam * 100f; break;
+                    case 2: rate_gold_enhanced += _setParam * 100f; break;
+                    case 3: rate_emerald_enhanced += _setParam * 100f; break;
+                    case 4: rate_ruby_enhanced += _setParam * 100f; break;
+                    case 5: rate_sapphire_enhanced += _setParam * 100f; break;
+                    case 6: rate_diamond_enhanced += _setParam * 100f; break;
                 }
                 break;
             case ParamType.Rate_Value:
@@ -409,7 +468,7 @@ public class BlockChangeRateParam
         }
     }
 
-    private int OreRateTotal => rate_iron_total + rate_gold_total + rate_emerald_total
+    private float OreRateTotal => rate_iron_total + rate_gold_total + rate_emerald_total
                                 + rate_ruby_total + rate_sapphire_total + rate_diamond_total;
 
     /// <summary>
@@ -417,11 +476,11 @@ public class BlockChangeRateParam
     /// </summary>
     public BlockGenerateParam SelectBlockType(bool _isNormalRate = true)
     {
-        var selectRate = _isNormalRate ? baseRate : baseRate / 2;
+        var selectRate = _isNormalRate ? baseRate : baseRate / 2f;
         var total = selectRate
-                    - (int)(ArtifactManager.Inst.changeBlockRate * 100) // アーティファクトによる確率上昇分
+                    - ArtifactManager.Inst.changeBlockRate * 100f // アーティファクトによる確率上昇分
                     + OreRateTotal;
-        var random = Random.Range(0, total);
+        var random = Random.Range(0f, total);
         return LotteryBlockParam(random);
     }
 
@@ -431,11 +490,11 @@ public class BlockChangeRateParam
     public BlockGenerateParam SelectOreBlockType()
     {
         var oreTotal = OreRateTotal;
-        if (oreTotal <= 0) return null;
-        return LotteryBlockParam(Random.Range(0, oreTotal));
+        if (oreTotal <= 0f) return null;
+        return LotteryBlockParam(Random.Range(0f, oreTotal));
     }
 
-    private BlockGenerateParam LotteryBlockParam(int random)
+    private BlockGenerateParam LotteryBlockParam(float random)
     {
         var targetIndex = 1;
         switch (random)
@@ -852,8 +911,17 @@ public static class GameParamManager
 
 
     #region ======== MAIN Method========
+    /// <summary>シーンを跨いで残るスキル補正を捨てる。セーブ削除後のタイトル復帰で使う。</summary>
+    public static void ResetRuntimeCache()
+    {
+        isInitEnd = false;
+        gameBaseParam.Reset();
+        blockChangeRateParam.Reset();
+    }
+
     public static async void Init()
     {
+        ResetRuntimeCache();
         // ゲームの基本的なパラメタを読み込む
         Init_GameBaseParam();
 

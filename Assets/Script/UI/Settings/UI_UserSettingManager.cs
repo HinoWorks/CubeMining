@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -446,96 +446,19 @@ public class UI_UserSettingManager : MonoBehaviour
         CloseDeleteConfirm();
     }
 
-    /// <summary>進行データを削除してゲームを終了する</summary>
+    /// <summary>進行データを削除し、キャッシュを捨ててタイトルへ戻す</summary>
     public void OnClick_DeleteSaveConfirm()
     {
         if (isDeletingSave) return;
         isDeletingSave = true;
         SaveLoader.Inst?.DeleteProgressData();
-        Relaunch();
-    }
+        GameParamManager.ResetRuntimeCache();
 
-    private static void Relaunch()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.playModeStateChanged -= RelaunchPlayMode;
-        UnityEditor.EditorApplication.playModeStateChanged += RelaunchPlayMode;
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        try
-        {
-            StartRelaunchAfterExit();
-        }
-        catch (System.Exception ex)
-        {
-            UnityEngine.Debug.LogError($"Relaunch failed: {ex.Message}");
-        }
-        Application.Quit();
-#endif
+        PauseManager.Inst?.ForceResumeIfPaused();
+        Time.timeScale = 1f;
+        DOTween.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
-#if UNITY_EDITOR
-    private static void RelaunchPlayMode(UnityEditor.PlayModeStateChange state)
-    {
-        if (state != UnityEditor.PlayModeStateChange.EnteredEditMode) return;
-        UnityEditor.EditorApplication.playModeStateChanged -= RelaunchPlayMode;
-        UnityEditor.EditorApplication.isPlaying = true;
-    }
-#else
-    private static void StartRelaunchAfterExit()
-    {
-        int pid = Process.GetCurrentProcess().Id;
-        string dir = Application.temporaryCachePath;
-        string scriptPath;
-        string fileName;
-        string arguments;
-
-#if UNITY_STANDALONE_OSX
-        string appPath = Directory.GetParent(Application.dataPath).FullName;
-        scriptPath = Path.Combine(dir, "relaunch.sh");
-        File.WriteAllText(scriptPath,
-            "#!/bin/sh\n" +
-            "while kill -0 " + pid + " 2>/dev/null; do sleep 0.3; done\n" +
-            "open " + QuoteSh(appPath) + "\n" +
-            "rm -f " + QuoteSh(scriptPath) + "\n");
-        fileName = "/bin/sh";
-        arguments = "-c " + QuoteSh("nohup /bin/sh " + QuoteSh(scriptPath) + " >/dev/null 2>&1 &");
-#else
-        string exePath = Process.GetCurrentProcess().MainModule.FileName;
-        scriptPath = Path.Combine(dir, "relaunch.bat");
-        File.WriteAllText(scriptPath,
-            "@echo off\r\n" +
-            ":wait\r\n" +
-            "tasklist /FI \"PID eq " + pid + "\" 2>nul | find \"" + pid + "\" >nul\r\n" +
-            "if not errorlevel 1 (\r\n" +
-            "ping -n 2 127.0.0.1 >nul\r\n" +
-            "goto wait\r\n" +
-            ")\r\n" +
-            "start \"\" " + QuoteCmd(exePath) + "\r\n" +
-            "del \"%~f0\"\r\n");
-        fileName = "cmd.exe";
-        arguments = "/c start \"\" /min " + QuoteCmd(scriptPath);
-#endif
-
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = fileName,
-            Arguments = arguments,
-            UseShellExecute = false,
-            CreateNoWindow = true,
-        });
-    }
-
-    private static string QuoteSh(string value)
-    {
-        return "'" + value.Replace("'", "'\\''") + "'";
-    }
-
-    private static string QuoteCmd(string value)
-    {
-        return "\"" + value + "\"";
-    }
-#endif
 
     private void CloseDeleteConfirm()
     {

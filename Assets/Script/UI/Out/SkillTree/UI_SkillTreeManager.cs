@@ -174,7 +174,7 @@ public class UI_SkillTreeManager : UI_OutGameTabBase
             if (isReady)
             {
                 haveEnhanceReadyUnit = true;
-                break;
+                //break;
             }
         }
         UIManager_OutGame.Inst.Set_HeaderCheckMarkActiveState(OutGame_MenuType.SkillTree, haveEnhanceReadyUnit);

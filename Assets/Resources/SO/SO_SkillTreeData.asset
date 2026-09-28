@@ -548,7 +548,7 @@ MonoBehaviour:
     skillName: Ore Vein Finder +
     description: Increases the spawn rate of Iron ore.
     icon: {fileID: 21300000, guid: 2b13bac6dea094ba79e7ac364b7d542c, type: 3}
-    maxLevel: 2
+    maxLevel: 5
     deltaValue: 0.01
     deltaValue2: 0
     unit: '%'
@@ -573,7 +573,7 @@ MonoBehaviour:
     description: Unlocks Gold ore to appear in mining layers.
     icon: {fileID: 21300000, guid: a82ad83c87e784ac0b0fdd5cd67d27ac, type: 3}
     maxLevel: 1
-    deltaValue: 3
+    deltaValue: 2.5
     deltaValue2: 0
     unit: NA
     unit2: 
@@ -584,7 +584,7 @@ MonoBehaviour:
     skillName: Ore Vein Finder
     description: Increases the spawn rate of Gold ore.
     icon: {fileID: 21300000, guid: 9d46989cf0e5b4510a16e4f5d8e3b34d, type: 3}
-    maxLevel: 5
+    maxLevel: 4
     deltaValue: 0.01
     deltaValue2: 0
     unit: '%'
@@ -620,7 +620,7 @@ MonoBehaviour:
     skillName: Ore Vein Finder +
     description: Increases the spawn rate of Gold ore.
     icon: {fileID: 21300000, guid: faa9d3a1b62144063bc7a61d9c99333b, type: 3}
-    maxLevel: 2
+    maxLevel: 3
     deltaValue: 0.01
     deltaValue2: 0
     unit: '%'
@@ -645,7 +645,7 @@ MonoBehaviour:
     description: Unlocks Emerald ore to appear in mining layers.
     icon: {fileID: 21300000, guid: d7301c1ef512c4f4f845e5022110af56, type: 3}
     maxLevel: 1
-    deltaValue: 3
+    deltaValue: 2
     deltaValue2: 0
     unit: NA
     unit2: 
@@ -656,7 +656,7 @@ MonoBehaviour:
     skillName: Ore Vein Finder
     description: Increases the spawn rate of Emerald ore.
     icon: {fileID: 21300000, guid: ebee96e10545740cb8a567077c64d7e9, type: 3}
-    maxLevel: 5
+    maxLevel: 3
     deltaValue: 0.01
     deltaValue2: 0
     unit: '%'
@@ -717,7 +717,7 @@ MonoBehaviour:
     description: Unlocks Ruby ore to appear in mining layers.
     icon: {fileID: 21300000, guid: 408790db9a97d4c699c46417d75ea7b6, type: 3}
     maxLevel: 1
-    deltaValue: 2
+    deltaValue: 1.5
     deltaValue2: 0
     unit: NA
     unit2: 
@@ -728,8 +728,8 @@ MonoBehaviour:
     skillName: Ore Vein Finder
     description: Increases the spawn rate of Ruby ore.
     icon: {fileID: 21300000, guid: c6e0d02a6b32c49abb9cf09ee1cb8744, type: 3}
-    maxLevel: 5
-    deltaValue: 0.01
+    maxLevel: 4
+    deltaValue: 0.005
     deltaValue2: 0
     unit: '%'
     unit2: 
@@ -764,7 +764,7 @@ MonoBehaviour:
     skillName: Ore Vein Finder +
     description: Increases the spawn rate of Ruby ore.
     icon: {fileID: 21300000, guid: 9e08a1c7682fe4223944f98aa3178d9c, type: 3}
-    maxLevel: 2
+    maxLevel: 1
     deltaValue: 0.01
     deltaValue2: 0
     unit: '%'
@@ -789,7 +789,7 @@ MonoBehaviour:
     description: Unlocks Sapphire ore to appear in mining layers.
     icon: {fileID: 21300000, guid: fc0a2efde0faa4eae9c8464ffe63a7fa, type: 3}
     maxLevel: 1
-    deltaValue: 2
+    deltaValue: 0.75
     deltaValue2: 0
     unit: NA
     unit2: 
@@ -800,8 +800,8 @@ MonoBehaviour:
     skillName: Ore Vein Finder
     description: Increases the spawn rate of Sapphire ore.
     icon: {fileID: 21300000, guid: 46cce4875997f40cd8a42754a41551b7, type: 3}
-    maxLevel: 5
-    deltaValue: 0.01
+    maxLevel: 3
+    deltaValue: 0.005
     deltaValue2: 0
     unit: '%'
     unit2: 
@@ -836,7 +836,7 @@ MonoBehaviour:
     skillName: Ore Vein Finder +
     description: Increases the spawn rate of Sapphire ore.
     icon: {fileID: 21300000, guid: 883588b1f5a4947229ac08098a9e4715, type: 3}
-    maxLevel: 2
+    maxLevel: 1
     deltaValue: 0.01
     deltaValue2: 0
     unit: '%'
@@ -861,7 +861,7 @@ MonoBehaviour:
     description: Unlocks Diamond ore to appear in mining layers.
     icon: {fileID: 21300000, guid: 9f982c2bfaf3041f691308c92759495e, type: 3}
     maxLevel: 1
-    deltaValue: 2
+    deltaValue: 0.5
     deltaValue2: 0
     unit: NA
     unit2: 
@@ -872,8 +872,8 @@ MonoBehaviour:
     skillName: Ore Vein Finder
     description: Increases the spawn rate of Diamond ore.
     icon: {fileID: 21300000, guid: c27bc6ed88c5d4f5fa8c89a82ee853bc, type: 3}
-    maxLevel: 5
-    deltaValue: 0.01
+    maxLevel: 2
+    deltaValue: 0.005
     deltaValue2: 0
     unit: '%'
     unit2: 
@@ -897,7 +897,7 @@ MonoBehaviour:
     description: Increases the chance for small Diamond ore to become giant ore.
     icon: {fileID: 21300000, guid: eb25f9a481214415eb873947045f0def, type: 3}
     maxLevel: 5
-    deltaValue: 0.01
+    deltaValue: 0.005
     deltaValue2: 0
     unit: '%'
     unit2: 
@@ -908,8 +908,8 @@ MonoBehaviour:
     skillName: Ore Vein Finder +
     description: Increases the spawn rate of Diamond ore.
     icon: {fileID: 21300000, guid: 4900e987982b14f279c7d33a51542d6d, type: 3}
-    maxLevel: 2
-    deltaValue: 0.01
+    maxLevel: 1
+    deltaValue: 0.005
     deltaValue2: 0
     unit: '%'
     unit2: 

@@ -989,7 +989,7 @@ public class SaveLoader : MonoBehaviour
     #region -- Delete progress --
     /// <summary>
     /// 進行データだけ消す。音量・画面設定は残す。Steam実績は触らない。
-    /// 終了時にメモリ上の古いセーブがファイルへ戻らないよう、キャッシュも捨てて読み直す。
+    /// メモリ上のセーブキャッシュも捨て、削除後のファイルを読み直す。
     /// </summary>
     public void DeleteProgressData()
     {

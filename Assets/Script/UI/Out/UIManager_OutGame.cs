@@ -188,5 +188,14 @@ public class UIManager_OutGame : MonoBehaviour
     {
         UI_UserSettingManager.Inst.Open();
     }
+
+    /// <summary>
+    /// タイトル画面に戻る
+    /// </summary>
+    public void OnClick_GoTitle()
+    {
+        GameWatcher.Inst.SetGameState(GameStateType.Title);
+        main.SetActive(false);
+    }
     #endregion
 }
