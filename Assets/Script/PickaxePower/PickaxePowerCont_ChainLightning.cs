@@ -149,7 +149,7 @@ public class PickaxePowerCont_ChainLightning : PickaxePowerCont_Base
             origin?.PlayShotEff();
         }
 
-        SoundManager.Inst.PlaySE(202, true);
+        SoundManager.Inst.PlaySE(226, true);
     }
 
     private void AttackReadyAnim()

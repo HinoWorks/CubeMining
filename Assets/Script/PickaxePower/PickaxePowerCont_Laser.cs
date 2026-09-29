@@ -31,6 +31,8 @@ public class PickaxePowerCont_Laser : PickaxePowerCont_Base
 
         var damage = (int)(AttackManager.Inst.currentPickaxeDamage * damageRate);
         newLaserUnit.Init(damage, maxCount, laserSize, rotateAngle);
+
+        SoundManager.Inst.PlaySE(223, true);
     }
 
 

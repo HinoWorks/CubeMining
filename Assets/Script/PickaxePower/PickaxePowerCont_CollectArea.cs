@@ -34,6 +34,7 @@ public class PickaxePowerCont_CollectArea : PickaxePowerCont_Base
         ActiveFlowerCont = newCollectArea.GetComponent<PickaxePowerCont_CollectAreaUnit>();
         ActiveFlowerCont.transform.position = flowerPosition;
         ActiveFlowerCont.Init(sizeRate, aliveTime, collectPower);
+        SoundManager.Inst.PlaySE(224, true);
         Debug.Log($"CreateCollectFlower ==  sizeRate: {sizeRate} / aliveTime: {aliveTime} / collectPower: {collectPower}");
     }
 

@@ -10,6 +10,8 @@ public class PickaxePowerCont_BigPickUnit : MonoBehaviour
     private float sizeRate;
     private Vector3 targetPosition;
 
+    private const int SE_Index = 221;
+
 
     void OnDestroy()
     {
@@ -48,6 +50,8 @@ public class PickaxePowerCont_BigPickUnit : MonoBehaviour
         obj_damageArea.transform.localScale = targetSize * 0.9f;
         obj_damageArea.transform.position = targetPosition;
         obj_damageArea.SetActive(true);
+
+        SoundManager.Inst.PlaySE(SE_Index, true);
 
         eff_Attack.Play();
         CameraManager.Inst.ShakeCamera_Large();

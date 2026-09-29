@@ -129,6 +129,8 @@ public class PickaxePowerCont_ArrowShots : PickaxePowerCont_Base
         arrowUnit.transform.position = bowPosition;
         arrowUnit.transform.rotation = Quaternion.LookRotation(direction);
         arrowUnit.Init(damage, damageCount, arrowLifetime, direction * arrowSpeed);
+
+        SoundManager.Inst.PlaySE(225, true);
     }
 
     private PickaxePowerCont_ArrowUnit Get_FreeArrowUnit()

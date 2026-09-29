@@ -23,6 +23,7 @@ public class PickaxePowerCont_CreateBom : PickaxePowerCont_Base
         Debug.Log("Power == CreateBom");
         try
         {
+            SoundManager.Inst.PlaySE(222, true);
             for (int i = 0; i < bomCount; i++)
             {
                 CreateBom(i);
