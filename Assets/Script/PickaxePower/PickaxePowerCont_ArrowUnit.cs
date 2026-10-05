@@ -7,7 +7,8 @@ using UnityEngine;
 public class PickaxePowerCont_ArrowUnit : MonoBehaviour
 {
     private int damage;
-    private int remainHitCount;
+    private int remainHitCount = 10;
+    private float sizeRate;
     private Vector3 velocity;
     private Rigidbody rb;
     private TrailRenderer trail;
@@ -29,13 +30,13 @@ public class PickaxePowerCont_ArrowUnit : MonoBehaviour
         triggerSender.OnEnter -= OnTriggerEnter;
     }
 
-    public void Init(int _damage, int _damageCount, float _lifetime, Vector3 _velocity)
+    public void Init(int _damage, float _sizeRate, float _lifetime, Vector3 _velocity)
     {
         CancelLifetime();
         hitTargets.Clear();
 
         damage = _damage;
-        remainHitCount = Mathf.Max(1, _damageCount);
+        sizeRate = _sizeRate;
         velocity = _velocity;
 
         if (trail != null)
@@ -46,6 +47,8 @@ public class PickaxePowerCont_ArrowUnit : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         gameObject.SetActive(true);
         rb.linearVelocity = velocity;
+
+        transform.localScale = sizeRate * Vector3.one;
 
         StartLifetime(_lifetime).Forget();
     }

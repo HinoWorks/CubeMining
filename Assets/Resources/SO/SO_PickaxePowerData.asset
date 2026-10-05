@@ -244,7 +244,7 @@ MonoBehaviour:
   - index: 3
     level: 2
     value_1: 2.5
-    value_2: 3
+    value_2: 3.5
     value_3: 60
     value_4: 1
     req_point: 3
@@ -258,7 +258,7 @@ MonoBehaviour:
   - index: 3
     level: 3
     value_1: 3
-    value_2: 4.5
+    value_2: 5
     value_3: 70
     value_4: 1
     req_point: 4
@@ -286,8 +286,8 @@ MonoBehaviour:
   - index: 4
     level: 1
     value_1: 1
-    value_2: 5
-    value_3: 1
+    value_2: 7
+    value_3: 1.5
     value_4: 1
     req_point: 2
     req_stone: 2000
@@ -300,8 +300,8 @@ MonoBehaviour:
   - index: 4
     level: 2
     value_1: 1.5
-    value_2: 7
-    value_3: 1.5
+    value_2: 10
+    value_3: 2
     value_4: 1
     req_point: 3
     req_stone: 3000
@@ -314,8 +314,8 @@ MonoBehaviour:
   - index: 4
     level: 3
     value_1: 2
-    value_2: 10
-    value_3: 2
+    value_2: 13
+    value_3: 2.75
     value_4: 2
     req_point: 4
     req_stone: 4000
@@ -648,13 +648,13 @@ MonoBehaviour:
     prefix: 
   - index: 5
     order: 2
-    paramName: Piercing
+    paramName: Size
     valueSlot: 2
-    format: 0
+    format: 1
     prefix: 
   - index: 5
     order: 3
-    paramName: Target Count
+    paramName: Arrow Count
     valueSlot: 3
     format: 0
     prefix: 

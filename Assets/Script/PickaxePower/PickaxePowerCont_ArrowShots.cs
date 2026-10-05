@@ -16,16 +16,17 @@ public class PickaxePowerCont_ArrowShots : PickaxePowerCont_Base
     private CancellationTokenSource shootCts;
 
     private float damageRate => EquippedLevelData.value_1;
-    private int damageCount => Mathf.Max(1, (int)EquippedLevelData.value_2);
+    private float sizeRate => Mathf.Max(1, EquippedLevelData.value_2);
     private int arrowCount => Mathf.Max(1, (int)EquippedLevelData.value_3);
 
     private int damage => (int)(AttackManager.Inst.currentPickaxeDamage * damageRate);
-    private const float arrowSpeed = 30f;
+    private const float arrowSpeed = 20f;
     private const float arrowLifetime = 2.5f;
     private const float rotateDuration = 0.75f;
     private const float spawnDelay = 0.2f;
     private const float returnDelay = 0.25f;
-    private static readonly Vector3 bowOffset = new Vector3(0f, 0.35f, 0f);
+    private static readonly Vector3 bowOffset = new Vector3(0f, 1.1f, 0f);
+    private static readonly Vector3 arrowOffset = new Vector3(0f, 0.5f, 0f);
 
     private readonly List<PickaxePowerCont_ArrowUnit> list_arrowUnits = new List<PickaxePowerCont_ArrowUnit>();
 
@@ -98,13 +99,14 @@ public class PickaxePowerCont_ArrowShots : PickaxePowerCont_Base
 
         anim_bow.Play("Shot");
 
+        var arrowPosition = new Vector3(bowPosition.x, arrowOffset.y, bowPosition.z);
         for (int i = 0; i < count; i++)
         {
             if (token.IsCancellationRequested) return;
 
             var angle = startAngle + angleStep * i;
             var direction = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-            ShotArrow(bowPosition, direction);
+            ShotArrow(arrowPosition, direction);
 
             if (i >= count - 1) break;
 
@@ -128,7 +130,7 @@ public class PickaxePowerCont_ArrowShots : PickaxePowerCont_Base
         var arrowUnit = Get_FreeArrowUnit();
         arrowUnit.transform.position = bowPosition;
         arrowUnit.transform.rotation = Quaternion.LookRotation(direction);
-        arrowUnit.Init(damage, damageCount, arrowLifetime, direction * arrowSpeed);
+        arrowUnit.Init(damage, sizeRate, arrowLifetime, direction * arrowSpeed);
 
         SoundManager.Inst.PlaySE(225, true);
     }

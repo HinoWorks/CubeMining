@@ -66,10 +66,15 @@ public class AttackCont_BoundShot : AttackContBase
                 Mathf.Sin(randomAngle * Mathf.Deg2Rad));
 
             freeBullet.transform.position = AttackManager.Inst.currentPickaxePosition + offsetPosition;
-            var isLevel2 = isLevel2Unit;
-            var setSpeedRate = isLevel2 ? speedRate_Level2Unit : 1;
+
+            var selectLevel = 1;
+            if (base.exLevel >= 2)
+            {
+                selectLevel = isLevel2Unit ? 2 : 1;
+            }
+            var setSpeedRate = selectLevel == 2 ? speedRate_Level2Unit : 1;
             freeBullet.Init(damage, aliveTime, direction * speed * setSpeedRate);
-            freeBullet.SetLevelUnit_Level2(isLevel2);
+            freeBullet.SetLevelUnit_Level2(selectLevel == 2);
         }
     }
 
